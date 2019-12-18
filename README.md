@@ -1,4 +1,4 @@
-# ** PLEASE CHECK https://guides.github.com/features/mastering-markdown/ TO MASTER GITHUB MARKDOWN BEFORE EDITING AN ISSUE OR README TEXT **
+# PLEASE CHECK https://guides.github.com/features/mastering-markdown/ TO MASTER GITHUB MARKDOWN BEFORE EDITING AN ISSUE OR README TEXT 
 
 ## ----> QUALITY EXPECTED <----
 

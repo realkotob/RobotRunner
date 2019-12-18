@@ -24,18 +24,31 @@ func _ready():
 	layer_up_teleport_node = children_array[prec]
 	layer_down_teleport_node = children_array[suiv]
 
+
+# Whenever a character enters the area of this teleport, this method gives him the referecence to this node
 func on_body_entered(body):
 	if body in players_nodes_array:
-#		body.get_node("LayerChange").teleport_node = self
-		pass
-	
+		body.get_node("LayerChange").teleport_node = self
+
+
+# Whenever a character exits the area of this teleport, set his teleport_node reference to null
 func on_body_exited(body):
-	if body in players_nodes_array:
-#		body.get_node("LayerChange").teleport_node = null
-		pass
+	if body in players_nodes_array and overlaps_body(body) == false:
+		body.get_node("LayerChange").teleport_node = null
 
-func teleport_layer_up(character):
-	character.set_position(layer_up_teleport_node.position)
 
-func teleport_layer_down(character):
-	character.set_position(layer_down_teleport_node.position)
+# Teleport the player the the right destination teleporter
+func teleport_layer(character : Node, up : bool):
+	
+	# Get the size of the character's collision shape
+	var y_offset = character.find_node("CollisionShape2D").get_shape().get_extents().y
+	var teleport_pos
+	
+	# Get the right teleport point to telport the character to, based on the up argument
+	if up == true:
+		teleport_pos = layer_up_teleport_node.global_position
+	else :
+		teleport_pos = layer_down_teleport_node.global_position
+	
+	teleport_pos.y -= y_offset
+	character.set_position(teleport_pos)

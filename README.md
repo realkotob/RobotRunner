@@ -38,3 +38,17 @@ _method_name(): method private to a class
 NomDeSignal: PascalCase, usally a verb a past tense (ex: ButtonTriggered)
 on_NomDeSignal(): snake_case with the name of the signal at the end (ex: on_ButtonTriggered)
 _argument_name: argument not used in the method (frequently used when the method is declared as abstract in the parent class)
+
+
+///// FOLDER ORGANISATION /////
+
+/GLOBAL (Contain every ressource, script et)
+    /BASE_CLASSES (Contain abstract classes, and classes that are very frequently inherited by other classes)
+    /ASSETS
+        /SPRITES
+        /MUSIC
+/SCENES
+    /SCENE_A
+        /SCRIPT
+        /SPRITES
+        /TSCN

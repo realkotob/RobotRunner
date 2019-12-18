@@ -45,26 +45,14 @@
 
 ## ----> FOLDER ORGANISATION <----
 
-/GLOBAL (Contain every ressource, script et)
-    /BASE_CLASSES (Contain abstract classes, and classes that are very frequently inherited by other classes)
-    /ASSET
-        /SPRITES
-        /MUSIC
-/SCENES
-    /SCENE_A
-        /SCRIPT
-        /SPRITES
-        /TSCN
-        
-X|X|X
--|-|-
-/Global | X| X
-X | /BASE_CLASSES > (Contain abstract classes, and classes that are very frequently inherited by other classes) | X
-X | /ASSETS | X
-X | X | /SPRITES
-X | X | /MUSIC
-/Scenes | X | X
-X | /SCENE_A | X
-X | X | /SCRIPT
-X | X | /SPRITES
-X | X | /TSCN
+| /GLOBAL |               |          |                                                                                             |
+|:-------:|---------------|----------|---------------------------------------------------------------------------------------------|
+|         | /BASE_CLASSES |          | (Contain abstract classes, and classes that are very frequently inherited by other classes) |
+|         | /ASSETS       |          |                                                                                             |
+|         |               | /SPRITES |                                                                                             |
+|         |               | /SOUNDS  |                                                                                             |
+| /SCENES |               |          |                                                                                             |
+|         | /SCENE_A      |          |                                                                                             |
+|         |               | /SCRIPT  |                                                                                             |
+|         |               | /SPRITES |                                                                                             |
+|         |               | /TSCN    |                                                                                             |

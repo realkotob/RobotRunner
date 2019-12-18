@@ -19,7 +19,7 @@
 **If one, or several of these rulls are not respected, a pull request can be rejected by a collegue.**
 
 
-## ---> NAMING CONVENTION <---
+## ----> NAMING CONVENTION <----
 
 * NameOfNode : PascalCase
 
@@ -47,7 +47,7 @@
 `
 /GLOBAL (Contain every ressource, script et)
     /BASE_CLASSES (Contain abstract classes, and classes that are very frequently inherited by other classes)
-    /ASSETS
+    /ASSETS</br>
         /SPRITES
         /MUSIC
 /SCENES

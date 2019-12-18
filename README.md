@@ -40,6 +40,7 @@ on_NomDeSignal(): snake_case with the name of the signal at the end (ex: on_Butt
 _argument_name: argument not used in the method (frequently used when the method is declared as abstract in the parent class)
 
 
+
 ///// FOLDER ORGANISATION /////
 
 /GLOBAL (Contain every ressource, script et)

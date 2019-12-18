@@ -25,27 +25,16 @@ ClassNameBase : (Classes that are parent class for inherited children scripts) P
 
 CONSTANT : All caps
 ENUMERATION : All caps
+
 variable_name: snake_case
 _variable_name : variable private to a class
 node_name_node : variable containing a NodeReference
 variable_name_array : variable containing an array
 var_name(variables locals to a method): snake_case with abreviations
+
 method_name(): snake_case, recognizable with the parenthesis
 _method_name(): method private to a class
+
 NomDeSignal: PascalCase, usally a verb a past tense (ex: ButtonTriggered)
 on_NomDeSignal(): snake_case with the name of the signal at the end (ex: on_ButtonTriggered)
 _argument_name: argument not used in the method (frequently used when the method is declared as abstract in the parent class)
-
-
-///// FOLDER ORGANISATION /////
-
-/GLOBAL (Contain every ressource, script et)
-    /BASE_CLASSES (Contain abstract classes, and classes that are very frequently inherited by other classes)
-    /ASSETS
-        /SPRITES
-        /MUSIC
-/SCENES
-    /SCENE_A
-        /SCRIPT
-        /SPRITES
-        /TSCN

@@ -11,11 +11,6 @@
 [ext_resource path="res://Scenes/RobotHammer/Sprites/RoboHammer.png" type="Texture" id=9]
 [ext_resource path="res://Scenes/RobotHammer/Sprites/RoboHammerJump.png" type="Texture" id=10]
 
-
-
-
-
-
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 3 ), ExtResource( 4 ) ],
@@ -44,7 +39,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="RobotHammer" index="0" instance=ExtResource( 1 )]
+[node name="RobotHammer" instance=ExtResource( 1 )]
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2( 0, 0 )

@@ -23,13 +23,6 @@
 [ext_resource path="res://Scenes/RobotBase/Scripts/Animation.gd" type="Script" id=21]
 [ext_resource path="res://Scenes/RobotBase/Scripts/HitBox.gd" type="Script" id=22]
 
-
-
-
-
-
-
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 11.6843, 20 )
 
@@ -91,7 +84,6 @@ script = ExtResource( 3 )
 script = ExtResource( 4 )
 
 [node name="States" type="Node" parent="."]
-editor/display_folded = true
 script = ExtResource( 5 )
 
 [node name="Idle" type="Node" parent="States"]

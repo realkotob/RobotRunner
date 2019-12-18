@@ -8,7 +8,6 @@ class_name StatesMachine
 
 onready var inputs_node : Node = get_parent().get_node("Inputs")
 onready var attributes_node : Node = get_parent().get_node("Attributes")
-onready var layer_change_node : Node = get_parent().get_node("LayerChange")
 
 onready var states_map = get_children()
 
@@ -21,9 +20,6 @@ var curent_anim_node
 var state_name
 
 func _ready():
-	var _err
-	_err = inputs_node.connect("LayerUpPressed", layer_change_node, "on_LayerUpPressed")
-	_err = inputs_node.connect("LayerDownPressed", layer_change_node, "on_LayerDownPressed")
 	state_name = states_map[0].name
 	set_state(get_node(state_name))
 
@@ -105,8 +101,8 @@ func disconnect_inputs_previous_state():
 func get_state_name():
 	return state_name
 
+# Flip the animation of the character, based on his direction
 func flip_animation():
-
 	if attributes_node.velocity.x < 0:
 		curent_anim_node.set_flip_h(true)
 		previous_anim_node.set_flip_h(true)

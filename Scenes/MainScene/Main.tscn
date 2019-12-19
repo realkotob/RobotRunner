@@ -1,53 +1,68 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Scenes/Camera/Camera.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/RobotHammer/RobotHammer.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/RobotIce/RobotIce.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/Levels/Level1.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Main/Main.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/GamePlayScene/GamePlaying.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Camera/Camera.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/RobotHammer/RobotHammer.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/RobotIce/RobotIce.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Levels/Level1.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 142.202, 436.293 )
 
+[sub_resource type="RectangleShape2D" id=2]
+
 [node name="Main" type="Node2D"]
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Camera" type="Camera2D" parent="."]
+[node name="GamePlaying" type="Node2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="Camera" type="Camera2D" parent="GamePlaying"]
 editor/display_folded = true
 position = Vector2( 512, 289 )
 current = true
 drag_margin_h_enabled = false
 drag_margin_v_enabled = false
-script = ExtResource( 1 )
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
-speed = 1.0
+speed = 0.1
 
-[node name="StartCameraArea" type="Area2D" parent="Camera"]
+[node name="StartCameraArea" type="Area2D" parent="GamePlaying/Camera"]
 editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera/StartCameraArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GamePlaying/Camera/StartCameraArea"]
 position = Vector2( 368.107, -3.17337 )
 shape = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="RobotHammer" parent="." groups=[
+[node name="PlayZone" type="Area2D" parent="GamePlaying/Camera"]
+editor/display_folded = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GamePlaying/Camera/PlayZone"]
+shape = SubResource( 2 )
+
+[node name="RobotHammer" parent="GamePlaying" groups=[
 "Players",
-] instance=ExtResource( 2 )]
-position = Vector2( 78.3315, 453.262 )
+] instance=ExtResource( 4 )]
+position = Vector2( 60, 460 )
 
-[node name="RobotIce" parent="." groups=[
+[node name="RobotIce" parent="GamePlaying" groups=[
 "Players",
-] instance=ExtResource( 3 )]
-position = Vector2( 98.7913, 80.6714 )
+] instance=ExtResource( 5 )]
+position = Vector2( 62.7354, 80 )
 
-[node name="Levels" type="Node2D" parent="."]
+[node name="Levels" type="Node2D" parent="GamePlaying"]
+editor/display_folded = true
 
-[node name="Level1" parent="Levels" instance=ExtResource( 4 )]
+[node name="Level1" parent="GamePlaying/Levels" instance=ExtResource( 6 )]

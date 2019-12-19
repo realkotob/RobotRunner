@@ -4,15 +4,15 @@ signal layer_change
 
 ### IDLE STATE ###
 
-onready var layerchange_node = get_node("../../LayerChange")
-onready var robot_node = get_parent().get_parent()
-onready var states_node = get_parent()
+var layer_change_node : Node
+var character_node : KinematicBody2D
+var states_node : Node
 
-func _ready():
-	var _err = connect("layer_change", layerchange_node, "on_layer_change")
+func setup():
+	var _err = connect("layer_change", layer_change_node, "on_layer_change")
 
 func update(_host, _delta):
-	if !robot_node.is_on_floor():
+	if !character_node.is_on_floor():
 		return "Fall"
 
 func on_JumpPressed():
@@ -35,5 +35,5 @@ func on_RightPressed():
 
 func enter_state(_host):
 	animation_node.play(self.name)
-	if !robot_node.is_on_floor():
-		states_node.set_state("Jump")
+	if character_node.is_on_floor() == false:
+		states_node.set_state("Fall")

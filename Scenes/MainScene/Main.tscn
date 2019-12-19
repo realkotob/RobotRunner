@@ -46,8 +46,9 @@ position = Vector2( 60, 460 )
 [node name="RobotIce" parent="." groups=[
 "Players",
 ] instance=ExtResource( 3 )]
-position = Vector2( 80.4639, 80 )
+position = Vector2( 62.7354, 80 )
 
 [node name="Levels" type="Node2D" parent="."]
+editor/display_folded = true
 
 [node name="Level1" parent="Levels" instance=ExtResource( 4 )]

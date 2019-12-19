@@ -24,3 +24,4 @@ func on_start_area_body_entered(body):
 func on_play_zone_body_exited(body):
 	if body in players_nodes_array:
 		pass
+		

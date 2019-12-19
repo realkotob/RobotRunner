@@ -2,9 +2,9 @@ extends PlayerStateBase
 
 ### JUMP STATE ###
 
-onready var character_node = get_parent().get_parent()
-onready var attributes_node = get_parent().get_parent().get_node("Attributes")
-onready var states_node = get_parent()
+var character_node : KinematicBody2D
+var attributes_node : Node
+var states_node : Node
 
 func update(_host, _delta):
 	if character_node.is_on_floor():

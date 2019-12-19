@@ -6,20 +6,35 @@ class_name StatesMachine
 # The states are distinguished by the name of their corresponding node
 # The default state is always the first in the tree
 
-onready var inputs_node : Node = get_parent().get_node("Inputs")
-onready var attributes_node : Node = get_parent().get_node("Attributes")
+var inputs_node : Node 
+var attributes_node : Node 
+var character_node : KinematicBody2D
+var layer_change_node : Node
+var hit_box_node : Node
 
 onready var states_map = get_children()
 
 onready var current_state : Object
 onready var previous_state : Object
 
+onready var idle_node = get_node("Idle")
+onready var move_node = get_node("Move")
+onready var jump_node = get_node("Jump")
+onready var fall_node = get_node("Fall")
+onready var action_node = get_node("Action")
+
 var previous_anim_node
 var curent_anim_node
 
 var state_name
 
-func _ready():
+func setup():
+	setup_idle_node()
+	setup_move_node()
+	setup_jump_node()
+	setup_fall_node()
+	setup_action_node()
+
 	state_name = states_map[0].name
 	set_state(get_node(state_name))
 
@@ -32,6 +47,7 @@ func _physics_process(delta):
 # Set a new state
 func set_state(new_state):
 	
+	# If the argument provided is of type string, convert it into a state in the state map
 	if new_state is String:
 		new_state = get_node(new_state)
 	
@@ -109,3 +125,33 @@ func flip_animation():
 	elif attributes_node.velocity.x > 0:
 		curent_anim_node.set_flip_h(false)
 		previous_anim_node.set_flip_h(false)
+
+
+func setup_idle_node():
+	idle_node.character_node = character_node
+	idle_node.states_node = self
+	idle_node.layer_change_node = layer_change_node
+	idle_node.setup()
+
+
+func setup_move_node():
+	move_node.character_node = character_node
+	move_node.states_node = self
+	move_node.layer_change_node = layer_change_node
+	move_node.attributes_node = attributes_node
+	move_node.setup()
+
+
+func setup_jump_node():
+	jump_node.character_node = character_node
+	jump_node.states_node = self
+	jump_node.attributes_node = attributes_node
+
+
+func setup_fall_node():
+	fall_node.character_node = character_node
+
+
+func setup_action_node():
+	action_node.hit_box_node = hit_box_node
+	action_node.state_node = self

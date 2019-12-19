@@ -2,8 +2,8 @@ extends PlayerStateBase
 
 ### ACTION STATE  ###
 
-onready var hit_box = get_parent().get_parent().get_node("HitBox/CollisionShape2D")
-onready var state_node = get_parent()
+var hit_box_node : Area2D
+var state_node : Node
 
 func _ready():
 	var _err = animation_node.connect("animation_finished", self, "on_animation_finished")
@@ -12,12 +12,12 @@ func _ready():
 # When the actor enters action state: set active the hit box, and play the right animation
 func enter_state(_host):
 	animation_node.play(self.name)
-	hit_box.set_disabled(false)
+	hit_box_node.get_child(0).set_disabled(false)
 
 
 # When the actor exits action state: set unactive the hit box
 func exit_state(_host):
-	hit_box.set_disabled(true)
+	hit_box_node.get_child(0).set_disabled(true)
 
 # When the animation is off, set the actor's state to Idle
 func on_animation_finished():

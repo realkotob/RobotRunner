@@ -508,6 +508,7 @@ position = Vector2( 3286.88, -887.804 )
 position = Vector2( 3502.96, -887.995 )
 
 [node name="EarthBlocks" type="Node2D" parent="InteractivesObjects"]
+editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -693,6 +694,7 @@ position = Vector2( 3444.12, -923.584 )
 position = Vector2( 3348.27, -924.325 )
 
 [node name="M" type="Node2D" parent="InteractivesObjects/EarthBlocks"]
+editor/display_folded = true
 
 [node name="M_BREAKABLE_BLOCK" parent="InteractivesObjects/EarthBlocks/M" instance=ExtResource( 6 )]
 position = Vector2( 334.736, 144.21 )

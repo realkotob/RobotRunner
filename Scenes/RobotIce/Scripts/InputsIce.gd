@@ -1,7 +1,5 @@
 extends Node
 
-onready var direction_node = get_node("../Attributes/Direction")
-
 signal JumpPressed
 signal JumpReleased
 
@@ -26,13 +24,17 @@ signal LayerUpReleased
 signal LayerDownPressed
 signal LayerDownReleased
 
-func _ready():
+
+# Should be called by the parent: connect directions inputs to the direction node
+func connect_direction(direction_node):
 	var _err
 	_err = connect("LeftPressed", direction_node, "on_LeftPressed")
 	_err = connect("RightPressed", direction_node, "on_RightPressed")
 	_err = connect("LeftReleased", direction_node, "on_LeftReleased")
 	_err = connect("RightReleased", direction_node, "on_RightReleased")
 
+
+# Map every inputs to a signal
 func _unhandled_input(event):
 	if event is InputEventKey:
 		match event.scancode:

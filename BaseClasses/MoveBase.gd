@@ -6,16 +6,16 @@ class_name MoveBase
 
 signal layer_change
 
-onready var robot_node = get_parent().get_parent()
-onready var states_node = get_parent()
-onready var layerchange_node = get_node("../../LayerChange")
-onready var attributes_node = get_node("../../Attributes")
+var states_node : Node
+var character_node : KinematicBody2D
+var layer_change_node : Node
+var attributes_node : Node
 
-func _ready():
-	var _err = connect("layer_change", layerchange_node, "on_layer_change")
+func setup():
+	var _err = connect("layer_change", layer_change_node, "on_layer_change")
 
 func update(_host, _delta):
-	if !robot_node.is_on_floor():
+	if !character_node.is_on_floor():
 		return "Fall"
 	elif attributes_node.velocity.x == 0:
 		return "Idle"
@@ -34,5 +34,5 @@ func on_ActionPressed():
 
 func enter_state(_host):
 	animation_node.play(self.name)
-	if !robot_node.is_on_floor():
+	if !character_node.is_on_floor():
 		states_node.set_state("Jump")

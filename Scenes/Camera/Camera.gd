@@ -14,4 +14,5 @@ func _physics_process(_delta):
 
 func on_body_entered(body):
 	if body in players_nodes_array:
+
 		set_physics_process(true)

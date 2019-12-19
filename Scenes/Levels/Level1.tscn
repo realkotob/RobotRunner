@@ -186,7 +186,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 script/source = "extends StaticBody2D
 
 func _ready():
-	add_to_group(\"Breakable\")"
+	add_to_group(\"EarthBlock\")"
 
 [node name="Level1" type="Node2D"]
 __meta__ = {
@@ -508,7 +508,6 @@ position = Vector2( 3286.88, -887.804 )
 position = Vector2( 3502.96, -887.995 )
 
 [node name="EarthBlocks" type="Node2D" parent="InteractivesObjects"]
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -694,11 +693,9 @@ position = Vector2( 3444.12, -923.584 )
 position = Vector2( 3348.27, -924.325 )
 
 [node name="M" type="Node2D" parent="InteractivesObjects/EarthBlocks"]
-editor/display_folded = true
 
 [node name="M_BREAKABLE_BLOCK" parent="InteractivesObjects/EarthBlocks/M" instance=ExtResource( 6 )]
 position = Vector2( 334.736, 144.21 )
-script = SubResource( 19 )
 
 [node name="M_BREAKABLE_BLOCK2" parent="InteractivesObjects/EarthBlocks/M" instance=ExtResource( 6 )]
 position = Vector2( 671.162, 288.774 )
@@ -913,6 +910,7 @@ position = Vector2( 3263.2, -961.044 )
 script = SubResource( 19 )
 
 [node name="TeleportGroups" type="Node2D" parent="InteractivesObjects"]
+editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }

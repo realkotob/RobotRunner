@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Global/Tileset/SPR_LEVELBACKGROUND.png" type="Texture" id=1]
 [ext_resource path="res://Global/Tileset/TileSet1.png" type="Texture" id=2]
@@ -7,6 +7,11 @@
 [ext_resource path="res://Scenes/BreakableObjects/EarthBlock/S (base)/EarthBlockBase.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/BreakableObjects/EarthBlock/M/MEarthBlock.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Teleports/TeleportArea.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Buttons&Doors/GroupBase.gd" type="Script" id=8]
+[ext_resource path="res://Scenes/Buttons&Doors/Buttons/ChildrenScenes/RedLever.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Buttons&Doors/Door/DoorBase.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Buttons&Doors/Buttons/ChildrenScenes/BlueLever.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Buttons&Doors/Door/ChildrenScenes/BlueDoor.tscn" type="PackedScene" id=12]
 
 [sub_resource type="TileSet" id=1]
 1/name = "SPR_LEVELBACKGROUND.png 1"
@@ -230,6 +235,9 @@ __meta__ = {
 
 [node name="S" type="Node2D" parent="InteractivesObjects/IceBlocks"]
 editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="S_ICE_BLOCK_BASE" parent="InteractivesObjects/IceBlocks/S" instance=ExtResource( 3 )]
 position = Vector2( 1956.54, 323.973 )
@@ -275,6 +283,9 @@ position = Vector2( 3468.31, -658.618 )
 
 [node name="M" type="Node2D" parent="InteractivesObjects/IceBlocks"]
 editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="M_ICE_BLOCK" parent="InteractivesObjects/IceBlocks/M" instance=ExtResource( 4 )]
 position = Vector2( 336.3, 24.7494 )
@@ -515,6 +526,9 @@ __meta__ = {
 
 [node name="S" type="Node2D" parent="InteractivesObjects/EarthBlocks"]
 editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="BREAKABLE_BLOCK_BASE2" parent="InteractivesObjects/EarthBlocks/S" instance=ExtResource( 5 )]
 position = Vector2( 682.918, 324.065 )
@@ -587,9 +601,6 @@ position = Vector2( 2652.93, 83.753 )
 
 [node name="BREAKABLE_BLOCK_BASE25" parent="InteractivesObjects/EarthBlocks/S" instance=ExtResource( 5 )]
 position = Vector2( 2677.3, 108.313 )
-
-[node name="BREAKABLE_BLOCK_BASE26" parent="InteractivesObjects/EarthBlocks/S" instance=ExtResource( 5 )]
-position = Vector2( 1348.65, 107.892 )
 
 [node name="BREAKABLE_BLOCK_BASE27" parent="InteractivesObjects/EarthBlocks/S" instance=ExtResource( 5 )]
 position = Vector2( 2722.61, 156.107 )
@@ -695,6 +706,9 @@ position = Vector2( 3348.27, -924.325 )
 
 [node name="M" type="Node2D" parent="InteractivesObjects/EarthBlocks"]
 editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="M_BREAKABLE_BLOCK" parent="InteractivesObjects/EarthBlocks/M" instance=ExtResource( 6 )]
 position = Vector2( 334.736, 144.21 )
@@ -912,12 +926,15 @@ position = Vector2( 3263.2, -961.044 )
 script = SubResource( 19 )
 
 [node name="TeleportGroups" type="Node2D" parent="InteractivesObjects"]
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="Group1" type="Node2D" parent="InteractivesObjects/TeleportGroups"]
+editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="TeleportArea" parent="InteractivesObjects/TeleportGroups/Group1" instance=ExtResource( 7 )]
 position = Vector2( 260, 60 )
@@ -931,6 +948,9 @@ position = Vector2( 220, 467.556 )
 [node name="Group2" type="Node2D" parent="InteractivesObjects/TeleportGroups"]
 editor/display_folded = true
 position = Vector2( 530, 0.749399 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="TeleportArea" parent="InteractivesObjects/TeleportGroups/Group2" instance=ExtResource( 7 )]
 position = Vector2( 220, 83.7605 )
@@ -941,7 +961,101 @@ position = Vector2( 244, 323.6 )
 [node name="TeleportArea3" parent="InteractivesObjects/TeleportGroups/Group2" instance=ExtResource( 7 )]
 position = Vector2( 220, 467.556 )
 
-[node name="Buttons&Doors" type="Node2D" parent="InteractivesObjects"]
+[node name="Group3" type="Node2D" parent="InteractivesObjects/TeleportGroups"]
+editor/display_folded = true
+position = Vector2( 858.423, 6.12218 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="TeleportArea" parent="InteractivesObjects/TeleportGroups/Group3" instance=ExtResource( 7 )]
+position = Vector2( 221.756, 151.705 )
+
+[node name="TeleportArea3" parent="InteractivesObjects/TeleportGroups/Group3" instance=ExtResource( 7 )]
+position = Vector2( 190.702, 464.272 )
+
+[node name="Group4" type="Node2D" parent="InteractivesObjects/TeleportGroups"]
+editor/display_folded = true
+position = Vector2( 1418.42, 6.12218 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="TeleportArea" parent="InteractivesObjects/TeleportGroups/Group4" instance=ExtResource( 7 )]
+position = Vector2( 221.756, 151.705 )
+
+[node name="TeleportArea2" parent="InteractivesObjects/TeleportGroups/Group4" instance=ExtResource( 7 )]
+position = Vector2( 242.003, 343.673 )
+
+[node name="TeleportArea3" parent="InteractivesObjects/TeleportGroups/Group4" instance=ExtResource( 7 )]
+position = Vector2( 240.702, 536.272 )
+
+[node name="Group5" type="Node2D" parent="InteractivesObjects/TeleportGroups"]
+editor/display_folded = true
+position = Vector2( 2178.7, -17.1402 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="TeleportArea" parent="InteractivesObjects/TeleportGroups/Group5" instance=ExtResource( 7 )]
+position = Vector2( 224.464, 150.803 )
+
+[node name="TeleportArea2" parent="InteractivesObjects/TeleportGroups/Group5" instance=ExtResource( 7 )]
+position = Vector2( 264.566, 340.966 )
+
+[node name="TeleportArea3" parent="InteractivesObjects/TeleportGroups/Group5" instance=ExtResource( 7 )]
+position = Vector2( 182.039, 557.03 )
+
+[node name="Group6" type="Node2D" parent="InteractivesObjects/TeleportGroups"]
+editor/display_folded = true
+position = Vector2( 2897.61, -62.8527 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="TeleportArea" parent="InteractivesObjects/TeleportGroups/Group6" instance=ExtResource( 7 )]
+position = Vector2( 244.464, 219.224 )
+
+[node name="TeleportArea2" parent="InteractivesObjects/TeleportGroups/Group6" instance=ExtResource( 7 )]
+position = Vector2( 538.25, 243.071 )
+
+[node name="TeleportArea3" parent="InteractivesObjects/TeleportGroups/Group6" instance=ExtResource( 7 )]
+position = Vector2( 628.242, 604.643 )
+
+[node name="Buttons&Doors" type="Node2D" parent="InteractivesObjects"]
+editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Group1" type="Node2D" parent="InteractivesObjects/Buttons&Doors"]
+editor/display_folded = true
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Area2D" parent="InteractivesObjects/Buttons&Doors/Group1" instance=ExtResource( 9 )]
+position = Vector2( 408, 325 )
+
+[node name="Door" parent="InteractivesObjects/Buttons&Doors/Group1" instance=ExtResource( 10 )]
+position = Vector2( 480.474, 96.579 )
+
+[node name="Door2" parent="InteractivesObjects/Buttons&Doors/Group1" instance=ExtResource( 10 )]
+position = Vector2( 479, 481 )
+
+[node name="Group2" type="Node2D" parent="InteractivesObjects/Buttons&Doors"]
+editor/display_folded = true
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Area2D" parent="InteractivesObjects/Buttons&Doors/Group2" instance=ExtResource( 11 )]
+position = Vector2( 1100.1, 348.65 )
+
+[node name="Door" parent="InteractivesObjects/Buttons&Doors/Group2" instance=ExtResource( 12 )]
+position = Vector2( 1001.74, 456.023 )
+
+[node name="Door2" parent="InteractivesObjects/Buttons&Doors/Group2" instance=ExtResource( 12 )]
+position = Vector2( 1032.6, 143.62 )

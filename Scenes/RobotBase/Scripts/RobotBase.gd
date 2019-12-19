@@ -45,4 +45,5 @@ func setup_states_node():
 	states_node.character_node = self
 	states_node.layer_change_node = layer_change_node
 	states_node.hit_box_node = hit_box_node
+	states_node.animation_node = animation_node
 	states_node.setup()

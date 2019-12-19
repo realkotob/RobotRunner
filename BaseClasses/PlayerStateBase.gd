@@ -2,10 +2,11 @@ extends StateBase
 
 class_name PlayerStateBase
 
-onready var animation_node = get_node("../../Animation")
+var animation_node : AnimatedSprite
 
 func enter_state(_host):
-	animation_node.play(self.name)
+	if animation_node != null:
+		animation_node.play(self.name)
 
 func on_UpPressed():
 	pass

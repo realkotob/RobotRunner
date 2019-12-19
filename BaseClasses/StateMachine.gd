@@ -11,6 +11,7 @@ var attributes_node : Node
 var character_node : KinematicBody2D
 var layer_change_node : Node
 var hit_box_node : Node
+var animation_node : AnimatedSprite
 
 onready var states_map = get_children()
 
@@ -131,6 +132,7 @@ func setup_idle_node():
 	idle_node.character_node = character_node
 	idle_node.states_node = self
 	idle_node.layer_change_node = layer_change_node
+	idle_node.animation_node = animation_node
 	idle_node.setup()
 
 
@@ -139,6 +141,7 @@ func setup_move_node():
 	move_node.states_node = self
 	move_node.layer_change_node = layer_change_node
 	move_node.attributes_node = attributes_node
+	move_node.animation_node = animation_node
 	move_node.setup()
 
 
@@ -146,12 +149,16 @@ func setup_jump_node():
 	jump_node.character_node = character_node
 	jump_node.states_node = self
 	jump_node.attributes_node = attributes_node
+	jump_node.animation_node = animation_node
 
 
 func setup_fall_node():
 	fall_node.character_node = character_node
+	fall_node.animation_node = animation_node
 
 
 func setup_action_node():
 	action_node.hit_box_node = hit_box_node
 	action_node.state_node = self
+	action_node.animation_node = animation_node
+	action_node.setup()

@@ -8,8 +8,14 @@
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2( 0.463928, 4.23197 )
 
-[node name="Inputs" parent="." index="2"]
+[node name="Inputs" parent="." index="4"]
 script = ExtResource( 2 )
 
-[node name="HitBox" parent="." index="6"]
+[node name="States" parent="." index="6"]
+editor/display_folded = false
+
+[node name="Action" parent="States" index="4"]
+animation_offset = Vector2( 24, 0 )
+
+[node name="HitBox" parent="." index="8"]
 breakable_group = "IceBlock"

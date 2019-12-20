@@ -23,6 +23,7 @@ script = ExtResource( 2 )
 
 [node name="Camera" type="Camera2D" parent="GamePlaying"]
 editor/display_folded = true
+
 position = Vector2( 512, 289 )
 current = true
 drag_margin_h_enabled = false
@@ -31,10 +32,12 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
+
 speed = 0.1
 
 [node name="StartCameraArea" type="Area2D" parent="GamePlaying/Camera"]
 editor/display_folded = true
+
 __meta__ = {
 "_edit_lock_": true
 }

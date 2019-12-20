@@ -14,7 +14,6 @@ __meta__ = {
 }
 
 [node name="Camera" type="Camera2D" parent="."]
-editor/display_folded = true
 position = Vector2( 512, 289 )
 current = true
 drag_margin_h_enabled = false
@@ -23,10 +22,9 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
-speed = 1.0
+speed = 0.5
 
 [node name="StartCameraArea" type="Area2D" parent="Camera"]
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }

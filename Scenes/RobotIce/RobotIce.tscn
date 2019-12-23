@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/RobotBase/RobotBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/RobotIce/Scripts/InputsIce.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/RobotIce/Scripts/ActionIce.gd" type="Script" id=3]
 
 [node name="RobotIce" index="0" instance=ExtResource( 1 )]
 
@@ -11,11 +12,8 @@ position = Vector2( 0.463928, 4.23197 )
 [node name="Inputs" parent="." index="4"]
 script = ExtResource( 2 )
 
-[node name="States" parent="." index="6"]
-editor/display_folded = false
-
 [node name="Action" parent="States" index="4"]
-animation_offset = Vector2( 24, 0 )
+script = ExtResource( 3 )
 
 [node name="HitBox" parent="." index="8"]
 breakable_group = "IceBlock"

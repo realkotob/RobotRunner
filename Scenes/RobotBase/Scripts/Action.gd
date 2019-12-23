@@ -1,6 +1,11 @@
 extends PlayerStateBase
 
+class_name ActionBase
+
 ### ACTION STATE  ###
+
+var interact_node : Node = null
+var interact_able_array : Array
 
 export var animation_offset : Vector2
 
@@ -10,12 +15,15 @@ var state_node : Node
 func setup():
 	var _err = animation_node.connect("animation_finished", self, "on_animation_finished")
 
-
 # When the actor enters action state: set active the hit box, and play the right animation
 func enter_state(_host):
 	animation_node.play(self.name)
 	animation_node.set_offset(animation_offset)
-	hit_box_node.get_child(0).set_disabled(false)
+	
+	if interact_node == null:
+		hit_box_node.get_child(0).set_disabled(false)
+	elif interact_node in interact_able_array:
+		interact_node.interact()
 
 
 # When the actor exits action state: set unactive the hit box

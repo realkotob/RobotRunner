@@ -1,6 +1,5 @@
 extends KinematicBody2D
 
-
 # Store all the children references
 onready var attributes_node = get_node("Attributes")
 onready var physic_node = get_node("Physic")

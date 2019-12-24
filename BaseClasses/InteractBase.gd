@@ -10,8 +10,9 @@ onready var area2D_node = get_node("Area2D")
 
 
 func _ready():
-	var _err = area2D_node.connect("body_entered", self, "on_body_entered")
-
+	var _err
+	_err = area2D_node.connect("body_entered", self, "on_body_entered")
+	_err = area2D_node.connect("body_exited", self, "on_body_exited")
 
 func on_body_entered(body):
 	if body in players_nodes_array and body.get_node("States/Action").interact_node != self:
@@ -30,7 +31,3 @@ func on_body_exited(body):
 		# If he left, set his teleport_node value to null
 		if is_colliding == false:
 			body.get_node("States/Action").interact_node = null
-
-# Declaration of the method handling how the interactive object behave on interaction
-func interact():
-	pass

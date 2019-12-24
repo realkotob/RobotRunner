@@ -9,7 +9,7 @@ var hit_box_node : Area2D
 const GRAVITY : int = 30
 
 func _physics_process(_delta):
-	var dir = direction_node.get_direction()
+	var dir = direction_node.get_move_direction()
 	var spd = attributes_node.speed
 	
 	attributes_node.velocity.x = dir * spd

@@ -59,6 +59,7 @@ animations = [ {
 extents = Vector2( 30, 30 )
 
 [node name="Robot" type="KinematicBody2D"]
+z_index = 1
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
@@ -85,6 +86,7 @@ jump_force = -500
 script = ExtResource( 5 )
 
 [node name="States" type="Node" parent="."]
+editor/display_folded = true
 script = ExtResource( 6 )
 
 [node name="Idle" type="Node" parent="States"]

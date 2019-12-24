@@ -12,6 +12,7 @@ var character_node : KinematicBody2D
 var layer_change_node : Node
 var hit_box_node : Node
 var animation_node : AnimatedSprite
+var direction_node
 
 onready var states_map = get_children()
 
@@ -161,4 +162,5 @@ func setup_action_node():
 	action_node.hit_box_node = hit_box_node
 	action_node.state_node = self
 	action_node.animation_node = animation_node
+	action_node.direction_node = direction_node
 	action_node.setup()

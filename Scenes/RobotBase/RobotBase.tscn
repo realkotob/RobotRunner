@@ -11,14 +11,14 @@
 [ext_resource path="res://Scenes/RobotBase/Scripts/Jump.gd" type="Script" id=9]
 [ext_resource path="res://Scenes/RobotBase/Scripts/Fall.gd" type="Script" id=10]
 [ext_resource path="res://Scenes/RobotBase/Scripts/Action.gd" type="Script" id=11]
-[ext_resource path="res://Scenes/RobotIce/Sprites/Move/RobotIce2.png" type="Texture" id=12]
-[ext_resource path="res://Scenes/RobotIce/Sprites/Move/RobotIce3.png" type="Texture" id=13]
-[ext_resource path="res://Scenes/RobotIce/Sprites/Move/RobotIce4.png" type="Texture" id=14]
-[ext_resource path="res://Scenes/RobotIce/Sprites/Move/RobotIce5.png" type="Texture" id=15]
-[ext_resource path="res://Scenes/RobotIce/Sprites/RobotIce.png" type="Texture" id=16]
-[ext_resource path="res://Scenes/RobotIce/Sprites/Attack/RobotIceAttack1.png" type="Texture" id=17]
-[ext_resource path="res://Scenes/RobotIce/Sprites/Attack/RobotIceAttack2.png" type="Texture" id=18]
-[ext_resource path="res://Scenes/RobotIce/Sprites/Attack/RobotIceAttack3.png" type="Texture" id=19]
+[ext_resource path="res://Scenes/RobotIce/Sprites/Attack/RobotIceAttack1.png" type="Texture" id=12]
+[ext_resource path="res://Scenes/RobotIce/Sprites/Attack/RobotIceAttack2.png" type="Texture" id=13]
+[ext_resource path="res://Scenes/RobotIce/Sprites/Attack/RobotIceAttack3.png" type="Texture" id=14]
+[ext_resource path="res://Scenes/RobotIce/Sprites/Move/RobotIce2.png" type="Texture" id=15]
+[ext_resource path="res://Scenes/RobotIce/Sprites/Move/RobotIce3.png" type="Texture" id=16]
+[ext_resource path="res://Scenes/RobotIce/Sprites/Move/RobotIce4.png" type="Texture" id=17]
+[ext_resource path="res://Scenes/RobotIce/Sprites/Move/RobotIce5.png" type="Texture" id=18]
+[ext_resource path="res://Scenes/RobotIce/Sprites/RobotIce.png" type="Texture" id=19]
 [ext_resource path="res://Scenes/RobotIce/Sprites/RobotIceFall.png" type="Texture" id=20]
 [ext_resource path="res://Scenes/RobotIce/Sprites/RobotIceJump6.png" type="Texture" id=21]
 [ext_resource path="res://Scenes/RobotBase/Scripts/Animation.gd" type="Script" id=22]
@@ -29,20 +29,20 @@ extents = Vector2( 11.6843, 20 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ) ],
+"frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
+"loop": false,
+"name": "Action",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ) ],
 "loop": true,
 "name": "Move",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 16 ) ],
+"frames": [ ExtResource( 19 ) ],
 "loop": true,
 "name": "Idle",
 "speed": 5.0
-}, {
-"frames": [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ) ],
-"loop": false,
-"name": "Action",
-"speed": 10.0
 }, {
 "frames": [ ExtResource( 20 ) ],
 "loop": true,
@@ -110,11 +110,11 @@ animation = "Action"
 script = ExtResource( 22 )
 
 [node name="HitBox" type="Area2D" parent="."]
-editor/display_folded = true
 space_override = 1
+linear_damp = 0.0
 script = ExtResource( 23 )
 breakable_group = "EarthBlock"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2( 29.3969, -6.3211 )
+position = Vector2( 30, -6 )
 shape = SubResource( 3 )

@@ -8,6 +8,8 @@ func _ready():
 	var _err = connect("body_entered", self, "on_body_entered")
 	shape_node.disabled = true
 
+
+# Check for a collision with a breakable object, and destroy it if necesary
 func on_body_entered(body):
 	if body == get_parent():
 		return

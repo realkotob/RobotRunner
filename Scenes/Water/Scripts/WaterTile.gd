@@ -17,7 +17,6 @@ func on_body_entered(body):
 	
 	if body in players_nodes_array and body.get_node("States/Action").interact_node != self:
 		body.get_node("States/Action").interact_node = self
-		body.set_in_water(true)
 	elif body in iceblocks_array:
 		body_floating(body, true)
 
@@ -37,7 +36,6 @@ func on_body_exited(body):
 		# If he left, set his teleport_node value to null
 		if is_colliding == false:
 			body.get_node("States/Action").interact_node = null
-			body.set_in_water(false)
 			
 	elif body in iceblocks_array:
 		var is_colliding = false

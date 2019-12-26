@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Scenes/RobotBase/Scripts/RobotBase.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/RobotBase/Scripts/Physic.gd" type="Script" id=2]
@@ -21,8 +21,7 @@
 [ext_resource path="res://Scenes/RobotIce/Sprites/RobotIce.png" type="Texture" id=19]
 [ext_resource path="res://Scenes/RobotIce/Sprites/RobotIceFall.png" type="Texture" id=20]
 [ext_resource path="res://Scenes/RobotIce/Sprites/RobotIceJump6.png" type="Texture" id=21]
-[ext_resource path="res://Scenes/RobotBase/Scripts/Animation.gd" type="Script" id=22]
-[ext_resource path="res://Scenes/RobotBase/Scripts/HitBoxBase.gd" type="Script" id=23]
+[ext_resource path="res://Scenes/RobotBase/Scripts/HitBoxBase.gd" type="Script" id=22]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 11.6843, 20 )
@@ -107,12 +106,11 @@ script = ExtResource( 11 )
 [node name="Animation" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "Action"
-script = ExtResource( 22 )
 
 [node name="HitBox" type="Area2D" parent="."]
 space_override = 1
 linear_damp = 0.0
-script = ExtResource( 23 )
+script = ExtResource( 22 )
 breakable_group = "EarthBlock"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]

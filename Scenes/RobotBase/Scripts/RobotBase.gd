@@ -1,7 +1,5 @@
 extends KinematicBody2D
 
-var in_water : bool = false setget set_in_water, get_in_water
-
 # Store all the children references
 onready var attributes_node = get_node("Attributes")
 onready var physic_node = get_node("Physic")
@@ -52,10 +50,3 @@ func setup_states_node():
 	states_node.animation_node = animation_node
 	states_node.direction_node = direction_node
 	states_node.setup()
-
-func set_in_water(value : bool):
-	in_water = value
-	animation_node.change_color(value)
-
-func get_in_water() -> bool:
-	return in_water

@@ -17,4 +17,4 @@ func on_body_entered(body):
 	var breakable_objects_array : Array = get_tree().get_nodes_in_group(breakable_group)
 	
 	if body in breakable_objects_array:
-		body.queue_free()
+		body.destroy()

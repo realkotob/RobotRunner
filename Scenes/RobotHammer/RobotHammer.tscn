@@ -54,6 +54,9 @@ shape = SubResource( 1 )
 [node name="Inputs" parent="." index="4"]
 script = ExtResource( 2 )
 
+[node name="States" parent="." index="6"]
+editor/display_folded = false
+
 [node name="Action" parent="States" index="4"]
 animation_offset = Vector2( 0, -10 )
 

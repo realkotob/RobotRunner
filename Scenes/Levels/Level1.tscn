@@ -517,7 +517,6 @@ position = Vector2( 3286.88, -887.804 )
 position = Vector2( 3502.96, -887.995 )
 
 [node name="EarthBlocks" type="Node2D" parent="InteractivesObjects"]
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }

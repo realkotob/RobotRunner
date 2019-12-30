@@ -1,15 +1,14 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/BreakableObjects/IceBlock/S (BASE)/IceBlockBase.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/BreakableObjects/IceBlock/M/MoyenneGlace1.png" type="Texture" id=2]
-[ext_resource path="res://Scenes/BreakableObjects/IceBlock/M/MoyenneGlace2.png" type="Texture" id=3]
-[ext_resource path="res://Scenes/BreakableObjects/IceBlock/M/MoyenneGlace3.png" type="Texture" id=4]
-[ext_resource path="res://Scenes/BreakableObjects/IceBlock/M/MoyenneGlace4.png" type="Texture" id=5]
-[ext_resource path="res://Scenes/BreakableObjects/IceBlock/M/MoyenneGlace5.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/BreakableObjects/IceBlock/S (BASE)/PetiteGlace1.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/BreakableObjects/IceBlock/S (BASE)/PetiteGlace2.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/BreakableObjects/IceBlock/S (BASE)/PetiteGlace3.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/BreakableObjects/IceBlock/S (BASE)/PetiteGlace4.png" type="Texture" id=5]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
 "loop": false,
 "name": "default",
 "speed": 10.0
@@ -23,6 +22,7 @@ mode = 1
 script = ExtResource( 1 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -4 )
 frames = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

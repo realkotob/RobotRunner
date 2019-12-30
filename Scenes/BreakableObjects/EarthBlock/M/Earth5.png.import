@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/WaterTiles.png-527e67223b03383182a47352d0dc622b.stex"
+path="res://.import/Earth5.png-be09ad327c9d23be8251cb704eea5808.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Global/Tileset/WaterTiles.png"
-dest_files=[ "res://.import/WaterTiles.png-527e67223b03383182a47352d0dc622b.stex" ]
+source_file="res://Scenes/BreakableObjects/EarthBlock/M/Earth5.png"
+dest_files=[ "res://.import/Earth5.png-be09ad327c9d23be8251cb704eea5808.stex" ]
 
 [params]
 

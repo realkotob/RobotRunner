@@ -23,7 +23,6 @@ script = ExtResource( 2 )
 
 [node name="Camera" type="Camera2D" parent="GamePlaying"]
 editor/display_folded = true
-
 position = Vector2( 512, 289 )
 current = true
 drag_margin_h_enabled = false
@@ -32,12 +31,10 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
-
 speed = 0.1
 
 [node name="StartCameraArea" type="Area2D" parent="GamePlaying/Camera"]
 editor/display_folded = true
-
 __meta__ = {
 "_edit_lock_": true
 }
@@ -59,13 +56,14 @@ shape = SubResource( 2 )
 "Players",
 ] instance=ExtResource( 4 )]
 position = Vector2( 60, 460 )
+z_index = 0
 
 [node name="RobotIce" parent="GamePlaying" groups=[
 "Players",
 ] instance=ExtResource( 5 )]
-position = Vector2( 62.7354, 80 )
+position = Vector2( 82.7471, 120.834 )
+z_index = 0
 
 [node name="Levels" type="Node2D" parent="GamePlaying"]
-editor/display_folded = true
 
 [node name="Level1" parent="GamePlaying/Levels" instance=ExtResource( 6 )]

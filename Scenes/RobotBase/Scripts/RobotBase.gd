@@ -1,6 +1,5 @@
 extends KinematicBody2D
 
-
 # Store all the children references
 onready var attributes_node = get_node("Attributes")
 onready var physic_node = get_node("Physic")
@@ -14,6 +13,7 @@ onready var hit_box_node = get_node("HitBox")
 # Give every reference they need to children nodes
 func _ready():
 	setup_physic_node()
+	setup_direction_node()
 	setup_inputs_node()
 	setup_layer_change_node()
 	setup_states_node()
@@ -25,8 +25,10 @@ func setup_physic_node():
 	physic_node.character_node = self
 	physic_node.direction_node = direction_node
 	physic_node.animation_node = animation_node
-	physic_node.hit_box_node = hit_box_node
 
+# Give to the direction node, every node references it needs
+func setup_direction_node():
+	direction_node.hit_box_node = hit_box_node
 
 # Give to the inputs node, every node references it needs
 func setup_inputs_node():
@@ -46,4 +48,5 @@ func setup_states_node():
 	states_node.layer_change_node = layer_change_node
 	states_node.hit_box_node = hit_box_node
 	states_node.animation_node = animation_node
+	states_node.direction_node = direction_node
 	states_node.setup()

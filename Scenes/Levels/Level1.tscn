@@ -260,6 +260,7 @@ position = Vector2( 2147.71, 228.282 )
 position = Vector2( 2221.1, 227.578 )
 
 [node name="S_ICE_BLOCK_BASE8" parent="InteractivesObjects/IceBlocks/S" instance=ExtResource( 4 )]
+
 position = Vector2( 2316.11, 251.858 )
 
 [node name="S_ICE_BLOCK_BASE9" parent="InteractivesObjects/IceBlocks/S" instance=ExtResource( 4 )]
@@ -298,6 +299,7 @@ position = Vector2( 1991.03, 287.749 )
 position = Vector2( 2185.05, 240.093 )
 
 [node name="M_ICE_BLOCK5" parent="InteractivesObjects/IceBlocks/M" instance=ExtResource( 5 )]
+
 position = Vector2( 2303.63, 287.476 )
 
 [node name="M_ICE_BLOCK6" parent="InteractivesObjects/IceBlocks/M" instance=ExtResource( 5 )]
@@ -558,6 +560,7 @@ position = Vector2( 1932.37, 324.349 )
 position = Vector2( 2148.05, 252.758 )
 
 [node name="BREAKABLE_BLOCK_BASE12" parent="InteractivesObjects/EarthBlocks/S" instance=ExtResource( 6 )]
+
 position = Vector2( 2676, 35.4385 )
 
 [node name="BREAKABLE_BLOCK_BASE13" parent="InteractivesObjects/EarthBlocks/S" instance=ExtResource( 6 )]
@@ -702,7 +705,6 @@ position = Vector2( 3444.12, -923.584 )
 position = Vector2( 3348.27, -924.325 )
 
 [node name="M" type="Node2D" parent="InteractivesObjects/EarthBlocks"]
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -765,6 +767,7 @@ position = Vector2( 2231.79, 264.578 )
 script = ExtResource( 8 )
 
 [node name="M_BREAKABLE_BLOCK16" parent="InteractivesObjects/EarthBlocks/M" instance=ExtResource( 7 )]
+
 position = Vector2( 2352.59, 287.117 )
 script = ExtResource( 8 )
 
@@ -948,7 +951,6 @@ __meta__ = {
 }
 
 [node name="Group1" type="Node2D" parent="InteractivesObjects/TeleportGroups"]
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -1040,19 +1042,21 @@ position = Vector2( 538.25, 243.071 )
 position = Vector2( 628.242, 604.643 )
 
 [node name="Buttons&Doors" type="Node2D" parent="InteractivesObjects"]
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="Group1" type="Node2D" parent="InteractivesObjects/Buttons&Doors"]
+
 editor/display_folded = true
 script = ExtResource( 12 )
+
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="Area2D" parent="InteractivesObjects/Buttons&Doors/Group1" instance=ExtResource( 13 )]
+
 position = Vector2( 408, 325 )
 
 [node name="Door" parent="InteractivesObjects/Buttons&Doors/Group1" instance=ExtResource( 14 )]

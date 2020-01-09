@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var camera_node = get_node("Camera")
+onready var camera_node = get_node("CameraSystem/Camera")
 onready var main_node = get_parent()
 
 func _ready():
@@ -8,3 +8,4 @@ func _ready():
 
 func on_loose_condition():
 	main_node.game_over()
+	pass

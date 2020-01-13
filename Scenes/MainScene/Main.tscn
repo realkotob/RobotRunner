@@ -16,13 +16,11 @@ __meta__ = {
 
 [node name="GamePlaying" type="Node2D" parent="."]
 script = ExtResource( 2 )
-
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="CameraSystem" type="Node2D" parent="GamePlaying"]
-
 __meta__ = {
 "_edit_lock_": true
 }
@@ -30,13 +28,12 @@ __meta__ = {
 [node name="Camera" parent="GamePlaying/CameraSystem" instance=ExtResource( 3 )]
 speed = 0.75
 
-[node name="CP1" parent="GamePlaying/CameraSystem" instance=ExtResource( 4 )]
+[node name="Checkpoint1" parent="GamePlaying/CameraSystem" instance=ExtResource( 4 )]
 position = Vector2( 3400, 280 )
-cp_dir = 3
+cp_dir = Vector2( 0, -1 )
 
-[node name="CP2" parent="GamePlaying/CameraSystem" instance=ExtResource( 4 )]
+[node name="Checkpoint2" parent="GamePlaying/CameraSystem" instance=ExtResource( 4 )]
 position = Vector2( 3400, -1450 )
-cp_dir = 2
 
 [node name="RobotHammer" parent="GamePlaying" groups=[
 "Players",
@@ -46,7 +43,6 @@ z_index = 0
 
 [node name="RobotIce" parent="GamePlaying" groups=[
 "Players",
-
 ] instance=ExtResource( 6 )]
 position = Vector2( 62.7354, 80 )
 

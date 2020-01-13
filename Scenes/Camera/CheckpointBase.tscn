@@ -4,8 +4,8 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 
-[node name="CP" type="Area2D" groups=[
-"CHECKPOINTS",
+[node name="CameraChekpoint" type="Area2D" groups=[
+"CameraCheckpoint",
 ]]
 position = Vector2( 596.005, 265.928 )
 z_index = 1

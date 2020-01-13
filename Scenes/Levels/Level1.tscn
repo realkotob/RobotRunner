@@ -228,6 +228,7 @@ __meta__ = {
 }
 
 [node name="IceBlocks" type="Node2D" parent="InteractivesObjects"]
+editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -237,34 +238,6 @@ editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
-
-[node name="S_ICE_BLOCK_BASE" parent="InteractivesObjects/IceBlocks/S" instance=ExtResource( 4 )]
-position = Vector2( 1956.54, 323.973 )
-
-[node name="S_ICE_BLOCK_BASE2" parent="InteractivesObjects/IceBlocks/S" instance=ExtResource( 4 )]
-position = Vector2( 2004, 252.236 )
-
-[node name="S_ICE_BLOCK_BASE3" parent="InteractivesObjects/IceBlocks/S" instance=ExtResource( 4 )]
-position = Vector2( 2026.98, 299.491 )
-
-[node name="S_ICE_BLOCK_BASE4" parent="InteractivesObjects/IceBlocks/S" instance=ExtResource( 4 )]
-position = Vector2( 2075.71, 227.014 )
-
-[node name="S_ICE_BLOCK_BASE5" parent="InteractivesObjects/IceBlocks/S" instance=ExtResource( 4 )]
-position = Vector2( 2099.36, 274.81 )
-
-[node name="S_ICE_BLOCK_BASE6" parent="InteractivesObjects/IceBlocks/S" instance=ExtResource( 4 )]
-position = Vector2( 2147.71, 228.282 )
-
-[node name="S_ICE_BLOCK_BASE7" parent="InteractivesObjects/IceBlocks/S" instance=ExtResource( 4 )]
-position = Vector2( 2221.1, 227.578 )
-
-[node name="S_ICE_BLOCK_BASE8" parent="InteractivesObjects/IceBlocks/S" instance=ExtResource( 4 )]
-
-position = Vector2( 2316.11, 251.858 )
-
-[node name="S_ICE_BLOCK_BASE9" parent="InteractivesObjects/IceBlocks/S" instance=ExtResource( 4 )]
-position = Vector2( 2267.64, 275.98 )
 
 [node name="S_ICE_BLOCK_BASE10" parent="InteractivesObjects/IceBlocks/S" instance=ExtResource( 4 )]
 position = Vector2( 3469.33, -778.51 )
@@ -282,6 +255,7 @@ position = Vector2( 3324.38, -876.848 )
 position = Vector2( 3468.31, -658.618 )
 
 [node name="M" type="Node2D" parent="InteractivesObjects/IceBlocks"]
+editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -291,16 +265,6 @@ position = Vector2( 334.736, 25 )
 
 [node name="M_ICE_BLOCK2" parent="InteractivesObjects/IceBlocks/M" instance=ExtResource( 5 )]
 position = Vector2( 335.263, 432.397 )
-
-[node name="M_ICE_BLOCK3" parent="InteractivesObjects/IceBlocks/M" instance=ExtResource( 5 )]
-position = Vector2( 1991.03, 287.749 )
-
-[node name="M_ICE_BLOCK4" parent="InteractivesObjects/IceBlocks/M" instance=ExtResource( 5 )]
-position = Vector2( 2185.05, 240.093 )
-
-[node name="M_ICE_BLOCK5" parent="InteractivesObjects/IceBlocks/M" instance=ExtResource( 5 )]
-
-position = Vector2( 2303.63, 287.476 )
 
 [node name="M_ICE_BLOCK6" parent="InteractivesObjects/IceBlocks/M" instance=ExtResource( 5 )]
 position = Vector2( 2976.42, -623.271 )
@@ -519,6 +483,7 @@ position = Vector2( 3286.88, -887.804 )
 position = Vector2( 3502.96, -887.995 )
 
 [node name="EarthBlocks" type="Node2D" parent="InteractivesObjects"]
+editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -550,24 +515,8 @@ position = Vector2( 1380.06, 444.191 )
 [node name="BREAKABLE_BLOCK_BASE8" parent="InteractivesObjects/EarthBlocks/S" instance=ExtResource( 6 )]
 position = Vector2( 1379.93, 467.556 )
 
-[node name="BREAKABLE_BLOCK_BASE9" parent="InteractivesObjects/EarthBlocks/S" instance=ExtResource( 6 )]
-position = Vector2( 1908.86, 298.919 )
-
-[node name="BREAKABLE_BLOCK_BASE10" parent="InteractivesObjects/EarthBlocks/S" instance=ExtResource( 6 )]
-position = Vector2( 1932.37, 324.349 )
-
-[node name="BREAKABLE_BLOCK_BASE11" parent="InteractivesObjects/EarthBlocks/S" instance=ExtResource( 6 )]
-position = Vector2( 2148.05, 252.758 )
-
 [node name="BREAKABLE_BLOCK_BASE12" parent="InteractivesObjects/EarthBlocks/S" instance=ExtResource( 6 )]
-
 position = Vector2( 2676, 35.4385 )
-
-[node name="BREAKABLE_BLOCK_BASE13" parent="InteractivesObjects/EarthBlocks/S" instance=ExtResource( 6 )]
-position = Vector2( 2341.79, 250.888 )
-
-[node name="BREAKABLE_BLOCK_BASE14" parent="InteractivesObjects/EarthBlocks/S" instance=ExtResource( 6 )]
-position = Vector2( 2365.17, 323.736 )
 
 [node name="BREAKABLE_BLOCK_BASE15" parent="InteractivesObjects/EarthBlocks/S" instance=ExtResource( 6 )]
 position = Vector2( 2507.98, 108.051 )
@@ -705,6 +654,7 @@ position = Vector2( 3444.12, -923.584 )
 position = Vector2( 3348.27, -924.325 )
 
 [node name="M" type="Node2D" parent="InteractivesObjects/EarthBlocks"]
+editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -744,31 +694,6 @@ script = ExtResource( 8 )
 
 [node name="M_BREAKABLE_BLOCK10" parent="InteractivesObjects/EarthBlocks/M" instance=ExtResource( 7 )]
 position = Vector2( 1415.73, 456.676 )
-script = ExtResource( 8 )
-
-[node name="M_BREAKABLE_BLOCK11" parent="InteractivesObjects/EarthBlocks/M" instance=ExtResource( 7 )]
-position = Vector2( 1896.4, 335.082 )
-script = ExtResource( 8 )
-
-[node name="M_BREAKABLE_BLOCK12" parent="InteractivesObjects/EarthBlocks/M" instance=ExtResource( 7 )]
-position = Vector2( 1943.93, 287.98 )
-script = ExtResource( 8 )
-
-[node name="M_BREAKABLE_BLOCK13" parent="InteractivesObjects/EarthBlocks/M" instance=ExtResource( 7 )]
-position = Vector2( 2064.1, 263.872 )
-script = ExtResource( 8 )
-
-[node name="M_BREAKABLE_BLOCK14" parent="InteractivesObjects/EarthBlocks/M" instance=ExtResource( 7 )]
-position = Vector2( 2110.85, 238.553 )
-script = ExtResource( 8 )
-
-[node name="M_BREAKABLE_BLOCK15" parent="InteractivesObjects/EarthBlocks/M" instance=ExtResource( 7 )]
-position = Vector2( 2231.79, 264.578 )
-script = ExtResource( 8 )
-
-[node name="M_BREAKABLE_BLOCK16" parent="InteractivesObjects/EarthBlocks/M" instance=ExtResource( 7 )]
-
-position = Vector2( 2352.59, 287.117 )
 script = ExtResource( 8 )
 
 [node name="M_BREAKABLE_BLOCK17" parent="InteractivesObjects/EarthBlocks/M" instance=ExtResource( 7 )]
@@ -920,7 +845,6 @@ position = Vector2( 3528.99, -961.485 )
 position = Vector2( 3263.2, -961.044 )
 
 [node name="WaterTiles" type="Node2D" parent="InteractivesObjects"]
-editor/display_folded = true
 script = ExtResource( 9 )
 __meta__ = {
 "_edit_lock_": true
@@ -943,6 +867,24 @@ position = Vector2( 948, 515.908 )
 
 [node name="WaterTile6" parent="InteractivesObjects/WaterTiles" instance=ExtResource( 10 )]
 position = Vector2( 972, 515.908 )
+
+[node name="WaterTile10" parent="InteractivesObjects/WaterTiles" instance=ExtResource( 10 )]
+position = Vector2( 2628.58, 515.908 )
+
+[node name="WaterTile9" parent="InteractivesObjects/WaterTiles" instance=ExtResource( 10 )]
+position = Vector2( 2604.46, 515.908 )
+
+[node name="WaterTile8" parent="InteractivesObjects/WaterTiles" instance=ExtResource( 10 )]
+position = Vector2( 2580.53, 515.908 )
+
+[node name="WaterTile11" parent="InteractivesObjects/WaterTiles" instance=ExtResource( 10 )]
+position = Vector2( 2700, 515.908 )
+
+[node name="WaterTile13" parent="InteractivesObjects/WaterTiles" instance=ExtResource( 10 )]
+position = Vector2( 2676, 515.908 )
+
+[node name="WaterTile12" parent="InteractivesObjects/WaterTiles" instance=ExtResource( 10 )]
+position = Vector2( 2652, 515.908 )
 
 [node name="TeleportGroups" type="Node2D" parent="InteractivesObjects"]
 editor/display_folded = true
@@ -1047,16 +989,13 @@ __meta__ = {
 }
 
 [node name="Group1" type="Node2D" parent="InteractivesObjects/Buttons&Doors"]
-
 editor/display_folded = true
 script = ExtResource( 12 )
-
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="Area2D" parent="InteractivesObjects/Buttons&Doors/Group1" instance=ExtResource( 13 )]
-
 position = Vector2( 408, 325 )
 
 [node name="Door" parent="InteractivesObjects/Buttons&Doors/Group1" instance=ExtResource( 14 )]

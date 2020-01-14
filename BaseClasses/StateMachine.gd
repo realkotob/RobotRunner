@@ -156,6 +156,7 @@ func setup_jump_node():
 func setup_fall_node():
 	fall_node.character_node = character_node
 	fall_node.animation_node = animation_node
+	fall_node.states_node = self
 
 
 func setup_action_node():

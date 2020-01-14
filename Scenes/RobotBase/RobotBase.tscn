@@ -85,7 +85,6 @@ jump_force = -500
 script = ExtResource( 5 )
 
 [node name="States" type="Node" parent="."]
-editor/display_folded = true
 script = ExtResource( 6 )
 
 [node name="Idle" type="Node" parent="States"]

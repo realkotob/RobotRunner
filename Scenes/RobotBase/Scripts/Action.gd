@@ -23,7 +23,11 @@ func enter_state(_host):
 	var face_dir = direction_node.get_face_direction()
 	
 	animation_node.play(self.name)
-	animation_node.set_offset(animation_offset * face_dir)
+	
+	# Apply the offset to the animation, and orient it the right way, depending of the direction the character is facing
+	var current_anim_offset = animation_offset
+	current_anim_offset.x *= face_dir
+	animation_node.set_offset(current_anim_offset)
 	
 	hit_box_shape.set_disabled(false)
 

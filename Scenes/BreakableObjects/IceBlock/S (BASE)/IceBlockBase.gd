@@ -1,6 +1,4 @@
-extends RigidBody2D
-
-onready var animation_node = get_node("Sprite")
+extends BlockBase
 
 var floating_line_y : float
 var floating_speed : int = 50
@@ -24,9 +22,3 @@ func floating(delta):
 	var dist_to_float_line = global_position.y - floating_line_y
 	if abs(dist_to_float_line) > 3:
 		position.y += floating_speed * sign(-dist_to_float_line) * delta
-
-func destroy():
-	animation_node.play()
-
-func _on_animation_finished():
-	queue_free()

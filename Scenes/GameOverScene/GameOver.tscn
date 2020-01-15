@@ -20,7 +20,7 @@ current = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_right = 1024.0
-margin_bottom = 576.0
+margin_bottom = 590.0
 color = Color( 0, 0, 0, 1 )
 
 [node name="Label" type="Label" parent="."]

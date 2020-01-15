@@ -4,6 +4,9 @@ class_name PlayerStateBase
 
 var animation_node : AnimatedSprite
 
+func setup():
+	pass
+
 func enter_state(_host):
 	if animation_node != null:
 		animation_node.play(self.name)

@@ -1,13 +1,14 @@
-[gd_resource type="SpriteFrames" load_steps=4 format=2]
+[gd_resource type="SpriteFrames" load_steps=5 format=2]
 
-[ext_resource path="res://Scenes/Buttons&Doors/Buttons/Sprites/green/green_lever1.png" type="Texture" id=1]
-[ext_resource path="res://Scenes/Buttons&Doors/Buttons/Sprites/green/green_lever2.png" type="Texture" id=2]
-[ext_resource path="res://Scenes/Buttons&Doors/Buttons/Sprites/green/green_lever3.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Buttons&Doors/Buttons/Sprites/green/ButtonGreen1.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Buttons&Doors/Buttons/Sprites/green/ButtonGreen2.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Buttons&Doors/Buttons/Sprites/green/ButtonGreen3.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Buttons&Doors/Buttons/Sprites/green/ButtonGreen4.png" type="Texture" id=4]
 
 [resource]
 animations = [ {
-"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ) ],
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
 "loop": false,
-"name": "default",
+"name": "Default",
 "speed": 7.0
 } ]

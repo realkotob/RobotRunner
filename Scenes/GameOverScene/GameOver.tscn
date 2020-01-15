@@ -1,10 +1,11 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Global/Fonts/BoldCapsPixel.ttf" type="DynamicFontData" id=1]
+[sub_resource type="DynamicFontData" id=2]
+font_path = "res://Global/Fonts/BoldCapsPixel.ttf"
 
 [sub_resource type="DynamicFont" id=1]
 size = 150
-font_data = ExtResource( 1 )
+font_data = SubResource( 2 )
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -20,7 +21,7 @@ current = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_right = 1024.0
-margin_bottom = 576.0
+margin_bottom = 590.0
 color = Color( 0, 0, 0, 1 )
 
 [node name="Label" type="Label" parent="."]

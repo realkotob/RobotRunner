@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/green_lever3.png-7bf0e80a5753ab367569cc28f4e37b47.stex"
+path="res://.import/ButtonGreen2.png-0411272f83781b009562917398c5455f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/Buttons&Doors/Buttons/Sprites/green/green_lever3.png"
-dest_files=[ "res://.import/green_lever3.png-7bf0e80a5753ab367569cc28f4e37b47.stex" ]
+source_file="res://Scenes/Buttons&Doors/Buttons/Sprites/green/ButtonGreen2.png"
+dest_files=[ "res://.import/ButtonGreen2.png-0411272f83781b009562917398c5455f.stex" ]
 
 [params]
 

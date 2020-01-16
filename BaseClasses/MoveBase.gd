@@ -6,7 +6,7 @@ class_name MoveBase
 
 signal layer_change
 
-var states_node : Node
+var state_node : Node
 var character_node : KinematicBody2D
 var layer_change_node : Node
 var attributes_node : Node
@@ -21,7 +21,7 @@ func update(_host, _delta):
 		return "Idle"
 
 func on_JumpPressed():
-	states_node.set_state("Jump")
+	state_node.set_state("Jump")
 
 func on_LayerUpPressed():
 	emit_signal("layer_change", true)
@@ -30,9 +30,9 @@ func on_LayerDownPressed():
 	emit_signal("layer_change", false)
 
 func on_ActionPressed():
-	states_node.set_state("Action")
+	state_node.set_state("Action")
 
 func enter_state(_host):
 	animation_node.play(self.name)
 	if !character_node.is_on_floor():
-		states_node.set_state("Jump")
+		state_node.set_state("Jump")

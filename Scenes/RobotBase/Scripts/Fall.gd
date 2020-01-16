@@ -2,7 +2,7 @@ extends PlayerStateBase
 
 ### FALL STATE ###
 
-var states_node : Node
+var state_node : Node
 var character_node : KinematicBody2D
 
 func update(_host, _delta):
@@ -10,4 +10,4 @@ func update(_host, _delta):
 		return "Idle"
 
 func on_ActionPressed():
-	states_node.set_state("Action")
+	state_node.set_state("Action")

@@ -10,43 +10,38 @@ onready var states_node = get_node("States")
 onready var animation_node = get_node("Animation")
 onready var hit_box_node = get_node("HitBox")
 
+# Get every children of this node
+onready var children_array : Array = get_children()
+
 # Give every reference they need to children nodes
 func _ready():
-	setup_physic_node()
-	setup_direction_node()
-	setup_inputs_node()
-	setup_layer_change_node()
-	setup_states_node()
-
-
-# Give to the physic node, every node references it needs
-func setup_physic_node():
-	physic_node.attributes_node = attributes_node
-	physic_node.character_node = self
-	physic_node.direction_node = direction_node
-	physic_node.animation_node = animation_node
-
-# Give to the direction node, every node references it needs
-func setup_direction_node():
-	direction_node.hit_box_node = hit_box_node
-
-# Give to the inputs node, every node references it needs
-func setup_inputs_node():
-	inputs_node.connect_direction(direction_node)
-
-
-# Give to the layer change node, every node references it needs
-func setup_layer_change_node():
-	layer_change_node.character_node = self
-
-
-# Give to the layer change node, every node references it needs
-func setup_states_node():
-	states_node.inputs_node = inputs_node
-	states_node.attributes_node = attributes_node
-	states_node.character_node = self
-	states_node.layer_change_node = layer_change_node
-	states_node.hit_box_node = hit_box_node
-	states_node.animation_node = animation_node
-	states_node.direction_node = direction_node
+	for child in children_array:
+		if "character_node" in child:
+			child.character_node = self
+		
+		if "attributes_node" in child:
+			child.attributes_node = attributes_node
+		
+		if "physic_node" in child:
+			child.attributes_node = physic_node
+		
+		if "direction_node" in child:
+			child.direction_node = direction_node
+		
+		if "inputs_node" in child:
+			child.inputs_node = inputs_node
+		
+		if "layer_change_node" in child:
+			child.layer_change_node = layer_change_node
+		
+		if "states_node" in child:
+			child.states_node = states_node
+		
+		if "animation_node" in child:
+			child.animation_node = animation_node
+		
+		if "hit_box_node" in child:
+			child.hit_box_node = hit_box_node
+	
 	states_node.setup()
+	inputs_node.connect_direction(direction_node)

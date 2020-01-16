@@ -4,7 +4,7 @@ extends PlayerStateBase
 
 var character_node : KinematicBody2D
 var attributes_node : Node
-var states_node : Node
+var state_node : Node
 
 func update(_host, _delta):
 	if character_node.is_on_floor():
@@ -17,4 +17,4 @@ func enter_state(_host):
 	attributes_node.velocity.y = attributes_node.jump_force
 
 func on_ActionPressed():
-	states_node.set_state("Action")
+	state_node.set_state("Action")

@@ -29,6 +29,7 @@ func _ready():
 	set_physics_process(false)
 
 func setup():
+	# Give the needed references to the children
 	for state in states_map:
 		if "state_node" in state:
 			state.state_node = self
@@ -57,8 +58,7 @@ func setup():
 		state.setup()
 	
 	set_physics_process(true)
-	state_name = states_map[0].name
-	set_state(get_node(state_name))
+	set_state(states_map[0])
 
 
 # Call for the current state process
@@ -86,6 +86,7 @@ func set_state(new_state):
 	# Change the current state, and the previous state
 	previous_state = current_state
 	current_state = new_state
+	
 	state_name = current_state.name
 	
 	# Connect/Disconnect input signals

@@ -90,6 +90,10 @@ script = ExtResource( 6 )
 [node name="Idle" type="Node" parent="States"]
 script = ExtResource( 7 )
 
+[node name="FallTimer" type="Timer" parent="States/Idle"]
+process_mode = 0
+wait_time = 0.4
+
 [node name="Move" type="Node" parent="States"]
 script = ExtResource( 8 )
 
@@ -107,6 +111,7 @@ frames = SubResource( 2 )
 animation = "Action"
 
 [node name="HitBox" type="Area2D" parent="."]
+editor/display_folded = true
 space_override = 1
 linear_damp = 0.0
 script = ExtResource( 22 )

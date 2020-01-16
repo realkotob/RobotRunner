@@ -6,7 +6,7 @@ var game_over_scene = preload("res://Scenes/GameOverScene/GameOver.tscn")
 var game_over_node : Node
 
 # Triggers the game over 
-func game_over():
+func on_gameover():
 	game_playing_node.queue_free()
 	game_over_node = game_over_scene.instance()
 	add_child(game_over_node)

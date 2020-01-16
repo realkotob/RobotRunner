@@ -19,8 +19,10 @@ func update(_host, _delta):
 		return "Idle"
 
 
+# Start the cool down at the entery of the state
 func enter_state(_host):
 	fall_timer_node.start()
+
 
 # Reset the falling timer cooldown, and stop it
 func exit_state(_host):

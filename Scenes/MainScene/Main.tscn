@@ -21,13 +21,18 @@ __meta__ = {
 }
 
 [node name="CameraSystem" type="Node2D" parent="GamePlaying"]
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="Camera" parent="GamePlaying/CameraSystem" instance=ExtResource( 3 )]
+editor/display_folded = true
+smoothing_enabled = true
 speed = 0.75
+
+[node name="GUI" type="Node2D" parent="GamePlaying/CameraSystem/Camera"]
+position = Vector2( -515, -280 )
+z_index = 100
 
 [node name="Checkpoint1" parent="GamePlaying/CameraSystem" instance=ExtResource( 4 )]
 position = Vector2( 3400, 280 )

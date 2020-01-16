@@ -191,8 +191,10 @@ __meta__ = {
 }
 
 [node name="Parallax" type="ParallaxBackground" parent="Map"]
+editor/display_folded = true
 
 [node name="BackgroundLayer" type="ParallaxLayer" parent="Map/Parallax"]
+editor/display_folded = true
 motion_scale = Vector2( 0.5, 0.5 )
 __meta__ = {
 "_edit_lock_": true
@@ -209,6 +211,7 @@ __meta__ = {
 }
 
 [node name="Walls" type="TileMap" parent="Map"]
+z_index = 1
 tile_set = SubResource( 17 )
 cell_size = Vector2( 24, 24 )
 format = 1
@@ -1001,6 +1004,7 @@ position = Vector2( 480.474, 96.579 )
 position = Vector2( 479, 481 )
 
 [node name="Group2" type="Node2D" parent="InteractivesObjects/Buttons&Doors"]
+editor/display_folded = true
 script = ExtResource( 12 )
 __meta__ = {
 "_edit_lock_": true

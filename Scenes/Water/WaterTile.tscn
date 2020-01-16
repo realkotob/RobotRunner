@@ -9,6 +9,7 @@ extents = Vector2( 12, 28 )
 [node name="WaterTile" type="Node2D" groups=[
 "Water",
 ]]
+z_index = 1
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true

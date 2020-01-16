@@ -185,7 +185,6 @@ __meta__ = {
 }
 
 [node name="Map" type="Node2D" parent="."]
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -984,11 +983,13 @@ position = Vector2( 538.25, 243.071 )
 position = Vector2( 628.242, 604.643 )
 
 [node name="Buttons&Doors" type="Node2D" parent="InteractivesObjects"]
+editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="Group1" type="Node2D" parent="InteractivesObjects/Buttons&Doors"]
+editor/display_folded = true
 script = ExtResource( 12 )
 __meta__ = {
 "_edit_lock_": true

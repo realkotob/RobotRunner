@@ -38,27 +38,27 @@ func connect_direction(direction_node):
 func _input(event):
 	if event is InputEventKey:
 		match event.scancode:
-			KEY_UP: 
+			KEY_O: 
 				if event.pressed:
 					emit_signal("UpPressed")
 				else:
 					emit_signal("UpReleased")
-			KEY_DOWN: 
+			KEY_L: 
 				if event.pressed:
 					emit_signal("DownPressed")
 				else:
 					emit_signal("DownReleased")
-			KEY_LEFT:
+			KEY_K:
 				if event.pressed:
 					emit_signal("LeftPressed")
 				else:
 					emit_signal("LeftReleased")
-			KEY_RIGHT:
+			KEY_M:
 				if event.pressed:
 					emit_signal("RightPressed")
 				else:
 					emit_signal("RightReleased")
-			KEY_KP_0:
+			KEY_N:
 				if event.pressed:
 					emit_signal("JumpPressed")
 				else:
@@ -68,12 +68,12 @@ func _input(event):
 					emit_signal("ActionPressed")
 				else:
 					emit_signal("ActionReleased")
-			KEY_KP_SUBTRACT:
+			KEY_I:
 				if event.pressed:
 					emit_signal("LayerUpPressed")
 				else:
 					emit_signal("LayerUpReleased")
-			KEY_KP_ADD:
+			KEY_P:
 				if event.pressed:
 					emit_signal("LayerDownPressed")
 				else:

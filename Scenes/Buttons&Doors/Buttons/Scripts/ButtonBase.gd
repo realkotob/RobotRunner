@@ -29,8 +29,9 @@ func on_body_entered(body):
 
 func on_animation_finished():
 	emit_signal("button_trigger")
+	collision_shape_node.set_disabled(true)
 
 func on_frame_change():
 	var new_pos = collision_shape_initial_pos
-	new_pos.y += (animation_node.get_frame() * 2)
+	new_pos.y += (animation_node.get_frame() * 2) + 2
 	collision_shape_node.set_position(new_pos)

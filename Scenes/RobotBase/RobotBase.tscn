@@ -85,7 +85,6 @@ jump_force = -500
 script = ExtResource( 5 )
 
 [node name="States" type="Node" parent="."]
-editor/display_folded = true
 script = ExtResource( 6 )
 
 [node name="Idle" type="Node" parent="States"]
@@ -98,12 +97,11 @@ script = ExtResource( 8 )
 script = ExtResource( 9 )
 
 [node name="Fall" type="Node" parent="States"]
-editor/display_folded = true
 script = ExtResource( 10 )
 
 [node name="FallTimer" type="Timer" parent="States/Fall"]
 process_mode = 0
-wait_time = 0.02
+wait_time = 0.04
 
 [node name="Action" type="Node" parent="States"]
 script = ExtResource( 11 )

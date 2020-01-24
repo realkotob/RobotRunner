@@ -49,7 +49,7 @@ custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "New Game"
 script = ExtResource( 3 )
-clickable = true
+_clickable = true
 
 [node name="Scores" type="Label" parent="HBoxContainer/V_OptContainer"]
 margin_top = 55.0
@@ -76,7 +76,7 @@ margin_bottom = 216.0
 custom_fonts/font = ExtResource( 2 )
 text = "Quit"
 script = ExtResource( 6 )
-clickable = true
+_clickable = true
 
 [node name="OptionChoiceSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )

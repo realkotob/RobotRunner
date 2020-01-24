@@ -27,18 +27,18 @@ func _unhandled_input(event):
 			choice_sound_node.play()
 			prev_opt_index = opt_index
 			options_up()
-			while(!options_array[opt_index].clickable):
+			while(!options_array[opt_index]._clickable):
 				options_up()
 		elif Input.is_action_just_pressed("ui_down"):
 			choice_sound_node.play()
 			prev_opt_index = opt_index
 			options_down()
-			while(!options_array[opt_index].clickable):
+			while(!options_array[opt_index]._clickable):
 				options_down()
 
 func check_clickable_options():
 	for opt in options_array:
-		if (!opt.clickable):
+		if (!opt._clickable):
 			count_not_clickable_options+=1
 	if(count_not_clickable_options == len(options_array)):
 		print("There are no clickable options. Exiting...")

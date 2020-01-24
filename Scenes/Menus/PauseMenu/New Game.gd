@@ -1,7 +1,5 @@
 extends MenuOptionsBase
 
-#Give mainscene path, so it can be changed later (or loaded?)
-onready var strMainScene = "res://Scenes/MainScene/Main.tscn"
 
 func options_action():
 	if(get_tree().paused):

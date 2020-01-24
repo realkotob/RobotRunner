@@ -4,6 +4,7 @@ extends MenuOptionsBase
 onready var strMainScene = "res://Scenes/MainScene/Main.tscn"
 
 func options_action():
-	#Player Selection -> New Game
-	get_tree().paused = false
-	var _err = get_tree().reload_current_scene()
+	if(get_tree().paused):
+		#Player Selection -> New Game
+		get_tree().paused = false
+		var _err = get_tree().reload_current_scene()

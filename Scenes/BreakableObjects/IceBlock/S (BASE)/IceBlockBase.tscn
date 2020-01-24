@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/BreakableObjects/IceBlock/S (BASE)/IceBlockBase.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/BreakableObjects/IceBlock/S (BASE)/PetiteGlace1.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/BreakableObjects/IceBlock/S (BASE)/PetiteGlace2.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/BreakableObjects/IceBlock/S (BASE)/PetiteGlace3.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/BreakableObjects/IceBlock/S (BASE)/PetiteGlace4.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/BreakableObjects/IceBlock/Sound/BreakIce.wav" type="AudioStream" id=6]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -30,3 +31,7 @@ shape = SubResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+pitch_scale = 1.2

@@ -47,3 +47,10 @@ func exit_state(_host):
 func on_animation_finished():
 	if state_node.current_state == self:
 		state_node.set_state("Idle")
+		animation_node.set_offset(Vector2(0, 0))
+
+func on_LeftPressed():
+	state_node.set_state("Move")
+
+func on_RightPressed():
+	state_node.set_state("Move")

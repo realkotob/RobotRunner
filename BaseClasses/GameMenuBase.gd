@@ -20,7 +20,6 @@ func _unhandled_input(event):
 	if event is InputEventKey:
 		# If the player hit confirm
 		if Input.is_action_just_pressed("ui_accept"):
-			choice_sound_node.play()
 			options_array[opt_index].options_action()
 		
 		# If the player hit up or down

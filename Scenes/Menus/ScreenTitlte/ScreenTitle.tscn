@@ -80,4 +80,5 @@ clickable = true
 
 [node name="OptionChoiceSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
+volume_db = -15.0
 pitch_scale = 3.0

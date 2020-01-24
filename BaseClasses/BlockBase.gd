@@ -4,6 +4,7 @@ class_name BlockBase
 
 onready var animation_node = get_node("Sprite")
 onready var collision_shape_node = get_node("CollisionShape2D")
+onready var audio_node = get_node("AudioStreamPlayer")
 
 # Connect signals
 func _ready():
@@ -13,6 +14,7 @@ func _ready():
 # When the block is destroyed, lauch the destroy animation
 func destroy():
 	animation_node.play()
+	audio_node.play()
 
 # When the destroy annimation is finished queue_free this block
 func _on_animation_finished():

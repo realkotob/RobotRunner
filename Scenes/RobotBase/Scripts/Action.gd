@@ -14,6 +14,8 @@ var hit_box_node : Area2D
 var state_node : Node
 var hit_box_shape : Node
 
+onready var audio_node = get_node("AudioStreamPlayer")
+
 func setup():
 	var _err = animation_node.connect("animation_finished", self, "on_animation_finished")
 	hit_box_shape = hit_box_node.get_child(0)
@@ -22,7 +24,9 @@ func setup():
 func enter_state(_host):
 	var face_dir = direction_node.get_face_direction()
 	
+	# Play the animation
 	animation_node.play(self.name)
+	audio_node.play()
 	
 	# Apply the offset to the animation, and orient it the right way, depending of the direction the character is facing
 	var current_anim_offset = animation_offset

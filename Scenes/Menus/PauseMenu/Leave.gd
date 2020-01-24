@@ -1,4 +1,5 @@
 extends MenuOptionsBase
 
 func options_action():
-	get_tree().quit()
+	if(get_tree().paused):
+		get_tree().quit()

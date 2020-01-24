@@ -39,7 +39,6 @@ func check_clickable_options():
 		get_tree().quit()
 
 func options_up():
-
 	opt_index -= 1
 	if(opt_index < 0):
 		opt_index = len(options_array)-1

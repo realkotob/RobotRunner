@@ -44,6 +44,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://BaseClasses/GameMenuBase.gd"
 }, {
+"base": "Node",
+"class": "MenuOptionsBase",
+"language": "GDScript",
+"path": "res://BaseClasses/MenuOptionsBase.gd"
+}, {
 "base": "PlayerStateBase",
 "class": "MoveBase",
 "language": "GDScript",
@@ -77,6 +82,7 @@ _global_script_class_icons={
 "InputsBase": "",
 "InteractBase": "",
 "MenuBase": "",
+"MenuOptionsBase": "",
 "MoveBase": "",
 "PlayerStateBase": "",
 "StateBase": "",
@@ -87,7 +93,7 @@ _global_script_class_icons={
 [application]
 
 config/name="LudusGameJam"
-run/main_scene="res://Scenes/Menu/GameMenu.tscn"
+run/main_scene="res://Scenes/Menus/ScreenTitlte/ScreenTitle.tscn"
 config/icon="res://icon.png"
 
 [display]

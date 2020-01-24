@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://BaseClasses/GameMenuBase.gd" type="Script" id=1]
 [ext_resource path="res://Global/Fonts/BoldCapsPixel.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Scenes/Menus/ScreenTitlte/Play.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Menus/ScreenTitlte/Scores.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/Menus/ScreenTitlte/Options.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/Menus/ScreenTitlte/Leave.gd" type="Script" id=6]
 
-[node name="GameMenu" type="Node2D"]
+[node name="ScreenTitle" type="Node2D"]
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
@@ -43,6 +47,8 @@ custom_fonts/font = ExtResource( 2 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "New Game"
+script = ExtResource( 3 )
+clickable = true
 
 [node name="Scores" type="Label" parent="HBoxContainer/V_OptContainer"]
 margin_top = 55.0
@@ -51,6 +57,7 @@ margin_bottom = 106.0
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.470588, 0.470588, 0.470588, 0.784314 )
 text = "Scores"
+script = ExtResource( 4 )
 
 [node name="Options" type="Label" parent="HBoxContainer/V_OptContainer"]
 margin_top = 110.0
@@ -59,6 +66,7 @@ margin_bottom = 161.0
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.470588, 0.470588, 0.470588, 0.784314 )
 text = "Options"
+script = ExtResource( 5 )
 
 [node name="Leave" type="Label" parent="HBoxContainer/V_OptContainer"]
 margin_top = 165.0
@@ -66,3 +74,5 @@ margin_right = 172.0
 margin_bottom = 216.0
 custom_fonts/font = ExtResource( 2 )
 text = "Quit"
+script = ExtResource( 6 )
+clickable = true

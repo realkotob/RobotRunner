@@ -3,6 +3,7 @@ extends Node2D
 class_name MenuBase
 
 onready var opt_container = get_node("HBoxContainer/V_OptContainer")
+onready var choice_sound_node = get_node("OptionChoiceSound")
 onready var options_array = opt_container.get_children()
 
 var opt_index : int = 0 #Get the index where the player aim
@@ -17,14 +18,20 @@ func _physics_process(_delta):
 
 func _unhandled_input(event):
 	if event is InputEventKey:
+		# If the player hit confirm
 		if Input.is_action_just_pressed("ui_accept"):
+			choice_sound_node.play()
 			options_array[opt_index].options_action()
+		
+		# If the player hit up or down
 		elif Input.is_action_just_pressed("ui_up"):
+			choice_sound_node.play()
 			prev_opt_index = opt_index
 			options_up()
 			while(!options_array[opt_index].clickable):
 				options_up()
 		elif Input.is_action_just_pressed("ui_down"):
+			choice_sound_node.play()
 			prev_opt_index = opt_index
 			options_down()
 			while(!options_array[opt_index].clickable):

@@ -1,7 +1,9 @@
 extends MenuBase
 
-func _input(event):
-	if event.is_action_pressed("ui_cancel"):
-		var new_pause_state = not get_tree().paused
-		get_tree().paused = new_pause_state
-		visible = new_pause_state
+onready var resume_label_node = get_node("HBoxContainer/V_OptContainer/Resume")
+
+func _ready():
+	resume_label_node.connect("resume", self, "on_resume")
+
+func on_resume():
+	queue_free()

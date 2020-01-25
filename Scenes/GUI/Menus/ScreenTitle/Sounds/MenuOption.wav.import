@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/MenuOption.wav-df668527821a0472e0aae954286b3443.sample"
+
+[deps]
+
+source_file="res://Scenes/GUI/Menus/ScreenTitle/Sounds/MenuOption.wav"
+dest_files=[ "res://.import/MenuOption.wav-df668527821a0472e0aae954286b3443.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

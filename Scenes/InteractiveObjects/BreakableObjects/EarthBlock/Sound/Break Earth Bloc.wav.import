@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Break Earth Bloc.wav-d17a7de12e5635911a5765735e1c607a.sample"
+
+[deps]
+
+source_file="res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/Sound/Break Earth Bloc.wav"
+dest_files=[ "res://.import/Break Earth Bloc.wav-d17a7de12e5635911a5765735e1c607a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

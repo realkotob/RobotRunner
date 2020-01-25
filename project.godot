@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "PlayerStateBase",
 "class": "ActionBase",
 "language": "GDScript",
-"path": "res://Scenes/RobotBase/Scripts/Action.gd"
+"path": "res://Scenes/Characters/RobotBase/Scripts/Action.gd"
 }, {
 "base": "Node",
 "class": "AttributesBase",
@@ -38,6 +38,11 @@ _global_script_classes=[ {
 "class": "InteractBase",
 "language": "GDScript",
 "path": "res://BaseClasses/InteractBase.gd"
+}, {
+"base": "Node2D",
+"class": "LevelBase",
+"language": "GDScript",
+"path": "res://Scenes/Levels/LevelBase.gd"
 }, {
 "base": "Control",
 "class": "MenuBase",
@@ -86,6 +91,7 @@ _global_script_class_icons={
 "ButtonBase": "",
 "InputsBase": "",
 "InteractBase": "",
+"LevelBase": "",
 "MenuBase": "",
 "MenuOptionsBase": "",
 "MoveBase": "",
@@ -99,7 +105,7 @@ _global_script_class_icons={
 [application]
 
 config/name="LudusGameJam"
-run/main_scene="res://Scenes/Menus/ScreenTitle/ScreenTitle.tscn"
+run/main_scene="res://Scenes/GUI/Menus/ScreenTitle/ScreenTitle.tscn"
 config/icon="res://icon.png"
 
 [display]

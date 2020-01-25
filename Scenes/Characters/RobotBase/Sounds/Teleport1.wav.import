@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Teleport1.wav-84ccd49671fba4c93156a4f24b90b180.sample"
+
+[deps]
+
+source_file="res://Scenes/Characters/RobotBase/Sounds/Teleport1.wav"
+dest_files=[ "res://.import/Teleport1.wav-84ccd49671fba4c93156a4f24b90b180.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

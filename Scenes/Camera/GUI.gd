@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 var pause_menu = preload("res://Scenes/GUI/Menus/PauseMenu/PauseMenu.tscn")
 var pause_menu_node : Control = null

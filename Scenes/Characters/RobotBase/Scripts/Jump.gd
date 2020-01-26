@@ -12,9 +12,11 @@ func update(_host, _delta):
 	elif attributes_node.velocity.y > 0:
 		return "Fall"
 
+
 func enter_state(_host):
 	animation_node.play(self.name)
 	attributes_node.velocity.y = attributes_node.jump_force
+
 
 func on_ActionPressed():
 	state_node.set_state("Action")

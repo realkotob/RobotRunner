@@ -6,12 +6,6 @@ signal JumpReleased
 signal ActionPressed
 signal ActionReleased
 
-signal UpPressed
-signal UpReleased
-
-signal DownPressed
-signal DownReleased
-
 signal RightPressed
 signal RightReleased
 
@@ -34,47 +28,40 @@ func connect_direction(direction_node):
 	_err = connect("RightReleased", direction_node, "on_RightReleased")
 
 
-# Map every inputs to a signal
-func _unhandled_input(event):
-	if event is InputEventKey:
-		match event.scancode:
-			KEY_Z: 
-				if event.pressed:
-					emit_signal("UpPressed")
-				else:
-					emit_signal("UpReleased")
-			KEY_S: 
-				if event.pressed:
-					emit_signal("DownPressed")
-				else:
-					emit_signal("DownReleased")
-			KEY_Q:
-				if event.pressed:
-					emit_signal("LeftPressed")
-				else:
-					emit_signal("LeftReleased")
-			KEY_D:
-				if event.pressed:
-					emit_signal("RightPressed")
-				else:
-					emit_signal("RightReleased")
-			KEY_SPACE:
-				if event.pressed:
-					emit_signal("JumpPressed")
-				else:
-					emit_signal("JumpReleased")
-			KEY_E:
-				if event.pressed:
-					emit_signal("ActionPressed")
-				else:
-					emit_signal("ActionReleased")
-			KEY_R:
-				if event.pressed:
-					emit_signal("LayerUpPressed")
-				else:
-					emit_signal("LayerUpReleased")
-			KEY_A:
-				if event.pressed:
-					emit_signal("LayerDownPressed")
-				else:
-					emit_signal("LayerDownReleased")
+# Map every inputs with a signal
+func _input(_event):
+	if Input.is_action_just_pressed("move_left_player1"):
+		emit_signal("LeftPressed")
+		
+	if Input.is_action_just_released("move_left_player1"):
+		emit_signal("LeftReleased")
+		
+	if Input.is_action_just_pressed("move_right_player1"):
+		emit_signal("RightPressed")
+		
+	if Input.is_action_just_released("move_right_player1"):
+		emit_signal("RightReleased")
+	
+	if Input.is_action_just_pressed("jump_player1"):
+		emit_signal("JumpPressed")
+		
+	if Input.is_action_just_released("jump_player1"):
+		emit_signal("JumpReleased")
+	
+	if Input.is_action_just_pressed("action_player1"):
+		emit_signal("ActionPressed")
+		
+	if Input.is_action_just_released("action_player1"):
+		emit_signal("ActionReleased")
+
+	if Input.is_action_just_pressed("layer_up_player1"):
+		emit_signal("LayerUpPressed")
+		
+	if Input.is_action_just_released("layer_up_player1"):
+		emit_signal("LayerUpReleased")
+	
+	if Input.is_action_just_pressed("layer_down_player1"):
+		emit_signal("LayerDownPressed")
+		
+	if Input.is_action_just_released("layer_down_player1"):
+		emit_signal("LayerDownReleased")

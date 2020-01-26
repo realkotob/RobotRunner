@@ -2,7 +2,7 @@ extends InteractBase
 
 var M_IceBlocks_node : Node2D
 
-onready var iceblock_scene = load("res://Scenes/BreakableObjects/IceBlock/M/MIceBlock.tscn")
+onready var iceblock_scene = load("res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/M/MIceBlock.tscn")
 onready var floating_line_node = get_node("FloatingLine")
 
 var ice_block_instance

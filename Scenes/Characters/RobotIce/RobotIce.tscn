@@ -13,9 +13,6 @@ position = Vector2( 0.463928, 4.23197 )
 [node name="Inputs" parent="." index="4"]
 script = ExtResource( 2 )
 
-[node name="States" parent="." index="6"]
-editor/display_folded = true
-
 [node name="Action" parent="States" index="4"]
 script = ExtResource( 3 )
 animation_offset = Vector2( 24, 0 )

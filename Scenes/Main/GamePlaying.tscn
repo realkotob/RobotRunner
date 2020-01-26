@@ -12,7 +12,7 @@ __meta__ = {
 [node name="RobotHammer" parent="." groups=[
 "Players",
 ] instance=ExtResource( 1 )]
-position = Vector2( 46.694, 303.112 )
+position = Vector2( 56.0253, 305.445 )
 
 [node name="RobotIce" parent="." groups=[
 "Players",

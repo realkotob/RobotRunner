@@ -27,5 +27,5 @@ func _physics_process(_delta):
 	# Apply force to bodies it hit
 	for index in character_node.get_slide_count():
 		var collision = character_node.get_slide_collision(index)
-		if collision.collider.is_in_group("Bodies"):
+		if collision.collider.is_in_group("MovableBodies"):
 			collision.collider.apply_central_impulse(-collision.normal * push)

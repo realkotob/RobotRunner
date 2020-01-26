@@ -25,4 +25,5 @@ stream = ExtResource( 4 )
 volume_db = -16.0
 
 [node name="HitBox" parent="." index="8"]
+editor/display_folded = true
 breakable_group = "IceBlock"

@@ -16,6 +16,7 @@ func _physics_process(_delta):
 	# Compute velocity
 	attributes_node.velocity.x = dir * spd
 	
+	# Flip the sprite in the right direction
 	if abs(attributes_node.velocity.x) > 10.0:
 		animation_node.flip_h = attributes_node.velocity.x < 0.0
 	

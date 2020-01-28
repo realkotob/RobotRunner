@@ -16,7 +16,7 @@ animations = [ {
 "speed": 13.0
 } ]
 
-[node name="IceBlockBase" index="0" instance=ExtResource( 1 )]
+[node name="IceBlockBase" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="Sprite" parent="." index="0"]

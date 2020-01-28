@@ -68,6 +68,7 @@ __meta__ = {
 }
 
 [node name="FastForwardArea" type="Area2D" parent="."]
+editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -81,6 +82,7 @@ __meta__ = {
 }
 
 [node name="SafeArea" type="Area2D" parent="."]
+editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }

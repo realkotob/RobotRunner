@@ -20,9 +20,10 @@ func update(_host, _delta):
 
 
 # Start the cool down at the entery of the state
-func enter_state(_host):
-	fall_timer_node.start()
-	if animation_node != null:
+func enter_state(host):
+	if host.previous_state.name != "Action":
+		fall_timer_node.start()
+	else:
 		animation_node.play(self.name)
 
 

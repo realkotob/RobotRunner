@@ -214,7 +214,6 @@ __meta__ = {
 }
 
 [node name="InteractivesObjects" type="Node2D" parent="."]
-editor/display_folded = true
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_lock_": true

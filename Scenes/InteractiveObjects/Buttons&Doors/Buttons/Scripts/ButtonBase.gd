@@ -28,11 +28,12 @@ func setup():
 			_err = connect("button_trigger", door, "on_button_trigger")
 	_err = area2D_node.connect("body_entered", self, "on_body_entered")
 	_err = animation_node.connect("frame_changed", self, "on_frame_change")
+	_err = animation_node.connect("animation_finished", self, "on_animation_finished")
 
 
 func on_body_entered(body):
 	if body in players_node_array:
-		animation_node.play("default")
+		animation_node.play()
 
 
 func on_animation_finished():

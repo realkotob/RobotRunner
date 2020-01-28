@@ -5,13 +5,19 @@ signal button_trigger
 onready var animation_node = get_node("Animation")
 onready var area2D_node = get_node("Area2D")
 onready var collision_shape_node = get_node("CollisionShape2D")
-onready var robot_array = get_tree().get_nodes_in_group("Players")
 
+var players_node_array : Array
 var door_node_array : Array
 var collision_shape_initial_pos : Vector2
 
 func _ready():
+	add_to_group("InteractivesObjects")
 	collision_shape_initial_pos = collision_shape_node.position
+
+
+func set_players_array():
+	players_node_array = get_tree().get_nodes_in_group("Players")
+
 
 func setup():
 	var _err
@@ -25,12 +31,14 @@ func setup():
 
 
 func on_body_entered(body):
-	if body in robot_array:
+	if body in players_node_array:
 		animation_node.play("default")
+
 
 func on_animation_finished():
 	emit_signal("button_trigger")
 	collision_shape_node.set_disabled(true)
+
 
 func on_frame_change():
 	var new_pos = collision_shape_initial_pos

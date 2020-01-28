@@ -18,7 +18,7 @@
 [node name="Level1" index="0" instance=ExtResource( 1 )]
 
 [node name="StartingPointP1" parent="." index="0" instance=ExtResource( 2 )]
-position = Vector2( 90, 140 )
+position = Vector2( 80, 217 )
 
 [node name="StartingPointP2" parent="." index="1" instance=ExtResource( 3 )]
 position = Vector2( 60, 313 )
@@ -31,6 +31,12 @@ tile_data = PoolIntArray( -917455, 6, 0, -65538, 6, 0, -65537, 6, 1, -131072, 6,
 
 [node name="InteractivesObjects" parent="." index="4"]
 editor/display_folded = false
+
+[node name="IceBlocks" parent="InteractivesObjects" index="0"]
+editor/display_folded = true
+
+[node name="S" parent="InteractivesObjects/IceBlocks" index="0"]
+editor/display_folded = true
 
 [node name="IceBlockBase3" parent="InteractivesObjects/IceBlocks/S" index="0" instance=ExtResource( 4 )]
 position = Vector2( 553, 132 )
@@ -74,6 +80,12 @@ position = Vector2( 1199, 123 )
 [node name="M_IceBlock9" parent="InteractivesObjects/IceBlocks/M" index="8" instance=ExtResource( 5 )]
 position = Vector2( 2098, 435 )
 
+[node name="EarthBlocks" parent="InteractivesObjects" index="1"]
+editor/display_folded = true
+
+[node name="S" parent="InteractivesObjects/EarthBlocks" index="0"]
+editor/display_folded = true
+
 [node name="EarthBlockBase5" parent="InteractivesObjects/EarthBlocks/S" index="0" instance=ExtResource( 6 )]
 position = Vector2( 754, 350 )
 
@@ -91,6 +103,9 @@ position = Vector2( 730, 325 )
 
 [node name="EarthBlockBase10" parent="InteractivesObjects/EarthBlocks/S" index="5" instance=ExtResource( 6 )]
 position = Vector2( 730, 300 )
+
+[node name="M" parent="InteractivesObjects/EarthBlocks" index="1"]
+editor/display_folded = true
 
 [node name="M_EarthBlock" parent="InteractivesObjects/EarthBlocks/M" index="0" instance=ExtResource( 7 )]
 position = Vector2( 480, 436 )
@@ -121,6 +136,9 @@ position = Vector2( 1203, 411 )
 
 [node name="M_EarthBlock12" parent="InteractivesObjects/EarthBlocks/M" index="9" instance=ExtResource( 7 )]
 position = Vector2( 2098, 483 )
+
+[node name="WaterTiles" parent="InteractivesObjects" index="2"]
+editor/display_folded = true
 
 [node name="WaterTile" parent="InteractivesObjects/WaterTiles" index="0" instance=ExtResource( 8 )]
 position = Vector2( 1932, 108 )
@@ -164,7 +182,11 @@ position = Vector2( 2316, 1404 )
 [node name="WaterTile13" parent="InteractivesObjects/WaterTiles" index="13" instance=ExtResource( 8 )]
 position = Vector2( 2268, 1404 )
 
+[node name="TeleportGroups" parent="InteractivesObjects" index="3"]
+editor/display_folded = true
+
 [node name="G1" type="Node2D" parent="InteractivesObjects/TeleportGroups" index="0"]
+editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -211,7 +233,11 @@ position = Vector2( 2232, 636 )
 [node name="TeleportArea2" parent="InteractivesObjects/TeleportGroups/G4" index="1" instance=ExtResource( 9 )]
 position = Vector2( 2307, 540 )
 
+[node name="Buttons&Doors" parent="InteractivesObjects" index="4"]
+editor/display_folded = true
+
 [node name="G1" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="0"]
+editor/display_folded = true
 script = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
@@ -224,6 +250,7 @@ position = Vector2( 910, 185 )
 position = Vector2( 981, 119 )
 
 [node name="G2" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="1"]
+editor/display_folded = true
 script = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
@@ -236,6 +263,7 @@ position = Vector2( 910, 449.5 )
 position = Vector2( 984, 409.5 )
 
 [node name="G3" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="2"]
+editor/display_folded = true
 script = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
@@ -248,6 +276,7 @@ position = Vector2( 1419, 112 )
 position = Vector2( 1728, 265 )
 
 [node name="G4" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="3"]
+editor/display_folded = true
 script = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
@@ -260,6 +289,7 @@ position = Vector2( 1607, 520 )
 position = Vector2( 2136, 265 )
 
 [node name="G5" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="4"]
+editor/display_folded = true
 script = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
@@ -275,6 +305,7 @@ position = Vector2( 1679, 265 )
 position = Vector2( 2220, 72 )
 
 [node name="G6" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="5"]
+editor/display_folded = true
 script = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
@@ -300,6 +331,7 @@ position = Vector2( 2329, 952 )
 position = Vector2( 2277, 913 )
 
 [node name="G8" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="7"]
+editor/display_folded = true
 script = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true

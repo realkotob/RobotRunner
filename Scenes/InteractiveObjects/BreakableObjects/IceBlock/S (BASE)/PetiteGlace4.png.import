@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/PetiteGlace4.png-85401f83e040e44e0ed117a095009b41.stex"
+path="res://.import/PetiteGlace4.png-84c54277bd5155c917250eb9146f3932.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/S (base)/PetiteGlace4.png"
-dest_files=[ "res://.import/PetiteGlace4.png-85401f83e040e44e0ed117a095009b41.stex" ]
+source_file="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/S (BASE)/PetiteGlace4.png"
+dest_files=[ "res://.import/PetiteGlace4.png-84c54277bd5155c917250eb9146f3932.stex" ]
 
 [params]
 

@@ -1,7 +1,7 @@
 extends Node2D
 
-#const level1 = preload("res://Scenes/Levels/Level1.tscn")
-const debug_level = preload("res://Scenes/Levels/LevelDebug.tscn")
+const level1 = preload("res://Scenes/Levels/Level1.tscn")
+#const debug_level = preload("res://Scenes/Levels/LevelDebug.tscn")
 const player1 = preload("res://Scenes/Characters/RobotIce/RobotIce.tscn")
 const player2 = preload("res://Scenes/Characters/RobotHammer/RobotHammer.tscn")
 
@@ -9,8 +9,8 @@ var current_level_node : Node
 
 # Generate the level, and the players
 func _ready():
-	current_level_node = debug_level.instance() 
-#	current_level_node = level1.instance()
+#	current_level_node = debug_level.instance() 
+	current_level_node = level1.instance()
 	add_child(current_level_node)
 	
 	var player1_start_node = current_level_node.get_node_or_null("StartingPointP1")

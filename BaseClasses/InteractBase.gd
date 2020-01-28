@@ -5,14 +5,17 @@ class_name InteractBase
 export var group_name : String
 
 onready var interact_nodes_array = get_tree().get_nodes_in_group(group_name)
-onready var players_nodes_array = get_tree().get_nodes_in_group("Players")
 onready var area2D_node = get_node("Area2D")
 
+var players_nodes_array : Array
 
 func _ready():
 	var _err
 	_err = area2D_node.connect("body_entered", self, "on_body_entered")
 	_err = area2D_node.connect("body_exited", self, "on_body_exited")
+
+func set_players_array():
+	players_nodes_array = get_tree().get_nodes_in_group("Players")
 
 func on_body_entered(body):
 	if body in players_nodes_array and body.get_node("States/Action").interact_node != self:

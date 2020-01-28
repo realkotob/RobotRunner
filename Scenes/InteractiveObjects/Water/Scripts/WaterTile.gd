@@ -8,6 +8,7 @@ onready var floating_line_node = get_node("FloatingLine")
 var ice_block_instance
 
 func _ready():
+	add_to_group("InteractivesObjects")
 	interact_nodes_array = get_tree().get_nodes_in_group("Water")
 
 

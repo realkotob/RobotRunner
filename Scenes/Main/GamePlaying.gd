@@ -13,9 +13,11 @@ func _ready():
 	current_level_node = level1.instance()
 	add_child(current_level_node)
 	
+	# Get the players starting positions
 	var player1_start_node = current_level_node.get_node_or_null("StartingPointP1")
 	var player2_start_node = current_level_node.get_node_or_null("StartingPointP2")
 	
+	# Add the players scene to the level scene a the position of the start position
 	if player1_start_node != null:
 		var player1_start_pos = player1_start_node.get_global_position()
 		var player1_node = player1.instance()
@@ -27,3 +29,9 @@ func _ready():
 		var player2_node = player2.instance()
 		add_child(player2_node)
 		player2_node.global_position = player2_start_pos
+	
+	# Triggers the method that get all players and stock it in an array, in every interactive object needing it
+	var interactive_objects_array = get_tree().get_nodes_in_group("InteractivesObjects")
+	for inter_object in interactive_objects_array:
+		if inter_object.has_method("set_players_array"):
+			inter_object.set_players_array()

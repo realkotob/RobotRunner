@@ -9,6 +9,7 @@ onready var timer_node = get_node("Timer")
 
 # Connect signals
 func _ready():
+	add_to_group("InteractivesObjects")
 	animation_node.connect("frame_changed", self, "_on_frame_changed")
 	animation_node.connect("animation_finished", self, "_on_animation_finished")
 	timer_node.connect("timeout", self, "on_timeout")

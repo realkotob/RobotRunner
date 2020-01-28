@@ -4,7 +4,6 @@ export var speed : float = 10
 export var acceleration : float = 5
 var current_acceleration : float = 1
 
-onready var players_nodes_array = get_tree().get_nodes_in_group("Players")
 onready var checkpoints_nodes_array = get_tree().get_nodes_in_group("CameraCheckpoint")
 onready var start_area_node = get_node("StartMovingArea")
 onready var play_zone_node = get_node("PlayZone")
@@ -13,7 +12,8 @@ onready var safe_area_node = get_node("SafeArea")
 
 onready var original_forward_shape_ext = fast_forward_zone_node.get_node("CollisionShape2D").get_shape().get_extents()
 onready var original_safe_area_shape_ext = Vector2((screen_width / 2), (screen_height / 3))
-#var player_forwarding : bool = false
+
+var players_nodes_array : Array
 
 signal player_outside_screen
 signal player_inside_screen
@@ -25,6 +25,8 @@ var screen_height : float = ProjectSettings.get("display/window/size/height")
 var screen_size := Vector2(screen_width, screen_height)
 
 func _ready():
+	add_to_group("InteractivesObjects")
+	
 	# Set the camera play_area (the playable area, where the players need to stay in) to the size of the game window 
 	play_zone_node.get_node("CollisionShape2D").get_shape().set_extents(screen_size / 2)
 	
@@ -38,6 +40,8 @@ func _ready():
 	for checkpoint in checkpoints_nodes_array:
 		_err = checkpoint.connect("camera_reached_checkpoint", self, "_on_checkpoint_reached")
 
+func set_players_array():
+	players_nodes_array = get_tree().get_nodes_in_group("Players")
 
 # Move the camera given by the last checkpoint
 func _physics_process(_delta):

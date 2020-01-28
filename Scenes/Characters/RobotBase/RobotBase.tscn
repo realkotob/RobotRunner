@@ -16,11 +16,11 @@
 [ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Attack/RobotIceAttack1.png" type="Texture" id=14]
 [ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Attack/RobotIceAttack2.png" type="Texture" id=15]
 [ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Attack/RobotIceAttack3.png" type="Texture" id=16]
-[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/RobotIce.png" type="Texture" id=17]
-[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Move/RobotIce2.png" type="Texture" id=18]
-[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Move/RobotIce3.png" type="Texture" id=19]
-[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Move/RobotIce4.png" type="Texture" id=20]
-[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Move/RobotIce5.png" type="Texture" id=21]
+[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Move/RobotIce2.png" type="Texture" id=17]
+[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Move/RobotIce3.png" type="Texture" id=18]
+[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Move/RobotIce4.png" type="Texture" id=19]
+[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Move/RobotIce5.png" type="Texture" id=20]
+[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/RobotIce.png" type="Texture" id=21]
 [ext_resource path="res://Scenes/Characters/RobotIce/Sprites/RobotIceFall.png" type="Texture" id=22]
 [ext_resource path="res://Scenes/Characters/RobotIce/Sprites/RobotIceJump6.png" type="Texture" id=23]
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/HitBoxBase.gd" type="Script" id=24]
@@ -35,15 +35,15 @@ animations = [ {
 "name": "Action",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 17 ) ],
-"loop": true,
-"name": "Idle",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ) ],
+"frames": [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ) ],
 "loop": true,
 "name": "Move",
 "speed": 8.0
+}, {
+"frames": [ ExtResource( 21 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 5.0
 }, {
 "frames": [ ExtResource( 22 ) ],
 "loop": true,
@@ -84,15 +84,15 @@ jump_force = -500
 [node name="Inputs" type="Node" parent="."]
 
 [node name="LayerChange" type="Node2D" parent="."]
-editor/display_folded = true
 script = ExtResource( 5 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LayerChange"]
 stream = ExtResource( 6 )
-volume_db = -16.0
-pitch_scale = 2.0
+volume_db = -12.0
+pitch_scale = 2.5
 
 [node name="States" type="Node" parent="."]
+editor/display_folded = true
 script = ExtResource( 7 )
 
 [node name="Idle" type="Node" parent="States"]
@@ -105,6 +105,7 @@ script = ExtResource( 9 )
 script = ExtResource( 10 )
 
 [node name="Fall" type="Node" parent="States"]
+editor/display_folded = true
 script = ExtResource( 11 )
 
 [node name="FallTimer" type="Timer" parent="States/Fall"]

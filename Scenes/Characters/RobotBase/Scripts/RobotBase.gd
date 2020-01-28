@@ -15,6 +15,8 @@ onready var children_array : Array = get_children()
 
 # Give every reference they need to children nodes
 func _ready():
+	add_to_group("Players")
+	
 	for child in children_array:
 		if "character_node" in child:
 			child.character_node = self

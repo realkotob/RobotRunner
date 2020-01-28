@@ -1,7 +1,7 @@
 extends Camera2D
 
 export var speed : float = 10
-export var acceleration : float = 5
+export var acceleration : float = 6
 var current_acceleration : float = 1
 
 onready var checkpoints_nodes_array = get_tree().get_nodes_in_group("CameraCheckpoint")

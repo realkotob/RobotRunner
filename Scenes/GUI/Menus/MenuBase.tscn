@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://BaseClasses/GameMenuBase.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/GUI/Menus/ScreenTitle/Sounds/MenuOption.wav" type="AudioStream" id=2]
+
+[node name="MenuBase" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 375.0
+margin_top = 170.0
+margin_right = 550.0
+margin_bottom = 386.0
+size_flags_vertical = 3
+custom_constants/separation = 0
+alignment = 1
+
+[node name="V_OptContainer" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 87.0
+margin_right = 87.0
+margin_bottom = 216.0
+size_flags_vertical = 3
+alignment = 1
+
+[node name="OptionChoiceSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = -15.0
+pitch_scale = 3.0

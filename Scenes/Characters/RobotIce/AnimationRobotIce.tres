@@ -1,0 +1,40 @@
+[gd_resource type="SpriteFrames" load_steps=11 format=2]
+
+[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Attack/RobotIceAttack1.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Attack/RobotIceAttack2.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Attack/RobotIceAttack3.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Move/RobotIce2.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Move/RobotIce3.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Move/RobotIce4.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Move/RobotIce5.png" type="Texture" id=7]
+[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/RobotIce.png" type="Texture" id=8]
+[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/RobotIceFall.png" type="Texture" id=9]
+[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/RobotIceJump6.png" type="Texture" id=10]
+
+[resource]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": false,
+"name": "Action",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "Move",
+"speed": 8.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ) ],
+"loop": true,
+"name": "Fall",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "Jump",
+"speed": 10.0
+} ]

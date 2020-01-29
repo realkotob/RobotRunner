@@ -21,4 +21,4 @@ func on_player_outside_screen(player : KinematicBody2D):
 	
 	outside_screen_popup_node.player_node = player
 	outside_screen_popup_node.camera_node = camera_node
-	outside_screen_popup_node.rect_position.y = player.position.y
+	outside_screen_popup_node.position.y = player.position.y

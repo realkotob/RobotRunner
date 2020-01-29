@@ -7,8 +7,6 @@
 extents = Vector2( 24, 23 )
 
 [node name="M_EarthBlock" instance=ExtResource( 1 )]
-mass = 1.0
-can_sleep = true
 linear_damp = -1.0
 
 [node name="Sprite" parent="." index="0"]

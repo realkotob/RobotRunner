@@ -182,10 +182,8 @@ z_index = 999
 [node name="Camera" parent="CameraSystem" instance=ExtResource( 2 )]
 
 [node name="GUI" type="Control" parent="CameraSystem/Camera"]
-margin_left = -480.0
-margin_top = -270.0
-margin_right = 480.0
-margin_bottom = 270.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 script = ExtResource( 3 )
 
 [node name="Map" type="Node2D" parent="."]

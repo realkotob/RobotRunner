@@ -4,21 +4,19 @@
 [ext_resource path="res://Scenes/GUI/OutsideScreenPopup/OutsideScreenPopup.gd" type="Script" id=2]
 [ext_resource path="res://Global/Fonts/BoldCapsPixel.tres" type="DynamicFont" id=3]
 
-[node name="OutsideScreenPopup" type="TextureRect"]
-anchor_bottom = 1.0
-margin_right = 64.0
-rect_pivot_offset = Vector2( 0, 24 )
+[node name="OutsideScreenPopup" type="Sprite"]
 texture = ExtResource( 1 )
+offset = Vector2( -5.81, 0 )
 script = ExtResource( 2 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
 
 [node name="Label" type="Label" parent="."]
-margin_left = 32.2006
-margin_top = -9.20379
-margin_right = 53.2006
-margin_bottom = 41.7962
+margin_left = -6.0
+margin_top = -33.0
+margin_right = 15.0
+margin_bottom = 18.0
 custom_fonts/font = ExtResource( 3 )
 text = "3"
 align = 1

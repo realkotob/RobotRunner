@@ -40,8 +40,11 @@ func _ready():
 	for checkpoint in checkpoints_nodes_array:
 		_err = checkpoint.connect("camera_reached_checkpoint", self, "_on_checkpoint_reached")
 
+
+# Set players array, called when the players are generated in the level 
 func set_players_array():
 	players_nodes_array = get_tree().get_nodes_in_group("Players")
+
 
 # Move the camera given by the last checkpoint
 func _physics_process(_delta):
@@ -68,7 +71,6 @@ func on_play_area_zone_exited(body):
 func on_play_area_zone_entered(body):
 	if body in players_nodes_array:
 		emit_signal("player_inside_screen", body)
-
 
 
 # Get the camera direction from the current check point, and adapt area in response

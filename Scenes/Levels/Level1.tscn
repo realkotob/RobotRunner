@@ -17,10 +17,9 @@
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/ChildrenScenes/GreenLever.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Door/ChildrenScenes/GreenDoor.tscn" type="PackedScene" id=16]
 
-[node name="Level1" instance=ExtResource( 1 )]
+[node name="Level1" index="0" instance=ExtResource( 1 )]
 
 [node name="StartingPointP1" parent="." index="0" instance=ExtResource( 2 )]
-
 position = Vector2( 90, 210 )
 
 [node name="StartingPointP2" parent="." index="1" instance=ExtResource( 3 )]
@@ -375,7 +374,6 @@ __meta__ = {
 position = Vector2( 2291, 1431 )
 
 [node name="Door" parent="InteractivesObjects/Buttons&Doors/G8" index="1" instance=ExtResource( 12 )]
-
 position = Vector2( 2380, 1320 )
 
 [node name="G9" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="8"]

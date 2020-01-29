@@ -56,7 +56,6 @@ __meta__ = {
 
 [node name="CheckPointTriggerZone" type="Area2D" parent="."]
 editor/display_folded = true
-visible = false
 __meta__ = {
 "_edit_lock_": true
 }

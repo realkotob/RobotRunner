@@ -1,7 +1,8 @@
-extends Sprite
+extends Node2D
 
 onready var timer_node : Timer = get_node("Timer")
 onready var label_node : Label = get_node("Label")
+onready var sprite_node : Label = get_node("Sprite")
 onready var main_node = get_tree().get_root().get_node("Main")
 
 var camera_node : Camera2D
@@ -12,8 +13,8 @@ var screen_height : float = ProjectSettings.get("display/window/size/height")
 
 signal gameover
 
-export var margin := Vector2(40, 10)
-onready var text_margin : Vector2 = label_node.rect_position
+export var margin : int = 45
+#onready var text_margin : Vector2 = label_node.rect_position
 
 
 func _ready():
@@ -26,64 +27,25 @@ func _ready():
 
 func _physics_process(_delta):
 	if player_node != null:
-		
-		# Adapt the position of the countdown to the player's position
-		var player_pos = player_node.position
-		var current_offset := Vector2(0,0)
-		var current_text_offset := Vector2(0,0)
-		
-		if is_player_left_from_screen() or is_player_right_from_screen():
-			if is_player_right_from_screen():
-				current_offset.x = -margin.x
-				current_text_offset.x = text_margin.x * 3.7
-			else:
-				current_offset.x = margin.x
-				current_text_offset.x = text_margin.x
-				
-			position.x = (is_player_right_from_screen() as int) * screen_width + current_offset.x
-			label_node.rect_position.x = current_text_offset.x
-			position.y = player_pos.y - margin.y
-			set_flip_h(is_player_right_from_screen()) 
-			
-		elif is_player_below_screen() or is_player_above_screen():
-			if is_player_below_screen():
-				current_offset.y = -margin.y
-				current_text_offset.y = text_margin.y * 3.7
-				label_node.set_rotation(1.5708)
-			else:
-				current_offset.y = margin.y
-				current_text_offset.y = text_margin.y
-				label_node.set_rotation(-1.5708)
-			
-			position.y = (is_player_below_screen() as int) * screen_height + current_offset.y
-			label_node.rect_position.x = current_text_offset.x
-			position.x = player_pos.x + margin.x
-		
+		adjust_position()
 		label_node.text = String((timer_node.get_time_left() + 1) as int)
 
 
-# Check if the player is outside the screen from left side
-func is_player_left_from_screen():
-	return  player_node.position.x < camera_node.position.x - (screen_width / 2)
-
-
-# Check if the player is outside the screen from right side
-func is_player_right_from_screen():
-	return  player_node.position.x > camera_node.position.x + (screen_width / 2)
-
-# Check if the player is below screen
-func is_player_below_screen():
-	return  player_node.position.y > camera_node.position.y - (screen_height / 2)
-
-# Check if the player is below screen
-func is_player_above_screen():
-	return  player_node.position.y < camera_node.position.y + (screen_height / 2)
+# Adapt the position of the countdown to the player's position, and clamp it to the screen frame
+func adjust_position():
+		var player_rel_pos = player_node.global_position - camera_node.global_position
+		
+		position.x = clamp(player_rel_pos.x, margin - (screen_width / 2), (screen_width / 2) - margin)
+		position.y = clamp(player_rel_pos.y, margin - (screen_height / 2), (screen_height / 2) - margin)
+		
+		# Set to rotation so the tip always point towards the player 
+		sprite_node.set_rotation(player_rel_pos.angle() + deg2rad(180))
 
 
 func on_timer_timeout():
 	emit_signal("gameover")
 
-
+# Destroy this instance if the player get back inside the screen
 func on_player_inside_screen(player):
 	if player == player_node:
 		queue_free()

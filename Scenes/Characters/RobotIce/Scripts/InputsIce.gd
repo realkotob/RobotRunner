@@ -12,11 +12,8 @@ signal RightReleased
 signal LeftPressed
 signal LeftReleased
 
-signal LayerUpPressed
-signal LayerUpReleased
-
-signal LayerDownPressed
-signal LayerDownReleased
+signal TeleportPressed
+signal TeleportReleased
 
 
 # Should be called by the parent: connect directions inputs to the direction node
@@ -54,14 +51,8 @@ func _input(_event):
 	if Input.is_action_just_released("action_player1"):
 		emit_signal("ActionReleased")
 
-	if Input.is_action_just_pressed("layer_up_player1"):
-		emit_signal("LayerUpPressed")
+	if Input.is_action_just_pressed("teleport_player_1"):
+		emit_signal("TeleportPressed")
 		
-	if Input.is_action_just_released("layer_up_player1"):
-		emit_signal("LayerUpReleased")
-	
-	if Input.is_action_just_pressed("layer_down_player1"):
-		emit_signal("LayerDownPressed")
-		
-	if Input.is_action_just_released("layer_down_player1"):
-		emit_signal("LayerDownReleased")
+	if Input.is_action_just_released("teleport_player_1"):
+		emit_signal("TeleportReleased")

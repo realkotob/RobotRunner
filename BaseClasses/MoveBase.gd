@@ -23,11 +23,8 @@ func update(_host, _delta):
 func on_JumpPressed():
 	state_node.set_state("Jump")
 
-func on_LayerUpPressed():
-	emit_signal("layer_change", true)
-
-func on_LayerDownPressed():
-	emit_signal("layer_change", false)
+func on_TeleportPressed():
+	emit_signal("layer_change")
 
 func on_ActionPressed():
 	state_node.set_state("Action")

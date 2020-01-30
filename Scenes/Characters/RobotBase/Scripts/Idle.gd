@@ -30,12 +30,12 @@ func on_JumpPressed():
 	state_node.set_state("Jump")
 
 
-func on_LayerUpPressed():
-	emit_signal("layer_change", true)
+func on_TeleportPressed():
+	emit_signal("layer_change")
 
 
-func on_LayerDownPressed():
-	emit_signal("layer_change", false)
+func on_TeleportReleased():
+	emit_signal("layer_change")
 
 
 func on_ActionPressed():

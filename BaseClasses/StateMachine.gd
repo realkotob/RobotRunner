@@ -115,10 +115,8 @@ func connect_inputs_current_state():
 		_err = inputs_node.connect("LeftReleased", current_state, "on_LeftReleased")
 		_err = inputs_node.connect("RightPressed", current_state, "on_RightPressed")
 		_err = inputs_node.connect("RightReleased", current_state, "on_RightReleased")
-		_err = inputs_node.connect("LayerUpPressed", current_state, "on_LayerUpPressed")
-		_err = inputs_node.connect("LayerUpReleased", current_state, "on_LayerUpReleased")
-		_err = inputs_node.connect("LayerDownPressed", current_state, "on_LayerDownPressed")
-		_err = inputs_node.connect("LayerDownReleased", current_state, "on_LayerDownReleased")
+		_err = inputs_node.connect("TeleportPressed", current_state, "on_TeleportPressed")
+		_err = inputs_node.connect("TeleportReleased", current_state, "on_TeleportReleased")
 
 
 # Disconnect the input signals to the current state
@@ -132,10 +130,8 @@ func disconnect_inputs_previous_state():
 		inputs_node.disconnect("LeftReleased", previous_state, "on_LeftReleased")
 		inputs_node.disconnect("RightPressed", previous_state, "on_RightPressed")
 		inputs_node.disconnect("RightReleased", previous_state, "on_RightReleased")
-		inputs_node.disconnect("LayerUpPressed", previous_state, "on_LayerUpPressed")
-		inputs_node.disconnect("LayerUpReleased", previous_state, "on_LayerUpReleased")
-		inputs_node.disconnect("LayerDownPressed", previous_state, "on_LayerDownPressed")
-		inputs_node.disconnect("LayerDownReleased", previous_state, "on_LayerDownReleased")
+		inputs_node.disconnect("TeleportPressed", previous_state, "on_TeleportPressed")
+		inputs_node.disconnect("TeleportReleased", previous_state, "on_TeleportReleased")
 
 
 # Flip the animation of the character, based on his direction

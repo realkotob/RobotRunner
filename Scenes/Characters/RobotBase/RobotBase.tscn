@@ -21,8 +21,8 @@
 [ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Move/RobotIce4.png" type="Texture" id=19]
 [ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Move/RobotIce5.png" type="Texture" id=20]
 [ext_resource path="res://Scenes/Characters/RobotIce/Sprites/RobotIce.png" type="Texture" id=21]
-[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/RobotIceFall.png" type="Texture" id=22]
-[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/RobotIceJump6.png" type="Texture" id=23]
+[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/RobotIceJump6.png" type="Texture" id=22]
+[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/RobotIceFall.png" type="Texture" id=23]
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/HitBoxBase.gd" type="Script" id=24]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -47,12 +47,12 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 22 ) ],
 "loop": true,
-"name": "Fall",
+"name": "Jump",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 23 ) ],
 "loop": true,
-"name": "Jump",
+"name": "Fall",
 "speed": 5.0
 } ]
 

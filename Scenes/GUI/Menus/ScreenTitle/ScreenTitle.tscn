@@ -17,11 +17,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="HBoxContainer" parent="." index="1"]
-editor/display_folded = true
-
 [node name="V_OptContainer" parent="HBoxContainer" index="0"]
-editor/display_folded = true
 margin_left = 1.0
 margin_right = 173.0
 

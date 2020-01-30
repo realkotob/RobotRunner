@@ -52,16 +52,16 @@ func on_body_exited(body):
 
 
 # Teleport the player the the right destination teleporter
-func teleport_layer(character : Node, up : bool):
+func teleport_layer(character : Node):
 	
 	# Get the size of the character's collision shape
 	var y_offset = character.find_node("CollisionShape2D").get_shape().get_extents().y
-	var teleport_pos
+	var teleport_pos : Vector2 = character.global_position
 	
-	# Get the right teleport point to telport the character to, based on the up argument
-	if up == true:
+	# Check if one player is already on the teleport or not
+	if len(layer_up_teleport_node.get_overlapping_bodies()) <= 0 :
 		teleport_pos = layer_up_teleport_node.global_position
-	else :
+	elif len(layer_down_teleport_node.get_overlapping_bodies()) <= 0:
 		teleport_pos = layer_down_teleport_node.global_position
 	
 	teleport_pos.y -= y_offset

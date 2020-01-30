@@ -31,11 +31,11 @@ func on_JumpPressed():
 
 
 func on_LayerUpPressed():
-	emit_signal("layer_change", true)
+	emit_signal("layer_change")
 
 
 func on_LayerDownPressed():
-	emit_signal("layer_change", false)
+	emit_signal("layer_change")
 
 
 func on_ActionPressed():

@@ -48,14 +48,8 @@ func on_JumpPressed():
 func on_JumpReleased():
 	pass
 
-func on_LayerUpPressed():
+func on_TeleportPressed():
 	pass
 
-func on_LayerUpReleased():
-	pass
-
-func on_LayerDownPressed():
-	pass
-
-func on_LayerDownReleased():
+func on_TeleportReleased():
 	pass

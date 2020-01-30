@@ -5,7 +5,7 @@
 [ext_resource path="res://Scenes/Characters/RobotIce/Scripts/ActionIce.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Characters/RobotIce/Sounds/Tank4.wav" type="AudioStream" id=4]
 
-[node name="RobotIce" index="0" instance=ExtResource( 1 )]
+[node name="RobotIce" instance=ExtResource( 1 )]
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2( 0.463928, 4.23197 )

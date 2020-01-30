@@ -24,10 +24,10 @@ func on_JumpPressed():
 	state_node.set_state("Jump")
 
 func on_LayerUpPressed():
-	emit_signal("layer_change", true)
+	emit_signal("layer_change")
 
 func on_LayerDownPressed():
-	emit_signal("layer_change", false)
+	emit_signal("layer_change")
 
 func on_ActionPressed():
 	state_node.set_state("Action")

@@ -2,7 +2,7 @@ extends Node2D
 
 onready var game_playing_node = get_node("GamePlaying")
 
-var game_over_scene = preload("res://Scenes/GUI/GameOverScene/GameOver.tscn")
+var game_over_scene = preload("res://Scenes/GUI/Menus/GameOverScene/GameOver.tscn")
 var game_over_node : Node
 
 

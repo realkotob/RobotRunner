@@ -34,10 +34,6 @@ func on_TeleportPressed():
 	emit_signal("layer_change")
 
 
-func on_TeleportReleased():
-	emit_signal("layer_change")
-
-
 func on_ActionPressed():
 	state_node.set_state("Action")
 

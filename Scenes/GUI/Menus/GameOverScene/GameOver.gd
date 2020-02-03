@@ -1,9 +1,10 @@
 extends Control
 
 onready var title_screen = "res://Scenes/GUI/Menus/ScreenTitle/ScreenTitle.tscn"
-onready var level1 = "res://Scenes/Levels/Level1.tscn"
 onready var children_array = get_children()
 onready var timer_node = get_node("Timer")
+
+var game_node : Node
 
 var player_action_on_gameover : String
 
@@ -26,4 +27,6 @@ func on_timer_timeout():
 		"MENU":
 			var _err = get_tree().change_scene(title_screen)
 		"RETRY":
-			var _err = get_tree().reload_current_scene()
+			game_node.generate_current_level()
+	
+	queue_free()

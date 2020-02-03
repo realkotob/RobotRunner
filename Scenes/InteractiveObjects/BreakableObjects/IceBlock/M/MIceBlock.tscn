@@ -4,7 +4,7 @@
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/M/MBlockAnimation.tres" type="SpriteFrames" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 24, 23 )
+extents = Vector2( 24, 24 )
 
 [node name="M_IceBlock" instance=ExtResource( 1 )]
 

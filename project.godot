@@ -35,9 +35,9 @@ _global_script_classes=[ {
 "path": "res://BaseClasses/InputsBase.gd"
 }, {
 "base": "Node2D",
-"class": "InteractBase",
+"class": "InteractAreaBase",
 "language": "GDScript",
-"path": "res://BaseClasses/InteractBase.gd"
+"path": "res://BaseClasses/InteractAreaBase.gd"
 }, {
 "base": "Node2D",
 "class": "LevelBase",
@@ -90,7 +90,7 @@ _global_script_class_icons={
 "BlockBase": "",
 "GroupBase": "",
 "InputsBase": "",
-"InteractBase": "",
+"InteractAreaBase": "",
 "LevelBase": "",
 "MenuBase": "",
 "MenuOptionsBase": "",

@@ -16,7 +16,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 11.8968, 11.8251 )
+extents = Vector2( 12, 12 )
 
 [node name="BreakableBlockBase" type="RigidBody2D"]
 mass = 40.8163

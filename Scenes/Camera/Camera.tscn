@@ -19,8 +19,6 @@ extents = Vector2( 320, 272 )
 [node name="Camera" type="Camera2D"]
 position = Vector2( 480, 272 )
 current = true
-drag_margin_h_enabled = false
-drag_margin_v_enabled = false
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
@@ -28,7 +26,6 @@ __meta__ = {
 speed = 50.0
 
 [node name="StartMovingArea" type="Area2D" parent="."]
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -42,7 +39,6 @@ __meta__ = {
 }
 
 [node name="PlayZone" type="Area2D" parent="."]
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -55,24 +51,24 @@ __meta__ = {
 }
 
 [node name="CheckPointTriggerZone" type="Area2D" parent="."]
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CheckPointTriggerZone"]
+visible = false
 shape = SubResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="FastForwardArea" type="Area2D" parent="."]
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FastForwardArea"]
+visible = false
 self_modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 408, 0 )
 shape = SubResource( 4 )
@@ -81,12 +77,12 @@ __meta__ = {
 }
 
 [node name="SafeArea" type="Area2D" parent="."]
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SafeArea"]
+visible = false
 modulate = Color( 0, 1, 0.133333, 1 )
 position = Vector2( 160, 0 )
 shape = SubResource( 5 )

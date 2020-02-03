@@ -14,8 +14,6 @@ func _ready():
 	_err = area2D_node.connect("body_entered", self, "on_body_entered")
 	_err = area2D_node.connect("body_exited", self, "on_body_exited")
 
-func set_players_array():
-	players_nodes_array = get_tree().get_nodes_in_group("Players")
 
 func on_body_entered(body):
 	if body in players_nodes_array and body.get_node("States/Action").interact_node != self:

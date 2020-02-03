@@ -15,10 +15,6 @@ func _ready():
 	collision_shape_initial_pos = collision_shape_node.position
 
 
-func set_players_array():
-	players_node_array = get_tree().get_nodes_in_group("Players")
-
-
 func setup():
 	var _err
 	
@@ -31,16 +27,19 @@ func setup():
 	_err = animation_node.connect("animation_finished", self, "on_animation_finished")
 
 
+# Play the animation when a player touch the button
 func on_body_entered(body):
 	if body in players_node_array:
 		animation_node.play()
 
 
+# When the animation is finished, emit the signal, and disable the collision shape
 func on_animation_finished():
 	emit_signal("button_trigger")
 	collision_shape_node.set_disabled(true)
 
 
+# Move the shape at the same time as the sprite
 func on_frame_change():
 	var new_pos = collision_shape_initial_pos
 	new_pos.y += (animation_node.get_frame() * 2) + 2

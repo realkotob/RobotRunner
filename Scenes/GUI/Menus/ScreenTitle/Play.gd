@@ -1,7 +1,7 @@
 extends MenuOptionsBase
 
 # Give mainscene path, so it can be changed later (or loaded?)
-onready var strMainScene = "res://Scenes/Main/Main.tscn"
+onready var strMainScene = "res://Scenes/Main/Game.tscn"
 
 func options_action():
 	# Player Selection -> New Game

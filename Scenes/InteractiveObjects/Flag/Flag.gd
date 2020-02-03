@@ -3,7 +3,6 @@ extends Node2D
 onready var area2D_node = get_node("Area2D")
 var players_node_array : Array
 
-
 signal player_entered
 signal player_exited
 
@@ -12,13 +11,14 @@ func _ready():
 	area2D_node.connect("body_entered", self, "on_body_entered")
 	area2D_node.connect("body_exited", self, "on_body_exited")
 
-# Notifie the flag group when a player touch a flag
+
+# Notify the flag group when a player touch a flag
 func on_body_entered(body):
 	if body in players_node_array:
 		emit_signal("player_entered")
 
 
-# Notifie the flag group when a player exit a flag
+# Notify the flag group when a player exit a flag
 func on_body_exited(body):
 	if body in players_node_array:
 		emit_signal("player_exited")

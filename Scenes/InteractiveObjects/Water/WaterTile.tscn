@@ -23,13 +23,12 @@ __meta__ = {
 }
 
 [node name="Area2D" type="Area2D" parent="."]
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( -1.52588e-005, 7.90773 )
+position = Vector2( -1.52588e-05, 7.90773 )
 shape = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true

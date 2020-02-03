@@ -7,6 +7,10 @@ const player2 = preload("res://Scenes/Characters/RobotHammer/RobotHammer.tscn")
 
 var current_level_node : Node
 
+var game_over_scene = preload("res://Scenes/GUI/Menus/GameOverScene/GameOver.tscn")
+var game_over_node : Node
+
+
 # Generate the level, and the players
 func _ready():
 #	current_level_node = debug_level.instance() 
@@ -30,8 +34,15 @@ func _ready():
 		add_child(player2_node)
 		player2_node.global_position = player2_start_pos
 	
-	# Triggers the method that get all players and stock it in an array, in every interactive object needing it
+	# Give the references to the players node to every interactive objects needing it
 	var interactive_objects_array = get_tree().get_nodes_in_group("InteractivesObjects")
 	for inter_object in interactive_objects_array:
-		if inter_object.has_method("set_players_array"):
-			inter_object.set_players_array()
+		if inter_object.get("players_node_array") != null:
+			inter_object.players_node_array = get_tree().get_nodes_in_group("Players")
+
+
+# Triggers the game over 
+func on_gameover():
+	queue_free()
+	game_over_node = game_over_scene.instance()
+	add_child(game_over_node)

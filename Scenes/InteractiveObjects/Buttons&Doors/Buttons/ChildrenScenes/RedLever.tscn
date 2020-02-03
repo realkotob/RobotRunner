@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/LeverBase.tscn" type="PackedScene" id=1]
-
-[node name="RedButton" instance=ExtResource( 1 )]

@@ -39,6 +39,7 @@ func on_animation_finished():
 	collision_shape_node.set_disabled(true)
 
 
+# Move the shape at the same time as the sprite
 func on_frame_change():
 	var new_pos = collision_shape_initial_pos
 	new_pos.y += (animation_node.get_frame() * 2) + 2

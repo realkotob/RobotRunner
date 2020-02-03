@@ -8,15 +8,23 @@ const player2 = preload("res://Scenes/Characters/RobotHammer/RobotHammer.tscn")
 var current_level_node : Node
 
 var game_over_scene = preload("res://Scenes/GUI/Menus/GameOverScene/GameOver.tscn")
-var game_over_node : Node
 
 
 # Generate the level, and the players
 func _ready():
-#	current_level_node = debug_level.instance() 
+	generate_current_level()
+
+
+# Generate the current level, and instanciate it as child of this node the generate the players inside of it
+func generate_current_level():
+	# Current_level_node = debug_level.instance() 
 	current_level_node = level1.instance()
 	add_child(current_level_node)
-	
+	instanciate_players()
+
+
+# Intanciate the players inside the level
+func instanciate_players():
 	# Get the players starting positions
 	var player1_start_node = current_level_node.get_node_or_null("StartingPointP1")
 	var player2_start_node = current_level_node.get_node_or_null("StartingPointP2")
@@ -41,8 +49,10 @@ func _ready():
 			inter_object.players_node_array = get_tree().get_nodes_in_group("Players")
 
 
-# Triggers the game over 
+# Triggers the game over scene
 func on_gameover():
-	queue_free()
-	game_over_node = game_over_scene.instance()
+	var game_over_node = game_over_scene.instance()
+	game_over_node.game_node = self
 	add_child(game_over_node)
+	
+	current_level_node.queue_free()

@@ -16,11 +16,12 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 11.8968, 11.8251 )
+extents = Vector2( 12, 12 )
 
 [node name="BreakableBlockBase" type="RigidBody2D"]
 mass = 40.8163
 gravity_scale = 13.0
+continuous_cd = 2
 can_sleep = false
 linear_damp = 1.0
 script = ExtResource( 1 )

@@ -1,4 +1,4 @@
-extends InteractBase
+extends InteractAreaBase
 
 var M_IceBlocks_node : Node2D
 
@@ -16,7 +16,7 @@ func _ready():
 func on_body_entered(body):
 	var iceblocks_array = get_tree().get_nodes_in_group("IceBlock")
 	
-	if body in players_nodes_array and body.get_node("States/Action").interact_node != self:
+	if body in players_node_array and body.get_node("States/Action").interact_node != self:
 		body.get_node("States/Action").interact_node = self
 	elif body in iceblocks_array:
 		body_floating(body, true)
@@ -26,7 +26,7 @@ func on_body_entered(body):
 func on_body_exited(body):
 	var iceblocks_array = get_tree().get_nodes_in_group("IceBlock")
 	
-	if body in players_nodes_array:
+	if body in players_node_array:
 		var is_colliding = false
 		
 		# When the character get out of the area, check if it's because he left, or because he entered another one

@@ -310,7 +310,7 @@ __meta__ = {
 }
 
 [node name="RedLever" parent="InteractivesObjects/Buttons&Doors/G4" index="0" instance=ExtResource( 12 )]
-position = Vector2( 1752, 519 )
+position = Vector2( 1752, 520 )
 
 [node name="RedDoor" parent="InteractivesObjects/Buttons&Doors/G4" index="1" instance=ExtResource( 13 )]
 position = Vector2( 2136, 265 )

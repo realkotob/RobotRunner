@@ -3,7 +3,7 @@ extends Node2D
 onready var timer_node : Timer = get_node("Timer")
 onready var label_node : Label = get_node("Label")
 onready var sprite_node : Label = get_node("Sprite")
-onready var main_node = get_tree().get_root().get_node("Main")
+onready var game_node = get_tree().get_root().get_node("Game")
 
 var camera_node : Camera2D
 var player_node : Node
@@ -19,7 +19,7 @@ export var margin : int = 45
 
 func _ready():
 	var _err
-	_err = connect("gameover", main_node, "on_gameover")
+	_err = connect("gameover", game_node, "on_gameover")
 	_err = timer_node.connect("timeout", self, "on_timer_timeout")
 	_err = camera_node.connect("player_inside_screen", self, "on_player_inside_screen")
 	timer_node.start()

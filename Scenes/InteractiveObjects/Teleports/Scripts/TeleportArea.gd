@@ -26,10 +26,6 @@ func _ready():
 	layer_down_teleport_node = teleporters_array[suiv]
 
 
-func set_players_array():
-	players_node_array = get_tree().get_nodes_in_group("Players")
-
-
 # Whenever a character enters the area of this teleport, this method gives him the referecence to this node
 func on_body_entered(body):
 	if body in players_node_array and body.get_node("LayerChange").teleport_node != self:

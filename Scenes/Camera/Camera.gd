@@ -13,7 +13,7 @@ onready var safe_area_node = get_node("SafeArea")
 onready var original_forward_shape_ext = fast_forward_zone_node.get_node("CollisionShape2D").get_shape().get_extents()
 onready var original_safe_area_shape_ext = Vector2((screen_width / 2), (screen_height / 3))
 
-var players_nodes_array : Array
+var players_node_array : Array
 
 signal player_outside_screen
 signal player_inside_screen
@@ -41,11 +41,6 @@ func _ready():
 		_err = checkpoint.connect("camera_reached_checkpoint", self, "_on_checkpoint_reached")
 
 
-# Set players array, called when the players are generated in the level 
-func set_players_array():
-	players_nodes_array = get_tree().get_nodes_in_group("Players")
-
-
 # Move the camera given by the last checkpoint
 func _physics_process(_delta):
 	if is_forwarding():
@@ -57,19 +52,19 @@ func _physics_process(_delta):
 
 # Start to move the camera if a player enter the start area
 func on_start_area_body_entered(body):
-	if body in players_nodes_array:
+	if body in players_node_array:
 		set_physics_process(true)
 
 
 # When a player exits the camera zone
 func on_play_area_zone_exited(body):
-	if body in players_nodes_array:
+	if body in players_node_array:
 		emit_signal("player_outside_screen", body)
 
 
 # When a player enter back the camera zone
 func on_play_area_zone_entered(body):
-	if body in players_nodes_array:
+	if body in players_node_array:
 		emit_signal("player_inside_screen", body)
 
 
@@ -87,7 +82,7 @@ func _on_checkpoint_reached(cp_dir):
 func players_in_area(area : Area2D, all : bool):
 	var bodies_in_area = area.get_overlapping_bodies()
 	
-	for player in players_nodes_array:
+	for player in players_node_array:
 		if(player in bodies_in_area) == (!all):
 			return !all
 	

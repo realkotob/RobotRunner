@@ -196,7 +196,7 @@ position = Vector2( -2330, -3040 )
 texture = ExtResource( 4 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 0, 0, 10240, 5760 )
+region_rect = Rect2( 0, 0, 5000, 5000 )
 __meta__ = {
 "_edit_lock_": true
 }

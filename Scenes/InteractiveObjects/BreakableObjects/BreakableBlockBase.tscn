@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://BaseClasses/BlockBase.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/S (base)/SmallEarth1.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/S (base)/SmallEarth3.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/S (base)/SmallEarth4.png" type="Texture" id=5]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/Sound/Break Earth Bloc.wav" type="AudioStream" id=6]
+[ext_resource path="res://BaseClasses/BreakableSpriteBase.gd" type="Script" id=7]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -30,6 +31,7 @@ script = ExtResource( 1 )
 position = Vector2( 0, -4 )
 frames = SubResource( 1 )
 animation = "New Anim"
+script = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )

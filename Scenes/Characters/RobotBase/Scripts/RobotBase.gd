@@ -9,6 +9,7 @@ onready var layer_change_node = get_node("LayerChange")
 onready var states_node = get_node("States")
 onready var animation_node = get_node("Animation")
 onready var hit_box_node = get_node("HitBox")
+onready var SFX_node = get_node("SFX")
 
 # Get every children of this node
 onready var children_array : Array = get_children()
@@ -44,6 +45,9 @@ func _ready():
 		
 		if "hit_box_node" in child:
 			child.hit_box_node = hit_box_node
+		
+		if "SFX_node" in child:
+			child.SFX_node = SFX_node
 	
 	states_node.setup()
 	inputs_node.connect_direction(direction_node)

@@ -7,7 +7,7 @@ signal layer_change
 var layer_change_node : Node
 var character_node : KinematicBody2D
 var state_node : Node
-
+var SFX_node : Node
 
 # Setup method
 func setup():
@@ -27,6 +27,7 @@ func enter_state(_host):
 
 
 func on_JumpPressed():
+	SFX_node.play_SFX("JumpDust", true)
 	state_node.set_state("Jump")
 
 

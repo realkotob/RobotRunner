@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/RobotBase.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/Physic.gd" type="Script" id=2]
@@ -13,17 +13,113 @@
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/Fall.gd" type="Script" id=11]
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/Action.gd" type="Script" id=12]
 [ext_resource path="res://Scenes/Characters/RobotIce/Sounds/Tank3.wav" type="AudioStream" id=13]
-[ext_resource path="res://Scenes/Characters/RobotIce/AnimationRobotIce.tres" type="SpriteFrames" id=14]
+[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Attack/RobotIceAttack1.png" type="Texture" id=14]
+[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Attack/RobotIceAttack2.png" type="Texture" id=15]
+[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Attack/RobotIceAttack3.png" type="Texture" id=16]
+[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Move/RobotIce2.png" type="Texture" id=17]
+[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Move/RobotIce3.png" type="Texture" id=18]
+[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Move/RobotIce4.png" type="Texture" id=19]
+[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Move/RobotIce5.png" type="Texture" id=20]
+[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/RobotIce.png" type="Texture" id=21]
+[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/RobotIceJump6.png" type="Texture" id=22]
+[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/RobotIceFall.png" type="Texture" id=23]
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/HitBoxBase.gd" type="Script" id=24]
+[ext_resource path="res://Scenes/Characters/RobotBase/SFX/Dust3/Dust3_2.png" type="Texture" id=25]
+[ext_resource path="res://Scenes/Characters/RobotBase/SFX/Dust2/Dust2_2.png" type="Texture" id=26]
+[ext_resource path="res://Scenes/Characters/RobotBase/SFX/Dust2/Dust2_3.png" type="Texture" id=27]
+[ext_resource path="res://Scenes/Characters/RobotBase/SFX/Dust2/Dust2_1.png" type="Texture" id=28]
+[ext_resource path="res://Scenes/Characters/RobotBase/SFX/Dust3/Dust3_4.png" type="Texture" id=29]
+[ext_resource path="res://Scenes/Characters/RobotBase/SFX/Dust3/Dust3_1.png" type="Texture" id=30]
+[ext_resource path="res://Scenes/Characters/RobotBase/SFX/Dust3/Dust3_3.png" type="Texture" id=31]
+[ext_resource path="res://Scenes/Characters/RobotBase/SFX/Dust2/Dust2_4.png" type="Texture" id=32]
+[ext_resource path="res://Scenes/Characters/RobotBase/SFX/DustBase.tscn" type="PackedScene" id=33]
+[ext_resource path="res://Scenes/Characters/RobotBase/Scripts/SFX_group_base.gd" type="Script" id=34]
+[ext_resource path="res://Scenes/Characters/RobotBase/Scripts/SFX_Base.gd" type="Script" id=35]
+[ext_resource path="res://Scenes/Characters/RobotBase/SFX/Jump/JumpDust6.png" type="Texture" id=36]
+[ext_resource path="res://Scenes/Characters/RobotBase/SFX/Jump/JumpDust5.png" type="Texture" id=37]
+[ext_resource path="res://Scenes/Characters/RobotBase/SFX/Jump/JumpDust1.png" type="Texture" id=38]
+[ext_resource path="res://Scenes/Characters/RobotBase/SFX/Jump/JumpDust4.png" type="Texture" id=39]
+[ext_resource path="res://Scenes/Characters/RobotBase/SFX/Jump/JumpDust2.png" type="Texture" id=40]
+[ext_resource path="res://Scenes/Characters/RobotBase/SFX/Jump/JumpDust3.png" type="Texture" id=41]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 15.5305, 20 )
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 24.0336, 19.7045 )
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 22 ) ],
+"loop": true,
+"name": "Jump",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 23 ) ],
+"loop": true,
+"name": "Fall",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ) ],
+"loop": true,
+"name": "Move",
+"speed": 8.0
+}, {
+"frames": [ ExtResource( 21 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
+"loop": false,
+"name": "Action",
+"speed": 20.0
+} ]
 
-[sub_resource type="CapsuleShape2D" id=3]
-radius = 7.72475
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 30, 30 )
+
+[sub_resource type="AnimatedTexture" id=4]
+frames = 4
+frame_0/texture = ExtResource( 28 )
+frame_1/texture = ExtResource( 26 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 27 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 32 )
+frame_3/delay_sec = 0.0
+
+[sub_resource type="AnimatedTexture" id=5]
+frames = 4
+fps = 9.0
+frame_0/texture = ExtResource( 30 )
+frame_1/texture = ExtResource( 25 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 31 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 29 )
+frame_3/delay_sec = 0.0
+
+[sub_resource type="ParticlesMaterial" id=6]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+
+[sub_resource type="AnimatedTexture" id=7]
+frames = 6
+fps = 13.0
+frame_0/texture = ExtResource( 38 )
+frame_1/texture = ExtResource( 40 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 41 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 39 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 37 )
+frame_4/delay_sec = 0.0
+frame_5/texture = ExtResource( 36 )
+frame_5/delay_sec = 0.0
+
+[sub_resource type="CapsuleShape2D" id=8]
+radius = 7.725
 height = 1.0
 
 [node name="Robot" type="KinematicBody2D"]
@@ -85,8 +181,10 @@ script = ExtResource( 12 )
 stream = ExtResource( 13 )
 
 [node name="Animation" type="AnimatedSprite" parent="."]
-frames = ExtResource( 14 )
-animation = "Idle"
+frames = SubResource( 2 )
+animation = "Move"
+frame = 1
+playing = true
 
 [node name="HitBox" type="Area2D" parent="."]
 space_override = 1
@@ -95,16 +193,56 @@ script = ExtResource( 24 )
 breakable_group = "EarthBlock"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2( 30.1937, -5.80629 )
-shape = SubResource( 2 )
+position = Vector2( 30, -6 )
+shape = SubResource( 3 )
+
+[node name="SFX" type="Node2D" parent="."]
+script = ExtResource( 34 )
+
+[node name="MoveDust" type="Node2D" parent="SFX"]
+script = ExtResource( 35 )
+
+[node name="Dust1" parent="SFX/MoveDust" instance=ExtResource( 33 )]
+position = Vector2( -35, 19.075 )
+z_index = 2
+z_as_relative = false
+amount = 1
+lifetime = 0.4
+
+[node name="Dust2" parent="SFX/MoveDust" instance=ExtResource( 33 )]
+position = Vector2( -29, 19.0747 )
+z_index = 2
+z_as_relative = false
+amount = 1
+lifetime = 0.3
+texture = SubResource( 4 )
+
+[node name="Dust3" parent="SFX/MoveDust" instance=ExtResource( 33 )]
+position = Vector2( -43.0917, 19.0747 )
+z_index = 2
+z_as_relative = false
+amount = 1
+lifetime = 0.3
+texture = SubResource( 5 )
+
+[node name="JumpDust" type="Node2D" parent="SFX"]
+script = ExtResource( 35 )
+
+[node name="Particles2D" type="Particles2D" parent="SFX/JumpDust"]
+modulate = Color( 1, 1, 1, 0.784314 )
+position = Vector2( -6, 27 )
+emitting = false
+amount = 1
+lifetime = 0.32
+fract_delta = false
+local_coords = false
+process_material = SubResource( 6 )
+texture = SubResource( 7 )
 
 [node name="HeadHitBox" type="StaticBody2D" parent="."]
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeadHitBox"]
 position = Vector2( 0, -20 )
 scale = Vector2( 1.65, 0.5 )
-shape = SubResource( 3 )
+shape = SubResource( 8 )
 one_way_collision = true

@@ -5,6 +5,7 @@ extends PlayerStateBase
 var character_node : KinematicBody2D
 var attributes_node : Node
 var state_node : Node
+var SFX_node : Node
 
 func update(_host, _delta):
 	if character_node.is_on_floor():
@@ -12,11 +13,15 @@ func update(_host, _delta):
 	elif attributes_node.velocity.y > 0:
 		return "Fall"
 
-
 func enter_state(_host):
 	animation_node.play(self.name)
 	attributes_node.velocity.y = attributes_node.jump_force
+	SFX_node.play_SFX("JumpDust", true)
+	state_node.set_state("Jump")
 
+func exit_state(_host):
+	SFX_node.play_SFX("JumpDust", false)
+	SFX_node.reset_SFX("JumpDust")
 
 func on_ActionPressed():
 	state_node.set_state("Action")

@@ -1,7 +1,7 @@
 extends Node2D
 
 const level1 = preload("res://Scenes/Levels/Level1.tscn")
-#const debug_level = preload("res://Scenes/Levels/LevelDebug.tscn")
+const debug_level = preload("res://Scenes/Levels/LevelDebug.tscn")
 const player1 = preload("res://Scenes/Characters/RobotIce/RobotIce.tscn")
 const player2 = preload("res://Scenes/Characters/RobotHammer/RobotHammer.tscn")
 

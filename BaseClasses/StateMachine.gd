@@ -13,6 +13,7 @@ var layer_change_node : Node
 var hit_box_node : Node
 var animation_node : AnimatedSprite
 var direction_node : Node
+var SFX_node : Node
 
 onready var states_map = get_children()
 
@@ -54,6 +55,9 @@ func setup():
 			
 		if "direction_node" in state:
 			state.direction_node = direction_node
+		
+		if "SFX_node" in state:
+			state.SFX_node = SFX_node
 		
 		state.setup()
 	

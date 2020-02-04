@@ -13,18 +13,18 @@
 [ext_resource path="res://Scenes/Characters/RobotHammer/Sprites/RoboHammerJump.png" type="Texture" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 10.2444, 22 )
+extents = Vector2( 12, 22 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 8 ) ],
+"frames": [ ExtResource( 11 ) ],
 "loop": true,
-"name": "Idle",
+"name": "Jump",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 11 ) ],
 "loop": true,
-"name": "Jump",
+"name": "Fall",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
@@ -32,9 +32,9 @@ animations = [ {
 "name": "Move",
 "speed": 15.0
 }, {
-"frames": [ ExtResource( 11 ) ],
+"frames": [ ExtResource( 8 ) ],
 "loop": true,
-"name": "Fall",
+"name": "Idle",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 9 ), ExtResource( 10 ) ],
@@ -44,7 +44,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 15.7704, 30 )
+extents = Vector2( 23.2417, 30 )
 
 [node name="RobotHammer" instance=ExtResource( 1 )]
 
@@ -68,3 +68,12 @@ frames = SubResource( 2 )
 [node name="CollisionShape2D" parent="HitBox" index="0"]
 position = Vector2( 25.6572, 1.04674 )
 shape = SubResource( 3 )
+
+[node name="Dust1" parent="SFX/MoveDust" index="0"]
+position = Vector2( -20, 21.075 )
+
+[node name="Dust2" parent="SFX/MoveDust" index="1"]
+position = Vector2( -14, 21.0747 )
+
+[node name="Dust3" parent="SFX/MoveDust" index="2"]
+position = Vector2( -28.0917, 21.0747 )

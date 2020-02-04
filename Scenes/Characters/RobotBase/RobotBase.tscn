@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/RobotBase.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/Physic.gd" type="Script" id=2]
@@ -118,6 +118,10 @@ frame_4/delay_sec = 0.0
 frame_5/texture = ExtResource( 36 )
 frame_5/delay_sec = 0.0
 
+[sub_resource type="CapsuleShape2D" id=8]
+radius = 7.725
+height = 1.0
+
 [node name="Robot" type="KinematicBody2D"]
 z_index = -1
 script = ExtResource( 1 )
@@ -179,6 +183,7 @@ stream = ExtResource( 13 )
 [node name="Animation" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "Move"
+frame = 1
 playing = true
 
 [node name="HitBox" type="Area2D" parent="."]
@@ -233,3 +238,11 @@ fract_delta = false
 local_coords = false
 process_material = SubResource( 6 )
 texture = SubResource( 7 )
+
+[node name="HeadHitBox" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HeadHitBox"]
+position = Vector2( 0, -20 )
+scale = Vector2( 1.65, 0.5 )
+shape = SubResource( 8 )
+one_way_collision = true

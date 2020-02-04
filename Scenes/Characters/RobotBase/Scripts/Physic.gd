@@ -7,6 +7,7 @@ var character_node : KinematicBody2D
 var direction_node : Node
 var animation_node : AnimatedSprite
 var hit_box_node : Area2D
+var block_counter_node : Area2D
 
 const GRAVITY : int = 30
 

@@ -34,7 +34,6 @@ func enter_state(_host):
 	
 	hit_box_shape.set_disabled(false)
 
-
 # When the actor exits action state: set unactive the hit box and triggers the interaction if necesary
 func exit_state(_host):
 	hit_box_shape.set_disabled(true)
@@ -42,7 +41,6 @@ func exit_state(_host):
 	
 	if interact_node in interact_able_array:
 		interact_node.interact(hit_box_shape.global_position)
-
 
 # When the animation is off, set the actor's state to Idle
 func on_animation_finished():

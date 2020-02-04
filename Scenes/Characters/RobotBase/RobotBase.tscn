@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/RobotBase.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/Physic.gd" type="Script" id=2]
@@ -13,51 +13,18 @@
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/Fall.gd" type="Script" id=11]
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/Action.gd" type="Script" id=12]
 [ext_resource path="res://Scenes/Characters/RobotIce/Sounds/Tank3.wav" type="AudioStream" id=13]
-[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Attack/RobotIceAttack1.png" type="Texture" id=14]
-[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Attack/RobotIceAttack2.png" type="Texture" id=15]
-[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Attack/RobotIceAttack3.png" type="Texture" id=16]
-[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Move/RobotIce2.png" type="Texture" id=17]
-[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Move/RobotIce3.png" type="Texture" id=18]
-[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Move/RobotIce4.png" type="Texture" id=19]
-[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Move/RobotIce5.png" type="Texture" id=20]
-[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/RobotIce.png" type="Texture" id=21]
-[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/RobotIceJump6.png" type="Texture" id=22]
-[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/RobotIceFall.png" type="Texture" id=23]
+[ext_resource path="res://Scenes/Characters/RobotIce/AnimationRobotIce.tres" type="SpriteFrames" id=14]
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/HitBoxBase.gd" type="Script" id=24]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 15.5305, 20 )
 
-[sub_resource type="SpriteFrames" id=2]
-animations = [ {
-"frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
-"loop": false,
-"name": "Action",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ) ],
-"loop": true,
-"name": "Move",
-"speed": 8.0
-}, {
-"frames": [ ExtResource( 21 ) ],
-"loop": true,
-"name": "Idle",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 22 ) ],
-"loop": true,
-"name": "Jump",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 23 ) ],
-"loop": true,
-"name": "Fall",
-"speed": 5.0
-} ]
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 24.0336, 19.7045 )
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 30, 30 )
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 7.72475
+height = 1.0
 
 [node name="Robot" type="KinematicBody2D"]
 z_index = -1
@@ -92,7 +59,6 @@ volume_db = -12.0
 pitch_scale = 2.5
 
 [node name="States" type="Node" parent="."]
-editor/display_folded = true
 script = ExtResource( 7 )
 
 [node name="Idle" type="Node" parent="States"]
@@ -105,7 +71,6 @@ script = ExtResource( 9 )
 script = ExtResource( 10 )
 
 [node name="Fall" type="Node" parent="States"]
-editor/display_folded = true
 script = ExtResource( 11 )
 
 [node name="FallTimer" type="Timer" parent="States/Fall"]
@@ -114,23 +79,32 @@ wait_time = 0.04
 one_shot = true
 
 [node name="Action" type="Node" parent="States"]
-editor/display_folded = true
 script = ExtResource( 12 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="States/Action"]
 stream = ExtResource( 13 )
 
 [node name="Animation" type="AnimatedSprite" parent="."]
-frames = SubResource( 2 )
-animation = "Action"
+frames = ExtResource( 14 )
+animation = "Idle"
 
 [node name="HitBox" type="Area2D" parent="."]
-editor/display_folded = true
 space_override = 1
 linear_damp = 0.0
 script = ExtResource( 24 )
 breakable_group = "EarthBlock"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2( 30, -6 )
+position = Vector2( 30.1937, -5.80629 )
+shape = SubResource( 2 )
+
+[node name="HeadHitBox" type="StaticBody2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HeadHitBox"]
+position = Vector2( 0, -20 )
+scale = Vector2( 1.65, 0.5 )
 shape = SubResource( 3 )
+one_way_collision = true

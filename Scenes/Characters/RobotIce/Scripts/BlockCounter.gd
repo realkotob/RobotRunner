@@ -1,16 +1,15 @@
 extends Area2D
 
 export var breakable_group : String
-
-onready var shape_node = get_node("CollisionShape2D")
+var breakable_items_counter : int
 
 func _ready():
 	var _err = connect("body_entered", self, "on_body_entered")
-	shape_node.disabled = true
+	breakable_items_counter = 0
 
 # Check for a collision with a breakable object, and destroy it if necesary
 func on_body_entered(body):
-	var breakable_objects_array : Array = get_tree().get_nodes_in_group("InteractivesObjects")
+	var breakable_objects_array : Array = get_tree().get_nodes_in_group(breakable_group)
 	
 	if body in breakable_objects_array:
 		body.destroy()

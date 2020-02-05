@@ -2,8 +2,8 @@ extends PlayerStateBase
 
 ### FALL STATE ###
 
-var state_node : Node
 var character_node : KinematicBody2D
+var inputs_node : Node
 
 onready var fall_timer_node = get_node("FallTimer")
 var fall_timer_init_value : float
@@ -33,8 +33,10 @@ func exit_state(_host):
 	fall_timer_node.set_wait_time(fall_timer_init_value)
 
 
-func on_ActionPressed():
-	state_node.set_state("Action")
+func _input(event):
+	if state_node.get_current_state() == self:
+		if event.is_action_pressed(inputs_node.input_map["Action"]):
+			state_node.set_state("Action")
 
 
 # When the cooldown is over; play the animation

@@ -66,3 +66,6 @@ func _input(event):
 		if event.is_action_pressed(inputs_node.input_map["MoveLeft"]) or event.is_action_pressed(inputs_node.input_map["MoveRight"]):
 			if character_node.is_on_floor():
 				state_node.set_state("Move")
+		if event.is_action_pressed(inputs_node.input_map["Jump"]):
+			if character_node.is_on_floor():
+				state_node.set_state("Jump")

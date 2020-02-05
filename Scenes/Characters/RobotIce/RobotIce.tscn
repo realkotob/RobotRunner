@@ -29,6 +29,11 @@ stereo = true
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
+"frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 11 ) ],
+"loop": false,
+"name": "Action",
+"speed": 10.0
+}, {
 "frames": [ ExtResource( 7 ) ],
 "loop": true,
 "name": "Jump",
@@ -48,11 +53,6 @@ animations = [ {
 "loop": true,
 "name": "Idle",
 "speed": 5.0
-}, {
-"frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 11 ) ],
-"loop": false,
-"name": "Action",
-"speed": 10.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=5]
@@ -79,7 +79,6 @@ volume_db = -16.0
 
 [node name="Animation" parent="." index="7"]
 frames = SubResource( 4 )
-frame = 0
 
 [node name="HitBox" parent="." index="8"]
 position = Vector2( 0, -0.291992 )

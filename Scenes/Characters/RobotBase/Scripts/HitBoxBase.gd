@@ -13,4 +13,5 @@ func on_body_entered(body):
 	var breakable_objects_array : Array = get_tree().get_nodes_in_group("InteractivesObjects")
 	
 	if body in breakable_objects_array:
-		body.destroy()
+		if body.has_method("destroy"):
+			body.destroy()

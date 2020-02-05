@@ -8,11 +8,11 @@ var direction_node : Node
 var interact_node : Node = null
 var interact_able_array : Array
 var character_node : KinematicBody2D
+var inputs_node : Node
 
 export var animation_offset : Vector2
 
 var hit_box_node : Area2D
-var state_node : Node
 var hit_box_shape : Node
 var face_dir : int
 
@@ -61,11 +61,8 @@ func offset_animation():
 		animation_node.set_offset(current_anim_offset)
 
 
-func on_LeftPressed():
-	if character_node.is_on_floor():
-		state_node.set_state("Move")
-
-
-func on_RightPressed():
-	if character_node.is_on_floor():
-		state_node.set_state("Move")
+func _input(event):
+	if state_node.get_current_state() == self:
+		if event.is_action_pressed(inputs_node.input_map["MoveLeft"]) or event.is_action_pressed(inputs_node.input_map["MoveRight"]):
+			if character_node.is_on_floor():
+				state_node.set_state("Move")

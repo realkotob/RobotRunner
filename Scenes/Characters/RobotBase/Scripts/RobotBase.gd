@@ -50,4 +50,3 @@ func _ready():
 			child.SFX_node = SFX_node
 	
 	states_node.setup()
-	inputs_node.connect_direction(direction_node)

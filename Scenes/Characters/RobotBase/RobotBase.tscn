@@ -6,7 +6,7 @@
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/Attributes.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/LayerChange.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Characters/RobotBase/Sounds/Teleport4.wav" type="AudioStream" id=6]
-[ext_resource path="res://BaseClasses/StateMachine.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/Characters/RobotBase/Scripts/RobotStatesMachine.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/Idle.gd" type="Script" id=8]
 [ext_resource path="res://BaseClasses/MoveBase.gd" type="Script" id=9]
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/Jump.gd" type="Script" id=10]
@@ -47,15 +47,20 @@ extents = Vector2( 15.5305, 20 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
+"frames": [ ExtResource( 23 ) ],
+"loop": true,
+"name": "Fall",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 22 ) ],
 "loop": true,
 "name": "Jump",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 23 ) ],
-"loop": true,
-"name": "Fall",
-"speed": 5.0
+"frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
+"loop": false,
+"name": "Action",
+"speed": 20.0
 }, {
 "frames": [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ) ],
 "loop": true,
@@ -66,11 +71,6 @@ animations = [ {
 "loop": true,
 "name": "Idle",
 "speed": 5.0
-}, {
-"frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
-"loop": false,
-"name": "Action",
-"speed": 20.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=3]
@@ -183,7 +183,7 @@ stream = ExtResource( 13 )
 [node name="Animation" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "Move"
-frame = 1
+frame = 2
 playing = true
 
 [node name="HitBox" type="Area2D" parent="."]

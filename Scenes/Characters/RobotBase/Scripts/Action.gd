@@ -11,6 +11,7 @@ var inputs_node : Node
 
 export var animation_offset : Vector2
 export var breakable_type : String
+export var interactables : PoolStringArray
 
 var bodies_in_hitbox : Array
 
@@ -46,17 +47,13 @@ func enter_state(_host):
 func exit_state(_host):
 	animation_node.set_offset(Vector2(0, 0))
 	
-	# Get every Interactive objects
-	interact_able_array = get_tree().get_nodes_in_group("InteractivesObjects")
+	# Get every area in the hitbox area
+	var interact_areas = hit_box_node.get_overlapping_areas()
 	
-	# Get every objects in the hitbox area
-	var current_interact_nodes = hit_box_node.get_overlapping_bodies()
-	current_interact_nodes.append(hit_box_node.get_overlapping_areas())
-	
-	# Check if one on the object in the hitbox area is an interative one, and interact with it if it is
-	for current_node in current_interact_nodes:
-		if current_node in interact_able_array && current_node.has_method("interact"):
-			current_node.interact(hit_box_shape.global_position)
+	# Check if one on the areas in the hitbox area is an interative one, and interact with it if it is
+	for area in interact_areas:
+		if area.is_class("Water"):
+			area.interact(hit_box_shape.global_position)
 
 
 # When the animation is off, set the actor's state to Idle

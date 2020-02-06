@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scenes/Levels/LevelBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/StartingPoints/StartingPointP1.tscn" type="PackedScene" id=2]
@@ -21,16 +21,24 @@
 [ext_resource path="res://Scenes/InteractiveObjects/Flag/RedFlag.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Scenes/InteractiveObjects/Flag/BlueFlag.tscn" type="PackedScene" id=20]
 
+[sub_resource type="Shader" id=1]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 108.075, 29.0156 )
+
 [node name="Level1" instance=ExtResource( 1 )]
 
 [node name="StartingPointP1" parent="." index="0" instance=ExtResource( 2 )]
-position = Vector2( 448, 139.5 )
+position = Vector2( 1703, 48 )
 
 [node name="StartingPointP2" parent="." index="1" instance=ExtResource( 3 )]
-position = Vector2( 56, 312 )
+position = Vector2( 1836, 265 )
 
 [node name="Camera" parent="CameraSystem" index="0"]
-position = Vector2( 480, 271 )
+position = Vector2( 1812, 263.5 )
 
 [node name="GUI" parent="CameraSystem/Camera" index="5"]
 grow_horizontal = 2
@@ -208,46 +216,15 @@ position = Vector2( 1230, 408.948 )
 angular_damp = -1.0
 
 [node name="WaterTile" parent="InteractivesObjects/WaterTiles" index="0" instance=ExtResource( 9 )]
-position = Vector2( 1932, 108 )
-
-[node name="WaterTile2" parent="InteractivesObjects/WaterTiles" index="1" instance=ExtResource( 9 )]
-position = Vector2( 1740, 108 )
-
-[node name="WaterTile3" parent="InteractivesObjects/WaterTiles" index="2" instance=ExtResource( 9 )]
-position = Vector2( 1764, 108 )
-
-[node name="WaterTile4" parent="InteractivesObjects/WaterTiles" index="3" instance=ExtResource( 9 )]
-position = Vector2( 1788, 108 )
-
-[node name="WaterTile5" parent="InteractivesObjects/WaterTiles" index="4" instance=ExtResource( 9 )]
-position = Vector2( 1812, 108 )
-
-[node name="WaterTile6" parent="InteractivesObjects/WaterTiles" index="5" instance=ExtResource( 9 )]
+material = SubResource( 2 )
 position = Vector2( 1836, 108 )
 
-[node name="WaterTile7" parent="InteractivesObjects/WaterTiles" index="6" instance=ExtResource( 9 )]
-position = Vector2( 1860, 108 )
-
-[node name="WaterTile8" parent="InteractivesObjects/WaterTiles" index="7" instance=ExtResource( 9 )]
-position = Vector2( 1884, 108 )
-
-[node name="WaterTile9" parent="InteractivesObjects/WaterTiles" index="8" instance=ExtResource( 9 )]
-position = Vector2( 1908, 108 )
-
-[node name="WaterTile10" parent="InteractivesObjects/WaterTiles" index="9" instance=ExtResource( 9 )]
-position = Vector2( 2292, 1404 )
-
-[node name="WaterTile12" parent="InteractivesObjects/WaterTiles" index="10" instance=ExtResource( 9 )]
-position = Vector2( 2244, 1404 )
-
-[node name="WaterTile11" parent="InteractivesObjects/WaterTiles" index="11" instance=ExtResource( 9 )]
-position = Vector2( 2340, 1404 )
-
-[node name="WaterTile14" parent="InteractivesObjects/WaterTiles" index="12" instance=ExtResource( 9 )]
-position = Vector2( 2316, 1404 )
-
-[node name="WaterTile13" parent="InteractivesObjects/WaterTiles" index="13" instance=ExtResource( 9 )]
-position = Vector2( 2268, 1404 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractivesObjects/WaterTiles/WaterTile" index="2"]
+position = Vector2( 0, 6.4998 )
+shape = SubResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="G1" type="Node2D" parent="InteractivesObjects/TeleportGroups" index="0"]
 __meta__ = {
@@ -269,7 +246,7 @@ __meta__ = {
 }
 
 [node name="TeleportArea1" parent="InteractivesObjects/TeleportGroups/G2" index="0" instance=ExtResource( 10 )]
-position = Vector2( 1610, 275.5 )
+position = Vector2( 1610, 276 )
 
 [node name="TeleportArea2" parent="InteractivesObjects/TeleportGroups/G2" index="1" instance=ExtResource( 10 )]
 position = Vector2( 1608, 132 )
@@ -354,7 +331,7 @@ __meta__ = {
 }
 
 [node name="BlueLever" parent="InteractivesObjects/Buttons&Doors/G5" index="0" instance=ExtResource( 14 )]
-position = Vector2( 2136, 111 )
+position = Vector2( 2136, 112 )
 
 [node name="BlueDoor1" parent="InteractivesObjects/Buttons&Doors/G5" index="1" instance=ExtResource( 15 )]
 position = Vector2( 1679, 265 )

@@ -1,18 +1,16 @@
-extends Node2D
+extends Area2D
 
 class_name InteractAreaBase
 
 export var group_name : String
-
 onready var interact_nodes_array = get_tree().get_nodes_in_group(group_name)
-onready var area2D_node = get_node("Area2D")
 
 var players_node_array : Array
 
 func _ready():
 	var _err
-	_err = area2D_node.connect("body_entered", self, "on_body_entered")
-	_err = area2D_node.connect("body_exited", self, "on_body_exited")
+	_err = connect("body_entered", self, "on_body_entered")
+	_err = connect("body_exited", self, "on_body_exited")
 
 
 # Give the reference to this node to the player entering the area

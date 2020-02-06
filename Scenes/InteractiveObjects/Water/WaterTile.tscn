@@ -1,38 +1,32 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/InteractiveObjects/Water/Scripts/WaterTile.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/InteractiveObjects/Water/WaterTiles.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/InteractiveObjects/Water/Scripts/WaterNoise.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/InteractiveObjects/Water/WaterShader.tres" type="Material" id=3]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 12, 28 )
+[sub_resource type="OpenSimplexNoise" id=3]
+period = 13.6
+lacunarity = 2.37
 
-[node name="WaterTile" type="Node2D" groups=[
-"Water",
-]]
+[sub_resource type="NoiseTexture" id=4]
+width = 100
+height = 100
+seamless = true
+noise = SubResource( 3 )
+
+[node name="WaterTile" type="Area2D"]
 z_index = 1
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 1, 1, 1, 0.784314 )
-texture = ExtResource( 2 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Area2D" type="Area2D" parent="."]
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( -1.52588e-05, 7.90773 )
-shape = SubResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="FloatingLine" type="Position2D" parent="."]
 position = Vector2( 0, -7 )
+
+[node name="WaterNoise2" type="Sprite" parent="."]
+material = ExtResource( 3 )
+position = Vector2( 0.35849, 7.70749 )
+scale = Vector2( 2.21169, 0.659437 )
+z_index = 1
+z_as_relative = false
+texture = SubResource( 4 )
+script = ExtResource( 2 )
+[connection signal="item_rect_changed" from="WaterNoise2" to="WaterNoise2" method="calculate_aspect_ratio"]

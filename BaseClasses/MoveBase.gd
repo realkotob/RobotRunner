@@ -47,7 +47,4 @@ func _input(event):
 		
 		elif event.is_action_pressed(inputs_node.input_map["Action"]):
 			state_node.set_state("Action")
-		
-		elif event.is_action_pressed(inputs_node.input_map["MoveLeft"]) or event.is_action_pressed(inputs_node.input_map["MoveRight"]):
-			state_node.set_state("Move")
 

@@ -1,18 +1,19 @@
 extends BlockBase
 
+class_name IceBlock
+
 ### ICEBLOCKS ###
 
 var floating_line_y : float
 var floating_speed : int = 50
 var is_floating : bool = false
 
+func is_class(value: String):
+	return value == "IceBlock"
+
 func _physics_process(delta):
 	if is_floating :
 		floating(delta)
-
-func _ready():
-	add_to_group("Bodies")
-	add_to_group("IceBlock")
 
 func set_static():
 	set_mode(MODE_STATIC)

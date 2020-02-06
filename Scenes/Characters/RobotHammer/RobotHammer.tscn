@@ -56,7 +56,8 @@ shape = SubResource( 1 )
 script = ExtResource( 2 )
 
 [node name="Action" parent="States" index="4"]
-animation_offset = Vector2( 0, -10 )
+animation_offset = Vector2( 0, -8 )
+breakable_type = "EarthBlock"
 
 [node name="AudioStreamPlayer" parent="States/Action" index="0"]
 stream = ExtResource( 3 )

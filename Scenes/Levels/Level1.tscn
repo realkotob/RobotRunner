@@ -98,137 +98,212 @@ tile_data = PoolIntArray( -65538, 6, 0, -65537, 6, 1, -131072, 6, 1, -131071, 6,
 
 [node name="IceBlockBase" parent="InteractivesObjects/IceBlocks/S" index="0" instance=ExtResource( 5 )]
 position = Vector2( 552, 132 )
+z_as_relative = true
 angular_damp = -1.0
 
 [node name="IceBlockBase2" parent="InteractivesObjects/IceBlocks/S" index="1" instance=ExtResource( 5 )]
 position = Vector2( 552, 107.736 )
+z_as_relative = true
 angular_damp = -1.0
 
 [node name="IceBlockBase3" parent="InteractivesObjects/IceBlocks/S" index="2" instance=ExtResource( 5 )]
 position = Vector2( 552, 83.7365 )
+z_as_relative = true
 angular_damp = -1.0
 
 [node name="IceBlockBase4" parent="InteractivesObjects/IceBlocks/S" index="3" instance=ExtResource( 5 )]
 position = Vector2( 552, 60 )
+z_as_relative = true
 angular_damp = -1.0
 
 [node name="M_IceBlock" parent="InteractivesObjects/IceBlocks/M" index="0" instance=ExtResource( 6 )]
 position = Vector2( 240, 148 )
+z_as_relative = true
 angular_damp = -1.0
 
 [node name="M_IceBlock8" parent="InteractivesObjects/IceBlocks/M" index="1" instance=ExtResource( 6 )]
 position = Vector2( 240, 101 )
+z_as_relative = true
 angular_damp = -1.0
 
 [node name="M_IceBlock2" parent="InteractivesObjects/IceBlocks/M" index="2" instance=ExtResource( 6 )]
 position = Vector2( 360, 121 )
+z_as_relative = true
 angular_damp = -1.0
 
 [node name="M_IceBlock7" parent="InteractivesObjects/IceBlocks/M" index="3" instance=ExtResource( 6 )]
 position = Vector2( 1199, 123 )
+z_as_relative = true
 angular_damp = -1.0
 
 [node name="M_IceBlock13" parent="InteractivesObjects/IceBlocks/M" index="4" instance=ExtResource( 6 )]
 position = Vector2( 1342, 265 )
+z_as_relative = true
 angular_damp = -1.0
 
 [node name="M_IceBlock10" parent="InteractivesObjects/IceBlocks/M" index="5" instance=ExtResource( 6 )]
 position = Vector2( 2640, 1154 )
+z_as_relative = true
 angular_damp = -1.0
 
 [node name="M_IceBlock11" parent="InteractivesObjects/IceBlocks/M" index="6" instance=ExtResource( 6 )]
 position = Vector2( 2520, 722 )
+z_as_relative = true
 angular_damp = -1.0
 
 [node name="M_IceBlock12" parent="InteractivesObjects/IceBlocks/M" index="7" instance=ExtResource( 6 )]
 position = Vector2( 2551, 314 )
+z_as_relative = true
 angular_damp = -1.0
 
 [node name="M_IceBlock9" parent="InteractivesObjects/IceBlocks/M" index="8" instance=ExtResource( 6 )]
 position = Vector2( 2098, 435 )
+z_as_relative = true
 angular_damp = -1.0
 
 [node name="M_IceBlock3" parent="InteractivesObjects/IceBlocks/M" index="9" instance=ExtResource( 6 )]
 position = Vector2( 792.417, 194 )
+z_as_relative = true
 angular_damp = -1.0
 
 [node name="M_IceBlock4" parent="InteractivesObjects/IceBlocks/M" index="10" instance=ExtResource( 6 )]
 position = Vector2( 792.417, 148 )
+z_as_relative = true
 angular_damp = -1.0
 
 [node name="M_IceBlock5" parent="InteractivesObjects/IceBlocks/M" index="11" instance=ExtResource( 6 )]
 position = Vector2( 792.417, 102 )
+z_as_relative = true
 angular_damp = -1.0
 
 [node name="M_IceBlock6" parent="InteractivesObjects/IceBlocks/M" index="12" instance=ExtResource( 6 )]
 position = Vector2( 792.417, 56 )
+z_as_relative = true
 angular_damp = -1.0
 
 [node name="EarthBlockBase9" parent="InteractivesObjects/EarthBlocks/S" index="0" instance=ExtResource( 7 )]
 position = Vector2( 754, 300 )
+z_as_relative = true
 gravity_scale = 1.0
 angular_damp = -1.0
 
 [node name="EarthBlockBase10" parent="InteractivesObjects/EarthBlocks/S" index="1" instance=ExtResource( 7 )]
 position = Vector2( 730, 300 )
+z_as_relative = true
 gravity_scale = 1.0
 angular_damp = -1.0
 
 [node name="M_EarthBlock12" parent="InteractivesObjects/EarthBlocks/M" index="0" instance=ExtResource( 8 )]
 position = Vector2( 2098, 483 )
-angular_damp = -1.0
+mass = 40.8163
+gravity_scale = 13.0
+continuous_cd = 2
+can_sleep = false
+angular_damp = 0.0
 
 [node name="M_EarthBlock13" parent="InteractivesObjects/EarthBlocks/M" index="1" instance=ExtResource( 8 )]
 position = Vector2( 2544, 1251 )
-angular_damp = -1.0
+mass = 40.8163
+gravity_scale = 13.0
+continuous_cd = 2
+can_sleep = false
+angular_damp = 0.0
 
 [node name="M_EarthBlock14" parent="InteractivesObjects/EarthBlocks/M" index="2" instance=ExtResource( 8 )]
 position = Vector2( 2545, 1203.5 )
-angular_damp = -1.0
+mass = 40.8163
+gravity_scale = 13.0
+continuous_cd = 2
+can_sleep = false
+angular_damp = 0.0
 
 [node name="M_EarthBlock15" parent="InteractivesObjects/EarthBlocks/M" index="3" instance=ExtResource( 8 )]
 position = Vector2( 2855, 1083.45 )
-angular_damp = -1.0
+mass = 40.8163
+gravity_scale = 13.0
+continuous_cd = 2
+can_sleep = false
+angular_damp = 0.0
 
 [node name="M_EarthBlock17" parent="InteractivesObjects/EarthBlocks/M" index="4" instance=ExtResource( 8 )]
 position = Vector2( 2688, 963 )
-angular_damp = -1.0
+mass = 40.8163
+gravity_scale = 13.0
+continuous_cd = 2
+can_sleep = false
+angular_damp = 0.0
 
 [node name="M_EarthBlock18" parent="InteractivesObjects/EarthBlocks/M" index="5" instance=ExtResource( 8 )]
 position = Vector2( 2736, 458 )
-angular_damp = -1.0
+mass = 40.8163
+gravity_scale = 13.0
+continuous_cd = 2
+can_sleep = false
+angular_damp = 0.0
 
 [node name="M_EarthBlock19" parent="InteractivesObjects/EarthBlocks/M" index="6" instance=ExtResource( 8 )]
 position = Vector2( 2600, 315 )
-angular_damp = -1.0
+mass = 40.8163
+gravity_scale = 13.0
+continuous_cd = 2
+can_sleep = false
+angular_damp = 0.0
 
 [node name="M_EarthBlock16" parent="InteractivesObjects/EarthBlocks/M" index="7" instance=ExtResource( 8 )]
 position = Vector2( 2855, 1249.5 )
-angular_damp = -1.0
+mass = 40.8163
+gravity_scale = 13.0
+continuous_cd = 2
+can_sleep = false
+angular_damp = 0.0
 
 [node name="M_EarthBlock" parent="InteractivesObjects/EarthBlocks/M" index="8" instance=ExtResource( 8 )]
 position = Vector2( 170, 481.5 )
-angular_damp = -1.0
+mass = 40.8163
+gravity_scale = 13.0
+continuous_cd = 2
+can_sleep = false
+angular_damp = 0.0
 
 [node name="M_EarthBlock4" parent="InteractivesObjects/EarthBlocks/M" index="9" instance=ExtResource( 8 )]
 position = Vector2( 336, 385.5 )
-angular_damp = -1.0
+mass = 40.8163
+gravity_scale = 13.0
+continuous_cd = 2
+can_sleep = false
+angular_damp = 0.0
 
 [node name="M_EarthBlock2" parent="InteractivesObjects/EarthBlocks/M" index="10" instance=ExtResource( 8 )]
 position = Vector2( 480, 434 )
-angular_damp = -1.0
+mass = 40.8163
+gravity_scale = 13.0
+continuous_cd = 2
+can_sleep = false
+angular_damp = 0.0
 
 [node name="M_EarthBlock3" parent="InteractivesObjects/EarthBlocks/M" index="11" instance=ExtResource( 8 )]
 position = Vector2( 480, 387 )
-angular_damp = -1.0
+mass = 40.8163
+gravity_scale = 13.0
+continuous_cd = 2
+can_sleep = false
+angular_damp = 0.0
 
 [node name="M_EarthBlock5" parent="InteractivesObjects/EarthBlocks/M" index="12" instance=ExtResource( 8 )]
 position = Vector2( 742, 337.5 )
-angular_damp = -1.0
+mass = 40.8163
+gravity_scale = 13.0
+continuous_cd = 2
+can_sleep = false
+angular_damp = 0.0
 
 [node name="M_EarthBlock6" parent="InteractivesObjects/EarthBlocks/M" index="13" instance=ExtResource( 8 )]
 position = Vector2( 1230, 408.948 )
-angular_damp = -1.0
+mass = 40.8163
+gravity_scale = 13.0
+continuous_cd = 2
+can_sleep = false
+angular_damp = 0.0
 
 [node name="WaterTile" parent="InteractivesObjects/WaterTiles" index="0" instance=ExtResource( 9 )]
 material = SubResource( 2 )
@@ -245,8 +320,6 @@ __meta__ = {
 material = ExtResource( 22 )
 position = Vector2( 0.35849, 7.70749 )
 scale = Vector2( 2.21169, 0.659437 )
-z_index = 1
-z_as_relative = false
 texture = SubResource( 5 )
 script = ExtResource( 21 )
 
@@ -265,8 +338,6 @@ __meta__ = {
 material = ExtResource( 22 )
 position = Vector2( 457.103, 1307.47 )
 scale = Vector2( 2.03375, 0.659437 )
-z_index = 1
-z_as_relative = false
 texture = SubResource( 5 )
 script = ExtResource( 21 )
 

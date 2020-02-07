@@ -1,8 +1,7 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scenes/Characters/RobotBase/RobotBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Characters/RobotIce/Scripts/InputsIce.gd" type="Script" id=2]
-[ext_resource path="res://Scenes/Characters/RobotIce/Scripts/ActionIce.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Move/RobotIce3.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Move/RobotIce2.png" type="Texture" id=5]
 [ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Move/RobotIce5.png" type="Texture" id=6]
@@ -29,16 +28,6 @@ stereo = true
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
-"frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 11 ) ],
-"loop": false,
-"name": "Action",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 7 ) ],
-"loop": true,
-"name": "Jump",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 9 ) ],
 "loop": true,
 "name": "Fall",
@@ -52,6 +41,16 @@ animations = [ {
 "frames": [ ExtResource( 10 ) ],
 "loop": true,
 "name": "Idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 11 ) ],
+"loop": false,
+"name": "Action",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "Jump",
 "speed": 5.0
 } ]
 
@@ -70,8 +69,9 @@ script = ExtResource( 2 )
 stream = SubResource( 2 )
 
 [node name="Action" parent="States" index="4"]
-script = ExtResource( 3 )
 animation_offset = Vector2( 24, 0 )
+breakable_type = "IceBlock"
+interactables = PoolStringArray( "Water" )
 
 [node name="AudioStreamPlayer" parent="States/Action" index="0"]
 stream = SubResource( 3 )
@@ -79,10 +79,10 @@ volume_db = -16.0
 
 [node name="Animation" parent="." index="7"]
 frames = SubResource( 4 )
+frame = 1
 
 [node name="HitBox" parent="." index="8"]
 position = Vector2( 0, -0.291992 )
-breakable_group = ""
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
 position = Vector2( 45.019, -3.55888 )

@@ -33,6 +33,7 @@ func exit_state(_host):
 	fall_timer_node.set_wait_time(fall_timer_init_value)
 
 
+# Define the actions the player can do in this state
 func _input(event):
 	if state_node.get_current_state() == self:
 		if event.is_action_pressed(inputs_node.input_map["Action"]):

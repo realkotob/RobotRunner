@@ -1,12 +1,10 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Scenes/Levels/LevelBase.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Camera/Camera.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Camera/GUI.gd" type="Script" id=3]
 [ext_resource path="res://Global/Background/Background.png" type="Texture" id=4]
 [ext_resource path="res://Global/Tileset/TileSet1.png" type="Texture" id=5]
-[ext_resource path="res://Scenes/InteractiveObjects/InteractivesObjects.gd" type="Script" id=6]
-[ext_resource path="res://Scenes/InteractiveObjects/Water/Scripts/WaterTilesContainer.gd" type="Script" id=7]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
@@ -179,6 +177,8 @@ anchor_bottom = 1.0
 script = ExtResource( 3 )
 
 [node name="Map" type="Node2D" parent="."]
+z_index = 2
+z_as_relative = false
 __meta__ = {
 "_edit_lock_": true
 }
@@ -212,7 +212,6 @@ __meta__ = {
 }
 
 [node name="InteractivesObjects" type="Node2D" parent="."]
-script = ExtResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -248,7 +247,6 @@ __meta__ = {
 }
 
 [node name="WaterTiles" type="Node2D" parent="InteractivesObjects"]
-script = ExtResource( 7 )
 __meta__ = {
 "_edit_lock_": true
 }

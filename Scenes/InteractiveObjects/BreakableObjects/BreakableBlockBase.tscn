@@ -20,6 +20,7 @@ animations = [ {
 extents = Vector2( 12, 12.1 )
 
 [node name="BreakableBlockBase" type="RigidBody2D"]
+z_as_relative = false
 mass = 40.8163
 gravity_scale = 13.0
 continuous_cd = 2

@@ -182,6 +182,7 @@ stream = ExtResource( 13 )
 [node name="Animation" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "Move"
+frame = 1
 playing = true
 
 [node name="HitBox" type="Area2D" parent="."]

@@ -3,9 +3,20 @@
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
-uniform vec4 blue_tint = vec4(0.0, 0.3, 1, 0.5);
-uniform vec2 sprite_scale = vec2(0.0, 0.3);
-uniform vec2 distort_scale = vec2(2);
+// Define the color of the water
+uniform vec4 water_tint = vec4(0.0, 0.8, 1, 1);
+
+// Define the scale of the water pool
+uniform vec2 sprite_scale = vec2(15, 0.5);
+
+// Define the amount of distortion
+uniform float distort_scale = 0.8;
+
+// Define the amount of recfration (the distortion of what is behind or under water)
+uniform float refraction_amount = 0.3;
+
+// Define the opacity of the water
+uniform float water_opacity = 0.2;
 
 // Returns a random number
 float rand(vec2 coord){
@@ -30,20 +41,23 @@ float noise(vec2 coord){
 
 void fragment(){
 	
-	vec2 noisecoord1 = UV * 0.8 * sprite_scale;
-	vec2 noisecoord2 = UV * 0.8 * sprite_scale + 4.0;
+	vec2 noisecoord1 = UV * sprite_scale * distort_scale;
+	vec2 noisecoord2 = UV * sprite_scale * distort_scale + 4.0;
 	
-	vec2 motion1 = vec2(TIME * 3.0, TIME * -0.4);
+	vec2 motion1 = vec2(TIME * 0.3, TIME * -0.4);
 	vec2 motion2 = vec2(TIME * 0.1, TIME * 0.5);
 	
 	vec2 distort1 = vec2(noise(noisecoord1 + motion1), noise(noisecoord2 + motion1)) - vec2(0.5);
-	vec2 distort2 = vec2(noise(noisecoord1 + motion2), noise(noisecoord2 + motion2))- vec2(0.5);
+	vec2 distort2 = vec2(noise(noisecoord1 + motion2), noise(noisecoord2 + motion2)) - vec2(0.5);
 	
-	vec2 distort_sum = (distort1 + distort2) / 40.0;
+	vec2 distort_sum = (distort1 + distort2) / 60.0;
 	
 	vec4 color = textureLod(TEXTURE, TIME * 0.1 + sin(UV) + distort_sum, -1.0);
+	vec4 background_color = textureLod(SCREEN_TEXTURE, SCREEN_UV + (distort_sum * refraction_amount), -1.0);
 	
-	color = mix(color, blue_tint, 0.3);
+	color = mix(background_color, color, water_opacity);
+	
+	color = mix(color, water_tint, 0.3);
 	color.rgb = mix(vec3(0.5), color.rgb, 1.4);
 	
 	float near_top = (UV.y + distort_sum.y) / (0.2 / sprite_scale.y);
@@ -67,7 +81,10 @@ void fragment(){
 }"
 
 [resource]
+render_priority = 1
 shader = SubResource( 1 )
-shader_param/blue_tint = Plane( 0, 1.476, 2.467, -1.474 )
-shader_param/sprite_scale = Vector2( 5.257, 0.507 )
-shader_param/distort_scale = Vector2( 1, 1 )
+shader_param/water_tint = Plane( 0, 0.8, 1, 1 )
+shader_param/sprite_scale = Vector2( 30, 0.5 )
+shader_param/distort_scale = 0.8
+shader_param/refraction_amount = 0.2
+shader_param/water_opacity = 0.2

@@ -19,13 +19,17 @@ var hit_box_node : Area2D
 var hit_box_shape : Node
 var face_dir : int
 
+var was_broke : bool = false
+
 onready var audio_node = get_node("AudioStreamPlayer")
 
-
+# Setup, called by the parent when it is ready
 func setup():
 	var _err = animation_node.connect("animation_finished", self, "on_animation_finished")
 	hit_box_shape = hit_box_node.get_child(0)
 
+
+# Aplly the offset of the animation every thick
 func update(_host, _delta):
 	offset_animation()
 
@@ -37,10 +41,13 @@ func enter_state(_host):
 	animation_node.play(self.name)
 	audio_node.play()
 	
+	# Destroy a block if it is in the hitbox area, and if his type correspond to the current robot breakable type
 	bodies_in_hitbox = hit_box_node.get_overlapping_bodies()
 	for body in bodies_in_hitbox:
 		if body.is_class(breakable_type):
 			body.destroy()
+			# Keep track if at least one block was broke
+			was_broke = true
 
 
 # When the actor exits action state: set unactive the hit box and triggers the interaction if necesary
@@ -51,9 +58,13 @@ func exit_state(_host):
 	var interact_areas = hit_box_node.get_overlapping_areas()
 	
 	# Check if one on the areas in the hitbox area is an interative one, and interact with it if it is
+	# Also verify if no block were broke in this use of the action state
 	for area in interact_areas:
-		if area.is_class("Water"):
+		if area.is_class("Water") && was_broke == false:
 			area.interact(hit_box_shape.global_position)
+	
+	# Reset the was broke bool, for the next use of the action state
+	was_broke = false
 
 
 # When the animation is off, set the actor's state to Idle

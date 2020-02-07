@@ -9,9 +9,14 @@ onready var floating_line_node = get_node("FloatingLine")
 
 var M_IceBlocks_node : Node2D
 
+# Return true is the given string is the name of the class 
+# (Necesary in 3.2 because Godot check the very parent class instead of the current class)
 func is_class(value : String):
 	return value == CLASS_NAME
 
+
+# Return a string of the name of the class 
+# (Necesary in 3.2 because Godot check the very parent class instead of the current class)
 func get_class():
 	return CLASS_NAME
 
@@ -29,12 +34,12 @@ func on_body_exited(body):
 
 
 # Create an ice block on interaction
-func interact(_pos : Vector2):
+func interact(global_pos : Vector2):
 	M_IceBlocks_node = iceblock_scene.instance()
-#	M_IceBlocks_node.set_global_position(pos)
 	M_IceBlocks_node.set_rigid()
 	
 	add_child(M_IceBlocks_node)
+	M_IceBlocks_node.set_global_position(global_pos)
 	body_floating(M_IceBlocks_node, true)
 
 

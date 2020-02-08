@@ -6,6 +6,8 @@ class_name StatesMachine
 # The states are distinguished by the name of their corresponding node
 # The default state is always the first in the tree
 
+signal state_change
+
 onready var states_map = get_children()
 
 onready var current_state : Object
@@ -53,6 +55,8 @@ func set_state(new_state):
 	# Use the enter_state function of the current state
 	if new_state != null:
 		current_state.enter_state(self)
+	
+	emit_signal("state_change")
 
 
 # Returns the String name of the current state

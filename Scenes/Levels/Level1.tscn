@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Scenes/Levels/LevelBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/StartingPoints/StartingPointP1.tscn" type="PackedScene" id=2]
@@ -20,8 +20,7 @@
 [ext_resource path="res://Scenes/InteractiveObjects/Flag/FlagsGroup.gd" type="Script" id=18]
 [ext_resource path="res://Scenes/InteractiveObjects/Flag/RedFlag.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Scenes/InteractiveObjects/Flag/BlueFlag.tscn" type="PackedScene" id=20]
-[ext_resource path="res://Scenes/InteractiveObjects/Water/Scripts/WaterNoise.gd" type="Script" id=21]
-[ext_resource path="res://Scenes/InteractiveObjects/Water/WaterShader.tres" type="Material" id=22]
+[ext_resource path="res://Scenes/InteractiveObjects/Water/Shader/WaterShader.tres" type="Material" id=22]
 
 [sub_resource type="Shader" id=1]
 
@@ -252,7 +251,6 @@ material = ExtResource( 22 )
 position = Vector2( 0.35849, 5.36782 )
 scale = Vector2( 2.21169, 0.612644 )
 texture = SubResource( 5 )
-script = ExtResource( 21 )
 
 [node name="WaterTile2" parent="InteractivesObjects/WaterTiles" index="1" instance=ExtResource( 9 )]
 material = SubResource( 2 )
@@ -520,4 +518,3 @@ position = Vector2( 3430, 1150 )
 
 [node name="BlueFlag" parent="InteractivesObjects/Flags" index="1" instance=ExtResource( 20 )]
 position = Vector2( 3630, 1150 )
-[connection signal="item_rect_changed" from="InteractivesObjects/WaterTiles/WaterTile/WaterShader" to="InteractivesObjects/WaterTiles/WaterTile/WaterShader" method="calculate_aspect_ratio"]

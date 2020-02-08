@@ -10,13 +10,13 @@ uniform vec4 water_tint : hint_color = vec4(0.0, 0.8, 1, 1);
 uniform vec4 surface_tint : hint_color = vec4(0.3, 0.93, 0.93, 1);
 
 // Define the scale of the water pool
-uniform vec2 sprite_scale = vec2(15, 0.5);
+uniform vec2 sprite_scale = vec2(30, 0.5);
 
 // Define the amount of distortion
 uniform float distort_scale = 0.8;
 
 // Define the amount of recfration (the distortion of what is behind or under water)
-uniform float refraction_amount = 0.3;
+uniform float refraction_amount = 0.2;
 
 // Define the opacity of the water
 uniform float water_opacity = 0.2;
@@ -90,13 +90,14 @@ void fragment(){
 		}
 	}
 	
+	// Apply the whole calculation to the canvas
 	COLOR = color;
 }"
 
 [resource]
 render_priority = 1
 shader = SubResource( 1 )
-shader_param/water_tint = Plane( 0, 0.8, 1, 1 )
+shader_param/water_tint = Color( 0, 0.8, 1, 1 )
 shader_param/surface_tint = Color( 0.3, 0.93, 0.93, 1 )
 shader_param/sprite_scale = Vector2( 30, 0.5 )
 shader_param/distort_scale = 0.8

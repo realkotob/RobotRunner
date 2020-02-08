@@ -49,7 +49,8 @@ func setup():
 		if "SFX_node" in state:
 			state.SFX_node = SFX_node
 		
-		state.setup()
+		if state.has_method("setup"):
+			state.setup()
 	
 	set_physics_process(true)
 	set_state(states_map[0])

@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/RobotBase.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/Physic.gd" type="Script" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://Scenes/Characters/RobotIce/Sprites/RobotIce.png" type="Texture" id=21]
 [ext_resource path="res://Scenes/Characters/RobotIce/Sprites/RobotIceJump6.png" type="Texture" id=22]
 [ext_resource path="res://Scenes/Characters/RobotIce/Sprites/RobotIceFall.png" type="Texture" id=23]
+[ext_resource path="res://Scenes/Characters/RobotBase/Scripts/StateLabel.gd" type="Script" id=24]
 [ext_resource path="res://Scenes/Characters/RobotBase/SFX/Dust3/Dust3_2.png" type="Texture" id=25]
 [ext_resource path="res://Scenes/Characters/RobotBase/SFX/Dust2/Dust2_2.png" type="Texture" id=26]
 [ext_resource path="res://Scenes/Characters/RobotBase/SFX/Dust2/Dust2_3.png" type="Texture" id=27]
@@ -40,12 +41,18 @@
 [ext_resource path="res://Scenes/Characters/RobotBase/SFX/Jump/JumpDust4.png" type="Texture" id=39]
 [ext_resource path="res://Scenes/Characters/RobotBase/SFX/Jump/JumpDust2.png" type="Texture" id=40]
 [ext_resource path="res://Scenes/Characters/RobotBase/SFX/Jump/JumpDust3.png" type="Texture" id=41]
+[ext_resource path="res://Global/Fonts/BoldCapsPixel.tres" type="DynamicFont" id=42]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 15.53, 20 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
+"frames": [ ExtResource( 22 ) ],
+"loop": true,
+"name": "Jump",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 23 ) ],
 "loop": true,
 "name": "Fall",
@@ -64,11 +71,6 @@ animations = [ {
 "frames": [ ExtResource( 21 ) ],
 "loop": true,
 "name": "Idle",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 22 ) ],
-"loop": true,
-"name": "Jump",
 "speed": 5.0
 } ]
 
@@ -131,6 +133,9 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 4 )
 shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Physic" type="Node" parent="."]
 script = ExtResource( 2 )
@@ -147,13 +152,16 @@ jump_force = -500
 
 [node name="LayerChange" type="Node2D" parent="."]
 script = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LayerChange"]
 stream = ExtResource( 6 )
 volume_db = -12.0
 pitch_scale = 2.5
 
-[node name="States" type="Node" parent="."]
+[node name="States" type="Node2D" parent="."]
 script = ExtResource( 7 )
 
 [node name="Idle" type="Node" parent="States"]
@@ -179,25 +187,53 @@ script = ExtResource( 12 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="States/Action"]
 stream = ExtResource( 13 )
 
+[node name="Label" type="Label" parent="States"]
+margin_left = -56.8554
+margin_top = -81.0958
+margin_right = 60.1446
+margin_bottom = -30.0958
+custom_fonts/font = ExtResource( 42 )
+align = 1
+valign = 1
+script = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Animation" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "Move"
 frame = 1
 playing = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="HitBox" type="Area2D" parent="."]
 space_override = 1
 linear_damp = 0.0
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2( 30, -6 )
 shape = SubResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="SFX" type="Node2D" parent="."]
 script = ExtResource( 34 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="MoveDust" type="Node2D" parent="SFX"]
 script = ExtResource( 35 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Dust1" parent="SFX/MoveDust" instance=ExtResource( 33 )]
 position = Vector2( -35, 19.075 )
@@ -224,6 +260,9 @@ texture = SubResource( 5 )
 
 [node name="JumpDust" type="Node2D" parent="SFX"]
 script = ExtResource( 35 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Particles2D" type="Particles2D" parent="SFX/JumpDust"]
 modulate = Color( 1, 1, 1, 0.784314 )
@@ -237,9 +276,15 @@ process_material = SubResource( 6 )
 texture = SubResource( 7 )
 
 [node name="HeadHitBox" type="StaticBody2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeadHitBox"]
 position = Vector2( 0, -20 )
 scale = Vector2( 1.65, 0.5 )
 shape = SubResource( 8 )
 one_way_collision = true
+__meta__ = {
+"_edit_lock_": true
+}

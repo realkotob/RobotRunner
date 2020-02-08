@@ -60,7 +60,7 @@ func exit_state(_host):
 	# Check if one on the areas in the hitbox area is an interative one, and interact with it if it is
 	# Also verify if no block were broke in this use of the action state
 	for area in interact_areas:
-		if area.is_class("Water") && was_broke == false:
+		if area.get_class() in interactables && was_broke == false:
 			area.interact(hit_box_shape.global_position)
 	
 	# Reset the was broke bool, for the next use of the action state

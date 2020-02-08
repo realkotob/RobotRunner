@@ -46,13 +46,13 @@ extents = Vector2( 79.0315, 29.0156 )
 [node name="Level1" instance=ExtResource( 1 )]
 
 [node name="StartingPointP1" parent="." index="0" instance=ExtResource( 2 )]
-position = Vector2( 1608, 115.5 )
+position = Vector2( 69.2351, 217 )
 
 [node name="StartingPointP2" parent="." index="1" instance=ExtResource( 3 )]
-position = Vector2( 1703, 48 )
+position = Vector2( 69.2351, 312 )
 
 [node name="Camera" parent="CameraSystem" index="0"]
-position = Vector2( 1812, 263.5 )
+position = Vector2( 470, 265 )
 
 [node name="GUI" parent="CameraSystem/Camera" index="5"]
 grow_horizontal = 2

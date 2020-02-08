@@ -5,7 +5,7 @@ const CLASS_NAME = "Water"
 
 onready var iceblock_scene = load("res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/M/MIceBlock.tscn")
 onready var floating_line_node = get_node("FloatingLine")
-#onready var water_area = get_node("CollisionShape2D")
+onready var water_area = get_node_or_null("CollisionShape2D")
 
 var M_IceBlocks_node : Node2D
 
@@ -33,15 +33,24 @@ func on_body_exited(body):
 		body_floating(body, false)
 
 
-# Create an ice block on interaction
+# Create an ice block on interaction, the position of the hit box has to be inside the water area to truly happen
 func interact(global_pos : Vector2):
-	M_IceBlocks_node = iceblock_scene.instance()
-	M_IceBlocks_node.set_rigid()
-	
-	add_child(M_IceBlocks_node)
-	M_IceBlocks_node.set_global_position(global_pos)
-	body_floating(M_IceBlocks_node, true)
+	if water_area != null:
+		if is_position_in_area(global_pos, water_area):
+			M_IceBlocks_node = iceblock_scene.instance()
+			M_IceBlocks_node.set_rigid()
+			
+			add_child(M_IceBlocks_node)
+			M_IceBlocks_node.set_global_position(global_pos)
+			body_floating(M_IceBlocks_node, true)
 
+
+# Return true if the given position is inside the given area, false if not
+func is_position_in_area(pos: Vector2, collision_shape : CollisionShape2D) -> bool:
+	var shape_pos = collision_shape.get_global_position()
+	var shape_ext = collision_shape.get_shape().get_extents()
+	
+	return pos.y > shape_pos.y - shape_ext.y && pos.y < shape_pos.y + shape_ext.y && pos.x > shape_pos.x - shape_ext.x && pos.x < shape_pos.x + shape_ext.x
 
 # Setup the floating on the given body
 func body_floating(body : PhysicsBody2D, float_or_not : bool):

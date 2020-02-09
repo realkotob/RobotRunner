@@ -16,6 +16,7 @@ var inputs_node : Node
 func setup():
 	var _err = connect("layer_change", layer_change_node, "on_layer_change")
 
+
 func update(_host, _delta):
 	if !character_node.is_on_floor():
 		return "Fall"

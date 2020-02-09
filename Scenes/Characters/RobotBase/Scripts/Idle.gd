@@ -36,7 +36,7 @@ func _input(event):
 		elif event.is_action_pressed(inputs_node.input_map["Teleport"]):
 			emit_signal("layer_change")
 		
-		elif event.is_action_pressed(inputs_node.input_map["MoveLeft"]) or event.is_action_pressed(inputs_node.input_map["MoveRight"]):
+		elif event.is_action(inputs_node.input_map["MoveLeft"]) or event.is_action(inputs_node.input_map["MoveRight"]):
 			state_node.set_state("Move")
 		
 		elif event.is_action_pressed(inputs_node.input_map["Action"]):

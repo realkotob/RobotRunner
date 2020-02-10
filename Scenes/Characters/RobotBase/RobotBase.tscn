@@ -43,6 +43,11 @@ extents = Vector2( 15.53, 20 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
+"frames": [ ExtResource( 23 ) ],
+"loop": true,
+"name": "Fall",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
 "loop": false,
 "name": "Action",
@@ -61,11 +66,6 @@ animations = [ {
 "frames": [ ExtResource( 22 ) ],
 "loop": true,
 "name": "Jump",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 23 ) ],
-"loop": true,
-"name": "Fall",
 "speed": 5.0
 } ]
 
@@ -93,7 +93,7 @@ frame_2/delay_sec = 0.0
 frame_3/texture = ExtResource( 29 )
 frame_3/delay_sec = 0.0
 
-[sub_resource type="CapsuleShape2D" id=8]
+[sub_resource type="CapsuleShape2D" id=6]
 radius = 7.725
 height = 1.0
 
@@ -164,6 +164,7 @@ script = ExtResource( 12 )
 stream = ExtResource( 13 )
 
 [node name="Label" type="Label" parent="States"]
+visible = false
 margin_left = -56.8554
 margin_top = -81.0958
 margin_right = 60.1446
@@ -179,6 +180,7 @@ __meta__ = {
 [node name="Animation" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "Move"
+frame = 2
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -247,7 +249,7 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeadHitBox"]
 position = Vector2( 0, -20 )
 scale = Vector2( 1.65, 0.5 )
-shape = SubResource( 8 )
+shape = SubResource( 6 )
 one_way_collision = true
 __meta__ = {
 "_edit_lock_": true

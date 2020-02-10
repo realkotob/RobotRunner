@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/RobotBase.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/Physic.gd" type="Script" id=2]
@@ -35,12 +35,7 @@
 [ext_resource path="res://Scenes/Characters/RobotBase/SFX/DustBase.tscn" type="PackedScene" id=33]
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/SFX_group_base.gd" type="Script" id=34]
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/SFX_Base.gd" type="Script" id=35]
-[ext_resource path="res://Scenes/Characters/RobotBase/SFX/Jump/JumpDust6.png" type="Texture" id=36]
-[ext_resource path="res://Scenes/Characters/RobotBase/SFX/Jump/JumpDust5.png" type="Texture" id=37]
-[ext_resource path="res://Scenes/Characters/RobotBase/SFX/Jump/JumpDust1.png" type="Texture" id=38]
-[ext_resource path="res://Scenes/Characters/RobotBase/SFX/Jump/JumpDust4.png" type="Texture" id=39]
-[ext_resource path="res://Scenes/Characters/RobotBase/SFX/Jump/JumpDust2.png" type="Texture" id=40]
-[ext_resource path="res://Scenes/Characters/RobotBase/SFX/Jump/JumpDust3.png" type="Texture" id=41]
+[ext_resource path="res://Scenes/Characters/RobotBase/Scripts/JumpDust.gd" type="Script" id=36]
 [ext_resource path="res://Global/Fonts/BoldCapsPixel.tres" type="DynamicFont" id=42]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -48,6 +43,11 @@ extents = Vector2( 15.53, 20 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
+"frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
+"loop": false,
+"name": "Action",
+"speed": 20.0
+}, {
 "frames": [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ) ],
 "loop": true,
 "name": "Move",
@@ -57,11 +57,6 @@ animations = [ {
 "loop": true,
 "name": "Idle",
 "speed": 5.0
-}, {
-"frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
-"loop": false,
-"name": "Action",
-"speed": 20.0
 }, {
 "frames": [ ExtResource( 22 ) ],
 "loop": true,
@@ -97,27 +92,6 @@ frame_2/texture = ExtResource( 31 )
 frame_2/delay_sec = 0.0
 frame_3/texture = ExtResource( 29 )
 frame_3/delay_sec = 0.0
-
-[sub_resource type="ParticlesMaterial" id=6]
-flag_disable_z = true
-gravity = Vector3( 0, 0, 0 )
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-
-[sub_resource type="AnimatedTexture" id=7]
-frames = 6
-fps = 13.0
-frame_0/texture = ExtResource( 38 )
-frame_1/texture = ExtResource( 40 )
-frame_1/delay_sec = 0.0
-frame_2/texture = ExtResource( 41 )
-frame_2/delay_sec = 0.0
-frame_3/texture = ExtResource( 39 )
-frame_3/delay_sec = 0.0
-frame_4/texture = ExtResource( 37 )
-frame_4/delay_sec = 0.0
-frame_5/texture = ExtResource( 36 )
-frame_5/delay_sec = 0.0
 
 [sub_resource type="CapsuleShape2D" id=8]
 radius = 7.725
@@ -261,21 +235,10 @@ lifetime = 0.3
 texture = SubResource( 5 )
 
 [node name="JumpDust" type="Node2D" parent="SFX"]
-script = ExtResource( 35 )
+script = ExtResource( 36 )
 __meta__ = {
 "_edit_lock_": true
 }
-
-[node name="Particles2D" type="Particles2D" parent="SFX/JumpDust"]
-modulate = Color( 1, 1, 1, 0.784314 )
-position = Vector2( -6, 27 )
-emitting = false
-amount = 1
-lifetime = 0.32
-fract_delta = false
-local_coords = false
-process_material = SubResource( 6 )
-texture = SubResource( 7 )
 
 [node name="HeadHitBox" type="StaticBody2D" parent="."]
 __meta__ = {

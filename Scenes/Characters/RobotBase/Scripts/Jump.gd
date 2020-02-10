@@ -15,13 +15,18 @@ func update(_host, _delta):
 
 func enter_state(_host):
 	animation_node.play(self.name)
+	
+	# Genreate the jump dust
+	SFX_node.play_SFX("JumpDust", true, character_node.global_position)
+	
+	# Apply the jump force
 	attributes_node.velocity.y = attributes_node.jump_force
-	SFX_node.play_SFX("JumpDust", true)
-	state_node.set_state("Jump")
+
 
 func exit_state(_host):
 	SFX_node.play_SFX("JumpDust", false)
 	SFX_node.reset_SFX("JumpDust")
+
 
 # Define the actions the player can do in this state
 func _input(event):

@@ -11,6 +11,8 @@ onready var animation_node = get_node("Animation")
 onready var hit_box_node = get_node("HitBox")
 onready var SFX_node = get_node("SFX")
 
+var level_node : Node
+
 # Get every children of this node
 onready var children_array : Array = get_children()
 
@@ -48,5 +50,6 @@ func _ready():
 		
 		if "SFX_node" in child:
 			child.SFX_node = SFX_node
-	
-	states_node.setup()
+		
+		if child.has_method("setup"):
+			child.setup()

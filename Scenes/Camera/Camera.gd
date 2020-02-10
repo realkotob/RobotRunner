@@ -1,7 +1,7 @@
 extends Camera2D
 
-export var speed : float = 10
-export var acceleration : float = 6
+export var speed : float = 50
+export var max_acceleration : float = 500
 var current_acceleration : float = 1
 
 onready var checkpoints_nodes_array = get_tree().get_nodes_in_group("CameraCheckpoint")
@@ -11,7 +11,7 @@ onready var fast_forward_zone_node = get_node("FastForwardArea")
 onready var safe_area_node = get_node("SafeArea")
 
 onready var original_forward_shape_ext = fast_forward_zone_node.get_node("CollisionShape2D").get_shape().get_extents()
-onready var original_safe_area_shape_ext = Vector2((screen_width / 2), (screen_height / 3))
+onready var original_safe_area_shape_ext = safe_area_node.get_node("CollisionShape2D").get_shape().get_extents()
 
 var players_node_array : Array
 
@@ -44,7 +44,9 @@ func _ready():
 # Move the camera given by the last checkpoint
 func _physics_process(_delta):
 	if is_forwarding():
-		current_acceleration = acceleration
+		var players_forwarding = get_players_forwarding()
+		var most_forw_player = get_most_forward_player(players_forwarding)
+		current_acceleration = calculate_camera_acceleration(most_forw_player)
 	else:
 		current_acceleration = 1
 	position += (speed / 100) * cam_direction * current_acceleration
@@ -99,6 +101,62 @@ func is_forwarding() -> bool:
 	return false
 
 
+# Returns an array of players in the forward area
+func get_players_forwarding() -> Array:
+	var forward_bodies_array = fast_forward_zone_node.get_overlapping_bodies()
+	var players_forwarding : Array = []
+	for body in forward_bodies_array:
+		if body.is_in_group("Players"):
+			players_forwarding.append(body)
+	
+	return players_forwarding
+
+
+# Returns the most forward player
+func get_most_forward_player(players_array):
+	if len(players_array) > 1:
+		var dist_player_array : PoolIntArray = []
+		for player in players_array:
+			var dist_to_border = calculate_distance_to_border(player)
+			dist_player_array.append(dist_to_border)
+		var most_forw_index = get_max_array_value_index(dist_player_array)
+		
+		return players_array[most_forw_index]
+	
+	else:
+		return players_array[0]
+
+
+# Returns the index of the maximum value of all the value in the given array of integers
+func get_max_array_value_index(arr : PoolIntArray):
+	var max_val = arr[0]
+	var i : int = 0
+	
+	for i in range(1, arr.size()):
+		max_val = max(max_val, arr[i])
+	
+	return i
+
+
+# Calculate the acceleration of the camera
+func calculate_camera_acceleration(most_forw_player : KinematicBody2D) -> float:
+	var dist_to_border = calculate_distance_to_border(most_forw_player)
+	return max_acceleration * (1 / dist_to_border)
+
+
+# Returns the distance to the border of the camera
+func calculate_distance_to_border(player : KinematicBody2D) -> float:
+	var ply_global_pos = player.get_global_position()
+	
+	var dist_to_border : float = 0.0
+	if cam_direction.x != 0:
+		dist_to_border = abs((global_position.x + ((screen_width / 2) * cam_direction.x)) - ply_global_pos.x)
+	elif cam_direction.y != 0:
+		dist_to_border = abs((global_position.y + ((screen_height / 2) * cam_direction.y)) - ply_global_pos.y)
+	
+	return dist_to_border
+
+
 # Compute the size and the direction of safe/forward area based on the direction of the camera
 func adapt_area(area : Area2D, original_ext : Vector2):
 	var collision_shape = area.get_node("CollisionShape2D")
@@ -110,14 +168,12 @@ func adapt_area(area : Area2D, original_ext : Vector2):
 		shape.extents = original_ext
 	if cam_direction.y != 0:
 		if area == fast_forward_zone_node:
-			shape.extents.x = (screen_width / 2)
+			shape.extents.x = screen_width / 2
 			shape.extents.y = original_ext.x
 		else:
-			shape.extents.x = original_ext.x
-			shape.extents.y = original_ext.y
-	
-	var shape_extents = shape.get_extents()
+			shape.extents.x = screen_width / 2
+			shape.extents.y = ((screen_height/2) * 2/3)
 	
 	# Compute the position of the given area
-	collision_shape.position.x = ((screen_width / 2) - shape_extents.x) * sign(cam_direction.x)
-	collision_shape.position.y = ((screen_height / 2) - shape_extents.y) * sign(cam_direction.y)
+	collision_shape.position.x = ((screen_width / 2) - shape.extents.x) * sign(cam_direction.x)
+	collision_shape.position.y = ((screen_height / 2) - shape.extents.y) * sign(cam_direction.y)

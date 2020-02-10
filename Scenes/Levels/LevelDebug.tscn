@@ -6,15 +6,17 @@
 [ext_resource path="res://Scenes/StartingPoints/StartingPointP2.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Characters/RobotBase/Tutorial/RobotMovementTutorial.png" type="Texture" id=5]
 
-[node name="LevelBase" instance=ExtResource( 1 )]
+[node name="LevelDebug" instance=ExtResource( 1 )]
 
 [node name="CameraChekpoint" parent="CameraSystem" index="1" instance=ExtResource( 2 )]
-position = Vector2( 1200, 268.36 )
-cp_dir = Vector2( 0, -1 )
+position = Vector2( 909.453, 268.36 )
+gravity_vec = Vector2( 0, 0 )
+cp_dir = Vector2( -1, 0 )
 
 [node name="CameraChekpoint2" parent="CameraSystem" index="2" instance=ExtResource( 2 )]
-position = Vector2( 1200, 1000 )
-cp_dir = Vector2( -1, 0 )
+position = Vector2( 7.48462, 271.64 )
+gravity_vec = Vector2( 0, 0 )
+cp_dir = Vector2( 1, 0 )
 
 [node name="PlayerTutorials" type="ParallaxLayer" parent="Map/Parallax" index="1"]
 motion_scale = Vector2( 0.7, 0.7 )

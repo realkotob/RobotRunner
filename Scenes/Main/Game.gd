@@ -9,7 +9,6 @@ var current_level_node : Node
 
 var game_over_scene = preload("res://Scenes/GUI/Menus/GameOverScene/GameOver.tscn")
 
-
 # Generate the level, and the players
 func _ready():
 	generate_current_level()
@@ -17,7 +16,7 @@ func _ready():
 
 # Generate the current level, and instanciate it as child of this node the generate the players inside of it
 func generate_current_level():
-	# Current_level_node = debug_level.instance() 
+	#current_level_node = debug_level.instance() 
 	current_level_node = level1.instance()
 	add_child(current_level_node)
 	instanciate_players()

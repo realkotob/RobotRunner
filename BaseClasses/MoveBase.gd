@@ -40,7 +40,6 @@ func exit_state(_host):
 func _input(event):
 	if state_node.get_current_state() == self:
 		if event.is_action_pressed(inputs_node.input_map["Jump"]):
-			SFX_node.play_SFX("JumpDust", true)
 			state_node.set_state("Jump")
 		
 		elif event.is_action_pressed(inputs_node.input_map["Teleport"]):

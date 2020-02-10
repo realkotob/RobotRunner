@@ -11,8 +11,9 @@ func set_fx_direction(direction : int):
 			node.position.x = -abs(node.position.x) * direction
 			node.process_material.direction.x = -abs(node.process_material.direction.x) * direction
 
+
 # Start/Stop the emition of particules
-func set_play(value : bool):
+func set_play(value : bool, _global_pos := Vector2.ZERO):
 	for node in particules_nodes_array:
 		node.set_emitting(value)
 

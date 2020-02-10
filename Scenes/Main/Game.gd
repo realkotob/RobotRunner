@@ -33,14 +33,17 @@ func instanciate_players():
 	if player1_start_node != null:
 		var player1_start_pos = player1_start_node.get_global_position()
 		var player1_node = player1.instance()
-		current_level_node.add_child(player1_node)
 		player1_node.global_position = player1_start_pos
+		player1_node.level_node = current_level_node
+		current_level_node.add_child(player1_node)
+		
 	
 	if player2_start_node != null:
 		var player2_start_pos = player2_start_node.get_global_position()
 		var player2_node = player2.instance()
-		current_level_node.add_child(player2_node)
 		player2_node.global_position = player2_start_pos
+		player2_node.level_node = current_level_node
+		current_level_node.add_child(player2_node)
 	
 	# Give the references to the players node to every interactive objects needing it
 	var interactive_objects_array = get_tree().get_nodes_in_group("InteractivesObjects")

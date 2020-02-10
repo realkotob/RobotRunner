@@ -16,7 +16,7 @@ var level_node : Node
 # Get every children of this node
 onready var children_array : Array = get_children()
 
-# Give every reference they need to children nodes
+# Give every reference they need to children nodes, and then call heir setup method if it possesses it
 func _ready():
 	add_to_group("Players")
 	

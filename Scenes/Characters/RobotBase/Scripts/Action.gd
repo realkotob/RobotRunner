@@ -32,14 +32,6 @@ func setup():
 # Aplly the offset of the animation every thick
 func update(_host, _delta):
 	offset_animation()
-
-
-# When the actor enters action state: set active the hit box, and play the right animation, applying it the defind offset
-func enter_state(_host):
-	# Play the animation
-	offset_animation()
-	animation_node.play(self.name)
-	audio_node.play()
 	
 	# Destroy a block if it is in the hitbox area, and if his type correspond to the current robot breakable type
 	bodies_in_hitbox = hit_box_node.get_overlapping_bodies()
@@ -48,6 +40,19 @@ func enter_state(_host):
 			body.destroy()
 			# Keep track if at least one block was broke
 			was_broke = true
+
+
+# When the actor enters action state: set active the hit box, and play the right animation, applying it the defind offset
+func enter_state(_host):
+	# Play the animation
+	offset_animation()
+	animation_node.play(self.name)
+	
+	# Play the audio
+	audio_node.play()
+	
+	# Set the hitbox active
+	hit_box_shape.set_disabled(false)
 
 
 # When the actor exits action state: set unactive the hit box and triggers the interaction if necesary
@@ -65,6 +70,9 @@ func exit_state(_host):
 	
 	# Reset the was broke bool, for the next use of the action state
 	was_broke = false
+	
+	# Set the hitbox inactive
+	hit_box_shape.set_disabled(true)
 
 
 # When the animation is off, set the actor's state to Idle

@@ -38,7 +38,6 @@ func interact(global_pos : Vector2):
 	if water_area != null:
 		if is_position_in_area(global_pos, water_area):
 			M_IceBlocks_node = iceblock_scene.instance()
-			M_IceBlocks_node.set_rigid()
 			
 			add_child(M_IceBlocks_node)
 			M_IceBlocks_node.set_global_position(global_pos)
@@ -51,6 +50,7 @@ func is_position_in_area(pos: Vector2, collision_shape : CollisionShape2D) -> bo
 	var shape_ext = collision_shape.get_shape().get_extents()
 	
 	return pos.y > shape_pos.y - shape_ext.y && pos.y < shape_pos.y + shape_ext.y && pos.x > shape_pos.x - shape_ext.x && pos.x < shape_pos.x + shape_ext.x
+
 
 # Setup the floating on the given body
 func body_floating(body : PhysicsBody2D, float_or_not : bool):

@@ -16,8 +16,8 @@ func _ready():
 
 # Generate the current level, and instanciate it as child of this node the generate the players inside of it
 func generate_current_level():
-	current_level_node = debug_level.instance() 
-	#current_level_node = level1.instance()
+	#current_level_node = debug_level.instance() 
+	current_level_node = level1.instance()
 	add_child(current_level_node)
 	instanciate_players()
 

@@ -1,11 +1,13 @@
 extends InteractAreaBase
 
+
 class_name Water
 const CLASS_NAME = "Water"
 
 onready var iceblock_scene = load("res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/M/MIceBlock.tscn")
 onready var floating_line_node = get_node("FloatingLine")
 onready var water_area = get_node_or_null("CollisionShape2D")
+onready var particules_node = get_node("Particles2D")
 
 var M_IceBlocks_node : Node2D
 
@@ -25,6 +27,10 @@ func get_class():
 func on_body_entered(body):
 	if body.is_class("IceBlock"):
 		body_floating(body, true)
+		
+	if body is RigidBody2D or body is KinematicBody2D:
+		particules_node.global_position.x = body.global_position.x
+		particules_node.set_emitting(true)
 
 
 # Whenever a body exits the area of this interact object, set his interact reference to null

@@ -28,7 +28,7 @@
 shader = SubResource( 1 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 108.075, 29.0156 )
+extents = Vector2( 108.075, 24.3285 )
 
 [sub_resource type="OpenSimplexNoise" id=4]
 period = 13.6
@@ -46,13 +46,13 @@ extents = Vector2( 79.0315, 29.0156 )
 [node name="Level1" instance=ExtResource( 1 )]
 
 [node name="StartingPointP1" parent="." index="0" instance=ExtResource( 2 )]
-position = Vector2( 66.6743, 217 )
+position = Vector2( 1703, 48 )
 
 [node name="StartingPointP2" parent="." index="1" instance=ExtResource( 3 )]
-position = Vector2( 66.6743, 312 )
+position = Vector2( 1610, 380.396 )
 
 [node name="Camera" parent="CameraSystem" index="0"]
-position = Vector2( 480, 270 )
+position = Vector2( 1946.94, 264 )
 
 [node name="GUI" parent="CameraSystem/Camera" index="5"]
 grow_horizontal = 2
@@ -268,8 +268,7 @@ material = SubResource( 2 )
 position = Vector2( 1836, 108 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractivesObjects/WaterTiles/WaterTile" index="1"]
-visible = false
-position = Vector2( 0, 6.4998 )
+position = Vector2( 0, 11.736 )
 shape = SubResource( 3 )
 __meta__ = {
 "_edit_group_": true
@@ -280,6 +279,9 @@ material = ExtResource( 22 )
 position = Vector2( 0.35849, 5.36782 )
 scale = Vector2( 2.21169, 0.612644 )
 texture = SubResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="WaterTile2" parent="InteractivesObjects/WaterTiles" index="1" instance=ExtResource( 9 )]
 material = SubResource( 2 )

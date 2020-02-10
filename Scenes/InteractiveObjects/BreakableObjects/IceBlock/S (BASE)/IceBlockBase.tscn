@@ -17,6 +17,8 @@ animations = [ {
 } ]
 
 [node name="IceBlockBase" instance=ExtResource( 1 )]
+gravity_scale = 1.0
+angular_damp = 1.0
 script = ExtResource( 2 )
 
 [node name="Sprite" parent="." index="0"]

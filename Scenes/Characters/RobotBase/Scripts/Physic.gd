@@ -1,6 +1,6 @@
 extends Node
 
-export (int, 0, 200) var push = 3
+export (int, 0, 200) var push = 2
 
 var attributes_node : Node
 var character_node : KinematicBody2D

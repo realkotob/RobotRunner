@@ -5,6 +5,8 @@ class_name BlockBase
 onready var audio_node = get_node("AudioStreamPlayer")
 onready var timer_node = get_node("Timer")
 
+var broke : bool = false
+
 # Connect signals
 func _ready():
 	animation_node.connect("frame_changed", self, "_on_frame_changed")
@@ -14,8 +16,10 @@ func _ready():
 
 # When the block is destroyed, lauch the destroy animation
 func destroy():
-	animation_node.play()
-	audio_node.play()
+	if broke == false:
+		animation_node.play()
+		audio_node.play()
+		broke = true
 
 
 # When the destroy annimation is finished start the countdown

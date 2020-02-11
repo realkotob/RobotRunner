@@ -130,7 +130,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LayerChange"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="LayerChange"]
 stream = ExtResource( 6 )
 volume_db = -12.0
 pitch_scale = 2.5
@@ -160,7 +160,7 @@ one_shot = true
 [node name="Action" type="Node" parent="States"]
 script = ExtResource( 12 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="States/Action"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="States/Action"]
 stream = ExtResource( 13 )
 
 [node name="Label" type="Label" parent="States"]
@@ -180,7 +180,6 @@ __meta__ = {
 [node name="Animation" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "Move"
-frame = 2
 playing = true
 __meta__ = {
 "_edit_lock_": true

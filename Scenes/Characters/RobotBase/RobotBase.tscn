@@ -63,6 +63,11 @@ animations = [ {
 "name": "Idle",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 23 ) ],
+"loop": true,
+"name": "Fall",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 22 ) ],
 "loop": true,
 "name": "Jump",
@@ -246,10 +251,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeadHitBox"]
-position = Vector2( 0, -20 )
+position = Vector2( 0, -17 )
 scale = Vector2( 1.65, 0.5 )
 shape = SubResource( 6 )
 one_way_collision = true
-__meta__ = {
-"_edit_lock_": true
-}

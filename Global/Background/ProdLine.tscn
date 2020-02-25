@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Global/Background/ChaineRobots.png" type="Texture" id=1]
+
+[node name="ProdLine" type="ParallaxLayer"]
+motion_scale = Vector2( 1.1, 1 )
+
+[node name="Line" type="Sprite" parent="."]
+modulate = Color( 1, 0.83, 0.83, 1 )
+position = Vector2( 535.948, -250 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 6400, 79 )
+__meta__ = {
+"_edit_lock_": true
+}

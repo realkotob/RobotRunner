@@ -6,7 +6,7 @@ var outside_screen_popup_scene = preload("res://Scenes/GUI/OutsideScreenPopup/Ou
 var outside_screen_popup_node : Node
 
 onready var camera_node = get_node("CameraSystem/Camera")
-onready var GUI_node = get_node("CameraSystem/Camera/GUI")
+onready var popups_node = get_node("GUI/Popups")
 
 
 func _ready():
@@ -16,7 +16,7 @@ func _ready():
 # Create the popup when a player exits the screen
 func on_player_outside_screen(player : KinematicBody2D):
 	outside_screen_popup_node = outside_screen_popup_scene.instance()
-	GUI_node.call_deferred("add_child", outside_screen_popup_node)
+	popups_node.call_deferred("add_child", outside_screen_popup_node)
 	
 	outside_screen_popup_node.player_node = player
 	outside_screen_popup_node.camera_node = camera_node

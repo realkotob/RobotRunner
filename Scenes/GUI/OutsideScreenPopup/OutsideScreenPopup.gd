@@ -35,8 +35,8 @@ func _physics_process(_delta):
 func adjust_position():
 		var player_rel_pos = player_node.global_position - camera_node.global_position
 		
-		position.x = clamp(player_rel_pos.x, margin - (screen_width / 2), (screen_width / 2) - margin)
-		position.y = clamp(player_rel_pos.y, margin - (screen_height / 2), (screen_height / 2) - margin)
+		position.x = clamp(player_rel_pos.x + screen_width / 2, margin, screen_width - margin)
+		position.y = clamp(player_rel_pos.y + screen_height / 2, margin, screen_height - margin)
 		
 		# Set to rotation so the tip always point towards the player 
 		sprite_node.set_rotation(player_rel_pos.angle() + deg2rad(180))

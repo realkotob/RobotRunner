@@ -17,7 +17,7 @@ const BLUE := Color(0, 0, 1, 1)
 const CYAN := Color(0, 0.9, 1, 1)
 # Check the options when the scenes is ready, to get sure at least one of them is clickable
 # Change the color of the option accordingly to their state
-func _ready():	
+func _ready():
 	check_clickable_options()
 	highlight_menuopt()
 
@@ -80,7 +80,7 @@ func options_down():
 # Change the color of menu option according if it is selected by a player or not
 func highlight_menuopt():
 	options_array[prev_opt_index].set_self_modulate(WHITE) # WHITE COLOR = Not selected
-	options_array[opt_index].set_self_modulate(RED) # RED COLOR = SELECTED$
+	options_array[opt_index].set_self_modulate(RED) # RED COLOR = SELECTED
 	
 	if options_array[prev_opt_index].has_method("on_option_unselected"):
 		options_array[prev_opt_index].on_option_unselected()

@@ -1,4 +1,4 @@
-extends Camera2D
+	extends Camera2D
 
 export var speed : float = 50
 export var max_acceleration : float = 500

@@ -60,24 +60,18 @@ alignment = 0
 
 [node name="V_OptContainer" parent="HBoxContainer" index="0"]
 margin_left = 0.0
-margin_right = 224.0
+margin_right = 132.0
 margin_bottom = 400.0
 
-[node name="Graphics" type="Label" parent="HBoxContainer/V_OptContainer" index="0"]
-margin_top = 39.0
-margin_right = 224.0
-margin_bottom = 90.0
+[node name="Graphics" type="Button" parent="HBoxContainer/V_OptContainer" index="0"]
+margin_top = 36.0
+margin_right = 132.0
+margin_bottom = 93.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 custom_fonts/font = SubResource( 1 )
 text = "Graphics"
-align = 1
-uppercase = true
 script = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-_clickable = true
 
 [node name="Label" type="Label" parent="HBoxContainer/V_OptContainer/Graphics" index="0"]
 visible = false
@@ -139,17 +133,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sounds" type="Label" parent="HBoxContainer/V_OptContainer" index="1"]
-margin_top = 173.0
-margin_right = 224.0
-margin_bottom = 224.0
+[node name="Sounds" type="Button" parent="HBoxContainer/V_OptContainer" index="1"]
+margin_top = 170.0
+margin_right = 132.0
+margin_bottom = 227.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 custom_fonts/font = SubResource( 2 )
 text = "Sounds"
-uppercase = true
 script = ExtResource( 5 )
-_clickable = true
 
 [node name="Label" type="Label" parent="HBoxContainer/V_OptContainer/Sounds" index="0"]
 visible = false
@@ -211,17 +203,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Input" type="Label" parent="HBoxContainer/V_OptContainer" index="2"]
-margin_top = 308.0
-margin_right = 224.0
-margin_bottom = 359.0
+[node name="Input" type="Button" parent="HBoxContainer/V_OptContainer" index="2"]
+margin_top = 305.0
+margin_right = 132.0
+margin_bottom = 362.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 custom_fonts/font = SubResource( 3 )
 text = "Inputs"
-uppercase = true
 script = ExtResource( 3 )
-_clickable = true
 
 [node name="Label" type="Label" parent="HBoxContainer/V_OptContainer/Input" index="0"]
 visible = false

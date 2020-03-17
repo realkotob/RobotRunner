@@ -14,8 +14,6 @@ var screen_height : float = ProjectSettings.get("display/window/size/height")
 signal gameover
 
 export var margin : int = 45
-#onready var text_margin : Vector2 = label_node.rect_position
-
 
 func _ready():
 	var _err
@@ -42,8 +40,10 @@ func adjust_position():
 		sprite_node.set_rotation(player_rel_pos.angle() + deg2rad(180))
 
 
+# Emit the signal triggering the game over
 func on_timer_timeout():
 	emit_signal("gameover")
+
 
 # Destroy this instance if the player get back inside the screen
 func on_player_inside_screen(player):

@@ -58,10 +58,10 @@ grow_vertical = 2
 position = Vector2( 480, 270 )
 
 [node name="Sprite" parent="CameraSystem/Camera/Foreground/TurnCloudL" index="0"]
-frame = 3
+frame = 0
 
 [node name="Sprite" parent="CameraSystem/Camera/Foreground/TurnCloudR" index="0"]
-frame = 3
+frame = 0
 
 [node name="CameraChekpoint" parent="CameraSystem" index="1" instance=ExtResource( 4 )]
 position = Vector2( 2167, 270 )

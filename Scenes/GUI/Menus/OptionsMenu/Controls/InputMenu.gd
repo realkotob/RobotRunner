@@ -1,16 +1,12 @@
 extends Control
 
 onready var _action_list = get_node("CanvasLayer/Column/ScrollContainer/ActionList")
-var screen_width : float = ProjectSettings.get("display/window/size/width")
-var screen_height : float = ProjectSettings.get("display/window/size/height")
 
 
 func _ready():
 	var _err = $InputMapper.connect('profile_changed', self, 'rebuild')
 	$CanvasLayer/Column/ProfilesMenu.initialize($InputMapper)
 	$InputMapper.change_profile($CanvasLayer/Column/ProfilesMenu.selected)
-	margin_left = -screen_width
-	margin_top = -screen_height
 
 
 func rebuild(input_profile, is_customizable=false):

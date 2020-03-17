@@ -1,4 +1,5 @@
 extends MenuOptionsBase
 
-func options_action():
+# Quit the game when pressed
+func on_pressed():
 	get_tree().quit()

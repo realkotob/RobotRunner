@@ -2,7 +2,7 @@ extends MenuOptionsBase
 
 onready var children_array = get_children()
 
-func options_action():
+func on_pressed():
 	pass
 
 func on_option_selected():

@@ -2,14 +2,6 @@ extends MenuBase
 
 var game_scene = "res://Scenes/Main/Game.tscn"
 
-var screen_width : float = ProjectSettings.get("display/window/size/width")
-var screen_height : float = ProjectSettings.get("display/window/size/height")
-
-
-# Set the GUI layer to be at the origin of the screen
-func _ready():
-	margin_left = -screen_width
-	margin_top = -screen_height
 
 func _unhandled_input(event):
 	if event is InputEvent:
@@ -17,14 +9,15 @@ func _unhandled_input(event):
 			get_tree().paused = false
 			queue_free()
 
-#FUNCTION OVERWRITE
+
+# FUNCTION OVERWRITE
 # Change the color of menu option according if it is selected by a player or not
 func highlight_menuopt():
-	options_array[prev_opt_index].set_self_modulate(WHITE) # WHITE COLOR = Not selected
-	options_array[opt_index].set_self_modulate(CYAN) # RED COLOR = SELECTED$
+	buttons_array[prev_button_index].set_self_modulate(NORMAL)
+	buttons_array[button_index].set_self_modulate(SELECTED)
 	
-	if options_array[prev_opt_index].has_method("on_option_unselected"):
-		options_array[prev_opt_index].on_option_unselected()
+	if buttons_array[prev_button_index].has_method("on_option_unselected"):
+		buttons_array[prev_button_index].on_option_unselected()
 		
-	if options_array[opt_index].has_method("on_option_selected"):
-		options_array[opt_index].on_option_selected()
+	if buttons_array[button_index].has_method("on_option_selected"):
+		buttons_array[button_index].on_option_selected()

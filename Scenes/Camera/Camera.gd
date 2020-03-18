@@ -1,7 +1,8 @@
 	extends Camera2D
 
 export var speed : float = 50
-export var max_acceleration : float = 500
+export var average_acceleration : float = 500
+export var max_acceleration : float = 300
 var current_acceleration : float = 1
 
 onready var checkpoints_nodes_array = get_tree().get_nodes_in_group("CameraCheckpoint")
@@ -50,7 +51,7 @@ func _physics_process(_delta):
 		current_acceleration = calculate_camera_acceleration(most_forw_player)
 	else:
 		current_acceleration = 1
-	position += clamp((speed / 100) * current_acceleration, -max_acceleration, max_acceleration) * cam_direction
+	position += (speed / 100) * current_acceleration * cam_direction
 
 
 # Start to move the camera if a player enter the start area
@@ -142,7 +143,7 @@ func get_max_array_value_index(arr : PoolIntArray):
 # Calculate the acceleration of the camera
 func calculate_camera_acceleration(most_forw_player : KinematicBody2D) -> float:
 	var dist_to_border = calculate_distance_to_border(most_forw_player)
-	return max_acceleration * (1 / dist_to_border)
+	return clamp(average_acceleration * (1 / dist_to_border), 0, max_acceleration)
 
 
 # Returns the distance to the border of the camera

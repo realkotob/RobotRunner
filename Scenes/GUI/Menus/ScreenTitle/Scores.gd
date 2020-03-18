@@ -1,5 +1,5 @@
 extends MenuOptionsBase
 
-func options_action():
+func on_pressed():
 	#TO DO: go to score screen
 	pass

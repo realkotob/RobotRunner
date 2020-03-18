@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer
 
 var pause_menu = preload("res://Scenes/GUI/Menus/PauseMenu/PauseMenu.tscn")
 var pause_menu_node : Control = null
@@ -6,9 +6,6 @@ var pause_menu_node : Control = null
 var screen_width : float = ProjectSettings.get("display/window/size/width")
 var screen_height : float = ProjectSettings.get("display/window/size/height")
 var screen_size := Vector2(screen_width, screen_height)
-
-func _ready():
-	rect_size = screen_size
 
 # Create an instance of the menu if it doesn't exist yet
 func _input(_event):

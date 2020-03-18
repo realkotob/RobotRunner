@@ -83,6 +83,20 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="GUI" type="CanvasLayer" parent="."]
+layer = 128
+script = ExtResource( 3 )
+
+[node name="Popups" type="Control" parent="GUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
 [node name="CameraSystem" type="Node2D" parent="."]
 z_index = 999
 __meta__ = {
@@ -90,11 +104,6 @@ __meta__ = {
 }
 
 [node name="Camera" parent="CameraSystem" instance=ExtResource( 2 )]
-
-[node name="GUI" type="Control" parent="CameraSystem/Camera"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-script = ExtResource( 3 )
 
 [node name="Foreground" type="Node2D" parent="CameraSystem/Camera"]
 
@@ -152,7 +161,7 @@ __meta__ = {
 [node name="Sprite" type="AnimatedSprite" parent="CameraSystem/Camera/Foreground/TurnCloudL"]
 modulate = Color( 1, 1, 1, 0.313726 )
 frames = SubResource( 4 )
-frame = 6
+frame = 1
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -165,7 +174,7 @@ scale = Vector2( -1, 1 )
 [node name="Sprite" type="AnimatedSprite" parent="CameraSystem/Camera/Foreground/TurnCloudR"]
 modulate = Color( 1, 1, 1, 0.313726 )
 frames = SubResource( 4 )
-frame = 6
+frame = 1
 playing = true
 __meta__ = {
 "_edit_lock_": true

@@ -51,10 +51,10 @@ position = Vector2( 64.7148, 217 )
 position = Vector2( 64.7148, 311.5 )
 
 [node name="Sprite" parent="Foreground/TurnCloudL" index="0"]
-frame = 7
+frame = 1
 
 [node name="Sprite" parent="Foreground/TurnCloudR" index="0"]
-frame = 7
+frame = 1
 
 [node name="GUI" parent="." index="3"]
 layer = 2

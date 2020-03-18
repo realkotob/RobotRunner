@@ -37,6 +37,7 @@ func _ready():
 	_err = start_area_node.connect("body_entered", self, "on_start_area_body_entered")
 	_err = play_zone_node.connect("body_exited", self, "on_play_area_zone_exited")
 	_err = play_zone_node.connect("body_entered", self, "on_play_area_zone_entered")
+	
 	for checkpoint in checkpoints_nodes_array:
 		_err = checkpoint.connect("camera_reached_checkpoint", self, "_on_checkpoint_reached")
 
@@ -49,7 +50,7 @@ func _physics_process(_delta):
 		current_acceleration = calculate_camera_acceleration(most_forw_player)
 	else:
 		current_acceleration = 1
-	position += (speed / 100) * cam_direction * current_acceleration
+	position += clamp((speed / 100) * current_acceleration, -max_acceleration, max_acceleration) * cam_direction
 
 
 # Start to move the camera if a player enter the start area

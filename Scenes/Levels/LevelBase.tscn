@@ -128,7 +128,7 @@ position = Vector2( 22.5517, 500.643 )
 [node name="Sprite" type="AnimatedSprite" parent="Foreground/TurnCloudL"]
 modulate = Color( 1, 1, 1, 0.313726 )
 frames = SubResource( 4 )
-frame = 6
+frame = 3
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -142,7 +142,7 @@ scale = Vector2( 1, -1 )
 [node name="Sprite" type="AnimatedSprite" parent="Foreground/TurnCloudR"]
 modulate = Color( 1, 1, 1, 0.313726 )
 frames = SubResource( 4 )
-frame = 6
+frame = 3
 playing = true
 __meta__ = {
 "_edit_lock_": true

@@ -83,6 +83,71 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Foreground" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Cloud1" type="Position2D" parent="Foreground"]
+position = Vector2( -7.4483, -1.35675 )
+
+[node name="Sprite" type="Sprite" parent="Foreground/Cloud1"]
+modulate = Color( 1, 1, 1, 0.431373 )
+position = Vector2( 508.971, 509.514 )
+texture = ExtResource( 8 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Foreground/Cloud1/Sprite"]
+autoplay = "Mouvement"
+anims/Mouvement = SubResource( 1 )
+
+[node name="Cloud2" type="Position2D" parent="Foreground"]
+position = Vector2( -7.4483, -1.35675 )
+
+[node name="Sprite" type="Sprite" parent="Foreground/Cloud2"]
+modulate = Color( 1, 1, 1, 0.431373 )
+position = Vector2( 787.69, 519.84 )
+texture = ExtResource( 9 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Foreground/Cloud2/Sprite"]
+autoplay = "Mouvement"
+anims/Mouvement = SubResource( 2 )
+
+[node name="Cloud3" type="Position2D" parent="Foreground"]
+position = Vector2( -7.4483, -1.35675 )
+
+[node name="Sprite" type="Sprite" parent="Foreground/Cloud3"]
+modulate = Color( 1, 1, 1, 0.431373 )
+position = Vector2( 189.437, 504.571 )
+texture = ExtResource( 10 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Foreground/Cloud3/Sprite"]
+autoplay = "Mouvement"
+anims/Mouvement = SubResource( 3 )
+
+[node name="TurnCloudL" type="Position2D" parent="Foreground"]
+position = Vector2( 22.5517, 500.643 )
+
+[node name="Sprite" type="AnimatedSprite" parent="Foreground/TurnCloudL"]
+modulate = Color( 1, 1, 1, 0.313726 )
+frames = SubResource( 4 )
+frame = 6
+playing = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="TurnCloudR" type="Position2D" parent="Foreground"]
+position = Vector2( 923.552, 500.643 )
+rotation = 3.14159
+scale = Vector2( 1, -1 )
+
+[node name="Sprite" type="AnimatedSprite" parent="Foreground/TurnCloudR"]
+modulate = Color( 1, 1, 1, 0.313726 )
+frames = SubResource( 4 )
+frame = 6
+playing = true
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="GUI" type="CanvasLayer" parent="."]
 layer = 128
 script = ExtResource( 3 )
@@ -104,81 +169,6 @@ __meta__ = {
 }
 
 [node name="Camera" parent="CameraSystem" instance=ExtResource( 2 )]
-
-[node name="Foreground" type="Node2D" parent="CameraSystem/Camera"]
-
-[node name="Cloud1" type="Position2D" parent="CameraSystem/Camera/Foreground"]
-position = Vector2( -480, -272 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Sprite" type="Sprite" parent="CameraSystem/Camera/Foreground/Cloud1"]
-modulate = Color( 1, 1, 1, 0.431373 )
-position = Vector2( 508.971, 509.514 )
-texture = ExtResource( 8 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CameraSystem/Camera/Foreground/Cloud1/Sprite"]
-autoplay = "Mouvement"
-anims/Mouvement = SubResource( 1 )
-
-[node name="Cloud2" type="Position2D" parent="CameraSystem/Camera/Foreground"]
-position = Vector2( -480, -272 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Sprite" type="Sprite" parent="CameraSystem/Camera/Foreground/Cloud2"]
-modulate = Color( 1, 1, 1, 0.431373 )
-position = Vector2( 787.69, 519.84 )
-texture = ExtResource( 9 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CameraSystem/Camera/Foreground/Cloud2/Sprite"]
-autoplay = "Mouvement"
-anims/Mouvement = SubResource( 2 )
-
-[node name="Cloud3" type="Position2D" parent="CameraSystem/Camera/Foreground"]
-position = Vector2( -480, -272 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Sprite" type="Sprite" parent="CameraSystem/Camera/Foreground/Cloud3"]
-modulate = Color( 1, 1, 1, 0.431373 )
-position = Vector2( 189.437, 504.571 )
-texture = ExtResource( 10 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CameraSystem/Camera/Foreground/Cloud3/Sprite"]
-autoplay = "Mouvement"
-anims/Mouvement = SubResource( 3 )
-
-[node name="TurnCloudL" type="Position2D" parent="CameraSystem/Camera/Foreground"]
-position = Vector2( -450, 230 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Sprite" type="AnimatedSprite" parent="CameraSystem/Camera/Foreground/TurnCloudL"]
-modulate = Color( 1, 1, 1, 0.313726 )
-frames = SubResource( 4 )
-frame = 1
-playing = true
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="TurnCloudR" type="Position2D" parent="CameraSystem/Camera/Foreground"]
-position = Vector2( 451, 230 )
-scale = Vector2( -1, 1 )
-
-[node name="Sprite" type="AnimatedSprite" parent="CameraSystem/Camera/Foreground/TurnCloudR"]
-modulate = Color( 1, 1, 1, 0.313726 )
-frames = SubResource( 4 )
-frame = 1
-playing = true
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Map" type="Node2D" parent="."]
 z_index = 2

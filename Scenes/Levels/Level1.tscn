@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Scenes/Levels/LevelBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/StartingPoints/StartingPointP1.tscn" type="PackedScene" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://Global/Tileset/LevelBase.tres" type="TileSet" id=21]
 [ext_resource path="res://Scenes/InteractiveObjects/Water/Shader/WaterShader.tres" type="Material" id=22]
 [ext_resource path="res://Global/Lights/Light500.png" type="Texture" id=23]
+[ext_resource path="res://Scenes/Camera/CameraRemake.gd" type="Script" id=24]
 
 [sub_resource type="Shader" id=1]
 
@@ -51,10 +52,10 @@ position = Vector2( 64.7148, 217 )
 position = Vector2( 64.7148, 311.5 )
 
 [node name="Sprite" parent="Foreground/TurnCloudL" index="0"]
-frame = 1
+frame = 4
 
 [node name="Sprite" parent="Foreground/TurnCloudR" index="0"]
-frame = 1
+frame = 4
 
 [node name="GUI" parent="." index="3"]
 layer = 2
@@ -65,37 +66,31 @@ grow_vertical = 2
 
 [node name="Camera" parent="CameraSystem" index="0"]
 position = Vector2( 480, 270 )
+script = ExtResource( 24 )
 
 [node name="CameraChekpoint" parent="CameraSystem" index="1" instance=ExtResource( 4 )]
-position = Vector2( 2167, 270 )
+position = Vector2( 2279, 270 )
 cp_dir = Vector2( 0, 1 )
+is_enabled = true
 
 [node name="CameraChekpoint2" parent="CameraSystem" index="2" instance=ExtResource( 4 )]
-position = Vector2( 2167, 1229 )
+position = Vector2( 2279, 1318 )
 cp_dir = Vector2( 1, 0 )
+is_enabled = true
 
 [node name="CameraChekpoint3" parent="CameraSystem" index="3" instance=ExtResource( 4 )]
-position = Vector2( 2700, 1229 )
-cp_dir = Vector2( 0, -1 )
+position = Vector2( 2663, 1318 )
+cp_dir = Vector2( 0, 1 )
+is_enabled = true
 
 [node name="CameraChekpoint4" parent="CameraSystem" index="4" instance=ExtResource( 4 )]
-position = Vector2( 2700, 189 )
-cp_dir = Vector2( 1, 0 )
+position = Vector2( 2663, 142 )
+cp_dir = Vector2( 0, 1 )
+is_enabled = true
 
 [node name="CameraChekpoint5" parent="CameraSystem" index="5" instance=ExtResource( 4 )]
-position = Vector2( 3020, 189 )
-cp_dir = Vector2( 0, 1 )
-
-[node name="CameraChekpoint6" parent="CameraSystem" index="6" instance=ExtResource( 4 )]
-position = Vector2( 3020, 1079 )
+position = Vector2( 2663, 982 )
 cp_dir = Vector2( 1, 0 )
-
-[node name="CameraChekpoint7" parent="CameraSystem" index="7" instance=ExtResource( 4 )]
-position = Vector2( 3310, 1079 )
-cp_dir = Vector2( 0, -1 )
-
-[node name="CameraChekpoint8" parent="CameraSystem" index="8" instance=ExtResource( 4 )]
-position = Vector2( 3310, 870 )
 
 [node name="Background" parent="Map" index="0"]
 scroll_ignore_camera_zoom = true
@@ -548,6 +543,7 @@ position = Vector2( 2500, 232 )
 position = Vector2( 2347, 288 )
 
 [node name="G13" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="12"]
+position = Vector2( 0, 8 )
 script = ExtResource( 11 )
 __meta__ = {
 "_edit_lock_": true
@@ -557,7 +553,7 @@ __meta__ = {
 position = Vector2( 3024, 88 )
 
 [node name="Door" parent="InteractivesObjects/Buttons&Doors/G13" index="1" instance=ExtResource( 13 )]
-position = Vector2( 3043, 1129 )
+position = Vector2( 3097.61, 1249.66 )
 
 [node name="G14" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="13"]
 script = ExtResource( 11 )
@@ -569,7 +565,7 @@ __meta__ = {
 position = Vector2( 2904, 976 )
 
 [node name="BlueDoor" parent="InteractivesObjects/Buttons&Doors/G14" index="1" instance=ExtResource( 15 )]
-position = Vector2( 2995, 1129 )
+position = Vector2( 3050.24, 1258.11 )
 
 [node name="G15" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="14"]
 script = ExtResource( 11 )
@@ -594,3 +590,4 @@ position = Vector2( 3430, 1150 )
 
 [node name="BlueFlag" parent="InteractivesObjects/Flags" index="1" instance=ExtResource( 20 )]
 position = Vector2( 3630, 1150 )
+[connection signal="cp_switch_state" from="CameraSystem/CameraChekpoint4" to="CameraSystem/CameraChekpoint5" method="_on_CameraChekpoint4_cp_switch_state"]

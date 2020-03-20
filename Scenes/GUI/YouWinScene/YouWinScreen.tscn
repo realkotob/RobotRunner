@@ -12,7 +12,7 @@ outline_size = 6
 outline_color = Color( 0, 0.505882, 1, 1 )
 font_data = ExtResource( 2 )
 
-[node name="MenuBase" index="0" instance=ExtResource( 1 )]
+[node name="MenuBase" instance=ExtResource( 1 )]
 
 [node name="ColorRect" type="ColorRect" parent="." index="0"]
 modulate = Color( 0, 0, 0, 1 )
@@ -33,6 +33,9 @@ margin_right = 192.0
 margin_bottom = 212.0
 custom_fonts/font = SubResource( 1 )
 text = "YOU WIN"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="HBoxContainer" parent="." index="2"]
 anchor_left = 0.5
@@ -47,29 +50,20 @@ margin_bottom = 185.013
 [node name="V_OptContainer" parent="HBoxContainer" index="0"]
 margin_left = 1.0
 margin_right = 173.0
+margin_bottom = 215.0
 
-[node name="New Game" type="Label" parent="HBoxContainer/V_OptContainer" index="0"]
-margin_top = 55.0
+[node name="New Game" type="Button" parent="HBoxContainer/V_OptContainer" index="0"]
+margin_top = 48.0
 margin_right = 172.0
-margin_bottom = 106.0
+margin_bottom = 105.0
 custom_fonts/font = ExtResource( 3 )
 text = "New Game"
-align = 1
 script = ExtResource( 4 )
-__meta__ = {
-"_edit_lock_": true
-}
-_clickable = true
 
-[node name="Quit" type="Label" parent="HBoxContainer/V_OptContainer" index="1"]
-margin_top = 110.0
+[node name="Quit" type="Button" parent="HBoxContainer/V_OptContainer" index="1"]
+margin_top = 109.0
 margin_right = 172.0
-margin_bottom = 161.0
+margin_bottom = 166.0
 custom_fonts/font = ExtResource( 3 )
 text = "Quit"
-align = 1
 script = ExtResource( 5 )
-__meta__ = {
-"_edit_lock_": true
-}
-_clickable = true

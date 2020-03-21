@@ -32,7 +32,7 @@
 [ext_resource path="res://Scenes/InteractiveObjects/Collactables/Xion Crate/Sprites/CrateSO/LargeCrateAnimSO1.png" type="Texture" id=34]
 [ext_resource path="res://Scenes/InteractiveObjects/Collactables/Xion Crate/XionCrate.gd" type="Script" id=36]
 
-[sub_resource type="SpriteFrames" id=7]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 16 ), ExtResource( 20 ), ExtResource( 17 ), ExtResource( 15 ), ExtResource( 19 ), ExtResource( 21 ) ],
 "loop": false,
@@ -40,7 +40,7 @@ animations = [ {
 "speed": 13.0
 } ]
 
-[sub_resource type="SpriteFrames" id=8]
+[sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 11 ), ExtResource( 9 ), ExtResource( 14 ), ExtResource( 12 ), ExtResource( 2 ), ExtResource( 1 ) ],
 "loop": false,
@@ -48,7 +48,7 @@ animations = [ {
 "speed": 13.0
 } ]
 
-[sub_resource type="SpriteFrames" id=9]
+[sub_resource type="SpriteFrames" id=3]
 animations = [ {
 "frames": [ ExtResource( 10 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 13 ), ExtResource( 7 ), ExtResource( 4 ) ],
 "loop": false,
@@ -56,7 +56,7 @@ animations = [ {
 "speed": 13.0
 } ]
 
-[sub_resource type="SpriteFrames" id=10]
+[sub_resource type="SpriteFrames" id=4]
 animations = [ {
 "frames": [ ExtResource( 22 ), ExtResource( 26 ), ExtResource( 31 ), ExtResource( 23 ), ExtResource( 32 ), ExtResource( 33 ) ],
 "loop": false,
@@ -64,7 +64,7 @@ animations = [ {
 "speed": 13.0
 } ]
 
-[sub_resource type="SpriteFrames" id=11]
+[sub_resource type="SpriteFrames" id=5]
 animations = [ {
 "frames": [ ExtResource( 34 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 27 ), ExtResource( 29 ), ExtResource( 30 ) ],
 "loop": false,
@@ -72,8 +72,7 @@ animations = [ {
 "speed": 13.0
 } ]
 
-[sub_resource type="Animation" id=1]
-resource_name = "Vibrate"
+[sub_resource type="Animation" id=6]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("NE:position")
@@ -148,17 +147,17 @@ tracks/5/keys = {
 "values": [ false, true, false ]
 }
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 24, 24 )
 
-[sub_resource type="Gradient" id=3]
+[sub_resource type="Gradient" id=8]
 offsets = PoolRealArray( 0.0301205, 0.972892 )
 colors = PoolColorArray( 1, 0.254902, 0.92549, 0.623529, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=4]
-gradient = SubResource( 3 )
+[sub_resource type="GradientTexture" id=9]
+gradient = SubResource( 8 )
 
-[sub_resource type="ParticlesMaterial" id=5]
+[sub_resource type="ParticlesMaterial" id=10]
 render_priority = 1
 emission_shape = 1
 emission_sphere_radius = 1.0
@@ -177,10 +176,10 @@ tangential_accel_random = 0.54
 damping = 63.24
 angle_random = 0.13
 scale_random = 0.54
-color_ramp = SubResource( 4 )
+color_ramp = SubResource( 9 )
 hue_variation_random = 0.2
 
-[sub_resource type="ParticlesMaterial" id=6]
+[sub_resource type="ParticlesMaterial" id=11]
 render_priority = 1
 emission_shape = 1
 emission_sphere_radius = 1.0
@@ -198,32 +197,32 @@ tangential_accel_random = 0.54
 damping = 63.24
 angle_random = 0.13
 scale_random = 0.54
-color_ramp = SubResource( 4 )
+color_ramp = SubResource( 9 )
 hue_variation_random = 0.2
 
-[node name="XionCrate" type="StaticBody2D"]
+[node name="XionCrate" type="RigidBody2D"]
 script = ExtResource( 36 )
 
 [node name="Base" type="AnimatedSprite" parent="."]
-frames = SubResource( 7 )
+frames = SubResource( 1 )
 
 [node name="NE" type="AnimatedSprite" parent="."]
-frames = SubResource( 8 )
+frames = SubResource( 2 )
 
 [node name="NO" type="AnimatedSprite" parent="."]
-frames = SubResource( 9 )
+frames = SubResource( 3 )
 
 [node name="SE" type="AnimatedSprite" parent="."]
-frames = SubResource( 10 )
+frames = SubResource( 4 )
 
 [node name="SO" type="AnimatedSprite" parent="."]
-frames = SubResource( 11 )
+frames = SubResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Vibrate = SubResource( 1 )
+anims/Vibrate = SubResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
+shape = SubResource( 7 )
 
 [node name="ParticlesLeft" type="Particles2D" parent="."]
 position = Vector2( -21.2924, -0.286514 )
@@ -233,7 +232,7 @@ amount = 150
 lifetime = 2.0
 explosiveness = 0.71
 randomness = 1.0
-process_material = SubResource( 5 )
+process_material = SubResource( 10 )
 
 [node name="ParticlesRight" type="Particles2D" parent="."]
 position = Vector2( 21.4729, 0.0958099 )
@@ -243,7 +242,7 @@ amount = 150
 lifetime = 2.0
 explosiveness = 0.71
 randomness = 1.0
-process_material = SubResource( 6 )
+process_material = SubResource( 11 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 1.5

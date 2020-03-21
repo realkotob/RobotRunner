@@ -69,9 +69,6 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 30, 30 )
-
 [sub_resource type="AnimatedTexture" id=4]
 frames = 4
 frame_0/texture = ExtResource( 28 )
@@ -92,6 +89,9 @@ frame_2/texture = ExtResource( 31 )
 frame_2/delay_sec = 0.0
 frame_3/texture = ExtResource( 29 )
 frame_3/delay_sec = 0.0
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 30, 30 )
 
 [sub_resource type="CapsuleShape2D" id=6]
 radius = 10.3682
@@ -159,6 +159,7 @@ one_shot = true
 
 [node name="Action" type="Node" parent="States"]
 script = ExtResource( 12 )
+breakable_type_array = PoolStringArray( "XionCrate" )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="States/Action"]
 stream = ExtResource( 13 )
@@ -182,20 +183,6 @@ frames = SubResource( 2 )
 animation = "Move"
 frame = 1
 playing = true
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="HitBox" type="Area2D" parent="."]
-space_override = 1
-linear_damp = 0.0
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2( 30, -6 )
-shape = SubResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -237,6 +224,20 @@ texture = SubResource( 5 )
 
 [node name="JumpDust" type="Node2D" parent="SFX"]
 script = ExtResource( 36 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="HitBox" type="Area2D" parent="."]
+space_override = 1
+linear_damp = 0.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2( 30, -6 )
+shape = SubResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }

@@ -10,7 +10,7 @@ var character_node : KinematicBody2D
 var inputs_node : Node
 
 export var animation_offset : Vector2
-export var breakable_type : String
+export var breakable_type_array : PoolStringArray
 export var interactables : PoolStringArray
 
 var bodies_in_hitbox : Array
@@ -19,7 +19,7 @@ var hit_box_node : Area2D
 var hit_box_shape : Node
 var face_dir : int
 
-var was_broke : bool = false
+var has_touch : bool = false
 
 onready var audio_node = get_node("AudioStreamPlayer")
 
@@ -35,14 +35,15 @@ func update(_host, _delta):
 	
 	# Destroy a block if it is in the hitbox area, and if his type correspond to the current robot breakable type
 	bodies_in_hitbox = hit_box_node.get_overlapping_bodies()
-	for body in bodies_in_hitbox:
-		if body.is_class(breakable_type):
-			body.destroy()
-			# Keep track if at least one block was broke
-			was_broke = true
+	if has_touch == false:
+		for body in bodies_in_hitbox:
+			if body.get_class() in breakable_type_array:
+				body.damage()
+				# Keep track if at least one block has been touched
+				has_touch = true
 
 
-# When the actor enters action state: set active the hit box, and play the right animation, applying it the defind offset
+# When the actor enters action state: set active the hit box, and play the right animation, applying it the defined offset
 func enter_state(_host):
 	# Play the animation
 	offset_animation()
@@ -65,11 +66,11 @@ func exit_state(_host):
 	# Check if one on the areas in the hitbox area is an interative one, and interact with it if it is
 	# Also verify if no block were broke in this use of the action state
 	for area in interact_areas:
-		if area.get_class() in interactables && was_broke == false:
+		if area.get_class() in interactables && has_touch == false:
 			area.interact(hit_box_shape.global_position)
 	
 	# Reset the was broke bool, for the next use of the action state
-	was_broke = false
+	has_touch = false
 	
 	# Set the hitbox inactive
 	hit_box_shape.set_disabled(true)

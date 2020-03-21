@@ -113,6 +113,11 @@ _global_script_classes=[ {
 "class": "WorkStateBase",
 "language": "GDScript",
 "path": "res://BaseClasses/WorkStateBase.gd"
+}, {
+"base": "BreakableObjectBase",
+"class": "XionCrate",
+"language": "GDScript",
+"path": "res://Scenes/InteractiveObjects/Collactables/Xion Crate/XionCrate.gd"
 } ]
 _global_script_class_icons={
 "ActionBase": "",
@@ -135,7 +140,8 @@ _global_script_class_icons={
 "StateBase": "",
 "StatesMachine": "",
 "Water": "",
-"WorkStateBase": ""
+"WorkStateBase": "",
+"XionCrate": ""
 }
 
 [application]

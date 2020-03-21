@@ -1,8 +1,11 @@
 extends BreakableObjectBase
 
+class_name XionCrate
+
 onready var animation_player_node = $AnimationPlayer
 onready var timer_node = $Timer
-onready var base_anim_node = $Base
+onready var base_anim_node = $Sprites/Base
+onready var flash_node = $Flash
 
 var animated_sprite_node_array : Array
 
@@ -25,6 +28,9 @@ func get_class():
 # If the hitpoints reaches 0 call the destroy method
 func damage():
 	hitpoint -= 1
+	
+	flash_node.play("Flash")
+	
 	if hitpoint == 0:
 		destroy()
 

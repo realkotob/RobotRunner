@@ -64,6 +64,7 @@ color_ramp = SubResource( 2 )
 hue_variation_random = 0.2
 
 [node name="XionCollectable" type="KinematicBody2D"]
+z_index = 10
 script = ExtResource( 2 )
 
 [node name="Light2D" type="Light2D" parent="."]
@@ -95,3 +96,8 @@ lifetime = 2.0
 randomness = 1.0
 local_coords = false
 process_material = SubResource( 5 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+autostart = true

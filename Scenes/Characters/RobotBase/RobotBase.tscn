@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/RobotBase.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/Physic.gd" type="Script" id=2]
@@ -43,14 +43,14 @@ extents = Vector2( 15.53, 20 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 22 ) ],
-"loop": true,
-"name": "Jump",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 23 ) ],
 "loop": true,
 "name": "Fall",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 21 ) ],
+"loop": true,
+"name": "Idle",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ) ],
@@ -58,15 +58,15 @@ animations = [ {
 "name": "Move",
 "speed": 8.0
 }, {
-"frames": [ ExtResource( 21 ) ],
-"loop": true,
-"name": "Idle",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
 "loop": false,
 "name": "Action",
 "speed": 20.0
+}, {
+"frames": [ ExtResource( 22 ) ],
+"loop": true,
+"name": "Jump",
+"speed": 5.0
 } ]
 
 [sub_resource type="AnimatedTexture" id=3]
@@ -96,6 +96,22 @@ extents = Vector2( 30, 30 )
 [sub_resource type="CapsuleShape2D" id=6]
 radius = 10.3682
 height = 1.0
+
+[sub_resource type="Animation" id=7]
+resource_name = "MagentaFlash"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Animation:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.992157, 0.705882, 1, 1 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="Robot" type="KinematicBody2D"]
 z_index = -1
@@ -252,3 +268,7 @@ position = Vector2( 0, -17 )
 scale = Vector2( 1.65, 0.5 )
 shape = SubResource( 6 )
 one_way_collision = true
+
+[node name="Flash" type="AnimationPlayer" parent="."]
+playback_speed = 2.0
+anims/MagentaFlash = SubResource( 7 )

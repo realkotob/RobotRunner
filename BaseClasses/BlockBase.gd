@@ -15,7 +15,7 @@ func _ready():
 
 
 # When the block is destroyed, lauch the destroy animation
-func destroy():
+func destroy(_actor_destroying: Node = null):
 	if broke == false:
 		animation_node.play()
 		audio_node.play()

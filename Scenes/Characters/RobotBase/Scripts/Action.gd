@@ -38,7 +38,7 @@ func update(_host, _delta):
 	if has_touch == false:
 		for body in bodies_in_hitbox:
 			if body.get_class() in breakable_type_array:
-				body.damage()
+				body.damage(character_node)
 				# Keep track if at least one block has been touched
 				has_touch = true
 

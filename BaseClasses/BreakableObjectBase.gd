@@ -11,11 +11,11 @@ func _ready():
 
 # Called by a character when its hitbox touches it
 # By default: call the destroy method
-func damage():
-	destroy()
+func damage(actor_damaging : Node = null):
+	destroy(actor_damaging)
 
 
 # Function called to destroy an object
 # By default: simply queue free the object
-func destroy():
+func destroy(_actor_destroying : Node = null):
 	queue_free()

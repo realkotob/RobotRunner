@@ -44,29 +44,32 @@ var profile_qwerty = {
 
 var profile_custom = profile_azerty
 
-
+#Get the selected profile id to change it. Ref to profile var for more information
 func change_profile(id):
-	current_profile_id = id
-	var profile = get(profiles[id])
-	var is_customizable = true if id == 2 else false
+	current_profile_id = id #set the current profile to the selected one
+	var profile = get(profiles[id]) #get the profile's input according to the id
+	var is_customizable = true if id == 2 else false #Currently, the customizable profile is the 3rd one, so ID(2).
+	#Otherwise, if we chose to add one more profile, the customizable profile would be ID(3), ID(4), etc...
 	
-	for action_name in profile.keys():
-		change_action_key(action_name, profile[action_name])
-	emit_signal('profile_changed', profile, is_customizable)
-	return profile
+	#For loop to get all the profile's coresponding keys
+	for action_name in profile.keys(): #get the name, get the key
+		change_action_key(action_name, profile[action_name]) #change the key
+	emit_signal('profile_changed', profile, is_customizable) #Emit the signal 'profile changed'
+	return profile #return the profile to display it / use it later.
 
 
-
+# This function will remove the current action from the settings and add a new key as an event
 func change_action_key(action_name, key_scancode):
-	erase_action_events(action_name)
+	erase_action_events(action_name) #remove the action from the settings
 
-	var new_event = InputEventKey.new()
-	new_event.set_scancode(key_scancode)
-	InputMap.action_add_event(action_name, new_event)
-	get_selected_profile()[action_name] = key_scancode
+	var new_event = InputEventKey.new() #Create a new inputevenkey event
+	new_event.set_scancode(key_scancode) #Set the scancode to the variable previously declared
+	new_event.set_scancode(key_scancode) #Set the scancode to the variable previously declared
+	InputMap.action_add_event(action_name, new_event) #Add the action(with the key) to the InputMap of the system so that it can be recognized
+	get_selected_profile()[action_name] = key_scancode #Get the current profile's changed action scancode
 
 
-
+# This function will remove the selected action from the settings (InputMap)
 func erase_action_events(action_name):
 	var input_events = InputMap.get_action_list(action_name)
 	for event in input_events:

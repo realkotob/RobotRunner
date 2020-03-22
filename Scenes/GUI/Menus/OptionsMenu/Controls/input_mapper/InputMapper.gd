@@ -23,7 +23,8 @@ var profile_azerty = {
 	'teleport_player2': KEY_DOWN,
 	'action_player2': KEY_SHIFT,
 	
-	'game_restart': KEY_R
+	'game_restart': KEY_F1,
+	'HUD_switch_state': KEY_F2
 }
 
 var profile_qwerty = {
@@ -39,7 +40,8 @@ var profile_qwerty = {
 	'teleport_player2': KEY_DOWN,
 	'action_player2': KEY_SHIFT,
 	
-	'game_restart': KEY_R
+	'game_restart': KEY_F1,
+	'HUD_switch_state': KEY_F2
 }
 
 var profile_custom = profile_azerty

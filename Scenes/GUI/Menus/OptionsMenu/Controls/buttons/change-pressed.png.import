@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/change-pressed.png-cf5e5c91e34cb055ad3d9e8e81250211.stex"
+path="res://.import/change-pressed.png-374c4dc902619470c58e02726a157116.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/GUI/Menus/OptionsMenu/COntrols/buttons/change-pressed.png"
-dest_files=[ "res://.import/change-pressed.png-cf5e5c91e34cb055ad3d9e8e81250211.stex" ]
+source_file="res://Scenes/GUI/Menus/OptionsMenu/Controls/buttons/change-pressed.png"
+dest_files=[ "res://.import/change-pressed.png-374c4dc902619470c58e02726a157116.stex" ]
 
 [params]
 

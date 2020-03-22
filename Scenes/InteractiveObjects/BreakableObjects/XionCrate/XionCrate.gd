@@ -2,6 +2,7 @@ extends BreakableObjectBase
 
 class_name XionCrate
 
+onready var sprites_group_node = $Sprites
 onready var animation_player_node = $AnimationPlayer
 onready var timer_node = $Timer
 onready var base_anim_node = $Sprites/Base
@@ -17,7 +18,7 @@ func _ready():
 	var _err = timer_node.connect("timeout", self, "on_timer_timeout")
 	_err = base_anim_node.connect("animation_finished", self, "on_sprite_animation_finished")
 	
-	for child in get_children():
+	for child in sprites_group_node.get_children():
 		if child.is_class("AnimatedSprite"):
 			animated_sprite_node_array.append(child)
 
@@ -39,7 +40,7 @@ func damage(actor_damaging: Node = null):
 
 # Function called to destroy an object
 func destroy(actor_destroying: Node = null):
-	for _i in range(randi() % 3 + 2):
+	for _i in range(5):
 		var xion_collactable_node = xion_collactable.instance()
 		xion_collactable_node.position = global_position
 		xion_collactable_node.aimed_character = actor_destroying

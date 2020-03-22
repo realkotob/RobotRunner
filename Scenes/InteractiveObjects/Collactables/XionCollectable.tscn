@@ -70,7 +70,7 @@ script = ExtResource( 2 )
 [node name="Light2D" type="Light2D" parent="."]
 texture = ExtResource( 1 )
 color = Color( 1, 0.298039, 0.941176, 1 )
-energy = 0.53
+energy = 0.8
 shadow_color = Color( 0, 0, 0, 0.447059 )
 
 [node name="Particles" type="Particles2D" parent="."]
@@ -83,7 +83,7 @@ process_material = SubResource( 3 )
 
 [node name="Particles2" type="Particles2D" parent="."]
 z_index = -1
-amount = 10
+amount = 100
 lifetime = 2.0
 randomness = 1.0
 local_coords = false
@@ -98,6 +98,6 @@ local_coords = false
 process_material = SubResource( 5 )
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.3
+wait_time = 0.2
 one_shot = true
 autostart = true

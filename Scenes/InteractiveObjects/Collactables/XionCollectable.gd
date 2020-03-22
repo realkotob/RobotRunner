@@ -13,7 +13,7 @@ func _ready():
 	var dir = Vector2(cos(random_ang), sin(random_ang))
 	
 	# Gennerate a random force value beteen 100 and 200
-	var random_force = randi() % 100 + 100
+	var random_force = randi() % 100 + 200
 	initial_velocity = dir * random_force
 	velocity = initial_velocity
 
@@ -24,4 +24,5 @@ func on_timeout():
 
 func contact_with_player():
 	emit_signal("xion_received")
+	SCORE.xion += 50
 	queue_free()

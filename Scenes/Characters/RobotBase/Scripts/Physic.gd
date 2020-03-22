@@ -33,6 +33,7 @@ func _physics_process(_delta):
 		if collision.collider.is_in_group("MovableBodies"):
 			collision.collider.apply_central_impulse(-collision.normal * push)
 
+
 # Flip the hit box shape
 func flip_hit_box():
 	var hit_box_shape_x_pos = hit_box_node.get_child(0).position.x

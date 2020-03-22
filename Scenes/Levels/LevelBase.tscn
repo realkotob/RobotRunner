@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Scenes/Levels/LevelBase.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Camera/Camera.tscn" type="PackedScene" id=2]
@@ -18,10 +18,15 @@
 [ext_resource path="res://Global/Foreground/TruningCloud/FuméeTournante7.png" type="Texture" id=16]
 [ext_resource path="res://Global/Foreground/TruningCloud/FuméeTournante8.png" type="Texture" id=17]
 [ext_resource path="res://Global/Foreground/TruningCloud/FuméeTournante6.png" type="Texture" id=18]
+[ext_resource path="res://Scenes/GUI/HUD/Xion.png" type="Texture" id=19]
+[ext_resource path="res://Global/Fonts/BoldCapsPixel.tres" type="DynamicFont" id=20]
+[ext_resource path="res://Scenes/GUI/HUD/XionLabel.gd" type="Script" id=21]
+[ext_resource path="res://Scenes/GUI/HUD/Materials.png" type="Texture" id=22]
+[ext_resource path="res://Scenes/GUI/HUD/HUD.gd" type="Script" id=23]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Mouvement"
-length = 40.0
+length = 90.0
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
@@ -30,10 +35,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 20 ),
+"times": PoolRealArray( 0, 45.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 492.326, 509.514 ), Vector2( 900, 509.514 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( -1300, 0 ) ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -50,7 +55,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 40.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 834.668, 519.84 ), Vector2( -100, 519.84 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 1300, 0 ) ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -66,7 +71,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 30.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 504.571 ), Vector2( 1000, 504.571 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 1300, 0 ) ]
 }
 
 [sub_resource type="SpriteFrames" id=4]
@@ -74,7 +79,7 @@ animations = [ {
 "frames": [ ExtResource( 12 ), ExtResource( 15 ), ExtResource( 11 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 18 ), ExtResource( 16 ), ExtResource( 17 ) ],
 "loop": true,
 "name": "default",
-"speed": 10.0
+"speed": 13.0
 } ]
 
 [node name="LevelBase" type="Node2D"]
@@ -87,36 +92,48 @@ __meta__ = {
 layer = 2
 
 [node name="Cloud1" type="Position2D" parent="Foreground"]
-position = Vector2( -7.4483, -1.35675 )
+position = Vector2( 1033.34, 501.457 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Sprite" type="Sprite" parent="Foreground/Cloud1"]
 modulate = Color( 1, 1, 1, 0.431373 )
-position = Vector2( 508.971, 509.514 )
 texture = ExtResource( 8 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Foreground/Cloud1/Sprite"]
 autoplay = "Mouvement"
 anims/Mouvement = SubResource( 1 )
 
 [node name="Cloud2" type="Position2D" parent="Foreground"]
-position = Vector2( -7.4483, -1.35675 )
+position = Vector2( -105.822, 520.66 )
 
 [node name="Sprite" type="Sprite" parent="Foreground/Cloud2"]
 modulate = Color( 1, 1, 1, 0.431373 )
-position = Vector2( 787.69, 519.84 )
 texture = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Foreground/Cloud2/Sprite"]
 autoplay = "Mouvement"
 anims/Mouvement = SubResource( 2 )
 
 [node name="Cloud3" type="Position2D" parent="Foreground"]
-position = Vector2( -7.4483, -1.35675 )
+position = Vector2( -192.048, 490.909 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Sprite" type="Sprite" parent="Foreground/Cloud3"]
 modulate = Color( 1, 1, 1, 0.431373 )
-position = Vector2( 189.437, 504.571 )
 texture = ExtResource( 10 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Foreground/Cloud3/Sprite"]
 autoplay = "Mouvement"
@@ -124,11 +141,14 @@ anims/Mouvement = SubResource( 3 )
 
 [node name="TurnCloudL" type="Position2D" parent="Foreground"]
 position = Vector2( 22.5517, 500.643 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Sprite" type="AnimatedSprite" parent="Foreground/TurnCloudL"]
 modulate = Color( 1, 1, 1, 0.313726 )
 frames = SubResource( 4 )
-frame = 3
+frame = 2
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -138,11 +158,14 @@ __meta__ = {
 position = Vector2( 923.552, 500.643 )
 rotation = 3.14159
 scale = Vector2( 1, -1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Sprite" type="AnimatedSprite" parent="Foreground/TurnCloudR"]
 modulate = Color( 1, 1, 1, 0.313726 )
 frames = SubResource( 4 )
-frame = 3
+frame = 2
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -161,6 +184,80 @@ __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
+
+[node name="HUD" type="Control" parent="GUI"]
+anchor_right = 1.0
+anchor_bottom = 0.143
+margin_bottom = -0.220001
+script = ExtResource( 23 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="GUI/HUD"]
+light_mask = 16384
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -290.0
+margin_bottom = 60.0
+color = Color( 0, 0, 0, 0.501961 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="XionContainer" type="Control" parent="GUI/HUD"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -134.0
+margin_top = 7.025
+margin_bottom = 58.025
+
+[node name="Sprite" type="TextureRect" parent="GUI/HUD/XionContainer"]
+light_mask = 16384
+margin_right = 44.0
+margin_bottom = 51.0
+texture = ExtResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="GUI/HUD/XionContainer"]
+margin_left = 64.0
+margin_top = -10.0
+margin_right = 120.0
+margin_bottom = 41.0
+custom_fonts/font = ExtResource( 20 )
+text = "0"
+align = 1
+script = ExtResource( 21 )
+
+[node name="MatrialsContainer" type="Control" parent="GUI/HUD"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -260.0
+margin_top = -31.5
+margin_right = -146.0
+margin_bottom = -0.499977
+
+[node name="Sprite" type="TextureRect" parent="GUI/HUD/MatrialsContainer"]
+light_mask = 16384
+margin_right = 44.0
+margin_bottom = 51.0
+texture = ExtResource( 22 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="GUI/HUD/MatrialsContainer"]
+margin_left = 64.0
+margin_top = -10.0
+margin_right = 120.0
+margin_bottom = 41.0
+custom_fonts/font = ExtResource( 20 )
+text = "0"
+align = 1
 
 [node name="CameraSystem" type="Node2D" parent="."]
 z_index = 999

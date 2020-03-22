@@ -7,6 +7,7 @@ var outside_screen_popup_node : Node
 
 onready var camera_node = get_node("CameraSystem/Camera")
 onready var popups_node = get_node("GUI/Popups")
+onready var GUI_node = get_node("GUI")
 
 
 func _ready():

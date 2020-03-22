@@ -9,6 +9,5 @@ var screen_height : float = ProjectSettings.get("display/window/size/height")
 func _ready():
 	resume_label_node.connect("resume", self, "on_resume")
 
-
 func on_resume():
 	queue_free()

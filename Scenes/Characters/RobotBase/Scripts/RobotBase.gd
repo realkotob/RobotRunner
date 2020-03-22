@@ -10,6 +10,7 @@ onready var states_node = get_node("States")
 onready var animation_node = get_node("Animation")
 onready var hit_box_node = get_node("HitBox")
 onready var SFX_node = get_node("SFX")
+onready var flash_node = get_node("Flash")
 
 var level_node : Node
 
@@ -53,3 +54,7 @@ func setup():
 		
 		if child.has_method("setup"):
 			child.setup()
+
+
+func on_xion_received():
+	flash_node.play("MagentaFlash")

@@ -590,4 +590,5 @@ position = Vector2( 3430, 1150 )
 
 [node name="BlueFlag" parent="InteractivesObjects/Flags" index="1" instance=ExtResource( 20 )]
 position = Vector2( 3630, 1150 )
+
 [connection signal="cp_switch_state" from="CameraSystem/CameraChekpoint4" to="CameraSystem/CameraChekpoint5" method="_on_CameraChekpoint4_cp_switch_state"]

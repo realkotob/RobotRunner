@@ -28,11 +28,6 @@ stereo = true
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
-"frames": [ ExtResource( 9 ) ],
-"loop": true,
-"name": "Fall",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 5 ), ExtResource( 4 ), ExtResource( 8 ), ExtResource( 6 ) ],
 "loop": true,
 "name": "Move",
@@ -52,6 +47,11 @@ animations = [ {
 "loop": true,
 "name": "Jump",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ) ],
+"loop": true,
+"name": "Fall",
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=5]
@@ -70,7 +70,7 @@ stream = SubResource( 2 )
 
 [node name="Action" parent="States" index="4"]
 animation_offset = Vector2( 24, 0 )
-breakable_type = "IceBlock"
+breakable_type_array = PoolStringArray( "XionCrate", "IceBlock" )
 interactables = PoolStringArray( "Water" )
 
 [node name="AudioStreamPlayer" parent="States/Action" index="0"]
@@ -79,7 +79,6 @@ volume_db = -16.0
 
 [node name="Animation" parent="." index="7"]
 frames = SubResource( 4 )
-frame = 1
 
 [node name="HitBox" parent="." index="8"]
 position = Vector2( 0, -0.291992 )

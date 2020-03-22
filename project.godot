@@ -156,15 +156,13 @@ config/name="Xion Leak"
 run/main_scene="res://Scenes/GUI/Menus/ScreenTitle/ScreenTitle.tscn"
 config/icon="res://icon.png"
 
-<<<<<<< HEAD
 [audio]
 
 default_bus_layout="res://Global/AudioBus/default_bus_layout.tres"
-=======
+
 [autoload]
 
 SCORE="*res://Global/Score/Score.gd"
->>>>>>> Add HUD fonctional
 
 [debug]
 

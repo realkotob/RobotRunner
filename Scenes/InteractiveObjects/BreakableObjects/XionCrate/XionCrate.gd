@@ -6,17 +6,23 @@ onready var sprites_group_node = $Sprites
 onready var animation_player_node = $AnimationPlayer
 onready var timer_node = $Timer
 onready var base_anim_node = $Sprites/Base
+onready var xion_explosion_node = $Sprites/XionExplosion
 onready var flash_node = $Flash
 
 var animated_sprite_node_array : Array
 
+### TO BE LOADED IN A SINGLETON LATER ###
 var xion_collactable = preload("res://Scenes/InteractiveObjects/Collactables/XionCollectable.tscn")
+
+var actor_destroying : Node
 
 export var hitpoint : int = 3
 
 func _ready():
 	var _err = timer_node.connect("timeout", self, "on_timer_timeout")
 	_err = base_anim_node.connect("animation_finished", self, "on_sprite_animation_finished")
+	_err = animation_player_node.connect("animation_finished", self, "on_fade_out_finished")
+	_err = xion_explosion_node.connect("frame_changed", self, "on_explode_anim_frame_changed")
 	
 	for child in sprites_group_node.get_children():
 		if child.is_class("AnimatedSprite"):
@@ -39,14 +45,48 @@ func damage(actor_damaging: Node = null):
 
 
 # Function called to destroy an object
-func destroy(actor_destroying: Node = null):
-	for _i in range(5):
-		var xion_collactable_node = xion_collactable.instance()
-		xion_collactable_node.position = global_position
-		xion_collactable_node.aimed_character = actor_destroying
-		owner.add_child(xion_collactable_node)
+func destroy(actor: Node = null):
+	timer_node.stop()
 	
-	queue_free()
+	# Hide every non-destruction related sprite
+	hide_crate()
+	
+	# Play the Xion explosion animation
+	xion_explosion_node.set_visible(true)
+	xion_explosion_node.play()
+	
+	# Play the crate explosion and triggers the fade out
+	base_anim_node.disconnect("animation_finished", self, "on_sprite_animation_finished")
+	animation_player_node.play("FadeOut")
+	base_anim_node.play("Blowing")
+	
+	actor_destroying = actor
+
+
+
+# Called when the destruction happens, hide every non-destruction related sprite
+func hide_crate():
+	for sprite in animated_sprite_node_array:
+		if sprite != xion_explosion_node && sprite != base_anim_node:
+			sprite.set_visible(false)
+
+
+# Queue free this instance when the fadeout animation is over
+func on_fade_out_finished(anim_name: String):
+	if anim_name == "FadeOut":
+		queue_free()
+
+
+# Instanciate the xion collatable at the right moment of the animation
+func on_explode_anim_frame_changed():
+	if xion_explosion_node.get_frame() == 6:
+		if actor_destroying != null:
+			for _i in range(5):
+				var xion_collactable_node = xion_collactable.instance()
+				xion_collactable_node.position = global_position
+				xion_collactable_node.aimed_character = actor_destroying
+				owner.add_child(xion_collactable_node)
+
 
 # Triggers every animation_sprite's animation
 func start_sprite_anim():

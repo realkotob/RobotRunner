@@ -1,16 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Global/Lights/Light300.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/InteractiveObjects/Collactables/XionCollectable.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/InteractiveObjects/Collactables/XionGradiant.tres" type="Texture" id=3]
 
-[sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0.0301205, 0.972892 )
-colors = PoolColorArray( 1, 0.254902, 0.92549, 0.623529, 1, 1, 1, 0 )
-
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 1 )
-
-[sub_resource type="ParticlesMaterial" id=3]
+[sub_resource type="ParticlesMaterial" id=1]
 render_priority = 1
 emission_shape = 1
 emission_sphere_radius = 6.0
@@ -24,10 +18,10 @@ orbit_velocity_random = 0.0
 damping = 63.24
 angle_random = 0.13
 scale_random = 0.54
-color_ramp = SubResource( 2 )
+color_ramp = ExtResource( 3 )
 hue_variation_random = 0.2
 
-[sub_resource type="ParticlesMaterial" id=4]
+[sub_resource type="ParticlesMaterial" id=2]
 render_priority = 1
 emission_shape = 1
 emission_sphere_radius = 5.0
@@ -42,10 +36,10 @@ damping = 63.24
 angle_random = 0.13
 scale = 3.0
 scale_random = 0.54
-color_ramp = SubResource( 2 )
+color_ramp = ExtResource( 3 )
 hue_variation_random = 0.2
 
-[sub_resource type="ParticlesMaterial" id=5]
+[sub_resource type="ParticlesMaterial" id=3]
 render_priority = 1
 emission_shape = 1
 emission_sphere_radius = 5.0
@@ -60,7 +54,7 @@ damping = 63.24
 angle_random = 0.13
 scale = 4.0
 scale_random = 0.54
-color_ramp = SubResource( 2 )
+color_ramp = ExtResource( 3 )
 hue_variation_random = 0.2
 
 [node name="XionCollectable" type="KinematicBody2D"]
@@ -69,8 +63,9 @@ script = ExtResource( 2 )
 
 [node name="Light2D" type="Light2D" parent="."]
 texture = ExtResource( 1 )
-color = Color( 1, 0.298039, 0.941176, 1 )
-energy = 0.8
+color = Color( 1, 0.298039, 0.941176, 0.439216 )
+energy = 0.5
+shadow_enabled = true
 shadow_color = Color( 0, 0, 0, 0.447059 )
 
 [node name="Particles" type="Particles2D" parent="."]
@@ -79,7 +74,7 @@ amount = 1000
 lifetime = 2.0
 randomness = 1.0
 local_coords = false
-process_material = SubResource( 3 )
+process_material = SubResource( 1 )
 
 [node name="Particles2" type="Particles2D" parent="."]
 z_index = -1
@@ -87,7 +82,7 @@ amount = 100
 lifetime = 2.0
 randomness = 1.0
 local_coords = false
-process_material = SubResource( 4 )
+process_material = SubResource( 2 )
 
 [node name="Particles3" type="Particles2D" parent="."]
 z_index = -1
@@ -95,7 +90,7 @@ amount = 10
 lifetime = 2.0
 randomness = 1.0
 local_coords = false
-process_material = SubResource( 5 )
+process_material = SubResource( 3 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.2

@@ -64,11 +64,11 @@ func change_profile(id):
 func change_action_key(action_name, key_scancode):
 	erase_action_events(action_name) #remove the action from the settings
 
-	var new_event = InputEventKey.new() #Create a new inputevenkey event
-	new_event.set_scancode(key_scancode) #Set the scancode to the variable previously declared
-	new_event.set_scancode(key_scancode) #Set the scancode to the variable previously declared
-	InputMap.action_add_event(action_name, new_event) #Add the action(with the key) to the InputMap of the system so that it can be recognized
-	get_selected_profile()[action_name] = key_scancode #Get the current profile's changed action scancode
+	var new_event = InputEventKey.new() # Create a new inputevenkey event
+	new_event.set_scancode(key_scancode) # Set the scancode to the variable previously declared
+	new_event.set_scancode(key_scancode) # Set the scancode to the variable previously declared
+	InputMap.action_add_event(action_name, new_event) # Add the action(with the key) to the InputMap of the system so that it can be recognized
+	get_selected_profile()[action_name] = key_scancode # Get the current profile's changed action scancode
 
 
 # This function will remove the selected action from the settings (InputMap)

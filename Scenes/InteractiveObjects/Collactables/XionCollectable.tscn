@@ -70,7 +70,7 @@ script = ExtResource( 2 )
 [node name="Light2D" type="Light2D" parent="."]
 texture = ExtResource( 1 )
 color = Color( 1, 0.298039, 0.941176, 1 )
-energy = 0.8
+energy = 0.6
 shadow_color = Color( 0, 0, 0, 0.447059 )
 
 [node name="Particles" type="Particles2D" parent="."]

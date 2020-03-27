@@ -7,7 +7,7 @@ export var speed : int = 400
 
 # Show/Hide the HUD on ui_select
 func _input(_event):
-	if Input.is_action_just_pressed("show_hide_HUD"):
+	if Input.is_action_just_pressed("HUD_switch_state"):
 		hidden = !hidden
 		set_physics_process(true)
 

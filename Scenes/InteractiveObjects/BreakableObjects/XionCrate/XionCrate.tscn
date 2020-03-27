@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/XionCrate.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateSE/LargeCrateAnimSE2.png" type="Texture" id=2]
@@ -32,6 +32,9 @@
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateNO/LargeCrateAnimNO5.png" type="Texture" id=30]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateSO/LargeCrateAnimSO5.png" type="Texture" id=31]
 [ext_resource path="res://Global/SFX/XionExplosion/XionExplosion.tscn" type="PackedScene" id=32]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/Blowing/CrateBlow1.png" type="Texture" id=33]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/Blowing/CrateBlow3.png" type="Texture" id=34]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/Blowing/CrateBlow2.png" type="Texture" id=35]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -39,6 +42,11 @@ animations = [ {
 "loop": false,
 "name": "default",
 "speed": 13.0
+}, {
+"frames": [ ExtResource( 33 ), ExtResource( 35 ), ExtResource( 34 ) ],
+"loop": false,
+"name": "Blowing",
+"speed": 10.0
 } ]
 
 [sub_resource type="SpriteFrames" id=2]
@@ -72,6 +80,22 @@ animations = [ {
 "name": "default",
 "speed": 13.0
 } ]
+
+[sub_resource type="Animation" id=13]
+resource_name = "FadeOut"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprites/Base:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.8, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
 
 [sub_resource type="Animation" id=6]
 length = 0.6
@@ -241,6 +265,7 @@ frames = SubResource( 5 )
 visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/FadeOut = SubResource( 13 )
 anims/Vibrate = SubResource( 6 )
 
 [node name="Flash" type="AnimationPlayer" parent="."]

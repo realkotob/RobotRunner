@@ -24,5 +24,5 @@ func on_timeout():
 
 func contact_with_player():
 	emit_signal("xion_received")
-	SCORE.xion += 50
+	SCORE.set_xion(SCORE.get_xion() + 50)
 	queue_free()

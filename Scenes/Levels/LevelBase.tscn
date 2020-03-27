@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scenes/Levels/LevelBase.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Camera/Camera.tscn" type="PackedScene" id=2]
@@ -18,11 +18,7 @@
 [ext_resource path="res://Global/Foreground/TruningCloud/FuméeTournante7.png" type="Texture" id=16]
 [ext_resource path="res://Global/Foreground/TruningCloud/FuméeTournante8.png" type="Texture" id=17]
 [ext_resource path="res://Global/Foreground/TruningCloud/FuméeTournante6.png" type="Texture" id=18]
-[ext_resource path="res://Scenes/GUI/HUD/Xion.png" type="Texture" id=19]
-[ext_resource path="res://Global/Fonts/BoldCapsPixel.tres" type="DynamicFont" id=20]
-[ext_resource path="res://Scenes/GUI/HUD/XionLabel.gd" type="Script" id=21]
-[ext_resource path="res://Scenes/GUI/HUD/Materials.png" type="Texture" id=22]
-[ext_resource path="res://Scenes/GUI/HUD/HUD.gd" type="Script" id=23]
+[ext_resource path="res://Scenes/GUI/HUD/HUD.tscn" type="PackedScene" id=19]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Mouvement"
@@ -185,79 +181,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HUD" type="Control" parent="GUI"]
-anchor_right = 1.0
-anchor_bottom = 0.143
-margin_bottom = -0.220001
-script = ExtResource( 23 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Background" type="ColorRect" parent="GUI/HUD"]
-light_mask = 16384
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -290.0
-margin_bottom = 60.0
-color = Color( 0, 0, 0, 0.501961 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="XionContainer" type="Control" parent="GUI/HUD"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -134.0
-margin_top = 7.025
-margin_bottom = 58.025
-
-[node name="Sprite" type="TextureRect" parent="GUI/HUD/XionContainer"]
-light_mask = 16384
-margin_right = 44.0
-margin_bottom = 51.0
-texture = ExtResource( 19 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="GUI/HUD/XionContainer"]
-margin_left = 64.0
-margin_top = -10.0
-margin_right = 120.0
-margin_bottom = 41.0
-custom_fonts/font = ExtResource( 20 )
-text = "0"
-align = 1
-script = ExtResource( 21 )
-
-[node name="MatrialsContainer" type="Control" parent="GUI/HUD"]
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -260.0
-margin_top = -31.5
-margin_right = -146.0
-margin_bottom = -0.499977
-
-[node name="Sprite" type="TextureRect" parent="GUI/HUD/MatrialsContainer"]
-light_mask = 16384
-margin_right = 44.0
-margin_bottom = 51.0
-texture = ExtResource( 22 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="GUI/HUD/MatrialsContainer"]
-margin_left = 64.0
-margin_top = -10.0
-margin_right = 120.0
-margin_bottom = 41.0
-custom_fonts/font = ExtResource( 20 )
-text = "0"
-align = 1
+[node name="HUD" parent="GUI" instance=ExtResource( 19 )]
 
 [node name="CameraSystem" type="Node2D" parent="."]
 z_index = 999

@@ -75,11 +75,13 @@ func on_explode_anim_finished():
 func on_explode_anim_frame_changed():
 	if xion_explosion_node.get_frame() == 6:
 		# Instanciate the xion collatable
-		for _i in range(5):
-			var xion_collactable_node = xion_collactable.instance()
-			xion_collactable_node.position = global_position
-			xion_collactable_node.aimed_character = actor_destroying
-			owner.add_child(xion_collactable_node)
+		
+		if actor_destroying != null:
+			for _i in range(5):
+				var xion_collactable_node = xion_collactable.instance()
+				xion_collactable_node.position = global_position
+				xion_collactable_node.aimed_character = actor_destroying
+				owner.add_child(xion_collactable_node)
 
 
 # Triggers every animation_sprite's animation

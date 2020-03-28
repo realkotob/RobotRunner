@@ -15,7 +15,8 @@ func _ready():
 	_err = connect("area_entered", self, "on_area_entered")
 	if(!is_enabled):
 		checkpoint_area.disabled = true
-		
+
+
 # When the camera reach this checkpoint, send it the direction it must take
 func on_area_entered(area):
 	if area == game_camera_node.get_node("CheckPointTriggerZone"):

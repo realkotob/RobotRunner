@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://Scenes/Levels/Magenta_BG_fog.shader" type="Shader" id=1]
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/fog_color = Color( 0.933333, 0.341176, 0.733333, 1 )
+shader_param/distort_speed = Vector2( 0.05, -0.08 )
+shader_param/opacity = 0.2
+shader_param/OCTAVES = 5

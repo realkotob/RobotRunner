@@ -1,30 +1,30 @@
 [gd_scene load_steps=31 format=2]
 
-[ext_resource path="res://Scenes/Levels/LevelBase.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/StartingPoints/StartingPointP1.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/StartingPoints/StartingPointP2.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/Camera/CheckpointBase.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/S (BASE)/IceBlockBase.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/M/MIceBlock.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/S (base)/EarthBlockBase.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/M/MEarthBlock.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/InteractiveObjects/Water/WaterTile.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Scenes/InteractiveObjects/Teleports/TeleportArea.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/GroupBase.gd" type="Script" id=11]
-[ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/ChildrenScenes/RedButton.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Door/ChildrenScenes/RedDoor.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/ChildrenScenes/BlueButton.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Door/ChildrenScenes/BlueDoor.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/ChildrenScenes/GreenButton.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Door/ChildrenScenes/GreenDoor.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Scenes/InteractiveObjects/Flag/FlagsGroup.gd" type="Script" id=18]
-[ext_resource path="res://Scenes/InteractiveObjects/Flag/RedFlag.tscn" type="PackedScene" id=19]
-[ext_resource path="res://Scenes/InteractiveObjects/Flag/BlueFlag.tscn" type="PackedScene" id=20]
-[ext_resource path="res://Global/Tileset/LevelBase.tres" type="TileSet" id=21]
-[ext_resource path="res://Scenes/InteractiveObjects/Water/Shader/WaterShader.tres" type="Material" id=22]
-[ext_resource path="res://Global/Lights/Light500.png" type="Texture" id=23]
-[ext_resource path="res://Scenes/Camera/CameraRemake.gd" type="Script" id=24]
-[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/XionCrate.tscn" type="PackedScene" id=25]
+[ext_resource path="res://Scenes/StartingPoints/StartingPointP2.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Camera/CheckpointBase.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/StartingPoints/StartingPointP1.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/S (base)/EarthBlockBase.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Levels/Base/LevelBase.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Camera/CameraRemake.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/InteractiveObjects/Flag/FlagsGroup.gd" type="Script" id=7]
+[ext_resource path="res://Global/Tileset/LevelBase.tres" type="TileSet" id=8]
+[ext_resource path="res://Scenes/InteractiveObjects/Water/Shader/WaterShader.tres" type="Material" id=9]
+[ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/GroupBase.gd" type="Script" id=10]
+[ext_resource path="res://Global/Lights/Light500.png" type="Texture" id=11]
+[ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Door/ChildrenScenes/BlueDoor.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Door/ChildrenScenes/GreenDoor.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/InteractiveObjects/Flag/RedFlag.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/InteractiveObjects/Flag/BlueFlag.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/ChildrenScenes/GreenButton.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/ChildrenScenes/BlueButton.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Door/ChildrenScenes/RedDoor.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Scenes/InteractiveObjects/Water/WaterTile.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/ChildrenScenes/RedButton.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/M/MIceBlock.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Scenes/InteractiveObjects/Teleports/TeleportArea.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/S (BASE)/IceBlockBase.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/M/MEarthBlock.tscn" type="PackedScene" id=25]
+[ext_resource path="res://Scenes/Levels/Base/LevelBase.gd" type="Script" id=26]
 
 [sub_resource type="Shader" id=1]
 
@@ -44,12 +44,13 @@ height = 100
 seamless = true
 noise = SubResource( 4 )
 
-[node name="Level1" instance=ExtResource( 1 )]
+[node name="Level1" instance=ExtResource( 5 )]
+script = ExtResource( 26 )
 
-[node name="StartingPointP1" parent="." index="0" instance=ExtResource( 2 )]
+[node name="StartingPointP1" parent="." index="0" instance=ExtResource( 3 )]
 position = Vector2( 64.7148, 217 )
 
-[node name="StartingPointP2" parent="." index="1" instance=ExtResource( 3 )]
+[node name="StartingPointP2" parent="." index="1" instance=ExtResource( 1 )]
 position = Vector2( 64.7148, 311.5 )
 
 [node name="Sprite" parent="Foreground/TurnCloudL" index="0"]
@@ -67,29 +68,29 @@ grow_vertical = 2
 
 [node name="Camera" parent="CameraSystem" index="0"]
 position = Vector2( 480, 270 )
-script = ExtResource( 24 )
+script = ExtResource( 6 )
 
-[node name="CameraChekpoint" parent="CameraSystem" index="1" instance=ExtResource( 4 )]
+[node name="CameraChekpoint" parent="CameraSystem" index="1" instance=ExtResource( 2 )]
 position = Vector2( 2279, 270 )
 cp_dir = Vector2( 0, 1 )
 is_enabled = true
 
-[node name="CameraChekpoint2" parent="CameraSystem" index="2" instance=ExtResource( 4 )]
+[node name="CameraChekpoint2" parent="CameraSystem" index="2" instance=ExtResource( 2 )]
 position = Vector2( 2279, 1318 )
 cp_dir = Vector2( 1, 0 )
 is_enabled = true
 
-[node name="CameraChekpoint3" parent="CameraSystem" index="3" instance=ExtResource( 4 )]
+[node name="CameraChekpoint3" parent="CameraSystem" index="3" instance=ExtResource( 2 )]
 position = Vector2( 2663, 1318 )
 cp_dir = Vector2( 0, 1 )
 is_enabled = true
 
-[node name="CameraChekpoint4" parent="CameraSystem" index="4" instance=ExtResource( 4 )]
+[node name="CameraChekpoint4" parent="CameraSystem" index="4" instance=ExtResource( 2 )]
 position = Vector2( 2663, 142 )
 cp_dir = Vector2( 0, 1 )
 is_enabled = true
 
-[node name="CameraChekpoint5" parent="CameraSystem" index="5" instance=ExtResource( 4 )]
+[node name="CameraChekpoint5" parent="CameraSystem" index="5" instance=ExtResource( 2 )]
 position = Vector2( 2663, 982 )
 cp_dir = Vector2( 1, 0 )
 
@@ -98,7 +99,7 @@ scroll_ignore_camera_zoom = true
 
 [node name="Light2D" type="Light2D" parent="Map/Background/Lights" index="0"]
 position = Vector2( -25.3296, -129.556 )
-texture = ExtResource( 23 )
+texture = ExtResource( 11 )
 color = Color( 0.14902, 1, 0, 1 )
 range_z_max = 0
 range_layer_min = -1
@@ -106,7 +107,7 @@ range_item_cull_mask = 2
 
 [node name="Light2D2" type="Light2D" parent="Map/Background/Lights" index="1"]
 position = Vector2( 491.925, 375.006 )
-texture = ExtResource( 23 )
+texture = ExtResource( 11 )
 color = Color( 0.14902, 1, 0, 1 )
 range_z_max = 0
 range_layer_min = -1
@@ -114,7 +115,7 @@ range_item_cull_mask = 2
 
 [node name="Light2D3" type="Light2D" parent="Map/Background/Lights" index="2"]
 position = Vector2( 720.406, -77.1954 )
-texture = ExtResource( 23 )
+texture = ExtResource( 11 )
 color = Color( 0.14902, 1, 0, 1 )
 range_z_max = 0
 range_layer_min = -1
@@ -125,183 +126,185 @@ tile_data = PoolIntArray( -65538, 6, 0, -65537, 6, 1, -131072, 6, 1, -131071, 6,
 
 [node name="Decoration" type="TileMap" parent="Map" index="2"]
 z_index = 2
-tile_set = ExtResource( 21 )
+tile_set = ExtResource( 8 )
 cell_size = Vector2( 24, 24 )
 format = 1
-tile_data = PoolIntArray( 65540, 536870925, 0, 65541, 14, 0, 65555, 13, 0, 65564, 15, 0, 65566, 14, 0, 65581, 9, 0, 65591, 13, 0, 65604, 9, 0, 524330, 14, 0, 524338, 536870925, 0, 524347, 9, 0, 524348, 536870926, 0, 786443, 15, 0, 786458, 9, 0, 786474, 8, 131072, 786475, 8, 131073, 786476, 8, 131074, 786477, 8, 131074, 786478, 8, 131074, 786479, 8, 131074, 786480, 8, 131074, 786481, 8, 131074, 786482, 8, 131074, 786483, 8, 131075, 786484, 8, 131076, 852010, 8, 196608, 852011, 8, 196609, 852012, 8, 196610, 852013, 8, 196610, 852014, 8, 196610, 852015, 8, 196610, 852016, 8, 196610, 852017, 8, 196610, 852018, 8, 196610, 852019, 8, 196610, 852020, 8, 196612, 917546, 536870924, 0, 917547, 12, 0, 917548, 8, 262146, 917549, 8, 262146, 917550, 8, 262146, 917551, 8, 262146, 917552, 8, 262146, 917553, 8, 262146, 917554, 536870924, 0, 917555, 11, 0, 917556, 8, 262148, 917566, 536870922, 0, 983082, 536870921, 0, 983083, 9, 0, 983090, 536870921, 0, 983091, 10, 0, 983110, 536870921, 0, 1048635, 536870926, 0, 1114113, 536870925, 0 )
+tile_data = PoolIntArray( 65540, 536870925, 0, 65541, 14, 0, 65555, 13, 0, 65564, 15, 0, 65566, 14, 0, 65581, 9, 0, 65591, 13, 0, 65604, 9, 0, 524330, 14, 0, 524338, 536870925, 0, 524347, 9, 0, 524348, 536870926, 0, 786458, 9, 0, 786474, 8, 131072, 786475, 8, 131073, 786476, 8, 131074, 786477, 8, 131074, 786478, 8, 131074, 786479, 8, 131074, 786480, 8, 131074, 786481, 8, 131074, 786482, 8, 131074, 786483, 8, 131075, 786484, 8, 131076, 852010, 8, 196608, 852011, 8, 196609, 852012, 8, 196610, 852013, 8, 196610, 852014, 8, 196610, 852015, 8, 196610, 852016, 8, 196610, 852017, 8, 196610, 852018, 8, 196610, 852019, 8, 196610, 852020, 8, 196612, 917546, 536870924, 0, 917547, 12, 0, 917548, 8, 262146, 917549, 8, 262146, 917550, 8, 262146, 917551, 8, 262146, 917552, 8, 262146, 917553, 8, 262146, 917554, 536870924, 0, 917555, 11, 0, 917556, 8, 262148, 917566, 536870922, 0, 983082, 536870921, 0, 983083, 9, 0, 983090, 536870921, 0, 983091, 10, 0, 983110, 536870921, 0, 1048635, 536870926, 0, 1114113, 536870925, 0 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="IceBlockBase" parent="InteractivesObjects/IceBlocks/S" index="0" instance=ExtResource( 5 )]
+[node name="XionCrates" type="Node2D" parent="InteractivesObjects" index="0"]
+
+[node name="IceBlockBase" parent="InteractivesObjects/IceBlocks/S" index="0" instance=ExtResource( 24 )]
 position = Vector2( 552, 132 )
 z_as_relative = true
 angular_damp = -1.0
 
-[node name="IceBlockBase2" parent="InteractivesObjects/IceBlocks/S" index="1" instance=ExtResource( 5 )]
+[node name="IceBlockBase2" parent="InteractivesObjects/IceBlocks/S" index="1" instance=ExtResource( 24 )]
 position = Vector2( 552, 107.736 )
 z_as_relative = true
 angular_damp = -1.0
 
-[node name="IceBlockBase3" parent="InteractivesObjects/IceBlocks/S" index="2" instance=ExtResource( 5 )]
+[node name="IceBlockBase3" parent="InteractivesObjects/IceBlocks/S" index="2" instance=ExtResource( 24 )]
 position = Vector2( 552, 83.7365 )
 z_as_relative = true
 angular_damp = -1.0
 
-[node name="IceBlockBase4" parent="InteractivesObjects/IceBlocks/S" index="3" instance=ExtResource( 5 )]
+[node name="IceBlockBase4" parent="InteractivesObjects/IceBlocks/S" index="3" instance=ExtResource( 24 )]
 position = Vector2( 552, 60 )
 z_as_relative = true
 angular_damp = -1.0
 
-[node name="M_IceBlock" parent="InteractivesObjects/IceBlocks/M" index="0" instance=ExtResource( 6 )]
+[node name="M_IceBlock" parent="InteractivesObjects/IceBlocks/M" index="0" instance=ExtResource( 22 )]
 position = Vector2( 240, 148 )
 mass = 40.8163
 gravity_scale = 13.0
 angular_damp = -1.0
 
-[node name="M_IceBlock8" parent="InteractivesObjects/IceBlocks/M" index="1" instance=ExtResource( 6 )]
+[node name="M_IceBlock8" parent="InteractivesObjects/IceBlocks/M" index="1" instance=ExtResource( 22 )]
 position = Vector2( 240, 101 )
 mass = 40.8163
 gravity_scale = 13.0
 angular_damp = -1.0
 
-[node name="M_IceBlock2" parent="InteractivesObjects/IceBlocks/M" index="2" instance=ExtResource( 6 )]
+[node name="M_IceBlock2" parent="InteractivesObjects/IceBlocks/M" index="2" instance=ExtResource( 22 )]
 position = Vector2( 360, 121 )
 mass = 40.8163
 gravity_scale = 13.0
 angular_damp = -1.0
 
-[node name="M_IceBlock7" parent="InteractivesObjects/IceBlocks/M" index="3" instance=ExtResource( 6 )]
+[node name="M_IceBlock7" parent="InteractivesObjects/IceBlocks/M" index="3" instance=ExtResource( 22 )]
 position = Vector2( 1199, 123 )
 mass = 40.8163
 gravity_scale = 13.0
 angular_damp = -1.0
 
-[node name="M_IceBlock13" parent="InteractivesObjects/IceBlocks/M" index="4" instance=ExtResource( 6 )]
+[node name="M_IceBlock13" parent="InteractivesObjects/IceBlocks/M" index="4" instance=ExtResource( 22 )]
 position = Vector2( 1342, 265 )
 mass = 40.8163
 gravity_scale = 13.0
 angular_damp = -1.0
 
-[node name="M_IceBlock10" parent="InteractivesObjects/IceBlocks/M" index="5" instance=ExtResource( 6 )]
+[node name="M_IceBlock10" parent="InteractivesObjects/IceBlocks/M" index="5" instance=ExtResource( 22 )]
 position = Vector2( 2640, 1154 )
 mass = 40.8163
 gravity_scale = 13.0
 angular_damp = -1.0
 
-[node name="M_IceBlock11" parent="InteractivesObjects/IceBlocks/M" index="6" instance=ExtResource( 6 )]
+[node name="M_IceBlock11" parent="InteractivesObjects/IceBlocks/M" index="6" instance=ExtResource( 22 )]
 position = Vector2( 2520, 722 )
 mass = 40.8163
 gravity_scale = 13.0
 angular_damp = -1.0
 
-[node name="M_IceBlock12" parent="InteractivesObjects/IceBlocks/M" index="7" instance=ExtResource( 6 )]
+[node name="M_IceBlock12" parent="InteractivesObjects/IceBlocks/M" index="7" instance=ExtResource( 22 )]
 position = Vector2( 2551, 314 )
 mass = 40.8163
 gravity_scale = 13.0
 angular_damp = -1.0
 
-[node name="M_IceBlock9" parent="InteractivesObjects/IceBlocks/M" index="8" instance=ExtResource( 6 )]
+[node name="M_IceBlock9" parent="InteractivesObjects/IceBlocks/M" index="8" instance=ExtResource( 22 )]
 position = Vector2( 2098, 435 )
 mass = 40.8163
 gravity_scale = 13.0
 angular_damp = -1.0
 
-[node name="M_IceBlock3" parent="InteractivesObjects/IceBlocks/M" index="9" instance=ExtResource( 6 )]
+[node name="M_IceBlock3" parent="InteractivesObjects/IceBlocks/M" index="9" instance=ExtResource( 22 )]
 position = Vector2( 792.417, 194 )
 mass = 40.8163
 gravity_scale = 13.0
 angular_damp = -1.0
 
-[node name="M_IceBlock4" parent="InteractivesObjects/IceBlocks/M" index="10" instance=ExtResource( 6 )]
+[node name="M_IceBlock4" parent="InteractivesObjects/IceBlocks/M" index="10" instance=ExtResource( 22 )]
 position = Vector2( 792.417, 148 )
 mass = 40.8163
 gravity_scale = 13.0
 angular_damp = -1.0
 
-[node name="M_IceBlock5" parent="InteractivesObjects/IceBlocks/M" index="11" instance=ExtResource( 6 )]
+[node name="M_IceBlock5" parent="InteractivesObjects/IceBlocks/M" index="11" instance=ExtResource( 22 )]
 position = Vector2( 792.417, 102 )
 mass = 40.8163
 gravity_scale = 13.0
 angular_damp = -1.0
 
-[node name="M_IceBlock6" parent="InteractivesObjects/IceBlocks/M" index="12" instance=ExtResource( 6 )]
+[node name="M_IceBlock6" parent="InteractivesObjects/IceBlocks/M" index="12" instance=ExtResource( 22 )]
 position = Vector2( 792.417, 56 )
 mass = 40.8163
 gravity_scale = 13.0
 angular_damp = -1.0
 
-[node name="EarthBlockBase9" parent="InteractivesObjects/EarthBlocks/S" index="0" instance=ExtResource( 7 )]
+[node name="EarthBlockBase9" parent="InteractivesObjects/EarthBlocks/S" index="0" instance=ExtResource( 4 )]
 position = Vector2( 754, 300 )
 z_as_relative = true
 mass = 40.8163
 gravity_scale = 1.0
 angular_damp = -1.0
 
-[node name="EarthBlockBase10" parent="InteractivesObjects/EarthBlocks/S" index="1" instance=ExtResource( 7 )]
+[node name="EarthBlockBase10" parent="InteractivesObjects/EarthBlocks/S" index="1" instance=ExtResource( 4 )]
 position = Vector2( 730, 300 )
 z_as_relative = true
 mass = 40.8163
 gravity_scale = 1.0
 angular_damp = -1.0
 
-[node name="M_EarthBlock12" parent="InteractivesObjects/EarthBlocks/M" index="0" instance=ExtResource( 8 )]
+[node name="M_EarthBlock12" parent="InteractivesObjects/EarthBlocks/M" index="0" instance=ExtResource( 25 )]
 position = Vector2( 2098, 483 )
 mass = 40.8163
 
-[node name="M_EarthBlock13" parent="InteractivesObjects/EarthBlocks/M" index="1" instance=ExtResource( 8 )]
+[node name="M_EarthBlock13" parent="InteractivesObjects/EarthBlocks/M" index="1" instance=ExtResource( 25 )]
 position = Vector2( 2544, 1251 )
 mass = 40.8163
 
-[node name="M_EarthBlock14" parent="InteractivesObjects/EarthBlocks/M" index="2" instance=ExtResource( 8 )]
+[node name="M_EarthBlock14" parent="InteractivesObjects/EarthBlocks/M" index="2" instance=ExtResource( 25 )]
 position = Vector2( 2545, 1203.5 )
 mass = 40.8163
 
-[node name="M_EarthBlock15" parent="InteractivesObjects/EarthBlocks/M" index="3" instance=ExtResource( 8 )]
+[node name="M_EarthBlock15" parent="InteractivesObjects/EarthBlocks/M" index="3" instance=ExtResource( 25 )]
 position = Vector2( 2855, 1083.45 )
 mass = 40.8163
 
-[node name="M_EarthBlock17" parent="InteractivesObjects/EarthBlocks/M" index="4" instance=ExtResource( 8 )]
+[node name="M_EarthBlock17" parent="InteractivesObjects/EarthBlocks/M" index="4" instance=ExtResource( 25 )]
 position = Vector2( 2688, 963 )
 mass = 40.8163
 
-[node name="M_EarthBlock18" parent="InteractivesObjects/EarthBlocks/M" index="5" instance=ExtResource( 8 )]
+[node name="M_EarthBlock18" parent="InteractivesObjects/EarthBlocks/M" index="5" instance=ExtResource( 25 )]
 position = Vector2( 2736, 458 )
 mass = 40.8163
 
-[node name="M_EarthBlock19" parent="InteractivesObjects/EarthBlocks/M" index="6" instance=ExtResource( 8 )]
+[node name="M_EarthBlock19" parent="InteractivesObjects/EarthBlocks/M" index="6" instance=ExtResource( 25 )]
 position = Vector2( 2600, 315 )
 mass = 40.8163
 
-[node name="M_EarthBlock16" parent="InteractivesObjects/EarthBlocks/M" index="7" instance=ExtResource( 8 )]
+[node name="M_EarthBlock16" parent="InteractivesObjects/EarthBlocks/M" index="7" instance=ExtResource( 25 )]
 position = Vector2( 2855, 1249.5 )
 mass = 40.8163
 
-[node name="M_EarthBlock" parent="InteractivesObjects/EarthBlocks/M" index="8" instance=ExtResource( 8 )]
+[node name="M_EarthBlock" parent="InteractivesObjects/EarthBlocks/M" index="8" instance=ExtResource( 25 )]
 position = Vector2( 170, 481.5 )
 mass = 40.8163
 
-[node name="M_EarthBlock4" parent="InteractivesObjects/EarthBlocks/M" index="9" instance=ExtResource( 8 )]
+[node name="M_EarthBlock4" parent="InteractivesObjects/EarthBlocks/M" index="9" instance=ExtResource( 25 )]
 position = Vector2( 336, 385.5 )
 mass = 40.8163
 
-[node name="M_EarthBlock2" parent="InteractivesObjects/EarthBlocks/M" index="10" instance=ExtResource( 8 )]
+[node name="M_EarthBlock2" parent="InteractivesObjects/EarthBlocks/M" index="10" instance=ExtResource( 25 )]
 position = Vector2( 480, 434 )
 mass = 40.8163
 
-[node name="M_EarthBlock3" parent="InteractivesObjects/EarthBlocks/M" index="11" instance=ExtResource( 8 )]
+[node name="M_EarthBlock3" parent="InteractivesObjects/EarthBlocks/M" index="11" instance=ExtResource( 25 )]
 position = Vector2( 480, 387 )
 mass = 40.8163
 
-[node name="M_EarthBlock5" parent="InteractivesObjects/EarthBlocks/M" index="12" instance=ExtResource( 8 )]
+[node name="M_EarthBlock5" parent="InteractivesObjects/EarthBlocks/M" index="12" instance=ExtResource( 25 )]
 position = Vector2( 742, 337.5 )
 mass = 40.8163
 
-[node name="M_EarthBlock6" parent="InteractivesObjects/EarthBlocks/M" index="13" instance=ExtResource( 8 )]
+[node name="M_EarthBlock6" parent="InteractivesObjects/EarthBlocks/M" index="13" instance=ExtResource( 25 )]
 position = Vector2( 1230, 408.948 )
 mass = 40.8163
 
-[node name="WaterTile" parent="InteractivesObjects/WaterTiles" index="0" instance=ExtResource( 9 )]
+[node name="WaterTile" parent="InteractivesObjects/WaterTiles" index="0" instance=ExtResource( 20 )]
 material = SubResource( 2 )
 position = Vector2( 1836, 111 )
 
@@ -314,7 +317,7 @@ __meta__ = {
 }
 
 [node name="WaterShader" type="Sprite" parent="InteractivesObjects/WaterTiles/WaterTile" index="2"]
-material = ExtResource( 22 )
+material = ExtResource( 9 )
 position = Vector2( 0.35849, 5.36782 )
 scale = Vector2( 2.21169, 0.612644 )
 texture = SubResource( 5 )
@@ -322,7 +325,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="WaterTile2" parent="InteractivesObjects/WaterTiles" index="1" instance=ExtResource( 9 )]
+[node name="WaterTile2" parent="InteractivesObjects/WaterTiles" index="1" instance=ExtResource( 20 )]
 material = SubResource( 2 )
 position = Vector2( 2291, 1405.39 )
 
@@ -335,7 +338,7 @@ __meta__ = {
 }
 
 [node name="WaterShader" type="Sprite" parent="InteractivesObjects/WaterTiles/WaterTile2" index="2"]
-material = ExtResource( 22 )
+material = ExtResource( 9 )
 position = Vector2( 0.35849, 5.36782 )
 scale = Vector2( 1.732, 0.613 )
 texture = SubResource( 5 )
@@ -348,13 +351,13 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="TeleportArea" parent="InteractivesObjects/TeleportGroups/G1" index="0" instance=ExtResource( 10 )]
+[node name="TeleportArea" parent="InteractivesObjects/TeleportGroups/G1" index="0" instance=ExtResource( 23 )]
 position = Vector2( 1106, 132 )
 
-[node name="TeleportArea2" parent="InteractivesObjects/TeleportGroups/G1" index="1" instance=ExtResource( 10 )]
+[node name="TeleportArea2" parent="InteractivesObjects/TeleportGroups/G1" index="1" instance=ExtResource( 23 )]
 position = Vector2( 1106, 324 )
 
-[node name="TeleportArea3" parent="InteractivesObjects/TeleportGroups/G1" index="2" instance=ExtResource( 10 )]
+[node name="TeleportArea3" parent="InteractivesObjects/TeleportGroups/G1" index="2" instance=ExtResource( 23 )]
 position = Vector2( 1106, 492 )
 
 [node name="G2" type="Node2D" parent="InteractivesObjects/TeleportGroups" index="1"]
@@ -362,13 +365,13 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="TeleportArea1" parent="InteractivesObjects/TeleportGroups/G2" index="0" instance=ExtResource( 10 )]
+[node name="TeleportArea1" parent="InteractivesObjects/TeleportGroups/G2" index="0" instance=ExtResource( 23 )]
 position = Vector2( 1610, 276 )
 
-[node name="TeleportArea2" parent="InteractivesObjects/TeleportGroups/G2" index="1" instance=ExtResource( 10 )]
+[node name="TeleportArea2" parent="InteractivesObjects/TeleportGroups/G2" index="1" instance=ExtResource( 23 )]
 position = Vector2( 1608, 132 )
 
-[node name="TeleportArea3" parent="InteractivesObjects/TeleportGroups/G2" index="2" instance=ExtResource( 10 )]
+[node name="TeleportArea3" parent="InteractivesObjects/TeleportGroups/G2" index="2" instance=ExtResource( 23 )]
 position = Vector2( 1609, 516 )
 
 [node name="G3" type="Node2D" parent="InteractivesObjects/TeleportGroups" index="2"]
@@ -376,10 +379,10 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="TeleportArea" parent="InteractivesObjects/TeleportGroups/G3" index="0" instance=ExtResource( 10 )]
+[node name="TeleportArea" parent="InteractivesObjects/TeleportGroups/G3" index="0" instance=ExtResource( 23 )]
 position = Vector2( 2232, 636 )
 
-[node name="TeleportArea2" parent="InteractivesObjects/TeleportGroups/G3" index="1" instance=ExtResource( 10 )]
+[node name="TeleportArea2" parent="InteractivesObjects/TeleportGroups/G3" index="1" instance=ExtResource( 23 )]
 position = Vector2( 2307, 540 )
 
 [node name="G4" type="Node2D" parent="InteractivesObjects/TeleportGroups" index="3"]
@@ -387,209 +390,209 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="TeleportArea" parent="InteractivesObjects/TeleportGroups/G4" index="0" instance=ExtResource( 10 )]
+[node name="TeleportArea" parent="InteractivesObjects/TeleportGroups/G4" index="0" instance=ExtResource( 23 )]
 position = Vector2( 2301, 300 )
 
-[node name="TeleportArea2" parent="InteractivesObjects/TeleportGroups/G4" index="1" instance=ExtResource( 10 )]
+[node name="TeleportArea2" parent="InteractivesObjects/TeleportGroups/G4" index="1" instance=ExtResource( 23 )]
 position = Vector2( 2640, 156 )
 
 [node name="G1" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="0"]
-script = ExtResource( 11 )
+script = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="RedLever" parent="InteractivesObjects/Buttons&Doors/G1" index="0" instance=ExtResource( 12 )]
+[node name="RedLever" parent="InteractivesObjects/Buttons&Doors/G1" index="0" instance=ExtResource( 21 )]
 position = Vector2( 910, 185 )
 
-[node name="Door" parent="InteractivesObjects/Buttons&Doors/G1" index="1" instance=ExtResource( 13 )]
+[node name="Door" parent="InteractivesObjects/Buttons&Doors/G1" index="1" instance=ExtResource( 19 )]
 position = Vector2( 990, 120 )
 
 [node name="G2" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="1"]
-script = ExtResource( 11 )
+script = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Button" parent="InteractivesObjects/Buttons&Doors/G2" index="0" instance=ExtResource( 14 )]
+[node name="Button" parent="InteractivesObjects/Buttons&Doors/G2" index="0" instance=ExtResource( 18 )]
 position = Vector2( 920, 448 )
 
-[node name="Door" parent="InteractivesObjects/Buttons&Doors/G2" index="1" instance=ExtResource( 15 )]
+[node name="Door" parent="InteractivesObjects/Buttons&Doors/G2" index="1" instance=ExtResource( 12 )]
 position = Vector2( 983, 432 )
 
 [node name="G3" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="2"]
-script = ExtResource( 11 )
+script = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="GreenButton" parent="InteractivesObjects/Buttons&Doors/G3" index="0" instance=ExtResource( 16 )]
+[node name="GreenButton" parent="InteractivesObjects/Buttons&Doors/G3" index="0" instance=ExtResource( 17 )]
 position = Vector2( 1416, 112 )
 
-[node name="Door" parent="InteractivesObjects/Buttons&Doors/G3" index="1" instance=ExtResource( 17 )]
+[node name="Door" parent="InteractivesObjects/Buttons&Doors/G3" index="1" instance=ExtResource( 13 )]
 position = Vector2( 1727, 265 )
 
 [node name="G4" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="3"]
-script = ExtResource( 11 )
+script = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="RedLever" parent="InteractivesObjects/Buttons&Doors/G4" index="0" instance=ExtResource( 12 )]
+[node name="RedLever" parent="InteractivesObjects/Buttons&Doors/G4" index="0" instance=ExtResource( 21 )]
 position = Vector2( 1752, 520 )
 
-[node name="RedDoor" parent="InteractivesObjects/Buttons&Doors/G4" index="1" instance=ExtResource( 13 )]
+[node name="RedDoor" parent="InteractivesObjects/Buttons&Doors/G4" index="1" instance=ExtResource( 19 )]
 position = Vector2( 2136, 265 )
 
 [node name="G5" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="4"]
-script = ExtResource( 11 )
+script = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="BlueLever" parent="InteractivesObjects/Buttons&Doors/G5" index="0" instance=ExtResource( 14 )]
+[node name="BlueLever" parent="InteractivesObjects/Buttons&Doors/G5" index="0" instance=ExtResource( 18 )]
 position = Vector2( 2136, 112 )
 
-[node name="BlueDoor1" parent="InteractivesObjects/Buttons&Doors/G5" index="1" instance=ExtResource( 15 )]
+[node name="BlueDoor1" parent="InteractivesObjects/Buttons&Doors/G5" index="1" instance=ExtResource( 12 )]
 position = Vector2( 1679, 265 )
 
-[node name="BlueDoor2" parent="InteractivesObjects/Buttons&Doors/G5" index="2" instance=ExtResource( 15 )]
+[node name="BlueDoor2" parent="InteractivesObjects/Buttons&Doors/G5" index="2" instance=ExtResource( 12 )]
 position = Vector2( 2204, 72 )
 
 [node name="G6" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="5"]
-script = ExtResource( 11 )
+script = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="RedLever" parent="InteractivesObjects/Buttons&Doors/G6" index="0" instance=ExtResource( 12 )]
+[node name="RedLever" parent="InteractivesObjects/Buttons&Doors/G6" index="0" instance=ExtResource( 21 )]
 position = Vector2( 2048, 496 )
 
-[node name="Door" parent="InteractivesObjects/Buttons&Doors/G6" index="1" instance=ExtResource( 13 )]
+[node name="Door" parent="InteractivesObjects/Buttons&Doors/G6" index="1" instance=ExtResource( 19 )]
 position = Vector2( 2280, 625 )
 
 [node name="G7" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="6"]
-script = ExtResource( 11 )
+script = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="RedLever" parent="InteractivesObjects/Buttons&Doors/G7" index="0" instance=ExtResource( 12 )]
+[node name="RedLever" parent="InteractivesObjects/Buttons&Doors/G7" index="0" instance=ExtResource( 21 )]
 position = Vector2( 2347, 952 )
 
-[node name="Door" parent="InteractivesObjects/Buttons&Doors/G7" index="1" instance=ExtResource( 13 )]
+[node name="Door" parent="InteractivesObjects/Buttons&Doors/G7" index="1" instance=ExtResource( 19 )]
 position = Vector2( 2280, 936 )
 
 [node name="G8" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="7"]
-script = ExtResource( 11 )
+script = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="RedLever" parent="InteractivesObjects/Buttons&Doors/G8" index="0" instance=ExtResource( 12 )]
+[node name="RedLever" parent="InteractivesObjects/Buttons&Doors/G8" index="0" instance=ExtResource( 21 )]
 position = Vector2( 2291, 1432 )
 
-[node name="Door" parent="InteractivesObjects/Buttons&Doors/G8" index="1" instance=ExtResource( 13 )]
+[node name="Door" parent="InteractivesObjects/Buttons&Doors/G8" index="1" instance=ExtResource( 19 )]
 position = Vector2( 2380, 1321 )
 
 [node name="G9" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="8"]
-script = ExtResource( 11 )
+script = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="RedLever" parent="InteractivesObjects/Buttons&Doors/G9" index="0" instance=ExtResource( 12 )]
+[node name="RedLever" parent="InteractivesObjects/Buttons&Doors/G9" index="0" instance=ExtResource( 21 )]
 position = Vector2( 2475, 1360 )
 
-[node name="Door" parent="InteractivesObjects/Buttons&Doors/G9" index="1" instance=ExtResource( 13 )]
+[node name="Door" parent="InteractivesObjects/Buttons&Doors/G9" index="1" instance=ExtResource( 19 )]
 position = Vector2( 2689, 1104 )
 
-[node name="Door2" parent="InteractivesObjects/Buttons&Doors/G9" index="2" instance=ExtResource( 13 )]
+[node name="Door2" parent="InteractivesObjects/Buttons&Doors/G9" index="2" instance=ExtResource( 19 )]
 position = Vector2( 2472, 1104 )
 
 [node name="G10" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="9"]
-script = ExtResource( 11 )
+script = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="RedLever" parent="InteractivesObjects/Buttons&Doors/G10" index="0" instance=ExtResource( 12 )]
+[node name="RedLever" parent="InteractivesObjects/Buttons&Doors/G10" index="0" instance=ExtResource( 21 )]
 position = Vector2( 2765, 856 )
 
-[node name="Door" parent="InteractivesObjects/Buttons&Doors/G10" index="1" instance=ExtResource( 13 )]
+[node name="Door" parent="InteractivesObjects/Buttons&Doors/G10" index="1" instance=ExtResource( 19 )]
 position = Vector2( 2472, 817 )
 
 [node name="G11" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="10"]
-script = ExtResource( 11 )
+script = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="RedLever" parent="InteractivesObjects/Buttons&Doors/G11" index="0" instance=ExtResource( 12 )]
+[node name="RedLever" parent="InteractivesObjects/Buttons&Doors/G11" index="0" instance=ExtResource( 21 )]
 position = Vector2( 2635, 520 )
 
-[node name="Door" parent="InteractivesObjects/Buttons&Doors/G11" index="1" instance=ExtResource( 13 )]
+[node name="Door" parent="InteractivesObjects/Buttons&Doors/G11" index="1" instance=ExtResource( 19 )]
 position = Vector2( 2496, 508.448 )
 
 [node name="G12" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="11"]
-script = ExtResource( 11 )
+script = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="RedLever" parent="InteractivesObjects/Buttons&Doors/G12" index="0" instance=ExtResource( 12 )]
+[node name="RedLever" parent="InteractivesObjects/Buttons&Doors/G12" index="0" instance=ExtResource( 21 )]
 position = Vector2( 2500, 232 )
 
-[node name="Door" parent="InteractivesObjects/Buttons&Doors/G12" index="1" instance=ExtResource( 13 )]
+[node name="Door" parent="InteractivesObjects/Buttons&Doors/G12" index="1" instance=ExtResource( 19 )]
 position = Vector2( 2347, 288 )
 
 [node name="G13" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="12"]
 position = Vector2( 0, 8 )
-script = ExtResource( 11 )
+script = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="RedLever" parent="InteractivesObjects/Buttons&Doors/G13" index="0" instance=ExtResource( 12 )]
+[node name="RedLever" parent="InteractivesObjects/Buttons&Doors/G13" index="0" instance=ExtResource( 21 )]
 position = Vector2( 3024, 88 )
 
-[node name="Door" parent="InteractivesObjects/Buttons&Doors/G13" index="1" instance=ExtResource( 13 )]
+[node name="Door" parent="InteractivesObjects/Buttons&Doors/G13" index="1" instance=ExtResource( 19 )]
 position = Vector2( 3097.61, 1249.66 )
 
 [node name="G14" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="13"]
-script = ExtResource( 11 )
+script = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Button" parent="InteractivesObjects/Buttons&Doors/G14" index="0" instance=ExtResource( 14 )]
+[node name="Button" parent="InteractivesObjects/Buttons&Doors/G14" index="0" instance=ExtResource( 18 )]
 position = Vector2( 2904, 976 )
 
-[node name="BlueDoor" parent="InteractivesObjects/Buttons&Doors/G14" index="1" instance=ExtResource( 15 )]
+[node name="BlueDoor" parent="InteractivesObjects/Buttons&Doors/G14" index="1" instance=ExtResource( 12 )]
 position = Vector2( 3050.24, 1258.11 )
 
 [node name="G15" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="14"]
-script = ExtResource( 11 )
+script = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="GreenButton" parent="InteractivesObjects/Buttons&Doors/G15" index="0" instance=ExtResource( 16 )]
+[node name="GreenButton" parent="InteractivesObjects/Buttons&Doors/G15" index="0" instance=ExtResource( 17 )]
 position = Vector2( 3169, 808 )
 
-[node name="GreenDoor" parent="InteractivesObjects/Buttons&Doors/G15" index="1" instance=ExtResource( 17 )]
+[node name="GreenDoor" parent="InteractivesObjects/Buttons&Doors/G15" index="1" instance=ExtResource( 13 )]
 position = Vector2( 3496, 792 )
 
-[node name="Flags" type="Node2D" parent="InteractivesObjects" index="5"]
-script = ExtResource( 18 )
+[node name="Flags" type="Node2D" parent="InteractivesObjects" index="6"]
+script = ExtResource( 7 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="RedFlag" parent="InteractivesObjects/Flags" index="0" instance=ExtResource( 19 )]
+[node name="RedFlag" parent="InteractivesObjects/Flags" index="0" instance=ExtResource( 14 )]
 position = Vector2( 3430, 1150 )
 
-[node name="BlueFlag" parent="InteractivesObjects/Flags" index="1" instance=ExtResource( 20 )]
+[node name="BlueFlag" parent="InteractivesObjects/Flags" index="1" instance=ExtResource( 15 )]
 position = Vector2( 3630, 1150 )
 
 [node name="XionCrate" parent="InteractivesObjects" index="6" instance=ExtResource( 25 )]

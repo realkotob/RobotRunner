@@ -1,6 +1,5 @@
 [gd_scene load_steps=24 format=2]
 
-[ext_resource path="res://Scenes/Levels/LevelBase.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Camera/Camera.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Camera/GUI.gd" type="Script" id=3]
 [ext_resource path="res://Global/Background/Background.png" type="Texture" id=4]
@@ -20,7 +19,34 @@
 [ext_resource path="res://Global/Foreground/TruningCloud/FuméeTournante6.png" type="Texture" id=18]
 [ext_resource path="res://Scenes/GUI/HUD/HUD.tscn" type="PackedScene" id=19]
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+class_name LevelBase
+
+var outside_screen_popup_scene = preload(\"res://Scenes/GUI/OutsideScreenPopup/OutsideScreenPopup.tscn\")
+var outside_screen_popup_node : Node
+
+onready var camera_node = get_node(\"CameraSystem/Camera\")
+onready var popups_node = get_node(\"GUI/Popups\")
+onready var GUI_node = get_node(\"GUI\")
+
+
+func _ready():
+	#var _err = camera_node.connect(\"player_outside_screen\", self, \"on_player_outside_screen\")
+	pass
+
+# Create the popup when a player exits the screen
+#func on_player_outside_screen(player : KinematicBody2D):
+#	outside_screen_popup_node = outside_screen_popup_scene.instance()
+#	popups_node.call_deferred(\"add_child\", outside_screen_popup_node)
+#
+#	outside_screen_popup_node.player_node = player
+#	outside_screen_popup_node.camera_node = camera_node
+#	outside_screen_popup_node.position.y = player.position.y
+"
+
+[sub_resource type="Animation" id=2]
 resource_name = "Mouvement"
 length = 90.0
 loop = true
@@ -37,7 +63,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( -1300, 0 ) ]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=3]
 resource_name = "Mouvement"
 length = 80.0
 loop = true
@@ -54,7 +80,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 1300, 0 ) ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 length = 60.0
 loop = true
 tracks/0/type = "value"
@@ -70,7 +96,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 1300, 0 ) ]
 }
 
-[sub_resource type="SpriteFrames" id=4]
+[sub_resource type="SpriteFrames" id=5]
 animations = [ {
 "frames": [ ExtResource( 12 ), ExtResource( 15 ), ExtResource( 11 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 18 ), ExtResource( 16 ), ExtResource( 17 ) ],
 "loop": true,
@@ -79,7 +105,7 @@ animations = [ {
 } ]
 
 [node name="LevelBase" type="Node2D"]
-script = ExtResource( 1 )
+script = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -102,7 +128,7 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Foreground/Cloud1/Sprite"]
 autoplay = "Mouvement"
-anims/Mouvement = SubResource( 1 )
+anims/Mouvement = SubResource( 2 )
 
 [node name="Cloud2" type="Position2D" parent="Foreground"]
 position = Vector2( -105.822, 520.66 )
@@ -116,7 +142,7 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Foreground/Cloud2/Sprite"]
 autoplay = "Mouvement"
-anims/Mouvement = SubResource( 2 )
+anims/Mouvement = SubResource( 3 )
 
 [node name="Cloud3" type="Position2D" parent="Foreground"]
 position = Vector2( -192.048, 490.909 )
@@ -133,7 +159,7 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Foreground/Cloud3/Sprite"]
 autoplay = "Mouvement"
-anims/Mouvement = SubResource( 3 )
+anims/Mouvement = SubResource( 4 )
 
 [node name="TurnCloudL" type="Position2D" parent="Foreground"]
 position = Vector2( 22.5517, 500.643 )
@@ -143,8 +169,8 @@ __meta__ = {
 
 [node name="Sprite" type="AnimatedSprite" parent="Foreground/TurnCloudL"]
 modulate = Color( 1, 1, 1, 0.313726 )
-frames = SubResource( 4 )
-frame = 2
+frames = SubResource( 5 )
+frame = 3
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -160,8 +186,8 @@ __meta__ = {
 
 [node name="Sprite" type="AnimatedSprite" parent="Foreground/TurnCloudR"]
 modulate = Color( 1, 1, 1, 0.313726 )
-frames = SubResource( 4 )
-frame = 2
+frames = SubResource( 5 )
+frame = 3
 playing = true
 __meta__ = {
 "_edit_lock_": true

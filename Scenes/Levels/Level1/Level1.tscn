@@ -1,11 +1,10 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Scenes/StartingPoints/StartingPointP2.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Camera/CheckpointBase.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/StartingPoints/StartingPointP1.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/S (base)/EarthBlockBase.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Levels/Base/LevelBase.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Camera/CameraRemake.gd" type="Script" id=6]
 [ext_resource path="res://Scenes/InteractiveObjects/Flag/FlagsGroup.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/InteractiveObjects/Water/Shader/WaterShader.tres" type="Material" id=9]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/GroupBase.gd" type="Script" id=10]
@@ -26,23 +25,23 @@
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/M/MEarthBlock.tscn" type="PackedScene" id=25]
 [ext_resource path="res://Scenes/Levels/Base/LevelBase.gd" type="Script" id=26]
 
-[sub_resource type="Shader" id=3]
+[sub_resource type="Shader" id=1]
 
-[sub_resource type="ShaderMaterial" id=4]
-shader = SubResource( 3 )
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 95.4873, 24.3285 )
 
-[sub_resource type="OpenSimplexNoise" id=1]
+[sub_resource type="OpenSimplexNoise" id=4]
 period = 13.6
 lacunarity = 2.37
 
-[sub_resource type="NoiseTexture" id=2]
+[sub_resource type="NoiseTexture" id=5]
 width = 100
 height = 100
 seamless = true
-noise = SubResource( 1 )
+noise = SubResource( 4 )
 
 [node name="Level1" instance=ExtResource( 5 )]
 script = ExtResource( 26 )
@@ -66,9 +65,11 @@ layer = 2
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Background" parent="GUI/HUD" index="0"]
+color = Color( 0, 0, 0, 0.501961 )
+
 [node name="Camera" parent="CameraSystem" index="0"]
 position = Vector2( 480, 270 )
-script = ExtResource( 6 )
 
 [node name="CameraChekpoint" parent="CameraSystem" index="1" instance=ExtResource( 2 )]
 position = Vector2( 2279, 270 )
@@ -298,12 +299,12 @@ position = Vector2( 1230, 408.948 )
 mass = 40.8163
 
 [node name="WaterTile" parent="InteractivesObjects/WaterTiles" index="0" instance=ExtResource( 20 )]
-material = SubResource( 4 )
+material = SubResource( 2 )
 position = Vector2( 1836.95, 111 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractivesObjects/WaterTiles/WaterTile" index="1"]
 position = Vector2( 0, 11.736 )
-shape = SubResource( 5 )
+shape = SubResource( 3 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -312,12 +313,12 @@ __meta__ = {
 [node name="WaterShader" parent="InteractivesObjects/WaterTiles/WaterTile" index="2" instance=ExtResource( 16 )]
 
 [node name="WaterTile2" parent="InteractivesObjects/WaterTiles" index="1" instance=ExtResource( 20 )]
-material = SubResource( 4 )
+material = SubResource( 2 )
 position = Vector2( 2291, 1405.39 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractivesObjects/WaterTiles/WaterTile2" index="1"]
 position = Vector2( 0, 11.736 )
-shape = SubResource( 5 )
+shape = SubResource( 3 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -327,7 +328,7 @@ __meta__ = {
 material = ExtResource( 9 )
 position = Vector2( 0.35849, 5.36782 )
 scale = Vector2( 1.732, 0.613 )
-texture = SubResource( 2 )
+texture = SubResource( 5 )
 __meta__ = {
 "_edit_lock_": true
 }

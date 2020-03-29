@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+class_name Player
+
 # Store all the children references
 onready var attributes_node = get_node("Attributes")
 onready var physic_node = get_node("Physic")
@@ -16,6 +18,14 @@ var level_node : Node
 
 # Get every children of this node
 onready var children_array : Array = get_children()
+
+
+# Class accesors
+func is_class(value: String):
+	return value == "Player"
+
+func get_class() -> String:
+	return "Player"
 
 # Give every reference they need to children nodes, and then call heir setup method if it possesses it
 func setup():

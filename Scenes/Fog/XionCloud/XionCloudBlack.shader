@@ -51,19 +51,14 @@ void fragment() {
 	vec4 color = vec4(vec3(fog_color.r, fog_color.g, fog_color.b), fog * opacity);
 	
 	// Handle the limit of the fog
-	float near_top = (UV.x + fog) / 3.0;
+	vec2 near_top = vec2(UV.x + fog, UV.y + fog) / 2.8;
 	near_top = clamp(near_top, 0.0, 1.0);
-	//near_top = near_top - 0.2;
 	
-	float edge_lower = 0.55 ;
+	float edge_lower = 0.8;
 	float edge_upper = edge_lower + fade_distance;
 	
-	if (near_top > edge_lower){
+	if(near_top.x > edge_lower || near_top.x < 1.1 - edge_lower || near_top.y > edge_lower || near_top.y < 1.1 - edge_lower){
 		color.a = 0.0;
-		
-		if (near_top < edge_upper){
-			color.a = 1.0 - near_top;
-		}
 	}
 	
 	COLOR = color;

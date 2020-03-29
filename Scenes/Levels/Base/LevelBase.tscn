@@ -19,11 +19,14 @@
 [ext_resource path="res://Global/Foreground/TruningCloud/FuméeTournante8.png" type="Texture" id=17]
 [ext_resource path="res://Global/Foreground/TruningCloud/FuméeTournante6.png" type="Texture" id=18]
 [ext_resource path="res://Scenes/GUI/HUD/HUD.tscn" type="PackedScene" id=19]
-[ext_resource path="res://Scenes/Levels/magenta_FG_fog_shadermaterial.tres" type="Material" id=20]
-[ext_resource path="res://Scenes/Levels/green_bg_fog_shadermaterial.tres" type="Material" id=21]
-[ext_resource path="res://Scenes/Levels/FogNormalMap.tres" type="Texture" id=22]
-[ext_resource path="res://Scenes/Levels/FogTexture.tres" type="Texture" id=23]
+[ext_resource path="res://Scenes/Fog/CosmeticFog/magenta_FG_fog_shadermaterial.tres" type="Material" id=20]
+[ext_resource path="res://Scenes/Fog/CosmeticFog/green_bg_fog_shadermaterial.tres" type="Material" id=21]
+[ext_resource path="res://Scenes/Fog/CosmeticFog/FogNormalMap.tres" type="Texture" id=22]
+[ext_resource path="res://Scenes/Fog/CosmeticFog/FogTexture.tres" type="Texture" id=23]
 [ext_resource path="res://Scenes/Levels/Base/LevelBase.gd" type="Script" id=24]
+
+
+
 
 [sub_resource type="Animation" id=2]
 resource_name = "Mouvement"

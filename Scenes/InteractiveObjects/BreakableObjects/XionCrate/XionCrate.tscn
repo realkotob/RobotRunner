@@ -31,11 +31,9 @@
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateSO/LargeCrateAnimSO1.png" type="Texture" id=29]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateNO/LargeCrateAnimNO5.png" type="Texture" id=30]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateSO/LargeCrateAnimSO5.png" type="Texture" id=31]
-[ext_resource path="res://Global/Autoloads/SFX/XionExplosion/XionExplosion.tscn" type="PackedScene" id=32]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/Blowing/CrateBlow1.png" type="Texture" id=33]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/Blowing/CrateBlow3.png" type="Texture" id=34]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/Blowing/CrateBlow2.png" type="Texture" id=35]
-
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -43,11 +41,6 @@ animations = [ {
 "loop": false,
 "name": "default",
 "speed": 13.0
-}, {
-"frames": [ ExtResource( 33 ), ExtResource( 35 ), ExtResource( 34 ) ],
-"loop": false,
-"name": "Blowing",
-"speed": 10.0
 } ]
 
 [sub_resource type="SpriteFrames" id=2]
@@ -82,9 +75,17 @@ animations = [ {
 "speed": 13.0
 } ]
 
+[sub_resource type="SpriteFrames" id=14]
+animations = [ {
+"frames": [ ExtResource( 33 ), ExtResource( 35 ), ExtResource( 34 ) ],
+"loop": false,
+"name": "default",
+"speed": 10.0
+} ]
+
 [sub_resource type="Animation" id=6]
 resource_name = "FadeOut"
-length = 1.5
+length = 0.9
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprites/Base:modulate")
 tracks/0/interp = 2
@@ -92,7 +93,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.8, 1.2 ),
+"times": PoolRealArray( 0.5, 0.9 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
@@ -261,8 +262,10 @@ frames = SubResource( 4 )
 [node name="SO" type="AnimatedSprite" parent="Sprites"]
 frames = SubResource( 5 )
 
-[node name="XionExplosion" parent="Sprites" instance=ExtResource( 32 )]
+[node name="Blowing" type="AnimatedSprite" parent="Sprites"]
 visible = false
+frames = SubResource( 14 )
+offset = Vector2( 0, -8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/FadeOut = SubResource( 6 )

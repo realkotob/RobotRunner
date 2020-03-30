@@ -6,11 +6,18 @@ export var speed : float = 40.0
 
 func _ready():
 	var _err = area_node.connect("body_entered", self, "on_body_entered")
+	_err = area_node.connect("body_exited", self, "on_body_exited")
 
 
-func on_body_entered(body : Node):
+# Triggers the overheat if a player enters the cloud
+func on_body_entered(body: Node):
 	if body.is_class("Player"):
 		body.overheat()
+
+
+func on_body_exited(body: Node):
+	if body.is_class("Player"):
+		body.stop_overheat()
 
 
 # Handle the movement to the next point on the path, return true if the node is arrived

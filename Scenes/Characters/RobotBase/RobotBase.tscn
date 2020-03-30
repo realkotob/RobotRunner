@@ -43,6 +43,16 @@ extents = Vector2( 15.53, 20 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
+"frames": [ ExtResource( 22 ) ],
+"loop": true,
+"name": "Jump",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 23 ) ],
+"loop": true,
+"name": "Fall",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ) ],
 "loop": true,
 "name": "Move",
@@ -57,16 +67,6 @@ animations = [ {
 "loop": false,
 "name": "Action",
 "speed": 20.0
-}, {
-"frames": [ ExtResource( 22 ) ],
-"loop": true,
-"name": "Jump",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 23 ) ],
-"loop": true,
-"name": "Fall",
-"speed": 5.0
 } ]
 
 [sub_resource type="AnimatedTexture" id=3]
@@ -211,10 +211,9 @@ __meta__ = {
 }
 
 [node name="Animation" type="AnimatedSprite" parent="."]
-modulate = Color( 1, 0, 0, 1 )
 frames = SubResource( 2 )
 animation = "Move"
-frame = 3
+frame = 2
 playing = true
 __meta__ = {
 "_edit_lock_": true

@@ -1,53 +1,56 @@
 extends Camera2D
 
-#var _timer = null
-
 onready var checkpoints_nodes_array = get_tree().get_nodes_in_group("CameraCheckpoint")
 onready var start_area_node = get_node("StartMovingArea")
 
 onready var new_cp_node = preload("res://Scenes/Camera/CheckpointBase.tscn")
 
-#signal player_outside_screen
-#signal player_inside_screen
-
-var players_pos = []
-var players = []
+var players_array : Array = []
 var cam_dir : String
-var _err
 
 func _ready():
 	set_physics_process(false)
 
+
 func setup():
-	_err = start_area_node.connect("body_entered", self, "on_start_area_body_entered")
+	var _err = start_area_node.connect("body_entered", self, "on_start_area_body_entered")
 	
 	for checkpoint in checkpoints_nodes_array:
 		_err = checkpoint.connect("camera_reached_checkpoint", self, "_on_checkpoint_reached")
 	
-	players = get_tree().get_nodes_in_group("Players") #Put all the players in an array
+	# Put all the players in an array
+	players_array = get_tree().get_nodes_in_group("Players") 
 
 
-func _physics_process(_delta):
-	calculate_players_position()
-	adapt_camera_position()
+func _physics_process(delta):
+	adapt_camera_position(delta)
 
 
-func calculate_players_position():
-	#Put the all the players positions in an array players_pos
-	players_pos = [players[0].position, players[1].position]
-
-
-func adapt_camera_position():
-	#Change the position of the camera according to the position of the players
+# Change the position of the camera according to the position of the players
+func adapt_camera_position(delta: float):
+	# Update the players array
+	players_array = get_tree().get_nodes_in_group("Players")
+	
+	# Compute the average position of every players
+	var average_pos := Vector2.ZERO
+	for player in players_array:
+		average_pos += player.position
+	average_pos /= len(players_array)
+	
+	# Compute the camera speed
+	var camera_speed = clamp(3 * delta, 0.0, 1.0)
+	
+	# Move the camera speed towards the average postion
+	# with a horiziontal/vertical restriction
 	if(cam_dir == 'leftright'):
-		self.position.x = ((players_pos[0].x + players_pos[1].x) / 2)
+		position.x = lerp(position.x, average_pos.x, camera_speed)
 	if(cam_dir == 'updown'):
-		self.position.y = ((players_pos[0].y + players_pos[1].y) / 2)
+		position.y = lerp(position.y, average_pos.y, camera_speed)
 
 
 # Start to move the camera if a player enter the start area
 func on_start_area_body_entered(body):
-	if body in players:
+	if body in players_array:
 		cam_dir = 'leftright'
 		set_physics_process(true)
 		start_area_node.queue_free()

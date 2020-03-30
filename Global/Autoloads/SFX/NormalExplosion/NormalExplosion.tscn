@@ -19,7 +19,7 @@ animations = [ {
 "frames": [ ExtResource( 1 ), ExtResource( 9 ), ExtResource( 4 ), ExtResource( 2 ), ExtResource( 10 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 5 ) ],
 "loop": false,
 "name": "default",
-"speed": 13.0
+"speed": 15.0
 } ]
 
 [node name="NormalExplosion" type="AnimatedSprite"]

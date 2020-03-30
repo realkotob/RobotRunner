@@ -11,5 +11,4 @@ func play_animation():
 
 
 func on_animation_finished():
-	set_visible(false)
-	set_frame(0)
+	queue_free()

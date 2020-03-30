@@ -75,10 +75,21 @@ func on_xion_received():
 	anim_player_node.play("MagentaFlash")
 
 
+# Triggers the overheat animation
+# Called by the cloud when a player enters it
 func overheat():
 	anim_player_node.play("Overheat")
 
 
+# Stops the overheat animation
+func stop_overheat():
+	var anim_queue : Array = anim_player_node.get_queue()
+	if len(anim_queue) > 0:
+		if anim_queue[0].name == "Overheat":
+			anim_player_node.stop()
+
+
+# Triggers the explosion and the destruction of the robot
 func on_animation_finished(animation: String):
 	if animation == "Overheat":
 		var explosion = SFX_autoload.normal_explosion.instance()

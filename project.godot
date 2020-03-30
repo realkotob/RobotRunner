@@ -182,6 +182,8 @@ default_bus_layout="res://Global/AudioBus/default_bus_layout.tres"
 
 SCORE="*res://Global/Score/Score.gd"
 SFX="*res://Global/Autoloads/SFX/SFX_Autoload.gd"
+MENUS="*res://Global/Autoloads/menus_autoload.gd"
+GAME="*res://Scenes/Main/Game.gd"
 
 [debug]
 

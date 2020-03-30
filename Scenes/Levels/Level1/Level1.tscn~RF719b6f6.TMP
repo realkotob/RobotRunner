@@ -5,7 +5,6 @@
 [ext_resource path="res://Scenes/StartingPoints/StartingPointP1.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/S (base)/EarthBlockBase.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Levels/Base/LevelBase.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/XionCrate.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/InteractiveObjects/Flag/FlagsGroup.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/InteractiveObjects/Water/Shader/WaterShader.tres" type="Material" id=9]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/GroupBase.gd" type="Script" id=10]
@@ -23,6 +22,7 @@
 [ext_resource path="res://Scenes/InteractiveObjects/Teleports/TeleportArea.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/S (BASE)/IceBlockBase.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/M/MEarthBlock.tscn" type="PackedScene" id=25]
+[ext_resource path="res://Scenes/Levels/Base/LevelBase.gd" type="Script" id=26]
 
 [sub_resource type="Shader" id=1]
 
@@ -43,6 +43,7 @@ seamless = true
 noise = SubResource( 4 )
 
 [node name="Level1" instance=ExtResource( 5 )]
+script = ExtResource( 26 )
 
 [node name="StartingPointP1" parent="." index="0" instance=ExtResource( 3 )]
 position = Vector2( 64.7148, 217 )
@@ -51,10 +52,10 @@ position = Vector2( 64.7148, 217 )
 position = Vector2( 64.7148, 311.5 )
 
 [node name="Sprite" parent="Foreground/Clouds/TurnCloudL" index="0"]
-frame = 3
+frame = 5
 
 [node name="Sprite" parent="Foreground/Clouds/TurnCloudR" index="0"]
-frame = 3
+frame = 5
 
 [node name="Popups" parent="GUI" index="0"]
 grow_horizontal = 2
@@ -114,9 +115,6 @@ tile_data = PoolIntArray( -65538, 6, 0, -65537, 6, 1, -131072, 6, 1, -131071, 6,
 tile_data = PoolIntArray( 65566, 14, 0, 917566, 536870922, 0 )
 
 [node name="XionCrates" type="Node2D" parent="InteractivesObjects" index="0"]
-
-[node name="XionCrate" parent="InteractivesObjects/XionCrates" index="0" instance=ExtResource( 6 )]
-position = Vector2( 140, 216.427 )
 
 [node name="IceBlockBase" parent="InteractivesObjects/IceBlocks/S" index="0" instance=ExtResource( 24 )]
 position = Vector2( 552, 132 )
@@ -558,7 +556,10 @@ position = Vector2( 3169, 808 )
 [node name="GreenDoor" parent="InteractivesObjects/Buttons&Doors/G15" index="1" instance=ExtResource( 13 )]
 position = Vector2( 3496, 792 )
 
-[node name="Flags" type="Node2D" parent="InteractivesObjects" index="6"]
+[node name="XionCrate" parent="InteractivesObjects" index="6" instance=ExtResource( 25 )]
+position = Vector2( 144, 216 )
+
+[node name="Flags" type="Node2D" parent="InteractivesObjects" index="7"]
 script = ExtResource( 7 )
 __meta__ = {
 "_edit_lock_": true

@@ -27,6 +27,6 @@ func on_timer_timeout():
 		"MENU":
 			var _err = get_tree().change_scene(title_screen)
 		"RETRY":
-			game_node.generate_current_level()
+			GAME.goto_current_level()
 	
 	queue_free()

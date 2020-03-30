@@ -40,14 +40,14 @@ func adapt_camera_position(delta: float):
 	average_pos /= len(players_array)
 	
 	# Compute the camera speed
-	var real_camera_speed = clamp(camera_speed * delta, 0.0, 1.0)
+	var reel_camera_speed = clamp(camera_speed * delta, 0.0, 1.0)
 	
 	# Move the camera speed towards the average postion
-	# with a horiziontal/vertical restriction
+	# With a horiziontal/vertical restriction
 	if(cam_dir == 'leftright'):
-		position.x = lerp(position.x, average_pos.x, real_camera_speed)
+		position.x = lerp(position.x, average_pos.x, reel_camera_speed)
 	if(cam_dir == 'updown'):
-		position.y = lerp(position.y, average_pos.y, real_camera_speed)
+		position.y = lerp(position.y, average_pos.y, reel_camera_speed)
 
 
 # Start to move the camera if a player enter the start area

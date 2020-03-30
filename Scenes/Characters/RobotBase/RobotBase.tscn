@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/RobotBase.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/Physic.gd" type="Script" id=2]
@@ -96,6 +96,22 @@ extents = Vector2( 30, 30 )
 [sub_resource type="CapsuleShape2D" id=6]
 radius = 10.3682
 height = 1.0
+
+[sub_resource type="Animation" id=9]
+resource_name = "Default"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Animation:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=7]
 resource_name = "MagentaFlash"
@@ -287,5 +303,6 @@ one_way_collision = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 1.5
+anims/Default = SubResource( 9 )
 anims/MagentaFlash = SubResource( 7 )
 anims/Overheat = SubResource( 8 )

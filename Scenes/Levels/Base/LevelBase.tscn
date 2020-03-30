@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Scenes/Camera/CameraRemake.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Camera/Camera.tscn" type="PackedScene" id=2]
@@ -25,27 +25,7 @@
 [ext_resource path="res://Scenes/Fog/CosmeticFog/FogTexture.tres" type="Texture" id=23]
 [ext_resource path="res://Scenes/Levels/Base/LevelBase.gd" type="Script" id=24]
 
-
-
-
-[sub_resource type="Animation" id=2]
-resource_name = "Mouvement"
-length = 90.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 45.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( -1300, 0 ) ]
-}
-
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=1]
 resource_name = "Mouvement"
 length = 80.0
 loop = true
@@ -62,7 +42,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 1300, 0 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 length = 60.0
 loop = true
 tracks/0/type = "value"
@@ -78,7 +58,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 1300, 0 ) ]
 }
 
-[sub_resource type="SpriteFrames" id=5]
+[sub_resource type="SpriteFrames" id=3]
 animations = [ {
 "frames": [ ExtResource( 12 ), ExtResource( 15 ), ExtResource( 11 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 18 ), ExtResource( 16 ), ExtResource( 17 ) ],
 "loop": true,
@@ -115,7 +95,7 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Foreground/Clouds/Cloud1/Sprite"]
 autoplay = "Mouvement"
-anims/Mouvement = SubResource( 2 )
+anims/Mouvement = SubResource( 1 )
 
 [node name="Cloud2" type="Position2D" parent="Foreground/Clouds"]
 position = Vector2( -105.822, 520.66 )
@@ -132,7 +112,7 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Foreground/Clouds/Cloud2/Sprite"]
 autoplay = "Mouvement"
-anims/Mouvement = SubResource( 3 )
+anims/Mouvement = SubResource( 2 )
 
 [node name="Cloud3" type="Position2D" parent="Foreground/Clouds"]
 position = Vector2( -192.048, 490.909 )
@@ -149,7 +129,6 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Foreground/Clouds/Cloud3/Sprite"]
 autoplay = "Mouvement"
-anims/Mouvement = SubResource( 4 )
 
 [node name="TurnCloudL" type="Position2D" parent="Foreground/Clouds"]
 position = Vector2( 22.5517, 500.643 )
@@ -159,8 +138,8 @@ __meta__ = {
 
 [node name="Sprite" type="AnimatedSprite" parent="Foreground/Clouds/TurnCloudL"]
 modulate = Color( 1, 1, 1, 0.313726 )
-frames = SubResource( 5 )
-frame = 1
+frames = SubResource( 3 )
+frame = 5
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -176,8 +155,8 @@ __meta__ = {
 
 [node name="Sprite" type="AnimatedSprite" parent="Foreground/Clouds/TurnCloudR"]
 modulate = Color( 1, 1, 1, 0.313726 )
-frames = SubResource( 5 )
-frame = 1
+frames = SubResource( 3 )
+frame = 5
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -214,7 +193,6 @@ __meta__ = {
 [node name="HUD" parent="GUI" instance=ExtResource( 19 )]
 
 [node name="CameraSystem" type="Node2D" parent="."]
-visible = false
 z_index = 999
 __meta__ = {
 "_edit_lock_": true

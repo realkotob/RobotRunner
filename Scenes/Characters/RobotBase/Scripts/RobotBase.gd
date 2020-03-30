@@ -83,10 +83,9 @@ func overheat():
 
 # Stops the overheat animation
 func stop_overheat():
-	var anim_queue : Array = anim_player_node.get_queue()
-	if len(anim_queue) > 0:
-		if anim_queue[0].name == "Overheat":
-			anim_player_node.stop()
+	var anim : String = anim_player_node.get_current_animation()
+	if anim == "Overheat":
+		anim_player_node.play("Default")
 
 
 # Triggers the explosion and the destruction of the robot
@@ -96,4 +95,5 @@ func on_animation_finished(animation: String):
 		explosion.set_global_position(global_position)
 		SFX_autoload.add_child(explosion)
 		explosion.play_animation()
+		GAME.gameover()
 		queue_free()

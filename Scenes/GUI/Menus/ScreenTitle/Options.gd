@@ -1,8 +1,6 @@
 extends MenuOptionsBase
 
-onready var option_menu = preload("res://Scenes/GUI/Menus/OptionsMenu/OptionsMenu.tscn")
-
 func on_pressed():
-	var opt_menu_node = option_menu.instance()
+	var opt_menu_node = MENUS.option_menu_scene.instance()
 	owner.get_parent().add_child(opt_menu_node)
 	owner.queue_free()

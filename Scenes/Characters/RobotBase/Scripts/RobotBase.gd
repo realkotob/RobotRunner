@@ -14,8 +14,6 @@ onready var hit_box_node = get_node("HitBox")
 onready var SFX_node = get_node("SFX")
 onready var anim_player_node = get_node("AnimationPlayer")
 
-onready var SFX_autoload = get_node("/root/SFX")
-
 var level_node : Node
 
 # Get every children of this node
@@ -91,9 +89,9 @@ func stop_overheat():
 # Triggers the explosion and the destruction of the robot
 func on_animation_finished(animation: String):
 	if animation == "Overheat":
-		var explosion = SFX_autoload.normal_explosion.instance()
+		var explosion = SFX.normal_explosion.instance()
 		explosion.set_global_position(global_position)
-		SFX_autoload.add_child(explosion)
+		SFX.add_child(explosion)
 		explosion.play_animation()
 		GAME.gameover()
 		queue_free()

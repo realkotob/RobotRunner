@@ -17,7 +17,7 @@ func _ready():
 func _physics_process(delta):
 	if len(path) > 0:
 		var target_point_world = path[len(path) - 1]
-		var arrived_to_next_point = xion_cloud_node.move_to(target_point_world, delta)
+		var arrived_to_next_point = xion_cloud_node.move_to(target_point_world, scale, delta)
 		
 		# If the cloud is arrived to the next point, remove this point from the path and take the next for destination
 		if arrived_to_next_point == true:

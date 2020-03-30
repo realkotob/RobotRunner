@@ -3,7 +3,7 @@ extends Area2D
 signal camera_reached_checkpoint
 export var cp_dir : Vector2
 export var is_enabled : bool = true
-export var Camera_Zoom : Vector2
+export var Camera_Zoom := Vector2.ONE
 
 onready var game_camera_node = get_parent().get_child(0)
 onready var checkpoint_area = get_node("CollisionShape2D")

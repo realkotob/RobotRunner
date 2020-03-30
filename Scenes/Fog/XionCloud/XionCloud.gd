@@ -15,6 +15,7 @@ func on_body_entered(body: Node):
 		body.overheat()
 
 
+# Stop the overheat animation when a player exits the cloud
 func on_body_exited(body: Node):
 	if body.is_class("Player"):
 		body.stop_overheat()

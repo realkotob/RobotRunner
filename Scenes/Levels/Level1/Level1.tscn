@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Scenes/StartingPoints/StartingPointP2.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Camera/CheckpointBase.tscn" type="PackedScene" id=2]
@@ -7,8 +7,10 @@
 [ext_resource path="res://Scenes/Levels/Base/LevelBase.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/XionCrate.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/InteractiveObjects/Flag/FlagsGroup.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/Fog/XionCloud/XionCloud.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/InteractiveObjects/Water/Shader/WaterShader.tres" type="Material" id=9]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/GroupBase.gd" type="Script" id=10]
+[ext_resource path="res://Scenes/Fog/XionCloud/CloudPath.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Door/ChildrenScenes/BlueDoor.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Door/ChildrenScenes/GreenDoor.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/InteractiveObjects/Flag/RedFlag.tscn" type="PackedScene" id=14]
@@ -51,10 +53,10 @@ position = Vector2( 64.7148, 217 )
 position = Vector2( 64.7148, 311.5 )
 
 [node name="Sprite" parent="Foreground/Clouds/TurnCloudL" index="0"]
-frame = 3
+frame = 0
 
 [node name="Sprite" parent="Foreground/Clouds/TurnCloudR" index="0"]
-frame = 3
+frame = 0
 
 [node name="Popups" parent="GUI" index="0"]
 grow_horizontal = 2
@@ -73,7 +75,7 @@ cp_dir = Vector2( 1, 0 )
 
 [node name="CameraChekpoint3" parent="CameraSystem" index="3" instance=ExtResource( 2 )]
 position = Vector2( 2663, 1318 )
-cp_dir = Vector2( 0, 1 )
+cp_dir = Vector2( 0, -1 )
 
 [node name="CameraChekpoint4" parent="CameraSystem" index="4" instance=ExtResource( 2 )]
 position = Vector2( 2663, 142 )
@@ -569,4 +571,9 @@ position = Vector2( 3430, 1150 )
 
 [node name="BlueFlag" parent="InteractivesObjects/Flags" index="1" instance=ExtResource( 15 )]
 position = Vector2( 3630, 1150 )
+
+[node name="CloudPath" parent="." index="7" instance=ExtResource( 11 )]
+
+[node name="XionCloud" parent="CloudPath" index="0" instance=ExtResource( 8 )]
+position = Vector2( -530, 266.5 )
 [connection signal="cp_switch_state" from="CameraSystem/CameraChekpoint4" to="CameraSystem/CameraChekpoint5" method="_on_CameraChekpoint4_cp_switch_state"]

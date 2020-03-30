@@ -12,16 +12,11 @@ var cam_dir : String
 
 func _ready():
 	set_physics_process(false)
-
-
-func setup():
+	
 	var _err = start_area_node.connect("body_entered", self, "on_start_area_body_entered")
 	
 	for checkpoint in checkpoints_nodes_array:
 		_err = checkpoint.connect("camera_reached_checkpoint", self, "_on_checkpoint_reached")
-	
-	# Put all the players in an array
-	players_array = get_tree().get_nodes_in_group("Players") 
 
 
 func _physics_process(delta):
@@ -52,6 +47,9 @@ func adapt_camera_position(delta: float):
 
 # Start to move the camera if a player enter the start area
 func on_start_area_body_entered(body):
+	# Put all the players in an array
+	players_array = get_tree().get_nodes_in_group("Players") 
+	
 	if body in players_array:
 		cam_dir = 'leftright'
 		set_physics_process(true)

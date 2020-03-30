@@ -32,8 +32,6 @@ func _ready():
 
 # Give every reference they need to children nodes, and then call heir setup method if it possesses it
 func setup():
-	add_to_group("Players")
-	
 	for child in children_array:
 		if "character_node" in child:
 			child.character_node = self

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Scenes/Camera/Camera.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Camera/CameraRemake.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 142.202, 436.293 )
@@ -30,7 +30,6 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StartMovingArea"]
-visible = false
 position = Vector2( 340, 3 )
 shape = SubResource( 1 )
 __meta__ = {

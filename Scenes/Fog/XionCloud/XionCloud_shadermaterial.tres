@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://Scenes/Fog/XionCloud/XionCloudBlack.shader" type="Shader" id=1]
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/fog_color = Color( 0.439216, 0, 0.411765, 1 )
+shader_param/distort_speed = Vector2( -0.05, 0.02 )
+shader_param/speed_multiplier = -1.5
+shader_param/opacity = 0.8
+shader_param/OCTAVES = 5
+shader_param/offset = Vector2( 30, 0 )
+shader_param/fade_distance = 0.01

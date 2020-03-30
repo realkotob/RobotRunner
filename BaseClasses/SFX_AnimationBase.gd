@@ -7,8 +7,8 @@ func _ready():
 
 func play_animation():
 	set_visible(true)
-	play("default")
+	play()
+
 
 func on_animation_finished():
-	set_visible(false)
-	set_frame(0)
+	queue_free()

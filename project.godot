@@ -84,6 +84,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://BaseClasses/MoveBase.gd"
 }, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Scenes/Characters/RobotBase/Scripts/RobotBase.gd"
+}, {
 "base": "StateBase",
 "class": "PlayerStateBase",
 "language": "GDScript",
@@ -150,6 +155,7 @@ _global_script_class_icons={
 "MenuBase": "",
 "MenuOptionsBase": "",
 "MoveBase": "",
+"Player": "",
 "PlayerStateBase": "",
 "SFX_AnimationBase": "",
 "SFX_group_base": "",
@@ -175,6 +181,9 @@ default_bus_layout="res://Global/AudioBus/default_bus_layout.tres"
 [autoload]
 
 SCORE="*res://Global/Score/Score.gd"
+SFX="*res://Global/Autoloads/SFX/SFX_Autoload.gd"
+MENUS="*res://Global/Autoloads/menus_autoload.gd"
+GAME="*res://Global/Autoloads/Game.tscn"
 
 [debug]
 

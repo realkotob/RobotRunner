@@ -2,23 +2,38 @@ extends Node2D
 
 class_name LevelBase
 
-var outside_screen_popup_scene = preload("res://Scenes/GUI/OutsideScreenPopup/OutsideScreenPopup.tscn")
-var outside_screen_popup_node : Node
-
-onready var camera_node = get_node("CameraSystem/Camera")
-onready var popups_node = get_node("GUI/Popups")
-onready var GUI_node = get_node("GUI")
-
-
 func _ready():
-	#var _err = camera_node.connect("player_outside_screen", self, "on_player_outside_screen")
-	pass
+	instanciate_players()
 
-# Create the popup when a player exits the screen
-#func on_player_outside_screen(player : KinematicBody2D):
-#	outside_screen_popup_node = outside_screen_popup_scene.instance()
-#	popups_node.call_deferred("add_child", outside_screen_popup_node)
-#
-#	outside_screen_popup_node.player_node = player
-#	outside_screen_popup_node.camera_node = camera_node
-#	outside_screen_popup_node.position.y = player.position.y
+
+# Intanciate the players inside the level
+func instanciate_players():
+	# Get the players starting positions
+	var player1_start_node = get_node_or_null("StartingPointP1")
+	var player2_start_node = get_node_or_null("StartingPointP2")
+
+	# Add the players scene to the level scene a the position of the start position
+	if player1_start_node != null:
+		var player1_start_pos = player1_start_node.get_global_position()
+		var player1_node = GAME.player1.instance()
+		player1_node.global_position = player1_start_pos
+		player1_node.level_node = self
+		add_child(player1_node)
+		
+		player1_node.setup()
+		
+	if player2_start_node != null:
+		var player2_start_pos = player2_start_node.get_global_position()
+		var player2_node = GAME.player2.instance()
+		player2_node.global_position = player2_start_pos
+		player2_node.level_node = self
+		add_child(player2_node)
+		
+		player2_node.setup()
+
+
+	# Give the references to the players node to every interactive objects needing it
+	var interactive_objects_array = get_tree().get_nodes_in_group("InteractivesObjects")
+	for inter_object in interactive_objects_array:
+		if inter_object.get("players_node_array") != null:
+			inter_object.players_node_array = get_tree().get_nodes_in_group("Players")

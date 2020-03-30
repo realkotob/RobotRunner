@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+class_name Player
+
 # Store all the children references
 onready var attributes_node = get_node("Attributes")
 onready var physic_node = get_node("Physic")
@@ -10,17 +12,26 @@ onready var states_node = get_node("States")
 onready var animation_node = get_node("Animation")
 onready var hit_box_node = get_node("HitBox")
 onready var SFX_node = get_node("SFX")
-onready var flash_node = get_node("Flash")
+onready var anim_player_node = get_node("AnimationPlayer")
 
 var level_node : Node
 
 # Get every children of this node
 onready var children_array : Array = get_children()
 
+# Class accesors
+func is_class(value: String):
+	return value == "Player"
+
+func get_class() -> String:
+	return "Player"
+
+
+func _ready():
+	var _err = anim_player_node.connect("animation_finished", self, "on_animation_finished")
+
 # Give every reference they need to children nodes, and then call heir setup method if it possesses it
 func setup():
-	add_to_group("Players")
-	
 	for child in children_array:
 		if "character_node" in child:
 			child.character_node = self
@@ -57,4 +68,28 @@ func setup():
 
 
 func on_xion_received():
-	flash_node.play("MagentaFlash")
+	anim_player_node.play("MagentaFlash")
+
+
+# Triggers the overheat animation
+# Called by the cloud when a player enters it
+func overheat():
+	anim_player_node.play("Overheat")
+
+
+# Stops the overheat animation
+func stop_overheat():
+	var anim : String = anim_player_node.get_current_animation()
+	if anim == "Overheat":
+		anim_player_node.play("Default")
+
+
+# Triggers the explosion and the destruction of the robot
+func on_animation_finished(animation: String):
+	if animation == "Overheat":
+		var explosion = SFX.normal_explosion.instance()
+		explosion.set_global_position(global_position)
+		SFX.add_child(explosion)
+		explosion.play_animation()
+		GAME.gameover()
+		queue_free()

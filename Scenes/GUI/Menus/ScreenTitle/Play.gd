@@ -5,4 +5,4 @@ onready var strMainScene = "res://Scenes/Main/Game.tscn"
 
 # Player Selection -> New Game
 func on_pressed():
-	var _err = get_tree().change_scene(strMainScene)
+	var _err = GAME.goto_current_level()

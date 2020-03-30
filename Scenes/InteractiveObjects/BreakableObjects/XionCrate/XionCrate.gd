@@ -23,6 +23,7 @@ func _ready():
 	_err = base_anim_node.connect("animation_finished", self, "on_sprite_animation_finished")
 	_err = animation_player_node.connect("animation_finished", self, "on_fade_out_finished")
 	_err = xion_explosion_node.connect("frame_changed", self, "on_explode_anim_frame_changed")
+	_err = xion_explosion_node.connect("animation_finished", self, "on_explode_anim_finished")
 	
 	for child in sprites_group_node.get_children():
 		if child.is_class("AnimatedSprite"):
@@ -86,6 +87,10 @@ func on_explode_anim_frame_changed():
 				xion_collactable_node.position = global_position
 				xion_collactable_node.aimed_character = actor_destroying
 				owner.add_child(xion_collactable_node)
+
+
+func on_explode_anim_finished():
+	xion_explosion_node.set_visible(false)
 
 
 # Triggers every animation_sprite's animation

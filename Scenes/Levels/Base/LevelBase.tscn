@@ -1,6 +1,5 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=27 format=2]
 
-[ext_resource path="res://Scenes/Camera/CameraRemake.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Camera/Camera.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Camera/GUI.gd" type="Script" id=3]
 [ext_resource path="res://Global/Background/Background.png" type="Texture" id=4]
@@ -19,52 +18,13 @@
 [ext_resource path="res://Global/Foreground/TruningCloud/FuméeTournante8.png" type="Texture" id=17]
 [ext_resource path="res://Global/Foreground/TruningCloud/FuméeTournante6.png" type="Texture" id=18]
 [ext_resource path="res://Scenes/GUI/HUD/HUD.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Scenes/Fog/CosmeticFog/magenta_FG_fog_shadermaterial.tres" type="Material" id=20]
+[ext_resource path="res://Scenes/Fog/CosmeticFog/green_bg_fog_shadermaterial.tres" type="Material" id=21]
+[ext_resource path="res://Scenes/Fog/CosmeticFog/FogNormalMap.tres" type="Texture" id=22]
+[ext_resource path="res://Scenes/Fog/CosmeticFog/FogTexture.tres" type="Texture" id=23]
+[ext_resource path="res://Scenes/Levels/Base/LevelBase.gd" type="Script" id=24]
 
-[sub_resource type="GDScript" id=1]
-script/source = "extends Node2D
-
-class_name LevelBase
-
-var outside_screen_popup_scene = preload(\"res://Scenes/GUI/OutsideScreenPopup/OutsideScreenPopup.tscn\")
-var outside_screen_popup_node : Node
-
-onready var camera_node = get_node(\"CameraSystem/Camera\")
-onready var popups_node = get_node(\"GUI/Popups\")
-onready var GUI_node = get_node(\"GUI\")
-
-
-func _ready():
-	#var _err = camera_node.connect(\"player_outside_screen\", self, \"on_player_outside_screen\")
-	pass
-
-# Create the popup when a player exits the screen
-#func on_player_outside_screen(player : KinematicBody2D):
-#	outside_screen_popup_node = outside_screen_popup_scene.instance()
-#	popups_node.call_deferred(\"add_child\", outside_screen_popup_node)
-#
-#	outside_screen_popup_node.player_node = player
-#	outside_screen_popup_node.camera_node = camera_node
-#	outside_screen_popup_node.position.y = player.position.y
-"
-
-[sub_resource type="Animation" id=2]
-resource_name = "Mouvement"
-length = 90.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 45.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( -1300, 0 ) ]
-}
-
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=1]
 resource_name = "Mouvement"
 length = 80.0
 loop = true
@@ -81,7 +41,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 1300, 0 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 length = 60.0
 loop = true
 tracks/0/type = "value"
@@ -97,7 +57,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 1300, 0 ) ]
 }
 
-[sub_resource type="SpriteFrames" id=5]
+[sub_resource type="SpriteFrames" id=3]
 animations = [ {
 "frames": [ ExtResource( 12 ), ExtResource( 15 ), ExtResource( 11 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 18 ), ExtResource( 16 ), ExtResource( 17 ) ],
 "loop": true,
@@ -106,7 +66,7 @@ animations = [ {
 } ]
 
 [node name="LevelBase" type="Node2D"]
-script = SubResource( 1 )
+script = ExtResource( 24 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -114,82 +74,101 @@ __meta__ = {
 [node name="Foreground" type="CanvasLayer" parent="."]
 layer = 2
 
-[node name="Cloud1" type="Position2D" parent="Foreground"]
+[node name="Clouds" type="Node2D" parent="Foreground"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Cloud1" type="Position2D" parent="Foreground/Clouds"]
 position = Vector2( 1033.34, 501.457 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Sprite" type="Sprite" parent="Foreground/Cloud1"]
+[node name="Sprite" type="Sprite" parent="Foreground/Clouds/Cloud1"]
 modulate = Color( 1, 1, 1, 0.431373 )
 texture = ExtResource( 8 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Foreground/Cloud1/Sprite"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Foreground/Clouds/Cloud1/Sprite"]
 autoplay = "Mouvement"
-anims/Mouvement = SubResource( 2 )
+anims/Mouvement = SubResource( 1 )
 
-[node name="Cloud2" type="Position2D" parent="Foreground"]
+[node name="Cloud2" type="Position2D" parent="Foreground/Clouds"]
 position = Vector2( -105.822, 520.66 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="Sprite" type="Sprite" parent="Foreground/Cloud2"]
+[node name="Sprite" type="Sprite" parent="Foreground/Clouds/Cloud2"]
 modulate = Color( 1, 1, 1, 0.431373 )
 texture = ExtResource( 9 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Foreground/Cloud2/Sprite"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Foreground/Clouds/Cloud2/Sprite"]
 autoplay = "Mouvement"
-anims/Mouvement = SubResource( 3 )
+anims/Mouvement = SubResource( 2 )
 
-[node name="Cloud3" type="Position2D" parent="Foreground"]
+[node name="Cloud3" type="Position2D" parent="Foreground/Clouds"]
 position = Vector2( -192.048, 490.909 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Sprite" type="Sprite" parent="Foreground/Cloud3"]
+[node name="Sprite" type="Sprite" parent="Foreground/Clouds/Cloud3"]
 modulate = Color( 1, 1, 1, 0.431373 )
 texture = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Foreground/Cloud3/Sprite"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Foreground/Clouds/Cloud3/Sprite"]
 autoplay = "Mouvement"
-anims/Mouvement = SubResource( 4 )
 
-[node name="TurnCloudL" type="Position2D" parent="Foreground"]
+[node name="TurnCloudL" type="Position2D" parent="Foreground/Clouds"]
 position = Vector2( 22.5517, 500.643 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Sprite" type="AnimatedSprite" parent="Foreground/TurnCloudL"]
+[node name="Sprite" type="AnimatedSprite" parent="Foreground/Clouds/TurnCloudL"]
 modulate = Color( 1, 1, 1, 0.313726 )
-frames = SubResource( 5 )
-frame = 7
+frames = SubResource( 3 )
 playing = true
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="TurnCloudR" type="Position2D" parent="Foreground"]
+[node name="TurnCloudR" type="Position2D" parent="Foreground/Clouds"]
 position = Vector2( 923.552, 500.643 )
-rotation = 3.14159
+rotation = -3.14159
 scale = Vector2( 1, -1 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Sprite" type="AnimatedSprite" parent="Foreground/TurnCloudR"]
+[node name="Sprite" type="AnimatedSprite" parent="Foreground/Clouds/TurnCloudR"]
 modulate = Color( 1, 1, 1, 0.313726 )
-frames = SubResource( 5 )
-frame = 7
+frames = SubResource( 3 )
 playing = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Fog" type="Node2D" parent="Foreground"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Fog" type="Sprite" parent="Foreground/Fog"]
+material = ExtResource( 20 )
+position = Vector2( 470.01, 277.517 )
+scale = Vector2( 2.09202, 1.27633 )
+texture = ExtResource( 23 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -217,7 +196,6 @@ __meta__ = {
 }
 
 [node name="Camera" parent="CameraSystem" instance=ExtResource( 2 )]
-script = ExtResource( 1 )
 
 [node name="Map" type="Node2D" parent="."]
 z_index = 2
@@ -226,19 +204,23 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Background" type="ParallaxBackground" parent="Map"]
+[node name="Background" type="Node2D" parent="Map"]
+z_index = -10
+z_as_relative = false
+
+[node name="Parallaxe" type="ParallaxBackground" parent="Map/Background"]
 layer = -1
 follow_viewport_enable = true
 scroll_base_scale = Vector2( -1, -1 )
 
-[node name="Back" type="ParallaxLayer" parent="Map/Background"]
+[node name="Back" type="ParallaxLayer" parent="Map/Background/Parallaxe"]
 position = Vector2( 800, 0 )
 motion_scale = Vector2( 0.2, 0.2 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="BGBase" type="Sprite" parent="Map/Background/Back"]
+[node name="BGBase" type="Sprite" parent="Map/Background/Parallaxe/Back"]
 modulate = Color( 1, 0.96, 0.96, 1 )
 light_mask = 2
 position = Vector2( -2330, -3040 )
@@ -250,20 +232,20 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Lights" type="ParallaxLayer" parent="Map/Background"]
+[node name="Lights" type="ParallaxLayer" parent="Map/Background/Parallaxe"]
 motion_scale = Vector2( 0.25, 0.25 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Gears" type="ParallaxLayer" parent="Map/Background"]
+[node name="Gears" type="ParallaxLayer" parent="Map/Background/Parallaxe"]
 position = Vector2( 800, 0 )
 motion_scale = Vector2( 0.3, 0.3 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Gears" type="Sprite" parent="Map/Background/Gears"]
+[node name="Gears" type="Sprite" parent="Map/Background/Parallaxe/Gears"]
 modulate = Color( 1, 0.903333, 0.9, 1 )
 light_mask = 2
 texture = ExtResource( 7 )
@@ -273,13 +255,31 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="ProdLine1" parent="Map/Background" instance=ExtResource( 6 )]
+[node name="ProdLine1" parent="Map/Background/Parallaxe" instance=ExtResource( 6 )]
 position = Vector2( 0, 370 )
 motion_scale = Vector2( 0.4, 0.4 )
 
-[node name="ProdLine2" parent="Map/Background" instance=ExtResource( 6 )]
+[node name="ProdLine2" parent="Map/Background/Parallaxe" instance=ExtResource( 6 )]
 position = Vector2( 0, 650 )
 motion_scale = Vector2( 0.4, 0.4 )
+
+[node name="Fog" type="ParallaxLayer" parent="Map/Background/Parallaxe"]
+motion_scale = Vector2( 0.5, 0.5 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Fog" type="Sprite" parent="Map/Background/Parallaxe/Fog"]
+material = ExtResource( 21 )
+position = Vector2( 470.01, 277.517 )
+scale = Vector2( 2.09202, 1.27633 )
+texture = ExtResource( 23 )
+normal_map = ExtResource( 22 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 3600, 3600 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Walls" type="TileMap" parent="Map"]
 z_index = 1

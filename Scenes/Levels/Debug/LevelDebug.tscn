@@ -7,11 +7,11 @@
 
 [node name="LevelDebug" instance=ExtResource( 4 )]
 
-[node name="Sprite" parent="Foreground/TurnCloudL" index="0"]
-frame = 6
+[node name="Sprite" parent="Foreground/Clouds/TurnCloudL" index="0"]
+frame = 4
 
-[node name="Sprite" parent="Foreground/TurnCloudR" index="0"]
-frame = 6
+[node name="Sprite" parent="Foreground/Clouds/TurnCloudR" index="0"]
+frame = 4
 
 [node name="CameraChekpoint" parent="CameraSystem" index="1" instance=ExtResource( 2 )]
 position = Vector2( 909.453, 268.36 )

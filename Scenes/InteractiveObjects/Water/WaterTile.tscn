@@ -44,6 +44,5 @@ lifetime = 0.4
 one_shot = true
 explosiveness = 0.83
 randomness = 0.53
-visibility_rect = Rect2( -100, -100, 200, 200 )
 local_coords = false
 process_material = SubResource( 3 )

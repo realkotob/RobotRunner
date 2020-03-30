@@ -5,6 +5,8 @@ onready var start_area_node = get_node("StartMovingArea")
 
 onready var new_cp_node = preload("res://Scenes/Camera/CheckpointBase.tscn")
 
+export var camera_speed : float = 3.0
+
 var players_array : Array = []
 var cam_dir : String
 
@@ -38,14 +40,14 @@ func adapt_camera_position(delta: float):
 	average_pos /= len(players_array)
 	
 	# Compute the camera speed
-	var camera_speed = clamp(3 * delta, 0.0, 1.0)
+	var real_camera_speed = clamp(camera_speed * delta, 0.0, 1.0)
 	
 	# Move the camera speed towards the average postion
 	# with a horiziontal/vertical restriction
 	if(cam_dir == 'leftright'):
-		position.x = lerp(position.x, average_pos.x, camera_speed)
+		position.x = lerp(position.x, average_pos.x, real_camera_speed)
 	if(cam_dir == 'updown'):
-		position.y = lerp(position.y, average_pos.y, camera_speed)
+		position.y = lerp(position.y, average_pos.y, real_camera_speed)
 
 
 # Start to move the camera if a player enter the start area

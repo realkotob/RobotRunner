@@ -1,7 +1,13 @@
 extends Node2D
 
-const level1 = preload("res://Scenes/Levels/Level1.tscn")
-const debug_level = preload("res://Scenes/Levels/LevelDebug.tscn")
+const debug_level = preload("res://Scenes/Levels/Debug/LevelDebug.tscn")
+
+const level1 = preload("res://Scenes/Levels/Level1/Level1.tscn")
+const level2 = preload("res://Scenes/Levels/Level2/Level2.tscn")
+
+# Please, just modify this line to select which level you want to start on
+export var current_level = level2
+
 const player1 = preload("res://Scenes/Characters/RobotIce/RobotIce.tscn")
 const player2 = preload("res://Scenes/Characters/RobotHammer/RobotHammer.tscn")
 
@@ -16,7 +22,7 @@ func _ready():
 # Generate the current level, and instanciate it as child of this node the generate the players inside of it
 func generate_current_level():
 	#current_level_node = debug_level.instance() 
-	current_level_node = level1.instance()
+	current_level_node = current_level.instance()
 	add_child(current_level_node)
 	instanciate_players()
 	

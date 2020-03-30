@@ -2,7 +2,8 @@ extends Area2D
 
 signal camera_reached_checkpoint
 export var cp_dir : Vector2
-export var is_enabled : bool
+export var is_enabled : bool = true
+export var Camera_Zoom : Vector2
 
 onready var game_camera_node = get_parent().get_child(0)
 onready var checkpoint_area = get_node("CollisionShape2D")
@@ -18,7 +19,7 @@ func _ready():
 # When the camera reach this checkpoint, send it the direction it must take
 func on_area_entered(area):
 	if area == game_camera_node.get_node("CheckPointTriggerZone"):
-		emit_signal("camera_reached_checkpoint", cp_dir)
+		emit_signal("camera_reached_checkpoint", cp_dir, Camera_Zoom)
 		if len(get_signal_connection_list("cp_switch_state")) > 0:
 			emit_signal("cp_switch_state")
 

@@ -54,7 +54,13 @@ func on_start_area_body_entered(body):
 
 
 # Get the camera direction from the current check point, and adapt area in response
-func _on_checkpoint_reached(cp_dir : Vector2):
+func _on_checkpoint_reached(cp_dir : Vector2, Camera_Zoom : Vector2):
+	if(Camera_Zoom > self.zoom):
+		while(self.zoom <= Camera_Zoom):
+			self.zoom += Vector2(0.1,0.1)
+	elif(Camera_Zoom < self.zoom):
+		while(self.zoom >= Camera_Zoom):
+			self.zoom -= Vector2(0.1,0.1)
 	if(abs(cp_dir.x) == 1):
 		cam_dir = 'leftright'
 	elif(abs(cp_dir.y) == 1):

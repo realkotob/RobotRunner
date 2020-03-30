@@ -65,31 +65,24 @@ layer = 2
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Background" parent="GUI/HUD" index="0"]
-color = Color( 0, 0, 0, 0.501961 )
-
 [node name="Camera" parent="CameraSystem" index="0"]
 position = Vector2( 480, 270 )
 
 [node name="CameraChekpoint" parent="CameraSystem" index="1" instance=ExtResource( 2 )]
 position = Vector2( 2279, 270 )
 cp_dir = Vector2( 0, 1 )
-is_enabled = true
 
 [node name="CameraChekpoint2" parent="CameraSystem" index="2" instance=ExtResource( 2 )]
 position = Vector2( 2279, 1318 )
 cp_dir = Vector2( 1, 0 )
-is_enabled = true
 
 [node name="CameraChekpoint3" parent="CameraSystem" index="3" instance=ExtResource( 2 )]
 position = Vector2( 2663, 1318 )
 cp_dir = Vector2( 0, 1 )
-is_enabled = true
 
 [node name="CameraChekpoint4" parent="CameraSystem" index="4" instance=ExtResource( 2 )]
 position = Vector2( 2663, 142 )
 cp_dir = Vector2( 0, 1 )
-is_enabled = true
 
 [node name="CameraChekpoint5" parent="CameraSystem" index="5" instance=ExtResource( 2 )]
 position = Vector2( 2663, 982 )

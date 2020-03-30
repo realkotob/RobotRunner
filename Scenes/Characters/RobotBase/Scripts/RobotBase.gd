@@ -12,13 +12,14 @@ onready var states_node = get_node("States")
 onready var animation_node = get_node("Animation")
 onready var hit_box_node = get_node("HitBox")
 onready var SFX_node = get_node("SFX")
-onready var flash_node = get_node("Flash")
+onready var anim_player_node = get_node("AnimationPlayer")
+
+onready var SFX_autoload = get_node("/root/SFX")
 
 var level_node : Node
 
 # Get every children of this node
 onready var children_array : Array = get_children()
-
 
 # Class accesors
 func is_class(value: String):
@@ -26,6 +27,10 @@ func is_class(value: String):
 
 func get_class() -> String:
 	return "Player"
+
+
+func _ready():
+	var _err = anim_player_node.connect("animation_finished", self, "on_animation_finished")
 
 # Give every reference they need to children nodes, and then call heir setup method if it possesses it
 func setup():
@@ -67,4 +72,17 @@ func setup():
 
 
 func on_xion_received():
-	flash_node.play("MagentaFlash")
+	anim_player_node.play("MagentaFlash")
+
+
+func overheat():
+	anim_player_node.play("Overheat")
+
+
+func on_animation_finished(animation: String):
+	if animation == "Overheat":
+		var explosion = SFX_autoload.normal_explosion.instance()
+		explosion.set_global_position(global_position)
+		SFX_autoload.add_child(explosion)
+		explosion.play_animation()
+		queue_free()

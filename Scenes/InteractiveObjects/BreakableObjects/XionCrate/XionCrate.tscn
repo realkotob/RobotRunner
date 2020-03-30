@@ -31,10 +31,11 @@
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateSO/LargeCrateAnimSO1.png" type="Texture" id=29]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateNO/LargeCrateAnimNO5.png" type="Texture" id=30]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateSO/LargeCrateAnimSO5.png" type="Texture" id=31]
-[ext_resource path="res://Global/SFX/XionExplosion/XionExplosion.tscn" type="PackedScene" id=32]
+[ext_resource path="res://Global/Autoloads/SFX/XionExplosion/XionExplosion.tscn" type="PackedScene" id=32]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/Blowing/CrateBlow1.png" type="Texture" id=33]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/Blowing/CrateBlow3.png" type="Texture" id=34]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/Blowing/CrateBlow2.png" type="Texture" id=35]
+
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {

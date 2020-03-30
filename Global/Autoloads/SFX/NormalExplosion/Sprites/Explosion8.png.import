@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/CrateExplosion1.png-8d63197b8ed31a495d5ed5e8d04a1dfe.stex"
+path="res://.import/Explosion8.png-50f18ec3496b225b88613476de1f66dc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Global/SFX/XionExplosion/Animation/CrateExplosion1.png"
-dest_files=[ "res://.import/CrateExplosion1.png-8d63197b8ed31a495d5ed5e8d04a1dfe.stex" ]
+source_file="res://Global/Autoloads/SFX/NormalExplosion/Sprites/Explosion8.png"
+dest_files=[ "res://.import/Explosion8.png-50f18ec3496b225b88613476de1f66dc.stex" ]
 
 [params]
 

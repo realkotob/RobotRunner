@@ -10,13 +10,13 @@ func _ready():
 
 func on_body_entered(body : Node):
 	if body.is_class("Player"):
-		print("A player enters the area")
+		body.overheat()
 
 
 # Handle the movement to the next point on the path, return true if the node is arrived
 func move_to(destination : Vector2, path_scale: Vector2, delta: float):
 	var velocity = (destination - position).normalized() * speed * delta
-	var avrg_scale = (path_scale.x + path_scale.y) /2
+	var avrg_scale = (path_scale.x + path_scale.y) / 2
 	
 	if position.distance_to(destination) <= speed * delta / avrg_scale:
 		position = destination

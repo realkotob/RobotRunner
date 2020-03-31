@@ -4,13 +4,15 @@ onready var xion_cloud_node = $XionCloud
 
 var path : PoolVector2Array = []
 
+export var cloud_active : bool = true
+
 func _ready():
 	var path_len = get_curve().get_point_count()
 	for i in range(path_len):
 		path.append(get_curve().get_point_position(i))
-
-#func _physics_process(delta):
-#	path_follow_node.set_unit_offset(path_follow_node.get_unit_offset() + (cloud_speed / 1000) * delta)
+	
+	set_visible(cloud_active)
+	set_physics_process(cloud_active)
 
 
 # Move the cloud, until it's arrived to the next point

@@ -10,9 +10,8 @@ extents = Vector2( 24, 23 )
 linear_damp = -1.0
 
 [node name="Sprite" parent="." index="0"]
-position = Vector2( 0, -3 )
 frames = ExtResource( 2 )
+offset = Vector2( 0, -1 )
 
 [node name="CollisionShape2D" parent="." index="1"]
-position = Vector2( 0, -1.5 )
 shape = SubResource( 1 )

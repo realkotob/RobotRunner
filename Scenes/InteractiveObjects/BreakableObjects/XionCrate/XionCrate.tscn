@@ -75,7 +75,7 @@ animations = [ {
 "speed": 13.0
 } ]
 
-[sub_resource type="SpriteFrames" id=14]
+[sub_resource type="SpriteFrames" id=6]
 animations = [ {
 "frames": [ ExtResource( 33 ), ExtResource( 35 ), ExtResource( 34 ) ],
 "loop": false,
@@ -83,8 +83,7 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[sub_resource type="Animation" id=6]
-resource_name = "FadeOut"
+[sub_resource type="Animation" id=7]
 length = 0.9
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprites/Base:modulate")
@@ -99,7 +98,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprites/NE:position")
@@ -174,7 +173,7 @@ tracks/5/keys = {
 "values": [ false, true, false ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=9]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprites:modulate")
@@ -189,17 +188,17 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 24, 24 )
 
-[sub_resource type="Gradient" id=10]
+[sub_resource type="Gradient" id=11]
 offsets = PoolRealArray( 0.0301205, 0.972892 )
 colors = PoolColorArray( 1, 0.254902, 0.92549, 0.623529, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=11]
-gradient = SubResource( 10 )
+[sub_resource type="GradientTexture" id=12]
+gradient = SubResource( 11 )
 
-[sub_resource type="ParticlesMaterial" id=12]
+[sub_resource type="ParticlesMaterial" id=13]
 render_priority = 1
 emission_shape = 1
 emission_sphere_radius = 1.0
@@ -218,10 +217,10 @@ tangential_accel_random = 0.54
 damping = 63.24
 angle_random = 0.13
 scale_random = 0.54
-color_ramp = SubResource( 11 )
+color_ramp = SubResource( 12 )
 hue_variation_random = 0.2
 
-[sub_resource type="ParticlesMaterial" id=13]
+[sub_resource type="ParticlesMaterial" id=14]
 render_priority = 1
 emission_shape = 1
 emission_sphere_radius = 1.0
@@ -239,7 +238,7 @@ tangential_accel_random = 0.54
 damping = 63.24
 angle_random = 0.13
 scale_random = 0.54
-color_ramp = SubResource( 11 )
+color_ramp = SubResource( 12 )
 hue_variation_random = 0.2
 
 [node name="XionCrate" type="RigidBody2D"]
@@ -264,19 +263,19 @@ frames = SubResource( 5 )
 
 [node name="Blowing" type="AnimatedSprite" parent="Sprites"]
 visible = false
-frames = SubResource( 14 )
+frames = SubResource( 6 )
 offset = Vector2( 0, -8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/FadeOut = SubResource( 6 )
-anims/Vibrate = SubResource( 7 )
+anims/FadeOut = SubResource( 7 )
+anims/Vibrate = SubResource( 8 )
 
 [node name="Flash" type="AnimationPlayer" parent="."]
 playback_speed = 1.7
-anims/Flash = SubResource( 8 )
+anims/Flash = SubResource( 9 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 9 )
+shape = SubResource( 10 )
 
 [node name="ParticlesLeft" type="Particles2D" parent="."]
 position = Vector2( -21.2924, -0.286514 )
@@ -286,7 +285,7 @@ amount = 150
 lifetime = 2.0
 explosiveness = 0.71
 randomness = 1.0
-process_material = SubResource( 12 )
+process_material = SubResource( 13 )
 
 [node name="ParticlesRight" type="Particles2D" parent="."]
 position = Vector2( 21.4729, 0.0958099 )
@@ -296,7 +295,7 @@ amount = 150
 lifetime = 2.0
 explosiveness = 0.71
 randomness = 1.0
-process_material = SubResource( 13 )
+process_material = SubResource( 14 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 1.5

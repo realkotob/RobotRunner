@@ -29,6 +29,7 @@ func get_class() -> String:
 
 func _ready():
 	var _err = anim_player_node.connect("animation_finished", self, "on_animation_finished")
+	add_to_group("Players")
 
 # Give every reference they need to children nodes, and then call heir setup method if it possesses it
 func setup():

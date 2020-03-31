@@ -70,10 +70,6 @@ func compute_average_pos(players_array: Array):
 # Start to move the camera if a player enter the start area
 func on_start_area_body_entered(body):
 	if body.is_class("Player"):
-	# Put all the players in an array
-	players_array = get_tree().get_nodes_in_group("Players")
-
-	if body in players_array:
 		timer_gaz.start()
 		cam_dir = 'leftright'
 		set_physics_process(true)

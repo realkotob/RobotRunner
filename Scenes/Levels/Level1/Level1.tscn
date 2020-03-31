@@ -116,7 +116,6 @@ __meta__ = {
 }
 
 [node name="CloudPath" parent="." index="7" instance=ExtResource( 11 )]
-visible = false
 
 [node name="XionCloud" parent="CloudPath" index="0" instance=ExtResource( 8 )]
 position = Vector2( -530, 266.5 )

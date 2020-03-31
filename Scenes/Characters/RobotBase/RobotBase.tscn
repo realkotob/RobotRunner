@@ -48,15 +48,15 @@ animations = [ {
 "name": "Move",
 "speed": 8.0
 }, {
-"frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
-"loop": false,
-"name": "Action",
-"speed": 20.0
-}, {
 "frames": [ ExtResource( 21 ) ],
 "loop": true,
 "name": "Idle",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
+"loop": false,
+"name": "Action",
+"speed": 20.0
 }, {
 "frames": [ ExtResource( 22 ) ],
 "loop": true,
@@ -229,7 +229,7 @@ __meta__ = {
 [node name="Animation" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "Move"
-frame = 3
+frame = 1
 playing = true
 __meta__ = {
 "_edit_lock_": true

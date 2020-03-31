@@ -2,6 +2,7 @@ extends Node2D
 
 class_name LevelBase
 
+
 func _ready():
 	instanciate_players()
 

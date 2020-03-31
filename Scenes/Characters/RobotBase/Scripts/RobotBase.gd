@@ -29,6 +29,7 @@ func get_class() -> String:
 
 func _ready():
 	var _err = anim_player_node.connect("animation_finished", self, "on_animation_finished")
+	add_to_group("Players")
 
 # Give every reference they need to children nodes, and then call heir setup method if it possesses it
 func setup():
@@ -87,9 +88,13 @@ func stop_overheat():
 # Triggers the explosion and the destruction of the robot
 func on_animation_finished(animation: String):
 	if animation == "Overheat":
-		var explosion = SFX.normal_explosion.instance()
-		explosion.set_global_position(global_position)
-		SFX.add_child(explosion)
-		explosion.play_animation()
-		GAME.gameover()
-		queue_free()
+		destroy()
+
+
+func destroy():
+	var explosion = SFX.normal_explosion.instance()
+	explosion.set_global_position(global_position)
+	SFX.add_child(explosion)
+	explosion.play_animation()
+	GAME.gameover()
+	queue_free()

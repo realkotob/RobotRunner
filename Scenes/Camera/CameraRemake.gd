@@ -9,6 +9,7 @@ export var camera_speed : float = 3.0
 
 var players_array : Array = []
 var cam_dir : String
+var average_pos := Vector2.ZERO
 
 func _ready():
 	set_physics_process(false)
@@ -28,21 +29,20 @@ func adapt_camera_position(delta: float):
 	# Update the players array
 	players_array = get_tree().get_nodes_in_group("Players")
 	
-	# Compute the average position of every players
-	var average_pos := Vector2.ZERO
-	for player in players_array:
-		average_pos += player.position
-	average_pos /= len(players_array)
-	
 	# Compute the camera speed
 	var reel_camera_speed = clamp(camera_speed * delta, 0.0, 1.0)
 	
 	# Move the camera speed towards the average postion
 	# With a horiziontal/vertical restriction
-	if(cam_dir == 'leftright'):
-		position.x = lerp(position.x, average_pos.x, reel_camera_speed)
-	if(cam_dir == 'updown'):
-		position.y = lerp(position.y, average_pos.y, reel_camera_speed)
+	if len(players_array) > 0:
+		for player in players_array:
+			average_pos += player.global_position
+			average_pos /= len(players_array)
+		
+		if(cam_dir == 'leftright'):
+			global_position.x = lerp(global_position.x, average_pos.x, reel_camera_speed)
+		if(cam_dir == 'updown'):
+			global_position.y = lerp(global_position.y, average_pos.y, reel_camera_speed)
 
 
 # Start to move the camera if a player enter the start area

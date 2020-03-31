@@ -11,6 +11,7 @@ func _ready():
 	for i in range(path_len):
 		path.append(get_curve().get_point_position(i))
 	
+	set_visible(cloud_active)
 	set_physics_process(cloud_active)
 
 

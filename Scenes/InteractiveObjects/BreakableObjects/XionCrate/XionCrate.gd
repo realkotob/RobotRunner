@@ -75,7 +75,8 @@ func hide_crate():
 # Triggers every animation_sprite's animation
 func start_sprite_anim():
 	for anim in animated_sprite_node_array:
-		anim.play()
+		if anim != blowing_anim_node:
+			anim.play()
 
 
 # Triggers the vibration animation
@@ -97,8 +98,9 @@ func on_timer_timeout():
 # Reset every animated_sprite to its first frame 
 func on_sprite_animation_finished():
 	for anim in animated_sprite_node_array:
-		anim.stop()
-		anim.set_frame(0)
+		if anim != blowing_anim_node:
+			anim.stop()
+			anim.set_frame(0)
 
 
 func on_blowing_anim_finished():

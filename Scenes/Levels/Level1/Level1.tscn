@@ -24,16 +24,16 @@ extents = Vector2( 252, 72 )
 [node name="Level1" instance=ExtResource( 5 )]
 
 [node name="StartingPointP1" parent="." index="0" instance=ExtResource( 3 )]
-position = Vector2( 60, 144 )
+position = Vector2( 48, 144 )
 
 [node name="StartingPointP2" parent="." index="1" instance=ExtResource( 1 )]
 position = Vector2( 48, 408 )
 
 [node name="Sprite" parent="Foreground/Clouds/TurnCloudL" index="0"]
-frame = 3
+frame = 2
 
 [node name="Sprite" parent="Foreground/Clouds/TurnCloudR" index="0"]
-frame = 3
+frame = 2
 
 [node name="Popups" parent="GUI" index="0"]
 grow_horizontal = 2
@@ -400,8 +400,11 @@ __meta__ = {
 position = Vector2( 3480, 288 )
 
 [node name="XionCloud" parent="." index="7" instance=ExtResource( 8 )]
+visible = false
 position = Vector2( -530, 266.5 )
-speed = 40.0
+speed = 30.0
+cloud_active = false
+time_before_moving = 10.0
 
 [node name="CloudPath" parent="XionCloud" index="3" instance=ExtResource( 11 )]
 position = Vector2( 530, -266.5 )

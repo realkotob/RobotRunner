@@ -19,6 +19,12 @@ func setup():
 func update(_host, _delta):
 	if !character_node.is_on_floor():
 		return "Fall"
+	
+	
+	# Chage state to move if the player is moving horizontaly
+	var horiz_movement = character_node.get_node("Attributes").get_velocity().x
+	if abs(horiz_movement) > 0.0 :
+		state_node.set_state("Move")
 
 
 # Triggers the Idle aniamtion when entering the state
@@ -34,9 +40,6 @@ func _input(event):
 		
 		elif event.is_action_pressed(inputs_node.input_map["Teleport"]):
 			emit_signal("layer_change")
-		
-		elif event.is_action(inputs_node.input_map["MoveLeft"]) or event.is_action(inputs_node.input_map["MoveRight"]):
-			state_node.set_state("Move")
 		
 		elif event.is_action_pressed(inputs_node.input_map["Action"]):
 			state_node.set_state("Action")

@@ -2,6 +2,8 @@ extends BlockBase
 
 class_name IceBlock
 
+onready var animation_player_node = $AnimationPlayer
+
 ### ICEBLOCKS ###
 
 var floating_line_y : float = 0.0
@@ -16,6 +18,16 @@ func is_class(value: String):
 
 func get_class() -> String:
 	return "IceBlock"
+
+
+# When the block is destroyed, lauch the destroy animation
+func destroy(_actor_destroying: Node = null):
+	if broke == false:
+		animation_node.play()
+		audio_node.play()
+		broke = true
+		animation_player_node.play("LightFadeOut")
+
 
 func _physics_process(_delta):
 	if floating_line_y != 0.0:

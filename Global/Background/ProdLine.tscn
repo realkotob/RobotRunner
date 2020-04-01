@@ -4,6 +4,9 @@
 
 [node name="ProdLine" type="ParallaxLayer"]
 motion_scale = Vector2( 1.1, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Line" type="Sprite" parent="."]
 modulate = Color( 1, 0.83, 0.83, 1 )

@@ -13,6 +13,7 @@ seamless = true
 noise = SubResource( 1 )
 
 [node name="WaterShader" type="Sprite"]
+light_mask = 1024
 material = ExtResource( 1 )
 position = Vector2( 0.35849, 5.36782 )
 scale = Vector2( 2.21169, 0.612644 )

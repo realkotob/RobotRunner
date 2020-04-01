@@ -15,11 +15,13 @@ var QUIT_TEXT : String = "[center][wave amp=50 freq=7]PRESS " + InputMap.get_act
 var RESTART_TEXT : String = "[center][wave amp=85 freq=3]PRESS " + InputMap.get_action_list("game_restart")[0].as_text() + " TO RETRY [/wave][/center]"
 var player_action_on_gameover : String
 
+
 func _ready():
 	var _err = timer_node.connect("timeout", self, "on_timer_timeout")
 	quit_text_node.bbcode_text = QUIT_TEXT
 	restart_text_node.bbcode_text = RESTART_TEXT
-	print(InputMap.get_action_list("game_restart")[0].as_text())
+	#print(InputMap.get_action_list("game_restart")[0].as_text()) ## DEBUG PURPOSE ##
+
 
 func _input(_event):
 	if(Input.is_action_just_pressed(CANCEL_KEY)):

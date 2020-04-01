@@ -211,6 +211,7 @@ breakable_type_array = PoolStringArray( "XionCrate" )
 stream = ExtResource( 13 )
 
 [node name="Label" type="Label" parent="States"]
+visible = false
 margin_left = -56.8554
 margin_top = -81.0958
 margin_right = 60.1446
@@ -226,6 +227,7 @@ __meta__ = {
 [node name="Animation" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "Move"
+frame = 3
 playing = true
 __meta__ = {
 "_edit_lock_": true

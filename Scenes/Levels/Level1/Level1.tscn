@@ -30,10 +30,10 @@ position = Vector2( 48, 144 )
 position = Vector2( 48, 408 )
 
 [node name="Sprite" parent="Foreground/Clouds/TurnCloudL" index="0"]
-frame = 2
+frame = 0
 
 [node name="Sprite" parent="Foreground/Clouds/TurnCloudR" index="0"]
-frame = 2
+frame = 0
 
 [node name="Popups" parent="GUI" index="0"]
 grow_horizontal = 2
@@ -47,7 +47,6 @@ visible = false
 
 [node name="Camera" parent="CameraSystem" index="0"]
 position = Vector2( 480, 270 )
-debug = true
 
 [node name="Parallaxe" parent="Map/Background" index="0"]
 layer = -10
@@ -403,8 +402,7 @@ position = Vector2( 3480, 288 )
 visible = false
 position = Vector2( -530, 266.5 )
 speed = 30.0
-cloud_active = false
-time_before_moving = 10.0
+time_before_moving = 5.0
 
 [node name="CloudPath" parent="XionCloud" index="3" instance=ExtResource( 11 )]
 position = Vector2( 530, -266.5 )

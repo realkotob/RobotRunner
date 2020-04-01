@@ -15,7 +15,7 @@ func setup():
 	_err = connect("layer_change", layer_change_node, "on_layer_change")
 
 
-# Check if the character is falling, with a small cooldown, before it triggers fall state
+# Check if the character is falling, before it triggers fall state
 func update(_host, _delta):
 	if !character_node.is_on_floor():
 		return "Fall"

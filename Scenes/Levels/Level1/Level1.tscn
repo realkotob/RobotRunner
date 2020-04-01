@@ -30,10 +30,10 @@ position = Vector2( 60, 144 )
 position = Vector2( 48, 408 )
 
 [node name="Sprite" parent="Foreground/Clouds/TurnCloudL" index="0"]
-frame = 6
+frame = 2
 
 [node name="Sprite" parent="Foreground/Clouds/TurnCloudR" index="0"]
-frame = 6
+frame = 2
 
 [node name="Popups" parent="GUI" index="0"]
 grow_horizontal = 2

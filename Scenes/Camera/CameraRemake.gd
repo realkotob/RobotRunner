@@ -2,7 +2,6 @@ extends Camera2D
 
 onready var checkpoints_nodes_array = get_tree().get_nodes_in_group("CameraCheckpoint")
 onready var start_area_node = get_node("StartMovingArea")
-onready var xioncloud_node = get_node("../../CloudPath")
 
 onready var new_cp_node = preload("res://Scenes/Camera/CheckpointBase.tscn")
 
@@ -14,19 +13,11 @@ var average_pos := Vector2.ZERO
 
 export var debug := false
 
-var timer_gaz
-
 func _ready():
 	cam_dir = 'leftright'
 	set_physics_process(debug)
 	if debug:
 		start_area_node.queue_free()
-
-	timer_gaz = Timer.new()
-	add_child(timer_gaz)
-	timer_gaz.connect("timeout", self, "_on_timergaz_timeout")
-	timer_gaz.one_shot = true
-	timer_gaz.set_wait_time(gaz_moving_delay)
 
 	var _err = start_area_node.connect("body_entered", self, "on_start_area_body_entered")
 
@@ -70,13 +61,11 @@ func compute_average_pos(players_array: Array):
 # Start to move the camera if a player enter the start area
 func on_start_area_body_entered(body):
 	if body.is_class("Player"):
-		timer_gaz.start()
 		cam_dir = 'leftright'
 		set_physics_process(true)
 		start_area_node.queue_free()
 
-func _on_timergaz_timeout():
-	xioncloud_node.set_physics_process(true)
+
 
 # Get the camera direction from the current check point, and adapt area in response
 func _on_checkpoint_reached(cp_dir : Vector2, Camera_Zoom : Vector2):

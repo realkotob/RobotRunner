@@ -1,6 +1,7 @@
 extends Node2D
 
 onready var area_node = $Area2D
+onready var timer_node = $Timer
 onready var path_node = get_node_or_null("CloudPath")
 
 export var speed : float = 40.0 
@@ -8,17 +9,26 @@ export var speed : float = 40.0
 var path : PoolVector2Array = []
 
 export var cloud_active : bool = true
+export var time_before_moving : float = 0.0
 
 func _ready():
 	var _err = area_node.connect("body_entered", self, "on_body_entered")
 	_err = area_node.connect("body_exited", self, "on_body_exited")
+	_err = timer_node.connect("timeout", self, "on_timer_timeout")
+	
+	set_physics_process(false)
 	
 	if path_node != null:
 		var path_len = path_node.get_curve().get_point_count()
 		for i in range(path_len):
 			path.append(path_node.get_curve().get_point_position(i))
 		
-		set_physics_process(cloud_active)
+		# Set the timer time, or triggers the cloud if the time is lesser or equal to 0
+		if time_before_moving <= 0.0:
+			set_physics_process(cloud_active)
+		else:
+			timer_node.set_wait_time(time_before_moving)
+			timer_node.start()
 	
 	set_visible(cloud_active)
 
@@ -34,6 +44,10 @@ func _physics_process(delta):
 			path.remove(0)
 	else:
 		set_physics_process(false)
+
+# When the timer is over, triggers the cloud mouvement
+func on_timer_timeout():
+	set_physics_process(cloud_active)
 
 
 # Triggers the overheat if a player enters the cloud

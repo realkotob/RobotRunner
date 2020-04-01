@@ -35,10 +35,10 @@ position = Vector2( 48, 288 )
 position = Vector2( 48, 192 )
 
 [node name="Sprite" parent="Foreground/Clouds/TurnCloudL" index="0"]
-frame = 5
+frame = 1
 
 [node name="Sprite" parent="Foreground/Clouds/TurnCloudR" index="0"]
-frame = 5
+frame = 1
 
 [node name="HUD" parent="GUI" index="1"]
 visible = false
@@ -536,7 +536,6 @@ position = Vector2( 4808, 192 )
 position = Vector2( -297.2, 254.91 )
 scale = Vector2( 1.086, 0.229365 )
 curve = SubResource( 1 )
-cloud_active = false
 
 [node name="XionCloud" parent="CloudPath" index="0" instance=ExtResource( 20 )]
 position = Vector2( -384.396, -43.363 )

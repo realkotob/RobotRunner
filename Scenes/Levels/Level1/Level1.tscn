@@ -30,10 +30,10 @@ position = Vector2( 60, 144 )
 position = Vector2( 48, 408 )
 
 [node name="Sprite" parent="Foreground/Clouds/TurnCloudL" index="0"]
-frame = 2
+frame = 7
 
 [node name="Sprite" parent="Foreground/Clouds/TurnCloudR" index="0"]
-frame = 2
+frame = 7
 
 [node name="Popups" parent="GUI" index="0"]
 grow_horizontal = 2
@@ -296,83 +296,33 @@ position = Vector2( 900, 396 )
 
 [node name="M_IceBlock" parent="InteractivesObjects/IceBlocks/M" index="0" instance=ExtResource( 22 )]
 position = Vector2( 840, 288 )
-z_as_relative = false
-gravity_scale = 10.0
-continuous_cd = 2
-can_sleep = false
-linear_damp = 1.0
 
 [node name="M_IceBlock9" parent="InteractivesObjects/IceBlocks/M" index="1" instance=ExtResource( 22 )]
 position = Vector2( 960, 408 )
-z_as_relative = false
-gravity_scale = 10.0
-continuous_cd = 2
-can_sleep = false
-linear_damp = 1.0
 
 [node name="M_IceBlock2" parent="InteractivesObjects/IceBlocks/M" index="2" instance=ExtResource( 22 )]
 position = Vector2( 1056, 72 )
-z_as_relative = false
-gravity_scale = 10.0
-continuous_cd = 2
-can_sleep = false
-linear_damp = 1.0
 
 [node name="M_IceBlock4" parent="InteractivesObjects/IceBlocks/M" index="3" instance=ExtResource( 22 )]
 position = Vector2( 2376, 312 )
-z_as_relative = false
-gravity_scale = 10.0
-continuous_cd = 2
-can_sleep = false
-linear_damp = 1.0
 
 [node name="M_IceBlock6" parent="InteractivesObjects/IceBlocks/M" index="4" instance=ExtResource( 22 )]
 position = Vector2( 2376, 360 )
-z_as_relative = false
-gravity_scale = 10.0
-continuous_cd = 2
-can_sleep = false
-linear_damp = 1.0
 
 [node name="M_IceBlock8" parent="InteractivesObjects/IceBlocks/M" index="5" instance=ExtResource( 22 )]
 position = Vector2( 2760, 288 )
-z_as_relative = false
-gravity_scale = 10.0
-continuous_cd = 2
-can_sleep = false
-linear_damp = 1.0
 
 [node name="M_IceBlock10" parent="InteractivesObjects/IceBlocks/M" index="6" instance=ExtResource( 22 )]
 position = Vector2( 3096, 264 )
-z_as_relative = false
-gravity_scale = 10.0
-continuous_cd = 2
-can_sleep = false
-linear_damp = 1.0
 
 [node name="M_IceBlock7" parent="InteractivesObjects/IceBlocks/M" index="7" instance=ExtResource( 22 )]
 position = Vector2( 2376, 408 )
-z_as_relative = false
-gravity_scale = 10.0
-continuous_cd = 2
-can_sleep = false
-linear_damp = 1.0
 
 [node name="M_IceBlock5" parent="InteractivesObjects/IceBlocks/M" index="8" instance=ExtResource( 22 )]
 position = Vector2( 2280, 432 )
-z_as_relative = false
-gravity_scale = 10.0
-continuous_cd = 2
-can_sleep = false
-linear_damp = 1.0
 
 [node name="M_IceBlock3" parent="InteractivesObjects/IceBlocks/M" index="9" instance=ExtResource( 22 )]
 position = Vector2( 1200, 456 )
-z_as_relative = false
-gravity_scale = 10.0
-continuous_cd = 2
-can_sleep = false
-linear_damp = 1.0
 
 [node name="EarthBlockBase" parent="InteractivesObjects/EarthBlocks/S" index="0" instance=ExtResource( 13 )]
 position = Vector2( 3084, 492 )
@@ -451,7 +401,8 @@ position = Vector2( 3480, 288 )
 
 [node name="XionCloud" parent="." index="7" instance=ExtResource( 8 )]
 position = Vector2( -530, 266.5 )
-speed = 30.0
+speed = 40.0
+time_before_moving = 10.0
 
 [node name="CloudPath" parent="XionCloud" index="3" instance=ExtResource( 11 )]
 position = Vector2( 530, -266.5 )

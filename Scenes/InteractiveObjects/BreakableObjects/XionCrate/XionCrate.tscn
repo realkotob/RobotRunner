@@ -305,5 +305,4 @@ autostart = true
 
 [node name="Light2D" type="Light2D" parent="."]
 texture = ExtResource( 32 )
-color = Color( 0.921569, 0.607843, 1, 1 )
-energy = 0.7
+color = Color( 0.843137, 0.207843, 1, 1 )

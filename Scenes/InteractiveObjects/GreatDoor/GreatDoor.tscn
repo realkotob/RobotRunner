@@ -94,7 +94,7 @@ hue_variation_random = 0.4
 
 [sub_resource type="Animation" id=11]
 resource_name = "Open"
-length = 9.0
+length = 7.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("RedLights:current_animation")
 tracks/0/interp = 1
@@ -102,7 +102,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1, 8 ),
+"times": PoolRealArray( 0, 1, 6.8 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 2,
 "values": [ "Normal", "Open", "Normal" ]
@@ -126,7 +126,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 2.9 ),
+"times": PoolRealArray( 0, 2.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 2,
 "values": [ "LightMoving", "Open" ]

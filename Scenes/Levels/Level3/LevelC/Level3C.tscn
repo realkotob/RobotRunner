@@ -23,10 +23,10 @@ position = Vector2( 88, 480 )
 visible = false
 
 [node name="Sprite" parent="Foreground/Clouds/TurnCloudL" index="0"]
-frame = 2
+frame = 7
 
 [node name="Sprite" parent="Foreground/Clouds/TurnCloudR" index="0"]
-frame = 2
+frame = 7
 
 [node name="Fog" parent="Foreground" index="1"]
 visible = false
@@ -35,6 +35,9 @@ visible = false
 visible = false
 
 [node name="HUD" parent="GUI" index="1"]
+visible = false
+
+[node name="CameraSystem" parent="." index="4"]
 visible = false
 
 [node name="CameraChekpoint" parent="CameraSystem" index="1" instance=ExtResource( 10 )]

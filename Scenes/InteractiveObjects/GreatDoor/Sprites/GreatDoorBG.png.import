@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/GreatDoor.png-2655d04eb501cef41be457a62566b4a0.stex"
+path="res://.import/GreatDoorBG.png-e8f5e5ea123ebb95d7186990b3d4da73.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/InteractiveObjects/GreatDoor/GreatDoor.png"
-dest_files=[ "res://.import/GreatDoor.png-2655d04eb501cef41be457a62566b4a0.stex" ]
+source_file="res://Scenes/InteractiveObjects/GreatDoor/Sprites/GreatDoorBG.png"
+dest_files=[ "res://.import/GreatDoorBG.png-e8f5e5ea123ebb95d7186990b3d4da73.stex" ]
 
 [params]
 

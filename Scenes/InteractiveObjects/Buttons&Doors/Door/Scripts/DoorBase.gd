@@ -1,18 +1,26 @@
 extends StaticBody2D
 
-class_name door
-const cls_name = "door"
+class_name Door
 
-onready var animation_node = get_node("Animation")
-onready var collision_node = get_node("CollisionShape2D")
-onready var audio_node = get_node("AudioStreamPlayer")
+#### BASE CLASS FOR DOORS ####
+
+const cls_name = "Door"
+
+onready var animation_node = get_node_or_null("Animation")
+onready var collision_node = get_node_or_null("CollisionShape2D")
+onready var audio_node = get_node_or_null("AudioStreamPlayer")
 
 export var is_open : bool = false
 
 func open_door():
-	animation_node.play("default")
-	collision_node.set_disabled(true)
-	audio_node.play()
+	if animation_node != null:
+		animation_node.play("default")
+	
+	if collision_node != null:
+		collision_node.set_disabled(true)
+	
+	if audio_node != null:
+		audio_node.play()
 
 # Those 2 functions will be optional in the future
 func get_class():

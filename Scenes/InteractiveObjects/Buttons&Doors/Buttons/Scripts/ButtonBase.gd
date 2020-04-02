@@ -1,7 +1,7 @@
 extends StaticBody2D
 
-class_name button
-const cls_name = "button"
+class_name DoorButton
+const cls_name = "DoorButton"
 
 signal button_trigger
 

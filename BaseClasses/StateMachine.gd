@@ -19,6 +19,7 @@ var new_state_name
 func _ready():
 	set_physics_process(false)
 
+
 func setup():
 	set_physics_process(true)
 	set_state(states_map[0])

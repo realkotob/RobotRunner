@@ -39,6 +39,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/InteractiveObjects/Collactables/CollactableBase.gd"
 }, {
+"base": "StaticBody2D",
+"class": "Door",
+"language": "GDScript",
+"path": "res://Scenes/InteractiveObjects/Buttons&Doors/Door/Scripts/DoorBase.gd"
+}, {
+"base": "StaticBody2D",
+"class": "DoorButton",
+"language": "GDScript",
+"path": "res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/Scripts/ButtonBase.gd"
+}, {
 "base": "BlockBase",
 "class": "EarthBlock",
 "language": "GDScript",
@@ -128,16 +138,6 @@ _global_script_classes=[ {
 "class": "XionCrate",
 "language": "GDScript",
 "path": "res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/XionCrate.gd"
-}, {
-"base": "StaticBody2D",
-"class": "button",
-"language": "GDScript",
-"path": "res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/Scripts/ButtonBase.gd"
-}, {
-"base": "StaticBody2D",
-"class": "door",
-"language": "GDScript",
-"path": "res://Scenes/InteractiveObjects/Buttons&Doors/Door/Scripts/DoorBase.gd"
 } ]
 _global_script_class_icons={
 "ActionBase": "",
@@ -146,6 +146,8 @@ _global_script_class_icons={
 "BreakableObjectBase": "",
 "BreakableSpriteBase": "",
 "CollactableBase": "",
+"Door": "",
+"DoorButton": "",
 "EarthBlock": "",
 "GroupBase": "",
 "IceBlock": "",
@@ -163,9 +165,7 @@ _global_script_class_icons={
 "StatesMachine": "",
 "Water": "",
 "WorkStateBase": "",
-"XionCrate": "",
-"button": "",
-"door": ""
+"XionCrate": ""
 }
 
 [application]

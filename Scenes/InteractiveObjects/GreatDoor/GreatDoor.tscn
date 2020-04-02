@@ -1,8 +1,672 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=21 format=2]
 
-[ext_resource path="res://Scenes/InteractiveObjects/GreatDoor/GreatDoor.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/InteractiveObjects/GreatDoor/Sprites/GreatDoorBorder.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/InteractiveObjects/GreatDoor/Sprites/GreatDoorBG.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/InteractiveObjects/GreatDoor/Sprites/GreatDoorRight.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/InteractiveObjects/GreatDoor/Sprites/GreatDoorPipes.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/InteractiveObjects/GreatDoor/Sprites/GreatDoorLeft.png" type="Texture" id=5]
+[ext_resource path="res://Global/Lights/Light300.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/InteractiveObjects/GreatDoor/GreatDoor.gd" type="Script" id=7]
 
-[node name="GreatDoor" type="Node2D"]
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 120, 120 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.353774, 0.981132 )
+colors = PoolColorArray( 1, 0, 0.755859, 1, 0.846954, 0.734375, 1, 0.792157, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 1
+emission_sphere_radius = 2.88
+flag_disable_z = true
+direction = Vector3( -1, 0, 0 )
+spread = 17.64
+gravity = Vector3( 0, -130, 0 )
+initial_velocity = 52.21
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+radial_accel = 11.2
+radial_accel_random = 0.6
+tangential_accel = 12.8
+tangential_accel_random = 0.49
+scale = 1.2
+scale_random = 1.0
+color_ramp = SubResource( 2 )
+hue_variation_random = 0.4
+
+[sub_resource type="ParticlesMaterial" id=5]
+emission_shape = 1
+emission_sphere_radius = 2.88
+flag_disable_z = true
+direction = Vector3( -1, 0, 0 )
+spread = 17.64
+gravity = Vector3( 0, -130, 0 )
+initial_velocity = 30.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+radial_accel = 11.2
+radial_accel_random = 0.6
+tangential_accel = 12.8
+tangential_accel_random = 0.49
+scale = 1.2
+scale_random = 1.0
+color_ramp = SubResource( 2 )
+hue_variation_random = 0.4
+
+[sub_resource type="ParticlesMaterial" id=6]
+emission_shape = 1
+emission_sphere_radius = 2.88
+flag_disable_z = true
+spread = 17.64
+gravity = Vector3( 0, -130, 0 )
+initial_velocity = 30.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+radial_accel = 11.2
+radial_accel_random = 0.6
+tangential_accel = 12.8
+tangential_accel_random = 0.49
+scale = 1.2
+scale_random = 1.0
+color_ramp = SubResource( 2 )
+hue_variation_random = 0.4
+
+[sub_resource type="ParticlesMaterial" id=7]
+emission_shape = 1
+emission_sphere_radius = 2.88
+flag_disable_z = true
+spread = 17.64
+gravity = Vector3( 0, -130, 0 )
+initial_velocity = 52.21
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+radial_accel = 11.2
+radial_accel_random = 0.6
+tangential_accel = 12.8
+tangential_accel_random = 0.49
+scale = 1.2
+scale_random = 1.0
+color_ramp = SubResource( 2 )
+hue_variation_random = 0.4
+
+[sub_resource type="Animation" id=11]
+resource_name = "Open"
+length = 7.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("RedLights:current_animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 6.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 2,
+"values": [ "Normal", "Open", "Normal" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Xion:current_animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.8 ),
+"transitions": PoolRealArray( 1 ),
+"update": 2,
+"values": [ "XionGaz" ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Doors:current_animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 2.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 2,
+"values": [ "LightMoving", "Open" ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "LightMoving"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprites/LeftDoor/Light1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.15, 0.25, 0.35, 0.55, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -107.717, 75.3593 ), Vector2( -82, 55 ), Vector2( -82, 42 ), Vector2( -59.0663, 42.4469 ), Vector2( -59.5645, 16.2058 ), Vector2( -57.0733, -5.05286 ), Vector2( -18, -6 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprites/LeftDoor/Light2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.15, 0.25, 0.45, 0.6, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -108.385, 46.9469 ), Vector2( -102.812, 42.3915 ), Vector2( -59.2387, 41.9643 ), Vector2( -57.0983, -4.88744 ), Vector2( -39.2613, -6.3144 ), Vector2( -39.0235, -16.3031 ), Vector2( -15, -17.017 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprites/LeftDoor/Light3:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.2, 0.35, 0.45, 0.55 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -107.312, -22.7235 ), Vector2( -102.115, -25.8865 ), Vector2( -90.1875, -25.6092 ), Vector2( -90.1875, 42.0737 ), Vector2( -60.5069, 42.0737 ), Vector2( -56.6234, -5.08237 ), Vector2( -18, -5.637 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprites/LeftDoor/Light4:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.001, 0.05, 0.15, 0.25, 0.45, 0.65, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -45.3082, -126.355 ), Vector2( -43.2691, -123.705 ), Vector2( -46.7355, -116.976 ), Vector2( -46.9394, -75.7867 ), Vector2( -28.1801, -75.9906 ), Vector2( -27.5683, -46.6281 ), Vector2( -13.932, -32.817 ), Vector2( -13.932, -12.887 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprites/RightDoor/Light1:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.2, 0.3, 0.4, 0.45, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 106.746, -56.5488 ), Vector2( 100.256, -61.2592 ), Vector2( 91.1492, -61.3638 ), Vector2( 91.1492, -36.8702 ), Vector2( 63.62, -36.2421 ), Vector2( 62.7879, 1.20537 ), Vector2( 46.9617, 1.20537 ), Vector2( 35.9202, 10.9587 ), Vector2( 20.6461, 11.1427 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprites/RightDoor/Light1:energy")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.6, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.5, 0.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprites/RightDoor/Light2:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.05, 0.15, 0.25, 0.3, 0.4, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 105.28, -33.0786 ), Vector2( 99.7541, -36.6769 ), Vector2( 62.7313, -37.1266 ), Vector2( 62.9692, 0.687798 ), Vector2( 47.0348, 0.925621 ), Vector2( 37.0461, 10.9143 ), Vector2( 20.1604, 11.1522 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Sprites/RightDoor/Light2:energy")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.45, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 1.5, 1.5, 0.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Sprites/RightDoor/Light3:position")
+tracks/8/interp = 2
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0.1, 0.15, 0.2, 0.25, 0.35, 0.5, 0.6, 0.65, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 105.28, -28.5786 ), Vector2( 99.4827, -32.2679 ), Vector2( 96.9915, -32.4339 ), Vector2( 97.1576, -36.7521 ), Vector2( 62.7784, -36.2539 ), Vector2( 62.9445, 1.11481 ), Vector2( 46.3362, 0.948734 ), Vector2( 36.5373, 10.2494 ), Vector2( 20, 10.249 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Sprites/RightDoor/Light3:energy")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.7, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 1.5, 1.5, 0.0 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Sprites/RightDoor/Light4:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.2, 0.3, 0.4, 0.45, 0.55, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 104.395, 46.61 ), Vector2( 100.472, 43.4986 ), Vector2( 85.186, 42.9575 ), Vector2( 85.186, 24.4248 ), Vector2( 56.9134, 24.1542 ), Vector2( 57.1839, 1.29262 ), Vector2( 47.3088, 0.886795 ), Vector2( 37.0278, 10.3561 ), Vector2( 20.6595, 10.4914 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("Sprites/RightDoor/Light4:energy")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.65, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 1.5, 1.5, 0.0 ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("Sprites/RightDoor/Light5:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.05, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 59.0809, 123.159 ), Vector2( 58.8104, 116.124 ), Vector2( 57.3745, 89.2906 ), Vector2( 17.3538, 48.9703 ), Vector2( 17.3538, 15.8446 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("Sprites/RightDoor/Light5:energy")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.45, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 1.5, 1.5, 0.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Open"
+length = 5.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprites/RightDoor:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4.95 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 130, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprites/LeftDoor:region_rect")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 4.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Rect2( 0, 0, 240, 240 ), Rect2( 140, 0, 240, 240 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprites/RightDoor:region_rect")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 4.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Rect2( 0, 0, 240, 240 ), Rect2( 0, 0, 0, 240 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "Normal"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprites/Border/Light1:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprites/Border/Light2:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "Open"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprites/Border/Light1:energy")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 1.0, 2.0, 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprites/Border/Light2:energy")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 1.0, 2.0, 1.0 ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "XionGaz"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprites/Pipes/Pipe1:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 1.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprites/Pipes/Pipe2:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.2, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprites/Pipes/Pipe3:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.7, 2.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprites/Pipes/Pipe4:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.6, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprites/Pipes/Pipe5:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 2.3, 3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+
+[node name="GreatDoor" type="StaticBody2D"]
+z_index = -1
+script = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 13 )
+
+[node name="Sprites" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Background" type="Sprite" parent="Sprites"]
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LeftDoor" type="Sprite" parent="Sprites"]
+position = Vector2( 1, 1 )
+texture = ExtResource( 5 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 240, 240 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Light1" type="Light2D" parent="Sprites/LeftDoor"]
+visible = false
+position = Vector2( -18, -6 )
+texture = ExtResource( 6 )
+texture_scale = 0.03
+color = Color( 0.941176, 0.247059, 0.976471, 1 )
+energy = 1.5
+
+[node name="Light2" type="Light2D" parent="Sprites/LeftDoor"]
+visible = false
+position = Vector2( -15, -17.017 )
+texture = ExtResource( 6 )
+texture_scale = 0.03
+color = Color( 0.941176, 0.247059, 0.976471, 1 )
+energy = 1.5
+
+[node name="Light3" type="Light2D" parent="Sprites/LeftDoor"]
+visible = false
+position = Vector2( -18, -5.637 )
+texture = ExtResource( 6 )
+texture_scale = 0.03
+color = Color( 0.941176, 0.247059, 0.976471, 1 )
+energy = 1.5
+
+[node name="Light4" type="Light2D" parent="Sprites/LeftDoor"]
+visible = false
+position = Vector2( -13.932, -12.887 )
+texture = ExtResource( 6 )
+texture_scale = 0.03
+color = Color( 0.941176, 0.247059, 0.976471, 1 )
+energy = 1.5
+
+[node name="RightDoor" type="Sprite" parent="Sprites"]
+light_mask = 2
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 240, 240 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Light1" type="Light2D" parent="Sprites/RightDoor"]
+visible = false
+position = Vector2( 20.6461, 11.1427 )
+texture = ExtResource( 6 )
+texture_scale = 0.03
+color = Color( 0.941176, 0.247059, 0.976471, 1 )
+energy = 0.0
+range_item_cull_mask = 2
+
+[node name="Light2" type="Light2D" parent="Sprites/RightDoor"]
+visible = false
+position = Vector2( 20.1604, 11.1522 )
+texture = ExtResource( 6 )
+texture_scale = 0.03
+color = Color( 0.941176, 0.247059, 0.976471, 1 )
+energy = 0.0
+range_item_cull_mask = 2
+
+[node name="Light3" type="Light2D" parent="Sprites/RightDoor"]
+visible = false
+position = Vector2( 20, 10.249 )
+texture = ExtResource( 6 )
+texture_scale = 0.03
+color = Color( 0.941176, 0.247059, 0.976471, 1 )
+energy = 0.0
+range_item_cull_mask = 2
+
+[node name="Light4" type="Light2D" parent="Sprites/RightDoor"]
+visible = false
+position = Vector2( 20.6595, 10.4914 )
+texture = ExtResource( 6 )
+texture_scale = 0.03
+color = Color( 0.941176, 0.247059, 0.976471, 1 )
+energy = 0.0
+range_item_cull_mask = 2
+
+[node name="Light5" type="Light2D" parent="Sprites/RightDoor"]
+visible = false
+position = Vector2( 17.3538, 15.8446 )
+texture = ExtResource( 6 )
+texture_scale = 0.03
+color = Color( 0.941176, 0.247059, 0.976471, 1 )
+energy = 0.0
+range_item_cull_mask = 2
+
+[node name="Border" type="Sprite" parent="Sprites"]
+light_mask = 1024
 texture = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Light1" type="Light2D" parent="Sprites/Border"]
+position = Vector2( -110.702, 0.487686 )
+texture = ExtResource( 6 )
+texture_scale = 0.5
+color = Color( 0.996078, 0, 0, 1 )
+range_item_cull_mask = 1027
+
+[node name="Light2" type="Light2D" parent="Sprites/Border"]
+position = Vector2( 110.214, 0.975357 )
+texture = ExtResource( 6 )
+texture_scale = 0.5
+color = Color( 1, 0, 0, 1 )
+range_item_cull_mask = 1027
+
+[node name="Pipes" type="Sprite" parent="Sprites"]
+light_mask = 1024
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Pipe1" type="Particles2D" parent="Sprites/Pipes"]
+position = Vector2( 56.2462, 113.107 )
+emitting = false
+amount = 1000
+lifetime = 3.0
+one_shot = true
+explosiveness = 0.35
+randomness = 0.3
+process_material = SubResource( 3 )
+
+[node name="Pipe2" type="Particles2D" parent="Sprites/Pipes"]
+position = Vector2( 78.51, 97.2582 )
+emitting = false
+amount = 200
+lifetime = 3.0
+one_shot = true
+explosiveness = 0.35
+randomness = 0.3
+process_material = SubResource( 5 )
+
+[node name="Pipe3" type="Particles2D" parent="Sprites/Pipes"]
+position = Vector2( 83.5464, 87.9601 )
+emitting = false
+amount = 200
+lifetime = 3.0
+one_shot = true
+explosiveness = 0.35
+randomness = 0.3
+process_material = SubResource( 5 )
+
+[node name="Pipe4" type="Particles2D" parent="Sprites/Pipes"]
+position = Vector2( -92.183, 105.669 )
+emitting = false
+amount = 400
+lifetime = 3.0
+one_shot = true
+explosiveness = 0.35
+randomness = 0.3
+process_material = SubResource( 6 )
+
+[node name="Pipe5" type="Particles2D" parent="Sprites/Pipes"]
+position = Vector2( -93.7355, 114.76 )
+emitting = false
+amount = 200
+lifetime = 3.0
+one_shot = true
+explosiveness = 0.35
+randomness = 0.3
+process_material = SubResource( 7 )
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+anims/Open = SubResource( 11 )
+
+[node name="Doors" type="AnimationPlayer" parent="."]
+anims/LightMoving = SubResource( 8 )
+anims/Open = SubResource( 4 )
+
+[node name="RedLights" type="AnimationPlayer" parent="."]
+anims/Normal = SubResource( 12 )
+anims/Open = SubResource( 9 )
+
+[node name="Xion" type="AnimationPlayer" parent="."]
+anims/XionGaz = SubResource( 10 )

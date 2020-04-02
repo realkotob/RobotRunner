@@ -11,13 +11,14 @@ var nb_button_triggered : int
 
 func _ready():
 	for buttons in children_array:
-		if buttons.is_class("button"):
+		if buttons.is_class("DoorButton"):
 			buttons.setup()
 			nb_buttons += 1
+
 
 func button_triggered():
 	nb_button_triggered += 1
 	if nb_button_triggered == nb_buttons:
 		for doors in children_array:
-			if doors.is_class("door"):
+			if doors.is_class("Door"):
 				doors.open_door()

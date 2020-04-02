@@ -33,3 +33,17 @@ func gameover():
 func on_gameover_timer_timeout():
 	gameover_timer_node.stop()
 	var _err = get_tree().change_scene_to(MENUS.game_over_scene)
+
+
+# Move the camera to the given position
+func move_camera_to(dest: Vector2, average_w_players: bool = false):
+	var camera_node = get_tree().get_current_scene().find_node("Camera")
+	
+	if camera_node != null:
+		camera_node.move_to(dest, average_w_players)
+
+
+func set_camera_on_follow():
+	var camera_node = get_tree().get_current_scene().find_node("Camera")
+	
+	camera_node.set_state("Follow")

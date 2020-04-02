@@ -1,5 +1,6 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
+[ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/GroupBase.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Camera/Camera.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Camera/GUI.gd" type="Script" id=3]
 [ext_resource path="res://Global/Background/Background.png" type="Texture" id=4]
@@ -138,7 +139,7 @@ __meta__ = {
 [node name="Sprite" type="AnimatedSprite" parent="Foreground/Clouds/TurnCloudL"]
 modulate = Color( 1, 1, 1, 0.313726 )
 frames = SubResource( 3 )
-frame = 4
+frame = 6
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -155,7 +156,7 @@ __meta__ = {
 [node name="Sprite" type="AnimatedSprite" parent="Foreground/Clouds/TurnCloudR"]
 modulate = Color( 1, 1, 1, 0.313726 )
 frames = SubResource( 3 )
-frame = 4
+frame = 6
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -209,6 +210,9 @@ __meta__ = {
 [node name="Background" type="Node2D" parent="Map"]
 z_index = -10
 z_as_relative = false
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Parallaxe" type="ParallaxBackground" parent="Map/Background"]
 layer = -1
@@ -298,7 +302,7 @@ z_index = 2
 tile_set = ExtResource( 5 )
 cell_size = Vector2( 24, 24 )
 format = 1
-tile_data = PoolIntArray( 65564, 15, 0, 65566, 14, 0, 917566, 536870922, 0 )
+tile_data = PoolIntArray( 917566, 536870922, 0 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -349,12 +353,20 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="LavaTiles" type="Node2D" parent="InteractivesObjects"]
+
 [node name="TeleportGroups" type="Node2D" parent="InteractivesObjects"]
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="Buttons&Doors" type="Node2D" parent="InteractivesObjects"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="GreatDoorGroup" type="Node2D" parent="InteractivesObjects"]
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }

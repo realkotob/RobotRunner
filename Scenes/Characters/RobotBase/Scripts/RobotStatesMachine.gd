@@ -27,10 +27,10 @@ func setup():
 		
 		if "inputs_node" in state:
 			state.inputs_node = inputs_node
-		
+			
 		if "attributes_node" in state:
 			state.attributes_node = attributes_node
-		
+			
 		if "character_node" in state:
 			state.character_node = character_node
 		

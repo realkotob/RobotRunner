@@ -19,10 +19,10 @@ position = Vector2( 88, 480 )
 visible = false
 
 [node name="Sprite" parent="Foreground/Clouds/TurnCloudL" index="0"]
-frame = 4
+frame = 0
 
 [node name="Sprite" parent="Foreground/Clouds/TurnCloudR" index="0"]
-frame = 4
+frame = 0
 
 [node name="Fog" parent="Foreground" index="1"]
 visible = false

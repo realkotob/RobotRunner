@@ -1,8 +1,11 @@
 extends PlayerStateBase
 
+signal layer_change
+
 ### FALL STATE ###
 
 var character_node : KinematicBody2D
+var layer_change_node : Node
 var inputs_node : Node
 
 onready var fall_timer_node = get_node("FallTimer")
@@ -10,7 +13,9 @@ var fall_timer_init_value : float
 
 
 func setup():
-	var _err = fall_timer_node.connect("timeout", self, "on_fall_timer_timeout")
+	var _err
+	_err = fall_timer_node.connect("timeout", self, "on_fall_timer_timeout")
+	_err = connect("layer_change", layer_change_node, "on_layer_change")
 	fall_timer_init_value = fall_timer_node.get_wait_time()
 
 
@@ -38,6 +43,9 @@ func _input(event):
 	if state_node.get_current_state() == self:
 		if event.is_action_pressed(inputs_node.input_map["Action"]):
 			state_node.set_state("Action")
+			
+		elif event.is_action_pressed(inputs_node.input_map["Teleport"]):
+			emit_signal("layer_change")
 
 
 # When the cooldown is over; play the animation

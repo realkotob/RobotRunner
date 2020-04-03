@@ -14,7 +14,8 @@ var inputs_node : Node
 
 
 func setup():
-	var _err = connect("layer_change", layer_change_node, "on_layer_change")
+	var _err
+	_err = connect("layer_change", layer_change_node, "on_layer_change")
 
 
 func update(_host, _delta):

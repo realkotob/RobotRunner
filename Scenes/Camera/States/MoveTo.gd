@@ -12,6 +12,8 @@ func get_destination() -> Vector2:
 	return destination
 
 
+# If average_w_player is true, the camera compute the average position
+# Between itself and the players
 func enter_state(_host):
 	if average_w_players == true:
 		var players_array = get_tree().get_nodes_in_group("Players")

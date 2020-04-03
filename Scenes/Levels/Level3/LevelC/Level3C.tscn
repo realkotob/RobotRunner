@@ -14,19 +14,13 @@
 [node name="Level3C" instance=ExtResource( 2 )]
 
 [node name="StartingPointP1" parent="." index="0" instance=ExtResource( 3 )]
-position = Vector2( 88, 72 )
+position = Vector2( 80, 77 )
 
 [node name="StartingPointP2" parent="." index="1" instance=ExtResource( 1 )]
-position = Vector2( 88, 480 )
+position = Vector2( 90, 480 )
 
 [node name="Clouds" parent="Foreground" index="0"]
 visible = false
-
-[node name="Sprite" parent="Foreground/Clouds/TurnCloudL" index="0"]
-frame = 7
-
-[node name="Sprite" parent="Foreground/Clouds/TurnCloudR" index="0"]
-frame = 7
 
 [node name="Fog" parent="Foreground" index="1"]
 visible = false

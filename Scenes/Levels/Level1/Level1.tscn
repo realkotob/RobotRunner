@@ -32,10 +32,10 @@ position = Vector2( 2976, 264 )
 position = Vector2( 2976, 336 )
 
 [node name="Sprite" parent="Foreground/Clouds/TurnCloudL" index="0"]
-frame = 5
+frame = 2
 
 [node name="Sprite" parent="Foreground/Clouds/TurnCloudR" index="0"]
-frame = 5
+frame = 2
 
 [node name="Popups" parent="GUI" index="0"]
 grow_horizontal = 2
@@ -384,6 +384,7 @@ __meta__ = {
 
 [node name="GreatDoor" parent="InteractivesObjects/GreatDoorGroup" index="0" instance=ExtResource( 12 )]
 position = Vector2( 3480, 288 )
+focus_on_door = false
 
 [node name="RedButton" parent="InteractivesObjects/GreatDoorGroup" index="1" instance=ExtResource( 14 )]
 position = Vector2( 3048, 156 )

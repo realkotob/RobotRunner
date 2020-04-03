@@ -8,6 +8,7 @@ onready var new_cp_node = preload("res://Scenes/Camera/CheckpointBase.tscn")
 onready var state_machine_node = $StateMachine
 onready var follow_state_node = $StateMachine/Follow
 onready var moveto_state_node = $StateMachine/MoveTo
+onready var zoom_state_node = $StateMachine/Zoom
 
 export var camera_speed : float = 3.0
 
@@ -55,16 +56,12 @@ func compute_average_pos(players_array: Array) -> Vector2:
 
 
 # Get the camera direction from the current check point, and adapt area in response
-func _on_checkpoint_reached(cp_dir : Vector2, Camera_Zoom : Vector2):
+func _on_checkpoint_reached(cp_dir : Vector2, dest_zoom : Vector2):
 	
 	# Manage zoom changement
-	#### TO BE REFACTO ####
-	if(Camera_Zoom > zoom):
-		while(zoom <= Camera_Zoom):
-			zoom += Vector2(0.1, 0.1)
-	elif(Camera_Zoom < zoom):
-		while(zoom >= Camera_Zoom):
-			zoom -= Vector2(0.1, 0.1)
+	if dest_zoom != zoom:
+		zoom_state_node.destination_zoom = dest_zoom
+		set_state("Zoom")
 	
 	# Give the follow state its direction
 	if(abs(cp_dir.x) == 1):

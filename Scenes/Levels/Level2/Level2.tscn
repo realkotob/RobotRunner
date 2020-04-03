@@ -35,16 +35,13 @@ position = Vector2( 48, 288 )
 position = Vector2( 48, 192 )
 
 [node name="Sprite" parent="Foreground/Clouds/TurnCloudL" index="0"]
-frame = 1
+frame = 2
 
 [node name="Sprite" parent="Foreground/Clouds/TurnCloudR" index="0"]
-frame = 1
+frame = 2
 
 [node name="HUD" parent="GUI" index="1"]
 visible = false
-
-[node name="Camera" parent="CameraSystem" index="0"]
-gaz_moving_delay = 45.0
 
 [node name="CameraChekpoint" parent="CameraSystem" index="1" instance=ExtResource( 18 )]
 position = Vector2( 2400, 272 )

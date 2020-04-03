@@ -61,5 +61,5 @@ func teleport_layer(character : Node):
 	if(!layer_change_teleport_node.player_already_on_teleportarea):
 		teleport_pos = layer_change_teleport_node.global_position
 	
-	teleport_pos.y -= y_offset/2
+	teleport_pos.y -= y_offset/10
 	character.set_position(teleport_pos)

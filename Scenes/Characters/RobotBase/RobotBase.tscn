@@ -48,15 +48,15 @@ animations = [ {
 "name": "Move",
 "speed": 8.0
 }, {
-"frames": [ ExtResource( 21 ) ],
-"loop": true,
-"name": "Idle",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
 "loop": false,
 "name": "Action",
 "speed": 20.0
+}, {
+"frames": [ ExtResource( 21 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 5.0
 }, {
 "frames": [ ExtResource( 22 ) ],
 "loop": true,
@@ -211,7 +211,6 @@ breakable_type_array = PoolStringArray( "XionCrate" )
 stream = ExtResource( 13 )
 
 [node name="Label" type="Label" parent="States"]
-visible = false
 margin_left = -56.8554
 margin_top = -81.0958
 margin_right = 60.1446
@@ -227,7 +226,7 @@ __meta__ = {
 [node name="Animation" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "Move"
-frame = 3
+frame = 2
 playing = true
 __meta__ = {
 "_edit_lock_": true

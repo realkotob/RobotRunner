@@ -7,10 +7,10 @@
 [ext_resource path="res://Scenes/Levels/Base/LevelBase.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/InteractiveObjects/Lava/LavaShader.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/InteractiveObjects/Water/WaterLight.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/Fog/XionCloud/XionCloud.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/XionCloud/XionCloud.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Global/Lights/Light500.png" type="Texture" id=9]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/S (BASE)/IceBlockBase.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Scenes/Fog/XionCloud/CloudPath.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/XionCloud/CloudPath.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/InteractiveObjects/GreatDoor/GreatDoor.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/S (base)/EarthBlockBase.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/ChildrenScenes/RedButton.tscn" type="PackedScene" id=14]
@@ -30,12 +30,6 @@ position = Vector2( 2976, 264 )
 
 [node name="StartingPointP2" parent="." index="1" instance=ExtResource( 1 )]
 position = Vector2( 2976, 336 )
-
-[node name="Sprite" parent="Foreground/Clouds/TurnCloudL" index="0"]
-frame = 2
-
-[node name="Sprite" parent="Foreground/Clouds/TurnCloudR" index="0"]
-frame = 2
 
 [node name="Popups" parent="GUI" index="0"]
 grow_horizontal = 2

@@ -7,16 +7,16 @@
 [ext_resource path="res://Scenes/Levels/Base/LevelBase.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/InteractiveObjects/Lava/LavaShader.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/InteractiveObjects/Water/WaterLight.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/Fog/XionCloud/XionCloud.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/XionCloud/XionCloud.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Global/Lights/Light500.png" type="Texture" id=9]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/S (BASE)/IceBlockBase.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Scenes/Fog/XionCloud/CloudPath.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/XionCloud/CloudPath.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/InteractiveObjects/GreatDoor/GreatDoor.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/S (base)/EarthBlockBase.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/ChildrenScenes/RedButton.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Scenes/InteractiveObjects/Water/WaterShaderNode.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/InteractiveObjects/Water/Shader/WaterShaderNode.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/InteractiveObjects/Lava/LavaLight.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Scenes/InteractiveObjects/Water/WaterTile.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Scenes/InteractiveObjects/Water/Water.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/M/MIceBlock.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/M/MEarthBlock.tscn" type="PackedScene" id=25]
 
@@ -26,16 +26,16 @@ extents = Vector2( 252, 72 )
 [node name="Level1" instance=ExtResource( 5 )]
 
 [node name="StartingPointP1" parent="." index="0" instance=ExtResource( 3 )]
-position = Vector2( 2976, 264 )
+position = Vector2( 48, 144 )
 
 [node name="StartingPointP2" parent="." index="1" instance=ExtResource( 1 )]
-position = Vector2( 2976, 336 )
+position = Vector2( 48, 408 )
 
 [node name="Sprite" parent="Foreground/Clouds/TurnCloudL" index="0"]
-frame = 2
+frame = 4
 
 [node name="Sprite" parent="Foreground/Clouds/TurnCloudR" index="0"]
-frame = 2
+frame = 4
 
 [node name="Popups" parent="GUI" index="0"]
 grow_horizontal = 2
@@ -352,20 +352,24 @@ position = Vector2( 2592, 288 )
 [node name="M_EarthBlock3" parent="InteractivesObjects/EarthBlocks/M" index="6" instance=ExtResource( 25 )]
 position = Vector2( 1248, 456 )
 
-[node name="WaterTile" parent="InteractivesObjects/WaterTiles" index="0" instance=ExtResource( 20 )]
+[node name="Water" parent="InteractivesObjects/WaterTiles" index="0" instance=ExtResource( 20 )]
 position = Vector2( 576, 468 )
+scale = Vector2( 0.895, 1 )
 
-[node name="WaterShader" parent="InteractivesObjects/WaterTiles/WaterTile" index="2" instance=ExtResource( 16 )]
+[node name="WaterShader" parent="InteractivesObjects/WaterTiles/Water" index="2" instance=ExtResource( 16 )]
 
-[node name="WaterLight" parent="InteractivesObjects/WaterTiles/WaterTile" index="3" instance=ExtResource( 7 )]
+[node name="WaterLight" parent="InteractivesObjects/WaterTiles/Water/WaterShader" index="0" instance=ExtResource( 7 )]
+position = Vector2( 5.26361, -8.76172 )
+scale = Vector2( 0.452143, 1.63227 )
 
 [node name="WaterTile2" parent="InteractivesObjects/WaterTiles" index="1" instance=ExtResource( 20 )]
 position = Vector2( 2688, 372 )
 
 [node name="WaterShader" parent="InteractivesObjects/WaterTiles/WaterTile2" index="2" instance=ExtResource( 16 )]
 
-[node name="WaterLight" parent="InteractivesObjects/WaterTiles/WaterTile2" index="3" instance=ExtResource( 7 )]
-position = Vector2( -12, 0 )
+[node name="WaterLight" parent="InteractivesObjects/WaterTiles/WaterTile2/WaterShader" index="0" instance=ExtResource( 7 )]
+position = Vector2( -5.58777, -8.76172 )
+scale = Vector2( 0.452143, 1.63227 )
 
 [node name="Lava" parent="InteractivesObjects/LavaTiles" index="0" instance=ExtResource( 4 )]
 position = Vector2( 1812, 440 )

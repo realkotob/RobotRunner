@@ -1,8 +1,16 @@
 extends InteractAreaBase
 
-
 class_name Water
 const CLASS_NAME = "Water"
+
+#### WATER ####
+
+# To instanciate a water zone:
+# 1) Instanciate this scene
+# 2) Instanciate the scene WaterShader & a CollisionShape as children of it
+# 3) Instanciate the WaterLight as a child of the WaterShader
+# 4) Set the size of the texture, of the shape and of the light as you will
+
 
 onready var iceblock_scene = load("res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/M/MIceBlock.tscn")
 onready var floating_line_node = get_node("FloatingLine")

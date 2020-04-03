@@ -2,6 +2,9 @@ extends StateBase
 
 #### MOVE TO CAMERA STATE ####
 
+# This state is called when you want to move the camera towards a destination
+# It will move progressivly using linear interpolation until it reaches it
+
 var destination := Vector2.ZERO setget set_destination, get_destination
 var average_w_players : bool = false
 
@@ -21,6 +24,7 @@ func enter_state(_host):
 		destination /= 2
 
 
+# Reset the bool value when leaving the state
 func exit_state(_host):
 	average_w_players = false
 
@@ -30,7 +34,6 @@ func exit_state(_host):
 func update(_host, _delta):
 	if move_to_destination() == true or destination == Vector2.ZERO:
 		return "Stop"
-
 
 
 # Move to the current destination, return true when it's arrived, false otherwise

@@ -9,7 +9,8 @@
 [ext_resource path="res://Scenes/InteractiveObjects/Teleports/TeleportArea.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/InteractiveObjects/GreatDoor/GreatDoor.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/ChildrenScenes/BlueButton.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Scenes/Camera/CheckpointBase.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Camera/Checkpoint/CheckpointBase.tscn" type="PackedScene" id=10]
+
 
 [node name="Level3C" instance=ExtResource( 2 )]
 

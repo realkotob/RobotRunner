@@ -2,6 +2,11 @@ extends StateBase
 
 #### FOLLOW CAMERA STATE ####
 
+# This state is used to follow the players
+# It computes the average position of all the players, and move the camera towards it
+# Progressivly, so the camera feels smooth
+
+
 var cam_dir : String = 'leftright'
 
 func update(_host, delta):

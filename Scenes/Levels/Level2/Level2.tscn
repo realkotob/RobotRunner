@@ -13,13 +13,17 @@
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/ChildrenScenes/BlueButton.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Door/ChildrenScenes/RedDoor.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/ChildrenScenes/RedButton.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scenes/InteractiveObjects/Water/WaterTile.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Scenes/InteractiveObjects/Water/WaterShaderNode.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/InteractiveObjects/Water/Water.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/InteractiveObjects/Water/Shader/WaterShaderNode.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/M/MEarthBlock.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/M/MIceBlock.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Scenes/Camera/CheckpointBase.tscn" type="PackedScene" id=18]
-[ext_resource path="res://Scenes/Fog/XionCloud/CloudPath.tscn" type="PackedScene" id=19]
-[ext_resource path="res://Scenes/Fog/XionCloud/XionCloud.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Scenes/Camera/Checkpoint/CheckpointBase.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Scenes/XionCloud/CloudPath.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Scenes/XionCloud/XionCloud.tscn" type="PackedScene" id=20]
+
+
+
+
 
 [sub_resource type="Curve2D" id=1]
 _data = {

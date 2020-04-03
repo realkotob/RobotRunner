@@ -29,7 +29,7 @@ scale_random = 1.0
 color_ramp = SubResource( 2 )
 hue_variation_random = 0.2
 
-[node name="WaterTile" type="Area2D"]
+[node name="Water" type="Area2D"]
 z_index = 2
 script = ExtResource( 1 )
 

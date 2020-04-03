@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/GroupBase.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Camera/Camera.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Camera/GUI.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/GUI/GUI.gd" type="Script" id=3]
 [ext_resource path="res://Global/Background/Background.png" type="Texture" id=4]
 [ext_resource path="res://Global/Tileset/LevelBase.tres" type="TileSet" id=5]
 [ext_resource path="res://Global/Background/ProdLine.tscn" type="PackedScene" id=6]
@@ -139,7 +139,7 @@ __meta__ = {
 [node name="Sprite" type="AnimatedSprite" parent="Foreground/Clouds/TurnCloudL"]
 modulate = Color( 1, 1, 1, 0.313726 )
 frames = SubResource( 3 )
-frame = 6
+frame = 5
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -156,7 +156,7 @@ __meta__ = {
 [node name="Sprite" type="AnimatedSprite" parent="Foreground/Clouds/TurnCloudR"]
 modulate = Color( 1, 1, 1, 0.313726 )
 frames = SubResource( 3 )
-frame = 6
+frame = 5
 playing = true
 __meta__ = {
 "_edit_lock_": true

@@ -2,6 +2,10 @@ extends StateBase
 
 #### ZOOM CAMERA STATE ####
 
+# This state is called when we need to zoom/dezoom the camera
+# It will zoom/dezoom progressivly using linear interporlation
+# When the transition is finished, the state change back to the previous state
+
 var destination_zoom := Vector2.ONE
 
 # Progressively zoom/dezoom, until it reachs the desired zoom

@@ -17,9 +17,10 @@
 [ext_resource path="res://Scenes/InteractiveObjects/Water/WaterShaderNode.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/M/MEarthBlock.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/M/MIceBlock.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Scenes/Camera/CheckpointBase.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Scenes/Camera/Checkpoint/CheckpointBase.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Scenes/Fog/XionCloud/CloudPath.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Scenes/Fog/XionCloud/XionCloud.tscn" type="PackedScene" id=20]
+
 
 [sub_resource type="Curve2D" id=1]
 _data = {

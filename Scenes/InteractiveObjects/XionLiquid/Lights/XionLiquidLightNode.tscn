@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="StreamTexture" id=1]
+load_path = "res://.import/Light300.png-52f4b423ac92f48283761156830cb1c0.stex"
+
+[node name="WaterLight" type="Light2D"]
+position = Vector2( 0, 6.10352e-05 )
+texture = SubResource( 1 )
+color = Color( 0.266667, 0, 0.529412, 1 )
+energy = 2.0
+__meta__ = {
+"_edit_lock_": true,
+"_editor_description_": ""
+}

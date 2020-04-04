@@ -2,22 +2,19 @@
 
 [ext_resource path="res://Scenes/InteractiveObjects/Water/Shader/WaterShader.tres" type="Material" id=1]
 
-[sub_resource type="OpenSimplexNoise" id=1]
+[sub_resource type="OpenSimplexNoise" id=3]
 period = 13.6
 lacunarity = 2.37
 
-[sub_resource type="NoiseTexture" id=2]
+[sub_resource type="NoiseTexture" id=4]
 width = 100
 height = 100
 seamless = true
-noise = SubResource( 1 )
+noise = SubResource( 3 )
 
 [node name="WaterShader" type="Sprite"]
 light_mask = 1024
 material = ExtResource( 1 )
-position = Vector2( 0.35849, 5.36782 )
-scale = Vector2( 2.21169, 0.612644 )
-texture = SubResource( 2 )
-__meta__ = {
-"_edit_lock_": true
-}
+position = Vector2( 8, 0 )
+scale = Vector2( 2, 1 )
+texture = SubResource( 4 )

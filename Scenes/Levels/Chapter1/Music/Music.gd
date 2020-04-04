@@ -22,12 +22,12 @@ func stop():
 
 
 # Interpolate the volume of the given stream
-func interpolate_stream_volume(stream_name : String, dest_volume: float):
+func interpolate_stream_volume(stream_name : String, dest_volume: float, weight : float):
 	var stream = get_node_or_null(stream_name)
 	
 	if stream != null:
 		var current_volume = stream.get_volume_db()
-		stream.set_volume_db(lerp(current_volume, dest_volume, 0.05))
+		stream.set_volume_db(lerp(current_volume, dest_volume, weight))
 
 
 # Restart every stream whenever one has finished playing 

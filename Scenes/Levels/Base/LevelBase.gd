@@ -9,9 +9,10 @@ onready var screen_size : Vector2 = get_viewport().get_size()
 onready var danger_distance : float = screen_size.x / 2
 
 var players_array : Array
+var player_in_danger : bool = false
+
 
 func _ready():
-	print(danger_distance)
 	instanciate_players()
 
 
@@ -26,9 +27,22 @@ func _physics_process(_delta):
 	
 	# Triggers the medium stream when one of the players is close enough from the cloud
 	if get_distance_to(closest_player, xion_cloud_node) <= danger_distance:
-		music_node.interpolate_stream_volume("Medium", 0.0)
+		music_node.interpolate_stream_volume("Medium", 0.0 , 0.01)
 	else: # If the closest player is to far from the cloud, fade_out the medium stream
-		music_node.interpolate_stream_volume("Medium", -80.0)
+		music_node.interpolate_stream_volume("Medium", -80.0, 0.01)
+	
+	if player_in_danger:
+		music_node.interpolate_stream_volume("Hard", 0.0, 0.05)
+	else:
+		music_node.interpolate_stream_volume("Hard", -80.0, 0.05)
+
+
+func on_player_in_danger():
+	player_in_danger = true
+
+
+func on_player_out_of_danger():
+	player_in_danger = false
 
 
 # Returns the distance between the two given elements

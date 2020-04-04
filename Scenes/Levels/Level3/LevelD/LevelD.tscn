@@ -41,10 +41,10 @@ position = Vector2( 80, 240 )
 position = Vector2( 520, 240 )
 
 [node name="Sprite" parent="Foreground/Clouds/TurnCloudL" index="0"]
-frame = 3
+frame = 4
 
 [node name="Sprite" parent="Foreground/Clouds/TurnCloudR" index="0"]
-frame = 3
+frame = 4
 
 [node name="Popups" parent="GUI" index="0"]
 visible = false

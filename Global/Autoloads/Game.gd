@@ -2,7 +2,7 @@ extends Node2D
 
 onready var gameover_timer_node = $GameoverTimer
 
-const level1 = preload("res://Scenes/Levels/Level1/Level1.tscn")
+const level1 = preload("res://Scenes/Levels/Chapter1/Level1/Level1.tscn")
 const debug_level = preload("res://Scenes/Levels/Debug/LevelDebug.tscn")
 
 var player1 = preload("res://Scenes/Characters/RobotIce/RobotIce.tscn")

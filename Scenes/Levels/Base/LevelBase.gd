@@ -2,12 +2,43 @@ extends Node2D
 
 class_name LevelBase
 
+var players_array : Array
+
+onready var music_node = $Music
+onready var xion_cloud_node = get_node_or_null("XionCloud")
 
 func _ready():
 	instanciate_players()
+	music_node.play()
+
+
+func _physics_process(_delta):
+	pass
+
+
+# Returns the distance between the two given elements
+func get_distance_from(element1: Node, element2: Node):
+	return element1.get_global_position().distance_to(element2.get_global_position())
+
+
+# Return the closest player from the element
+func get_closest_player(element: Node):
+	var smaller_distance := Vector2.INF
+	var current_distance := Vector2.ZERO
+	var closest_player : Node = null
+	
+	for player in players_array:
+		current_distance = get_distance_from(element, player)
+		if current_distance > smaller_distance:
+			smaller_distance = current_distance
+			closest_player = player
+	
+	return closest_player
+
 
 
 # Intanciate the players inside the level
+#### TO BE REFACTO -- NEED TO BE DYNAMIC ####
 func instanciate_players():
 	# Get the players starting positions
 	var player1_start_node = get_node_or_null("StartingPointP1")
@@ -20,6 +51,7 @@ func instanciate_players():
 		player1_node.global_position = player1_start_pos
 		player1_node.level_node = self
 		add_child(player1_node)
+		players_array.append(player1_node)
 		
 		player1_node.setup()
 		
@@ -29,6 +61,7 @@ func instanciate_players():
 		player2_node.global_position = player2_start_pos
 		player2_node.level_node = self
 		add_child(player2_node)
+		players_array.append(player2_node)
 		
 		player2_node.setup()
 

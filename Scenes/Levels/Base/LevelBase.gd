@@ -29,19 +29,28 @@ func adapt_music():
 	if closest_player == null:
 		return
 	
+	var dist_to = get_distance_to(closest_player, xion_cloud_node)
+	
 	# Triggers the medium stream when one of the players is close enough from the cloud
-	if get_distance_to(closest_player, xion_cloud_node) <= danger_distance:
-		music_node.interpolate_stream_volume("Medium", 0.0 , 0.01)
+	if dist_to <= danger_distance:
+		music_node.interpolate_stream_volume("Medium", index_volume_on_distance(dist_to) , 0.1)
 	else: # If the closest player is to far from the cloud, fade_out the medium stream
-		music_node.interpolate_stream_volume("Medium", -80.0, 0.01)
+		music_node.interpolate_stream_volume("Medium", -80.0, 0.1)
 	
 	# If a player is in danger, triggers the hard stream
 	if player_in_danger:
 		### CHANGE THE SOUND FILE TO BE LOUDER ###
 		music_node.interpolate_stream_volume("Hard", 0.0, 0.1)
 	else:
-		music_node.interpolate_stream_volume("Hard", -80.0, 0.03)
+		music_node.interpolate_stream_volume("Hard", -80.0, 0.01)
 
+
+# Compute the desired volume based on the given distance
+func index_volume_on_distance(dist_to : float) -> float:
+	var desired_volume : float = (1.0 / 100.0) * (dist_to / 4)
+	desired_volume *= desired_volume * desired_volume
+	desired_volume *= -1.0
+	return clamp(desired_volume, -80.0, .0)
 
 
 func on_player_in_danger():

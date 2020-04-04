@@ -11,10 +11,19 @@ var path : PoolVector2Array = []
 export var cloud_active : bool = true
 export var time_before_moving : float = 0.0
 
+signal player_in_danger
+signal player_out_of_danger
+
 func _ready():
 	var _err = area_node.connect("body_entered", self, "on_body_entered")
 	_err = area_node.connect("body_exited", self, "on_body_exited")
 	_err = timer_node.connect("timeout", self, "on_timer_timeout")
+	
+	# Connect the signals only if the scene is not playing alone
+	if owner != null:
+		_err = connect("player_in_danger", owner, "on_player_in_danger")
+		_err = connect("player_out_of_danger", owner, "on_player_out_of_danger")
+	
 	
 	set_physics_process(false)
 	
@@ -54,12 +63,42 @@ func on_timer_timeout():
 func on_body_entered(body: Node):
 	if body.is_class("Player"):
 		body.overheat()
+		
+		# Emit the signal only if the scene is not playing alone
+		if owner != null:
+			emit_signal("player_in_danger")
 
 
 # Stop the overheat animation when a player exits the cloud
 func on_body_exited(body: Node):
 	if body.is_class("Player"):
 		body.stop_overheat()
+		
+		# Emit the signal only if the scene is not playing alone
+		if owner != null:
+			var bodies_in_cloud = area_node.get_overlapping_bodies()
+			if count_class_in_array(bodies_in_cloud, "Player") <= 1:
+				emit_signal("player_out_of_danger")
+
+
+
+# Return the number of elements in the array of the given class
+func count_class_in_array(array: Array, cls_name: String) -> int:
+	var nb_element : int = 0
+	
+	for element in array:
+		if element.is_class(cls_name):
+			nb_element += 1
+	
+	return nb_element
+
+
+# Return true if a element in the given array is of class player, flase if not
+func is_class_in_array(array: Array, cls_name: String) -> bool:
+	for element in array:
+		if element.is_class(cls_name):
+			return true
+	return false
 
 
 # Handle the movement to the next point on the path, return true if the node is arrived

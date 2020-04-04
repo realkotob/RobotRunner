@@ -2,7 +2,7 @@ extends Node2D
 
 onready var gameover_timer_node = $GameoverTimer
 
-const level1 = preload("res://Scenes/Levels/Level1/Level1.tscn")
+const level1 = preload("res://Scenes/Levels/Chapter1/Level1/Level1.tscn")
 const debug_level = preload("res://Scenes/Levels/Debug/LevelDebug.tscn")
 
 var player1 = preload("res://Scenes/Characters/RobotIce/RobotIce.tscn")
@@ -25,8 +25,10 @@ func goto_current_level():
 
 
 # Triggers the timer before the gameover is triggered
+# Called when a player die
 func gameover():
 	gameover_timer_node.start()
+	get_tree().get_current_scene().set_physics_process(false)
 
 
 #  Change scene to go to the gameover scene after the timer has finished

@@ -17,6 +17,10 @@ func _ready():
 
 
 func _physics_process(_delta):
+	adapt_music()
+
+
+func adapt_music():
 	if xion_cloud_node == null:
 		return
 	
@@ -31,10 +35,13 @@ func _physics_process(_delta):
 	else: # If the closest player is to far from the cloud, fade_out the medium stream
 		music_node.interpolate_stream_volume("Medium", -80.0, 0.01)
 	
+	# If a player is in danger, triggers the hard stream
 	if player_in_danger:
-		music_node.interpolate_stream_volume("Hard", 0.0, 0.05)
+		### CHANGE THE SOUND FILE TO BE LOUDER ###
+		music_node.interpolate_stream_volume("Hard", 0.0, 0.1)
 	else:
-		music_node.interpolate_stream_volume("Hard", -80.0, 0.05)
+		music_node.interpolate_stream_volume("Hard", -80.0, 0.03)
+
 
 
 func on_player_in_danger():

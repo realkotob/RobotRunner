@@ -143,6 +143,7 @@ __meta__ = {
 [node name="Sprite" type="AnimatedSprite" parent="Foreground/Clouds/TurnCloudL"]
 modulate = Color( 1, 1, 1, 0.313726 )
 frames = SubResource( 3 )
+frame = 4
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -159,6 +160,7 @@ __meta__ = {
 [node name="Sprite" type="AnimatedSprite" parent="Foreground/Clouds/TurnCloudR"]
 modulate = Color( 1, 1, 1, 0.313726 )
 frames = SubResource( 3 )
+frame = 4
 playing = true
 __meta__ = {
 "_edit_lock_": true

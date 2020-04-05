@@ -31,6 +31,18 @@ position = Vector2( 48, 144 )
 [node name="StartingPointP2" parent="." index="1" instance=ExtResource( 1 )]
 position = Vector2( 48, 408 )
 
+[node name="Clouds" parent="Foreground" index="0"]
+visible = false
+
+[node name="Sprite" parent="Foreground/Clouds/TurnCloudL" index="0"]
+frame = 6
+
+[node name="Sprite" parent="Foreground/Clouds/TurnCloudR" index="0"]
+frame = 6
+
+[node name="Fog" parent="Foreground" index="1"]
+visible = false
+
 [node name="Popups" parent="GUI" index="0"]
 grow_horizontal = 2
 grow_vertical = 2
@@ -43,6 +55,9 @@ visible = false
 
 [node name="Camera" parent="CameraSystem" index="0"]
 position = Vector2( 480, 270 )
+
+[node name="Background" parent="Map" index="0"]
+visible = false
 
 [node name="Parallaxe" parent="Map/Background" index="0"]
 layer = -10

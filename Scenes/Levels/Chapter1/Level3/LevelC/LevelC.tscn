@@ -24,10 +24,10 @@ position = Vector2( 144, 120 )
 position = Vector2( 816, 120 )
 
 [node name="Sprite" parent="Foreground/Clouds/TurnCloudL" index="0"]
-frame = 1
+frame = 6
 
 [node name="Sprite" parent="Foreground/Clouds/TurnCloudR" index="0"]
-frame = 1
+frame = 6
 
 [node name="Camera" parent="CameraSystem" index="0"]
 zoom = Vector2( 2, 2 )

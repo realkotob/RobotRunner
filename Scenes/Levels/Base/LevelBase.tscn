@@ -24,10 +24,10 @@
 [ext_resource path="res://Scenes/Fog/CosmeticFog/FogNormalMap.tres" type="Texture" id=22]
 [ext_resource path="res://Scenes/Fog/CosmeticFog/FogTexture.tres" type="Texture" id=23]
 [ext_resource path="res://Scenes/Levels/Base/LevelBase.gd" type="Script" id=24]
-[ext_resource path="res://Scenes/Levels/Chapter1/Music/Test_Normal.wav" type="AudioStream" id=25]
+[ext_resource path="res://Scenes/Levels/Chapter1/Music/Chapter1_Hard.ogg" type="AudioStream" id=25]
 [ext_resource path="res://Scenes/Levels/Chapter1/Music/Music.gd" type="Script" id=26]
-[ext_resource path="res://Scenes/Levels/Chapter1/Music/Test_Medium.wav" type="AudioStream" id=27]
-[ext_resource path="res://Scenes/Levels/Chapter1/Music/Test_hard.wav" type="AudioStream" id=28]
+[ext_resource path="res://Scenes/Levels/Chapter1/Music/Chapter1_Medium.ogg" type="AudioStream" id=27]
+[ext_resource path="res://Scenes/Levels/Chapter1/Music/Chapter1_Normal.ogg" type="AudioStream" id=28]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Mouvement"
@@ -143,7 +143,6 @@ __meta__ = {
 [node name="Sprite" type="AnimatedSprite" parent="Foreground/Clouds/TurnCloudL"]
 modulate = Color( 1, 1, 1, 0.313726 )
 frames = SubResource( 3 )
-frame = 4
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -160,7 +159,6 @@ __meta__ = {
 [node name="Sprite" type="AnimatedSprite" parent="Foreground/Clouds/TurnCloudR"]
 modulate = Color( 1, 1, 1, 0.313726 )
 frames = SubResource( 3 )
-frame = 4
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -379,7 +377,7 @@ __meta__ = {
 script = ExtResource( 26 )
 
 [node name="Normal" type="AudioStreamPlayer" parent="Music"]
-stream = ExtResource( 25 )
+stream = ExtResource( 28 )
 bus = "Music"
 
 [node name="Medium" type="AudioStreamPlayer" parent="Music"]
@@ -388,6 +386,6 @@ volume_db = -80.0
 bus = "Music"
 
 [node name="Hard" type="AudioStreamPlayer" parent="Music"]
-stream = ExtResource( 28 )
+stream = ExtResource( 25 )
 volume_db = -80.0
 bus = "Music"

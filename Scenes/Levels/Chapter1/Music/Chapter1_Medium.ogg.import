@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Chapter1_Medium.ogg-133e985ea275234b304a33085bbfe259.oggstr"
+
+[deps]
+
+source_file="res://Scenes/Levels/Chapter1/Music/Chapter1_Medium.ogg"
+dest_files=[ "res://.import/Chapter1_Medium.ogg-133e985ea275234b304a33085bbfe259.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

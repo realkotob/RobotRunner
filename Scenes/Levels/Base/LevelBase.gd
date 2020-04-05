@@ -14,9 +14,10 @@ var player_in_danger : bool = false
 
 func _ready():
 	instanciate_players()
+#	set_process(false)
 
 
-func _physics_process(_delta):
+func _process(_delta):
 	adapt_music()
 
 

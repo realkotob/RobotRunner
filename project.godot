@@ -187,6 +187,7 @@ GAME="*res://Global/Autoloads/Game.tscn"
 
 [debug]
 
+settings/stdout/print_fps=true
 gdscript/completion/autocomplete_setters_and_getters=true
 
 [display]

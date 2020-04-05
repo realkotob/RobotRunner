@@ -1,0 +1,118 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/InteractiveObjects/XionLiquid/Shader/XionLiquidNoise1.tres" type="Texture" id=1]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+// Define the color of the water
+uniform vec4 water_tint : hint_color = vec4(0.0, 0.8, 1, 1);
+
+// Define the color of the surface of the water
+uniform vec4 surface_tint : hint_color = vec4(0.3, 0.93, 0.93, 1);
+
+// Define the scale of the water pool
+uniform vec2 sprite_scale = vec2(30, 0.5);
+
+// Define the amount of distortion
+uniform float distort_scale = 0.8;
+
+// Define the amount of recfration (the distortion of what is behind or under water)
+uniform float refraction_amount = 0.2;
+
+// Define the opacity of the water
+uniform float water_opacity = 0.2;
+
+// Returns a random number
+float rand(vec2 coord){
+	return fract(sin(dot(coord, vec2(19.9898, 78.233))) * 43758.5453123);
+}
+
+// Returns a noise texture
+float noise(vec2 coord){
+	vec2 i = floor(coord);
+	vec2 f = fract(coord);
+	
+	// 4 corners of a rectangle surrounding our point
+	float a = rand(i);
+	float b = rand(i + vec2(1.0, 0.0));
+	float c = rand(i + vec2(0.0, 1.0));
+	float d = rand(i + vec2(1.0, 1.0));
+	
+	vec2 cubic = f * f * (3.0 - 2.0 * f);
+	
+	return mix(a, b, cubic.x) + (c - a) * cubic.y * (1.0 - cubic.x) + (d - b) * cubic.x * cubic.y;
+}
+
+void fragment(){
+	
+	// Calculate the noise coordonate for each pixel of the sprite
+	vec2 noisecoord1 = UV * sprite_scale * distort_scale;
+	vec2 noisecoord2 = UV * sprite_scale * distort_scale + 4.0;
+	
+	// Calculate the motion of the noise layers
+	vec2 motion1 = vec2(TIME * 0.3, TIME * -0.4);
+	vec2 motion2 = vec2(TIME * 0.1, TIME * 0.5);
+	
+	// Calculate the distortion over time using the noise and the motion
+	vec2 distort1 = vec2(noise(noisecoord1 + motion1), noise(noisecoord2 + motion1)) - vec2(0.5);
+	vec2 distort2 = vec2(noise(noisecoord1 + motion2), noise(noisecoord2 + motion2)) - vec2(0.5);
+	
+	// Calculate the overall distortion
+	vec2 distort_sum = (distort1 + distort2) / 60.0;
+	
+	// Calulate separatly the effect of the disrotion on both the noise texture, and the rest of the screen
+	vec4 color = textureLod(TEXTURE, TIME * 0.1 + sin(UV) + distort_sum, -1.0);
+	vec4 background_color = textureLod(SCREEN_TEXTURE, SCREEN_UV + (distort_sum * refraction_amount), -1.0);
+	
+	// Mix the noise and the screen distortion together
+	color = mix(background_color, color, water_opacity);
+	
+	// Apply the color tint to the water
+	color = mix(color, water_tint, 0.3);
+	
+	// Cull the contrasts
+	color.rgb = mix(vec3(0.5), color.rgb, 1.4);
+	
+	// Handle the water surface
+	float near_top = (UV.y + distort_sum.y) / (0.2 / sprite_scale.y);
+	near_top = clamp(near_top, 0.0, 1.0);
+	near_top = 1.0 - near_top;
+	
+	color = mix(color, surface_tint, near_top);
+	
+	float edge_lower = 0.5;
+	float edge_upper = edge_lower + 0.1;
+	
+	if (near_top > edge_lower){
+		color.a = 0.0;
+		
+		if (near_top < edge_upper){
+			color.a = (edge_upper - near_top) / (edge_upper - edge_lower);
+		}
+	}
+	
+	// Apply the whole calculation to the canvas
+	COLOR = color;
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+render_priority = 1
+shader = SubResource( 1 )
+shader_param/water_tint = Color( 0.47451, 0, 0.721569, 1 )
+shader_param/surface_tint = Color( 0.211765, 0, 0.364706, 1 )
+shader_param/sprite_scale = Vector2( 30, 0.5 )
+shader_param/distort_scale = 0.8
+shader_param/refraction_amount = 0.2
+shader_param/water_opacity = 0.2
+
+[node name="XionLiquidShader" type="Sprite"]
+light_mask = 1024
+material = SubResource( 2 )
+position = Vector2( 9.09495e-13, 0 )
+scale = Vector2( 2, 1 )
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_editor_description_": ""
+}

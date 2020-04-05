@@ -28,7 +28,7 @@ func goto_current_level():
 # Called when a player die
 func gameover():
 	gameover_timer_node.start()
-	get_tree().get_current_scene().set_physics_process(false)
+	get_tree().get_current_scene().set_process(false)
 
 
 #  Change scene to go to the gameover scene after the timer has finished

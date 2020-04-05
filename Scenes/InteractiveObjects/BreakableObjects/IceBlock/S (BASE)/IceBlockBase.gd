@@ -20,6 +20,9 @@ func get_class() -> String:
 	return "IceBlock"
 
 
+func _ready():
+	set_physics_process(false)
+
 # When the block is destroyed, lauch the destroy animation
 func destroy(_actor_destroying: Node = null):
 	if broke == false:
@@ -52,4 +55,5 @@ func apply_floating(value: bool):
 func set_is_floating(value: bool):
 	is_floating = value
 	apply_floating(true)
+	set_physics_process(true)
 	add_to_group("MovableBodies")

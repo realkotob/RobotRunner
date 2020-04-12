@@ -2,7 +2,7 @@ extends Control
 
 onready var background_node = $Background
 
-export var hidden : bool = true
+export var hidden : bool = true setget set_hidden, get_hidden
 export var speed : int = 400
 
 onready var HUD_width = background_node.get_size().y
@@ -10,6 +10,16 @@ onready var HUD_width = background_node.get_size().y
 func _ready():
 	rect_position = Vector2(0, -HUD_width)
 	set_visible(true)
+
+
+func set_hidden(value: bool):
+	if value != hidden:
+		hidden = value
+		set_physics_process(true)
+
+
+func get_hidden() -> bool:
+	return hidden
 
 
 # Show/Hide the HUD on ui_select

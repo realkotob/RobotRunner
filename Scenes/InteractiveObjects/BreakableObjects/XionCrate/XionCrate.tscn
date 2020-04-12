@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/XionCrate.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateSE/LargeCrateAnimSE2.png" type="Texture" id=2]
@@ -242,6 +242,9 @@ scale_random = 0.54
 color_ramp = SubResource( 12 )
 hue_variation_random = 0.2
 
+[sub_resource type="CircleShape2D" id=15]
+radius = 94.0032
+
 [node name="XionCrate" type="RigidBody2D"]
 gravity_scale = 5.0
 script = ExtResource( 1 )
@@ -306,3 +309,8 @@ autostart = true
 [node name="Light2D" type="Light2D" parent="."]
 texture = ExtResource( 32 )
 color = Color( 0.843137, 0.207843, 1, 1 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 15 )

@@ -16,8 +16,6 @@
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/M/MIceBlock.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/S (BASE)/IceBlockBase.tscn" type="PackedScene" id=19]
 
-
-
 [node name="Level1" instance=ExtResource( 1 )]
 
 [node name="StartingPointP1" parent="." index="0" instance=ExtResource( 5 )]
@@ -402,14 +400,16 @@ sleeping = true
 can_sleep = true
 
 [node name="Water" parent="InteractivesObjects/WaterTiles" index="0" instance=ExtResource( 14 )]
-position = Vector2( 585.101, 471 )
-scale = Vector2( 0.895, 1 )
+position = Vector2( 585.101, 477.957 )
+scale = Vector2( 0.416, 0.495 )
 
 [node name="Water2" parent="InteractivesObjects/WaterTiles" index="1" instance=ExtResource( 14 )]
-position = Vector2( 2688, 372 )
+position = Vector2( 2688, 381 )
+scale = Vector2( 0.436, 0.457 )
 
 [node name="Lava" parent="InteractivesObjects/LavaTiles" index="0" instance=ExtResource( 6 )]
-position = Vector2( 1812, 440 )
+position = Vector2( 1812, 441.406 )
+scale = Vector2( 1, 1.399 )
 
 [node name="GreatDoor" parent="InteractivesObjects/GreatDoorGroup" index="0" instance=ExtResource( 16 )]
 position = Vector2( 3480, 288 )

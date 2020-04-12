@@ -708,10 +708,12 @@ position = Vector2( 1560, -144 )
 
 [node name="Water2" parent="InteractivesObjects/WaterTiles" index="1" instance=ExtResource( 17 )]
 position = Vector2( 3138.9, 466 )
+scale = Vector2( 0.33, 0.842 )
 script = SubResource( 9 )
 
 [node name="Water3" parent="InteractivesObjects/WaterTiles" index="2" instance=ExtResource( 17 )]
-position = Vector2( 352, 416 )
+position = Vector2( 352.226, 456 )
+scale = Vector2( 1, 1.159 )
 
 [node name="Lava" parent="InteractivesObjects/LavaTiles" index="0" instance=ExtResource( 9 )]
 position = Vector2( 1032, -112 )
@@ -790,9 +792,14 @@ scale = Vector2( 0.89, 0.78 )
 
 [node name="XionLiquid" parent="InteractivesObjects/XionLiquid" index="0" instance=ExtResource( 6 )]
 position = Vector2( 1536, 272 )
+scale = Vector2( 1, 2.976 )
+
+[node name="XionLiquidLight" parent="InteractivesObjects/XionLiquid/XionLiquid/XionLiquidShader" index="0"]
+texture_scale = 0.7
 
 [node name="XionLiquid2" parent="InteractivesObjects/XionLiquid" index="1" instance=ExtResource( 6 )]
-position = Vector2( 2096, -312 )
+position = Vector2( 2096, -312.286 )
+scale = Vector2( 0.389, 0.691 )
 
 [node name="G1" type="Node2D" parent="InteractivesObjects/TeleportGroups" index="0"]
 __meta__ = {
@@ -899,7 +906,7 @@ position = Vector2( 36, 288 )
 rotation = -1.5708
 
 [node name="AnimatedSprite" parent="InteractivesObjects/TeleportGroups/G8/TeleportArea" index="0"]
-frame = 2
+frame = 1
 
 [node name="CollisionShape2D" parent="InteractivesObjects/TeleportGroups/G8/TeleportArea" index="1"]
 position = Vector2( 0, -36 )
@@ -920,7 +927,7 @@ position = Vector2( -132, 328 )
 rotation = 4.71239
 
 [node name="AnimatedSprite" parent="InteractivesObjects/TeleportGroups/G9/TeleportArea" index="0"]
-frame = 2
+frame = 1
 
 [node name="CollisionShape2D" parent="InteractivesObjects/TeleportGroups/G9/TeleportArea" index="1"]
 position = Vector2( 0, -20 )
@@ -1302,6 +1309,8 @@ rotation = 1.5708
 
 [node name="GreatDoor" parent="InteractivesObjects/GreatDoorGroup" index="7" instance=ExtResource( 4 )]
 position = Vector2( 3408, 312 )
+
+[editable path="InteractivesObjects/XionLiquid/XionLiquid"]
 
 [editable path="InteractivesObjects/TeleportGroups/G8/TeleportArea"]
 

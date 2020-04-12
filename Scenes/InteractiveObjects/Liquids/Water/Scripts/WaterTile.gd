@@ -5,11 +5,8 @@ const CLASS_NAME = "Water"
 
 #### WATER ####
 
-# To instanciate a water zone:
-# 1) Instanciate this scene
-# 2) Instanciate the scene WaterShader & a CollisionShape as children of it
-# 3) Instanciate the WaterLight as a child of the WaterShader
-# 4) Set the size of the texture, of the shape and of the light as you will
+## USE: CHANGE THE SIZE OF THE POOL BY CHANGING THE SCALE OF THIS NODE ##
+## PLEASE DO NOT USE CHANGE CHILDREN TO CHANGE THE SIZE ##
 
 
 onready var iceblock_scene = load("res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/M/MIceBlock.tscn")

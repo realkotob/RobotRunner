@@ -13,10 +13,13 @@ noise = ExtResource( 6 )
 scale = Vector2( 0.707, 1 )
 script = ExtResource( 4 )
 
-[node name="CollisionShape2D" parent="." index="0"]
-position = Vector2( 0, 18 )
-
-[node name="LavaShader" parent="." index="1" instance=ExtResource( 2 )]
+[node name="LavaShader" parent="." index="0" instance=ExtResource( 2 )]
+scale = Vector2( 0.985785, 0.359375 )
 texture = SubResource( 1 )
 
 [node name="LavaLight" parent="LavaShader" index="0" instance=ExtResource( 3 )]
+
+[node name="CollisionShape2D" parent="." index="1"]
+visible = false
+position = Vector2( 0, 18 )
+scale = Vector2( 0.989846, 1 )

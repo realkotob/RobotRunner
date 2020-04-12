@@ -256,7 +256,7 @@ position = Vector2( 2568, 216 )
 
 [node name="WaterTile" parent="InteractivesObjects/WaterTiles" index="0" instance=ExtResource( 14 )]
 position = Vector2( 517.161, 358.729 )
-scale = Vector2( 0.520005, 1.52 )
+scale = Vector2( 0.302, 0.704 )
 
 [node name="G1" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="0"]
 script = ExtResource( 6 )

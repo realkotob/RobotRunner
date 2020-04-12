@@ -2,11 +2,8 @@ extends Area2D
 
 #### LAVA MAIN NODE ####
 
-# To instanciate a lave zone:
-# 1) Instanciate this scene
-# 2) Instanciate the scene LavaShader & a CollisionShape as children of it
-# 3) Instanciate the LavaLight as a child of the LavaShader
-# 4) Set the size of the texture, of the shape and of the light as you will
+## USE: CHANGE THE SIZE OF THE POOL BY CHANGING THE SCALE OF THIS NODE ##
+## PLEASE DO NOT USE CHANGE CHILDREN TO CHANGE THE SIZE ##
 
 func _ready():
 	var _err = connect("body_entered", self, "on_body_entered")

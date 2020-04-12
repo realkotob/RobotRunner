@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Scenes/StartingPoints/StartingPointP2.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Levels/Base/LevelBase.tscn" type="PackedScene" id=2]
@@ -14,23 +14,21 @@
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/ChildrenScenes/GreenButton.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/InteractiveObjects/Lava/Lava.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Door/ChildrenScenes/GreenDoor.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Scenes/InteractiveObjects/Lava/LavaShader.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/InteractiveObjects/Water/WaterLight.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/InteractiveObjects/Water/Shader/WaterShaderNode.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Scenes/InteractiveObjects/Lava/LavaLight.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Scenes/InteractiveObjects/Water/Water.tscn" type="PackedScene" id=19]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 253.003, 72.0001 )
+extents = Vector2( 256.53, 75 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 61.75, 22.3039 )
+extents = Vector2( 70, 19.7422 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 69.75, 22.3039 )
+extents = Vector2( 63.7017, 22.7787 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 32, 28.3203 )
+extents = Vector2( 24.8354, 40.8727 )
 
 [node name="Level3D" instance=ExtResource( 2 )]
 
@@ -133,41 +131,24 @@ scale = Vector2( 3.70195, 1.67062 )
 [node name="Lava" parent="InteractivesObjects/LavaTiles" index="0" instance=ExtResource( 13 )]
 position = Vector2( 1453.47, 367.397 )
 
-[node name="LavaShader" parent="InteractivesObjects/LavaTiles/Lava" index="0" instance=ExtResource( 15 )]
-position = Vector2( -1.4734, -7.39694 )
-scale = Vector2( 0.984375, 0.375 )
-
-[node name="LavaLight" parent="InteractivesObjects/LavaTiles/Lava" index="1" instance=ExtResource( 18 )]
-position = Vector2( 0, 0 )
-color = Color( 0.627451, 0.368627, 0, 1 )
-energy = 1.4
-shadow_color = Color( 0.129412, 0, 0, 0.8 )
-shadow_gradient_length = 100.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractivesObjects/LavaTiles/Lava" index="2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractivesObjects/LavaTiles/Lava" index="1"]
 visible = false
-position = Vector2( -2.47339, 16.6031 )
+position = Vector2( 0, 17.603 )
 shape = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="Lava2" parent="InteractivesObjects/LavaTiles" index="1" instance=ExtResource( 13 )]
-position = Vector2( 1834.25, 488.304 )
+position = Vector2( 1831.47, 488.304 )
 
-[node name="LavaShader" parent="InteractivesObjects/LavaTiles/Lava2" index="0" instance=ExtResource( 15 )]
-scale = Vector2( 0.370065, 0.123822 )
+[node name="LavaShader" parent="InteractivesObjects/LavaTiles/Lava2" index="0"]
+position = Vector2( 5.03011, 0 )
+scale = Vector2( 0.259766, 0.14078 )
 
-[node name="LavaLight" parent="InteractivesObjects/LavaTiles/Lava2" index="1" instance=ExtResource( 18 )]
-position = Vector2( 0, 0 )
-color = Color( 0.627451, 0.368627, 0, 1 )
-energy = 1.15
-shadow_color = Color( 0.129412, 0, 0, 0.8 )
-shadow_gradient_length = 100.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractivesObjects/LavaTiles/Lava2" index="2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractivesObjects/LavaTiles/Lava2" index="1"]
 visible = false
-position = Vector2( 0, 5.99994 )
+position = Vector2( 5.14917, 0 )
 shape = SubResource( 2 )
 __meta__ = {
 "_edit_lock_": true
@@ -176,40 +157,32 @@ __meta__ = {
 [node name="Lava3" parent="InteractivesObjects/LavaTiles" index="2" instance=ExtResource( 13 )]
 position = Vector2( 2218.25, 488.304 )
 
-[node name="LavaShader" parent="InteractivesObjects/LavaTiles/Lava3" index="0" instance=ExtResource( 15 )]
-scale = Vector2( 0.370065, 0.123822 )
+[node name="LavaShader" parent="InteractivesObjects/LavaTiles/Lava3" index="0"]
+position = Vector2( -3.25, 0.525993 )
+scale = Vector2( 0.449219, 0.175117 )
 
-[node name="LavaLight" parent="InteractivesObjects/LavaTiles/Lava3" index="1" instance=ExtResource( 18 )]
-position = Vector2( 0, 0 )
-color = Color( 0.627451, 0.368627, 0, 1 )
-energy = 1.15
-shadow_color = Color( 0.129412, 0, 0, 0.8 )
-shadow_gradient_length = 100.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractivesObjects/LavaTiles/Lava3" index="2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractivesObjects/LavaTiles/Lava3" index="1"]
 visible = false
-position = Vector2( 0, 5.99994 )
+position = Vector2( 0, -3.84091 )
 shape = SubResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="Lava4" parent="InteractivesObjects/LavaTiles" index="3" instance=ExtResource( 13 )]
-position = Vector2( 2348.02, 375.799 )
+position = Vector2( 2348.02, 377 )
 
-[node name="LavaShader" parent="InteractivesObjects/LavaTiles/Lava4" index="0" instance=ExtResource( 15 )]
-scale = Vector2( 0.125, 0.140625 )
+[node name="LavaShader" parent="InteractivesObjects/LavaTiles/Lava4" index="0"]
+position = Vector2( 4.38232, 7.50001 )
+scale = Vector2( 0.126572, 0.330078 )
 
-[node name="LavaLight" parent="InteractivesObjects/LavaTiles/Lava4" index="1" instance=ExtResource( 18 )]
-position = Vector2( 0, 0 )
-color = Color( 0.627451, 0.368627, 0, 1 )
-energy = 1.0
-shadow_color = Color( 0.129412, 0, 0, 0.8 )
-shadow_gradient_length = 100.0
+[node name="LavaLight" parent="InteractivesObjects/LavaTiles/Lava4/LavaShader" index="0"]
+position = Vector2( -18.9805, -72.71 )
+scale = Vector2( 1.512, 1.36381 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractivesObjects/LavaTiles/Lava4" index="2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractivesObjects/LavaTiles/Lava4" index="1"]
 visible = false
-position = Vector2( 0, 7.99994 )
+position = Vector2( 4.63306, -2.29941 )
 shape = SubResource( 4 )
 __meta__ = {
 "_edit_lock_": true
@@ -361,3 +334,9 @@ position = Vector2( 2643, 228 )
 
 [node name="RedButton3" parent="InteractivesObjects/GreatDoorGroup" index="3" instance=ExtResource( 7 )]
 position = Vector2( 2760, 180 )
+
+[editable path="InteractivesObjects/LavaTiles/Lava2"]
+
+[editable path="InteractivesObjects/LavaTiles/Lava3"]
+
+[editable path="InteractivesObjects/LavaTiles/Lava4"]

@@ -132,7 +132,7 @@ _global_script_classes=[ {
 "base": "InteractAreaBase",
 "class": "Water",
 "language": "GDScript",
-"path": "res://Scenes/InteractiveObjects/Water/Scripts/WaterTile.gd"
+"path": "res://Scenes/InteractiveObjects/Liquids/Water/Scripts/WaterTile.gd"
 }, {
 "base": "StateBase",
 "class": "WorkStateBase",

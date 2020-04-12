@@ -12,9 +12,9 @@
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/S (base)/EarthBlockBase.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/ChildrenScenes/BlueButton.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/ChildrenScenes/GreenButton.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Scenes/InteractiveObjects/Lava/Lava.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/InteractiveObjects/Liquids/Lava/Lava.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Door/ChildrenScenes/GreenDoor.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Scenes/InteractiveObjects/Water/Water.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Scenes/InteractiveObjects/Liquids/Water/Water.tscn" type="PackedScene" id=19]
 
 [node name="Level3D" instance=ExtResource( 2 )]
 
@@ -103,16 +103,20 @@ position = Vector2( 299.908, 408 )
 position = Vector2( 966.345, 456 )
 
 [node name="Lava" parent="InteractivesObjects/LavaTiles" index="0" instance=ExtResource( 13 )]
-position = Vector2( 1453.47, 367.397 )
+position = Vector2( 1453.47, 377 )
+scale = Vector2( 1.046, 0.991 )
 
 [node name="Lava2" parent="InteractivesObjects/LavaTiles" index="1" instance=ExtResource( 13 )]
 position = Vector2( 1831.47, 488.304 )
+scale = Vector2( 0.27, 0.344 )
 
 [node name="Lava3" parent="InteractivesObjects/LavaTiles" index="2" instance=ExtResource( 13 )]
 position = Vector2( 2218.25, 488.304 )
+scale = Vector2( 0.282, 0.363 )
 
 [node name="Lava4" parent="InteractivesObjects/LavaTiles" index="3" instance=ExtResource( 13 )]
 position = Vector2( 2348.02, 377 )
+scale = Vector2( 0.144, 0.853 )
 
 [node name="G1" type="Node2D" parent="InteractivesObjects/TeleportGroups" index="0"]
 __meta__ = {

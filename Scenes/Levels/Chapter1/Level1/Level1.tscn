@@ -4,17 +4,19 @@
 [ext_resource path="res://Scenes/StartingPoints/StartingPointP2.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/XionCrate.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/StartingPoints/StartingPointP1.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/InteractiveObjects/Lava/Lava.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/InteractiveObjects/Liquids/Lava/Lava.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Global/Lights/Light500.png" type="Texture" id=7]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/ChildrenScenes/RedButton.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/XionCloud/XionCloud.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/XionCloud/CloudPath.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/S (base)/EarthBlockBase.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scenes/InteractiveObjects/Water/Water.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/InteractiveObjects/Liquids/Water/Water.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/M/MEarthBlock.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/InteractiveObjects/GreatDoor/GreatDoor.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/M/MIceBlock.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/S (BASE)/IceBlockBase.tscn" type="PackedScene" id=19]
+
+
 
 [node name="Level1" instance=ExtResource( 1 )]
 

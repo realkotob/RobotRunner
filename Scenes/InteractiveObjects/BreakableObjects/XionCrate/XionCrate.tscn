@@ -243,7 +243,7 @@ color_ramp = SubResource( 12 )
 hue_variation_random = 0.2
 
 [sub_resource type="CircleShape2D" id=15]
-radius = 94.0032
+radius = 80.5399
 
 [node name="XionCrate" type="RigidBody2D"]
 gravity_scale = 5.0

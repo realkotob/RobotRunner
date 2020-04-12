@@ -1,17 +1,19 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/InteractiveObjects/Water/Scripts/WaterTile.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/InteractiveObjects/Water/Particles/WaterParticle.tres" type="Material" id=2]
+[ext_resource path="res://Scenes/InteractiveObjects/Water/Shader/WaterShaderNode.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/InteractiveObjects/Water/WaterLight.tscn" type="PackedScene" id=4]
 
 [node name="Water" type="Area2D"]
 z_index = 2
 script = ExtResource( 1 )
 
 [node name="FloatingLine" type="Position2D" parent="."]
-position = Vector2( 0, -7 )
+position = Vector2( 0, -30 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
-position = Vector2( 0, -7 )
+position = Vector2( 0, -30 )
 emitting = false
 amount = 30
 lifetime = 0.4
@@ -20,3 +22,10 @@ explosiveness = 0.83
 randomness = 0.53
 local_coords = false
 process_material = ExtResource( 2 )
+
+[node name="WaterShader" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, 0 )
+
+[node name="WaterLight" parent="WaterShader" instance=ExtResource( 4 )]
+position = Vector2( -2.38419e-07, 1.90735e-06 )
+scale = Vector2( 0.91, 1.2 )

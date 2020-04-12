@@ -8,6 +8,7 @@ onready var timer_node = $Timer
 onready var base_anim_node = $Sprites/Base
 onready var blowing_anim_node = $Sprites/Blowing
 onready var flash_node = $Flash
+onready var area_node = $Area2D
 
 var animated_sprite_node_array : Array
 
@@ -22,6 +23,8 @@ func _ready():
 	var _err = timer_node.connect("timeout", self, "on_timer_timeout")
 	_err = base_anim_node.connect("animation_finished", self, "on_sprite_animation_finished")
 	_err = blowing_anim_node.connect("animation_finished", self, "on_blowing_anim_finished")
+	_err = area_node.connect("body_entered", SCORE, "on_enter_collactable_area")
+	_err = area_node.connect("body_exited", SCORE, "on_exit_collactable_area")
 	
 	for child in sprites_group_node.get_children():
 		if child.is_class("AnimatedSprite"):
@@ -103,11 +106,13 @@ func on_sprite_animation_finished():
 			anim.set_frame(0)
 
 
+# Called when the object has finished its breaking animation
 func on_blowing_anim_finished():
 	generate_xion_collectable()
 	queue_free()
 
 
+# Genereate xion collactables
 func generate_xion_collectable():
 	if actor_destroying != null:
 		for _i in range(5):

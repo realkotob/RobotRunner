@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scenes/StartingPoints/StartingPointP2.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/StartingPoints/StartingPointP1.tscn" type="PackedScene" id=2]
@@ -13,8 +13,7 @@
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/ChildrenScenes/BlueButton.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Door/ChildrenScenes/RedDoor.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/ChildrenScenes/RedButton.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scenes/InteractiveObjects/Water/Water.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Scenes/InteractiveObjects/Water/Shader/WaterShaderNode.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/InteractiveObjects/Liquids/Water/Water.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/M/MEarthBlock.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/M/MIceBlock.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scenes/Camera/Checkpoint/CheckpointBase.tscn" type="PackedScene" id=18]
@@ -257,9 +256,7 @@ position = Vector2( 2568, 216 )
 
 [node name="WaterTile" parent="InteractivesObjects/WaterTiles" index="0" instance=ExtResource( 14 )]
 position = Vector2( 517.161, 358.729 )
-scale = Vector2( 0.520005, 1.52 )
-
-[node name="WaterShader" parent="InteractivesObjects/WaterTiles/WaterTile" index="2" instance=ExtResource( 15 )]
+scale = Vector2( 0.302, 0.704 )
 
 [node name="G1" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="0"]
 script = ExtResource( 6 )

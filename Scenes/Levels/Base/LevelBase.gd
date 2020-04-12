@@ -14,7 +14,6 @@ var player_in_danger : bool = false
 
 func _ready():
 	instanciate_players()
-#	set_process(false)
 
 
 func _process(_delta):

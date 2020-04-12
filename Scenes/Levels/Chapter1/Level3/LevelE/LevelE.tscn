@@ -1,27 +1,19 @@
-[gd_scene load_steps=112 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://Scenes/Levels/Base/LevelBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/StartingPoints/StartingPointP1.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/StartingPoints/StartingPointP2.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/InteractiveObjects/GreatDoor/GreatDoor.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/InteractiveObjects/XionLiquid/Shader/XionLiquidShaderNode.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/InteractiveObjects/XionLiquid/XionLiquid.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/InteractiveObjects/XionLiquid/Lights/XionLiquidLightNode.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/InteractiveObjects/Lava/LavaShader.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/InteractiveObjects/Lava/Lava.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Scenes/InteractiveObjects/Lava/LavaLight.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/InteractiveObjects/Liquids/XionLiquid/XionLiquid.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/InteractiveObjects/Liquids/Lava/Lava.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/ChildrenScenes/BlueButton.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Door/ChildrenScenes/BlueDoor.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/InteractiveObjects/Teleports/TeleportArea.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/GroupBase.gd" type="Script" id=14]
-[ext_resource path="res://Scenes/InteractiveObjects/Water/WaterLight.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Scenes/InteractiveObjects/Water/Shader/WaterShaderNode.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Scenes/InteractiveObjects/Water/Water.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scenes/InteractiveObjects/Liquids/Water/Water.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/XionCrate.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/ChildrenScenes/RedButton.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Door/ChildrenScenes/RedDoor.tscn" type="PackedScene" id=20]
-[ext_resource path="res://Scenes/InteractiveObjects/Lava/Shader/LavaShader.shader" type="Shader" id=21]
-[ext_resource path="res://Scenes/InteractiveObjects/Water/WaterNoise1.tres" type="OpenSimplexNoise" id=22]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Door/ChildrenScenes/GreenDoor.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/ChildrenScenes/GreenButton.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/M/MIceBlock.tscn" type="PackedScene" id=25]
@@ -211,147 +203,215 @@ func body_floating(body : PhysicsBody2D, float_or_not : bool):
 		body.floating_line_y = floating_line_node.global_position.y
 "
 
-[sub_resource type="Shader" id=10]
-code = "shader_type canvas_item;
+[sub_resource type="GDScript" id=10]
+script/source = "extends Area2D
 
-// Define the color of the water
-uniform vec4 water_tint : hint_color = vec4(0.0, 0.8, 1, 1);
+#### LAVA MAIN NODE ####
 
-// Define the color of the surface of the water
-uniform vec4 surface_tint : hint_color = vec4(0.3, 0.93, 0.93, 1);
+# To instanciate a lave zone:
+# 1) Instanciate this scene
+# 2) Instanciate the scene LavaShader & a CollisionShape as children of it
+# 3) Instanciate the LavaLight as a child of the LavaShader
+# 4) Set the size of the texture, of the shape and of the light as you will
 
-// Define the scale of the water pool
-uniform vec2 sprite_scale = vec2(30, 0.5);
+func _ready():
+	var _err = connect(\"body_entered\", self, \"on_body_entered\")
 
-// Define the amount of distortion
-uniform float distort_scale = 0.8;
 
-// Define the amount of recfration (the distortion of what is behind or under water)
-uniform float refraction_amount = 0.2;
+# Destroy the body entering the lava
+func on_body_entered(body):
+	if body.is_class(\"Player\"):
+		body.destroy()
+"
 
-// Define the opacity of the water
-uniform float water_opacity = 0.2;
+[sub_resource type="GDScript" id=11]
+script/source = "extends Area2D
 
-// Returns a random number
-float rand(vec2 coord){
-	return fract(sin(dot(coord, vec2(19.9898, 78.233))) * 43758.5453123);
-}
+#### LAVA MAIN NODE ####
 
-// Returns a noise texture
-float noise(vec2 coord){
-	vec2 i = floor(coord);
-	vec2 f = fract(coord);
-	
-	// 4 corners of a rectangle surrounding our point
-	float a = rand(i);
-	float b = rand(i + vec2(1.0, 0.0));
-	float c = rand(i + vec2(0.0, 1.0));
-	float d = rand(i + vec2(1.0, 1.0));
-	
-	vec2 cubic = f * f * (3.0 - 2.0 * f);
-	
-	return mix(a, b, cubic.x) + (c - a) * cubic.y * (1.0 - cubic.x) + (d - b) * cubic.x * cubic.y;
-}
+# To instanciate a lave zone:
+# 1) Instanciate this scene
+# 2) Instanciate the scene LavaShader & a CollisionShape as children of it
+# 3) Instanciate the LavaLight as a child of the LavaShader
+# 4) Set the size of the texture, of the shape and of the light as you will
 
-void fragment(){
-	
-	// Calculate the noise coordonate for each pixel of the sprite
-	vec2 noisecoord1 = UV * sprite_scale * distort_scale;
-	vec2 noisecoord2 = UV * sprite_scale * distort_scale + 4.0;
-	
-	// Calculate the motion of the noise layers
-	vec2 motion1 = vec2(TIME * 0.3, TIME * -0.4);
-	vec2 motion2 = vec2(TIME * 0.1, TIME * 0.5);
-	
-	// Calculate the distortion over time using the noise and the motion
-	vec2 distort1 = vec2(noise(noisecoord1 + motion1), noise(noisecoord2 + motion1)) - vec2(0.5);
-	vec2 distort2 = vec2(noise(noisecoord1 + motion2), noise(noisecoord2 + motion2)) - vec2(0.5);
-	
-	// Calculate the overall distortion
-	vec2 distort_sum = (distort1 + distort2) / 60.0;
-	
-	// Calulate separatly the effect of the disrotion on both the noise texture, and the rest of the screen
-	vec4 color = textureLod(TEXTURE, TIME * 0.1 + sin(UV) + distort_sum, -1.0);
-	vec4 background_color = textureLod(SCREEN_TEXTURE, SCREEN_UV + (distort_sum * refraction_amount), -1.0);
-	
-	// Mix the noise and the screen distortion together
-	color = mix(background_color, color, water_opacity);
-	
-	// Apply the color tint to the water
-	color = mix(color, water_tint, 0.3);
-	
-	// Cull the contrasts
-	color.rgb = mix(vec3(0.5), color.rgb, 1.4);
-	
-	// Handle the water surface
-	float near_top = (UV.y + distort_sum.y) / (0.2 / sprite_scale.y);
-	near_top = clamp(near_top, 0.0, 1.0);
-	near_top = 1.0 - near_top;
-	
-	color = mix(color, surface_tint, near_top);
-	
-	float edge_lower = 0.5;
-	float edge_upper = edge_lower + 0.1;
-	
-	if (near_top > edge_lower){
-		color.a = 0.0;
-		
-		if (near_top < edge_upper){
-			color.a = (edge_upper - near_top) / (edge_upper - edge_lower);
-		}
-	}
-	
-	// Apply the whole calculation to the canvas
-	COLOR = color;
-}"
+func _ready():
+	var _err = connect(\"body_entered\", self, \"on_body_entered\")
 
-[sub_resource type="ShaderMaterial" id=11]
-render_priority = 1
-shader = SubResource( 10 )
-shader_param/water_tint = Color( 0, 0.8, 1, 1 )
-shader_param/surface_tint = Color( 0.3, 0.93, 0.93, 1 )
-shader_param/sprite_scale = Vector2( 30, 0.5 )
-shader_param/distort_scale = 0.8
-shader_param/refraction_amount = 0.2
-shader_param/water_opacity = 0.2
 
-[sub_resource type="OpenSimplexNoise" id=12]
-period = 13.6
-lacunarity = 2.37
+# Destroy the body entering the lava
+func on_body_entered(body):
+	if body.is_class(\"Player\"):
+		body.destroy()
+"
 
-[sub_resource type="NoiseTexture" id=13]
-width = 100
-height = 100
-seamless = true
-noise = SubResource( 12 )
+[sub_resource type="GDScript" id=12]
+script/source = "extends Area2D
 
-[sub_resource type="StreamTexture" id=14]
-load_path = "res://.import/Light300.png-52f4b423ac92f48283761156830cb1c0.stex"
+#### LAVA MAIN NODE ####
 
-[sub_resource type="ShaderMaterial" id=15]
-render_priority = 1
-shader = SubResource( 10 )
-shader_param/water_tint = Color( 0, 0.8, 1, 1 )
-shader_param/surface_tint = Color( 0.3, 0.93, 0.93, 1 )
-shader_param/sprite_scale = Vector2( 30, 0.5 )
-shader_param/distort_scale = 0.8
-shader_param/refraction_amount = 0.2
-shader_param/water_opacity = 0.2
+# To instanciate a lave zone:
+# 1) Instanciate this scene
+# 2) Instanciate the scene LavaShader & a CollisionShape as children of it
+# 3) Instanciate the LavaLight as a child of the LavaShader
+# 4) Set the size of the texture, of the shape and of the light as you will
 
-[sub_resource type="NoiseTexture" id=16]
-width = 100
-height = 100
-seamless = true
-noise = SubResource( 12 )
+func _ready():
+	var _err = connect(\"body_entered\", self, \"on_body_entered\")
 
-[sub_resource type="StreamTexture" id=17]
-load_path = "res://.import/Light300.png-52f4b423ac92f48283761156830cb1c0.stex"
 
-[sub_resource type="RectangleShape2D" id=18]
-extents = Vector2( 48, 40 )
+# Destroy the body entering the lava
+func on_body_entered(body):
+	if body.is_class(\"Player\"):
+		body.destroy()
+"
 
-[sub_resource type="RectangleShape2D" id=19]
-extents = Vector2( 168, 10 )
+[sub_resource type="GDScript" id=13]
+script/source = "extends Area2D
+
+#### LAVA MAIN NODE ####
+
+# To instanciate a lave zone:
+# 1) Instanciate this scene
+# 2) Instanciate the scene LavaShader & a CollisionShape as children of it
+# 3) Instanciate the LavaLight as a child of the LavaShader
+# 4) Set the size of the texture, of the shape and of the light as you will
+
+func _ready():
+	var _err = connect(\"body_entered\", self, \"on_body_entered\")
+
+
+# Destroy the body entering the lava
+func on_body_entered(body):
+	if body.is_class(\"Player\"):
+		body.destroy()
+"
+
+[sub_resource type="GDScript" id=14]
+script/source = "extends Area2D
+
+#### LAVA MAIN NODE ####
+
+# To instanciate a lave zone:
+# 1) Instanciate this scene
+# 2) Instanciate the scene LavaShader & a CollisionShape as children of it
+# 3) Instanciate the LavaLight as a child of the LavaShader
+# 4) Set the size of the texture, of the shape and of the light as you will
+
+func _ready():
+	var _err = connect(\"body_entered\", self, \"on_body_entered\")
+
+
+# Destroy the body entering the lava
+func on_body_entered(body):
+	if body.is_class(\"Player\"):
+		body.destroy()
+"
+
+[sub_resource type="GDScript" id=15]
+script/source = "extends Area2D
+
+#### LAVA MAIN NODE ####
+
+# To instanciate a lave zone:
+# 1) Instanciate this scene
+# 2) Instanciate the scene LavaShader & a CollisionShape as children of it
+# 3) Instanciate the LavaLight as a child of the LavaShader
+# 4) Set the size of the texture, of the shape and of the light as you will
+
+func _ready():
+	var _err = connect(\"body_entered\", self, \"on_body_entered\")
+
+
+# Destroy the body entering the lava
+func on_body_entered(body):
+	if body.is_class(\"Player\"):
+		body.destroy()
+"
+
+[sub_resource type="GDScript" id=16]
+script/source = "extends Area2D
+
+#### LAVA MAIN NODE ####
+
+# To instanciate a lave zone:
+# 1) Instanciate this scene
+# 2) Instanciate the scene LavaShader & a CollisionShape as children of it
+# 3) Instanciate the LavaLight as a child of the LavaShader
+# 4) Set the size of the texture, of the shape and of the light as you will
+
+func _ready():
+	var _err = connect(\"body_entered\", self, \"on_body_entered\")
+
+
+# Destroy the body entering the lava
+func on_body_entered(body):
+	if body.is_class(\"Player\"):
+		body.destroy()
+"
+
+[sub_resource type="GDScript" id=17]
+script/source = "extends Area2D
+
+#### LAVA MAIN NODE ####
+
+# To instanciate a lave zone:
+# 1) Instanciate this scene
+# 2) Instanciate the scene LavaShader & a CollisionShape as children of it
+# 3) Instanciate the LavaLight as a child of the LavaShader
+# 4) Set the size of the texture, of the shape and of the light as you will
+
+func _ready():
+	var _err = connect(\"body_entered\", self, \"on_body_entered\")
+
+
+# Destroy the body entering the lava
+func on_body_entered(body):
+	if body.is_class(\"Player\"):
+		body.destroy()
+"
+
+[sub_resource type="GDScript" id=18]
+script/source = "extends Area2D
+
+#### LAVA MAIN NODE ####
+
+# To instanciate a lave zone:
+# 1) Instanciate this scene
+# 2) Instanciate the scene LavaShader & a CollisionShape as children of it
+# 3) Instanciate the LavaLight as a child of the LavaShader
+# 4) Set the size of the texture, of the shape and of the light as you will
+
+func _ready():
+	var _err = connect(\"body_entered\", self, \"on_body_entered\")
+
+
+# Destroy the body entering the lava
+func on_body_entered(body):
+	if body.is_class(\"Player\"):
+		body.destroy()
+"
+
+[sub_resource type="GDScript" id=19]
+script/source = "extends Area2D
+
+#### LAVA MAIN NODE ####
+
+# To instanciate a lave zone:
+# 1) Instanciate this scene
+# 2) Instanciate the scene LavaShader & a CollisionShape as children of it
+# 3) Instanciate the LavaLight as a child of the LavaShader
+# 4) Set the size of the texture, of the shape and of the light as you will
+
+func _ready():
+	var _err = connect(\"body_entered\", self, \"on_body_entered\")
+
+
+# Destroy the body entering the lava
+func on_body_entered(body):
+	if body.is_class(\"Player\"):
+		body.destroy()
+"
 
 [sub_resource type="GDScript" id=20]
 script/source = "extends Area2D
@@ -374,457 +434,13 @@ func on_body_entered(body):
 		body.destroy()
 "
 
-[sub_resource type="ShaderMaterial" id=21]
-render_priority = 1
-shader = ExtResource( 21 )
-shader_param/water_tint = Color( 0.478431, 0.0313726, 0.0509804, 1 )
-shader_param/surface_tint = Color( 1, 0.705882, 0.290196, 1 )
-shader_param/sprite_scale = Vector2( 30, 0.5 )
-shader_param/distort_scale = 0.3
-shader_param/refraction_amount = 7.522
-shader_param/water_opacity = 0.9
-
-[sub_resource type="NoiseTexture" id=22]
-noise = ExtResource( 22 )
-
-[sub_resource type="StreamTexture" id=23]
-load_path = "res://.import/Light500.png-b2b14a3aed88563f2009ff7538a248c6.stex"
-
-[sub_resource type="RectangleShape2D" id=24]
-extents = Vector2( 72, 24 )
-
-[sub_resource type="GDScript" id=25]
-script/source = "extends Area2D
-
-#### LAVA MAIN NODE ####
-
-# To instanciate a lave zone:
-# 1) Instanciate this scene
-# 2) Instanciate the scene LavaShader & a CollisionShape as children of it
-# 3) Instanciate the LavaLight as a child of the LavaShader
-# 4) Set the size of the texture, of the shape and of the light as you will
-
-func _ready():
-	var _err = connect(\"body_entered\", self, \"on_body_entered\")
-
-
-# Destroy the body entering the lava
-func on_body_entered(body):
-	if body.is_class(\"Player\"):
-		body.destroy()
-"
-
-[sub_resource type="ShaderMaterial" id=26]
-render_priority = 1
-shader = ExtResource( 21 )
-shader_param/water_tint = Color( 0.478431, 0.0313726, 0.0509804, 1 )
-shader_param/surface_tint = Color( 1, 0.705882, 0.290196, 1 )
-shader_param/sprite_scale = Vector2( 30, 0.5 )
-shader_param/distort_scale = 0.3
-shader_param/refraction_amount = 7.522
-shader_param/water_opacity = 0.9
-
-[sub_resource type="NoiseTexture" id=27]
-noise = ExtResource( 22 )
-
-[sub_resource type="StreamTexture" id=28]
-load_path = "res://.import/Light500.png-b2b14a3aed88563f2009ff7538a248c6.stex"
-
-[sub_resource type="RectangleShape2D" id=29]
-extents = Vector2( 144, 55 )
-
-[sub_resource type="GDScript" id=30]
-script/source = "extends Area2D
-
-#### LAVA MAIN NODE ####
-
-# To instanciate a lave zone:
-# 1) Instanciate this scene
-# 2) Instanciate the scene LavaShader & a CollisionShape as children of it
-# 3) Instanciate the LavaLight as a child of the LavaShader
-# 4) Set the size of the texture, of the shape and of the light as you will
-
-func _ready():
-	var _err = connect(\"body_entered\", self, \"on_body_entered\")
-
-
-# Destroy the body entering the lava
-func on_body_entered(body):
-	if body.is_class(\"Player\"):
-		body.destroy()
-"
-
-[sub_resource type="ShaderMaterial" id=31]
-render_priority = 1
-shader = ExtResource( 21 )
-shader_param/water_tint = Color( 0.478431, 0.0313726, 0.0509804, 1 )
-shader_param/surface_tint = Color( 1, 0.705882, 0.290196, 1 )
-shader_param/sprite_scale = Vector2( 30, 0.5 )
-shader_param/distort_scale = 0.3
-shader_param/refraction_amount = 7.522
-shader_param/water_opacity = 0.9
-
-[sub_resource type="NoiseTexture" id=32]
-noise = ExtResource( 22 )
-
-[sub_resource type="StreamTexture" id=33]
-load_path = "res://.import/Light500.png-b2b14a3aed88563f2009ff7538a248c6.stex"
-
-[sub_resource type="RectangleShape2D" id=34]
-extents = Vector2( 40, 31 )
-
-[sub_resource type="GDScript" id=35]
-script/source = "extends Area2D
-
-#### LAVA MAIN NODE ####
-
-# To instanciate a lave zone:
-# 1) Instanciate this scene
-# 2) Instanciate the scene LavaShader & a CollisionShape as children of it
-# 3) Instanciate the LavaLight as a child of the LavaShader
-# 4) Set the size of the texture, of the shape and of the light as you will
-
-func _ready():
-	var _err = connect(\"body_entered\", self, \"on_body_entered\")
-
-
-# Destroy the body entering the lava
-func on_body_entered(body):
-	if body.is_class(\"Player\"):
-		body.destroy()
-"
-
-[sub_resource type="ShaderMaterial" id=36]
-render_priority = 1
-shader = ExtResource( 21 )
-shader_param/water_tint = Color( 0.478431, 0.0313726, 0.0509804, 1 )
-shader_param/surface_tint = Color( 1, 0.705882, 0.290196, 1 )
-shader_param/sprite_scale = Vector2( 30, 0.5 )
-shader_param/distort_scale = 0.3
-shader_param/refraction_amount = 7.522
-shader_param/water_opacity = 0.9
-
-[sub_resource type="NoiseTexture" id=37]
-noise = ExtResource( 22 )
-
-[sub_resource type="StreamTexture" id=38]
-load_path = "res://.import/Light500.png-b2b14a3aed88563f2009ff7538a248c6.stex"
-
-[sub_resource type="RectangleShape2D" id=39]
-extents = Vector2( 40, 22 )
-
-[sub_resource type="GDScript" id=40]
-script/source = "extends Area2D
-
-#### LAVA MAIN NODE ####
-
-# To instanciate a lave zone:
-# 1) Instanciate this scene
-# 2) Instanciate the scene LavaShader & a CollisionShape as children of it
-# 3) Instanciate the LavaLight as a child of the LavaShader
-# 4) Set the size of the texture, of the shape and of the light as you will
-
-func _ready():
-	var _err = connect(\"body_entered\", self, \"on_body_entered\")
-
-
-# Destroy the body entering the lava
-func on_body_entered(body):
-	if body.is_class(\"Player\"):
-		body.destroy()
-"
-
-[sub_resource type="ShaderMaterial" id=41]
-render_priority = 1
-shader = ExtResource( 21 )
-shader_param/water_tint = Color( 0.478431, 0.0313726, 0.0509804, 1 )
-shader_param/surface_tint = Color( 1, 0.705882, 0.290196, 1 )
-shader_param/sprite_scale = Vector2( 30, 0.5 )
-shader_param/distort_scale = 0.3
-shader_param/refraction_amount = 7.522
-shader_param/water_opacity = 0.9
-
-[sub_resource type="NoiseTexture" id=42]
-noise = ExtResource( 22 )
-
-[sub_resource type="StreamTexture" id=43]
-load_path = "res://.import/Light500.png-b2b14a3aed88563f2009ff7538a248c6.stex"
-
-[sub_resource type="RectangleShape2D" id=44]
-extents = Vector2( 40, 9.04401 )
-
-[sub_resource type="ShaderMaterial" id=45]
-render_priority = 1
-shader = ExtResource( 21 )
-shader_param/water_tint = Color( 0.478431, 0.0313726, 0.0509804, 1 )
-shader_param/surface_tint = Color( 1, 0.705882, 0.290196, 1 )
-shader_param/sprite_scale = Vector2( 30, 0.5 )
-shader_param/distort_scale = 0.3
-shader_param/refraction_amount = 7.522
-shader_param/water_opacity = 0.9
-
-[sub_resource type="NoiseTexture" id=46]
-noise = ExtResource( 22 )
-
-[sub_resource type="StreamTexture" id=47]
-load_path = "res://.import/Light500.png-b2b14a3aed88563f2009ff7538a248c6.stex"
-
-[sub_resource type="RectangleShape2D" id=48]
-extents = Vector2( 40, 9.04401 )
-
-[sub_resource type="GDScript" id=49]
-script/source = "extends Area2D
-
-#### LAVA MAIN NODE ####
-
-# To instanciate a lave zone:
-# 1) Instanciate this scene
-# 2) Instanciate the scene LavaShader & a CollisionShape as children of it
-# 3) Instanciate the LavaLight as a child of the LavaShader
-# 4) Set the size of the texture, of the shape and of the light as you will
-
-func _ready():
-	var _err = connect(\"body_entered\", self, \"on_body_entered\")
-
-
-# Destroy the body entering the lava
-func on_body_entered(body):
-	if body.is_class(\"Player\"):
-		body.destroy()
-"
-
-[sub_resource type="ShaderMaterial" id=50]
-render_priority = 1
-shader = ExtResource( 21 )
-shader_param/water_tint = Color( 0.478431, 0.0313726, 0.0509804, 1 )
-shader_param/surface_tint = Color( 1, 0.705882, 0.290196, 1 )
-shader_param/sprite_scale = Vector2( 30, 0.5 )
-shader_param/distort_scale = 0.3
-shader_param/refraction_amount = 7.522
-shader_param/water_opacity = 0.9
-
-[sub_resource type="NoiseTexture" id=51]
-noise = ExtResource( 22 )
-
-[sub_resource type="StreamTexture" id=52]
-load_path = "res://.import/Light500.png-b2b14a3aed88563f2009ff7538a248c6.stex"
-
-[sub_resource type="RectangleShape2D" id=53]
-extents = Vector2( 40, 32 )
-
-[sub_resource type="GDScript" id=54]
-script/source = "extends Area2D
-
-#### LAVA MAIN NODE ####
-
-# To instanciate a lave zone:
-# 1) Instanciate this scene
-# 2) Instanciate the scene LavaShader & a CollisionShape as children of it
-# 3) Instanciate the LavaLight as a child of the LavaShader
-# 4) Set the size of the texture, of the shape and of the light as you will
-
-func _ready():
-	var _err = connect(\"body_entered\", self, \"on_body_entered\")
-
-
-# Destroy the body entering the lava
-func on_body_entered(body):
-	if body.is_class(\"Player\"):
-		body.destroy()
-"
-
-[sub_resource type="ShaderMaterial" id=55]
-render_priority = 1
-shader = ExtResource( 21 )
-shader_param/water_tint = Color( 0.478431, 0.0313726, 0.0509804, 1 )
-shader_param/surface_tint = Color( 1, 0.705882, 0.290196, 1 )
-shader_param/sprite_scale = Vector2( 30, 0.5 )
-shader_param/distort_scale = 0.3
-shader_param/refraction_amount = 7.522
-shader_param/water_opacity = 0.9
-
-[sub_resource type="NoiseTexture" id=56]
-noise = ExtResource( 22 )
-
-[sub_resource type="StreamTexture" id=57]
-load_path = "res://.import/Light500.png-b2b14a3aed88563f2009ff7538a248c6.stex"
-
-[sub_resource type="RectangleShape2D" id=58]
-extents = Vector2( 80, 40 )
-
-[sub_resource type="GDScript" id=59]
-script/source = "extends Area2D
-
-#### LAVA MAIN NODE ####
-
-# To instanciate a lave zone:
-# 1) Instanciate this scene
-# 2) Instanciate the scene LavaShader & a CollisionShape as children of it
-# 3) Instanciate the LavaLight as a child of the LavaShader
-# 4) Set the size of the texture, of the shape and of the light as you will
-
-func _ready():
-	var _err = connect(\"body_entered\", self, \"on_body_entered\")
-
-
-# Destroy the body entering the lava
-func on_body_entered(body):
-	if body.is_class(\"Player\"):
-		body.destroy()
-"
-
-[sub_resource type="ShaderMaterial" id=60]
-render_priority = 1
-shader = ExtResource( 21 )
-shader_param/water_tint = Color( 0.478431, 0.0313726, 0.0509804, 1 )
-shader_param/surface_tint = Color( 1, 0.705882, 0.290196, 1 )
-shader_param/sprite_scale = Vector2( 30, 0.5 )
-shader_param/distort_scale = 0.3
-shader_param/refraction_amount = 7.522
-shader_param/water_opacity = 0.9
-
-[sub_resource type="NoiseTexture" id=61]
-noise = ExtResource( 22 )
-
-[sub_resource type="StreamTexture" id=62]
-load_path = "res://.import/Light500.png-b2b14a3aed88563f2009ff7538a248c6.stex"
-
-[sub_resource type="RectangleShape2D" id=63]
-extents = Vector2( 48, 32 )
-
-[sub_resource type="RectangleShape2D" id=64]
-extents = Vector2( 24, 44.0475 )
-
-[sub_resource type="GDScript" id=65]
-script/source = "extends Area2D
-
-#### LAVA MAIN NODE ####
-
-# To instanciate a lave zone:
-# 1) Instanciate this scene
-# 2) Instanciate the scene LavaShader & a CollisionShape as children of it
-# 3) Instanciate the LavaLight as a child of the LavaShader
-# 4) Set the size of the texture, of the shape and of the light as you will
-
-func _ready():
-	var _err = connect(\"body_entered\", self, \"on_body_entered\")
-
-
-# Destroy the body entering the lava
-func on_body_entered(body):
-	if body.is_class(\"Player\"):
-		body.destroy()
-"
-
-[sub_resource type="ShaderMaterial" id=66]
-render_priority = 1
-shader = ExtResource( 21 )
-shader_param/water_tint = Color( 0.478431, 0.0313726, 0.0509804, 1 )
-shader_param/surface_tint = Color( 1, 0.705882, 0.290196, 1 )
-shader_param/sprite_scale = Vector2( 30, 0.5 )
-shader_param/distort_scale = 0.3
-shader_param/refraction_amount = 7.522
-shader_param/water_opacity = 0.9
-
-[sub_resource type="NoiseTexture" id=67]
-noise = ExtResource( 22 )
-
-[sub_resource type="StreamTexture" id=68]
-load_path = "res://.import/Light500.png-b2b14a3aed88563f2009ff7538a248c6.stex"
-
-[sub_resource type="RectangleShape2D" id=69]
-extents = Vector2( 48, 40 )
-
-[sub_resource type="GDScript" id=70]
-script/source = "extends Area2D
-
-#### LAVA MAIN NODE ####
-
-# To instanciate a lave zone:
-# 1) Instanciate this scene
-# 2) Instanciate the scene LavaShader & a CollisionShape as children of it
-# 3) Instanciate the LavaLight as a child of the LavaShader
-# 4) Set the size of the texture, of the shape and of the light as you will
-
-func _ready():
-	var _err = connect(\"body_entered\", self, \"on_body_entered\")
-
-
-# Destroy the body entering the lava
-func on_body_entered(body):
-	if body.is_class(\"Player\"):
-		body.destroy()
-"
-
-[sub_resource type="ShaderMaterial" id=71]
-render_priority = 1
-shader = ExtResource( 21 )
-shader_param/water_tint = Color( 0.478431, 0.0313726, 0.0509804, 1 )
-shader_param/surface_tint = Color( 1, 0.705882, 0.290196, 1 )
-shader_param/sprite_scale = Vector2( 30, 0.5 )
-shader_param/distort_scale = 0.3
-shader_param/refraction_amount = 7.522
-shader_param/water_opacity = 0.9
-
-[sub_resource type="NoiseTexture" id=72]
-noise = ExtResource( 22 )
-
-[sub_resource type="StreamTexture" id=73]
-load_path = "res://.import/Light500.png-b2b14a3aed88563f2009ff7538a248c6.stex"
-
-[sub_resource type="RectangleShape2D" id=74]
-extents = Vector2( 24, 22 )
-
-[sub_resource type="GDScript" id=75]
-script/source = "extends Area2D
-
-#### LAVA MAIN NODE ####
-
-# To instanciate a lave zone:
-# 1) Instanciate this scene
-# 2) Instanciate the scene LavaShader & a CollisionShape as children of it
-# 3) Instanciate the LavaLight as a child of the LavaShader
-# 4) Set the size of the texture, of the shape and of the light as you will
-
-func _ready():
-	var _err = connect(\"body_entered\", self, \"on_body_entered\")
-
-
-# Destroy the body entering the lava
-func on_body_entered(body):
-	if body.is_class(\"Player\"):
-		body.destroy()
-"
-
-[sub_resource type="ShaderMaterial" id=76]
-render_priority = 1
-shader = ExtResource( 21 )
-shader_param/water_tint = Color( 0.478431, 0.0313726, 0.0509804, 1 )
-shader_param/surface_tint = Color( 1, 0.705882, 0.290196, 1 )
-shader_param/sprite_scale = Vector2( 30, 0.5 )
-shader_param/distort_scale = 0.3
-shader_param/refraction_amount = 7.522
-shader_param/water_opacity = 0.9
-
-[sub_resource type="NoiseTexture" id=77]
-noise = ExtResource( 22 )
-
-[sub_resource type="StreamTexture" id=78]
-load_path = "res://.import/Light500.png-b2b14a3aed88563f2009ff7538a248c6.stex"
-
-[sub_resource type="RectangleShape2D" id=79]
-extents = Vector2( 136, 52.1662 )
-
-[sub_resource type="RectangleShape2D" id=80]
-extents = Vector2( 208, 39.5302 )
-
-[sub_resource type="RectangleShape2D" id=81]
+[sub_resource type="RectangleShape2D" id=21]
 extents = Vector2( 21.0893, 48 )
 
-[sub_resource type="RectangleShape2D" id=82]
+[sub_resource type="RectangleShape2D" id=22]
 extents = Vector2( 21.0893, 40 )
 
-[sub_resource type="GDScript" id=83]
+[sub_resource type="GDScript" id=23]
 script/source = "extends StaticBody2D
 
 class_name DoorButton
@@ -1088,385 +704,102 @@ position = Vector2( 2312, 384 )
 position = Vector2( 2893, 360 )
 
 [node name="Water" parent="InteractivesObjects/WaterTiles" index="0" instance=ExtResource( 17 )]
-position = Vector2( 1552, -144 )
-
-[node name="WaterShader" parent="InteractivesObjects/WaterTiles/Water" index="2" instance=ExtResource( 16 )]
-position = Vector2( 0, -4 )
-scale = Vector2( 2.54, 1.52 )
-
-[node name="WaterLight" parent="InteractivesObjects/WaterTiles/Water" index="3" instance=ExtResource( 15 )]
+position = Vector2( 1560, -144 )
 
 [node name="Water2" parent="InteractivesObjects/WaterTiles" index="1" instance=ExtResource( 17 )]
-position = Vector2( 3136, 448 )
+position = Vector2( 3138.9, 466 )
+scale = Vector2( 0.33, 0.842 )
 script = SubResource( 9 )
 
-[node name="WaterShader" parent="InteractivesObjects/WaterTiles/Water2" index="2" instance=ExtResource( 16 )]
-material = SubResource( 11 )
-position = Vector2( 8.00008, -4 )
-scale = Vector2( 1.6, 1.36 )
-texture = SubResource( 13 )
-
-[node name="WaterLight" parent="InteractivesObjects/WaterTiles/Water2" index="3" instance=ExtResource( 15 )]
-position = Vector2( 0, 0 )
-texture = SubResource( 14 )
-
 [node name="Water3" parent="InteractivesObjects/WaterTiles" index="2" instance=ExtResource( 17 )]
-position = Vector2( 352, 416 )
-
-[node name="WaterShader" parent="InteractivesObjects/WaterTiles/Water3" index="2" instance=ExtResource( 16 )]
-material = SubResource( 15 )
-position = Vector2( 20, 4 )
-scale = Vector2( 4.24, 2 )
-texture = SubResource( 16 )
-
-[node name="WaterLight" parent="InteractivesObjects/WaterTiles/Water3" index="3" instance=ExtResource( 15 )]
-texture = SubResource( 17 )
-texture_scale = 1.75
-color = Color( 0.00784314, 0.392157, 0.996078, 1 )
-energy = 1.1
+position = Vector2( 352.226, 456 )
+scale = Vector2( 1, 1.159 )
 
 [node name="Lava" parent="InteractivesObjects/LavaTiles" index="0" instance=ExtResource( 9 )]
 position = Vector2( 1032, -112 )
-
-[node name="LavaShader" parent="InteractivesObjects/LavaTiles/Lava" index="0" instance=ExtResource( 8 )]
-position = Vector2( -4.72069e-05, -8 )
-scale = Vector2( 0.21875, 0.21875 )
-
-[node name="LavaLight" parent="InteractivesObjects/LavaTiles/Lava" index="1" instance=ExtResource( 10 )]
-energy = 1.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractivesObjects/LavaTiles/Lava" index="2"]
-shape = SubResource( 18 )
-__meta__ = {
-"_edit_lock_": true
-}
+scale = Vector2( 0.194, 0.768 )
 
 [node name="Lava2" parent="InteractivesObjects/LavaTiles" index="1" instance=ExtResource( 9 )]
-position = Vector2( 2016, -16 )
-
-[node name="LavaShader" parent="InteractivesObjects/LavaTiles/Lava2" index="0" instance=ExtResource( 8 )]
-position = Vector2( -6.10352e-05, 0 )
-scale = Vector2( 0.703125, 0.160156 )
-
-[node name="LavaLight" parent="InteractivesObjects/LavaTiles/Lava2" index="1" instance=ExtResource( 10 )]
-position = Vector2( 0, -16 )
-energy = 0.8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractivesObjects/LavaTiles/Lava2" index="2"]
-position = Vector2( 0, -16 )
-shape = SubResource( 19 )
-__meta__ = {
-"_edit_lock_": true
-}
+position = Vector2( 2018.71, -14.2001 )
+scale = Vector2( 0.675, 0.448 )
 
 [node name="Lava3" parent="InteractivesObjects/LavaTiles" index="2" instance=ExtResource( 9 )]
 position = Vector2( 2328, -24 )
-script = SubResource( 20 )
-
-[node name="LavaShader" parent="InteractivesObjects/LavaTiles/Lava3" index="0" instance=ExtResource( 8 )]
-material = SubResource( 21 )
-scale = Vector2( 0.328125, 0.125 )
-texture = SubResource( 22 )
-
-[node name="LavaLight" parent="InteractivesObjects/LavaTiles/Lava3" index="1" instance=ExtResource( 10 )]
-position = Vector2( 1.10791, 7.62939e-06 )
-texture = SubResource( 23 )
-energy = 0.75
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractivesObjects/LavaTiles/Lava3" index="2"]
-position = Vector2( 0, 8 )
-shape = SubResource( 24 )
-__meta__ = {
-"_edit_lock_": true
-}
+scale = Vector2( 0.311, 0.287 )
+script = SubResource( 10 )
 
 [node name="Lava4" parent="InteractivesObjects/LavaTiles" index="3" instance=ExtResource( 9 )]
 position = Vector2( 2856, 64 )
-script = SubResource( 25 )
-
-[node name="LavaShader" parent="InteractivesObjects/LavaTiles/Lava4" index="0" instance=ExtResource( 8 )]
-material = SubResource( 26 )
-position = Vector2( 7.82013e-05, -7.99999 )
-scale = Vector2( 0.562499, 0.25 )
-texture = SubResource( 27 )
-
-[node name="LavaLight" parent="InteractivesObjects/LavaTiles/Lava4" index="1" instance=ExtResource( 10 )]
-position = Vector2( 0.974233, 2.92203 )
-scale = Vector2( 1.51811, 0.746014 )
-texture = SubResource( 28 )
-energy = 0.8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractivesObjects/LavaTiles/Lava4" index="2"]
-position = Vector2( 0, 7 )
-shape = SubResource( 29 )
-__meta__ = {
-"_edit_lock_": true
-}
+script = SubResource( 11 )
 
 [node name="Lava5" parent="InteractivesObjects/LavaTiles" index="4" instance=ExtResource( 9 )]
 position = Vector2( 3104, 216 )
-script = SubResource( 30 )
-
-[node name="LavaShader" parent="InteractivesObjects/LavaTiles/Lava5" index="0" instance=ExtResource( 8 )]
-material = SubResource( 31 )
-position = Vector2( 3.99998, -4.00001 )
-scale = Vector2( 0.140625, 0.109375 )
-texture = SubResource( 32 )
-
-[node name="LavaLight" parent="InteractivesObjects/LavaTiles/Lava5" index="1" instance=ExtResource( 10 )]
-position = Vector2( 0, 7.62939e-06 )
-texture = SubResource( 33 )
-energy = 0.75
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractivesObjects/LavaTiles/Lava5" index="2"]
-position = Vector2( 0, 11 )
-shape = SubResource( 34 )
-__meta__ = {
-"_edit_lock_": true
-}
+scale = Vector2( 0.167, 0.267 )
+script = SubResource( 12 )
 
 [node name="Lava6" parent="InteractivesObjects/LavaTiles" index="5" instance=ExtResource( 9 )]
 position = Vector2( 2528, 200 )
-script = SubResource( 35 )
-
-[node name="LavaShader" parent="InteractivesObjects/LavaTiles/Lava6" index="0" instance=ExtResource( 8 )]
-material = SubResource( 36 )
-position = Vector2( 3.99995, -4.00001 )
-scale = Vector2( 0.171875, 0.109375 )
-texture = SubResource( 37 )
-
-[node name="LavaLight" parent="InteractivesObjects/LavaTiles/Lava6" index="1" instance=ExtResource( 10 )]
-position = Vector2( 0, 7.62939e-06 )
-texture = SubResource( 38 )
-energy = 0.7
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractivesObjects/LavaTiles/Lava6" index="2"]
-position = Vector2( 4, 3 )
-shape = SubResource( 39 )
-__meta__ = {
-"_edit_lock_": true
-}
+scale = Vector2( 0.175, 0.367 )
+script = SubResource( 13 )
 
 [node name="Lava7" parent="InteractivesObjects/LavaTiles" index="6" instance=ExtResource( 9 )]
 position = Vector2( 2688, 256 )
-script = SubResource( 40 )
-
-[node name="LavaShader" parent="InteractivesObjects/LavaTiles/Lava7" index="0" instance=ExtResource( 8 )]
-material = SubResource( 41 )
-scale = Vector2( 0.125, 0.0625 )
-texture = SubResource( 42 )
-
-[node name="LavaLight" parent="InteractivesObjects/LavaTiles/Lava7" index="1" instance=ExtResource( 10 )]
-position = Vector2( 0, 7.62939e-06 )
-texture = SubResource( 43 )
-energy = 0.5
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractivesObjects/LavaTiles/Lava7" index="2"]
-shape = SubResource( 44 )
-__meta__ = {
-"_edit_lock_": true
-}
+scale = Vector2( 0.342, 0.183 )
+script = SubResource( 14 )
 
 [node name="Lava8" parent="InteractivesObjects/LavaTiles" index="7" instance=ExtResource( 9 )]
 position = Vector2( 2928, 256 )
-script = SubResource( 40 )
-
-[node name="LavaShader" parent="InteractivesObjects/LavaTiles/Lava8" index="0" instance=ExtResource( 8 )]
-material = SubResource( 45 )
-scale = Vector2( 0.125, 0.0625 )
-texture = SubResource( 46 )
-
-[node name="LavaLight" parent="InteractivesObjects/LavaTiles/Lava8" index="1" instance=ExtResource( 10 )]
-position = Vector2( 0, 7.62939e-06 )
-texture = SubResource( 47 )
-energy = 0.5
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractivesObjects/LavaTiles/Lava8" index="2"]
-shape = SubResource( 48 )
-__meta__ = {
-"_edit_lock_": true
-}
+scale = Vector2( 0.192, 0.18 )
+script = SubResource( 14 )
 
 [node name="Lava9" parent="InteractivesObjects/LavaTiles" index="8" instance=ExtResource( 9 )]
 position = Vector2( 312, -32 )
-script = SubResource( 49 )
-
-[node name="LavaShader" parent="InteractivesObjects/LavaTiles/Lava9" index="0" instance=ExtResource( 8 )]
-material = SubResource( 50 )
-position = Vector2( -12, -8 )
-scale = Vector2( 0.171875, 0.15625 )
-texture = SubResource( 51 )
-
-[node name="LavaLight" parent="InteractivesObjects/LavaTiles/Lava9" index="1" instance=ExtResource( 10 )]
-texture = SubResource( 52 )
-energy = 0.8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractivesObjects/LavaTiles/Lava9" index="2"]
-position = Vector2( -8, 0 )
-shape = SubResource( 53 )
-__meta__ = {
-"_edit_lock_": true
-}
+scale = Vector2( 0.296, 0.513 )
+script = SubResource( 15 )
 
 [node name="Lava10" parent="InteractivesObjects/LavaTiles" index="9" instance=ExtResource( 9 )]
 position = Vector2( -176, 464 )
-script = SubResource( 54 )
-
-[node name="LavaShader" parent="InteractivesObjects/LavaTiles/Lava10" index="0" instance=ExtResource( 8 )]
-material = SubResource( 55 )
-position = Vector2( 8, -12 )
-scale = Vector2( 0.3125, 0.203125 )
-texture = SubResource( 56 )
-
-[node name="LavaLight" parent="InteractivesObjects/LavaTiles/Lava10" index="1" instance=ExtResource( 10 )]
-texture = SubResource( 57 )
-energy = 1.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractivesObjects/LavaTiles/Lava10" index="2"]
-shape = SubResource( 58 )
-__meta__ = {
-"_edit_lock_": true
-}
+scale = Vector2( 0.357, 0.886 )
+script = SubResource( 16 )
 
 [node name="Lava11" parent="InteractivesObjects/LavaTiles" index="10" instance=ExtResource( 9 )]
 position = Vector2( 0, 455 )
-script = SubResource( 59 )
-
-[node name="LavaShader" parent="InteractivesObjects/LavaTiles/Lava11" index="0" instance=ExtResource( 8 )]
-material = SubResource( 60 )
-position = Vector2( 0, -2.00001 )
-scale = Vector2( 0.3125, 0.210938 )
-texture = SubResource( 61 )
-
-[node name="LavaLight" parent="InteractivesObjects/LavaTiles/Lava11" index="1" instance=ExtResource( 10 )]
-position = Vector2( -3.8147e-06, -2.09808e-05 )
-scale = Vector2( 0.704, 0.512 )
-texture = SubResource( 62 )
-energy = 1.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractivesObjects/LavaTiles/Lava11" index="2"]
-shape = SubResource( 63 )
-__meta__ = {
-"_edit_lock_": true
-}
+scale = Vector2( 0.214, 0.763 )
+script = SubResource( 17 )
 
 [node name="Lava12" parent="InteractivesObjects/LavaTiles" index="11" instance=ExtResource( 9 )]
 position = Vector2( 1824, 472 )
-
-[node name="LavaShader" parent="InteractivesObjects/LavaTiles/Lava12" index="0" instance=ExtResource( 8 )]
-position = Vector2( -1.52588e-05, -20 )
-scale = Vector2( 0.125, 0.234375 )
-
-[node name="LavaLight" parent="InteractivesObjects/LavaTiles/Lava12" index="1" instance=ExtResource( 10 )]
-energy = 0.6
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractivesObjects/LavaTiles/Lava12" index="2"]
-position = Vector2( 0, -8 )
-shape = SubResource( 64 )
-__meta__ = {
-"_edit_lock_": true
-}
+scale = Vector2( 0.109, 0.744 )
 
 [node name="Lava13" parent="InteractivesObjects/LavaTiles" index="12" instance=ExtResource( 9 )]
-position = Vector2( 2184, 472 )
-script = SubResource( 65 )
-
-[node name="LavaShader" parent="InteractivesObjects/LavaTiles/Lava13" index="0" instance=ExtResource( 8 )]
-material = SubResource( 66 )
-position = Vector2( 4.00003, -16 )
-scale = Vector2( 0.203125, 0.21875 )
-texture = SubResource( 67 )
-
-[node name="LavaLight" parent="InteractivesObjects/LavaTiles/Lava13" index="1" instance=ExtResource( 10 )]
-texture = SubResource( 68 )
-energy = 0.8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractivesObjects/LavaTiles/Lava13" index="2"]
-position = Vector2( 0, -8 )
-shape = SubResource( 69 )
-__meta__ = {
-"_edit_lock_": true
-}
+position = Vector2( 2196.99, 472 )
+scale = Vector2( 0.165, 0.816 )
+script = SubResource( 18 )
 
 [node name="Lava14" parent="InteractivesObjects/LavaTiles" index="13" instance=ExtResource( 9 )]
-position = Vector2( 2424, 488 )
-script = SubResource( 70 )
-
-[node name="LavaShader" parent="InteractivesObjects/LavaTiles/Lava14" index="0" instance=ExtResource( 8 )]
-material = SubResource( 71 )
-position = Vector2( 4, -6 )
-scale = Vector2( 0.140625, 0.125 )
-texture = SubResource( 72 )
-
-[node name="LavaLight" parent="InteractivesObjects/LavaTiles/Lava14" index="1" instance=ExtResource( 10 )]
-texture = SubResource( 73 )
-energy = 0.8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractivesObjects/LavaTiles/Lava14" index="2"]
-position = Vector2( 0, -2 )
-shape = SubResource( 74 )
-__meta__ = {
-"_edit_lock_": true
-}
+position = Vector2( 2424, 486.688 )
+scale = Vector2( 0.104, 0.349 )
+script = SubResource( 19 )
 
 [node name="Lava15" parent="InteractivesObjects/LavaTiles" index="14" instance=ExtResource( 9 )]
 position = Vector2( 2896, 448 )
-script = SubResource( 75 )
-
-[node name="LavaShader" parent="InteractivesObjects/LavaTiles/Lava15" index="0" instance=ExtResource( 8 )]
-material = SubResource( 76 )
-position = Vector2( -4.0002, -8 )
-scale = Vector2( 0.546875, 0.25 )
-texture = SubResource( 77 )
-
-[node name="LavaLight" parent="InteractivesObjects/LavaTiles/Lava15" index="1" instance=ExtResource( 10 )]
-position = Vector2( 0, 0 )
-texture = SubResource( 78 )
-energy = 1.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractivesObjects/LavaTiles/Lava15" index="2"]
-position = Vector2( -8, 8 )
-shape = SubResource( 79 )
-__meta__ = {
-"_edit_lock_": true
-}
+scale = Vector2( 0.582, 0.776 )
+script = SubResource( 20 )
 
 [node name="Lava16" parent="InteractivesObjects/LavaTiles" index="15" instance=ExtResource( 9 )]
-position = Vector2( 2024, 192 )
-
-[node name="LavaShader" parent="InteractivesObjects/LavaTiles/Lava16" index="0" instance=ExtResource( 8 )]
-position = Vector2( 3.99998, 24 )
-scale = Vector2( 0.796875, 0.21875 )
-
-[node name="LavaLight" parent="InteractivesObjects/LavaTiles/Lava16" index="1" instance=ExtResource( 10 )]
-energy = 1.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractivesObjects/LavaTiles/Lava16" index="2"]
-position = Vector2( 0, 33 )
-shape = SubResource( 80 )
-__meta__ = {
-"_edit_lock_": true
-}
+position = Vector2( 2018.71, 212 )
+scale = Vector2( 0.89, 0.78 )
 
 [node name="XionLiquid" parent="InteractivesObjects/XionLiquid" index="0" instance=ExtResource( 6 )]
 position = Vector2( 1536, 272 )
+scale = Vector2( 1, 2.976 )
 
-[node name="XionLiquidShader" parent="InteractivesObjects/XionLiquid/XionLiquid" index="2" instance=ExtResource( 5 )]
-position = Vector2( -8.00012, -52 )
-scale = Vector2( 4.64, 5.36 )
-
-[node name="XionLiquidLight" parent="InteractivesObjects/XionLiquid/XionLiquid" index="3" instance=ExtResource( 7 )]
-texture_scale = 1.5
-energy = 1.8
+[node name="XionLiquidLight" parent="InteractivesObjects/XionLiquid/XionLiquid/XionLiquidShader" index="0"]
+texture_scale = 0.7
 
 [node name="XionLiquid2" parent="InteractivesObjects/XionLiquid" index="1" instance=ExtResource( 6 )]
-position = Vector2( 2096, -312 )
-
-[node name="XionLiquidShader" parent="InteractivesObjects/XionLiquid/XionLiquid2" index="2" instance=ExtResource( 5 )]
-
-[node name="XionLiquidLight" parent="InteractivesObjects/XionLiquid/XionLiquid2" index="3" instance=ExtResource( 7 )]
-position = Vector2( 0, 0 )
-energy = 1.0
+position = Vector2( 2096, -312.286 )
+scale = Vector2( 0.389, 0.691 )
 
 [node name="G1" type="Node2D" parent="InteractivesObjects/TeleportGroups" index="0"]
 __meta__ = {
@@ -1577,7 +910,7 @@ frame = 1
 
 [node name="CollisionShape2D" parent="InteractivesObjects/TeleportGroups/G8/TeleportArea" index="1"]
 position = Vector2( 0, -36 )
-shape = SubResource( 81 )
+shape = SubResource( 21 )
 
 [node name="TeleportArea2" parent="InteractivesObjects/TeleportGroups/G8" index="1" instance=ExtResource( 13 )]
 position = Vector2( 156, 80 )
@@ -1598,7 +931,7 @@ frame = 1
 
 [node name="CollisionShape2D" parent="InteractivesObjects/TeleportGroups/G9/TeleportArea" index="1"]
 position = Vector2( 0, -20 )
-shape = SubResource( 82 )
+shape = SubResource( 22 )
 
 [node name="TeleportArea2" parent="InteractivesObjects/TeleportGroups/G9" index="1" instance=ExtResource( 13 )]
 position = Vector2( 0, 132 )
@@ -1806,7 +1139,7 @@ __meta__ = {
 [node name="BlueButton" parent="InteractivesObjects/Buttons&Doors/G5" index="0" instance=ExtResource( 11 )]
 position = Vector2( 2312, 216 )
 rotation = 1.5708
-script = SubResource( 83 )
+script = SubResource( 23 )
 
 [node name="BlueDoor" parent="InteractivesObjects/Buttons&Doors/G5" index="1" instance=ExtResource( 12 )]
 position = Vector2( 2408, 72 )
@@ -1976,6 +1309,8 @@ rotation = 1.5708
 
 [node name="GreatDoor" parent="InteractivesObjects/GreatDoorGroup" index="7" instance=ExtResource( 4 )]
 position = Vector2( 3408, 312 )
+
+[editable path="InteractivesObjects/XionLiquid/XionLiquid"]
 
 [editable path="InteractivesObjects/TeleportGroups/G8/TeleportArea"]
 

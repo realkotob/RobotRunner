@@ -36,7 +36,8 @@
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/SFX_group_base.gd" type="Script" id=34]
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/SFX_Base.gd" type="Script" id=35]
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/JumpDust.gd" type="Script" id=36]
-[ext_resource path="res://Global/Fonts/BoldCapsPixel.tres" type="DynamicFont" id=42]
+[ext_resource path="res://Global/Fonts/BoldCapsPixel64.tres" type="DynamicFont" id=42]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 15.53, 20 )

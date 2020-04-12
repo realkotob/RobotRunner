@@ -2,10 +2,11 @@
 
 [ext_resource path="res://Scenes/GUI/Menus/OptionsMenu/Controls/InputMenu.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/GUI/Menus/OptionsMenu/Controls/input_mapper/InputMapper.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Global/Fonts/BoldCapsPixel.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Global/Fonts/BoldCapsPixel64.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Scenes/GUI/Menus/OptionsMenu/Controls/input_line/ActionList.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/GUI/Menus/OptionsMenu/Controls/KeySelectMenu.gd" type="Script" id=8]
 [ext_resource path="res://Global/GUI_theme/transparant_UI_theme.tres" type="Theme" id=9]
+
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends OptionButton

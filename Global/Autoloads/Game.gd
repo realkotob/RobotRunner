@@ -14,10 +14,8 @@ var current_level = level1
 func _ready():
 	var _err = gameover_timer_node.connect("timeout",self, "on_gameover_timer_timeout")
 
-
 func goto_level(_level_name : String):
 	pass
-
 
 # Generate the current level
 func goto_current_level():
@@ -47,5 +45,4 @@ func move_camera_to(dest: Vector2, average_w_players: bool = false):
 
 func set_camera_on_follow():
 	var camera_node = get_tree().get_current_scene().find_node("Camera")
-	
 	camera_node.set_state("Follow")

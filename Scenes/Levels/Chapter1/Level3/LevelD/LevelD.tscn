@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scenes/StartingPoints/StartingPointP2.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Levels/Base/LevelBase.tscn" type="PackedScene" id=2]
@@ -12,25 +12,9 @@
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/S (base)/EarthBlockBase.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/ChildrenScenes/BlueButton.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/ChildrenScenes/GreenButton.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Scenes/InteractiveObjects/Lava/Lava.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/InteractiveObjects/Liquids/Lava/Lava.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Door/ChildrenScenes/GreenDoor.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Scenes/InteractiveObjects/Lava/LavaShader.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Scenes/InteractiveObjects/Water/WaterLight.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Scenes/InteractiveObjects/Water/Shader/WaterShaderNode.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Scenes/InteractiveObjects/Lava/LavaLight.tscn" type="PackedScene" id=18]
-[ext_resource path="res://Scenes/InteractiveObjects/Water/Water.tscn" type="PackedScene" id=19]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 253.003, 72.0001 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 61.75, 22.3039 )
-
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 69.75, 22.3039 )
-
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 32, 28.3203 )
+[ext_resource path="res://Scenes/InteractiveObjects/Liquids/Water/Water.tscn" type="PackedScene" id=19]
 
 [node name="Level3D" instance=ExtResource( 2 )]
 
@@ -44,6 +28,9 @@ position = Vector2( 520, 240 )
 visible = false
 
 [node name="HUD" parent="GUI" index="1"]
+visible = false
+
+[node name="CameraSystem" parent="." index="4"]
 visible = false
 
 [node name="Walls" parent="Map" index="1"]
@@ -113,107 +100,26 @@ position = Vector2( 936, 288 )
 position = Vector2( 936, 240 )
 
 [node name="Water" parent="InteractivesObjects/WaterTiles" index="0" instance=ExtResource( 19 )]
-position = Vector2( 299.908, 400.447 )
-
-[node name="WaterShader" parent="InteractivesObjects/WaterTiles/Water" index="2" instance=ExtResource( 17 )]
-position = Vector2( -2.356, 26.1656 )
-scale = Vector2( 5.19639, 1.78933 )
-
-[node name="WaterLight" parent="InteractivesObjects/WaterTiles/Water" index="3" instance=ExtResource( 16 )]
+position = Vector2( 299.908, 408 )
 
 [node name="Water2" parent="InteractivesObjects/WaterTiles" index="1" instance=ExtResource( 19 )]
-position = Vector2( 973.908, 400.447 )
-
-[node name="WaterShader" parent="InteractivesObjects/WaterTiles/Water2" index="2" instance=ExtResource( 17 )]
-position = Vector2( -3.0543, 32.1015 )
-scale = Vector2( 3.70195, 1.67062 )
-
-[node name="WaterLight" parent="InteractivesObjects/WaterTiles/Water2" index="3" instance=ExtResource( 16 )]
+position = Vector2( 966.345, 456 )
 
 [node name="Lava" parent="InteractivesObjects/LavaTiles" index="0" instance=ExtResource( 13 )]
-position = Vector2( 1453.47, 367.397 )
-
-[node name="LavaShader" parent="InteractivesObjects/LavaTiles/Lava" index="0" instance=ExtResource( 15 )]
-position = Vector2( -1.4734, -7.39694 )
-scale = Vector2( 0.984375, 0.375 )
-
-[node name="LavaLight" parent="InteractivesObjects/LavaTiles/Lava" index="1" instance=ExtResource( 18 )]
-position = Vector2( 0, 0 )
-color = Color( 0.627451, 0.368627, 0, 1 )
-energy = 1.4
-shadow_color = Color( 0.129412, 0, 0, 0.8 )
-shadow_gradient_length = 100.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractivesObjects/LavaTiles/Lava" index="2"]
-visible = false
-position = Vector2( -2.47339, 16.6031 )
-shape = SubResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
+position = Vector2( 1453.47, 377 )
+scale = Vector2( 1.046, 0.991 )
 
 [node name="Lava2" parent="InteractivesObjects/LavaTiles" index="1" instance=ExtResource( 13 )]
-position = Vector2( 1834.25, 488.304 )
-
-[node name="LavaShader" parent="InteractivesObjects/LavaTiles/Lava2" index="0" instance=ExtResource( 15 )]
-scale = Vector2( 0.370065, 0.123822 )
-
-[node name="LavaLight" parent="InteractivesObjects/LavaTiles/Lava2" index="1" instance=ExtResource( 18 )]
-position = Vector2( 0, 0 )
-color = Color( 0.627451, 0.368627, 0, 1 )
-energy = 1.15
-shadow_color = Color( 0.129412, 0, 0, 0.8 )
-shadow_gradient_length = 100.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractivesObjects/LavaTiles/Lava2" index="2"]
-visible = false
-position = Vector2( 0, 5.99994 )
-shape = SubResource( 2 )
-__meta__ = {
-"_edit_lock_": true
-}
+position = Vector2( 1831.47, 488.304 )
+scale = Vector2( 0.27, 0.344 )
 
 [node name="Lava3" parent="InteractivesObjects/LavaTiles" index="2" instance=ExtResource( 13 )]
 position = Vector2( 2218.25, 488.304 )
-
-[node name="LavaShader" parent="InteractivesObjects/LavaTiles/Lava3" index="0" instance=ExtResource( 15 )]
-scale = Vector2( 0.370065, 0.123822 )
-
-[node name="LavaLight" parent="InteractivesObjects/LavaTiles/Lava3" index="1" instance=ExtResource( 18 )]
-position = Vector2( 0, 0 )
-color = Color( 0.627451, 0.368627, 0, 1 )
-energy = 1.15
-shadow_color = Color( 0.129412, 0, 0, 0.8 )
-shadow_gradient_length = 100.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractivesObjects/LavaTiles/Lava3" index="2"]
-visible = false
-position = Vector2( 0, 5.99994 )
-shape = SubResource( 3 )
-__meta__ = {
-"_edit_lock_": true
-}
+scale = Vector2( 0.282, 0.363 )
 
 [node name="Lava4" parent="InteractivesObjects/LavaTiles" index="3" instance=ExtResource( 13 )]
-position = Vector2( 2348.02, 375.799 )
-
-[node name="LavaShader" parent="InteractivesObjects/LavaTiles/Lava4" index="0" instance=ExtResource( 15 )]
-scale = Vector2( 0.125, 0.140625 )
-
-[node name="LavaLight" parent="InteractivesObjects/LavaTiles/Lava4" index="1" instance=ExtResource( 18 )]
-position = Vector2( 0, 0 )
-color = Color( 0.627451, 0.368627, 0, 1 )
-energy = 1.0
-shadow_color = Color( 0.129412, 0, 0, 0.8 )
-shadow_gradient_length = 100.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractivesObjects/LavaTiles/Lava4" index="2"]
-visible = false
-position = Vector2( 0, 7.99994 )
-shape = SubResource( 4 )
-__meta__ = {
-"_edit_lock_": true
-}
+position = Vector2( 2348.02, 377 )
+scale = Vector2( 0.144, 0.853 )
 
 [node name="G1" type="Node2D" parent="InteractivesObjects/TeleportGroups" index="0"]
 __meta__ = {

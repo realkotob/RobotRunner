@@ -1,0 +1,28 @@
+[gd_resource type="ParticlesMaterial" load_steps=3 format=2]
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 0.726385, 0.953613, 0.942296, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[resource]
+lifetime_randomness = 0.43
+emission_shape = 2
+emission_box_extents = Vector3( 30, 1, 1 )
+flag_align_y = true
+flag_rotate_y = true
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 38.84
+gravity = Vector3( 0, 300, 0 )
+initial_velocity = 200.0
+initial_velocity_random = 0.35
+angular_velocity = 166.15
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel_random = 0.61
+scale = 2.5
+scale_random = 1.0
+color_ramp = SubResource( 2 )
+hue_variation_random = 0.2

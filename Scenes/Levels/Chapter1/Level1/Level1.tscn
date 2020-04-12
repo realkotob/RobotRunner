@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scenes/Levels/Base/LevelBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/StartingPoints/StartingPointP2.tscn" type="PackedScene" id=3]
@@ -15,9 +15,6 @@
 [ext_resource path="res://Scenes/InteractiveObjects/GreatDoor/GreatDoor.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/M/MIceBlock.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/S (BASE)/IceBlockBase.tscn" type="PackedScene" id=19]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 258, 80.1537 )
 
 [node name="Level1" instance=ExtResource( 1 )]
 
@@ -406,22 +403,11 @@ can_sleep = true
 position = Vector2( 585.101, 471 )
 scale = Vector2( 0.895, 1 )
 
-[node name="WaterLight" parent="InteractivesObjects/WaterTiles/Water/WaterShader" index="0"]
-position = Vector2( 0, 0 )
-
 [node name="Water2" parent="InteractivesObjects/WaterTiles" index="1" instance=ExtResource( 14 )]
 position = Vector2( 2688, 372 )
 
 [node name="Lava" parent="InteractivesObjects/LavaTiles" index="0" instance=ExtResource( 6 )]
 position = Vector2( 1812, 440 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractivesObjects/LavaTiles/Lava" index="1"]
-visible = false
-position = Vector2( 0, 23.909 )
-shape = SubResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="GreatDoor" parent="InteractivesObjects/GreatDoorGroup" index="0" instance=ExtResource( 16 )]
 position = Vector2( 3480, 288 )
@@ -443,5 +429,3 @@ time_before_moving = 5.0
 
 [node name="CloudPath" parent="XionCloud" index="3" instance=ExtResource( 12 )]
 position = Vector2( 530, -266.5 )
-
-[editable path="InteractivesObjects/WaterTiles/Water"]

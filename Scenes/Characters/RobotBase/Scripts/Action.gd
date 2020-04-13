@@ -96,12 +96,13 @@ func offset_animation():
 
 # Define the actions the player can do in this state
 func _input(event):
-	if state_node.get_current_state() == self:
-		
-		if event.is_action_pressed(inputs_node.input_map["MoveLeft"]) or event.is_action_pressed(inputs_node.input_map["MoveRight"]):
-			if character_node.is_on_floor():
-				state_node.set_state("Move")
-		
-		elif event.is_action_pressed(inputs_node.input_map["Jump"]):
-			if character_node.is_on_floor():
-				state_node.set_state("Jump")
+	if event is InputEventKey:
+		if state_node.get_current_state() == self:
+			
+			if event.is_action_pressed(inputs_node.input_map["MoveLeft"]) or event.is_action_pressed(inputs_node.input_map["MoveRight"]):
+				if character_node.is_on_floor():
+					state_node.set_state("Move")
+			
+			elif event.is_action_pressed(inputs_node.input_map["Jump"]):
+				if character_node.is_on_floor():
+					state_node.set_state("Jump")

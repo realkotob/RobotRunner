@@ -40,12 +40,13 @@ func exit_state(_host):
 
 # Define the actions the player can do in this state
 func _input(event):
-	if state_node.get_current_state() == self:
-		if event.is_action_pressed(inputs_node.input_map["Action"]):
-			state_node.set_state("Action")
-			
-		elif event.is_action_pressed(inputs_node.input_map["Teleport"]):
-			emit_signal("layer_change")
+	if event is InputEventKey:
+		if state_node.get_current_state() == self:
+			if event.is_action_pressed(inputs_node.input_map["Action"]):
+				state_node.set_state("Action")
+				
+			elif event.is_action_pressed(inputs_node.input_map["Teleport"]):
+				emit_signal("layer_change")
 
 
 # When the cooldown is over; play the animation

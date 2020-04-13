@@ -7,7 +7,7 @@ extends StateBase
 # Progressivly, so the camera feels smooth
 
 
-var cam_dir : String = 'leftright'
+var cam_dir : String = ""
 
 func update(_host, delta):
 	adapt_camera_position(delta)
@@ -27,7 +27,7 @@ func adapt_camera_position(delta: float):
 		var average_pos : Vector2 = owner.compute_average_pos(players_array)
 
 		# If instant is true, go all the way to the desired position
-		if(cam_dir == 'leftright'):
+		if(cam_dir != 'updown'):
 			owner.global_position.x = lerp(owner.global_position.x, average_pos.x, reel_camera_speed)
-		if(cam_dir == 'updown'):
+		if(cam_dir != 'leftright'):
 			owner.global_position.y = lerp(owner.global_position.y, average_pos.y, reel_camera_speed)

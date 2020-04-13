@@ -80,7 +80,7 @@ _global_script_classes=[ {
 "path": "res://BaseClasses/InteractAreaBase.gd"
 }, {
 "base": "Node2D",
-"class": "LevelBase",
+"class": "Level",
 "language": "GDScript",
 "path": "res://Scenes/Levels/Base/LevelBase.gd"
 }, {
@@ -159,7 +159,7 @@ _global_script_class_icons={
 "IceBlock": "",
 "InputsBase": "",
 "InteractAreaBase": "",
-"LevelBase": "",
+"Level": "",
 "MenuBase": "",
 "MenuOptionsBase": "",
 "MoveBase": "",

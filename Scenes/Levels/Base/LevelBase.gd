@@ -1,6 +1,8 @@
 extends Node2D
 
-class_name LevelBase
+class_name Level
+
+const CLASS : String = "Level"
 
 onready var music_node = $Music
 onready var xion_cloud_node = get_node_or_null("XionCloud")
@@ -11,13 +13,19 @@ onready var danger_distance : float = screen_size.x / 2
 var players_array : Array
 var player_in_danger : bool = false
 
-
 func _ready():
 	instanciate_players()
+	GAME.set_current_level(self)
 
 
 func _process(_delta):
 	adapt_music()
+
+func is_class(value: String) -> bool:
+	return value == CLASS
+
+func get_class() -> String:
+	return CLASS
 
 
 func adapt_music():

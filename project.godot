@@ -331,6 +331,8 @@ HUD_switch_state={
 
 [layer_names]
 
+2d_render/layer_5="SeeThroughA"
+2d_render/layer_6="SeeThroughB"
 2d_render/layer_20="GUI"
 
 [rendering]

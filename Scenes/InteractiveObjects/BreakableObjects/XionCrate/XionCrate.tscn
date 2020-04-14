@@ -309,6 +309,7 @@ autostart = true
 [node name="Light2D" type="Light2D" parent="."]
 texture = ExtResource( 32 )
 color = Color( 0.843137, 0.207843, 1, 1 )
+range_item_cull_mask = 17
 
 [node name="Area2D" type="Area2D" parent="."]
 

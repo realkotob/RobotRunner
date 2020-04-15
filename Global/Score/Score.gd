@@ -33,17 +33,15 @@ func update_HUD_display():
 	HUD_node.set_hidden(player_left_in_area)
 
 
-func on_enter_collactable_area(body):
-	if body.is_class("Player"):
-		players_in_collactable_area += 1
-		update_HUD_display()
-		print_notification("A player entered the area of a collactable")
+func on_approch_collactable():
+	players_in_collactable_area += 1
+	update_HUD_display()
+	print_notification("A player entered the area of a collactable")
 
 
-func on_exit_collactable_area(body):
-	if body.is_class("Player"):
-		players_in_collactable_area -= 1
-		if players_in_collactable_area < 0:
-			players_in_collactable_area = 0
-		update_HUD_display()
-		print_notification("A player exited the area of a collactable")
+func on_approch_collactable_nomore():
+	players_in_collactable_area -= 1
+	if players_in_collactable_area < 0:
+		players_in_collactable_area = 0
+	update_HUD_display()
+	print_notification("A player exited the area of a collactable")

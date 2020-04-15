@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/RobotBase.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/Physic.gd" type="Script" id=2]
@@ -37,6 +37,7 @@
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/SFX_Base.gd" type="Script" id=35]
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/JumpDust.gd" type="Script" id=36]
 [ext_resource path="res://Global/Lights/SeeThrouhMask.png" type="Texture" id=37]
+[ext_resource path="res://Scenes/Characters/RobotBase/Scripts/Shock.gd" type="Script" id=38]
 [ext_resource path="res://Global/Fonts/BoldCapsPixel64.tres" type="DynamicFont" id=42]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -44,11 +45,6 @@ extents = Vector2( 15.53, 20 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
-"loop": false,
-"name": "Action",
-"speed": 20.0
-}, {
 "frames": [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ) ],
 "loop": true,
 "name": "Move",
@@ -59,14 +55,19 @@ animations = [ {
 "name": "Idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 22 ) ],
-"loop": true,
-"name": "Jump",
-"speed": 5.0
+"frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
+"loop": false,
+"name": "Action",
+"speed": 20.0
 }, {
 "frames": [ ExtResource( 23 ) ],
 "loop": true,
 "name": "Fall",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 22 ) ],
+"loop": true,
+"name": "Jump",
 "speed": 5.0
 } ]
 
@@ -212,6 +213,9 @@ breakable_type_array = PoolStringArray( "XionCrate" )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="States/Action"]
 stream = ExtResource( 13 )
 
+[node name="Shock" type="Node" parent="States"]
+script = ExtResource( 38 )
+
 [node name="Label" type="Label" parent="States"]
 visible = false
 margin_left = -56.8554
@@ -229,7 +233,6 @@ __meta__ = {
 [node name="Animation" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "Move"
-frame = 2
 playing = true
 __meta__ = {
 "_edit_lock_": true

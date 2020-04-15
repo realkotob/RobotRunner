@@ -41,7 +41,7 @@ func setup():
 			child.attributes_node = attributes_node
 		
 		if "physic_node" in child:
-			child.attributes_node = physic_node
+			child.physic_node = physic_node
 		
 		if "direction_node" in child:
 			child.direction_node = direction_node
@@ -70,6 +70,10 @@ func setup():
 
 func on_xion_received():
 	anim_player_node.play("MagentaFlash")
+
+
+func set_state(value : String):
+	states_node.set_state(value)
 
 
 # Triggers the overheat animation

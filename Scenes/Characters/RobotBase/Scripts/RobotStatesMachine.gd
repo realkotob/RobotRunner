@@ -12,6 +12,7 @@ var hit_box_node : Node
 var animation_node : AnimatedSprite
 var direction_node : Node
 var SFX_node : Node
+var physic_node : Node
 
 var previous_anim_node
 var curent_anim_node
@@ -48,6 +49,9 @@ func setup():
 		
 		if "SFX_node" in state:
 			state.SFX_node = SFX_node
+		
+		if "physic_node" in state:
+			state.physic_node = physic_node
 		
 		if state.has_method("setup"):
 			state.setup()

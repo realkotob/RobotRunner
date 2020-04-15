@@ -383,6 +383,11 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Platform" type="Node2D" parent="InteractivesObjects"]
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="Music" type="Node" parent="."]
 script = ExtResource( 26 )
 

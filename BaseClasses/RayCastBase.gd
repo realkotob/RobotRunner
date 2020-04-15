@@ -1,5 +1,7 @@
 extends RayCast2D
 
+class_name RayCastBase
+
 # Abstract class for a basic raycast, Searching for a specific target until it find it
 # the signal target_found usually connected by it's parent is emitted whenever
 # the first body found by the raycast is the target

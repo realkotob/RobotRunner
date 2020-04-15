@@ -35,7 +35,7 @@
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/Blowing/CrateBlow1.png" type="Texture" id=33]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/Blowing/CrateBlow3.png" type="Texture" id=34]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/Blowing/CrateBlow2.png" type="Texture" id=35]
-[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/RayCast2D.gd" type="Script" id=36]
+[ext_resource path="res://BaseClasses/RayCastBase.gd" type="Script" id=36]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -318,5 +318,4 @@ range_item_cull_mask = 17
 shape = SubResource( 15 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-cast_to = Vector2( 0, 50 )
 script = ExtResource( 36 )

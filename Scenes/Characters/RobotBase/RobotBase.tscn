@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/RobotBase.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/Physic.gd" type="Script" id=2]
@@ -38,6 +38,7 @@
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/JumpDust.gd" type="Script" id=36]
 [ext_resource path="res://Global/Lights/SeeThrouhMask.png" type="Texture" id=37]
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/Shock.gd" type="Script" id=38]
+[ext_resource path="res://Scenes/Characters/RobotBase/Scripts/SeeThourghWalls.gd" type="Script" id=40]
 [ext_resource path="res://Global/Fonts/BoldCapsPixel64.tres" type="DynamicFont" id=42]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -60,14 +61,14 @@ animations = [ {
 "name": "Action",
 "speed": 20.0
 }, {
-"frames": [ ExtResource( 23 ) ],
-"loop": true,
-"name": "Fall",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 22 ) ],
 "loop": true,
 "name": "Jump",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 23 ) ],
+"loop": true,
+"name": "Fall",
 "speed": 5.0
 } ]
 
@@ -144,6 +145,9 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 18.2249, 20.9273 )
 
 [node name="Robot" type="KinematicBody2D"]
 z_index = -1
@@ -233,7 +237,6 @@ __meta__ = {
 [node name="Animation" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "Move"
-frame = 1
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -315,6 +318,7 @@ anims/Overheat = SubResource( 9 )
 light_mask = 0
 z_index = 512
 z_as_relative = false
+enabled = false
 texture = ExtResource( 37 )
 texture_scale = 0.7
 mode = 3
@@ -322,3 +326,11 @@ range_layer_min = -512
 range_layer_max = 15
 range_item_cull_mask = 16
 shadow_item_cull_mask = 0
+script = ExtResource( 40 )
+
+[node name="Area2D" type="Area2D" parent="SeeThourghWalls"]
+collision_layer = 17
+collision_mask = 17
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="SeeThourghWalls/Area2D"]
+shape = SubResource( 10 )

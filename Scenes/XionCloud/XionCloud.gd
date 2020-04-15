@@ -1,6 +1,5 @@
-extends Node2D
+extends Area2D
 
-onready var area_node = $Area2D
 onready var timer_node = $Timer
 onready var path_node = get_node_or_null("CloudPath")
 
@@ -15,8 +14,8 @@ signal player_in_danger
 signal player_out_of_danger
 
 func _ready():
-	var _err = area_node.connect("body_entered", self, "on_body_entered")
-	_err = area_node.connect("body_exited", self, "on_body_exited")
+	var _err = connect("body_entered", self, "on_body_entered")
+	_err = connect("body_exited", self, "on_body_exited")
 	_err = timer_node.connect("timeout", self, "on_timer_timeout")
 	
 	# Connect the signals only if the scene is not playing alone
@@ -76,7 +75,7 @@ func on_body_exited(body: Node):
 		
 		# Emit the signal only if the scene is not playing alone
 		if owner != null:
-			var bodies_in_cloud = area_node.get_overlapping_bodies()
+			var bodies_in_cloud = get_overlapping_bodies()
 			if count_class_in_array(bodies_in_cloud, "Player") <= 1:
 				emit_signal("player_out_of_danger")
 

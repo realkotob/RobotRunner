@@ -13,9 +13,6 @@ onready var raycast_node = $RayCast2D
 
 var animated_sprite_node_array : Array
 
-### TO BE LOADED IN A SINGLETON LATER ###
-var xion_collactable = preload("res://Scenes/InteractiveObjects/Collactables/XionCollectable.tscn")
-
 var actor_destroying : Node
 
 signal approch_collactable
@@ -139,7 +136,7 @@ func on_blowing_anim_finished():
 func generate_xion_collectable():
 	if actor_destroying != null:
 		for _i in range(5):
-			var xion_collactable_node = xion_collactable.instance()
+			var xion_collactable_node = COLLACTABLES.xion.instance()
 			xion_collactable_node.position = global_position
 			xion_collactable_node.aimed_character = actor_destroying
 			owner.add_child(xion_collactable_node)

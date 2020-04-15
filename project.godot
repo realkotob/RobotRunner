@@ -196,6 +196,7 @@ SCORE="*res://Global/Score/Score.gd"
 SFX="*res://Global/Autoloads/SFX/SFX_Autoload.gd"
 MENUS="*res://Global/Autoloads/menus_autoload.gd"
 GAME="*res://Global/Autoloads/Game.tscn"
+COLLACTABLES="*res://Global/Autoloads/Collactables.gd"
 
 [debug]
 

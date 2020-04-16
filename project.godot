@@ -200,6 +200,7 @@ COLLACTABLES="*res://Global/Autoloads/Collactables.gd"
 
 [debug]
 
+settings/stdout/print_fps=true
 gdscript/completion/autocomplete_setters_and_getters=true
 
 [display]

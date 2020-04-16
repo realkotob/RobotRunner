@@ -89,7 +89,6 @@ func get_closest_player(element: Node):
 	return closest_player
 
 
-
 # Intanciate the players inside the level
 #### TO BE REFACTO -- NEED TO BE DYNAMIC ####
 func instanciate_players():

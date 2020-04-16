@@ -147,6 +147,7 @@ __meta__ = {
 }
 
 [node name="Fog" type="Node2D" parent="Foreground"]
+visible = false
 __meta__ = {
 "_edit_lock_": true
 }
@@ -267,6 +268,7 @@ position = Vector2( 470.01, 277.517 )
 scale = Vector2( 2.09202, 1.27633 )
 texture = ExtResource( 23 )
 normal_map = ExtResource( 22 )
+offset = Vector2( 10.943, 0 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 3600, 3600 )
 __meta__ = {

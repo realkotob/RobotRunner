@@ -34,7 +34,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://BaseClasses/BreakableObjectBase.gd"
 }, {
-"base": "AnimatedSprite",
+"base": "Sprite",
 "class": "BreakableSpriteBase",
 "language": "GDScript",
 "path": "res://BaseClasses/BreakableSpriteBase.gd"
@@ -338,6 +338,7 @@ HUD_switch_state={
 
 [layer_names]
 
+2d_physics/layer_3="Debris"
 2d_render/layer_5="SeeThroughA"
 2d_render/layer_6="SeeThroughB"
 2d_render/layer_20="GUI"

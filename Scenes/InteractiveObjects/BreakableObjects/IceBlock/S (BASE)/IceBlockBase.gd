@@ -23,13 +23,17 @@ func get_class() -> String:
 func _ready():
 	set_physics_process(false)
 
+
 # When the block is destroyed, lauch the destroy animation
 func destroy(_actor_destroying: Node = null):
-	if broke == false:
-		animation_node.play()
-		audio_node.play()
-		broke = true
-		animation_player_node.play("LightFadeOut")
+	audio_node.play()
+	set_mode(RigidBody2D.MODE_STATIC)
+	collision_shape_node.set_disabled(true)
+	$Particles2D.set_emitting(true)
+	SFX.scatter_sprite(self, nb_debris, explosion_impulse)
+	SFX.scatter_sprite(self, int(nb_debris / 6), explosion_impulse * 0.7)
+	sprite_node.set_visible(false)
+	animation_player_node.play("LightFadeOut")
 
 
 func _physics_process(_delta):

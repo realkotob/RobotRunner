@@ -6,7 +6,7 @@ onready var xion_explosion = preload("res://Global/Autoloads/SFX/XionExplosion/X
 onready var debris = preload("res://Global/Autoloads/SFX/Debris/Debris.tscn")
 
 
-func scatter_sprite(body : Node, nb_debris : int, impulse_force: float = 1.0):
+func scatter_sprite(body : Node, nb_debris : int, impulse_force: float = 100.0):
 	var texture = body.get_node("Sprite").get_texture()
 	
 	var sprite_width : float = texture.get_width()

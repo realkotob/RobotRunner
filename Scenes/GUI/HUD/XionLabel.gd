@@ -1,14 +1,12 @@
 extends Label
 
-onready var score_singleton = get_tree().get_root().get_node("SCORE")
-
 export var increment_offset : int = 5
 
 var current_value : int = 0
 var aimed_value : int = 0
 
 func _ready():
-	var _err = score_singleton.connect("xion_changed", self, "on_score_xion_changed")
+	var _err = SCORE.connect("xion_changed", self, "on_score_xion_changed")
 	set_physics_process(false)
 
 

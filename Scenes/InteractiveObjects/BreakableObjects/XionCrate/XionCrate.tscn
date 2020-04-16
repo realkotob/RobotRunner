@@ -318,6 +318,7 @@ color = Color( 0.843137, 0.207843, 1, 1 )
 range_item_cull_mask = 17
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 15 )

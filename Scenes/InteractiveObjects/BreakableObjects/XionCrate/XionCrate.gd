@@ -15,7 +15,6 @@ var animated_sprite_node_array : Array
 var actor_destroying : Node
 
 signal approch_collactable
-signal approch_collactable_nomore
 
 export var hitpoint : int = 3
 
@@ -26,7 +25,6 @@ func _ready():
 	_err = area_node.connect("body_exited", self, "on_area_body_exited")
 	_err = raycast_node.connect("target_found", self, "on_raycast_target_found")
 	_err = connect("approch_collactable", SCORE, "on_approch_collactable")
-	_err = connect("approch_collactable_nomore", SCORE, "on_approch_collactable_nomore")
 	
 	for child in sprites_group_node.get_children():
 		if child.is_class("AnimatedSprite"):
@@ -115,7 +113,6 @@ func on_area_body_entered(body : Node):
 func on_area_body_exited(body : Node):
 	if body.is_class("Player"):
 		raycast_node.set_activate(false)
-		emit_signal("approch_collactable_nomore")
 
 
 func on_raycast_target_found(target: Node):

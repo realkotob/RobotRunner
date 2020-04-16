@@ -61,6 +61,7 @@ hue_variation_random = 0.2
 [node name="XionCollectable" type="KinematicBody2D"]
 z_index = 10
 script = ExtResource( 2 )
+speed = 400
 
 [node name="Light2D" type="Light2D" parent="."]
 texture = ExtResource( 1 )

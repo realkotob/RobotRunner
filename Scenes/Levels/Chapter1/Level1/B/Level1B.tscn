@@ -31,48 +31,18 @@ tile_data = PoolIntArray( 786466, 14, 0, 786482, 18, 65536, 852028, 8, 131072, 8
 
 [node name="M_IceBlock" parent="InteractivesObjects/IceBlocks/M" index="0" instance=ExtResource( 6 )]
 position = Vector2( 768, 192 )
-z_as_relative = false
-gravity_scale = 10.0
-continuous_cd = 2
-can_sleep = false
-linear_damp = 1.0
-explosion_impulse = 150.0
 
 [node name="M_IceBlock2" parent="InteractivesObjects/IceBlocks/M" index="1" instance=ExtResource( 6 )]
 position = Vector2( 768, 144 )
-z_as_relative = false
-gravity_scale = 10.0
-continuous_cd = 2
-can_sleep = false
-linear_damp = 1.0
-explosion_impulse = 150.0
 
 [node name="M_IceBlock3" parent="InteractivesObjects/IceBlocks/M" index="2" instance=ExtResource( 6 )]
 position = Vector2( 1416, 336 )
-z_as_relative = false
-gravity_scale = 10.0
-continuous_cd = 2
-can_sleep = false
-linear_damp = 1.0
-explosion_impulse = 150.0
 
 [node name="M_IceBlock4" parent="InteractivesObjects/IceBlocks/M" index="3" instance=ExtResource( 6 )]
 position = Vector2( 1512, 192 )
-z_as_relative = false
-gravity_scale = 10.0
-continuous_cd = 2
-can_sleep = false
-linear_damp = 1.0
-explosion_impulse = 150.0
 
 [node name="M_IceBlock5" parent="InteractivesObjects/IceBlocks/M" index="4" instance=ExtResource( 6 )]
 position = Vector2( 2064, 288 )
-z_as_relative = false
-gravity_scale = 10.0
-continuous_cd = 2
-can_sleep = false
-linear_damp = 1.0
-explosion_impulse = 150.0
 
 [node name="M_EarthBlock" parent="InteractivesObjects/EarthBlocks/M" index="0" instance=ExtResource( 5 )]
 position = Vector2( 696, 360 )

@@ -9,7 +9,7 @@ extents = Vector2( 12, 12.1 )
 
 [sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0, 0.938462 )
-colors = PoolColorArray( 0.71875, 0.571153, 0.367798, 1, 0.705882, 0.454902, 0.0980392, 0.368627 )
+colors = PoolColorArray( 0.717647, 0.572549, 0.368627, 0.796078, 0.705882, 0.454902, 0.0980392, 0.368627 )
 
 [sub_resource type="GradientTexture" id=3]
 gradient = SubResource( 2 )
@@ -38,6 +38,7 @@ can_sleep = false
 linear_damp = 1.0
 angular_damp = 0.0
 script = ExtResource( 1 )
+nb_debris = 20
 explosion_impulse = 150.0
 
 [node name="Sprite" type="Sprite" parent="."]

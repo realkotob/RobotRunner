@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/XionCrate.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateSE/LargeCrateAnimSE2.png" type="Texture" id=2]
@@ -32,10 +32,8 @@
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateNO/LargeCrateAnimNO5.png" type="Texture" id=30]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateSO/LargeCrateAnimSO5.png" type="Texture" id=31]
 [ext_resource path="res://Global/Lights/Light300.png" type="Texture" id=32]
-[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/Blowing/CrateBlow1.png" type="Texture" id=33]
-[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/Blowing/CrateBlow3.png" type="Texture" id=34]
-[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/Blowing/CrateBlow2.png" type="Texture" id=35]
 [ext_resource path="res://BaseClasses/RayCastBase.gd" type="Script" id=36]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/LargeCrate.png" type="Texture" id=37]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -77,16 +75,8 @@ animations = [ {
 "speed": 13.0
 } ]
 
-[sub_resource type="SpriteFrames" id=6]
-animations = [ {
-"frames": [ ExtResource( 33 ), ExtResource( 35 ), ExtResource( 34 ) ],
-"loop": false,
-"name": "default",
-"speed": 10.0
-} ]
-
 [sub_resource type="Animation" id=7]
-length = 0.9
+length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprites/Base:modulate")
 tracks/0/interp = 2
@@ -94,10 +84,24 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.5, 0.9 ),
+"times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "on_fadeout_finished"
+} ]
 }
 
 [sub_resource type="Animation" id=8]
@@ -249,6 +253,8 @@ radius = 80.5399
 [node name="XionCrate" type="RigidBody2D"]
 gravity_scale = 5.0
 script = ExtResource( 1 )
+nb_debris = 30
+explosion_impulse = 150.0
 
 [node name="Sprites" type="Node2D" parent="."]
 
@@ -267,10 +273,9 @@ frames = SubResource( 4 )
 [node name="SO" type="AnimatedSprite" parent="Sprites"]
 frames = SubResource( 5 )
 
-[node name="Blowing" type="AnimatedSprite" parent="Sprites"]
+[node name="Sprite" type="Sprite" parent="."]
 visible = false
-frames = SubResource( 6 )
-offset = Vector2( 0, -8 )
+texture = ExtResource( 37 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/FadeOut = SubResource( 7 )

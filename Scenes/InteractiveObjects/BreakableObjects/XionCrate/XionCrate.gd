@@ -6,7 +6,6 @@ onready var sprites_group_node = $Sprites
 onready var animation_player_node = $AnimationPlayer
 onready var timer_node = $Timer
 onready var base_anim_node = $Sprites/Base
-onready var blowing_anim_node = $Sprites/Blowing
 onready var flash_node = $Flash
 onready var area_node = $Area2D
 onready var raycast_node = $RayCast2D
@@ -23,7 +22,6 @@ export var hitpoint : int = 3
 func _ready():
 	var _err = timer_node.connect("timeout", self, "on_timer_timeout")
 	_err = base_anim_node.connect("animation_finished", self, "on_sprite_animation_finished")
-	_err = blowing_anim_node.connect("animation_finished", self, "on_blowing_anim_finished")
 	_err = area_node.connect("body_entered", self, "on_area_body_entered")
 	_err = area_node.connect("body_exited", self, "on_area_body_exited")
 	_err = raycast_node.connect("target_found", self, "on_raycast_target_found")
@@ -62,8 +60,9 @@ func destroy(actor: Node = null):
 	xion_explosion_node.set_global_position(global_position)
 	SFX.add_child(xion_explosion_node)
 	
-	blowing_anim_node.set_visible(true)
-	blowing_anim_node.play()
+	# Scatter the crate in little pieces
+	SFX.scatter_sprite(self, nb_debris, explosion_impulse)
+	SFX.scatter_sprite(self, int(nb_debris / 4), explosion_impulse)
 	
 	# Play the crate explosion and triggers the fade out
 	base_anim_node.disconnect("animation_finished", self, "on_sprite_animation_finished")
@@ -82,8 +81,7 @@ func hide_crate():
 # Triggers every animation_sprite's animation
 func start_sprite_anim():
 	for anim in animated_sprite_node_array:
-		if anim != blowing_anim_node:
-			anim.play()
+		anim.play()
 
 
 # Triggers the vibration animation
@@ -105,9 +103,8 @@ func on_timer_timeout():
 # Reset every animated_sprite to its first frame 
 func on_sprite_animation_finished():
 	for anim in animated_sprite_node_array:
-		if anim != blowing_anim_node:
-			anim.stop()
-			anim.set_frame(0)
+		anim.stop()
+		anim.set_frame(0)
 
 
 func on_area_body_entered(body : Node):
@@ -127,7 +124,7 @@ func on_raycast_target_found(target: Node):
 
 
 # Called when the object has finished its breaking animation
-func on_blowing_anim_finished():
+func on_fadeout_finished():
 	generate_xion_collectable()
 	queue_free()
 

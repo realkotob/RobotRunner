@@ -2,9 +2,6 @@ extends BreakableObjectBase
 
 class_name BlockBase
 
-export (int, 5, 40) var nb_debris = 10
-export (float, 10.0, 500.0) var explosion_impulse = 30.0
-
 onready var audio_node = get_node("AudioStreamPlayer")
 
 func _ready():

@@ -2,8 +2,11 @@ extends RigidBody2D
 
 class_name BreakableObjectBase
 
-onready var animation_node = get_node_or_null("Sprite")
+onready var sprite_node = get_node_or_null("Sprite")
 onready var collision_shape_node = get_node_or_null("CollisionShape2D")
+
+export (int, 5, 40) var nb_debris = 10
+export (float, 10.0, 500.0) var explosion_impulse = 80.0
 
 func _ready():
 	add_to_group("InteractivesObjects")

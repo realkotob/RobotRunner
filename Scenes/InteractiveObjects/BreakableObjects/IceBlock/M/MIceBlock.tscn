@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/S (BASE)/IceBlockBase.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/M/MBlockAnimation.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/M/BaseIce48x48.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 24, 24 )
@@ -21,16 +21,49 @@ tracks/0/keys = {
 "values": [ 0.4, 0.0 ]
 }
 
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0.442211, 1 )
+colors = PoolColorArray( 0.909804, 0.227451, 0.227451, 0.54902, 1, 1, 1, 0.184314 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
+width = 150
+
+[sub_resource type="ParticlesMaterial" id=3]
+lifetime_randomness = 0.3
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 60.0
+gravity = Vector3( 0, 400, 0 )
+initial_velocity = 326.05
+initial_velocity_random = 0.47
+angular_velocity = 290.42
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 84.87
+scale = 2.09
+scale_random = 1.0
+color_ramp = SubResource( 5 )
+hue_variation = -0.4
+hue_variation_random = 0.51
+
 [node name="M_IceBlock" instance=ExtResource( 1 )]
+nb_debris = 30
 
 [node name="Sprite" parent="." index="0"]
-frames = ExtResource( 2 )
+texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource( 1 )
 
-[node name="Light2D" parent="." index="3"]
-energy = 1.0
-
 [node name="AnimationPlayer" parent="." index="4"]
 anims/LightFadeOut = SubResource( 2 )
+
+[node name="Timer" type="Timer" parent="." index="5"]
+wait_time = 0.25
+one_shot = true
+
+[node name="Particles2D" parent="." index="6"]
+amount = 60
+explosiveness = 1.0
+process_material = SubResource( 3 )

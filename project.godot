@@ -34,7 +34,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://BaseClasses/BreakableObjectBase.gd"
 }, {
-"base": "AnimatedSprite",
+"base": "Sprite",
 "class": "BreakableSpriteBase",
 "language": "GDScript",
 "path": "res://BaseClasses/BreakableSpriteBase.gd"
@@ -109,6 +109,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://BaseClasses/PlayerStateBase.gd"
 }, {
+"base": "RayCast2D",
+"class": "RayCastBase",
+"language": "GDScript",
+"path": "res://BaseClasses/RayCastBase.gd"
+}, {
 "base": "AnimatedSprite",
 "class": "SFX_AnimationBase",
 "language": "GDScript",
@@ -165,6 +170,7 @@ _global_script_class_icons={
 "MoveBase": "",
 "Player": "",
 "PlayerStateBase": "",
+"RayCastBase": "",
 "SFX_AnimationBase": "",
 "SFX_group_base": "",
 "StateBase": "",
@@ -190,6 +196,7 @@ SCORE="*res://Global/Score/Score.gd"
 SFX="*res://Global/Autoloads/SFX/SFX_Autoload.gd"
 MENUS="*res://Global/Autoloads/menus_autoload.gd"
 GAME="*res://Global/Autoloads/Game.tscn"
+COLLACTABLES="*res://Global/Autoloads/Collactables.gd"
 
 [debug]
 
@@ -331,6 +338,9 @@ HUD_switch_state={
 
 [layer_names]
 
+2d_physics/layer_3="Debris"
+2d_render/layer_5="SeeThroughA"
+2d_render/layer_6="SeeThroughB"
 2d_render/layer_20="GUI"
 
 [rendering]

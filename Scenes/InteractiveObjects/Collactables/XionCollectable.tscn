@@ -7,7 +7,7 @@
 [sub_resource type="ParticlesMaterial" id=1]
 render_priority = 1
 emission_shape = 1
-emission_sphere_radius = 6.0
+emission_sphere_radius = 10.36
 flag_disable_z = true
 direction = Vector3( 0, 0, 0 )
 spread = 103.78
@@ -19,12 +19,13 @@ damping = 63.24
 angle_random = 0.13
 scale_random = 0.54
 color_ramp = ExtResource( 3 )
-hue_variation_random = 0.2
+hue_variation = 0.07
+hue_variation_random = 0.76
 
 [sub_resource type="ParticlesMaterial" id=2]
 render_priority = 1
 emission_shape = 1
-emission_sphere_radius = 5.0
+emission_sphere_radius = 7.34
 flag_disable_z = true
 direction = Vector3( 0, 0, 0 )
 spread = 103.78
@@ -60,13 +61,16 @@ hue_variation_random = 0.2
 [node name="XionCollectable" type="KinematicBody2D"]
 z_index = 10
 script = ExtResource( 2 )
+speed = 400
 
 [node name="Light2D" type="Light2D" parent="."]
 texture = ExtResource( 1 )
-color = Color( 1, 0.298039, 0.941176, 0.439216 )
-energy = 0.5
+texture_scale = 0.29
+color = Color( 1, 0.784314, 0.980392, 1 )
+energy = 0.8
 shadow_enabled = true
 shadow_color = Color( 0, 0, 0, 0.447059 )
+shadow_item_cull_mask = 17
 
 [node name="Particles" type="Particles2D" parent="."]
 z_index = -1
@@ -79,7 +83,6 @@ process_material = SubResource( 1 )
 [node name="Particles2" type="Particles2D" parent="."]
 z_index = -1
 amount = 100
-lifetime = 2.0
 randomness = 1.0
 local_coords = false
 process_material = SubResource( 2 )
@@ -87,7 +90,6 @@ process_material = SubResource( 2 )
 [node name="Particles3" type="Particles2D" parent="."]
 z_index = -1
 amount = 10
-lifetime = 2.0
 randomness = 1.0
 local_coords = false
 process_material = SubResource( 3 )

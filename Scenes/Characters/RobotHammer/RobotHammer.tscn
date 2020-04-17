@@ -17,15 +17,15 @@ extents = Vector2( 12, 22 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
-"loop": true,
-"name": "Move",
-"speed": 15.0
-}, {
 "frames": [ ExtResource( 9 ), ExtResource( 10 ) ],
 "loop": false,
 "name": "Action",
 "speed": 10.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "Move",
+"speed": 15.0
 }, {
 "frames": [ ExtResource( 8 ) ],
 "loop": true,
@@ -80,3 +80,7 @@ position = Vector2( -28.0917, 21.0747 )
 [node name="CollisionShape2D" parent="HitBox" index="0"]
 position = Vector2( 25.6572, 1.04674 )
 shape = SubResource( 3 )
+
+[node name="SeeThourghWalls" parent="." index="12"]
+light_mask = 16
+z_index = 511

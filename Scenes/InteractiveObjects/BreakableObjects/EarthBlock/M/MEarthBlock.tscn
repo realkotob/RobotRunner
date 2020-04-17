@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/S (base)/EarthBlockBase.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/M/MEarthBlockAnimation.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/M/Rock.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 24, 24 )
@@ -10,7 +10,7 @@ extents = Vector2( 24, 24 )
 linear_damp = -1.0
 
 [node name="Sprite" parent="." index="0"]
-frames = ExtResource( 2 )
+texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource( 1 )

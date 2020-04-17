@@ -6,6 +6,7 @@ extends Door
 # When set to false, the camera will make an average between the average players position
 # And the door position, and move to it
 export var focus_on_door : bool = true
+export var short_focus : bool = false
 
 func _ready():
 	animation_node.connect("animation_finished", self, "on_animation_finished")
@@ -24,6 +25,13 @@ func open_door():
 	
 	# Triggers the camera movement
 	GAME.move_camera_to(position, !focus_on_door)
+
+
+# Triggered when the door starts opening
+# Reset the camera on follow if the exported short_focus booleen is true
+func on_focus_finished():
+	if short_focus == true:
+		GAME.set_camera_on_follow()
 
 
 # Reset the camera on follow state when the animation is over

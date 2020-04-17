@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/GroupBase.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Camera/Camera.tscn" type="PackedScene" id=2]
@@ -13,7 +13,6 @@
 [ext_resource path="res://Scenes/GUI/HUD/HUD.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Scenes/Fog/CosmeticFog/magenta_FG_fog_shadermaterial.tres" type="Material" id=20]
 [ext_resource path="res://Scenes/Fog/CosmeticFog/green_bg_fog_shadermaterial.tres" type="Material" id=21]
-[ext_resource path="res://Scenes/Fog/CosmeticFog/FogNormalMap.tres" type="Texture" id=22]
 [ext_resource path="res://Scenes/Fog/CosmeticFog/FogTexture.tres" type="Texture" id=23]
 [ext_resource path="res://Scenes/Levels/Base/LevelBase.gd" type="Script" id=24]
 [ext_resource path="res://Scenes/Levels/Chapter1/Music/Chapter1_Hard.ogg" type="AudioStream" id=25]
@@ -266,7 +265,7 @@ material = ExtResource( 21 )
 position = Vector2( 470.01, 277.517 )
 scale = Vector2( 2.09202, 1.27633 )
 texture = ExtResource( 23 )
-normal_map = ExtResource( 22 )
+offset = Vector2( 10.943, 0 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 3600, 3600 )
 __meta__ = {
@@ -277,20 +276,22 @@ __meta__ = {
 z_index = 1
 tile_set = ExtResource( 5 )
 cell_size = Vector2( 24, 24 )
+collision_layer = 5
+collision_mask = 5
 format = 1
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="HiddenWalls" type="TileMap" parent="Map"]
-light_mask = 16
+light_mask = 48
 z_index = 10
 z_as_relative = false
 tile_set = ExtResource( 5 )
 cell_size = Vector2( 24, 24 )
-collision_layer = 16
-collision_mask = 16
-occluder_light_mask = 16
+collision_layer = 0
+collision_mask = 0
+occluder_light_mask = 48
 format = 1
 __meta__ = {
 "_edit_lock_": true
@@ -374,6 +375,16 @@ __meta__ = {
 
 [node name="GreatDoorGroup" type="Node2D" parent="InteractivesObjects"]
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Collactables" type="Node2D" parent="InteractivesObjects"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Platform" type="Node2D" parent="InteractivesObjects"]
 __meta__ = {
 "_edit_lock_": true
 }

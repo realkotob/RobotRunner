@@ -1,6 +1,7 @@
 extends Control
 
 onready var background_node = $Background
+onready var timer_node = $Timer
 
 export var hidden : bool = true setget set_hidden, get_hidden
 export var speed : int = 400
@@ -8,6 +9,8 @@ export var speed : int = 400
 onready var HUD_width = background_node.get_size().y
 
 func _ready():
+	var _err = timer_node.connect("timeout", self, "on_timer_timeout")
+	_err = SCORE.connect("xion_changed", self, "on_score_changed")
 	rect_position = Vector2(0, -HUD_width)
 	set_visible(true)
 
@@ -16,6 +19,10 @@ func set_hidden(value: bool):
 	if value != hidden:
 		hidden = value
 		set_physics_process(true)
+		
+		# Restart the timer each time, the HUD is notified tho show itself
+		if value == false:
+			timer_node.start(timer_node.get_wait_time())
 
 
 func get_hidden() -> bool:
@@ -25,7 +32,7 @@ func get_hidden() -> bool:
 # Show/Hide the HUD on ui_select
 func _input(_event):
 	if Input.is_action_just_pressed("HUD_switch_state"):
-		hidden = !hidden
+		set_hidden(!hidden)
 		set_physics_process(true)
 
 
@@ -46,3 +53,15 @@ func move_to(dest: Vector2, spd : float):
 	if rect_position.distance_to(dest) < spd:
 		rect_position = dest
 		set_physics_process(false)
+
+
+# Whenever the score change, reset the timer
+func on_score_changed(_value):
+	set_hidden(false)
+	timer_node.start(timer_node.get_wait_time())
+
+
+# Whenever the timer finish, hide the HUD
+func on_timer_timeout():
+	set_hidden(true)
+	timer_node.stop()

@@ -7,6 +7,8 @@ onready var state_machine_node = $StateMachine
 onready var follow_state_node = $StateMachine/Follow
 onready var moveto_state_node = $StateMachine/MoveTo
 
+var parallax_node : ParallaxBackground
+
 export var camera_speed : float = 3.0
 
 export var debug := false
@@ -43,7 +45,7 @@ func on_start_area_body_entered(body):
 
 # Progressively zoom/dezoom
 func zoom_to(dest_zoom: Vector2):
-	zoom = zoom.linear_interpolate(dest_zoom, 0.03)
+	zoom = zoom.linear_interpolate(dest_zoom, 0.02)
 
 
 # Set the average_pos variable to be at the average of every players position

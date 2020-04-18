@@ -7,14 +7,7 @@ extends StateBase
 # Progressivly, so the camera feels smooth
 
 
-var cam_dir : String = ""
-
 func update(_host, delta):
-	adapt_camera_position(delta)
-
-
-# Change the position of the camera according to the position of the players
-func adapt_camera_position(delta: float):
 	# Compute the camera speed
 	var reel_camera_speed = clamp(owner.camera_speed * delta, 0.0, 1.0)
 
@@ -22,12 +15,23 @@ func adapt_camera_position(delta: float):
 
 	# Move the camera speed towards the average postion
 	# With a horiziontal/vertical restriction
-	if len(players_array) > 0:
+	if len(players_array) > 1:
 
 		var average_pos : Vector2 = owner.compute_average_pos(players_array)
 
 		# If instant is true, go all the way to the desired position
-		if(cam_dir != 'updown'):
-			owner.global_position.x = lerp(owner.global_position.x, average_pos.x, reel_camera_speed)
-		if(cam_dir != 'leftright'):
-			owner.global_position.y = lerp(owner.global_position.y, average_pos.y, reel_camera_speed)
+		owner.global_position = owner.global_position.linear_interpolate(average_pos, reel_camera_speed)
+		
+		
+		# Zoom/Dezoom if necesary
+		var screen_width = get_viewport().get_size().y / 2
+		var max_dist = screen_width * 0.9
+		var players_vertical_distance = abs(players_array[0].global_position.y - players_array[1].global_position.y)
+		var dest_zoom := Vector2.ONE
+		
+		if players_vertical_distance > max_dist:
+			var distance_ratio = (players_vertical_distance / (screen_width * 0.85))
+			dest_zoom = Vector2(distance_ratio, distance_ratio)
+		
+		if owner.zoom != dest_zoom:
+			owner.zoom_to(dest_zoom)

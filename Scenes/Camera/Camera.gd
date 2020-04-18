@@ -6,7 +6,6 @@ onready var start_area_node = get_node("StartMovingArea")
 onready var state_machine_node = $StateMachine
 onready var follow_state_node = $StateMachine/Follow
 onready var moveto_state_node = $StateMachine/MoveTo
-onready var zoom_state_node = $StateMachine/Zoom
 
 export var camera_speed : float = 3.0
 
@@ -42,6 +41,11 @@ func on_start_area_body_entered(body):
 		start_area_node.queue_free()
 
 
+# Progressively zoom/dezoom
+func zoom_to(dest_zoom: Vector2):
+	zoom = zoom.linear_interpolate(dest_zoom, 0.03)
+
+
 # Set the average_pos variable to be at the average of every players position
 func compute_average_pos(players_array: Array) -> Vector2:
 	var average_pos = Vector2.ZERO
@@ -51,18 +55,3 @@ func compute_average_pos(players_array: Array) -> Vector2:
 	average_pos /= len(players_array)
 	
 	return average_pos
-
-
-# Get the camera direction from the current check point, and adapt area in response
-func _on_checkpoint_reached(cp_dir : Vector2, dest_zoom : Vector2):
-	
-	# Manage zoom changement
-	if dest_zoom != zoom:
-		zoom_state_node.destination_zoom = dest_zoom
-		set_state("Zoom")
-	
-	# Give the follow state its direction
-	if(abs(cp_dir.x) == 1):
-		follow_state_node.cam_dir = 'leftright'
-	elif(abs(cp_dir.y) == 1):
-		follow_state_node.cam_dir = 'updown'

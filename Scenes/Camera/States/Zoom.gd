@@ -13,7 +13,7 @@ func update(host, _delta):
 	if owner.get_zoom() == destination_zoom:
 		return host.previous_state
 	else:
-		owner.zoom = owner.zoom.linear_interpolate(destination_zoom, 0.03)
+		p
 
 
 # Reset the zoom destination to normal when leaving the state

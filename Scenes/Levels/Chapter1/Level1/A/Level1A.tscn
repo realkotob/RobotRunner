@@ -18,18 +18,28 @@
 
 [node name="Level1" instance=ExtResource( 5 )]
 
-[node name="StartingPointP1" parent="." index="0" instance=ExtResource( 3 )]
+[node name="CameraBorder" type="Node2D" parent="." index="0"]
+
+[node name="StartingPointP1" parent="." index="1" instance=ExtResource( 3 )]
 position = Vector2( 48, 144 )
 
-[node name="StartingPointP2" parent="." index="1" instance=ExtResource( 4 )]
+[node name="StartingPointP2" parent="." index="2" instance=ExtResource( 4 )]
 position = Vector2( 48, 408 )
 
 [node name="Popups" parent="GUI" index="0"]
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="CameraSystem" parent="." index="5"]
+visible = true
+
 [node name="Camera" parent="CameraSystem" index="0"]
 position = Vector2( 480, 270 )
+limit_left = 0
+limit_top = 0
+limit_right = 3665
+limit_bottom = 540
+editor_draw_limits = true
 debug = false
 
 [node name="Parallaxe" parent="Map/Background" index="0"]
@@ -418,7 +428,7 @@ position = Vector2( 2952, 516 )
 [node name="RedButton3" parent="InteractivesObjects/GreatDoorGroup" index="3" instance=ExtResource( 8 )]
 position = Vector2( 2952, 516 )
 
-[node name="XionCloud" parent="." index="7" instance=ExtResource( 2 )]
+[node name="XionCloud" parent="." index="8" instance=ExtResource( 2 )]
 position = Vector2( -530, 266.5 )
 speed = 30.0
 time_before_moving = 5.0

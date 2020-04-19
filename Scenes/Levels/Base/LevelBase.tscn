@@ -202,6 +202,7 @@ __meta__ = {
 [node name="Paralaxe" type="ParallaxBackground" parent="Map/Background"]
 layer = -1
 follow_viewport_enable = true
+scroll_ignore_camera_zoom = true
 
 [node name="Back" type="ParallaxLayer" parent="Map/Background/Paralaxe"]
 position = Vector2( 800, 0 )

@@ -199,75 +199,75 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Parallaxe" type="ParallaxBackground" parent="Map/Background"]
+[node name="Paralaxe" type="ParallaxBackground" parent="Map/Background"]
 layer = -1
 follow_viewport_enable = true
-scroll_base_scale = Vector2( -1, -1 )
+scroll_ignore_camera_zoom = true
 
-[node name="Back" type="ParallaxLayer" parent="Map/Background/Parallaxe"]
+[node name="Back" type="ParallaxLayer" parent="Map/Background/Paralaxe"]
 position = Vector2( 800, 0 )
-motion_scale = Vector2( 0.2, 0.2 )
+motion_scale = Vector2( 0.05, 0 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="BGBase" type="Sprite" parent="Map/Background/Parallaxe/Back"]
+[node name="BGBase" type="Sprite" parent="Map/Background/Paralaxe/Back"]
 modulate = Color( 1, 0.96, 0.96, 1 )
 light_mask = 2
 position = Vector2( -2330, -3040 )
 texture = ExtResource( 4 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 0, 0, 5000, 5000 )
+region_rect = Rect2( 0, 0, 15000, 15000 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Lights" type="ParallaxLayer" parent="Map/Background/Parallaxe"]
-motion_scale = Vector2( 0.25, 0.25 )
+[node name="Lights" type="ParallaxLayer" parent="Map/Background/Paralaxe"]
+motion_scale = Vector2( 0.1, 0 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Gears" type="ParallaxLayer" parent="Map/Background/Parallaxe"]
+[node name="Gears" type="ParallaxLayer" parent="Map/Background/Paralaxe"]
 position = Vector2( 800, 0 )
-motion_scale = Vector2( 0.3, 0.3 )
+motion_scale = Vector2( 0.12, 0 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Gears" type="Sprite" parent="Map/Background/Parallaxe/Gears"]
+[node name="Gears" type="Sprite" parent="Map/Background/Paralaxe/Gears"]
 modulate = Color( 1, 0.903333, 0.9, 1 )
 light_mask = 2
 texture = ExtResource( 7 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 6400, 3600 )
+region_rect = Rect2( 0, 0, 15000, 15000 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="ProdLine1" parent="Map/Background/Parallaxe" instance=ExtResource( 6 )]
+[node name="ProdLine1" parent="Map/Background/Paralaxe" instance=ExtResource( 6 )]
 position = Vector2( 0, 370 )
-motion_scale = Vector2( 0.4, 0.4 )
+motion_scale = Vector2( 0.15, 0 )
 
-[node name="ProdLine2" parent="Map/Background/Parallaxe" instance=ExtResource( 6 )]
+[node name="ProdLine2" parent="Map/Background/Paralaxe" instance=ExtResource( 6 )]
 position = Vector2( 0, 650 )
-motion_scale = Vector2( 0.4, 0.4 )
+motion_scale = Vector2( 0.17, 0 )
 
-[node name="Fog" type="ParallaxLayer" parent="Map/Background/Parallaxe"]
-motion_scale = Vector2( 0.5, 0.5 )
+[node name="Fog" type="ParallaxLayer" parent="Map/Background/Paralaxe"]
+motion_scale = Vector2( 0.2, 0 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Fog" type="Sprite" parent="Map/Background/Parallaxe/Fog"]
+[node name="Fog" type="Sprite" parent="Map/Background/Paralaxe/Fog"]
 material = ExtResource( 21 )
 position = Vector2( 470.01, 277.517 )
 scale = Vector2( 2.09202, 1.27633 )
 texture = ExtResource( 23 )
 offset = Vector2( 10.943, 0 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 3600, 3600 )
+region_rect = Rect2( 0, 0, 8000, 8000 )
 __meta__ = {
 "_edit_lock_": true
 }

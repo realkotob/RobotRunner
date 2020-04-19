@@ -14,7 +14,7 @@ light_mask = 2
 position = Vector2( 535.948, -250 )
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 6400, 79 )
+region_rect = Rect2( 0, 0, 15000, 79 )
 __meta__ = {
 "_edit_lock_": true
 }

@@ -5,7 +5,7 @@ onready var timer_node = $Timer
 signal xion_received
 
 func _ready():
-	var _err = connect("xion_received", aimed_character, "on_xion_received")
+	var _err = connect("xion_received", aimed_character_weakref.get_ref(), "on_xion_received")
 	_err = timer_node.connect("timeout", self, "on_timeout")
 	
 	# Genererate a random angle value between 0 and 359

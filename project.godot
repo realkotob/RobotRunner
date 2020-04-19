@@ -185,6 +185,7 @@ _global_script_class_icons={
 config/name="Xion Leak"
 run/main_scene="res://Scenes/GUI/Menus/ScreenTitle/ScreenTitle.tscn"
 config/icon="res://icon.png"
+config/Vesion="0.0.2"
 
 [audio]
 

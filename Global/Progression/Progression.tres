@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Global/Progression/Progression.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+chapter = 1
+level = 1
+sub_level = 1
+checkpoint = 0

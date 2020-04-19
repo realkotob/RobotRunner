@@ -23,7 +23,7 @@ func set_current_level(level : Node):
 func get_current_level():
 	return current_level
 
-
+#### TO BE ENHENCED -- HAVE TO TAKE CHARGE OF THE CHECKPOINTS SITUATION ####
 func goto_level(level = current_level):
 	var _err = get_tree().change_scene_to(level)
 

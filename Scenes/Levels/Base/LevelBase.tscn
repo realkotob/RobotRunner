@@ -405,3 +405,4 @@ volume_db = -80.0
 bus = "Music"
 
 [node name="Checkpoints" type="Node2D" parent="."]
+visible = false

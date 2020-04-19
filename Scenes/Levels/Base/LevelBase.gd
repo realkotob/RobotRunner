@@ -90,21 +90,26 @@ func get_closest_player(element: Node):
 	return closest_player
 
 
+# Load the last checkpoint visited and set the position accordingly,
+# Also disable every uneeded checkpoint
 func set_starting_points():
 	var current_checkpoint = GAME.progression.checkpoint
 	
-	if current_checkpoint < 0:
+	if current_checkpoint <= 0:
 		return
 	
-	var checkpoint_array = get_tree().get_nodes_in_group("Checkpoint")
+	var checkpoint_array = get_node("Checkpoints").get_children()
 	var starting_point_array = get_tree().get_nodes_in_group("StartingPoint")
 	
+	
+	# Place the starting position based on the last checkpoint visited
 	var new_starting_point1 = checkpoint_array[current_checkpoint - 1].get_node("NewStartingPoint1")
 	var new_starting_point2 = checkpoint_array[current_checkpoint - 1].get_node("NewStartingPoint2")
 	
 	starting_point_array[0].set_global_position(new_starting_point1.global_position)
 	starting_point_array[1].set_global_position(new_starting_point2.global_position)
 	
+	# Disable every checkpoint before the current one (And also the current one)
 	for i in range(current_checkpoint):
 		var collision_shape = checkpoint_array[i].get_node("CollisionShape2D")
 		collision_shape.set_disabled(true)

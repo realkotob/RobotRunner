@@ -14,6 +14,7 @@ var players_array : Array
 var player_in_danger : bool = false
 
 func _ready():
+	set_starting_points()
 	instanciate_players()
 	GAME.set_current_level(self)
 
@@ -87,6 +88,26 @@ func get_closest_player(element: Node):
 			closest_player = player
 	
 	return closest_player
+
+
+func set_starting_points():
+	var current_checkpoint = GAME.progression.checkpoint
+	
+	if current_checkpoint < 0:
+		return
+	
+	var checkpoint_array = get_tree().get_nodes_in_group("Checkpoint")
+	var starting_point_array = get_tree().get_nodes_in_group("StartingPoint")
+	
+	var new_starting_point1 = checkpoint_array[current_checkpoint - 1].get_node("NewStartingPoint1")
+	var new_starting_point2 = checkpoint_array[current_checkpoint - 1].get_node("NewStartingPoint2")
+	
+	starting_point_array[0].set_global_position(new_starting_point1.global_position)
+	starting_point_array[1].set_global_position(new_starting_point2.global_position)
+	
+	for i in range(current_checkpoint):
+		var collision_shape = checkpoint_array[i].get_node("CollisionShape2D")
+		collision_shape.set_disabled(true)
 
 
 # Intanciate the players inside the level

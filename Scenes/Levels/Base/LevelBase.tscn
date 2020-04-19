@@ -208,6 +208,7 @@ scroll_ignore_camera_zoom = true
 position = Vector2( 800, 0 )
 motion_scale = Vector2( 0.05, 0 )
 __meta__ = {
+"_edit_group_": true,
 "_edit_lock_": true
 }
 
@@ -226,6 +227,7 @@ __meta__ = {
 [node name="Lights" type="ParallaxLayer" parent="Map/Background/Paralaxe"]
 motion_scale = Vector2( 0.1, 0 )
 __meta__ = {
+"_edit_group_": true,
 "_edit_lock_": true
 }
 
@@ -233,6 +235,7 @@ __meta__ = {
 position = Vector2( 800, 0 )
 motion_scale = Vector2( 0.12, 0 )
 __meta__ = {
+"_edit_group_": true,
 "_edit_lock_": true
 }
 
@@ -257,6 +260,7 @@ motion_scale = Vector2( 0.17, 0 )
 [node name="Fog" type="ParallaxLayer" parent="Map/Background/Paralaxe"]
 motion_scale = Vector2( 0.2, 0 )
 __meta__ = {
+"_edit_group_": true,
 "_edit_lock_": true
 }
 
@@ -303,12 +307,6 @@ tile_set = ExtResource( 5 )
 cell_size = Vector2( 24, 24 )
 format = 1
 tile_data = PoolIntArray( 917566, 536870922, 0 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="ForeLights" type="Node2D" parent="Map"]
-position = Vector2( 480, 272 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -405,3 +403,5 @@ bus = "Music"
 stream = ExtResource( 25 )
 volume_db = -80.0
 bus = "Music"
+
+[node name="Checkpoints" type="Node2D" parent="."]

@@ -2,6 +2,8 @@ extends Node2D
 
 onready var gameover_timer_node = $GameoverTimer
 
+export var progression : Resource
+
 const level1 = preload("res://Scenes/Levels/Chapter1/Level1/A/Level1A.tscn")
 const debug_level = preload("res://Scenes/Levels/Debug/LevelDebug.tscn")
 
@@ -9,7 +11,6 @@ var player1 = preload("res://Scenes/Characters/RobotIce/RobotIce.tscn")
 var player2 = preload("res://Scenes/Characters/RobotHammer/RobotHammer.tscn")
 
 var current_level = level1 setget set_current_level, get_current_level
-
 
 func _ready():
 	var _err = gameover_timer_node.connect("timeout",self, "on_gameover_timer_timeout")

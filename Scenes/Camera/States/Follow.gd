@@ -24,14 +24,21 @@ func update(_host, delta):
 		
 		
 		# Zoom/Dezoom if necesary
-		if owner.zoom_enabled:
-			var screen_width = get_viewport().get_size().y / 2
-			var max_dist = screen_width * 0.7
-			var players_vertical_distance = abs(players_array[0].global_position.y - players_array[1].global_position.y)
+		if owner.y_zoom_enabled or owner.x_zoom_enabled:
+			var screen_size = get_viewport().get_size() / 2
+			var max_dist = Vector2(screen_size.x * 0.7, screen_size.y * 0.7)
+			var players_v_distance = abs(players_array[0].global_position.y - players_array[1].global_position.y)
+			var players_h_distance = abs(players_array[0].global_position.x - players_array[1].global_position.x)
 			var dest_zoom := Vector2.ONE
 			
-			if players_vertical_distance > max_dist:
-				var distance_ratio = (players_vertical_distance / max_dist)
+			# Vertical
+			if players_v_distance > max_dist.y && owner.y_zoom_enabled:
+				var distance_ratio = (players_v_distance / max_dist.y)
+				distance_ratio = clamp(distance_ratio, 1.0, 2.0)
+				dest_zoom = Vector2(distance_ratio, distance_ratio)
+			# Horizontal
+			elif players_h_distance > max_dist.x && owner.x_zoom_enabled:
+				var distance_ratio = (players_h_distance / max_dist.x)
 				distance_ratio = clamp(distance_ratio, 1.0, 2.0)
 				dest_zoom = Vector2(distance_ratio, distance_ratio)
 			

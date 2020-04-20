@@ -41,7 +41,7 @@ limit_top = 0
 limit_right = 3665
 limit_bottom = 540
 editor_draw_limits = true
-zoom_enabled = false
+y_zoom_enabled = false
 
 [node name="Light" parent="Map/Background/Paralaxe/Lights" index="0" instance=ExtResource( 9 )]
 position = Vector2( 202, -218 )

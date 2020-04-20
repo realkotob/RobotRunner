@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Scenes/InteractiveObjects/GreatDoor/Sprites/GreatDoorBorder.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/InteractiveObjects/GreatDoor/Sprites/GreatDoorBG.png" type="Texture" id=2]
@@ -500,6 +500,9 @@ tracks/4/keys = {
 "values": [ false, true, false ]
 }
 
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 65.812, 63.104 )
+
 [node name="GreatDoor" type="StaticBody2D"]
 z_index = -1
 script = ExtResource( 7 )
@@ -699,3 +702,9 @@ anims/Open = SubResource( 12 )
 
 [node name="Xion" type="AnimationPlayer" parent="."]
 anims/XionGaz = SubResource( 13 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 2.31647, 57.448 )
+shape = SubResource( 14 )

@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://BaseClasses/BreakableSpriteBase.gd"
 }, {
+"base": "Resource",
+"class": "ChapterBase",
+"language": "GDScript",
+"path": "res://BaseClasses/ChapterBase.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "CollactableBase",
 "language": "GDScript",
@@ -139,11 +144,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/InteractiveObjects/Liquids/Water/Scripts/WaterTile.gd"
 }, {
-"base": "StateBase",
-"class": "WorkStateBase",
-"language": "GDScript",
-"path": "res://BaseClasses/WorkStateBase.gd"
-}, {
 "base": "BreakableObjectBase",
 "class": "XionCrate",
 "language": "GDScript",
@@ -156,6 +156,7 @@ _global_script_class_icons={
 "BlockBase": "",
 "BreakableObjectBase": "",
 "BreakableSpriteBase": "",
+"ChapterBase": "",
 "CollactableBase": "",
 "Door": "",
 "DoorButton": "",
@@ -176,7 +177,6 @@ _global_script_class_icons={
 "StateBase": "",
 "StatesMachine": "",
 "Water": "",
-"WorkStateBase": "",
 "XionCrate": ""
 }
 

@@ -5,7 +5,8 @@ onready var follow_state_node = $StateMachine/Follow
 onready var moveto_state_node = $StateMachine/MoveTo
 
 export var camera_speed : float = 3.0
-export var zoom_enabled : bool = true
+export var x_zoom_enabled : bool = true
+export var y_zoom_enabled : bool = true
 
 func _ready():
 	state_machine_node.setup()

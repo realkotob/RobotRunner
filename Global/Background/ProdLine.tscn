@@ -5,6 +5,7 @@
 [node name="ProdLine" type="ParallaxLayer"]
 motion_scale = Vector2( 1.1, 1 )
 __meta__ = {
+"_edit_group_": true,
 "_edit_lock_": true
 }
 

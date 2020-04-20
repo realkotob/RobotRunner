@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/GroupBase.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Camera/Camera.tscn" type="PackedScene" id=2]
@@ -7,9 +7,6 @@
 [ext_resource path="res://Global/Tileset/LevelBase.tres" type="TileSet" id=5]
 [ext_resource path="res://Global/Background/ProdLine.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Global/Background/Gears.png" type="Texture" id=7]
-[ext_resource path="res://Global/Foreground/Cloud1.png" type="Texture" id=8]
-[ext_resource path="res://Global/Foreground/Cloud2.png" type="Texture" id=9]
-[ext_resource path="res://Global/Foreground/Cloud3.png" type="Texture" id=10]
 [ext_resource path="res://Scenes/GUI/HUD/HUD.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Scenes/Fog/CosmeticFog/magenta_FG_fog_shadermaterial.tres" type="Material" id=20]
 [ext_resource path="res://Scenes/Fog/CosmeticFog/green_bg_fog_shadermaterial.tres" type="Material" id=21]
@@ -20,39 +17,6 @@
 [ext_resource path="res://Scenes/Levels/Chapter1/Music/Chapter1_Medium.ogg" type="AudioStream" id=27]
 [ext_resource path="res://Scenes/Levels/Chapter1/Music/Chapter1_Normal.ogg" type="AudioStream" id=28]
 
-[sub_resource type="Animation" id=1]
-resource_name = "Mouvement"
-length = 80.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 40.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 1300, 0 ) ]
-}
-
-[sub_resource type="Animation" id=2]
-length = 60.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 30.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 1300, 0 ) ]
-}
-
 [node name="LevelBase" type="Node2D"]
 script = ExtResource( 24 )
 __meta__ = {
@@ -61,89 +25,6 @@ __meta__ = {
 
 [node name="Foreground" type="CanvasLayer" parent="."]
 layer = 2
-
-[node name="Clouds" type="Node2D" parent="Foreground"]
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Cloud1" type="Position2D" parent="Foreground/Clouds"]
-position = Vector2( 1033.34, 501.457 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Sprite" type="Sprite" parent="Foreground/Clouds/Cloud1"]
-modulate = Color( 1, 1, 1, 0.431373 )
-texture = ExtResource( 8 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Foreground/Clouds/Cloud1/Sprite"]
-autoplay = "Mouvement"
-anims/Mouvement = SubResource( 1 )
-
-[node name="Cloud2" type="Position2D" parent="Foreground/Clouds"]
-position = Vector2( -105.822, 520.66 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Sprite" type="Sprite" parent="Foreground/Clouds/Cloud2"]
-modulate = Color( 1, 1, 1, 0.431373 )
-texture = ExtResource( 9 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Foreground/Clouds/Cloud2/Sprite"]
-autoplay = "Mouvement"
-anims/Mouvement = SubResource( 2 )
-
-[node name="Cloud3" type="Position2D" parent="Foreground/Clouds"]
-position = Vector2( -192.048, 490.909 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Sprite" type="Sprite" parent="Foreground/Clouds/Cloud3"]
-modulate = Color( 1, 1, 1, 0.431373 )
-texture = ExtResource( 10 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Foreground/Clouds/Cloud3/Sprite"]
-autoplay = "Mouvement"
-
-[node name="TurnCloudL" type="Position2D" parent="Foreground/Clouds"]
-position = Vector2( 22.5517, 500.643 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Sprite" type="AnimatedSprite" parent="Foreground/Clouds/TurnCloudL"]
-modulate = Color( 1, 1, 1, 0.313726 )
-playing = true
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="TurnCloudR" type="Position2D" parent="Foreground/Clouds"]
-position = Vector2( 923.552, 500.643 )
-rotation = -3.14159
-scale = Vector2( 1, -1 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Sprite" type="AnimatedSprite" parent="Foreground/Clouds/TurnCloudR"]
-modulate = Color( 1, 1, 1, 0.313726 )
-playing = true
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Fog" type="Node2D" parent="Foreground"]
 __meta__ = {
@@ -318,72 +199,86 @@ __meta__ = {
 
 [node name="IceBlocks" type="Node2D" parent="InteractivesObjects"]
 __meta__ = {
+"_edit_group_": true,
 "_edit_lock_": true
 }
 
 [node name="S" type="Node2D" parent="InteractivesObjects/IceBlocks"]
 __meta__ = {
+"_edit_group_": true,
 "_edit_lock_": true
 }
 
 [node name="M" type="Node2D" parent="InteractivesObjects/IceBlocks"]
 __meta__ = {
+"_edit_group_": true,
 "_edit_lock_": true
 }
 
 [node name="EarthBlocks" type="Node2D" parent="InteractivesObjects"]
 __meta__ = {
+"_edit_group_": true,
 "_edit_lock_": true
 }
 
 [node name="S" type="Node2D" parent="InteractivesObjects/EarthBlocks"]
 __meta__ = {
+"_edit_group_": true,
 "_edit_lock_": true
 }
 
 [node name="M" type="Node2D" parent="InteractivesObjects/EarthBlocks"]
 __meta__ = {
+"_edit_group_": true,
 "_edit_lock_": true
 }
 
 [node name="WaterTiles" type="Node2D" parent="InteractivesObjects"]
 __meta__ = {
+"_edit_group_": true,
 "_edit_lock_": true
 }
 
 [node name="LavaTiles" type="Node2D" parent="InteractivesObjects"]
 __meta__ = {
+"_edit_group_": true,
 "_edit_lock_": true
 }
 
 [node name="XionLiquid" type="Node2D" parent="InteractivesObjects"]
 __meta__ = {
+"_edit_group_": true,
 "_edit_lock_": true
 }
 
 [node name="TeleportGroups" type="Node2D" parent="InteractivesObjects"]
 __meta__ = {
+"_edit_group_": true,
 "_edit_lock_": true
 }
 
 [node name="Buttons&Doors" type="Node2D" parent="InteractivesObjects"]
 __meta__ = {
+"_edit_group_": true,
 "_edit_lock_": true
 }
 
 [node name="GreatDoorGroup" type="Node2D" parent="InteractivesObjects"]
 script = ExtResource( 1 )
 __meta__ = {
+"_edit_group_": true,
 "_edit_lock_": true
 }
 
 [node name="Collactables" type="Node2D" parent="InteractivesObjects"]
 __meta__ = {
+"_edit_group_": true,
 "_edit_lock_": true
 }
 
 [node name="Platform" type="Node2D" parent="InteractivesObjects"]
 __meta__ = {
+"_edit_group_": true,
 "_edit_lock_": true
 }
 

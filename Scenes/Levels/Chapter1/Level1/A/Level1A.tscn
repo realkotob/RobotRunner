@@ -41,7 +41,7 @@ limit_top = 0
 limit_right = 3665
 limit_bottom = 540
 editor_draw_limits = true
-zoom_enabled = false
+y_zoom_enabled = false
 
 [node name="Light" parent="Map/Background/Paralaxe/Lights" index="0" instance=ExtResource( 9 )]
 position = Vector2( 202, -218 )
@@ -108,138 +108,79 @@ position = Vector2( 960, 360 )
 
 [node name="IceBlockBase" parent="InteractivesObjects/IceBlocks/S" index="0" instance=ExtResource( 15 )]
 position = Vector2( 900, 420 )
-contact_monitor = true
-sleeping = true
-can_sleep = true
 
 [node name="IceBlockBase3" parent="InteractivesObjects/IceBlocks/S" index="1" instance=ExtResource( 15 )]
 position = Vector2( 3108, 228 )
-contact_monitor = true
-sleeping = true
-can_sleep = true
 
 [node name="IceBlockBase4" parent="InteractivesObjects/IceBlocks/S" index="2" instance=ExtResource( 15 )]
 position = Vector2( 3132, 228 )
-contact_monitor = true
-sleeping = true
-can_sleep = true
 
 [node name="IceBlockBase2" parent="InteractivesObjects/IceBlocks/S" index="3" instance=ExtResource( 15 )]
 position = Vector2( 900, 396 )
-contact_monitor = true
-sleeping = true
-can_sleep = true
 
 [node name="M_IceBlock" parent="InteractivesObjects/IceBlocks/M" index="0" instance=ExtResource( 14 )]
 position = Vector2( 840, 288 )
-contact_monitor = true
-sleeping = true
 
 [node name="M_IceBlock9" parent="InteractivesObjects/IceBlocks/M" index="1" instance=ExtResource( 14 )]
 position = Vector2( 960, 408 )
-contact_monitor = true
-sleeping = true
 
 [node name="M_IceBlock2" parent="InteractivesObjects/IceBlocks/M" index="2" instance=ExtResource( 14 )]
 position = Vector2( 1056, 72 )
-contact_monitor = true
-sleeping = true
 
 [node name="M_IceBlock4" parent="InteractivesObjects/IceBlocks/M" index="3" instance=ExtResource( 14 )]
 position = Vector2( 2376, 312 )
-contact_monitor = true
-sleeping = true
 
 [node name="M_IceBlock6" parent="InteractivesObjects/IceBlocks/M" index="4" instance=ExtResource( 14 )]
 position = Vector2( 2376, 360 )
-contact_monitor = true
-sleeping = true
 
 [node name="M_IceBlock8" parent="InteractivesObjects/IceBlocks/M" index="5" instance=ExtResource( 14 )]
 position = Vector2( 2760, 288 )
-contact_monitor = true
-sleeping = true
 
 [node name="M_IceBlock10" parent="InteractivesObjects/IceBlocks/M" index="6" instance=ExtResource( 14 )]
 position = Vector2( 3120, 264 )
-contact_monitor = true
-sleeping = true
 
 [node name="M_IceBlock7" parent="InteractivesObjects/IceBlocks/M" index="7" instance=ExtResource( 14 )]
 position = Vector2( 2376, 408 )
-contact_monitor = true
-sleeping = true
 
 [node name="M_IceBlock5" parent="InteractivesObjects/IceBlocks/M" index="8" instance=ExtResource( 14 )]
 position = Vector2( 2280, 432 )
-contact_monitor = true
-sleeping = true
 
 [node name="M_IceBlock3" parent="InteractivesObjects/IceBlocks/M" index="9" instance=ExtResource( 14 )]
 position = Vector2( 1224, 456 )
-contact_monitor = true
-sleeping = true
 
 [node name="EarthBlockBase" parent="InteractivesObjects/EarthBlocks/S" index="0" instance=ExtResource( 11 )]
 position = Vector2( 3084, 492 )
-contact_monitor = true
-sleeping = true
-can_sleep = true
 
 [node name="EarthBlockBase2" parent="InteractivesObjects/EarthBlocks/S" index="1" instance=ExtResource( 11 )]
 position = Vector2( 3084, 516 )
-contact_monitor = true
-sleeping = true
-can_sleep = true
 
 [node name="M_EarthBlock" parent="InteractivesObjects/EarthBlocks/M" index="0" instance=ExtResource( 12 )]
 position = Vector2( 696, 384 )
-contact_monitor = true
-sleeping = true
-can_sleep = true
 
 [node name="M_EarthBlock2" parent="InteractivesObjects/EarthBlocks/M" index="1" instance=ExtResource( 12 )]
 position = Vector2( 1044, 240 )
-contact_monitor = true
-sleeping = true
-can_sleep = true
 
 [node name="M_EarthBlock6" parent="InteractivesObjects/EarthBlocks/M" index="2" instance=ExtResource( 12 )]
 position = Vector2( 1104, 384 )
-contact_monitor = true
-sleeping = true
-can_sleep = true
 
 [node name="M_EarthBlock4" parent="InteractivesObjects/EarthBlocks/M" index="3" instance=ExtResource( 12 )]
 position = Vector2( 2328, 264 )
-contact_monitor = true
-sleeping = true
-can_sleep = true
 
 [node name="M_EarthBlock7" parent="InteractivesObjects/EarthBlocks/M" index="4" instance=ExtResource( 12 )]
 position = Vector2( 3048, 504 )
-contact_monitor = true
-sleeping = true
-can_sleep = true
 
 [node name="M_EarthBlock5" parent="InteractivesObjects/EarthBlocks/M" index="5" instance=ExtResource( 12 )]
 position = Vector2( 2592, 288 )
-contact_monitor = true
-sleeping = true
-can_sleep = true
 
 [node name="M_EarthBlock3" parent="InteractivesObjects/EarthBlocks/M" index="6" instance=ExtResource( 12 )]
 position = Vector2( 1272, 456 )
-contact_monitor = true
-sleeping = true
-can_sleep = true
 
 [node name="Water" parent="InteractivesObjects/WaterTiles" index="0" instance=ExtResource( 10 )]
 position = Vector2( 585.101, 477.957 )
 scale = Vector2( 0.416, 0.495 )
 
 [node name="Water2" parent="InteractivesObjects/WaterTiles" index="1" instance=ExtResource( 10 )]
-position = Vector2( 2688, 381 )
+position = Vector2( 2688, 384 )
 scale = Vector2( 0.436, 0.457 )
 
 [node name="Lava" parent="InteractivesObjects/LavaTiles" index="0" instance=ExtResource( 1 )]
@@ -265,6 +206,7 @@ speed = 30.0
 time_before_moving = 5.0
 
 [node name="CloudPath" parent="XionCloud" index="3" instance=ExtResource( 7 )]
+visible = false
 position = Vector2( 530, -266.5 )
 
 [node name="Checkpoint" parent="Checkpoints" index="0" instance=ExtResource( 16 )]

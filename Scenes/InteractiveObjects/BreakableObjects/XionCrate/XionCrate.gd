@@ -47,7 +47,7 @@ func damage(actor_damaging: Node = null):
 
 
 # Function called to destroy an object
-func destroy(actor: Node = null):
+func on_destruction(actor: Node = null):
 	timer_node.stop()
 	
 	# Hide every non-destruction related sprite
@@ -57,10 +57,6 @@ func destroy(actor: Node = null):
 	var xion_explosion_node = SFX.xion_explosion.instance()
 	xion_explosion_node.set_global_position(global_position)
 	SFX.add_child(xion_explosion_node)
-	
-	# Scatter the crate in little pieces
-	SFX.scatter_sprite(self, nb_debris, explosion_impulse)
-	SFX.scatter_sprite(self, int(nb_debris / 4), explosion_impulse)
 	
 	# Play the crate explosion and triggers the fade out
 	base_anim_node.disconnect("animation_finished", self, "on_sprite_animation_finished")

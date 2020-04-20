@@ -28,10 +28,10 @@ func _physics_process(_delta):
 	attributes_node.velocity = character_node.move_and_slide(attributes_node.velocity, Vector2.UP, false, 4, PI/4, false)
 	
 	# Apply force to bodies it hit
-	for index in character_node.get_slide_count():
-		var collision = character_node.get_slide_collision(index)
-		if collision.collider.is_in_group("MovableBodies"):
-			collision.collider.apply_central_impulse(-collision.normal * push)
+#	for index in character_node.get_slide_count():
+#		var collision = character_node.get_slide_collision(index)
+#		if collision.collider.is_in_group("MovableBodies"):
+#			collision.collider.apply_central_impulse(-collision.normal * push)
 
 
 # Flip the hit box shape

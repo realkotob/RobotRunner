@@ -11,6 +11,7 @@ export (float, 10.0, 500.0) var explosion_impulse = 80.0
 
 func _ready():
 	add_to_group("InteractivesObjects")
+	var _err = connect("sleeping_state_changed", self, "on_sleeping_state_changed")
 
 
 # Called by a character when its hitbox touches it
@@ -43,3 +44,9 @@ func awake():
 	awake_nearby_bodies()
 	set_mode(RigidBody2D.MODE_RIGID)
 	set_sleeping(false)
+
+
+# Set the mode back to static mode when the body is sleeping
+func on_sleeping_state_changed():
+	if is_sleeping():
+		set_mode(RigidBody2D.MODE_STATIC)

@@ -35,6 +35,7 @@ extents = Vector2( 11.4111, 2.38694 )
 
 [node name="BreakableBlockBase" type="RigidBody2D"]
 z_as_relative = false
+mode = 1
 gravity_scale = 10.0
 continuous_cd = 2
 sleeping = true

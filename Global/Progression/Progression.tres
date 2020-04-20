@@ -4,7 +4,6 @@
 
 [resource]
 script = ExtResource( 1 )
-chapter = 1
-level = 1
-sub_level = 1
+chapter = 0
+level = 0
 checkpoint = 0

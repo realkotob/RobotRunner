@@ -18,10 +18,10 @@
 [node name="Level1B" instance=ExtResource( 1 )]
 
 [node name="StartingPointP1" parent="." index="0" instance=ExtResource( 3 )]
-position = Vector2( 240, 72 )
+position = Vector2( 48, 264 )
 
 [node name="StartingPointP2" parent="." index="1" instance=ExtResource( 4 )]
-position = Vector2( 96, 456 )
+position = Vector2( 48, 360 )
 
 [node name="CameraSystem" parent="." index="4"]
 visible = true
@@ -89,161 +89,78 @@ tile_data = PoolIntArray( 786466, 14, 0, 786482, 18, 65536, 852028, 8, 131072, 8
 
 [node name="M_IceBlock" parent="InteractivesObjects/IceBlocks/M" index="0" instance=ExtResource( 6 )]
 position = Vector2( 768, 192 )
-z_as_relative = false
-gravity_scale = 10.0
 continuous_cd = 2
-sleeping = true
 can_sleep = false
-linear_damp = 1.0
-explosion_impulse = 150.0
 
 [node name="M_IceBlock2" parent="InteractivesObjects/IceBlocks/M" index="1" instance=ExtResource( 6 )]
 position = Vector2( 768, 144 )
-z_as_relative = false
-gravity_scale = 10.0
 continuous_cd = 2
-sleeping = true
 can_sleep = false
-linear_damp = 1.0
-explosion_impulse = 150.0
 
 [node name="M_IceBlock3" parent="InteractivesObjects/IceBlocks/M" index="2" instance=ExtResource( 6 )]
 position = Vector2( 1416, 336 )
-z_as_relative = false
-gravity_scale = 10.0
 continuous_cd = 2
-sleeping = true
 can_sleep = false
-linear_damp = 1.0
-explosion_impulse = 150.0
 
 [node name="M_IceBlock4" parent="InteractivesObjects/IceBlocks/M" index="3" instance=ExtResource( 6 )]
 position = Vector2( 1512, 192 )
-z_as_relative = false
-gravity_scale = 10.0
 continuous_cd = 2
-sleeping = true
 can_sleep = false
-linear_damp = 1.0
-explosion_impulse = 150.0
 
 [node name="M_IceBlock5" parent="InteractivesObjects/IceBlocks/M" index="4" instance=ExtResource( 6 )]
 position = Vector2( 2064, 288 )
-z_as_relative = false
-gravity_scale = 10.0
 continuous_cd = 2
-sleeping = true
 can_sleep = false
-linear_damp = 1.0
-explosion_impulse = 150.0
 
 [node name="M_IceBlock6" parent="InteractivesObjects/IceBlocks/M" index="5" instance=ExtResource( 6 )]
 position = Vector2( 4056, 288 )
-z_as_relative = false
-gravity_scale = 10.0
 continuous_cd = 2
-sleeping = true
 can_sleep = false
-linear_damp = 1.0
-explosion_impulse = 150.0
 
 [node name="M_IceBlock7" parent="InteractivesObjects/IceBlocks/M" index="6" instance=ExtResource( 6 )]
 position = Vector2( 3960, 504 )
-z_as_relative = false
-gravity_scale = 10.0
 continuous_cd = 2
-sleeping = true
 can_sleep = false
-linear_damp = 1.0
-explosion_impulse = 150.0
 
 [node name="M_EarthBlock" parent="InteractivesObjects/EarthBlocks/M" index="0" instance=ExtResource( 5 )]
 position = Vector2( 696, 360 )
-z_as_relative = false
-gravity_scale = 10.0
 continuous_cd = 2
-sleeping = true
 can_sleep = false
-angular_damp = 0.0
-nb_debris = 20
-explosion_impulse = 150.0
 
 [node name="M_EarthBlock2" parent="InteractivesObjects/EarthBlocks/M" index="1" instance=ExtResource( 5 )]
 position = Vector2( 1452, 504 )
-z_as_relative = false
-gravity_scale = 10.0
 continuous_cd = 2
-sleeping = true
 can_sleep = false
-angular_damp = 0.0
-nb_debris = 20
-explosion_impulse = 150.0
 
 [node name="M_EarthBlock7" parent="InteractivesObjects/EarthBlocks/M" index="2" instance=ExtResource( 5 )]
 position = Vector2( 3840, 96 )
-z_as_relative = false
-gravity_scale = 10.0
 continuous_cd = 2
-sleeping = true
 can_sleep = false
-angular_damp = 0.0
-nb_debris = 20
-explosion_impulse = 150.0
 
 [node name="M_EarthBlock8" parent="InteractivesObjects/EarthBlocks/M" index="3" instance=ExtResource( 5 )]
 position = Vector2( 3912, 96 )
-z_as_relative = false
-gravity_scale = 10.0
 continuous_cd = 2
-sleeping = true
 can_sleep = false
-angular_damp = 0.0
-nb_debris = 20
-explosion_impulse = 150.0
 
 [node name="M_EarthBlock3" parent="InteractivesObjects/EarthBlocks/M" index="4" instance=ExtResource( 5 )]
 position = Vector2( 1452, 456 )
-z_as_relative = false
-gravity_scale = 10.0
 continuous_cd = 2
-sleeping = true
 can_sleep = false
-angular_damp = 0.0
-nb_debris = 20
-explosion_impulse = 150.0
 
 [node name="M_EarthBlock4" parent="InteractivesObjects/EarthBlocks/M" index="5" instance=ExtResource( 5 )]
 position = Vector2( 1656, 504 )
-z_as_relative = false
-gravity_scale = 10.0
 continuous_cd = 2
-sleeping = true
 can_sleep = false
-angular_damp = 0.0
-nb_debris = 20
-explosion_impulse = 150.0
 
 [node name="M_EarthBlock5" parent="InteractivesObjects/EarthBlocks/M" index="6" instance=ExtResource( 5 )]
 position = Vector2( 1656, 456 )
-z_as_relative = false
-gravity_scale = 10.0
 continuous_cd = 2
-sleeping = true
 can_sleep = false
-angular_damp = 0.0
-nb_debris = 20
-explosion_impulse = 150.0
 
 [node name="M_EarthBlock6" parent="InteractivesObjects/EarthBlocks/M" index="7" instance=ExtResource( 5 )]
 position = Vector2( 2112, 288 )
-z_as_relative = false
-gravity_scale = 10.0
 continuous_cd = 2
-sleeping = true
 can_sleep = false
-angular_damp = 0.0
-nb_debris = 20
-explosion_impulse = 150.0
 
 [node name="Lava" parent="InteractivesObjects/LavaTiles" index="0" instance=ExtResource( 2 )]
 position = Vector2( 275.12, 269.282 )

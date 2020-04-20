@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://BaseClasses/BreakableSpriteBase.gd"
 }, {
+"base": "Resource",
+"class": "ChapterBase",
+"language": "GDScript",
+"path": "res://BaseClasses/ChapterBase.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "CollactableBase",
 "language": "GDScript",
@@ -151,6 +156,7 @@ _global_script_class_icons={
 "BlockBase": "",
 "BreakableObjectBase": "",
 "BreakableSpriteBase": "",
+"ChapterBase": "",
 "CollactableBase": "",
 "Door": "",
 "DoorButton": "",

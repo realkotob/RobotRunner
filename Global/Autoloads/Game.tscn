@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Global/Autoloads/Game.gd" type="Script" id=1]
 [ext_resource path="res://Global/Progression/Progression.tres" type="Resource" id=2]
+[ext_resource path="res://Scenes/Levels/Chapter1/Chapter1.tres" type="Resource" id=3]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
 progression = ExtResource( 2 )
+current_chapter = ExtResource( 3 )
 
 [node name="GameoverTimer" type="Timer" parent="."]
 one_shot = true

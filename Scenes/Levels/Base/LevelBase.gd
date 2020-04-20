@@ -12,21 +12,34 @@ onready var danger_distance : float = screen_size.x / 2
 
 var players_array : Array
 var player_in_danger : bool = false
-
-func _ready():
-	set_starting_points()
-	instanciate_players()
-	GAME.set_current_level(self)
+var players_exited : int = 0
 
 
-func _process(_delta):
-	adapt_music()
+signal level_finished
+
 
 func is_class(value: String) -> bool:
 	return value == CLASS
 
 func get_class() -> String:
 	return CLASS
+
+
+func _ready():
+	var _err = connect("level_finished", GAME, "on_level_finished")
+	
+	# Set the current level to be this one (for debug purposes)
+	var current_level_index = find_string(GAME.current_chapter.levels_scenes_array, self.filename)
+
+	if GAME.progression.level != current_level_index:
+		GAME.progression.level = current_level_index
+	
+	set_starting_points()
+	instanciate_players()
+
+
+func _process(_delta):
+	adapt_music()
 
 
 func adapt_music():
@@ -48,7 +61,6 @@ func adapt_music():
 	
 	# If a player is in danger, triggers the hard stream
 	if player_in_danger:
-		### CHANGE THE SOUND FILE TO BE LOUDER ###
 		music_node.interpolate_stream_volume("Hard", 0.0, 0.1)
 	else:
 		music_node.interpolate_stream_volume("Hard", -80.0, 0.01)
@@ -60,6 +72,19 @@ func index_volume_on_distance(dist_to : float) -> float:
 	desired_volume *= desired_volume * desired_volume
 	desired_volume *= -1.0
 	return clamp(desired_volume, -80.0, .0)
+
+
+# Called by GAME when a player exited the level
+# Update the players array, and the player_exited counter
+func on_player_exited(player : PhysicsBody2D):
+	players_exited += 1
+	
+	var player_index = players_array.find(player)
+	if player_index != -1:
+		players_array.remove(player_index)
+	
+	if players_exited == 2:
+		emit_signal("level_finished")
 
 
 func on_player_in_danger():
@@ -79,13 +104,14 @@ func get_distance_to(element1: Node, element2: Node):
 func get_closest_player(element: Node):
 	var smaller_distance : float = INF
 	var current_distance : float = 0.0
-	var closest_player : Node = null
+	var closest_player : Object = players_array[0]
 	
-	for player in players_array:
-		current_distance = get_distance_to(element, player)
-		if current_distance < smaller_distance:
-			smaller_distance = current_distance
-			closest_player = player
+	if len(players_array) > 1:
+		for player in players_array:
+			current_distance = get_distance_to(element, player)
+			if current_distance < smaller_distance:
+				smaller_distance = current_distance
+				closest_player = player
 	
 	return closest_player
 
@@ -149,3 +175,17 @@ func instanciate_players():
 	for inter_object in interactive_objects_array:
 		if inter_object.get("players_node_array") != null:
 			inter_object.players_node_array = get_tree().get_nodes_in_group("Players")
+
+
+# Return the index of a given string in a given array
+func find_string(string_array: PoolStringArray, target_string : String):
+	var index = 0
+	for string in string_array:
+		if string == target_string:
+			break
+		else:
+			index += 1
+			if index == len(string_array):
+				index = -1
+	
+	return index

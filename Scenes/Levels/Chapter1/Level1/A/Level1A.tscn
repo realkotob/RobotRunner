@@ -22,10 +22,10 @@
 [node name="CameraBorder" type="Node2D" parent="." index="0"]
 
 [node name="StartingPointP1" parent="." index="1" instance=ExtResource( 3 )]
-position = Vector2( 816, 408 )
+position = Vector2( 48, 144 )
 
 [node name="StartingPointP2" parent="." index="2" instance=ExtResource( 4 )]
-position = Vector2( 780, 504 )
+position = Vector2( 48, 408 )
 
 [node name="Popups" parent="GUI" index="0"]
 grow_horizontal = 2
@@ -206,6 +206,7 @@ speed = 30.0
 time_before_moving = 5.0
 
 [node name="CloudPath" parent="XionCloud" index="3" instance=ExtResource( 7 )]
+visible = false
 position = Vector2( 530, -266.5 )
 
 [node name="Checkpoint" parent="Checkpoints" index="0" instance=ExtResource( 16 )]

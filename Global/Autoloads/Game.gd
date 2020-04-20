@@ -3,29 +3,21 @@ extends Node2D
 onready var gameover_timer_node = $GameoverTimer
 
 export var progression : Resource
-
-const level1 = preload("res://Scenes/Levels/Chapter1/Level1/A/Level1A.tscn")
-const debug_level = preload("res://Scenes/Levels/Debug/LevelDebug.tscn")
+export var current_chapter : Resource
 
 var player1 = preload("res://Scenes/Characters/RobotIce/RobotIce.tscn")
 var player2 = preload("res://Scenes/Characters/RobotHammer/RobotHammer.tscn")
 
-var current_level = level1 setget set_current_level, get_current_level
+var level_array : Array
 
 func _ready():
 	var _err = gameover_timer_node.connect("timeout",self, "on_gameover_timer_timeout")
+	level_array = current_chapter.load_levels()
 
-
-func set_current_level(level : Node):
-	current_level = load(level.get_filename())
-
-
-func get_current_level():
-	return current_level
 
 #### TO BE ENHENCED -- HAVE TO TAKE CHARGE OF THE CHECKPOINTS SITUATION ####
-func goto_level(level = current_level):
-	var _err = get_tree().change_scene_to(level)
+func goto_level(index : int = progression.level):
+	var _err = get_tree().change_scene_to(level_array[index])
 
 
 # Triggers the timer before the gameover is triggered
@@ -52,3 +44,15 @@ func move_camera_to(dest: Vector2, average_w_players: bool = false):
 func set_camera_on_follow():
 	var camera_node = get_tree().get_current_scene().find_node("Camera")
 	camera_node.set_state("Follow")
+
+
+func on_player_level_exited(body: Node):
+	get_tree().get_current_scene().on_player_exited(body)
+
+
+# Called when a level is finished, change scene to the next level scene
+func on_level_finished():
+	progression.level += 1
+	progression.checkpoint = 0 
+	var current_level_index = progression.level
+	goto_level(current_level_index)

@@ -143,7 +143,7 @@ func instanciate_players():
 		
 		player2_node.setup()
 
-
+	#### CHECK IF THIS IS STILL NECESARY? ####
 	# Give the references to the players node to every interactive objects needing it
 	var interactive_objects_array = get_tree().get_nodes_in_group("InteractivesObjects")
 	for inter_object in interactive_objects_array:

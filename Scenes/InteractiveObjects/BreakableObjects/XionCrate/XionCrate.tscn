@@ -254,6 +254,7 @@ radius = 80.5399
 extents = Vector2( 22.7645, 3.99571 )
 
 [node name="XionCrate" type="RigidBody2D"]
+mode = 1
 gravity_scale = 5.0
 sleeping = true
 script = ExtResource( 1 )

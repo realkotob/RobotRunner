@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/XionCrate.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateSE/LargeCrateAnimSE2.png" type="Texture" id=2]
@@ -250,8 +250,12 @@ hue_variation_random = 0.2
 [sub_resource type="CircleShape2D" id=14]
 radius = 80.5399
 
+[sub_resource type="RectangleShape2D" id=15]
+extents = Vector2( 22.7645, 3.99571 )
+
 [node name="XionCrate" type="RigidBody2D"]
 gravity_scale = 5.0
+sleeping = true
 script = ExtResource( 1 )
 nb_debris = 30
 explosion_impulse = 150.0
@@ -324,4 +328,11 @@ visible = false
 shape = SubResource( 14 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
+visible = false
 script = ExtResource( 36 )
+
+[node name="AwakeArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AwakeArea"]
+position = Vector2( -0.160763, -28.4921 )
+shape = SubResource( 15 )

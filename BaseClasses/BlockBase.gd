@@ -2,7 +2,7 @@ extends BreakableObjectBase
 
 class_name BlockBase
 
-onready var audio_node = get_node("AudioStreamPlayer")
+onready var audio_node = $AudioStreamPlayer
 
 func _ready():
 	audio_node.connect("finished", self, "on_audiostream_finished")
@@ -10,6 +10,7 @@ func _ready():
 
 # When the block is destroyed, lauch the destroy animation
 func destroy(_actor_destroying: Node = null):
+	awake_nearby_bodies()
 	audio_node.play()
 	sprite_node.set_visible(false)
 	set_mode(RigidBody2D.MODE_STATIC)
@@ -21,4 +22,3 @@ func destroy(_actor_destroying: Node = null):
 
 func on_audiostream_finished():
 	queue_free()
-

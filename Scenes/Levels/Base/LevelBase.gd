@@ -168,15 +168,9 @@ func instanciate_players():
 		
 		player2_node.setup()
 
-	#### CHECK IF THIS IS STILL NECESARY? ####
-	# Give the references to the players node to every interactive objects needing it
-	var interactive_objects_array = get_tree().get_nodes_in_group("InteractivesObjects")
-	for inter_object in interactive_objects_array:
-		if inter_object.get("players_node_array") != null:
-			inter_object.players_node_array = get_tree().get_nodes_in_group("Players")
-
 
 # Return the index of a given string in a given array
+# Return -1 if the string wasn't found
 func find_string(string_array: PoolStringArray, target_string : String):
 	var index = 0
 	for string in string_array:

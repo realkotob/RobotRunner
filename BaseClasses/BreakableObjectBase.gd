@@ -13,7 +13,6 @@ export (float, 10.0, 500.0) var explosion_impulse = 80.0
 export (float, 0.0, 1.0) var explosion_impulse_modifier = 0.7
 
 func _ready():
-	add_to_group("InteractivesObjects")
 	var _err = connect("sleeping_state_changed", self, "on_sleeping_state_changed")
 
 

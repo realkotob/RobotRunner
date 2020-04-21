@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://BaseClasses/BreakableSpriteBase.gd"
 }, {
+"base": "Area2D",
+"class": "CameraEventBase",
+"language": "GDScript",
+"path": "res://Scenes/Camera/CameraEvents/CameraEvent.gd"
+}, {
 "base": "Resource",
 "class": "ChapterBase",
 "language": "GDScript",
@@ -156,6 +161,7 @@ _global_script_class_icons={
 "BlockBase": "",
 "BreakableObjectBase": "",
 "BreakableSpriteBase": "",
+"CameraEventBase": "",
 "ChapterBase": "",
 "CollactableBase": "",
 "Door": "",

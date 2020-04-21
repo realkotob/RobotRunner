@@ -43,4 +43,4 @@ func update(_host, delta):
 				dest_zoom = Vector2(distance_ratio, distance_ratio)
 			
 			if owner.zoom != dest_zoom:
-				owner.zoom_to(dest_zoom)
+				owner.set_destination_zoom(dest_zoom)

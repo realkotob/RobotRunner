@@ -15,7 +15,6 @@ func _ready():
 	level_array = current_chapter.load_levels()
 
 
-#### TO BE ENHENCED -- HAVE TO TAKE CHARGE OF THE CHECKPOINTS SITUATION ####
 func goto_level(index : int = progression.level):
 	var _err = get_tree().change_scene_to(level_array[index])
 
@@ -34,11 +33,21 @@ func on_gameover_timer_timeout():
 
 
 # Move the camera to the given position
-func move_camera_to(dest: Vector2, average_w_players: bool = false):
+func move_camera_to(dest: Vector2, average_w_players: bool = false, speed : float = -1.0):
 	var camera_node = get_tree().get_current_scene().find_node("Camera")
 	
 	if camera_node != null:
-		camera_node.move_to(dest, average_w_players)
+		camera_node.move_to(dest, average_w_players, speed)
+
+
+# Give zoom the camera to the destination wanted zoom
+func zoom_camera_to(dest_zoom: Vector2, zoom_speed : float = -1.0):
+	var camera_node = get_tree().get_current_scene().find_node("Camera")
+	
+	if camera_node != null:
+		camera_node.set_destination_zoom(dest_zoom)
+		if zoom_speed != -1.0:
+			camera_node.current_zoom_speed = zoom_speed
 
 
 func set_camera_on_follow():

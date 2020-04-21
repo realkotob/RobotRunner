@@ -127,7 +127,6 @@ func set_starting_points():
 	var checkpoint_array = get_node("Checkpoints").get_children()
 	var starting_point_array = get_tree().get_nodes_in_group("StartingPoint")
 	
-	
 	# Place the starting position based on the last checkpoint visited
 	var new_starting_point1 = checkpoint_array[current_checkpoint - 1].get_node("NewStartingPoint1")
 	var new_starting_point2 = checkpoint_array[current_checkpoint - 1].get_node("NewStartingPoint2")

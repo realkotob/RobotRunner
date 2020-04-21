@@ -66,6 +66,11 @@ __meta__ = {
 
 [node name="Camera" parent="CameraSystem" instance=ExtResource( 2 )]
 
+[node name="Events" type="Node2D" parent="CameraSystem"]
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="Map" type="Node2D" parent="."]
 z_index = 2
 z_as_relative = false

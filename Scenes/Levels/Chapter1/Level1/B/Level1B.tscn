@@ -37,6 +37,9 @@ limit_right = 4500
 limit_bottom = 767
 editor_draw_limits = true
 
+[node name="Events" parent="CameraSystem" index="1"]
+visible = false
+
 [node name="CameraEvent" parent="CameraSystem/Events" index="0" instance=ExtResource( 15 )]
 position = Vector2( 2124, 288 )
 camera_new_zoom = Vector2( 2, 2 )

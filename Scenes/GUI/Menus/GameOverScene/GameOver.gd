@@ -38,6 +38,6 @@ func on_timer_timeout():
 		"MENU":
 			var _err = get_tree().change_scene(title_screen)
 		"RESTART":
-			GAME.goto_level()
+			GAME.goto_last_level()
 	
 	queue_free()

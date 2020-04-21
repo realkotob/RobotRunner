@@ -14,9 +14,7 @@ var players_array : Array
 var player_in_danger : bool = false
 var players_exited : int = 0
 
-
 signal level_finished
-
 
 func is_class(value: String) -> bool:
 	return value == CLASS
@@ -27,12 +25,7 @@ func get_class() -> String:
 
 func _ready():
 	var _err = connect("level_finished", GAME, "on_level_finished")
-	
-	# Set the current level to be this one (for debug purposes)
-	var current_level_index = find_string(GAME.current_chapter.levels_scenes_array, self.filename)
-
-	if GAME.progression.level != current_level_index:
-		GAME.progression.level = current_level_index
+	GAME.last_level_path = self.filename
 	
 	set_starting_points()
 	instanciate_players()
@@ -167,18 +160,3 @@ func instanciate_players():
 		players_array.append(player2_node)
 		
 		player2_node.setup()
-
-
-# Return the index of a given string in a given array
-# Return -1 if the string wasn't found
-func find_string(string_array: PoolStringArray, target_string : String):
-	var index = 0
-	for string in string_array:
-		if string == target_string:
-			break
-		else:
-			index += 1
-			if index == len(string_array):
-				index = -1
-	
-	return index

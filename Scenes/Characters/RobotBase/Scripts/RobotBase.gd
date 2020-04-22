@@ -81,6 +81,11 @@ func set_state(value : String):
 func overheat():
 	anim_player_node.play("Overheat")
 
+# Triggers the fadeOut animation
+# Called by the greatdoor when a player exit the level
+func fade_out():
+	anim_player_node.play("FadeOut")
+
 
 # Stops the overheat animation
 func stop_overheat():
@@ -93,6 +98,8 @@ func stop_overheat():
 func on_animation_finished(animation: String):
 	if animation == "Overheat":
 		destroy()
+	if animation == "Fadeout":
+		queue_free()
 
 
 func destroy():

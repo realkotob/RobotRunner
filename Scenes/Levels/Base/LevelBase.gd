@@ -36,10 +36,13 @@ func _process(_delta):
 
 
 func adapt_music():
+	var closest_player : Player = null
+	
 	if xion_cloud_node == null:
 		return
 	
-	var closest_player = get_closest_player(xion_cloud_node)
+	if len(players_array) > 1:
+		closest_player = get_closest_player(xion_cloud_node)
 	
 	if closest_player == null:
 		return

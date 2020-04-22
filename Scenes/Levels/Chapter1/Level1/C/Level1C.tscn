@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scenes/Levels/Base/LevelBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/InteractiveObjects/Liquids/Lava/Lava.tscn" type="PackedScene" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/ChildrenScenes/RedButton.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/InteractiveObjects/Platform/BreakablePlatform/2 Tiles/2TilesBreakablePlateform.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/InteractiveObjects/Platform/BreakablePlatform/3 Tiles/3TilesBreakablePlateform.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/Events/Checkpoint/Checkpoint.tscn" type="PackedScene" id=15]
 
 [node name="Level1C" instance=ExtResource( 1 )]
 
@@ -168,3 +169,35 @@ position = Vector2( 288, -636 )
 
 [node name="2TilesBreakablePlateform4" parent="InteractivesObjects/Platform/2 Tiles" index="6" instance=ExtResource( 13 )]
 position = Vector2( 792, -672 )
+
+[node name="Events" parent="." index="8"]
+visible = true
+
+[node name="Checkpoint" parent="Events/Checkpoints" index="0" instance=ExtResource( 15 )]
+position = Vector2( 468, 72 )
+
+[node name="TriggerArea" parent="Events/Checkpoints/Checkpoint" index="0"]
+position = Vector2( 12, 0 )
+scale = Vector2( 13.899, 7.241 )
+
+[node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint" index="1"]
+position = Vector2( 120, 48 )
+
+[node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint" index="2"]
+position = Vector2( -96, -48 )
+
+[node name="Checkpoint2" parent="Events/Checkpoints" index="1" instance=ExtResource( 15 )]
+position = Vector2( 516, -576 )
+
+[node name="TriggerArea" parent="Events/Checkpoints/Checkpoint2" index="0"]
+scale = Vector2( 10.774, 7.959 )
+
+[node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint2" index="1"]
+position = Vector2( 84, 12 )
+
+[node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint2" index="2"]
+position = Vector2( -84, 12 )
+
+[editable path="Events/Checkpoints/Checkpoint"]
+
+[editable path="Events/Checkpoints/Checkpoint2"]

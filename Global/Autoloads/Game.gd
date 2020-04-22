@@ -1,6 +1,7 @@
 extends Node2D
 
 onready var gameover_timer_node = $GameoverTimer
+onready var transition_timer_node = $TransitionTimer
 
 export var progression : Resource
 export var current_chapter : Resource
@@ -13,6 +14,7 @@ var last_level_path : String
 
 func _ready():
 	var _err = gameover_timer_node.connect("timeout",self, "on_gameover_timer_timeout")
+	_err = transition_timer_node.connect("timeout",self, "on_transition_timer_timeout")
 	level_array = current_chapter.load_levels()
 
 
@@ -27,6 +29,20 @@ func goto_last_level():
 	var last_level = load(last_level_path)
 	var _err = get_tree().change_scene_to(last_level)
 
+# Change scene to the next level scene
+# If the last level was not in the list, set the progression to -1
+# Which means the last level will be launched again
+func goto_next_level():
+	var last_level_index = find_string(current_chapter.levels_scenes_array, last_level_path)
+	
+	progression.level += 1
+	progression.checkpoint = 0
+	
+	if last_level_index == -1:
+		goto_last_level()
+	else:
+		goto_level(progression.level)
+
 
 # Triggers the timer before the gameover is triggered
 # Called when a player die
@@ -39,6 +55,10 @@ func gameover():
 func on_gameover_timer_timeout():
 	gameover_timer_node.stop()
 	var _err = get_tree().change_scene_to(MENUS.game_over_scene)
+
+
+func on_transition_timer_timeout():
+	goto_next_level()
 
 
 # Move the camera to the given position
@@ -68,19 +88,9 @@ func on_player_level_exited(body: Node):
 	get_tree().get_current_scene().on_player_exited(body)
 
 
-# Called when a level is finished, change scene to the next level scene
-# If the last level was not in the list, set the progression to -1
-# Which means the last level will be launched again
+# Called when a level is finished
 func on_level_finished():
-	var last_level_index = find_string(current_chapter.levels_scenes_array, last_level_path)
-	
-	progression.level += 1
-	progression.checkpoint = 0
-	
-	if last_level_index == -1:
-		goto_last_level()
-	else:
-		goto_level(progression.level)
+	transition_timer_node.start()
 
 
 # Return the index of a given string in a given array

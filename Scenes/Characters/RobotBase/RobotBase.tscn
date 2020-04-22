@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/RobotBase.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/Physic.gd" type="Script" id=2]
@@ -46,11 +46,6 @@ extents = Vector2( 15.53, 20 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
-"loop": false,
-"name": "Action",
-"speed": 20.0
-}, {
 "frames": [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ) ],
 "loop": true,
 "name": "Move",
@@ -60,6 +55,11 @@ animations = [ {
 "loop": true,
 "name": "Idle",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
+"loop": false,
+"name": "Action",
+"speed": 20.0
 }, {
 "frames": [ ExtResource( 22 ) ],
 "loop": true,
@@ -117,6 +117,21 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=8]
+resource_name = "FadeOut"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Animation:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=9]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Animation:modulate")
@@ -131,7 +146,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 0.992157, 0.705882, 1, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=10]
 length = 5.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Animation:modulate")
@@ -146,7 +161,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 18.2249, 20.9273 )
 
 [node name="Robot" type="KinematicBody2D"]
@@ -237,7 +252,6 @@ __meta__ = {
 [node name="Animation" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "Move"
-frame = 3
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -312,8 +326,9 @@ one_way_collision = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 1.5
 anims/Default = SubResource( 7 )
-anims/MagentaFlash = SubResource( 8 )
-anims/Overheat = SubResource( 9 )
+anims/FadeOut = SubResource( 8 )
+anims/MagentaFlash = SubResource( 9 )
+anims/Overheat = SubResource( 10 )
 
 [node name="SeeThourghWalls" type="Light2D" parent="."]
 light_mask = 0
@@ -334,4 +349,4 @@ collision_layer = 17
 collision_mask = 17
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="SeeThourghWalls/Area2D"]
-shape = SubResource( 10 )
+shape = SubResource( 11 )

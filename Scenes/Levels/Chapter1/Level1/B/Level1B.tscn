@@ -268,7 +268,8 @@ contacts_reported = 10
 can_sleep = false
 
 [node name="XionCloud" parent="." index="8" instance=ExtResource( 12 )]
-position = Vector2( -744, 324 )
+position = Vector2( -1032, 300 )
+speed = 45.0
 
 [node name="CloudPath" parent="XionCloud" index="4" instance=ExtResource( 11 )]
 visible = false

@@ -170,9 +170,6 @@ position = Vector2( 288, -636 )
 [node name="2TilesBreakablePlateform4" parent="InteractivesObjects/Platform/2 Tiles" index="6" instance=ExtResource( 13 )]
 position = Vector2( 792, -672 )
 
-[node name="Events" parent="." index="8"]
-visible = true
-
 [node name="Checkpoint" parent="Events/Checkpoints" index="0" instance=ExtResource( 15 )]
 position = Vector2( 468, 72 )
 

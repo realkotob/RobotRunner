@@ -117,7 +117,7 @@ func set_starting_points():
 	if current_checkpoint <= 0:
 		return
 	
-	var checkpoint_array = get_node("Checkpoints").get_children()
+	var checkpoint_array = get_node("Events/Checkpoints").get_children()
 	var starting_point_array = get_tree().get_nodes_in_group("StartingPoint")
 	
 	# Place the starting position based on the last checkpoint visited
@@ -128,9 +128,8 @@ func set_starting_points():
 	starting_point_array[1].set_global_position(new_starting_point2.global_position)
 	
 	# Disable every checkpoint before the current one (And also the current one)
-	for i in range(current_checkpoint):
-		var collision_shape = checkpoint_array[i].get_node("CollisionShape2D")
-		collision_shape.set_disabled(true)
+	for checkpoint in checkpoint_array:
+		checkpoint.set_disabled(true)
 
 
 # Intanciate the players inside the level

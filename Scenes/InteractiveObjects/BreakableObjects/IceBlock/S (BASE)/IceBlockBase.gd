@@ -28,8 +28,8 @@ func _ready():
 func destroy(_actor_destroying: Node = null):
 	awake_nearby_bodies()
 	audio_node.play()
-	set_mode(RigidBody2D.MODE_STATIC)
-	collision_shape_node.set_disabled(true)
+	call_deferred("set_mode", RigidBody2D.MODE_STATIC)
+	collision_shape_node.call_deferred("set_disabled", true)
 	$Particles2D.set_emitting(true)
 	SFX.scatter_sprite(self, nb_debris, explosion_impulse)
 	SFX.scatter_sprite(self, int(nb_debris / 6), explosion_impulse * 0.7)

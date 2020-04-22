@@ -39,10 +39,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://BaseClasses/BreakableSpriteBase.gd"
 }, {
-"base": "Area2D",
+"base": "Event",
 "class": "CameraEventBase",
 "language": "GDScript",
-"path": "res://Scenes/Camera/CameraEvents/CameraEvent.gd"
+"path": "res://Scenes/Events/CameraEvents/CameraEvent.gd"
 }, {
 "base": "Resource",
 "class": "ChapterBase",
@@ -68,6 +68,11 @@ _global_script_classes=[ {
 "class": "EarthBlock",
 "language": "GDScript",
 "path": "res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/S (base)/EarthBlockBase.gd"
+}, {
+"base": "Node2D",
+"class": "Event",
+"language": "GDScript",
+"path": "res://Scenes/Events/BaseScene/EventBase.gd"
 }, {
 "base": "Node2D",
 "class": "GroupBase",
@@ -144,6 +149,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://BaseClasses/StateMachine.gd"
 }, {
+"base": "Area2D",
+"class": "TriggerArea",
+"language": "GDScript",
+"path": "res://Scenes/Events/BaseScene/TriggerAreaBase.gd"
+}, {
 "base": "InteractAreaBase",
 "class": "Water",
 "language": "GDScript",
@@ -167,6 +177,7 @@ _global_script_class_icons={
 "Door": "",
 "DoorButton": "",
 "EarthBlock": "",
+"Event": "",
 "GroupBase": "",
 "IceBlock": "",
 "InputsBase": "",
@@ -182,6 +193,7 @@ _global_script_class_icons={
 "SFX_group_base": "",
 "StateBase": "",
 "StatesMachine": "",
+"TriggerArea": "",
 "Water": "",
 "XionCrate": ""
 }

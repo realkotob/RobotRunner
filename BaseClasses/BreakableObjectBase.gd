@@ -13,7 +13,6 @@ export (float, 10.0, 500.0) var explosion_impulse = 80.0
 export (float, 0.0, 1.0) var explosion_impulse_modifier = 0.7
 
 func _ready():
-	add_to_group("InteractivesObjects")
 	var _err = connect("sleeping_state_changed", self, "on_sleeping_state_changed")
 
 
@@ -32,15 +31,15 @@ func destroy(actor_destroying : Node = null):
 		audio_node.play()
 		
 	if sprite_node:
-		sprite_node.set_visible(false)
+		sprite_node.call_deferred("set_visible", false)
 	
 	if collision_shape_node:
-		collision_shape_node.set_disabled(true)
+		collision_shape_node.call_deferred("set_disabled", true)
 	
 	if particule_node:
 		particule_node.set_emitting(true)
 	
-	set_mode(RigidBody2D.MODE_STATIC)
+	call_deferred("set_mode", RigidBody2D.MODE_STATIC)
 	SFX.scatter_sprite(self, nb_debris, explosion_impulse)
 	SFX.scatter_sprite(self, int(nb_debris / 6), explosion_impulse * explosion_impulse_modifier)
 	

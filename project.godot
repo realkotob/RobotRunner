@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://BaseClasses/BreakableSpriteBase.gd"
 }, {
+"base": "Event",
+"class": "CameraEventBase",
+"language": "GDScript",
+"path": "res://Scenes/Events/CameraEvents/CameraEvent.gd"
+}, {
 "base": "Resource",
 "class": "ChapterBase",
 "language": "GDScript",
@@ -65,9 +70,19 @@ _global_script_classes=[ {
 "path": "res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/S (base)/EarthBlockBase.gd"
 }, {
 "base": "Node2D",
+"class": "Event",
+"language": "GDScript",
+"path": "res://Scenes/Events/BaseScene/EventBase.gd"
+}, {
+"base": "Node2D",
 "class": "GroupBase",
 "language": "GDScript",
 "path": "res://Scenes/InteractiveObjects/Buttons&Doors/GroupBase.gd"
+}, {
+"base": "LavaZone",
+"class": "GrowingLava",
+"language": "GDScript",
+"path": "res://Scenes/InteractiveObjects/Liquids/Lava/GrowingLava.gd"
 }, {
 "base": "BlockBase",
 "class": "IceBlock",
@@ -83,6 +98,11 @@ _global_script_classes=[ {
 "class": "InteractAreaBase",
 "language": "GDScript",
 "path": "res://BaseClasses/InteractAreaBase.gd"
+}, {
+"base": "Area2D",
+"class": "LavaZone",
+"language": "GDScript",
+"path": "res://Scenes/InteractiveObjects/Liquids/Lava/Lava.gd"
 }, {
 "base": "Node2D",
 "class": "Level",
@@ -139,6 +159,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://BaseClasses/StateMachine.gd"
 }, {
+"base": "Area2D",
+"class": "TriggerArea",
+"language": "GDScript",
+"path": "res://Scenes/Events/BaseScene/TriggerAreaBase.gd"
+}, {
 "base": "InteractAreaBase",
 "class": "Water",
 "language": "GDScript",
@@ -156,15 +181,19 @@ _global_script_class_icons={
 "BlockBase": "",
 "BreakableObjectBase": "",
 "BreakableSpriteBase": "",
+"CameraEventBase": "",
 "ChapterBase": "",
 "CollactableBase": "",
 "Door": "",
 "DoorButton": "",
 "EarthBlock": "",
+"Event": "",
 "GroupBase": "",
+"GrowingLava": "",
 "IceBlock": "",
 "InputsBase": "",
 "InteractAreaBase": "",
+"LavaZone": "",
 "Level": "",
 "MenuBase": "",
 "MenuOptionsBase": "",
@@ -176,6 +205,7 @@ _global_script_class_icons={
 "SFX_group_base": "",
 "StateBase": "",
 "StatesMachine": "",
+"TriggerArea": "",
 "Water": "",
 "XionCrate": ""
 }

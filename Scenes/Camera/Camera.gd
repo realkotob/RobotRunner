@@ -8,14 +8,28 @@ export var camera_speed : float = 3.0
 export var x_zoom_enabled : bool = true
 export var y_zoom_enabled : bool = true
 
+var destination_zoom := Vector2.ONE
+var zoom_speed : float = 0.02
+var current_zoom_speed : float = zoom_speed
+
 func _ready():
 	state_machine_node.setup()
 	set_state("Follow")
 
 
-func move_to(dest: Vector2, average_w_players : bool = false):
-	moveto_state_node.set_destination(dest)
+func _physics_process(_delta):
+	if zoom != destination_zoom:
+		_zoom_to(destination_zoom)
+	else:
+		current_zoom_speed = zoom_speed
+
+
+# Give the camera the order to move at the given position, and set it's state to move_to
+func move_to(dest: Vector2, average_w_players : bool = false, move_speed : float = -1.0):
+	moveto_state_node.destination = dest
 	moveto_state_node.average_w_players = average_w_players
+	if move_speed != -1.0:
+		moveto_state_node.current_speed = move_speed
 	state_machine_node.set_state("MoveTo")
 
 
@@ -23,9 +37,13 @@ func set_state(state_name: String):
 	state_machine_node.set_state(state_name)
 
 
+func set_destination_zoom(dest_zoom : Vector2):
+	destination_zoom = dest_zoom
+
+
 # Progressively zoom/dezoom
-func zoom_to(dest_zoom: Vector2):
-	zoom = zoom.linear_interpolate(dest_zoom, 0.02)
+func _zoom_to(dest_zoom: Vector2):
+	zoom = zoom.linear_interpolate(dest_zoom, current_zoom_speed)
 
 
 # Set the average_pos variable to be at the average of every players position

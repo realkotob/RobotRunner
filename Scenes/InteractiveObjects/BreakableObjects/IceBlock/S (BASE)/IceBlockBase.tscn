@@ -39,7 +39,6 @@ hue_variation_random = 0.51
 
 [node name="IceBlockBase" instance=ExtResource( 1 )]
 light_mask = 1024
-mode = 1
 angular_damp = 1.0
 script = ExtResource( 2 )
 
@@ -65,4 +64,3 @@ process_material = SubResource( 2 )
 
 [node name="CollisionShape2D" parent="AwakeArea" index="0"]
 position = Vector2( -0.113628, -14.6841 )
-disabled = false

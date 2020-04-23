@@ -4,5 +4,5 @@ func on_pressed():
 	if(get_tree().paused):
 		#Player Selection -> New Game
 		get_tree().paused = false
-		var _err = GAME.goto_level()
+		var _err = GAME.goto_last_level()
 

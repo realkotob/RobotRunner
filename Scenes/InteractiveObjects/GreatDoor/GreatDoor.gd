@@ -52,4 +52,4 @@ func on_area_body_entered(body : PhysicsBody2D):
 	if body != null:
 		if body.is_class("Player"):
 			emit_signal("player_exit_level", body)
-			body.queue_free()
+			body.fade_out()

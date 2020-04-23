@@ -9,7 +9,6 @@
 [ext_resource path="res://Scenes/GUI/Menus/PauseMenu/Leave.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/GUI/Menus/ScreenTitle/Options.gd" type="Script" id=8]
 
-
 [node name="PauseMenu" instance=ExtResource( 1 )]
 grow_horizontal = 2
 grow_vertical = 2
@@ -53,30 +52,30 @@ margin_bottom = 166.0
 mouse_filter = 2
 
 [node name="V_OptContainer" parent="HBoxContainer" index="0"]
-margin_left = 1.0
-margin_right = 173.0
+margin_left = 29.0
+margin_right = 145.0
 margin_bottom = 328.0
 mouse_filter = 2
 
 [node name="Resume" type="Button" parent="HBoxContainer/V_OptContainer" index="0"]
 margin_top = 13.0
-margin_right = 172.0
+margin_right = 116.0
 margin_bottom = 70.0
 custom_fonts/font = ExtResource( 3 )
 text = "Resume"
 script = ExtResource( 4 )
 
-[node name="New Game" type="Button" parent="HBoxContainer/V_OptContainer" index="1"]
+[node name="Retry" type="Button" parent="HBoxContainer/V_OptContainer" index="1"]
 margin_top = 74.0
-margin_right = 172.0
+margin_right = 116.0
 margin_bottom = 131.0
 custom_fonts/font = ExtResource( 3 )
-text = "New Game"
+text = "Retry"
 script = ExtResource( 5 )
 
 [node name="Options" type="Button" parent="HBoxContainer/V_OptContainer" index="2"]
 margin_top = 135.0
-margin_right = 172.0
+margin_right = 116.0
 margin_bottom = 192.0
 custom_fonts/font = ExtResource( 3 )
 text = "Options"
@@ -84,7 +83,7 @@ script = ExtResource( 8 )
 
 [node name="Menu" type="Button" parent="HBoxContainer/V_OptContainer" index="3"]
 margin_top = 196.0
-margin_right = 172.0
+margin_right = 116.0
 margin_bottom = 253.0
 custom_fonts/font = ExtResource( 3 )
 text = "Menu"
@@ -92,7 +91,7 @@ script = ExtResource( 6 )
 
 [node name="Leave" type="Button" parent="HBoxContainer/V_OptContainer" index="4"]
 margin_top = 257.0
-margin_right = 172.0
+margin_right = 116.0
 margin_bottom = 314.0
 custom_fonts/font = ExtResource( 3 )
 text = "Quit"

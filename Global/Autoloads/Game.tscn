@@ -11,3 +11,6 @@ current_chapter = ExtResource( 3 )
 
 [node name="GameoverTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="TransitionTimer" type="Timer" parent="."]
+one_shot = true

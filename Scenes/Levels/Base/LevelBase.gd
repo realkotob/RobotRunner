@@ -14,9 +14,7 @@ var players_array : Array
 var player_in_danger : bool = false
 var players_exited : int = 0
 
-
 signal level_finished
-
 
 func is_class(value: String) -> bool:
 	return value == CLASS
@@ -27,12 +25,7 @@ func get_class() -> String:
 
 func _ready():
 	var _err = connect("level_finished", GAME, "on_level_finished")
-	
-	# Set the current level to be this one (for debug purposes)
-	var current_level_index = find_string(GAME.current_chapter.levels_scenes_array, self.filename)
-
-	if GAME.progression.level != current_level_index:
-		GAME.progression.level = current_level_index
+	GAME.last_level_path = self.filename
 	
 	set_starting_points()
 	instanciate_players()
@@ -43,10 +36,13 @@ func _process(_delta):
 
 
 func adapt_music():
+	var closest_player : Player = null
+	
 	if xion_cloud_node == null:
 		return
 	
-	var closest_player = get_closest_player(xion_cloud_node)
+	if len(players_array) > 1:
+		closest_player = get_closest_player(xion_cloud_node)
 	
 	if closest_player == null:
 		return
@@ -124,9 +120,8 @@ func set_starting_points():
 	if current_checkpoint <= 0:
 		return
 	
-	var checkpoint_array = get_node("Checkpoints").get_children()
+	var checkpoint_array = get_node("Events/Checkpoints").get_children()
 	var starting_point_array = get_tree().get_nodes_in_group("StartingPoint")
-	
 	
 	# Place the starting position based on the last checkpoint visited
 	var new_starting_point1 = checkpoint_array[current_checkpoint - 1].get_node("NewStartingPoint1")
@@ -136,9 +131,8 @@ func set_starting_points():
 	starting_point_array[1].set_global_position(new_starting_point2.global_position)
 	
 	# Disable every checkpoint before the current one (And also the current one)
-	for i in range(current_checkpoint):
-		var collision_shape = checkpoint_array[i].get_node("CollisionShape2D")
-		collision_shape.set_disabled(true)
+	for checkpoint in checkpoint_array:
+		checkpoint.set_disabled(true)
 
 
 # Intanciate the players inside the level
@@ -168,24 +162,3 @@ func instanciate_players():
 		players_array.append(player2_node)
 		
 		player2_node.setup()
-
-	#### CHECK IF THIS IS STILL NECESARY? ####
-	# Give the references to the players node to every interactive objects needing it
-	var interactive_objects_array = get_tree().get_nodes_in_group("InteractivesObjects")
-	for inter_object in interactive_objects_array:
-		if inter_object.get("players_node_array") != null:
-			inter_object.players_node_array = get_tree().get_nodes_in_group("Players")
-
-
-# Return the index of a given string in a given array
-func find_string(string_array: PoolStringArray, target_string : String):
-	var index = 0
-	for string in string_array:
-		if string == target_string:
-			break
-		else:
-			index += 1
-			if index == len(string_array):
-				index = -1
-	
-	return index

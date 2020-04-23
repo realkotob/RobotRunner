@@ -15,23 +15,21 @@
 [ext_resource path="res://Scenes/InteractiveObjects/GreatDoor/GreatDoor.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/M/MIceBlock.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/S (BASE)/IceBlockBase.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Scenes/Checkpoint/Checkpoint.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/Events/Checkpoint/Checkpoint.tscn" type="PackedScene" id=16]
 
 [node name="Level1" instance=ExtResource( 5 )]
 
-[node name="CameraBorder" type="Node2D" parent="." index="0"]
-
-[node name="StartingPointP1" parent="." index="1" instance=ExtResource( 3 )]
+[node name="StartingPointP1" parent="." index="0" instance=ExtResource( 3 )]
 position = Vector2( 48, 144 )
 
-[node name="StartingPointP2" parent="." index="2" instance=ExtResource( 4 )]
+[node name="StartingPointP2" parent="." index="1" instance=ExtResource( 4 )]
 position = Vector2( 48, 408 )
 
 [node name="Popups" parent="GUI" index="0"]
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CameraSystem" parent="." index="5"]
+[node name="CameraSystem" parent="." index="4"]
 visible = true
 
 [node name="Camera" parent="CameraSystem" index="0"]
@@ -200,7 +198,7 @@ position = Vector2( 2952, 516 )
 [node name="RedButton3" parent="InteractivesObjects/GreatDoorGroup" index="3" instance=ExtResource( 8 )]
 position = Vector2( 2952, 516 )
 
-[node name="XionCloud" parent="." index="8" instance=ExtResource( 2 )]
+[node name="XionCloud" parent="." index="7" instance=ExtResource( 2 )]
 position = Vector2( -530, 266.5 )
 speed = 30.0
 time_before_moving = 5.0
@@ -209,16 +207,16 @@ time_before_moving = 5.0
 visible = false
 position = Vector2( 530, -266.5 )
 
-[node name="Checkpoint" parent="Checkpoints" index="0" instance=ExtResource( 16 )]
-position = Vector2( 1632, 204 )
+[node name="Checkpoint" parent="Events/Checkpoints" index="0" instance=ExtResource( 16 )]
+position = Vector2( 1536, 216 )
 
-[node name="CollisionShape2D" parent="Checkpoints/Checkpoint" index="0"]
-position = Vector2( -12, 0 )
+[node name="TriggerArea" parent="Events/Checkpoints/Checkpoint" index="0"]
+scale = Vector2( 2.205, 9.973 )
 
-[node name="NewStartingPoint1" parent="Checkpoints/Checkpoint" index="1"]
-position = Vector2( -180, 60 )
+[node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint" index="1"]
+position = Vector2( -168, 48 )
 
-[node name="NewStartingPoint2" parent="Checkpoints/Checkpoint" index="2"]
-position = Vector2( -240, 60 )
+[node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint" index="2"]
+position = Vector2( -96, 48 )
 
-[editable path="Checkpoints/Checkpoint"]
+[editable path="Events/Checkpoints/Checkpoint"]

@@ -1,21 +1,21 @@
 shader_type canvas_item;
 
-// Define the color of the water
+// Define the color of the liquid
 uniform vec4 water_tint : hint_color = vec4(0.0, 0.8, 1, 1);
 
-// Define the color of the surface of the water
+// Define the color of the surface of the liquid
 uniform vec4 surface_tint : hint_color = vec4(0.3, 0.93, 0.93, 1);
 
-// Define the scale of the water pool
-uniform vec2 sprite_scale = vec2(30, 0.5);
+// Define the scale of the liquid pool
+uniform vec2 sprite_scale = vec2(1, 1);
 
 // Define the amount of distortion
 uniform float distort_scale = 0.8;
 
-// Define the amount of recfration (the distortion of what is behind or under water)
+// Define the amount of recfration (the distortion of what is behind or under liquid)
 uniform float refraction_amount = 0.2;
 
-// Define the opacity of the water
+// Define the opacity of the liquid
 uniform float water_opacity = 0.2;
 
 // Returns a random number

@@ -205,13 +205,11 @@ __meta__ = {
 
 [node name="S" type="Node2D" parent="InteractivesObjects/IceBlocks"]
 __meta__ = {
-"_edit_group_": true,
 "_edit_lock_": true
 }
 
 [node name="M" type="Node2D" parent="InteractivesObjects/IceBlocks"]
 __meta__ = {
-"_edit_group_": true,
 "_edit_lock_": true
 }
 
@@ -223,13 +221,11 @@ __meta__ = {
 
 [node name="S" type="Node2D" parent="InteractivesObjects/EarthBlocks"]
 __meta__ = {
-"_edit_group_": true,
 "_edit_lock_": true
 }
 
 [node name="M" type="Node2D" parent="InteractivesObjects/EarthBlocks"]
 __meta__ = {
-"_edit_group_": true,
 "_edit_lock_": true
 }
 
@@ -282,6 +278,21 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="5 Tiles" type="Node2D" parent="InteractivesObjects/Platform"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="3 Tiles" type="Node2D" parent="InteractivesObjects/Platform"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="2 Tiles" type="Node2D" parent="InteractivesObjects/Platform"]
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="Music" type="Node" parent="."]
 script = ExtResource( 26 )
 
@@ -299,5 +310,23 @@ stream = ExtResource( 25 )
 volume_db = -80.0
 bus = "Music"
 
-[node name="Checkpoints" type="Node2D" parent="."]
+[node name="Events" type="Node2D" parent="."]
 visible = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Checkpoints" type="Node2D" parent="Events"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CameraEvents" type="Node2D" parent="Events"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LevelEvent" type="Node2D" parent="Events"]
+__meta__ = {
+"_edit_lock_": true
+}

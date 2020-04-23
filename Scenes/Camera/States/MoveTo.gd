@@ -5,15 +5,11 @@ extends StateBase
 # This state is called when you want to move the camera towards a destination
 # It will move progressivly using linear interpolation until it reaches it
 
-var destination := Vector2.ZERO setget set_destination, get_destination
+var destination := Vector2.ZERO 
+var zoom_destination := Vector2.ONE
 var average_w_players : bool = false
-
-func set_destination(value: Vector2):
-	destination = value
-
-func get_destination() -> Vector2:
-	return destination
-
+var move_speed : float = 0.1
+var current_speed : float = move_speed
 
 # If average_w_player is true, the camera compute the average position
 # Between itself and the players
@@ -27,6 +23,7 @@ func enter_state(_host):
 # Reset the bool value when leaving the state
 func exit_state(_host):
 	average_w_players = false
+	current_speed = move_speed
 
 
 # Move the camera to its destination until its arrived
@@ -38,6 +35,5 @@ func update(_host, _delta):
 
 # Move to the current destination, return true when it's arrived, false otherwise
 func move_to_destination():
-	owner.global_position = owner.global_position.linear_interpolate(destination, 0.1)
-	
+	owner.global_position = owner.global_position.linear_interpolate(destination, current_speed)
 	return owner.global_position == destination

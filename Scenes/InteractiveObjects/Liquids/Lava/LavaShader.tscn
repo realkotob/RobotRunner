@@ -8,5 +8,5 @@ noise = ExtResource( 2 )
 
 [node name="LavaShader" type="Sprite"]
 material = ExtResource( 1 )
-scale = Vector2( 1, 0.359375 )
+scale = Vector2( 1, 0.338 )
 texture = SubResource( 1 )

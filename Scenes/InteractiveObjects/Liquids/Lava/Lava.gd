@@ -1,5 +1,7 @@
 extends Area2D
 
+class_name LavaZone
+
 #### LAVA MAIN NODE ####
 
 ## USE: CHANGE THE SIZE OF THE POOL BY CHANGING THE SCALE OF THIS NODE ##

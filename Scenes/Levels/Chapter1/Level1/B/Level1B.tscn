@@ -176,11 +176,11 @@ position = Vector2( 1452, 564 )
 scale = Vector2( 0.621, 0.409 )
 
 [node name="Lava4" parent="InteractivesObjects/LavaTiles" index="3" instance=ExtResource( 2 )]
-position = Vector2( 1840, 180 )
-scale = Vector2( 0.316, 0.409 )
+position = Vector2( 1848, 180 )
+scale = Vector2( 0.316, 0.423 )
 
 [node name="Lava5" parent="InteractivesObjects/LavaTiles" index="4" instance=ExtResource( 2 )]
-position = Vector2( 2616, 624 )
+position = Vector2( 2616, 648 )
 scale = Vector2( 1.905, 1.295 )
 
 [node name="Lava6" parent="InteractivesObjects/LavaTiles" index="5" instance=ExtResource( 2 )]

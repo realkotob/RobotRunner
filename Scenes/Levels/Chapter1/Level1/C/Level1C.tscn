@@ -119,7 +119,8 @@ position = Vector2( 480, 504 )
 scale = Vector2( 3.21, 0.893 )
 
 [node name="LavaShader" parent="InteractivesObjects/LavaTiles/GrowingLava" index="0"]
-position = Vector2( 0, 0 )
+position = Vector2( 3.73831, -13.4379 )
+scale = Vector2( 1, 0.527 )
 
 [node name="Lava2" parent="InteractivesObjects/LavaTiles" index="1" instance=ExtResource( 2 )]
 position = Vector2( 492, 180 )

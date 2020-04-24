@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/XionTraveling.ogg-c017b924b48b0c90a320a93f9083033c.oggstr"
+
+[deps]
+
+source_file="res://Scenes/InteractiveObjects/Collactables/Audio/XionTraveling.ogg"
+dest_files=[ "res://.import/XionTraveling.ogg-c017b924b48b0c90a320a93f9083033c.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

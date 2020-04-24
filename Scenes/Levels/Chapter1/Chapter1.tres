@@ -1,7 +1,0 @@
-[gd_resource type="Resource" load_steps=2 format=2]
-
-[ext_resource path="res://BaseClasses/ChapterBase.gd" type="Script" id=2]
-
-[resource]
-script = ExtResource( 2 )
-levels_scenes_array = PoolStringArray( "res://Scenes/Levels/Chapter1/Level1/A/Level1A.tscn", "res://Scenes/Levels/Chapter1/Level1/B/Level1B.tscn", "res://Scenes/Levels/Chapter1/Level2/A/Level2A.tscn", "res://Scenes/Levels/Chapter1/Level2/B/Level2B.tscn", "res://Scenes/Levels/Chapter1/Level3/A/Level1A.tscn", "res://Scenes/Levels/Chapter1/Level3/B/Level2B.tscn", "res://Scenes/Levels/Chapter1/Level3/C/Level3C.tscn", "res://Scenes/Levels/Chapter1/Level3/D/Level4D.tscn", "res://Scenes/Levels/Chapter1/Level3/E/Level5E.tscn" )

@@ -2,8 +2,8 @@ extends Node
 
 class_name AutoloadBase
 
-var notification : bool = false
+var debug : bool = false
 
 func print_notification(notif : String):
-	if notification == true:
-		print(name + " : " + notif)
+	if debug == true:
+		print("AUTOLOAD " + name + " : " + notif)

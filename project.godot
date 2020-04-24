@@ -49,7 +49,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://BaseClasses/ChapterBase.gd"
 }, {
-"base": "KinematicBody2D",
+"base": "Area2D",
 "class": "CollactableBase",
 "language": "GDScript",
 "path": "res://Scenes/InteractiveObjects/Collactables/CollactableBase.gd"
@@ -225,9 +225,10 @@ default_bus_layout="res://Global/AudioBus/default_bus_layout.tres"
 
 SCORE="*res://Global/Score/Score.gd"
 SFX="*res://Global/Autoloads/SFX/SFX_Autoload.gd"
-MENUS="*res://Global/Autoloads/menus_autoload.gd"
-GAME="*res://Global/Autoloads/Game.tscn"
-COLLACTABLES="*res://Global/Autoloads/Collactables.gd"
+MENUS="*res://Global/Autoloads/Menus/menus_autoload.gd"
+GAME="*res://Global/Autoloads/Game/Game.tscn"
+COLLACTABLES="*res://Global/Autoloads/Collactables/Collactables.gd"
+CHAPTER_GEN="*res://Global/Autoloads/ChapterGeneration/ChapterGen.gd"
 
 [debug]
 

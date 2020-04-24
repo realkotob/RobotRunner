@@ -2,7 +2,7 @@ extends Resource
 
 class_name ChapterBase
 
-export var levels_scenes_array : PoolStringArray
+export var levels_scenes_array : Array
 
 func load_levels():
 	var levels_array : Array = []

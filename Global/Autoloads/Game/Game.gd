@@ -4,7 +4,9 @@ onready var gameover_timer_node = $GameoverTimer
 onready var transition_timer_node = $TransitionTimer
 
 export var progression : Resource
-export var current_chapter : Resource
+
+var chapters_array = []
+var current_chapter : Resource = null
 
 var player1 = preload("res://Scenes/Characters/RobotIce/RobotIce.tscn")
 var player2 = preload("res://Scenes/Characters/RobotHammer/RobotHammer.tscn")
@@ -15,6 +17,11 @@ var last_level_path : String
 func _ready():
 	var _err = gameover_timer_node.connect("timeout",self, "on_gameover_timer_timeout")
 	_err = transition_timer_node.connect("timeout",self, "on_transition_timer_timeout")
+
+
+func new_chapter():
+	progression.chapter += 1
+	current_chapter = chapters_array[progression.chapter]
 	level_array = current_chapter.load_levels()
 
 
@@ -28,6 +35,7 @@ func goto_level(index : int = 0):
 func goto_last_level():
 	var last_level = load(last_level_path)
 	var _err = get_tree().change_scene_to(last_level)
+
 
 # Change scene to the next level scene
 # If the last level was not in the list, set the progression to -1
@@ -57,10 +65,6 @@ func on_gameover_timer_timeout():
 	var _err = get_tree().change_scene_to(MENUS.game_over_scene)
 
 
-func on_transition_timer_timeout():
-	goto_next_level()
-
-
 # Move the camera to the given position
 func move_camera_to(dest: Vector2, average_w_players: bool = false, speed : float = -1.0):
 	var camera_node = get_tree().get_current_scene().find_node("Camera")
@@ -88,9 +92,13 @@ func on_player_level_exited(body: Node):
 	get_tree().get_current_scene().on_player_exited(body)
 
 
-# Called when a level is finished
+# Called when a level is finished: wait for the transition to be finished
 func on_level_finished():
 	transition_timer_node.start()
+
+# When the transition is finished, go to the next level
+func on_transition_timer_timeout():
+	goto_next_level()
 
 
 # Return the index of a given string in a given array

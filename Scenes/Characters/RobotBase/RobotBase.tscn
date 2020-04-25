@@ -1,9 +1,6 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/RobotBase.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/Characters/RobotBase/Scripts/Physic.gd" type="Script" id=2]
-[ext_resource path="res://Scenes/Characters/RobotBase/Scripts/Direction.gd" type="Script" id=3]
-[ext_resource path="res://Scenes/Characters/RobotBase/Scripts/Attributes.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/LayerChange.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Characters/RobotBase/Sounds/Teleport4.wav" type="AudioStream" id=6]
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/RobotStatesMachine.gd" type="Script" id=7]
@@ -179,17 +176,6 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Physic" type="Node" parent="."]
-script = ExtResource( 2 )
-
-[node name="Direction" type="Node" parent="."]
-script = ExtResource( 3 )
-
-[node name="Attributes" type="Node" parent="."]
-script = ExtResource( 4 )
-speed = 400
-jump_force = -500
-
 [node name="Inputs" type="Node" parent="."]
 
 [node name="LayerChange" type="Node2D" parent="."]
@@ -252,6 +238,7 @@ __meta__ = {
 [node name="Animation" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "Move"
+frame = 3
 playing = true
 __meta__ = {
 "_edit_lock_": true

@@ -4,9 +4,7 @@ class_name ActionBase
 
 ### ACTION STATE  ###
 
-var direction_node : Node
 var interact_able_array : Array
-var character_node : KinematicBody2D
 var inputs_node : Node
 
 export var animation_offset : Vector2
@@ -38,7 +36,7 @@ func update(_host, _delta):
 	if has_touch == false:
 		for body in bodies_in_hitbox:
 			if body.get_class() in breakable_type_array:
-				body.damage(character_node)
+				body.damage(owner)
 				# Keep track if at least one block has been touched
 				has_touch = true
 
@@ -79,7 +77,7 @@ func exit_state(_host):
 # When the animation is off, set the actor's state to Idle
 func on_animation_finished():
 	if state_node.current_state == self:
-		if character_node.is_on_floor():
+		if owner.is_on_floor():
 			state_node.set_state("Idle")
 		else:
 			state_node.set_state("Fall")
@@ -87,7 +85,7 @@ func on_animation_finished():
 
 # Apply the offset to the animation, and orient it the right way, depending of the direction the character is facing
 func offset_animation():
-	face_dir = direction_node.get_face_direction()
+	face_dir = owner.get_face_direction()
 	var current_anim_offset = animation_offset
 	current_anim_offset.x *= face_dir
 	if animation_node.get_offset() != current_anim_offset:
@@ -100,9 +98,9 @@ func _input(event):
 		if state_node.get_current_state() == self:
 			
 			if event.is_action_pressed(inputs_node.input_map["MoveLeft"]) or event.is_action_pressed(inputs_node.input_map["MoveRight"]):
-				if character_node.is_on_floor():
+				if owner.is_on_floor():
 					state_node.set_state("Move")
 			
 			elif event.is_action_pressed(inputs_node.input_map["Jump"]):
-				if character_node.is_on_floor():
+				if owner.is_on_floor():
 					state_node.set_state("Jump")

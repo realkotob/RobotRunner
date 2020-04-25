@@ -3,9 +3,6 @@ extends KinematicBody2D
 class_name Player
 
 # Store all the children references
-onready var attributes_node = get_node("Attributes")
-onready var physic_node = get_node("Physic")
-onready var direction_node = get_node("Direction")
 onready var inputs_node = get_node("Inputs")
 onready var layer_change_node = get_node("LayerChange")
 onready var states_node = get_node("States")
@@ -14,46 +11,61 @@ onready var hit_box_node = get_node("HitBox")
 onready var SFX_node = get_node("SFX")
 onready var anim_player_node = get_node("AnimationPlayer")
 
+export (int, 0, 200) var push = 2
+export var speed : int setget set_speed, get_speed
+export var jump_force : int setget set_jump_force, get_jump_force
+
+const GRAVITY : int = 30
+const MAX_SPEED = 500
+
+var velocity : Vector2 setget set_velocity, get_velocity
+var dirLeft : int = 0 
+var dirRight : int = 0
+
 var level_node : Node
 
-# Get every children of this node
-onready var children_array : Array = get_children()
-
-# Class accesors
+#### ACCESSORS ####
 func is_class(value: String):
 	return value == "Player"
 
 func get_class() -> String:
 	return "Player"
 
+func set_speed(value : int):
+	speed = value
+
+func get_speed() -> int:
+	return speed
+
+func set_velocity(value : Vector2):
+	velocity = value
+
+func get_velocity() -> Vector2:
+	return velocity
+
+func set_jump_force(value : int):
+	jump_force = value
+
+func get_jump_force() -> int:
+	return jump_force
+
+func set_state(value : String):
+	states_node.set_state(value)
+
 
 func _ready():
 	var _err = anim_player_node.connect("animation_finished", self, "on_animation_finished")
 	add_to_group("Players")
 
-# Give every reference they need to children nodes, and then call heir setup method if it possesses it
+
+# Give every reference they need to children nodes, and then call their setup method if it possesses it
 func setup():
-	for child in children_array:
-		if "character_node" in child:
-			child.character_node = self
-		
-		if "attributes_node" in child:
-			child.attributes_node = attributes_node
-		
-		if "physic_node" in child:
-			child.physic_node = physic_node
-		
-		if "direction_node" in child:
-			child.direction_node = direction_node
-		
+	for child in get_children():
 		if "inputs_node" in child:
 			child.inputs_node = inputs_node
 		
 		if "layer_change_node" in child:
 			child.layer_change_node = layer_change_node
-		
-		if "states_node" in child:
-			child.states_node = states_node
 		
 		if "animation_node" in child:
 			child.animation_node = animation_node
@@ -68,18 +80,71 @@ func setup():
 			child.setup()
 
 
-func on_xion_received():
-	anim_player_node.play("MagentaFlash")
+#### PHYSIC BEHAVIOUR ####
+
+func _physics_process(_delta):
+	var dir = get_move_direction()
+	
+	# Compute velocity
+	velocity.x = dir * speed
+	
+	# Flip the sprite in the right direction
+	if abs(velocity.x) > 10.0:
+		flip_hit_box()
+	
+	# Apply movement
+	velocity.y += GRAVITY
+	velocity = move_and_slide(velocity, Vector2.UP, false, 4, PI/4, false)
+	
+	# Apply force to bodies it hit
+	for index in get_slide_count():
+		var collision = get_slide_collision(index)
+		if collision.collider.is_in_group("MovableBodies"):
+			collision.collider.apply_central_impulse(-collision.normal * push)
 
 
-func set_state(value : String):
-	states_node.set_state(value)
+#### INPUT RESPONSES ####
+
+func _input(event):
+	if event.is_action_pressed(inputs_node.input_map["MoveLeft"]):
+		dirLeft = 1
+	
+	elif event.is_action_released(inputs_node.input_map["MoveLeft"]):
+		dirLeft = 0
+	
+	elif event.is_action_pressed(inputs_node.input_map["MoveRight"]):
+		dirRight = 1
+	
+	elif event.is_action_released(inputs_node.input_map["MoveRight"]):
+		dirRight = 0
+
+
+#### BEHAVIOUR RELATED FUNCTIONS ####
+
+# Returns the direction of the robot
+func get_move_direction() -> int:
+	return dirRight - dirLeft
+
+
+# Returns the direction of the robot
+func get_face_direction() -> int:
+	if animation_node.is_flipped_h():
+		return -1
+	else:
+		return 1
+
+
+# Flip the hit box shape
+func flip_hit_box():
+	var hit_box_shape_x_pos = hit_box_node.get_child(0).position.x
+	hit_box_node.get_child(0).position.x = abs(hit_box_shape_x_pos) * get_face_direction()
 
 
 # Triggers the overheat animation
 # Called by the cloud when a player enters it
 func overheat():
 	anim_player_node.play("Overheat")
+
 
 # Triggers the fadeOut animation
 # Called by the greatdoor when a player exit the level
@@ -94,14 +159,8 @@ func stop_overheat():
 		anim_player_node.play("Default")
 
 
-# Triggers the explosion and the destruction of the robot
-func on_animation_finished(animation: String):
-	if animation == "Overheat":
-		destroy()
-	if animation == "Fadeout":
-		queue_free()
-
-
+# Called when the robot is destroyed, triggers the death animation, the gameover,
+# and destroy this instance
 func destroy():
 	var explosion = SFX.normal_explosion.instance()
 	explosion.set_global_position(global_position)
@@ -109,3 +168,16 @@ func destroy():
 	explosion.play_animation()
 	GAME.gameover()
 	queue_free()
+
+
+#### SIGNALS RESPONSES ####
+
+# Triggers the explosion and the destruction of the robot
+func on_animation_finished(animation: String):
+	if animation == "Overheat":
+		destroy()
+	if animation == "Fadeout":
+		queue_free()
+
+func on_xion_received():
+	anim_player_node.play("MagentaFlash")

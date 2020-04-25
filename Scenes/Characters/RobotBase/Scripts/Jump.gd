@@ -4,9 +4,7 @@ signal layer_change
 
 ### JUMP STATE ###
 
-var character_node : KinematicBody2D
 var layer_change_node : Node
-var attributes_node : Node
 var SFX_node : Node
 var inputs_node : Node
 
@@ -15,19 +13,19 @@ func setup():
 	_err = connect("layer_change", layer_change_node, "on_layer_change")
 
 func update(_host, _delta):
-	if character_node.is_on_floor():
+	if owner.is_on_floor():
 		return "Idle"
-	elif attributes_node.velocity.y > 0:
+	elif owner.velocity.y > 0:
 		return "Fall"
 
 func enter_state(_host):
 	animation_node.play(self.name)
 	
 	# Genreate the jump dust
-	SFX_node.play_SFX("JumpDust", true, character_node.global_position)
+	SFX_node.play_SFX("JumpDust", true, owner.global_position)
 	
 	# Apply the jump force
-	attributes_node.velocity.y = attributes_node.jump_force
+	owner.velocity.y = owner.jump_force
 
 
 func exit_state(_host):

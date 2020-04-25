@@ -5,7 +5,7 @@ onready var particules_nodes_array = get_children()
 func _ready():
 	set_play(false)
 
-# Play the fx in the right direction
+# Play the FX in the right direction
 func set_fx_direction(direction : int):
 	if direction != 0:
 		for node in particules_nodes_array:

@@ -17,11 +17,6 @@ extents = Vector2( 12, 22 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 9 ), ExtResource( 10 ) ],
-"loop": false,
-"name": "Action",
-"speed": 10.0
-}, {
 "frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
 "loop": true,
 "name": "Move",
@@ -31,6 +26,11 @@ animations = [ {
 "loop": true,
 "name": "Idle",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 10 ) ],
+"loop": false,
+"name": "Action",
+"speed": 10.0
 }, {
 "frames": [ ExtResource( 11 ) ],
 "loop": true,
@@ -52,7 +52,7 @@ extents = Vector2( 23.2417, 30 )
 position = Vector2( 0, 2 )
 shape = SubResource( 1 )
 
-[node name="Inputs" parent="." index="4"]
+[node name="Inputs" parent="." index="1"]
 script = ExtResource( 2 )
 
 [node name="Action" parent="States" index="4"]
@@ -63,7 +63,7 @@ breakable_type_array = PoolStringArray( "XionCrate", "EarthBlock" )
 stream = ExtResource( 3 )
 volume_db = -18.0
 
-[node name="Animation" parent="." index="7"]
+[node name="Animation" parent="." index="4"]
 frames = SubResource( 2 )
 animation = "Idle"
 frame = 0
@@ -81,6 +81,6 @@ position = Vector2( -28.0917, 21.0747 )
 position = Vector2( 25.6572, 1.04674 )
 shape = SubResource( 3 )
 
-[node name="SeeThourghWalls" parent="." index="12"]
+[node name="SeeThourghWalls" parent="." index="9"]
 light_mask = 16
 z_index = 511

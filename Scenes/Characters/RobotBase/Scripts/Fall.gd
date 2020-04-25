@@ -4,7 +4,6 @@ signal layer_change
 
 ### FALL STATE ###
 
-var character_node : KinematicBody2D
 var layer_change_node : Node
 var inputs_node : Node
 
@@ -20,7 +19,7 @@ func setup():
 
 
 func update(_host, _delta):
-	if character_node.is_on_floor():
+	if owner.is_on_floor():
 		return "Idle"
 
 

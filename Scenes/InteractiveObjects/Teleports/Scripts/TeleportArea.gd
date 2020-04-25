@@ -27,8 +27,8 @@ func _ready():
 
 # Whenever a character enters the area of this teleport, this method gives him the referecence to this node
 func on_body_entered(body):
-	if body.is_class("Player") and body.get_node("LayerChange").teleport_node != self:
-		body.get_node("LayerChange").teleport_node = self
+	if body.is_class("Player") and body.teleport_node != self:
+		body.teleport_node = self
 		player_already_on_teleportarea = true
 
 
@@ -45,7 +45,7 @@ func on_body_exited(body):
 		
 		# If he left, set his teleport_node value to null
 		if is_colliding == false:
-			body.get_node("LayerChange").teleport_node = null
+			body.teleport_node = null
 			player_already_on_teleportarea = false
 
 

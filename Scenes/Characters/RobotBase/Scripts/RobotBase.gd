@@ -183,5 +183,5 @@ func on_xion_received():
 # If the player is on a teleport point and enter layer change, teleport him to the assigned teleport destiation
 func on_layer_change():
 	if teleport_node != null:
-		teleport_node.teleport_layer(owner)
+		teleport_node.teleport_layer(self)
 		$LayerChangeAudio.play()

@@ -4,16 +4,14 @@ class_name Player
 
 # Store all the children references
 onready var inputs_node = get_node("Inputs")
-onready var layer_change_node = get_node("LayerChange")
-onready var states_node = get_node("States")
 onready var animation_node = get_node("Animation")
-onready var hit_box_node = get_node("HitBox")
+onready var action_hitbox_node = get_node("ActionHitBox")
 onready var SFX_node = get_node("SFX")
 onready var anim_player_node = get_node("AnimationPlayer")
 
 export (int, 0, 200) var push = 2
-export var speed : int setget set_speed, get_speed
-export var jump_force : int setget set_jump_force, get_jump_force
+export var speed : int = 400 setget set_speed, get_speed
+export var jump_force : int = -500 setget set_jump_force, get_jump_force
 
 const GRAVITY : int = 30
 const MAX_SPEED = 500
@@ -22,6 +20,7 @@ var velocity : Vector2 setget set_velocity, get_velocity
 var dirLeft : int = 0 
 var dirRight : int = 0
 
+var teleport_node : Area2D = null
 var level_node : Node
 
 #### ACCESSORS ####
@@ -50,7 +49,7 @@ func get_jump_force() -> int:
 	return jump_force
 
 func set_state(value : String):
-	states_node.set_state(value)
+	$States.set_state(value)
 
 
 func _ready():
@@ -64,14 +63,11 @@ func setup():
 		if "inputs_node" in child:
 			child.inputs_node = inputs_node
 		
-		if "layer_change_node" in child:
-			child.layer_change_node = layer_change_node
-		
 		if "animation_node" in child:
 			child.animation_node = animation_node
 		
-		if "hit_box_node" in child:
-			child.hit_box_node = hit_box_node
+		if "action_hitbox_node" in child:
+			child.action_hitbox_node = action_hitbox_node
 		
 		if "SFX_node" in child:
 			child.SFX_node = SFX_node
@@ -88,8 +84,10 @@ func _physics_process(_delta):
 	# Compute velocity
 	velocity.x = dir * speed
 	
-	# Flip the sprite in the right direction
-	if abs(velocity.x) > 10.0:
+	# Flip the character in the right direction
+	if abs(velocity.x) > 0.0:
+		var is_looking_left = get_move_direction() == -1
+		animation_node.set_flip_h(is_looking_left)
 		flip_hit_box()
 	
 	# Apply movement
@@ -136,8 +134,8 @@ func get_face_direction() -> int:
 
 # Flip the hit box shape
 func flip_hit_box():
-	var hit_box_shape_x_pos = hit_box_node.get_child(0).position.x
-	hit_box_node.get_child(0).position.x = abs(hit_box_shape_x_pos) * get_face_direction()
+	var hit_box_shape_x_pos = action_hitbox_node.get_child(0).position.x
+	action_hitbox_node.get_child(0).position.x = abs(hit_box_shape_x_pos) * get_face_direction()
 
 
 # Triggers the overheat animation
@@ -181,3 +179,9 @@ func on_animation_finished(animation: String):
 
 func on_xion_received():
 	anim_player_node.play("MagentaFlash")
+
+# If the player is on a teleport point and enter layer change, teleport him to the assigned teleport destiation
+func on_layer_change():
+	if teleport_node != null:
+		teleport_node.teleport_layer(owner)
+		$LayerChangeAudio.play()

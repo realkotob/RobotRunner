@@ -4,14 +4,13 @@ signal layer_change
 
 ### IDLE STATE ###
 
-var layer_change_node : Node
 var SFX_node : Node
 var inputs_node : Node
 
 # Setup method
 func setup():
 	var _err
-	_err = connect("layer_change", layer_change_node, "on_layer_change")
+	_err = connect("layer_change", owner, "on_layer_change")
 
 
 # Check if the character is falling, before it triggers fall state

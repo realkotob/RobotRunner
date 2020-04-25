@@ -14,7 +14,7 @@ var fall_timer_init_value : float
 func setup():
 	var _err
 	_err = fall_timer_node.connect("timeout", self, "on_fall_timer_timeout")
-	_err = connect("layer_change", layer_change_node, "on_layer_change")
+	_err = connect("layer_change", owner, "on_layer_change")
 	fall_timer_init_value = fall_timer_node.get_wait_time()
 
 

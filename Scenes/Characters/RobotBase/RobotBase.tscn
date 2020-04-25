@@ -1,7 +1,6 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/RobotBase.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/Characters/RobotBase/Scripts/LayerChange.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Characters/RobotBase/Sounds/Teleport4.wav" type="AudioStream" id=6]
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/RobotStatesMachine.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/Idle.gd" type="Script" id=8]
@@ -178,17 +177,6 @@ __meta__ = {
 
 [node name="Inputs" type="Node" parent="."]
 
-[node name="LayerChange" type="Node2D" parent="."]
-script = ExtResource( 5 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="LayerChange"]
-stream = ExtResource( 6 )
-volume_db = -12.0
-pitch_scale = 2.5
-
 [node name="States" type="Node2D" parent="."]
 z_index = 999
 z_as_relative = false
@@ -238,7 +226,7 @@ __meta__ = {
 [node name="Animation" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "Move"
-frame = 3
+frame = 1
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -285,14 +273,14 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="HitBox" type="Area2D" parent="."]
+[node name="ActionHitBox" type="Area2D" parent="."]
 space_override = 1
 linear_damp = 0.0
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionHitBox"]
 position = Vector2( 30, -6 )
 shape = SubResource( 5 )
 __meta__ = {
@@ -337,3 +325,8 @@ collision_mask = 17
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="SeeThourghWalls/Area2D"]
 shape = SubResource( 11 )
+
+[node name="LayerChangeAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+volume_db = -12.0
+pitch_scale = 2.5

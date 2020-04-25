@@ -13,7 +13,7 @@ export var interactables : PoolStringArray
 
 var bodies_in_hitbox : Array
 
-var hit_box_node : Area2D
+var action_hitbox_node : Area2D
 var hit_box_shape : Node
 var face_dir : int
 
@@ -24,7 +24,7 @@ onready var audio_node = get_node("AudioStreamPlayer")
 # Setup, called by the parent when it is ready
 func setup():
 	var _err = animation_node.connect("animation_finished", self, "on_animation_finished")
-	hit_box_shape = hit_box_node.get_child(0)
+	hit_box_shape = action_hitbox_node.get_child(0)
 
 
 # Aplly the offset of the animation every thick
@@ -32,7 +32,7 @@ func update(_host, _delta):
 	offset_animation()
 	
 	# Destroy a block if it is in the hitbox area, and if his type correspond to the current robot breakable type
-	bodies_in_hitbox = hit_box_node.get_overlapping_bodies()
+	bodies_in_hitbox = action_hitbox_node.get_overlapping_bodies()
 	if has_touch == false:
 		for body in bodies_in_hitbox:
 			if body.get_class() in breakable_type_array:
@@ -59,7 +59,7 @@ func exit_state(_host):
 	animation_node.set_offset(Vector2(0, 0))
 	
 	# Get every area in the hitbox area
-	var interact_areas = hit_box_node.get_overlapping_areas()
+	var interact_areas = action_hitbox_node.get_overlapping_areas()
 	
 	# Check if one on the areas in the hitbox area is an interative one, and interact with it if it is
 	# Also verify if no block were broke in this use of the action state

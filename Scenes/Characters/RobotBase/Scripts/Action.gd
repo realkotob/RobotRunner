@@ -4,9 +4,7 @@ class_name ActionBase
 
 ### ACTION STATE  ###
 
-var direction_node : Node
 var interact_able_array : Array
-var character_node : KinematicBody2D
 var inputs_node : Node
 
 export var animation_offset : Vector2
@@ -15,7 +13,7 @@ export var interactables : PoolStringArray
 
 var bodies_in_hitbox : Array
 
-var hit_box_node : Area2D
+var action_hitbox_node : Area2D
 var hit_box_shape : Node
 var face_dir : int
 
@@ -26,7 +24,7 @@ onready var audio_node = get_node("AudioStreamPlayer")
 # Setup, called by the parent when it is ready
 func setup():
 	var _err = animation_node.connect("animation_finished", self, "on_animation_finished")
-	hit_box_shape = hit_box_node.get_child(0)
+	hit_box_shape = action_hitbox_node.get_child(0)
 
 
 # Aplly the offset of the animation every thick
@@ -34,11 +32,11 @@ func update(_host, _delta):
 	offset_animation()
 	
 	# Destroy a block if it is in the hitbox area, and if his type correspond to the current robot breakable type
-	bodies_in_hitbox = hit_box_node.get_overlapping_bodies()
+	bodies_in_hitbox = action_hitbox_node.get_overlapping_bodies()
 	if has_touch == false:
 		for body in bodies_in_hitbox:
 			if body.get_class() in breakable_type_array:
-				body.damage(character_node)
+				body.damage(owner)
 				# Keep track if at least one block has been touched
 				has_touch = true
 
@@ -61,7 +59,7 @@ func exit_state(_host):
 	animation_node.set_offset(Vector2(0, 0))
 	
 	# Get every area in the hitbox area
-	var interact_areas = hit_box_node.get_overlapping_areas()
+	var interact_areas = action_hitbox_node.get_overlapping_areas()
 	
 	# Check if one on the areas in the hitbox area is an interative one, and interact with it if it is
 	# Also verify if no block were broke in this use of the action state
@@ -79,7 +77,7 @@ func exit_state(_host):
 # When the animation is off, set the actor's state to Idle
 func on_animation_finished():
 	if state_node.current_state == self:
-		if character_node.is_on_floor():
+		if owner.is_on_floor():
 			state_node.set_state("Idle")
 		else:
 			state_node.set_state("Fall")
@@ -87,7 +85,7 @@ func on_animation_finished():
 
 # Apply the offset to the animation, and orient it the right way, depending of the direction the character is facing
 func offset_animation():
-	face_dir = direction_node.get_face_direction()
+	face_dir = owner.get_face_direction()
 	var current_anim_offset = animation_offset
 	current_anim_offset.x *= face_dir
 	if animation_node.get_offset() != current_anim_offset:
@@ -100,9 +98,9 @@ func _input(event):
 		if state_node.get_current_state() == self:
 			
 			if event.is_action_pressed(inputs_node.input_map["MoveLeft"]) or event.is_action_pressed(inputs_node.input_map["MoveRight"]):
-				if character_node.is_on_floor():
+				if owner.is_on_floor():
 					state_node.set_state("Move")
 			
 			elif event.is_action_pressed(inputs_node.input_map["Jump"]):
-				if character_node.is_on_floor():
+				if owner.is_on_floor():
 					state_node.set_state("Jump")

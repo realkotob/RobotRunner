@@ -4,25 +4,23 @@ signal layer_change
 
 ### IDLE STATE ###
 
-var layer_change_node : Node
-var character_node : KinematicBody2D
 var SFX_node : Node
 var inputs_node : Node
 
 # Setup method
 func setup():
 	var _err
-	_err = connect("layer_change", layer_change_node, "on_layer_change")
+	_err = connect("layer_change", owner, "on_layer_change")
 
 
 # Check if the character is falling, before it triggers fall state
 func update(_host, _delta):
-	if !character_node.is_on_floor():
+	if !owner.is_on_floor():
 		return "Fall"
 	
 	
 	# Chage state to move if the player is moving horizontaly
-	var horiz_movement = character_node.get_node("Attributes").get_velocity().x
+	var horiz_movement = owner.get_velocity().x
 	if abs(horiz_movement) > 0.0 :
 		state_node.set_state("Move")
 

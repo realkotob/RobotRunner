@@ -4,7 +4,6 @@ signal layer_change
 
 ### FALL STATE ###
 
-var character_node : KinematicBody2D
 var layer_change_node : Node
 var inputs_node : Node
 
@@ -15,12 +14,12 @@ var fall_timer_init_value : float
 func setup():
 	var _err
 	_err = fall_timer_node.connect("timeout", self, "on_fall_timer_timeout")
-	_err = connect("layer_change", layer_change_node, "on_layer_change")
+	_err = connect("layer_change", owner, "on_layer_change")
 	fall_timer_init_value = fall_timer_node.get_wait_time()
 
 
 func update(_host, _delta):
-	if character_node.is_on_floor():
+	if owner.is_on_floor():
 		return "Idle"
 
 

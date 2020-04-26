@@ -32,7 +32,6 @@ func setup():
 	_err = animation_node.connect("frame_changed", self, "on_frame_change")
 	_err = animation_node.connect("animation_finished", self, "on_animation_finished")
 
-
 # Play the animation when a player touch the button
 func on_body_entered(body):
 	if body.is_class("Player"):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Scenes/Levels/Base/LevelBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/StartingPoints/StartingPointP1.tscn" type="PackedScene" id=2]
@@ -17,6 +17,10 @@
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Door/ChildrenScenes/GreenDoor.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/M/MEarthBlock.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/M/MIceBlock.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scenes/Events/Checkpoint/NewStartingPoint1.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Scenes/Events/BaseScene/TriggerAreaBase.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Scenes/Events/Checkpoint/NewStartingPoint2.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Scenes/Events/Checkpoint/Checkpoint.gd" type="Script" id=21]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 255.161, 74 )
@@ -269,19 +273,13 @@ position = Vector2( 2064, 960 )
 [node name="M_IceBlock21" parent="InteractivesObjects/IceBlocks/M" index="22" instance=ExtResource( 17 )]
 position = Vector2( 2112, 960 )
 
-[node name="M_IceBlock24" parent="InteractivesObjects/IceBlocks/M" index="23" instance=ExtResource( 17 )]
-position = Vector2( 2328, 1488 )
-
-[node name="M_IceBlock25" parent="InteractivesObjects/IceBlocks/M" index="24" instance=ExtResource( 17 )]
-position = Vector2( 2384, 1488 )
-
-[node name="M_IceBlock26" parent="InteractivesObjects/IceBlocks/M" index="25" instance=ExtResource( 17 )]
+[node name="M_IceBlock26" parent="InteractivesObjects/IceBlocks/M" index="23" instance=ExtResource( 17 )]
 position = Vector2( 2896, 72 )
 
-[node name="M_IceBlock27" parent="InteractivesObjects/IceBlocks/M" index="26" instance=ExtResource( 17 )]
+[node name="M_IceBlock27" parent="InteractivesObjects/IceBlocks/M" index="24" instance=ExtResource( 17 )]
 position = Vector2( 2944, 72 )
 
-[node name="M_IceBlock28" parent="InteractivesObjects/IceBlocks/M" index="27" instance=ExtResource( 17 )]
+[node name="M_IceBlock28" parent="InteractivesObjects/IceBlocks/M" index="25" instance=ExtResource( 17 )]
 position = Vector2( 3080, 144 )
 
 [node name="M_EarthBlock" parent="InteractivesObjects/EarthBlocks/M" index="0" instance=ExtResource( 16 )]
@@ -369,7 +367,7 @@ position = Vector2( 3536, 360 )
 position = Vector2( 3536, 312 )
 
 [node name="Lava" parent="InteractivesObjects/LavaTiles" index="0" instance=ExtResource( 9 )]
-position = Vector2( 2320, 664 )
+position = Vector2( 2320, 665 )
 scale = Vector2( 0.187, 0.194982 )
 
 [node name="Lava2" parent="InteractivesObjects/LavaTiles" index="1" instance=ExtResource( 9 )]
@@ -377,11 +375,11 @@ position = Vector2( 2436, 855 )
 scale = Vector2( 0.147, 0.18 )
 
 [node name="Lava3" parent="InteractivesObjects/LavaTiles" index="2" instance=ExtResource( 9 )]
-position = Vector2( 2316, 1010 )
+position = Vector2( 2316, 1011 )
 scale = Vector2( 0.147, 0.25 )
 
 [node name="Lava4" parent="InteractivesObjects/LavaTiles" index="3" instance=ExtResource( 9 )]
-position = Vector2( 2344, 1392 )
+position = Vector2( 2344, 1395 )
 scale = Vector2( 0.25, 0.25 )
 
 [node name="Lava5" parent="InteractivesObjects/LavaTiles" index="4" instance=ExtResource( 9 )]
@@ -393,7 +391,7 @@ position = Vector2( 2449, 1236 )
 scale = Vector2( 0.1, 0.14 )
 
 [node name="Lava7" parent="InteractivesObjects/LavaTiles" index="6" instance=ExtResource( 9 )]
-position = Vector2( 2856, 1112 )
+position = Vector2( 2856, 1113 )
 scale = Vector2( 0.1, 0.45998 )
 
 [node name="Lava8" parent="InteractivesObjects/LavaTiles" index="7" instance=ExtResource( 9 )]
@@ -405,7 +403,7 @@ position = Vector2( 3384, 232 )
 scale = Vector2( 0.104176, 0.162208 )
 
 [node name="Lava10" parent="InteractivesObjects/LavaTiles" index="9" instance=ExtResource( 9 )]
-position = Vector2( 1488, 562 )
+position = Vector2( 1488, 563 )
 scale = Vector2( 0.464186, 0.442208 )
 
 [node name="Lava11" parent="InteractivesObjects/LavaTiles" index="10" instance=ExtResource( 9 )]
@@ -774,6 +772,41 @@ position = Vector2( 3624, 420 )
 
 [node name="GreatDoor" parent="InteractivesObjects/GreatDoorGroup" index="6" instance=ExtResource( 13 )]
 position = Vector2( 3792, 168 )
+
+[node name="Events" parent="." index="8"]
+visible = true
+
+[node name="Checkpoint1" type="Node2D" parent="Events/Checkpoints" index="0"]
+script = ExtResource( 21 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="TriggerArea" parent="Events/Checkpoints/Checkpoint1" index="0" instance=ExtResource( 19 )]
+position = Vector2( 2320, 392 )
+scale = Vector2( 15, 15 )
+
+[node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint1" index="1" instance=ExtResource( 18 )]
+position = Vector2( 2432, 336 )
+
+[node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint1" index="2" instance=ExtResource( 20 )]
+position = Vector2( 2312, 336 )
+
+[node name="Checkpoint2" type="Node2D" parent="Events/Checkpoints" index="1"]
+script = ExtResource( 21 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="TriggerArea" parent="Events/Checkpoints/Checkpoint2" index="0" instance=ExtResource( 19 )]
+position = Vector2( 2408, 1480 )
+scale = Vector2( 12.76, 3.8 )
+
+[node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint2" index="1" instance=ExtResource( 18 )]
+position = Vector2( 2736, 1488 )
+
+[node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint2" index="2" instance=ExtResource( 20 )]
+position = Vector2( 2800, 1488 )
 
 [editable path="InteractivesObjects/XionLiquid/Liquid"]
 

@@ -17,6 +17,11 @@ extents = Vector2( 12, 22 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
+"frames": [ ExtResource( 9 ), ExtResource( 10 ) ],
+"loop": false,
+"name": "Action",
+"speed": 10.0
+}, {
 "frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
 "loop": true,
 "name": "Move",
@@ -26,11 +31,6 @@ animations = [ {
 "loop": true,
 "name": "Idle",
 "speed": 5.0
-}, {
-"frames": [ ExtResource( 9 ), ExtResource( 10 ) ],
-"loop": false,
-"name": "Action",
-"speed": 10.0
 }, {
 "frames": [ ExtResource( 11 ) ],
 "loop": true,
@@ -63,6 +63,7 @@ volume_db = -18.0
 [node name="Animation" parent="." index="3"]
 frames = SubResource( 2 )
 animation = "Idle"
+frame = 0
 
 [node name="Dust1" parent="SFX/MoveDust" index="0"]
 position = Vector2( -20, 21.075 )
@@ -72,6 +73,9 @@ position = Vector2( -14, 21.0747 )
 
 [node name="Dust3" parent="SFX/MoveDust" index="2"]
 position = Vector2( -28.0917, 21.0747 )
+
+[node name="CollisionShape2D" parent="ActionHitBox" index="0"]
+position = Vector2( 30, -5 )
 
 [node name="SeeThourghWalls" parent="." index="8"]
 light_mask = 16

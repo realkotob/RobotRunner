@@ -4,10 +4,10 @@
 [ext_resource path="res://Scenes/InteractiveObjects/Platform/BreakablePlatform/5 Tiles (Base)/BreakablePlateform.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 60, 12 )
+extents = Vector2( 60, 10.2288 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 60, 2 )
+extents = Vector2( 60, 8 )
 
 [sub_resource type="Animation" id=3]
 length = 0.5
@@ -68,7 +68,8 @@ one_way_collision = true
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 0, -12 )
+position = Vector2( 0, -10 )
+scale = Vector2( 1, 0.3 )
 shape = SubResource( 2 )
 one_way_collision = true
 one_way_collision_margin = 0.0

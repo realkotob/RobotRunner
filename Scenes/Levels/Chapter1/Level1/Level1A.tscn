@@ -203,7 +203,7 @@ position = Vector2( 2952, 516 )
 
 [node name="XionCloud" parent="." index="7" instance=ExtResource( 2 )]
 position = Vector2( -793.881, 270 )
-speed = 50.0
+speed = 40.0
 
 [node name="CloudPath" parent="XionCloud" index="3" instance=ExtResource( 7 )]
 position = Vector2( 480, -272.975 )

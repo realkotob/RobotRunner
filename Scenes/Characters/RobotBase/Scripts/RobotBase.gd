@@ -177,8 +177,10 @@ func on_animation_finished(animation: String):
 	if animation == "Fadeout":
 		queue_free()
 
+
 func on_xion_received():
 	anim_player_node.play("MagentaFlash")
+
 
 # If the player is on a teleport point and enter layer change, teleport him to the assigned teleport destiation
 func on_layer_change():

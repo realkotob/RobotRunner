@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/RoboHammerMove3.png-2ee341a6abcd1fe2cf91fa3d2a235cd7.stex"
+path="res://.import/RoboHammerStartFalling2.png-e6528135ff7a4c47a46a3e75d1c3e1c7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/Characters/RobotHammer/Sprites/Move/RoboHammerMove3.png"
-dest_files=[ "res://.import/RoboHammerMove3.png-2ee341a6abcd1fe2cf91fa3d2a235cd7.stex" ]
+source_file="res://Scenes/Characters/RobotHammer/Sprites/StartFalling/RoboHammerStartFalling2.png"
+dest_files=[ "res://.import/RoboHammerStartFalling2.png-e6528135ff7a4c47a46a3e75d1c3e1c7.stex" ]
 
 [params]
 

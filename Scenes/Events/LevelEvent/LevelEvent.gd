@@ -25,8 +25,7 @@ func event():
 	# Call the method in every target, and pass every argument in the array
 	for target in target_array:
 		if target.has_method(method_name):
-			var call_def_funcref := funcref(target, "call_deferred")
-			arguments_array.push_front(method_name)
+			var call_def_funcref := funcref(target, method_name)
 			call_def_funcref.call_funcv(arguments_array)
 	
 	# Queue free this event if it should be

@@ -20,15 +20,18 @@ func set_is_growing(value : bool):
 
 
 # Make the lava grow
+#func growing(delta):
+#	var reel_speed = speed * delta
+#	var lava_region_rect_size = lava_shader_node.get_region_rect().size
+#
+#	lava_region_rect_size.y += reel_speed
+#	lava_shader_node.set_region_rect(Rect2(Vector2(0, 18), Vector2(lava_region_rect_size)))
+#
+#	var shape_extend = collision_shape_node.get_shape().get_extents()
+#	shape_extend.y += reel_speed / 2
+#	collision_shape_node.get_shape().set_extents(shape_extend)
+#
+#	light_node.position.y -= reel_speed
+
 func growing(delta):
-	var reel_speed = speed * delta
-	var lava_region_rect_size = lava_shader_node.get_region_rect().size
-	
-	lava_region_rect_size.y += reel_speed
-	lava_shader_node.set_region_rect(Rect2(Vector2(0, 18), Vector2(lava_region_rect_size)))
-	
-	var shape_extend = collision_shape_node.get_shape().get_extents()
-	shape_extend.y += reel_speed / 2
-	collision_shape_node.get_shape().set_extents(shape_extend)
-	
-	light_node.position.y -= reel_speed
+	scale.y += (speed * delta) / 100

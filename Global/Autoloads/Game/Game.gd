@@ -34,6 +34,7 @@ func goto_level(index : int = 0):
 
 func goto_last_level():
 	var last_level = load(last_level_path)
+	get_tree().current_scene.queue_free()
 	var _err = get_tree().change_scene_to(last_level)
 
 

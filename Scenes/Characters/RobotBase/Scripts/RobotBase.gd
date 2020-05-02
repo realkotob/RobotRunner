@@ -16,6 +16,9 @@ export var jump_force : int = -500 setget set_jump_force, get_jump_force
 const GRAVITY : int = 30
 const MAX_SPEED = 500
 
+var snap_vector = Vector2(0, 10)
+var current_snap = snap_vector
+
 var velocity : Vector2 setget set_velocity, get_velocity
 var dirLeft : int = 0 
 var dirRight : int = 0
@@ -92,7 +95,7 @@ func _physics_process(_delta):
 	
 	# Apply movement
 	velocity.y += GRAVITY
-	velocity = move_and_slide(velocity, Vector2.UP, false, 4, PI/4, false)
+	velocity = move_and_slide_with_snap(velocity, current_snap, Vector2.UP, true, 4, deg2rad(46), false)
 	
 	# Apply force to bodies it hit
 	for index in get_slide_count():
@@ -177,8 +180,10 @@ func on_animation_finished(animation: String):
 	if animation == "Fadeout":
 		queue_free()
 
+
 func on_xion_received():
 	anim_player_node.play("MagentaFlash")
+
 
 # If the player is on a teleport point and enter layer change, teleport him to the assigned teleport destiation
 func on_layer_change():

@@ -15,8 +15,9 @@ var bodies_in_hitbox : Array
 
 var action_hitbox_node : Area2D
 var hit_box_shape : Node
-var face_dir : int
 
+var face_dir : int
+var base_offset := Vector2.ZERO
 var has_touch : bool = false
 
 onready var audio_node = get_node("AudioStreamPlayer")
@@ -25,6 +26,8 @@ onready var audio_node = get_node("AudioStreamPlayer")
 func setup():
 	var _err = animation_node.connect("animation_finished", self, "on_animation_finished")
 	hit_box_shape = action_hitbox_node.get_child(0)
+	
+	base_offset = animation_node.get_offset()
 
 
 # Aplly the offset of the animation every thick
@@ -56,7 +59,7 @@ func enter_state(_host):
 
 # When the actor exits action state: set unactive the hit box and triggers the interaction if necesary
 func exit_state(_host):
-	animation_node.set_offset(Vector2(0, 0))
+	animation_node.set_offset(base_offset)
 	
 	# Get every area in the hitbox area
 	var interact_areas = action_hitbox_node.get_overlapping_areas()

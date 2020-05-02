@@ -26,6 +26,7 @@ func enter_state(_host):
 	if !owner.is_on_floor():
 		state_node.set_state("Jump")
 	
+	owner.current_snap = owner.snap_vector
 	animation_node.play(self.name)
 	SFX_node.play_SFX("MoveDust", true)
 

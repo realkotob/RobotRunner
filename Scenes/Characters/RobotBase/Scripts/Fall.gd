@@ -7,15 +7,11 @@ signal layer_change
 var layer_change_node : Node
 var inputs_node : Node
 
-onready var fall_timer_node = get_node("FallTimer")
-var fall_timer_init_value : float
-
 
 func setup():
 	var _err
-	_err = fall_timer_node.connect("timeout", self, "on_fall_timer_timeout")
 	_err = connect("layer_change", owner, "on_layer_change")
-	fall_timer_init_value = fall_timer_node.get_wait_time()
+	_err = animation_node.connect("animation_finished", self, "on_animation_finished")
 
 
 func update(_host, _delta):
@@ -24,17 +20,16 @@ func update(_host, _delta):
 
 
 # Start the cool down at the entery of the state
-func enter_state(host):
-	if host.previous_state.name != "Action":
-		fall_timer_node.start()
+func enter_state(_host):
+	
+	owner.current_snap = Vector2.ZERO
+	
+	# Triggers the StartFalling animation if it exists
+	if "StartFalling" in animation_node.get_sprite_frames().get_animation_names():
+		animation_node.play("StartFalling")
 	else:
 		animation_node.play(self.name)
 
-
-# Reset the falling timer cooldown, and stop it
-func exit_state(_host):
-	fall_timer_node.stop()
-	fall_timer_node.set_wait_time(fall_timer_init_value)
 
 
 # Define the actions the player can do in this state
@@ -48,6 +43,8 @@ func _input(event):
 				emit_signal("layer_change")
 
 
-# When the cooldown is over; play the animation
-func on_fall_timer_timeout():
-	animation_node.play(self.name)
+# Triggers the fall animation when the start falling is over
+func on_animation_finished():
+	if state_node.get_current_state() == self:
+		if animation_node.get_animation() == "StartFalling":
+				animation_node.play(self.name)

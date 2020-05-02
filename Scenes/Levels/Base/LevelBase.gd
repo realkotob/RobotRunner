@@ -25,7 +25,8 @@ func get_class() -> String:
 
 func _ready():
 	var _err = connect("level_finished", GAME, "on_level_finished")
-	GAME.last_level_path = self.filename
+	GAME.last_level_path = filename
+	update_current_level_index()
 	
 	set_starting_points()
 	instanciate_players()
@@ -162,3 +163,13 @@ func instanciate_players():
 		players_array.append(player2_node)
 		
 		player2_node.setup()
+
+
+func update_current_level_index():
+	var i = 0
+	for level in GAME.level_array:
+		if name in level._bundled["names"]:
+			break
+		i += 1
+	
+	GAME.progression.level = i

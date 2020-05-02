@@ -194,11 +194,6 @@ script = ExtResource( 10 )
 [node name="Fall" type="Node" parent="States"]
 script = ExtResource( 11 )
 
-[node name="FallTimer" type="Timer" parent="States/Fall"]
-process_mode = 0
-wait_time = 0.04
-one_shot = true
-
 [node name="Action" type="Node" parent="States"]
 script = ExtResource( 12 )
 breakable_type_array = PoolStringArray( "XionCrate" )
@@ -225,8 +220,7 @@ __meta__ = {
 
 [node name="Animation" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
-animation = "Move"
-frame = 1
+animation = "Idle"
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -324,6 +318,7 @@ collision_layer = 17
 collision_mask = 17
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="SeeThourghWalls/Area2D"]
+visible = false
 shape = SubResource( 11 )
 
 [node name="LayerChangeAudio" type="AudioStreamPlayer2D" parent="."]

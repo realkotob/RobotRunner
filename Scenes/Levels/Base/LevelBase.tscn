@@ -192,6 +192,16 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Decoration2" type="TileMap" parent="Map"]
+z_index = 2
+tile_set = ExtResource( 5 )
+cell_size = Vector2( 24, 24 )
+format = 1
+tile_data = PoolIntArray( 917566, 536870922, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="InteractivesObjects" type="Node2D" parent="."]
 __meta__ = {
 "_edit_lock_": true

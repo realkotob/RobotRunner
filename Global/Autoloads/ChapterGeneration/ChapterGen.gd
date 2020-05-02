@@ -49,7 +49,8 @@ func create_chapters(path : String = ""):
 			else:
 				print_notification("       Found level file: " + current_file_name)
 				var current_scene_path = get_current_file_path(dir, current_file_name)
-				GAME.chapters_array[0].levels_scenes_array.append(current_scene_path)
+				var last_chapter_index = len(GAME.chapters_array) - 1
+				GAME.chapters_array[last_chapter_index].levels_scenes_array.append(current_scene_path)
 			
 			# Access the next file/folder
 			current_file_name = dir.get_next()
@@ -61,4 +62,3 @@ func create_chapters(path : String = ""):
 # Retruns the path of the current file pointed by the dir object
 func get_current_file_path(dir : Directory, current_file_name : String) -> String:
 	return dir.get_current_dir() + "/" + current_file_name
-	

@@ -21,6 +21,9 @@ func update(_host, _delta):
 
 # Start the cool down at the entery of the state
 func enter_state(_host):
+	
+	owner.current_snap = Vector2.ZERO
+	
 	# Triggers the StartFalling animation if it exists
 	if "StartFalling" in animation_node.get_sprite_frames().get_animation_names():
 		animation_node.play("StartFalling")
@@ -40,8 +43,8 @@ func _input(event):
 				emit_signal("layer_change")
 
 
-# Triggers the fall aniamt
+# Triggers the fall animation when the start falling is over
 func on_animation_finished():
 	if state_node.get_current_state() == self:
 		if animation_node.get_animation() == "StartFalling":
-				animation_node.play("Fall")
+				animation_node.play(self.name)

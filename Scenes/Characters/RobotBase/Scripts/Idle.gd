@@ -11,6 +11,7 @@ var inputs_node : Node
 func setup():
 	var _err
 	_err = connect("layer_change", owner, "on_layer_change")
+	_err = animation_node.connect("animation_finished", self, "on_animation_finished")
 
 
 # Check if the character is falling, before it triggers fall state
@@ -25,9 +26,19 @@ func update(_host, _delta):
 		state_node.set_state("Move")
 
 
-# Triggers the Idle aniamtion when entering the state
-func enter_state(_host):
-	animation_node.play(self.name)
+# Triggers the Idle aniamtion when entering the state,
+# If the character was falling before, triggers the landing animation before
+func enter_state(host):
+	if !owner.is_on_floor():
+		host.set_state("Fall")
+	
+	var animations_array = animation_node.get_sprite_frames().get_animation_names()
+	owner.current_snap = owner.snap_vector
+	
+	if host.previous_state != null && host.previous_state.name == "Fall" && "StartFalling" in animations_array:
+		animation_node.play("Landing")
+	else:
+		animation_node.play(self.name)
 
 
 # Define the actions the player can do in this state
@@ -42,3 +53,9 @@ func _input(event):
 		elif event.is_action_pressed(inputs_node.input_map["Action"]):
 			state_node.set_state("Action")
 
+
+# Triggers the idle animation when the slanding is over
+func on_animation_finished():
+	if state_node.get_current_state() == self:
+		if animation_node.get_animation() == "Landing":
+				animation_node.play(self.name)

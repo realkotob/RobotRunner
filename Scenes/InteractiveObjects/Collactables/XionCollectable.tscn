@@ -62,6 +62,12 @@ hue_variation_random = 0.2
 [node name="XionCollactable" instance=ExtResource( 4 )]
 script = ExtResource( 2 )
 
+[node name="CollectSound" parent="." index="1"]
+bus = "Sounds"
+
+[node name="TravellingSound" parent="." index="2"]
+bus = "Sounds"
+
 [node name="Light2D" type="Light2D" parent="." index="3"]
 texture = ExtResource( 1 )
 texture_scale = 0.29

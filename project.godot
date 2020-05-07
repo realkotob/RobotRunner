@@ -159,6 +159,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://BaseClasses/StateMachine.gd"
 }, {
+"base": "MenuBase",
+"class": "SubMenuBase",
+"language": "GDScript",
+"path": "res://BaseClasses/SubMenuBase.gd"
+}, {
 "base": "Area2D",
 "class": "TriggerArea",
 "language": "GDScript",
@@ -205,6 +210,7 @@ _global_script_class_icons={
 "SFX_group_base": "",
 "StateBase": "",
 "StatesMachine": "",
+"SubMenuBase": "",
 "TriggerArea": "",
 "Water": "",
 "XionCrate": ""
@@ -213,7 +219,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Xion Leak"
-run/main_scene="res://Scenes/GUI/Menus/ScreenTitle/ScreenTitle.tscn"
+run/main_scene="res://Scenes/Menus/ScreenTitle/ScreenTitle.tscn"
 config/icon="res://icon.png"
 config/Vesion="0.0.2"
 

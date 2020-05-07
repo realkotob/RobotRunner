@@ -200,6 +200,7 @@ breakable_type_array = PoolStringArray( "XionCrate" )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="States/Action"]
 stream = ExtResource( 13 )
+bus = "Sounds"
 
 [node name="Shock" type="Node" parent="States"]
 script = ExtResource( 38 )
@@ -325,3 +326,4 @@ shape = SubResource( 11 )
 stream = ExtResource( 6 )
 volume_db = -12.0
 pitch_scale = 2.5
+bus = "Sounds"

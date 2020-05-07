@@ -17,6 +17,9 @@ const SELECTED := Color(1, 0, 0, 1)
 # Check the options when the scenes is ready, to get sure at least one of them is clickable
 # Change the color of the option accordingly to their state
 func _ready():
+	if len(buttons_array) == 0:
+		return
+	
 	check_clickable_options()
 	highlight_menuopt()
 	
@@ -57,18 +60,20 @@ func _unhandled_input(event):
 
 
 # Exit the game if there is no clickable option
+# Also set the selected option to be the first not disabled
 func check_clickable_options():
-	for opt in buttons_array:
-		if opt.is_disabled():
+	var i : int = 0
+	for button in buttons_array:
+		if button.is_disabled():
+			button.set_self_modulate(DISABLED)
 			count_not_clickable_options += 1
+			if button_index == i:
+				button_index += 1
+		i += 1
 	
 	if count_not_clickable_options == len(buttons_array):
 		print("There are no clickable options. Exiting...")
 		get_tree().quit()
-	
-	for n in range(len(buttons_array)):
-		if(buttons_array[n].is_disabled()):
-			buttons_array[n].set_self_modulate(DISABLED)
 
 
 # Navigate the menu up

@@ -20,3 +20,4 @@ shape = SubResource( 1 )
 stream = ExtResource( 3 )
 volume_db = -10.0
 pitch_scale = 1.2
+bus = "Sounds"

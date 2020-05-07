@@ -54,6 +54,7 @@ shape = SubResource( 1 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 6 )
+bus = "Sounds"
 
 [node name="Particles2D" type="Particles2D" parent="."]
 emitting = false

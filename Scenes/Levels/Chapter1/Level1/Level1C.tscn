@@ -127,10 +127,7 @@ scale = Vector2( 1, 0.527 )
 
 [node name="CollisionShape2D" parent="InteractivesObjects/LavaTiles/GrowingLava" index="1"]
 visible = true
-<<<<<<< HEAD
-=======
 shape = SubResource( 1 )
->>>>>>> Mr Stonks animation enhancement
 
 [node name="Lava2" parent="InteractivesObjects/LavaTiles" index="1" instance=ExtResource( 2 )]
 position = Vector2( 492, 180 )

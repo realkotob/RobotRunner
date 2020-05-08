@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/GroupBase.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Camera/Camera.tscn" type="PackedScene" id=2]
@@ -12,10 +12,6 @@
 [ext_resource path="res://Scenes/Fog/CosmeticFog/green_bg_fog_shadermaterial.tres" type="Material" id=21]
 [ext_resource path="res://Scenes/Fog/CosmeticFog/FogTexture.tres" type="Texture" id=23]
 [ext_resource path="res://Scenes/Levels/Base/LevelBase.gd" type="Script" id=24]
-[ext_resource path="res://Scenes/Levels/Chapter1/Music/Chapter1_Hard.ogg" type="AudioStream" id=25]
-[ext_resource path="res://Scenes/Levels/Chapter1/Music/Music.gd" type="Script" id=26]
-[ext_resource path="res://Scenes/Levels/Chapter1/Music/Chapter1_Medium.ogg" type="AudioStream" id=27]
-[ext_resource path="res://Scenes/Levels/Chapter1/Music/Chapter1_Normal.ogg" type="AudioStream" id=28]
 
 [node name="LevelBase" type="Node2D"]
 script = ExtResource( 24 )
@@ -302,23 +298,6 @@ __meta__ = {
 __meta__ = {
 "_edit_lock_": true
 }
-
-[node name="Music" type="Node" parent="."]
-script = ExtResource( 26 )
-
-[node name="Normal" type="AudioStreamPlayer" parent="Music"]
-stream = ExtResource( 28 )
-bus = "Music"
-
-[node name="Medium" type="AudioStreamPlayer" parent="Music"]
-stream = ExtResource( 27 )
-volume_db = -80.0
-bus = "Music"
-
-[node name="Hard" type="AudioStreamPlayer" parent="Music"]
-stream = ExtResource( 25 )
-volume_db = -80.0
-bus = "Music"
 
 [node name="Events" type="Node2D" parent="."]
 visible = false

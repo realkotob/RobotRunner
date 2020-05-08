@@ -12,8 +12,9 @@
 [ext_resource path="res://Global/Autoloads/SFX/XionExplosion/Animation/CrateExplosion6.png" type="Texture" id=10]
 [ext_resource path="res://Global/Autoloads/SFX/XionExplosion/Animation/CrateExplosion9.png" type="Texture" id=11]
 [ext_resource path="res://Global/Autoloads/SFX/XionExplosion/Animation/CrateExplosion7.png" type="Texture" id=12]
-[ext_resource path="res://BaseClasses/SFX_AnimationBase.gd" type="Script" id=13]
+[ext_resource path="res://AbstractClasses/SFX_AnimationBase.gd" type="Script" id=13]
 [ext_resource path="res://Global/Autoloads/SFX/NormalExplosion/Sound/ExplosionV1.wav" type="AudioStream" id=14]
+
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {

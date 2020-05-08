@@ -1,7 +1,7 @@
 extends AutoloadBase
 
 onready var chapter_dir_path : String = "res://Scenes/Levels/"
-onready var chapter_base_script = preload("res://BaseClasses/ChapterBase.gd")
+onready var chapter_base_script = preload("res://AbstractClasses/ChapterBase.gd")
 var chapters_array : Array = []
 
 func _ready():

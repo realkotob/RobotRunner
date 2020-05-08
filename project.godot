@@ -17,27 +17,27 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "AttributesBase",
 "language": "GDScript",
-"path": "res://BaseClasses/AttributesBase.gd"
+"path": "res://AbstractClasses/AttributesBase.gd"
 }, {
 "base": "Node",
 "class": "AutoloadBase",
 "language": "GDScript",
-"path": "res://BaseClasses/AutoloadBase.gd"
+"path": "res://AbstractClasses/AutoloadBase.gd"
 }, {
 "base": "BreakableObjectBase",
 "class": "BlockBase",
 "language": "GDScript",
-"path": "res://BaseClasses/BlockBase.gd"
+"path": "res://AbstractClasses/BlockBase.gd"
 }, {
 "base": "RigidBody2D",
 "class": "BreakableObjectBase",
 "language": "GDScript",
-"path": "res://BaseClasses/BreakableObjectBase.gd"
+"path": "res://AbstractClasses/BreakableObjectBase.gd"
 }, {
 "base": "Sprite",
 "class": "BreakableSpriteBase",
 "language": "GDScript",
-"path": "res://BaseClasses/BreakableSpriteBase.gd"
+"path": "res://AbstractClasses/BreakableSpriteBase.gd"
 }, {
 "base": "Event",
 "class": "CameraEventBase",
@@ -47,7 +47,7 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "ChapterBase",
 "language": "GDScript",
-"path": "res://BaseClasses/ChapterBase.gd"
+"path": "res://AbstractClasses/ChapterBase.gd"
 }, {
 "base": "Area2D",
 "class": "CollactableBase",
@@ -92,12 +92,12 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "InputsBase",
 "language": "GDScript",
-"path": "res://BaseClasses/InputsBase.gd"
+"path": "res://AbstractClasses/InputsBase.gd"
 }, {
 "base": "Area2D",
 "class": "InteractAreaBase",
 "language": "GDScript",
-"path": "res://BaseClasses/InteractAreaBase.gd"
+"path": "res://AbstractClasses/InteractAreaBase.gd"
 }, {
 "base": "Area2D",
 "class": "LavaZone",
@@ -112,17 +112,17 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "MenuBase",
 "language": "GDScript",
-"path": "res://BaseClasses/GameMenuBase.gd"
+"path": "res://AbstractClasses/GameMenuBase.gd"
 }, {
 "base": "Button",
 "class": "MenuOptionsBase",
 "language": "GDScript",
-"path": "res://BaseClasses/MenuOptionsBase.gd"
+"path": "res://AbstractClasses/MenuOptionsBase.gd"
 }, {
 "base": "PlayerStateBase",
 "class": "MoveBase",
 "language": "GDScript",
-"path": "res://BaseClasses/MoveBase.gd"
+"path": "res://AbstractClasses/MoveBase.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Player",
@@ -132,17 +132,17 @@ _global_script_classes=[ {
 "base": "StateBase",
 "class": "PlayerStateBase",
 "language": "GDScript",
-"path": "res://BaseClasses/PlayerStateBase.gd"
+"path": "res://AbstractClasses/PlayerStateBase.gd"
 }, {
 "base": "RayCast2D",
 "class": "RayCastBase",
 "language": "GDScript",
-"path": "res://BaseClasses/RayCastBase.gd"
+"path": "res://AbstractClasses/RayCastBase.gd"
 }, {
 "base": "AnimatedSprite",
 "class": "SFX_AnimationBase",
 "language": "GDScript",
-"path": "res://BaseClasses/SFX_AnimationBase.gd"
+"path": "res://AbstractClasses/SFX_AnimationBase.gd"
 }, {
 "base": "Node2D",
 "class": "SFX_group_base",
@@ -152,17 +152,17 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "StateBase",
 "language": "GDScript",
-"path": "res://BaseClasses/StateBase.gd"
+"path": "res://AbstractClasses/StateBase.gd"
 }, {
 "base": "Node",
 "class": "StatesMachine",
 "language": "GDScript",
-"path": "res://BaseClasses/StateMachine.gd"
+"path": "res://AbstractClasses/StateMachine.gd"
 }, {
 "base": "MenuBase",
 "class": "SubMenuBase",
 "language": "GDScript",
-"path": "res://BaseClasses/SubMenuBase.gd"
+"path": "res://AbstractClasses/SubMenuBase.gd"
 }, {
 "base": "Area2D",
 "class": "TriggerArea",
@@ -235,6 +235,7 @@ MENUS="*res://Global/Autoloads/Menus/menus_autoload.gd"
 GAME="*res://Global/Autoloads/Game/Game.tscn"
 COLLACTABLES="*res://Global/Autoloads/Collactables/Collactables.gd"
 CHAPTER_GEN="*res://Global/Autoloads/ChapterGeneration/ChapterGen.gd"
+MUSIC="*res://Global/Autoloads/Music/Music.tscn"
 
 [debug]
 

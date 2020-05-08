@@ -23,7 +23,8 @@ func enter_state(_host):
 	animation_node.play(self.name)
 	
 	# Genreate the jump dust
-	SFX_node.play_SFX("JumpDust", true, owner.global_position)
+	if owner.is_on_floor():
+		SFX_node.play_SFX("JumpDust", true, owner.global_position)
 	
 	owner.current_snap = Vector2.ZERO
 	

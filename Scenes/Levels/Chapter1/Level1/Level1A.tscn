@@ -29,18 +29,6 @@ position = Vector2( 48, 408 )
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CameraSystem" parent="." index="4"]
-visible = true
-
-[node name="Camera" parent="CameraSystem" index="0"]
-position = Vector2( 480, 270 )
-limit_left = 0
-limit_top = 0
-limit_right = 3665
-limit_bottom = 540
-editor_draw_limits = true
-y_zoom_enabled = false
-
 [node name="Light" parent="Map/Background/Paralaxe/Lights" index="0" instance=ExtResource( 9 )]
 position = Vector2( 202, -218 )
 
@@ -201,12 +189,6 @@ position = Vector2( 2952, 516 )
 [node name="RedButton3" parent="InteractivesObjects/GreatDoorGroup" index="3" instance=ExtResource( 8 )]
 position = Vector2( 2952, 516 )
 
-[node name="XionCloud" parent="." index="7" instance=ExtResource( 2 )]
-position = Vector2( -793.881, 270 )
-
-[node name="CloudPath" parent="XionCloud" index="3" instance=ExtResource( 7 )]
-position = Vector2( 480, -272.975 )
-
 [node name="Checkpoint" parent="Events/Checkpoints" index="0" instance=ExtResource( 16 )]
 position = Vector2( 1536, 216 )
 
@@ -218,5 +200,19 @@ position = Vector2( -168, 48 )
 
 [node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint" index="2"]
 position = Vector2( -96, 48 )
+
+[node name="XionCloud" parent="." index="7" instance=ExtResource( 2 )]
+position = Vector2( -793.881, 270 )
+
+[node name="CloudPath" parent="XionCloud" index="3" instance=ExtResource( 7 )]
+position = Vector2( 480, -272.975 )
+
+[node name="Camera" parent="." index="8"]
+limit_left = 0
+limit_top = 0
+limit_right = 3700
+limit_bottom = 540
+limit_smoothed = true
+editor_draw_limits = true
 
 [editable path="Events/Checkpoints/Checkpoint"]

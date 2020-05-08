@@ -24,16 +24,6 @@ position = Vector2( 48, 264 )
 [node name="StartingPointP2" parent="." index="1" instance=ExtResource( 4 )]
 position = Vector2( 48, 360 )
 
-[node name="CameraSystem" parent="." index="4"]
-visible = true
-
-[node name="Camera" parent="CameraSystem" index="0"]
-limit_left = 0
-limit_top = -48
-limit_right = 4500
-limit_bottom = 767
-editor_draw_limits = true
-
 [node name="Light" parent="Map/Background/Paralaxe/Lights" index="0" instance=ExtResource( 13 )]
 position = Vector2( 240, 36 )
 
@@ -270,13 +260,6 @@ custom_integrator = true
 contacts_reported = 10
 can_sleep = false
 
-[node name="XionCloud" parent="." index="8" instance=ExtResource( 12 )]
-position = Vector2( -1032, 300 )
-speed = 45.0
-
-[node name="CloudPath" parent="XionCloud" index="4" instance=ExtResource( 11 )]
-visible = false
-
 [node name="Checkpoint" parent="Events/Checkpoints" index="0" instance=ExtResource( 14 )]
 position = Vector2( 2100, 276 )
 
@@ -321,6 +304,20 @@ scale = Vector2( 7.214, 18.506 )
 camera_new_speed = 0.01
 camera_new_zoom_speed = 0.01
 follow_state = true
+
+[node name="Camera" parent="." index="7"]
+limit_left = 0
+limit_top = -70
+limit_right = 4500
+limit_bottom = 750
+editor_draw_limits = true
+
+[node name="XionCloud" parent="." index="8" instance=ExtResource( 12 )]
+position = Vector2( -1032, 300 )
+speed = 45.0
+
+[node name="CloudPath" parent="XionCloud" index="4" instance=ExtResource( 11 )]
+visible = false
 
 [editable path="InteractivesObjects/Collactables/XionCrate"]
 

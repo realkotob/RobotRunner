@@ -15,7 +15,6 @@
 [ext_resource path="res://AbstractClasses/SFX_AnimationBase.gd" type="Script" id=13]
 [ext_resource path="res://Global/Autoloads/SFX/NormalExplosion/Sound/ExplosionV1.wav" type="AudioStream" id=14]
 
-
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 1 ), ExtResource( 9 ), ExtResource( 4 ), ExtResource( 2 ), ExtResource( 10 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 5 ) ],
@@ -28,6 +27,8 @@ animations = [ {
 frames = SubResource( 1 )
 offset = Vector2( 0, -24 )
 script = ExtResource( 13 )
+shake_magnitude = 5.0
+shake_duration = 0.4
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 14 )

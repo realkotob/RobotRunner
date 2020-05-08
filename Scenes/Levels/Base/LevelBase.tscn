@@ -53,15 +53,6 @@ __meta__ = {
 [node name="HUD" parent="GUI" instance=ExtResource( 19 )]
 visible = false
 
-[node name="CameraSystem" type="Node2D" parent="."]
-visible = false
-z_index = 999
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Camera" parent="CameraSystem" instance=ExtResource( 2 )]
-
 [node name="Map" type="Node2D" parent="."]
 z_index = 2
 z_as_relative = false
@@ -319,3 +310,8 @@ __meta__ = {
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="Camera" parent="." instance=ExtResource( 2 )]
+z_index = 999
+limit_smoothed = true
+smoothing_enabled = true

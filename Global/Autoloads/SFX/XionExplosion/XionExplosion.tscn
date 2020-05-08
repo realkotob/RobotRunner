@@ -15,7 +15,6 @@
 [ext_resource path="res://AbstractClasses/SFX_AnimationBase.gd" type="Script" id=13]
 [ext_resource path="res://Global/Autoloads/SFX/NormalExplosion/Sound/ExplosionV1.wav" type="AudioStream" id=14]
 
-
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 4 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 12 ), ExtResource( 1 ), ExtResource( 11 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 8 ) ],

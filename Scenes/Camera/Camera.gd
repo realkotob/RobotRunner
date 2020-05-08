@@ -3,6 +3,7 @@ extends Camera2D
 onready var state_machine_node = $StateMachine
 onready var follow_state_node = $StateMachine/Follow
 onready var moveto_state_node = $StateMachine/MoveTo
+onready var shake_state_node = $StateMachine/Shake
 
 export var camera_speed : float = 3.0
 export var x_zoom_enabled : bool = true
@@ -55,3 +56,9 @@ func compute_average_pos(players_array: Array) -> Vector2:
 	average_pos /= len(players_array)
 	
 	return average_pos
+
+
+func shake(magnitude: float, duration: float):
+	shake_state_node.magnitude = magnitude
+	shake_state_node.duration = duration
+	set_state("Shake")

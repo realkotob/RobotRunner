@@ -194,7 +194,11 @@ script = ExtResource( 10 )
 [node name="Fall" type="Node" parent="States"]
 script = ExtResource( 11 )
 
-[node name="Timer" type="Timer" parent="States/Fall"]
+[node name="ToleranceTimer" type="Timer" parent="States/Fall"]
+wait_time = 0.1
+one_shot = true
+
+[node name="JumpBufferTimer" type="Timer" parent="States/Fall"]
 wait_time = 0.1
 one_shot = true
 

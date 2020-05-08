@@ -54,6 +54,9 @@ func get_jump_force() -> int:
 func set_state(value : String):
 	$States.set_state(value)
 
+func get_state() -> String:
+	return $States.get_state_name()
+
 
 func _ready():
 	var _err = anim_player_node.connect("animation_finished", self, "on_animation_finished")
@@ -81,7 +84,7 @@ func setup():
 
 #### PHYSIC BEHAVIOUR ####
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	var dir = get_move_direction()
 	
 	# Compute velocity
@@ -93,8 +96,18 @@ func _physics_process(_delta):
 		animation_node.set_flip_h(is_looking_left)
 		flip_hit_box()
 	
-	# Apply movement
 	velocity.y += GRAVITY
+	
+	# Jump corner correction
+	if get_state() == "Jump":
+		# Make a movement test to check collisions preemptively
+		var corner_col = move_and_collide(velocity * delta, true, true, true)
+		if corner_col != null:
+			var col_normal = corner_col.get_normal()
+			if col_normal.x < 0.2 && col_normal.x > -0.2:
+				corner_correct(20, delta)
+	
+	# Apply movement
 	velocity = move_and_slide_with_snap(velocity, current_snap, Vector2.UP, true, 4, deg2rad(46), false)
 	
 	# Apply force to bodies it hit
@@ -102,6 +115,15 @@ func _physics_process(_delta):
 		var collision = get_slide_collision(index)
 		if collision.collider.is_in_group("MovableBodies"):
 			collision.collider.apply_central_impulse(-collision.normal * push)
+
+
+func corner_correct(amount : int, delta: float):
+	for i in range(1, amount + 1):
+		for j in [1, -1]:
+			var movement = Vector2(i * j, velocity.y * delta)
+			if !move_and_collide(movement, true, true, true):
+				global_position += movement
+				return
 
 
 #### INPUT RESPONSES ####

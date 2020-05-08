@@ -37,20 +37,17 @@
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/SeeThourghWalls.gd" type="Script" id=40]
 [ext_resource path="res://Global/Fonts/BoldCapsPixel64.tres" type="DynamicFont" id=42]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 15.53, 20 )
-
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ) ],
-"loop": true,
-"name": "Move",
-"speed": 8.0
-}, {
 "frames": [ ExtResource( 21 ) ],
 "loop": true,
 "name": "Idle",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ) ],
+"loop": true,
+"name": "Move",
+"speed": 8.0
 }, {
 "frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
 "loop": false,
@@ -67,6 +64,9 @@ animations = [ {
 "name": "Fall",
 "speed": 5.0
 } ]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 15.53, 20 )
 
 [sub_resource type="AnimatedTexture" id=3]
 frames = 4
@@ -168,6 +168,14 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Animation" type="AnimatedSprite" parent="."]
+frames = SubResource( 2 )
+animation = "Idle"
+playing = true
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 4 )
 shape = SubResource( 1 )
@@ -227,14 +235,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Animation" type="AnimatedSprite" parent="."]
-frames = SubResource( 2 )
-animation = "Idle"
-playing = true
-__meta__ = {
-"_edit_lock_": true
-}
-
 [node name="SFX" type="Node2D" parent="."]
 script = ExtResource( 34 )
 __meta__ = {
@@ -286,11 +286,13 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ActionHitBox"]
 position = Vector2( 30, -6 )
 shape = SubResource( 5 )
+disabled = true
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="HeadHitBox" type="StaticBody2D" parent="."]
+visible = false
 __meta__ = {
 "_edit_lock_": true
 }

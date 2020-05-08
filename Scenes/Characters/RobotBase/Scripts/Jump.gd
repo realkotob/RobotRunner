@@ -13,11 +13,13 @@ func setup():
 	_err = connect("layer_change", owner, "on_layer_change")
 	_err = animation_node.connect("animation_finished", self, "on_animation_finished")
 
+
 func update(_host, _delta):
 	if owner.is_on_floor():
 		return "Idle"
 	elif owner.velocity.y > 0:
 		return "Fall"
+
 
 func enter_state(_host):
 	animation_node.play(self.name)
@@ -42,6 +44,7 @@ func on_animation_finished():
 		if animation_node.get_animation() == "Jump":
 			if "MidAir" in animation_node.get_sprite_frames().get_animation_names():
 				animation_node.play("MidAir")
+
 
 # Define the actions the player can do in this state
 func _input(event):

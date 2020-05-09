@@ -12,11 +12,12 @@ func _ready():
 
 
 func on_body_entered(body : Node):
-	if body.is_class("Player"):
-		if instant_break:
-			destroy()
-		else:
-			animation_player_node.play("Shake")
+	if body is Player:
+		if body.global_position.y < global_position.y - 24:
+			if instant_break:
+				destroy()
+			else:
+				animation_player_node.play("Shake")
 
 
 func on_shake_finished():

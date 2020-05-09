@@ -30,16 +30,6 @@ position = Vector2( 60, 408 )
 [node name="StartingPointP2" parent="." index="1" instance=ExtResource( 4 )]
 position = Vector2( 924, 408 )
 
-[node name="CameraSystem" parent="." index="4"]
-visible = true
-
-[node name="Camera" parent="CameraSystem" index="0"]
-limit_left = -200
-limit_top = -1000
-limit_right = 1210
-limit_bottom = 564
-editor_draw_limits = true
-
 [node name="Light" parent="Map/Background/Paralaxe/Lights" index="0" instance=ExtResource( 10 )]
 position = Vector2( -74, 340 )
 
@@ -188,7 +178,7 @@ position = Vector2( 288, -636 )
 [node name="2TilesBreakablePlateform4" parent="InteractivesObjects/Platform/2 Tiles" index="6" instance=ExtResource( 13 )]
 position = Vector2( 792, -672 )
 
-[node name="Events" parent="." index="8"]
+[node name="Events" parent="." index="6"]
 visible = true
 
 [node name="Checkpoint" parent="Events/Checkpoints" index="0" instance=ExtResource( 15 )]

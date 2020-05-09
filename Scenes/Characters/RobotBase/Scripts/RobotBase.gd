@@ -57,6 +57,8 @@ func set_state(value : String):
 func get_state() -> String:
 	return $States.get_state_name()
 
+func get_extents() -> Vector2:
+	return $CollisionShape2D.get_shape().get_extents()
 
 func _ready():
 	var _err = anim_player_node.connect("animation_finished", self, "on_animation_finished")

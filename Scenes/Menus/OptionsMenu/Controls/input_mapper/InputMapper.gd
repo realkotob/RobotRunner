@@ -24,7 +24,8 @@ var profile_azerty = {
 	'action_player2': KEY_SHIFT,
 	
 	'game_restart': KEY_F1,
-	'HUD_switch_state': KEY_F2
+	'HUD_switch_state': KEY_F2,
+	'display_console': KEY_F3
 }
 
 var profile_qwerty = {
@@ -41,7 +42,8 @@ var profile_qwerty = {
 	'action_player2': KEY_SHIFT,
 	
 	'game_restart': KEY_F1,
-	'HUD_switch_state': KEY_F2
+	'HUD_switch_state': KEY_F2,
+	'display_console': KEY_F3
 }
 
 var profile_custom = profile_azerty

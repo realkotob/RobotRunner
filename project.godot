@@ -54,6 +54,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/InteractiveObjects/Collactables/CollactableBase.gd"
 }, {
+"base": "Node",
+"class": "Commands",
+"language": "GDScript",
+"path": "res://Scenes/GameConsole/Commands.gd"
+}, {
 "base": "StaticBody2D",
 "class": "Door",
 "language": "GDScript",
@@ -73,6 +78,11 @@ _global_script_classes=[ {
 "class": "Event",
 "language": "GDScript",
 "path": "res://Scenes/Events/BaseScene/EventBase.gd"
+}, {
+"base": "Control",
+"class": "GameConsoleScript",
+"language": "GDScript",
+"path": "res://Scenes/GameConsole/GameConsole.gd"
 }, {
 "base": "Node2D",
 "class": "GroupBase",
@@ -189,10 +199,12 @@ _global_script_class_icons={
 "CameraEventBase": "",
 "ChapterBase": "",
 "CollactableBase": "",
+"Commands": "",
 "Door": "",
 "DoorButton": "",
 "EarthBlock": "",
 "Event": "",
+"GameConsoleScript": "",
 "GroupBase": "",
 "GrowingLava": "",
 "IceBlock": "",
@@ -372,6 +384,11 @@ game_restart={
 HUD_switch_state={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777245,"unicode":0,"echo":false,"script":null)
+ ]
+}
+display_console={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777246,"unicode":0,"echo":false,"script":null)
  ]
 }
 

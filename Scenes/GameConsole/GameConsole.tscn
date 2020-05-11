@@ -1,0 +1,163 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Global/Fonts/BoldCapsPixel.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Scenes/GameConsole/GameConsole.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/GameConsole/Assets/cmd_send_sound.wav" type="AudioStream" id=3]
+[ext_resource path="res://Scenes/GameConsole/Assets/close_cmdconsole.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/GameConsole/Commands.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/GameConsole/CMD_Scripts/HELP.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/GameConsole/CMD_Scripts/CLEAR.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/GameConsole/CMD_Scripts/CHEATS.gd" type="Script" id=8]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://Global/Fonts/BoldCapsPixel.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 64
+font_data = SubResource( 1 )
+
+[node name="GameConsole" type="Control"]
+pause_mode = 2
+margin_top = -1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="."]
+margin_top = 193.0
+margin_right = 960.0
+margin_bottom = 545.0
+color = Color( 0.196078, 0.196078, 0.196078, 0.784314 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LOG" type="Control" parent="."]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CMDLogs_container" type="ItemList" parent="LOG"]
+modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 8.0
+margin_top = 201.0
+margin_right = 952.0
+margin_bottom = 465.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Console Input" type="Control" parent="."]
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="CMDInput" type="LineEdit" parent="Console Input"]
+modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 8.0
+margin_top = 473.0
+margin_right = 952.0
+margin_bottom = 534.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+max_length = 255
+context_menu_enabled = false
+clear_button_enabled = true
+caret_blink = true
+caret_blink_speed = 0.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Console Quit" type="Control" parent="."]
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ConsoleQUIT" type="Button" parent="Console Quit"]
+margin_left = 912.0
+margin_top = 209.0
+margin_right = 948.0
+margin_bottom = 239.0
+icon = ExtResource( 4 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CMDSendingSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -15.0
+pitch_scale = 1.5
+
+[node name="CommandsList" type="Node" parent="."]
+
+[node name="HELP" type="Node" parent="CommandsList"]
+script = ExtResource( 6 )
+cmd_name = "HELP"
+cmd_description = "Display all commands in the console"
+
+[node name="CHEATS" type="Node" parent="CommandsList"]
+script = ExtResource( 8 )
+cmd_name = "CHEATS"
+cmd_description = "Turn cheats on"
+
+[node name="CLEAR" type="Node" parent="CommandsList"]
+script = ExtResource( 7 )
+cmd_name = "CLEAR"
+cmd_description = "Clear the console"
+
+[node name="NOCLIP" type="Node" parent="CommandsList"]
+script = ExtResource( 5 )
+cmd_name = "NOCLIP"
+cmd_description = "Grant permission to player to go through walls and godmod"
+cheats_required = true
+
+[node name="GRAVITY" type="Node" parent="CommandsList"]
+script = ExtResource( 5 )
+cmd_name = "GRAVITY"
+args_number = 1
+cmd_description = "Set the Player's Gravity"
+cheats_required = true
+
+[node name="INFINITEJUMP" type="Node" parent="CommandsList"]
+script = ExtResource( 5 )
+cmd_name = "INFINITEJUMP"
+cmd_description = "Get Infinite Jump"
+cheats_required = true
+
+[node name="NEXTLEVEL" type="Node" parent="CommandsList"]
+script = ExtResource( 5 )
+cmd_name = "NEXTLEVEL"
+cmd_description = "Go to next level"
+cheats_required = true
+
+[node name="PREVIOUSLEVEL" type="Node" parent="CommandsList"]
+script = ExtResource( 5 )
+cmd_name = "PREVIOUSLEVEL"
+cmd_description = "Go to previous level"
+cheats_required = true
+
+[node name="GOTOLEVEL" type="Node" parent="CommandsList"]
+script = ExtResource( 5 )
+cmd_name = "GOTOLEVEL"
+cmd_description = "Go to a specific level"
+cheats_required = true
+
+[node name="DIE" type="Node" parent="CommandsList"]
+script = ExtResource( 5 )
+cmd_name = "DIE"
+cmd_description = "Kill the Player"
+cheats_required = true
+
+[node name="SPEED" type="Node" parent="CommandsList"]
+script = ExtResource( 5 )
+cmd_name = "SPEED"
+args_number = 1
+cmd_description = "Set the Player's Speed"
+cheats_required = true

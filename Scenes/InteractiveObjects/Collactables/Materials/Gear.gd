@@ -29,3 +29,4 @@ func collect():
 	animated_sprite_node.set_visible(false)
 	$CollectSound.play()
 	$TravellingSound.stop()
+	SCORE.set_materials(SCORE.get_materials() + 1)

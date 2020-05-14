@@ -5,11 +5,10 @@ class_name CollactableBase
 var aimed_character_weakref : WeakRef = null
 
 export var speed : int = 300
+export var initial_impulse : bool = true
 
 var initial_velocity := Vector2.ZERO
 var velocity := Vector2.ZERO
-
-var initial_impulse : bool = true
 
 func _ready():
 	$TravellingSound.play()
@@ -39,12 +38,14 @@ func _physics_process(delta):
 
 
 func on_body_entered(body : PhysicsBody2D):
-	if !body:
-		return
-	
-	if body.is_class("Player"):
-		$CollectSound.play()
-		$TravellingSound.stop()
+	if body is Player:
+		collect()
+
+
+func collect():
+	call_deferred("set_monitoring", false)
+	$CollectSound.play()
+	$TravellingSound.stop()
 
 
 func on_collect_audio_finished():

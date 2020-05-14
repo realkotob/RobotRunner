@@ -212,7 +212,6 @@ limit_left = 0
 limit_top = 0
 limit_right = 3700
 limit_bottom = 540
-limit_smoothed = true
 editor_draw_limits = true
 
 [editable path="Events/Checkpoints/Checkpoint"]

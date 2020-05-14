@@ -260,6 +260,9 @@ custom_integrator = true
 contacts_reported = 10
 can_sleep = false
 
+[node name="Events" parent="." index="6"]
+visible = true
+
 [node name="Checkpoint" parent="Events/Checkpoints" index="0" instance=ExtResource( 14 )]
 position = Vector2( 2100, 276 )
 
@@ -285,9 +288,6 @@ position = Vector2( -24, 36 )
 [node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint2" index="2"]
 position = Vector2( -24, -60 )
 
-[node name="CameraEvents" parent="Events" index="1"]
-visible = false
-
 [node name="CameraEvent" parent="Events/CameraEvents" index="0" instance=ExtResource( 15 )]
 position = Vector2( 2100, 288 )
 scale = Vector2( 2.888, 3.606 )
@@ -304,6 +304,17 @@ scale = Vector2( 7.214, 18.506 )
 camera_new_speed = 0.01
 camera_new_zoom_speed = 0.01
 follow_state = true
+
+[node name="CameraEvent3" parent="Events/CameraEvents" index="2" instance=ExtResource( 15 )]
+position = Vector2( 3659.84, 365.426 )
+camera_new_zoom = Vector2( 2, 2 )
+
+[node name="TriggerArea" parent="Events/CameraEvents/CameraEvent3" index="0"]
+position = Vector2( -1.58643, 22.2134 )
+scale = Vector2( 3.51, 7.302 )
+
+[node name="Position2D" parent="Events/CameraEvents/CameraEvent3" index="1"]
+position = Vector2( 245.548, -9.8219 )
 
 [node name="Camera" parent="." index="7"]
 limit_left = 0
@@ -326,3 +337,5 @@ visible = false
 [editable path="Events/Checkpoints/Checkpoint2"]
 
 [editable path="Events/CameraEvents/CameraEvent"]
+
+[editable path="Events/CameraEvents/CameraEvent3"]

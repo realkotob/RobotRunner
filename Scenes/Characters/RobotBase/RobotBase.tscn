@@ -39,6 +39,11 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
+"frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
+"loop": false,
+"name": "Action",
+"speed": 20.0
+}, {
 "frames": [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ) ],
 "loop": true,
 "name": "Move",
@@ -48,11 +53,6 @@ animations = [ {
 "loop": true,
 "name": "Idle",
 "speed": 5.0
-}, {
-"frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
-"loop": false,
-"name": "Action",
-"speed": 20.0
 }, {
 "frames": [ ExtResource( 22 ) ],
 "loop": true,
@@ -210,7 +210,7 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
-[node name="Action" type="Node" parent="States"]
+[node name="Action" type="Node2D" parent="States"]
 script = ExtResource( 12 )
 breakable_type_array = PoolStringArray( "XionCrate" )
 

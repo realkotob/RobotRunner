@@ -2,6 +2,7 @@ shader_type canvas_item;
 
 uniform vec4 fog_color : hint_color = vec4(0.7, 0.0, 0.5, 1);
 uniform vec2 distort_speed = vec2(-0.03, 0.03);
+uniform float move_speed = 1.0;
 uniform float opacity = 0.5;
 uniform int OCTAVES = 4;
 
@@ -41,7 +42,7 @@ float fbm(vec2 coord){
 
 void fragment() {
 	vec2 coord = UV * 20.0;
-	vec2 motion = vec2(fbm(coord + TIME * 0.5));
+	vec2 motion = vec2(fbm(coord + TIME * distort_speed));
 	//vec4 fog_reslut = textureLod(TEXTURE, UV + motion, 1.0);
 	float final = fbm(coord + motion);
 	

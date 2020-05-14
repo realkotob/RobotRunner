@@ -7,7 +7,8 @@
 [ext_resource path="res://Scenes/Menus/PauseMenu/New Game.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Menus/PauseMenu/GotoMenu.gd" type="Script" id=6]
 [ext_resource path="res://Scenes/Menus/PauseMenu/Leave.gd" type="Script" id=7]
-[ext_resource path="res://Scenes/Menus/ScreenTitle/Options.gd" type="Script" id=8]
+[ext_resource path="res://Scenes/Menus/ScreenTitle/Scripts/Options.gd" type="Script" id=8]
+
 
 [node name="PauseMenu" instance=ExtResource( 1 )]
 grow_horizontal = 2

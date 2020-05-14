@@ -1,3 +1,3 @@
 extends Node
 
-var xion = preload("res://Scenes/InteractiveObjects/Collactables/XionCollectable.tscn")
+var xion = preload("res://Scenes/InteractiveObjects/Collactables/XionCollactable/XionCollectable.tscn")

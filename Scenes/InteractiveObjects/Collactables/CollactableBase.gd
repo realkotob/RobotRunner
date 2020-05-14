@@ -18,6 +18,9 @@ func _ready():
 
 
 func _physics_process(delta):
+	if aimed_character_weakref == null:
+		return
+	
 	var aimed_character = aimed_character_weakref.get_ref()
 	
 	# Move toward the aimed player

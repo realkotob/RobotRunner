@@ -5,13 +5,13 @@ var materials : int = 0 setget set_materials, get_materials
 
 var players_in_collactable_area : int = 0
 
-signal xion_changed
+signal score_changed
 
 func set_xion(value: int):
 	xion = value
 	
 	# Notify the HUD that the xion value has changed
-	emit_signal("xion_changed", value)
+	emit_signal("score_changed")
 
 
 func get_xion() -> int:
@@ -21,6 +21,8 @@ func get_xion() -> int:
 func set_materials(value: int):
 	materials = value
 	
+	emit_signal("score_changed")
+
 
 func get_materials() -> int:
 	return materials

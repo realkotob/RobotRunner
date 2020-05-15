@@ -22,19 +22,15 @@ func on_timeout():
 	initial_impulse = false
 
 
-func on_body_entered(body : PhysicsBody2D):
-	if !body:
-		return
-	
-	if body.is_class("Player"):
-		emit_signal("xion_received")
-		SCORE.set_xion(SCORE.get_xion() + 50)
-		set_physics_process(false)
-		$CollisionShape2D.call_deferred("set_disabled", true)
-		$CollectSound.play()
-		$TravellingSound.stop()
-		$Light2D.set_visible(false)
+func collect():
+	emit_signal("xion_received")
+	SCORE.set_xion(SCORE.get_xion() + 50)
+	set_physics_process(false)
+	$CollisionShape2D.call_deferred("set_disabled", true)
+	$CollectSound.play()
+	$TravellingSound.stop()
+	$Light2D.set_visible(false)
 		
-		for child in get_children():
-			if child is Particles2D:
-				child.set_emitting(false)
+	for child in get_children():
+		if child is Particles2D:
+			child.set_emitting(false)

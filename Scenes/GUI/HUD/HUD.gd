@@ -10,7 +10,7 @@ onready var HUD_width = background_node.get_size().y
 
 func _ready():
 	var _err = timer_node.connect("timeout", self, "on_timer_timeout")
-	_err = SCORE.connect("xion_changed", self, "on_score_changed")
+	_err = SCORE.connect("score_changed", self, "on_score_changed")
 	rect_position = Vector2(0, -HUD_width)
 	set_visible(true)
 
@@ -56,7 +56,7 @@ func move_to(dest: Vector2, spd : float):
 
 
 # Whenever the score change, reset the timer
-func on_score_changed(_value):
+func on_score_changed():
 	set_hidden(false)
 	timer_node.start(timer_node.get_wait_time())
 

@@ -12,5 +12,5 @@ func event():
 	if follow_state:
 		GAME.set_camera_on_follow()
 	else:
-		GAME.move_camera_to($Position2D.get_global_position(), false, camera_new_speed)
+		GAME.move_camera_to($Position2D.get_global_position(), false, camera_new_speed, INF)
 	queue_free()

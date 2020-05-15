@@ -277,10 +277,10 @@ position = Vector2( 2100, 276 )
 scale = Vector2( 3.227, 4.161 )
 
 [node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint" index="1"]
-position = Vector2( -156, 60 )
+position = Vector2( -138.751, 11.2435 )
 
 [node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint" index="2"]
-position = Vector2( -96, 60 )
+position = Vector2( -138.459, 59.3366 )
 
 [node name="Checkpoint2" parent="Events/Checkpoints" index="1" instance=ExtResource( 14 )]
 position = Vector2( 3264, 324 )

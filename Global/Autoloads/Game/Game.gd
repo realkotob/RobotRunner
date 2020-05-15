@@ -67,11 +67,12 @@ func on_gameover_timer_timeout():
 
 
 # Move the camera to the given position
-func move_camera_to(dest: Vector2, average_w_players: bool = false, speed : float = -1.0):
+func move_camera_to(dest: Vector2, average_w_players: bool = false, speed : float = -1.0, duration : float = 0.0):
 	var camera_node = get_tree().get_current_scene().find_node("Camera")
 	
 	if camera_node != null:
-		camera_node.move_to(dest, average_w_players, speed)
+		var func_call_array : Array = ["move_to", dest, average_w_players, speed, duration]
+		camera_node.stack_instruction(func_call_array)
 
 
 # Give zoom the camera to the destination wanted zoom

@@ -14,8 +14,7 @@ export var short_focus : bool = false
 signal player_exit_level
 
 func _ready():
-	var _err = animation_node.connect("animation_finished", self, "on_animation_finished")
-	_err = area_node.connect("body_entered", self, "on_area_body_entered")
+	var _err = area_node.connect("body_entered", self, "on_area_body_entered")
 	_err = connect("player_exit_level", GAME, "on_player_level_exited")
 
 
@@ -31,20 +30,8 @@ func open_door():
 		audio_node.play()
 	
 	# Triggers the camera movement
-	GAME.move_camera_to(position, !focus_on_door)
+	GAME.move_camera_to(position, !focus_on_door, -1.0, 3.0)
 
-
-# Triggered when the door starts opening
-# Reset the camera on follow if the exported short_focus booleen is true
-func on_focus_finished():
-	if short_focus == true:
-		GAME.set_camera_on_follow()
-
-
-# Reset the camera on follow state when the animation is over
-func on_animation_finished(anim_name: String):
-	if anim_name == "Open":
-		GAME.set_camera_on_follow()
 
 
 # Notify the game autoload that a player exited the level 

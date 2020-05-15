@@ -6,7 +6,6 @@ extends StateBase
 # It computes the average position of all the players, and move the camera towards it
 # Progressivly, so the camera feels smooth
 
-
 func update(_host, delta):
 	# Compute the camera speed
 	var reel_camera_speed = clamp(owner.camera_speed * delta, 0.0, 1.0)
@@ -22,7 +21,6 @@ func update(_host, delta):
 		# If instant is true, go all the way to the desired position
 		owner.global_position = owner.global_position.linear_interpolate(average_pos, reel_camera_speed)
 		
-		
 		# Zoom/Dezoom if necesary
 		if owner.y_zoom_enabled or owner.x_zoom_enabled:
 			var screen_size = get_viewport().get_size() / 2
@@ -36,6 +34,7 @@ func update(_host, delta):
 				var distance_ratio = (players_v_distance / max_dist.y)
 				distance_ratio = clamp(distance_ratio, 1.0, 2.0)
 				dest_zoom = Vector2(distance_ratio, distance_ratio)
+			
 			# Horizontal
 			elif players_h_distance > max_dist.x && owner.x_zoom_enabled:
 				var distance_ratio = (players_h_distance / max_dist.x)

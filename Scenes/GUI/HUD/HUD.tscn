@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Global/Fonts/BoldCapsPixel64.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Scenes/GUI/HUD/HUD.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/GUI/HUD/XionLabel.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/GUI/HUD/Xion.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/GUI/HUD/Materials.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/GUI/Dialogue/Assets/DialogueBoxHUD.png" type="Texture" id=6]
 
 [node name="HUD" type="Control"]
 anchor_right = 1.0
@@ -15,25 +16,35 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Background" type="ColorRect" parent="."]
-light_mask = 16384
+[node name="Background" type="NinePatchRect" parent="."]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -290.0
+margin_top = 4.0
+margin_right = -4.0
 margin_bottom = 60.0
-color = Color( 0, 0, 0, 0.501961 )
+rect_min_size = Vector2( 48, 48 )
+texture = ExtResource( 6 )
+patch_margin_left = 24
+patch_margin_top = 24
+patch_margin_right = 24
+patch_margin_bottom = 24
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="XionContainer" type="Control" parent="."]
+[node name="XionContainer" type="Control" parent="Background"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -134.0
-margin_top = 7.025
-margin_bottom = 58.025
+margin_left = -130.0
+margin_top = 6.0
+margin_right = 4.0
+margin_bottom = 57.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Sprite" type="TextureRect" parent="XionContainer"]
+[node name="Sprite" type="TextureRect" parent="Background/XionContainer"]
 light_mask = 16384
 margin_right = 44.0
 margin_bottom = 51.0
@@ -42,7 +53,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="XionContainer"]
+[node name="Label" type="Label" parent="Background/XionContainer"]
 margin_left = 64.0
 margin_top = -10.0
 margin_right = 120.0
@@ -56,17 +67,17 @@ __meta__ = {
 }
 score_type = "xion"
 
-[node name="MatrialsContainer" type="Control" parent="."]
+[node name="MatrialsContainer" type="Control" parent="Background"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -260.0
-margin_top = -31.5
-margin_right = -146.0
-margin_bottom = -0.499977
+margin_left = -256.0
+margin_top = -22.0
+margin_right = -142.0
+margin_bottom = 9.00002
 
-[node name="Sprite" type="TextureRect" parent="MatrialsContainer"]
+[node name="Sprite" type="TextureRect" parent="Background/MatrialsContainer"]
 light_mask = 16384
 margin_right = 44.0
 margin_bottom = 51.0
@@ -75,7 +86,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="MatrialsContainer"]
+[node name="Label" type="Label" parent="Background/MatrialsContainer"]
 margin_left = 64.0
 margin_top = -10.0
 margin_right = 120.0

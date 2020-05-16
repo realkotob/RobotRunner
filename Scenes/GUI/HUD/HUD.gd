@@ -6,7 +6,7 @@ onready var timer_node = $Timer
 export var hidden : bool = true setget set_hidden, get_hidden
 export var speed : int = 400
 
-onready var HUD_width = background_node.get_size().y
+onready var HUD_width = background_node.get_size().y + 8
 
 func _ready():
 	var _err = timer_node.connect("timeout", self, "on_timer_timeout")

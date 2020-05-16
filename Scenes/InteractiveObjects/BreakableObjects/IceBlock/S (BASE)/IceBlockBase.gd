@@ -2,8 +2,6 @@ extends BlockBase
 
 class_name IceBlock
 
-onready var animation_player_node = $AnimationPlayer
-
 ### ICEBLOCKS ###
 
 var floating_line_y : float = 0.0
@@ -34,7 +32,6 @@ func destroy(_actor_destroying: Node = null):
 	SFX.scatter_sprite(self, nb_debris, explosion_impulse)
 	SFX.scatter_sprite(self, int(nb_debris / 6), explosion_impulse * 0.7)
 	sprite_node.set_visible(false)
-	animation_player_node.play("LightFadeOut")
 
 
 

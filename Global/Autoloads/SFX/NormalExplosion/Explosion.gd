@@ -10,3 +10,4 @@ func play_animation():
 		camera_node.shake(4.0, 0.3)
 	set_visible(true)
 	play()
+	$AudioStreamPlayer2D.play()

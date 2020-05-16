@@ -10,6 +10,7 @@ func _ready():
 func play_animation():
 	set_visible(true)
 	play()
+	$AudioStreamPlayer2D.play()
 
 
 func on_animation_finished():

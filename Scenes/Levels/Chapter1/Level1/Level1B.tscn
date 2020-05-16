@@ -15,7 +15,8 @@
 [ext_resource path="res://Global/Background/BackgroundLight.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/Events/Checkpoint/Checkpoint.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Events/CameraEvents/CameraEvent.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Scenes/InteractiveObjects/Collactables/Materials/Gear.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/InteractiveObjects/Collactables/Materials/Gear/Gear.tscn" type="PackedScene" id=16]
+
 
 [node name="Level1B" instance=ExtResource( 1 )]
 

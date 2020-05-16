@@ -1,4 +1,5 @@
 extends CollactableBase
+class_name GearCollactable
 
 onready var timer_node = $Timer
 onready var animated_sprite_node = $AnimatedSprite

@@ -1,0 +1,17 @@
+[gd_resource type="SpriteFrames" load_steps=8 format=2]
+
+[ext_resource path="res://Scenes/InteractiveObjects/Collactables/Materials/GoldenGear/GoldenGear3.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/InteractiveObjects/Collactables/Materials/GoldenGear/GoldenGear7.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/InteractiveObjects/Collactables/Materials/GoldenGear/GoldenGear2.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/InteractiveObjects/Collactables/Materials/GoldenGear/GoldenGear5.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/InteractiveObjects/Collactables/Materials/GoldenGear/GoldenGear6.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/InteractiveObjects/Collactables/Materials/GoldenGear/GoldenGear1.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/InteractiveObjects/Collactables/Materials/GoldenGear/GoldenGear4.png" type="Texture" id=7]
+
+[resource]
+animations = [ {
+"frames": [ ExtResource( 6 ), ExtResource( 3 ), ExtResource( 1 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 2 ) ],
+"loop": false,
+"name": "default",
+"speed": 17.0
+} ]

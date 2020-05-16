@@ -3,7 +3,18 @@ extends Node
 onready var normal_explosion = preload("res://Global/Autoloads/SFX/NormalExplosion/NormalExplosion.tscn")
 onready var xion_explosion = preload("res://Global/Autoloads/SFX/XionExplosion/XionExplosion.tscn")
 
+onready var normal_hit = preload("res://Global/Autoloads/SFX/Feedbacks/NormalHit/NormalHit.tscn")
+onready var great_hit = preload("res://Global/Autoloads/SFX/Feedbacks/GreatHit/GreatHit.tscn")
+
 onready var debris = preload("res://Global/Autoloads/SFX/Debris/Debris.tscn")
+
+
+func play_SFX(fx: PackedScene, pos: Vector2):
+	var fx_node = fx.instance()
+	fx_node.set_global_position(pos)
+	add_child(fx_node)
+	fx_node.play_animation()
+
 
 
 func scatter_sprite(body : Node, nb_debris : int, impulse_force: float = 100.0):

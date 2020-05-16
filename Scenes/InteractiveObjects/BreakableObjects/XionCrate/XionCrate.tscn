@@ -35,7 +35,6 @@
 [ext_resource path="res://AbstractClasses/RayCastBase.gd" type="Script" id=36]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/LargeCrate.png" type="Texture" id=37]
 
-
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 6 ), ExtResource( 14 ), ExtResource( 21 ), ExtResource( 16 ), ExtResource( 26 ), ExtResource( 17 ) ],

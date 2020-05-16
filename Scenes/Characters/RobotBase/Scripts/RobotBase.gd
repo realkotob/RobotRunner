@@ -187,10 +187,7 @@ func stop_overheat():
 # Called when the robot is destroyed, triggers the death animation, the gameover,
 # and destroy this instance
 func destroy():
-	var explosion = SFX.normal_explosion.instance()
-	explosion.set_global_position(global_position)
-	SFX.add_child(explosion)
-	explosion.play_animation()
+	SFX.play_SFX(SFX.normal_explosion, global_position)
 	GAME.gameover()
 	queue_free()
 

@@ -54,9 +54,7 @@ func on_destruction(actor: Node = null):
 	hide_crate()
 	
 	# Play the Xion explosion animation
-	var xion_explosion_node = SFX.xion_explosion.instance()
-	xion_explosion_node.set_global_position(global_position)
-	SFX.add_child(xion_explosion_node)
+	SFX.play_SFX(SFX.xion_explosion, global_position)
 	
 	# Play the crate explosion and triggers the fade out
 	base_anim_node.disconnect("animation_finished", self, "on_sprite_animation_finished")
@@ -111,7 +109,7 @@ func on_area_body_exited(body : Node):
 		raycast_node.set_activate(false)
 
 
-func on_raycast_target_found(target: Node):
+func on_raycast_target_found(target: Node, _impact_pos: Vector2):
 	if target.is_class("Player"):
 		emit_signal("approch_collactable")
 

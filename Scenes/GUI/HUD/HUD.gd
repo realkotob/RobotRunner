@@ -16,13 +16,12 @@ func _ready():
 
 
 func set_hidden(value: bool):
-	if value != hidden:
-		hidden = value
-		set_physics_process(true)
-		
-		# Restart the timer each time, the HUD is notified tho show itself
-		if value == false:
-			timer_node.start(timer_node.get_wait_time())
+	hidden = value
+	set_physics_process(true)
+	
+	# Restart the timer each time, the HUD is notified tho show itself
+	if value == false:
+		timer_node.start(timer_node.get_wait_time())
 
 
 func get_hidden() -> bool:

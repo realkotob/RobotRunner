@@ -329,7 +329,6 @@ visible = false
 shape = SubResource( 14 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-visible = false
 script = ExtResource( 36 )
 
 [node name="AwakeArea" type="Area2D" parent="."]

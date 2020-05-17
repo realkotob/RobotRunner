@@ -13,6 +13,7 @@ onready var raycast_node = $RayCast2D
 var animated_sprite_node_array : Array
 
 var actor_destroying : Node
+var tracked_player : Player = null
 
 signal approch_collactable
 
@@ -33,6 +34,12 @@ func _ready():
 
 func get_class():
 	return "XionCrate"
+
+
+func _physics_process(_delta):
+	if tracked_player != null:
+		raycast_node.search_for_target(tracked_player)
+
 
 # Called by a character when its hitbox touches it
 # Count the number of time the crate has been damaged
@@ -100,17 +107,18 @@ func on_sprite_animation_finished():
 
 
 func on_area_body_entered(body : Node):
-	if body.is_class("Player"):
-		raycast_node.search_for_target(body)
+	if body is Player:
+		tracked_player = body
 
 
 func on_area_body_exited(body : Node):
-	if body.is_class("Player"):
+	if body is Player:
 		raycast_node.set_activate(false)
+		tracked_player = null
 
 
 func on_raycast_target_found(target: Node, _impact_pos: Vector2):
-	if target.is_class("Player"):
+	if target is Player:
 		emit_signal("approch_collactable")
 
 

@@ -1,6 +1,6 @@
 extends Control
 
-onready var title_screen = "res://Scenes/GUI/Menus/ScreenTitle/ScreenTitle.tscn"
+onready var title_screen = "res://Scenes/Menus/ScreenTitle/ScreenTitle.tscn"
 onready var children_array = get_children()
 onready var timer_node = get_node("Timer")
 onready var quit_text_node = get_node("RTL_Quit")

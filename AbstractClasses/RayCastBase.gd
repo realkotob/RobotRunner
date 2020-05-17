@@ -8,7 +8,6 @@ class_name RayCastBase
 
 signal target_found
 
-export var oneshot : bool = false
 var cast_target : Node = null 
 
 func _ready():
@@ -16,18 +15,20 @@ func _ready():
 
 
 # Activate the ray cast, until it find a specific target
-func search_for_target(target : Node, once: bool = false):
-	if cast_target == null:
+func search_for_target(target : Node):
+	if target == null:
 		return
+	
 	cast_target = target
-	oneshot = once
 	set_activate(true)
 
 
 func set_activate(value: bool):
 	set_enabled(value)
 	set_physics_process(value)
-	cast_target = null
+	
+	if value == false:
+		cast_target = null
 
 
 func _physics_process(_delta):
@@ -45,8 +46,4 @@ func _physics_process(_delta):
 	if collider == cast_target:
 		var collision_point = get_collision_point()
 		emit_signal("target_found", cast_target, collision_point)
-	
-	if oneshot:
-		queue_free()
-	else:
 		set_activate(false)

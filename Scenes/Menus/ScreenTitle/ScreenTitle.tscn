@@ -57,27 +57,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Light2D" type="Light2D" parent="." index="1"]
-position = Vector2( 470, 169.1 )
-texture = ExtResource( 12 )
-texture_scale = 1.29
-color = Color( 1, 0, 0, 1 )
-energy = 1.22
-
-[node name="Light2D2" type="Light2D" parent="." index="2"]
-position = Vector2( 0, 540 )
-texture = ExtResource( 12 )
-texture_scale = 1.69
-color = Color( 0.541176, 0.00392157, 0.533333, 1 )
-energy = 0.86
-
-[node name="Light2D3" type="Light2D" parent="." index="3"]
-position = Vector2( 960, 539.601 )
-texture = ExtResource( 12 )
-texture_scale = 1.69
-color = Color( 0.541176, 0.00392157, 0.533333, 1 )
-
-[node name="Fog" type="Sprite" parent="." index="4"]
+[node name="Fog" type="Sprite" parent="." index="1"]
 material = SubResource( 1 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 9 )
@@ -88,7 +68,41 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Logo" type="TextureRect" parent="." index="5"]
+[node name="Light2D" type="Light2D" parent="Fog" index="0"]
+position = Vector2( 235, 100 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 12 )
+texture_scale = 1.29
+color = Color( 1, 0, 0, 1 )
+energy = 1.22
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Light2D2" type="Light2D" parent="Fog" index="1"]
+position = Vector2( 0, 270 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 12 )
+texture_scale = 1.69
+energy = 0.7
+mode = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Light2D3" type="Light2D" parent="Fog" index="2"]
+position = Vector2( 480, 269.801 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 12 )
+texture_scale = 1.69
+color = Color( 0.541176, 0.00392157, 0.533333, 1 )
+energy = 0.0
+mode = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Logo" type="TextureRect" parent="." index="2"]
 light_mask = 0
 material = SubResource( 2 )
 anchor_left = 0.5
@@ -100,6 +114,7 @@ margin_bottom = 282.3
 texture = ExtResource( 3 )
 script = ExtResource( 8 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -111,6 +126,7 @@ margin_right = 168.155
 margin_bottom = 68.8084
 texture = ExtResource( 11 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -129,7 +145,7 @@ one_shot = true
 autoplay = "HeadFloating"
 anims/HeadFloating = SubResource( 3 )
 
-[node name="HBoxContainer" parent="." index="6"]
+[node name="HBoxContainer" parent="." index="3"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -161,5 +177,5 @@ margin_right = 129.0
 margin_bottom = 140.0
 text = "Quit"
 
-[node name="OptionChoiceSound" parent="." index="7"]
+[node name="OptionChoiceSound" parent="." index="4"]
 bus = "Sounds"

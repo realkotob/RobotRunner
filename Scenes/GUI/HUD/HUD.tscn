@@ -17,6 +17,7 @@ __meta__ = {
 }
 
 [node name="Background" type="NinePatchRect" parent="."]
+self_modulate = Color( 1, 1, 1, 0.647059 )
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -290.0
@@ -102,4 +103,4 @@ increment_offset = 1
 score_type = "materials"
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 2.0

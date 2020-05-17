@@ -84,11 +84,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/GameConsole/GameConsole.gd"
 }, {
-"base": "CollactableBase",
-"class": "GearCollactable",
-"language": "GDScript",
-"path": "res://Scenes/InteractiveObjects/Collactables/Materials/Gear/Gear.gd"
-}, {
 "base": "Node2D",
 "class": "GroupBase",
 "language": "GDScript",
@@ -128,6 +123,11 @@ _global_script_classes=[ {
 "class": "Level",
 "language": "GDScript",
 "path": "res://Scenes/Levels/Base/LevelBase.gd"
+}, {
+"base": "CollactableBase",
+"class": "MaterialCollactable",
+"language": "GDScript",
+"path": "res://Scenes/InteractiveObjects/Collactables/Materials/Gear/Gear.gd"
 }, {
 "base": "Control",
 "class": "MenuBase",
@@ -220,7 +220,6 @@ _global_script_class_icons={
 "EarthBlock": "",
 "Event": "",
 "GameConsoleScript": "",
-"GearCollactable": "",
 "GroupBase": "",
 "GrowingLava": "",
 "HUD_label": "",
@@ -229,6 +228,7 @@ _global_script_class_icons={
 "InteractAreaBase": "",
 "LavaZone": "",
 "Level": "",
+"MaterialCollactable": "",
 "MenuBase": "",
 "MenuOptionsBase": "",
 "MoveBase": "",

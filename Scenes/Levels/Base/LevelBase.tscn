@@ -57,6 +57,13 @@ visible = false
 [node name="GameConsole" parent="GUI" instance=ExtResource( 8 )]
 visible = false
 
+[node name="Dialogue" type="Control" parent="GUI"]
+margin_right = 320.0
+margin_bottom = 159.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Map" type="Node2D" parent="."]
 z_index = 2
 z_as_relative = false

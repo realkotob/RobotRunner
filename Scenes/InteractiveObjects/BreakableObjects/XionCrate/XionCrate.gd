@@ -117,7 +117,7 @@ func on_area_body_exited(body : Node):
 		tracked_player = null
 
 
-func on_raycast_target_found(target: Node, _impact_pos: Vector2):
+func on_raycast_target_found(target: Node):
 	if target is Player:
 		emit_signal("approch_collactable")
 

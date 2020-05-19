@@ -4,6 +4,10 @@ extends RichTextLabel
 var right_margin : int = 20
 
 
+func _ready():
+	rect_clip_content = false
+
+
 func on_box_resized():
 	var box_size = get_parent().get_rect().size
 	var self_height = get_rect().size.y

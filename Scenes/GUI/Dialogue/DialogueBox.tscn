@@ -26,6 +26,7 @@ tracks/0/keys = {
 }
 
 [node name="DialogueBox" type="NinePatchRect"]
+self_modulate = Color( 1, 1, 1, 0.709804 )
 margin_right = 360.0
 margin_bottom = 116.0
 rect_min_size = Vector2( 100, 100 )

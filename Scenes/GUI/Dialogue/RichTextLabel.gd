@@ -12,3 +12,4 @@ func on_box_resized():
 	
 	var pos_x = rect_position.x
 	rect_size.x = box_size.x - pos_x - right_margin
+

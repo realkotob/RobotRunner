@@ -19,14 +19,14 @@ func _ready():
 
 func on_animation_finished(anim_name: String):
 	if anim_name == "Open":
-		load_text(0)
+		load_text(TRANSLATION.get_dialogue_key(0))
 		set_process(true)
 		timer_node.set_wait_time(text_base_speed)
 		timer_node.start()
 
 
-func load_text(index : int):
-	entire_text = DIALOGUE.text_array[index]
+func load_text(key : String):
+	entire_text = TRANSLATION.get_current_translation().get_message(key)
 
 
 func _process(_delta):

@@ -1,4 +1,4 @@
-extends SubMenuBase
+extends Control
 
 onready var music_slider_node = $MusicSlider
 onready var sounds_slider_node = $SoundsSlider
@@ -12,6 +12,13 @@ func _ready():
 	
 	music_slider_node.connect("value_changed", self, "on_music_value_changed")
 	sounds_slider_node.connect("value_changed", self, "on_sounds_value_changed")
+
+
+func _unhandled_input(event):
+	if event is InputEvent:
+		if event.is_action_pressed("ui_cancel"):
+			get_tree().paused = false
+			queue_free()
 
 
 func on_music_value_changed(value : float):

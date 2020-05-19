@@ -266,6 +266,7 @@ GAME="*res://Global/Autoloads/Game/Game.tscn"
 COLLACTABLES="*res://Global/Autoloads/Collactables/Collactables.gd"
 CHAPTER_GEN="*res://Global/Autoloads/ChapterGeneration/ChapterGen.gd"
 MUSIC="*res://Global/Autoloads/Music/Music.tscn"
+TRANSLATION="*res://DialogueContainter.gd"
 
 [debug]
 
@@ -275,6 +276,8 @@ gdscript/completion/autocomplete_setters_and_getters=true
 
 window/size/width=960
 window/size/height=540
+window/size/borderless=true
+window/size/fullscreen=true
 window/vsync/use_vsync=false
 window/stretch/mode="2d"
 window/stretch/aspect="keep_width"
@@ -409,6 +412,15 @@ HUD_switch_state={
 2d_render/layer_5="SeeThroughA"
 2d_render/layer_6="SeeThroughB"
 2d_render/layer_20="GUI"
+
+[locale]
+
+translations=PoolStringArray( "res://Global/Autoloads/Translation/Text.en.translation", "res://Global/Autoloads/Translation/Text.fr.translation" )
+locale_filter=[ 0, [ "en", "fr" ] ]
+translation_remaps={
+"res://Global/Autoloads/Dialogues/Text.en.translation": PoolStringArray(  ),
+"res://Global/Autoloads/Dialogues/Text.fr.translation": PoolStringArray(  )
+}
 
 [rendering]
 

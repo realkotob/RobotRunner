@@ -62,13 +62,13 @@ onready var particules_node = get_node(\"Particles2D\")
 
 var M_IceBlocks_node : Node2D
 
-# Return true is the given string is the name of the class 
+# Return true is the given string is the name of the class
 # (Necesary in 3.2 because Godot check the very parent class instead of the current class)
 func is_class(value : String):
 	return value == CLASS_NAME
 
 
-# Return a string of the name of the class 
+# Return a string of the name of the class
 # (Necesary in 3.2 because Godot check the very parent class instead of the current class)
 func get_class():
 	return CLASS_NAME
@@ -78,7 +78,7 @@ func get_class():
 func on_body_entered(body):
 	if body.is_class(\"IceBlock\"):
 		body_floating(body, true)
-		
+
 	if body is RigidBody2D or body is KinematicBody2D:
 		particules_node.global_position.x = body.global_position.x
 		particules_node.set_emitting(true)
@@ -95,7 +95,7 @@ func interact(global_pos : Vector2):
 	if water_area != null:
 		if is_position_in_area(global_pos, water_area):
 			M_IceBlocks_node = iceblock_scene.instance()
-			
+
 			add_child(M_IceBlocks_node)
 			M_IceBlocks_node.set_global_position(global_pos)
 			body_floating(M_IceBlocks_node, true)
@@ -105,14 +105,14 @@ func interact(global_pos : Vector2):
 func is_position_in_area(pos: Vector2, collision_shape : CollisionShape2D) -> bool:
 	var shape_pos = collision_shape.get_global_position()
 	var shape_ext = collision_shape.get_shape().get_extents()
-	
+
 	return pos.y > shape_pos.y - shape_ext.y && pos.y < shape_pos.y + shape_ext.y && pos.x > shape_pos.x - shape_ext.x && pos.x < shape_pos.x + shape_ext.x
 
 
 # Setup the floating on the given body
 func body_floating(body : PhysicsBody2D, float_or_not : bool):
 	body.is_floating = float_or_not
-	
+
 	if float_or_not == true:
 		body.floating_line_y = floating_line_node.global_position.y
 "
@@ -747,7 +747,7 @@ position = Vector2( 36, 288 )
 rotation = -1.5708
 
 [node name="AnimatedSprite" parent="InteractivesObjects/TeleportGroups/G8/TeleportArea" index="0"]
-frame = 0
+frame = 2
 
 [node name="CollisionShape2D" parent="InteractivesObjects/TeleportGroups/G8/TeleportArea" index="1"]
 position = Vector2( 0.00012207, -36 )
@@ -767,7 +767,7 @@ position = Vector2( -132, 288 )
 rotation = 4.71239
 
 [node name="AnimatedSprite" parent="InteractivesObjects/TeleportGroups/G9/TeleportArea" index="0"]
-frame = 0
+frame = 2
 
 [node name="CollisionShape2D" parent="InteractivesObjects/TeleportGroups/G9/TeleportArea" index="1"]
 position = Vector2( 0, -20 )

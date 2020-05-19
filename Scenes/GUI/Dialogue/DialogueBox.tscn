@@ -1,42 +1,111 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Global/Fonts/BoldCapsPixel24.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Scenes/GUI/Dialogue/Assets/DialogueBox.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/GUI/Dialogue/Assets/Overseer.png" type="Texture" id=3]
-[ext_resource path="res://Scenes/GUI/Dialogue/Assets/FrameBG.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/GUI/Dialogue/DialogueBox.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/GUI/Dialogue/Assets/PortraitFrame.png" type="Texture" id=5]
 [ext_resource path="res://Global/Fonts/BoldCapsPixel48.tres" type="DynamicFont" id=6]
+[ext_resource path="res://Scenes/GUI/Dialogue/PortraitFrame.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/GUI/Dialogue/RichTextLabel.gd" type="Script" id=8]
 
-[node name="NinePatchRect" type="NinePatchRect"]
-margin_left = 7.0
-margin_top = 4.0
-margin_right = 367.0
-margin_bottom = 128.0
+[sub_resource type="Animation" id=2]
+resource_name = "Close"
+length = 1.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_size")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 360, 116 ), Vector2( 100, 100 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5, 1.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "Open"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_size")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6, 0.75, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 100, 100 ), Vector2( 360, 116 ), Vector2( 340, 108 ), Vector2( 360, 116 ) ]
+}
+
+[node name="DialogueBox" type="NinePatchRect"]
+self_modulate = Color( 1, 1, 1, 0.709804 )
+margin_right = 360.0
+margin_bottom = 116.0
+rect_min_size = Vector2( 100, 100 )
 texture = ExtResource( 2 )
 patch_margin_left = 24
 patch_margin_top = 24
 patch_margin_right = 24
 patch_margin_bottom = 24
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="PortraitFrame" type="TextureRect" parent="."]
-margin_left = 20.0931
-margin_top = 24.861
-margin_right = 88.0931
-margin_bottom = 92.861
+anchor_left = 0.08
+anchor_top = 0.206
+anchor_right = 0.275
+anchor_bottom = 0.888
+margin_left = 0.88158
+margin_top = 0.194147
+margin_right = -5.11543
+margin_bottom = -14.0459
 texture = ExtResource( 5 )
+stretch_mode = 4
+script = ExtResource( 7 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Background" type="TextureRect" parent="PortraitFrame"]
-margin_right = 68.0
-margin_bottom = 68.0
-texture = ExtResource( 4 )
+[node name="Background" type="ColorRect" parent="PortraitFrame"]
+show_behind_parent = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -32.157
+margin_top = -32.0
+margin_right = 31.843
+margin_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 5
+size_flags_vertical = 5
+color = Color( 0.317647, 0.333333, 0.509804, 1 )
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true,
+"_edit_use_anchors_": true
 }
 
 [node name="Portrait" type="TextureRect" parent="PortraitFrame"]
@@ -46,23 +115,44 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -32.0
 margin_top = -33.0
-margin_right = 36.0
-margin_bottom = 35.0
+margin_right = 32.0
+margin_bottom = 32.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource( 3 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-margin_left = 98.0
-margin_top = 26.0
-margin_right = 359.0
-margin_bottom = 107.0
+anchor_left = 0.319
+anchor_top = 0.36
+anchor_right = 0.319
+anchor_bottom = 0.36
+margin_left = -1.28001
+margin_top = -5.26002
+margin_right = 225.16
+margin_bottom = 37.74
 custom_fonts/mono_font = ExtResource( 6 )
 custom_fonts/normal_font = ExtResource( 1 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
+scroll_active = false
+script = ExtResource( 8 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 1.7
+anims/Close = SubResource( 2 )
+anims/Open = SubResource( 1 )
+
+[node name="TypeInTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="ReadingTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+[connection signal="resized" from="." to="RichTextLabel" method="on_box_resized"]

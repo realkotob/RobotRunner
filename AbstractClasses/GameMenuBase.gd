@@ -40,11 +40,11 @@ func _unhandled_input(event):
 			
 			# If the player hit up -> Navigate up
 			if Input.is_action_just_pressed("ui_up"):
-				increment_button_index(1)
+				increment_button_index(-1)
 				
 			# If the player hit down -> Navigate down
 			elif Input.is_action_just_pressed("ui_down"):
-				increment_button_index(-1)
+				increment_button_index(1)
 			
 			# Triggers the reponse of the button
 			on_button_aimed(buttons_array[button_index], false)

@@ -44,6 +44,5 @@ func _physics_process(_delta):
 	var collider = get_collider()
 		
 	if collider == cast_target:
-		var collision_point = get_collision_point()
-		emit_signal("target_found", cast_target, collision_point)
+		emit_signal("target_found", cast_target)
 		set_activate(false)

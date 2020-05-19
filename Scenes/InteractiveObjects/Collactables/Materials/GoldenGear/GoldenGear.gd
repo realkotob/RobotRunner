@@ -1,2 +1,2 @@
-extends GearCollactable
+extends MaterialCollactable
 

@@ -29,6 +29,7 @@
 shader = ExtResource( 2 )
 shader_param/fog_color = Color( 0.541176, 0.0784314, 0.392157, 1 )
 shader_param/distort_speed = Vector2( 0.05, -0.08 )
+shader_param/move_speed = 1.0
 shader_param/opacity = 0.3
 shader_param/OCTAVES = 5
 
@@ -745,6 +746,9 @@ __meta__ = {
 position = Vector2( 36, 288 )
 rotation = -1.5708
 
+[node name="AnimatedSprite" parent="InteractivesObjects/TeleportGroups/G8/TeleportArea" index="0"]
+frame = 0
+
 [node name="CollisionShape2D" parent="InteractivesObjects/TeleportGroups/G8/TeleportArea" index="1"]
 position = Vector2( 0.00012207, -36 )
 shape = SubResource( 16 )
@@ -761,6 +765,9 @@ __meta__ = {
 [node name="TeleportArea" parent="InteractivesObjects/TeleportGroups/G9" index="0" instance=ExtResource( 13 )]
 position = Vector2( -132, 288 )
 rotation = 4.71239
+
+[node name="AnimatedSprite" parent="InteractivesObjects/TeleportGroups/G9/TeleportArea" index="0"]
+frame = 0
 
 [node name="CollisionShape2D" parent="InteractivesObjects/TeleportGroups/G9/TeleportArea" index="1"]
 position = Vector2( 0, -20 )
@@ -897,9 +904,6 @@ rotation = 1.5708
 
 [node name="G1" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="0"]
 script = ExtResource( 6 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="BlueButton" parent="InteractivesObjects/Buttons&Doors/G1" index="0" instance=ExtResource( 20 )]
 position = Vector2( 312, -136 )
@@ -910,9 +914,6 @@ position = Vector2( 104, -312 )
 
 [node name="G2" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="1"]
 script = ExtResource( 6 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="BlueButton" parent="InteractivesObjects/Buttons&Doors/G2" index="0" instance=ExtResource( 20 )]
 position = Vector2( 1159, -144 )
@@ -923,9 +924,6 @@ position = Vector2( 816, -24 )
 
 [node name="G3" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="2"]
 script = ExtResource( 6 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="RedButton" parent="InteractivesObjects/Buttons&Doors/G3" index="0" instance=ExtResource( 7 )]
 position = Vector2( 1536, -108 )
@@ -938,9 +936,6 @@ position = Vector2( 1792, -312 )
 
 [node name="G5" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="3"]
 script = ExtResource( 6 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="BlueButton" parent="InteractivesObjects/Buttons&Doors/G5" index="0" instance=ExtResource( 20 )]
 position = Vector2( 2312, 216 )
@@ -951,9 +946,6 @@ position = Vector2( 2352, 272 )
 
 [node name="G6" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="4"]
 script = ExtResource( 6 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="GreenButton" parent="InteractivesObjects/Buttons&Doors/G6" index="0" instance=ExtResource( 17 )]
 position = Vector2( 576, 128 )
@@ -964,9 +956,6 @@ position = Vector2( 648, 312 )
 
 [node name="G7" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="5"]
 script = ExtResource( 6 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="RedButton2" parent="InteractivesObjects/Buttons&Doors/G7" index="0" instance=ExtResource( 7 )]
 position = Vector2( 888, 252 )
@@ -1008,9 +997,6 @@ position = Vector2( 1248, 576 )
 
 [node name="G8" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="6"]
 script = ExtResource( 6 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="BlueButton" parent="InteractivesObjects/Buttons&Doors/G8" index="0" instance=ExtResource( 20 )]
 position = Vector2( 1856, 576 )
@@ -1085,8 +1071,8 @@ rotation = -3.14159
 position = Vector2( 1016, -528 )
 
 [node name="RedButton" parent="InteractivesObjects/GreatDoorGroup" index="0" instance=ExtResource( 7 )]
-position = Vector2( 2524, 108 )
-rotation = 3.14159
+position = Vector2( 2336, 104 )
+rotation = 2.35619
 
 [node name="RedButton2" parent="InteractivesObjects/GreatDoorGroup" index="1" instance=ExtResource( 7 )]
 position = Vector2( 1812, 96 )
@@ -1152,17 +1138,17 @@ position = Vector2( 8, 32 )
 position = Vector2( -8, 32 )
 
 [node name="Checkpoint3" parent="Events/Checkpoints" index="2" instance=ExtResource( 24 )]
-position = Vector2( 1792, -440 )
+position = Vector2( 1754.89, -453.353 )
 
 [node name="TriggerArea" parent="Events/Checkpoints/Checkpoint3" index="0"]
-position = Vector2( 0, 24 )
-scale = Vector2( 9.03998, 4 )
+position = Vector2( -146.663, -74.2866 )
+scale = Vector2( 2.71237, 4.76098 )
 
 [node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint3" index="1"]
-position = Vector2( -32, 32 )
+position = Vector2( 61.1077, 45.3533 )
 
 [node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint3" index="2"]
-position = Vector2( 24, 32 )
+position = Vector2( 5.10767, 45.3533 )
 
 [node name="Checkpoint4" parent="Events/Checkpoints" index="3" instance=ExtResource( 24 )]
 position = Vector2( -24, -176 )
@@ -1179,6 +1165,7 @@ position = Vector2( -24, 56 )
 
 [node name="Checkpoint5" parent="Events/Checkpoints" index="4" instance=ExtResource( 24 )]
 position = Vector2( 1168, 616 )
+rotation = 0.000845693
 
 [node name="Checkpoint6" parent="Events/Checkpoints" index="5" instance=ExtResource( 24 )]
 position = Vector2( 2112, 616 )

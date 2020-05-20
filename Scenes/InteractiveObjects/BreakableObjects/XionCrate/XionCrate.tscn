@@ -1,0 +1,338 @@
+[gd_scene load_steps=50 format=2]
+
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/XionCrate.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateSE/LargeCrateAnimSE2.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateSO/LargeCrateAnimSO4.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateSE/LargeCrateAnimSE6.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateSO/LargeCrateAnimSO3.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateBase/LargeCrateAnimBase1.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateNE/LargeCrateAnimNE1.png" type="Texture" id=7]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateNO/LargeCrateAnimNO4.png" type="Texture" id=8]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateNO/LargeCrateAnimNO6.png" type="Texture" id=9]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateNO/LargeCrateAnimNO1.png" type="Texture" id=10]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateNE/LargeCrateAnimNE3.png" type="Texture" id=11]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateSO/LargeCrateAnimSO2.png" type="Texture" id=12]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateNO/LargeCrateAnimNO3.png" type="Texture" id=13]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateBase/LargeCrateAnimBase2.png" type="Texture" id=14]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateSE/LargeCrateAnimSE1.png" type="Texture" id=15]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateBase/LargeCrateAnimBase4.png" type="Texture" id=16]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateBase/LargeCrateAnimBase6.png" type="Texture" id=17]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateSE/LargeCrateAnimSE4.png" type="Texture" id=18]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateSE/LargeCrateAnimSE5.png" type="Texture" id=19]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateSE/LargeCrateAnimSE3.png" type="Texture" id=20]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateBase/LargeCrateAnimBase3.png" type="Texture" id=21]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateNE/LargeCrateAnimNE4.png" type="Texture" id=22]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateNE/LargeCrateAnimNE2.png" type="Texture" id=23]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateNE/LargeCrateAnimNE6.png" type="Texture" id=24]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateSO/LargeCrateAnimSO6.png" type="Texture" id=25]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateBase/LargeCrateAnimBase5.png" type="Texture" id=26]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateNE/LargeCrateAnimNE5.png" type="Texture" id=27]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateNO/LargeCrateAnimNO2.png" type="Texture" id=28]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateSO/LargeCrateAnimSO1.png" type="Texture" id=29]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateNO/LargeCrateAnimNO5.png" type="Texture" id=30]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateSO/LargeCrateAnimSO5.png" type="Texture" id=31]
+[ext_resource path="res://Global/Lights/Light300.png" type="Texture" id=32]
+[ext_resource path="res://AbstractClasses/RayCastBase.gd" type="Script" id=36]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/LargeCrate.png" type="Texture" id=37]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 6 ), ExtResource( 14 ), ExtResource( 21 ), ExtResource( 16 ), ExtResource( 26 ), ExtResource( 17 ) ],
+"loop": false,
+"name": "default",
+"speed": 13.0
+} ]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 7 ), ExtResource( 23 ), ExtResource( 11 ), ExtResource( 22 ), ExtResource( 27 ), ExtResource( 24 ) ],
+"loop": false,
+"name": "default",
+"speed": 13.0
+} ]
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 10 ), ExtResource( 28 ), ExtResource( 13 ), ExtResource( 8 ), ExtResource( 30 ), ExtResource( 9 ) ],
+"loop": false,
+"name": "default",
+"speed": 13.0
+} ]
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 15 ), ExtResource( 2 ), ExtResource( 20 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 4 ) ],
+"loop": false,
+"name": "default",
+"speed": 13.0
+} ]
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ ExtResource( 29 ), ExtResource( 12 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 31 ), ExtResource( 25 ) ],
+"loop": false,
+"name": "default",
+"speed": 13.0
+} ]
+
+[sub_resource type="Animation" id=6]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprites/Base:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "on_fadeout_finished"
+} ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprites/NE:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 1, -1 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprites/NO:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -1, 0 ), Vector2( 0, 0 ), Vector2( -1, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprites/SE:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 1, 0 ), Vector2( 0, 0 ), Vector2( 0, -1 ), Vector2( 1, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprites/SO:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -1, 0 ), Vector2( 0, 0 ), Vector2( -1, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("ParticlesLeft:emitting")
+tracks/4/interp = 0
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("ParticlesRight:emitting")
+tracks/5/interp = 0
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprites:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 24, 24 )
+
+[sub_resource type="Gradient" id=10]
+offsets = PoolRealArray( 0.0301205, 0.972892 )
+colors = PoolColorArray( 1, 0.254902, 0.92549, 0.623529, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=11]
+gradient = SubResource( 10 )
+
+[sub_resource type="ParticlesMaterial" id=12]
+render_priority = 1
+emission_shape = 1
+emission_sphere_radius = 1.0
+flag_disable_z = true
+direction = Vector3( -1, 0, 0 )
+spread = 103.78
+flatness = 0.42
+gravity = Vector3( 0, -100, 0 )
+initial_velocity = 25.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.06
+radial_accel = 29.42
+radial_accel_random = 0.4
+tangential_accel = 24.84
+tangential_accel_random = 0.54
+damping = 63.24
+angle_random = 0.13
+scale_random = 0.54
+color_ramp = SubResource( 11 )
+hue_variation_random = 0.2
+
+[sub_resource type="ParticlesMaterial" id=13]
+render_priority = 1
+emission_shape = 1
+emission_sphere_radius = 1.0
+flag_disable_z = true
+spread = 103.78
+flatness = 0.42
+gravity = Vector3( 0, -100, 0 )
+initial_velocity = 25.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.06
+radial_accel = 29.42
+radial_accel_random = 0.4
+tangential_accel = 24.84
+tangential_accel_random = 0.54
+damping = 63.24
+angle_random = 0.13
+scale_random = 0.54
+color_ramp = SubResource( 11 )
+hue_variation_random = 0.2
+
+[sub_resource type="CircleShape2D" id=14]
+radius = 80.5399
+
+[sub_resource type="RectangleShape2D" id=15]
+extents = Vector2( 22.7645, 3.99571 )
+
+[node name="XionCrate" type="RigidBody2D"]
+mode = 1
+gravity_scale = 5.0
+sleeping = true
+script = ExtResource( 1 )
+nb_debris = 30
+explosion_impulse = 150.0
+
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="Base" type="AnimatedSprite" parent="Sprites"]
+frames = SubResource( 1 )
+
+[node name="NE" type="AnimatedSprite" parent="Sprites"]
+frames = SubResource( 2 )
+
+[node name="NO" type="AnimatedSprite" parent="Sprites"]
+frames = SubResource( 3 )
+
+[node name="SE" type="AnimatedSprite" parent="Sprites"]
+frames = SubResource( 4 )
+
+[node name="SO" type="AnimatedSprite" parent="Sprites"]
+frames = SubResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 37 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/FadeOut = SubResource( 6 )
+anims/Vibrate = SubResource( 7 )
+
+[node name="Flash" type="AnimationPlayer" parent="."]
+playback_speed = 1.7
+anims/Flash = SubResource( 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 9 )
+
+[node name="ParticlesLeft" type="Particles2D" parent="."]
+position = Vector2( -21.2924, -0.286514 )
+z_index = -1
+emitting = false
+amount = 150
+lifetime = 2.0
+explosiveness = 0.71
+randomness = 1.0
+process_material = SubResource( 12 )
+
+[node name="ParticlesRight" type="Particles2D" parent="."]
+position = Vector2( 21.4729, 0.0958099 )
+z_index = -1
+emitting = false
+amount = 150
+lifetime = 2.0
+explosiveness = 0.71
+randomness = 1.0
+process_material = SubResource( 13 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 32 )
+color = Color( 0.843137, 0.207843, 1, 1 )
+range_item_cull_mask = 17
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 14 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+script = ExtResource( 36 )
+
+[node name="AwakeArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AwakeArea"]
+position = Vector2( -0.160763, -28.4921 )
+shape = SubResource( 15 )

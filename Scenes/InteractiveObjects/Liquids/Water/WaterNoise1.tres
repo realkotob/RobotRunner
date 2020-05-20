@@ -1,0 +1,6 @@
+[gd_resource type="OpenSimplexNoise" format=2]
+
+[resource]
+octaves = 6
+period = 0.1
+lacunarity = 0.1

@@ -1,0 +1,92 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/Menus/OptionsMenu/SoundMenu/SoundMenu.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Menus/MenuBase.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Global/Fonts/BoldCapsPixel48.tres" type="DynamicFont" id=3]
+
+[node name="SoundMenu" instance=ExtResource( 2 )]
+script = ExtResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="." index="0"]
+modulate = Color( 0, 0, 0, 0.4 )
+margin_right = 960.0
+margin_bottom = 540.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="ColorRect" index="0"]
+modulate = Color( 0, 0, 0, 0.6 )
+margin_left = 80.0
+margin_top = 70.0
+margin_right = 880.0
+margin_bottom = 470.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="MusicSlider" type="HSlider" parent="." index="3"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -68.9913
+margin_top = -48.0
+margin_right = 195.009
+margin_bottom = -32.0
+max_value = 1.0
+step = 0.1
+value = 1.0
+scrollable = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="MusicSlider" index="0"]
+margin_left = -128.513
+margin_top = -13.9466
+margin_right = -20.5133
+margin_bottom = 24.0534
+custom_fonts/font = ExtResource( 3 )
+custom_constants/shadow_offset_x = 0
+custom_constants/line_spacing = 0
+text = "MUSIC"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SoundsSlider" type="HSlider" parent="." index="4"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -69.2188
+margin_top = 17.108
+margin_right = 194.781
+margin_bottom = 33.108
+max_value = 1.0
+step = 0.1
+value = 1.0
+scrollable = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="SoundsSlider" index="0"]
+margin_left = -145.95
+margin_top = -14.4638
+margin_right = -19.9503
+margin_bottom = 23.5362
+custom_fonts/font = ExtResource( 3 )
+custom_constants/shadow_offset_x = 0
+custom_constants/line_spacing = 0
+text = "SOUNDS"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -1,14 +1,10 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/RobotBase.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/Characters/RobotBase/Scripts/Physic.gd" type="Script" id=2]
-[ext_resource path="res://Scenes/Characters/RobotBase/Scripts/Direction.gd" type="Script" id=3]
-[ext_resource path="res://Scenes/Characters/RobotBase/Scripts/Attributes.gd" type="Script" id=4]
-[ext_resource path="res://Scenes/Characters/RobotBase/Scripts/LayerChange.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Characters/RobotBase/Sounds/Teleport4.wav" type="AudioStream" id=6]
-[ext_resource path="res://BaseClasses/StateMachine.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/Characters/RobotBase/Scripts/RobotStatesMachine.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/Idle.gd" type="Script" id=8]
-[ext_resource path="res://BaseClasses/MoveBase.gd" type="Script" id=9]
+[ext_resource path="res://AbstractClasses/MoveBase.gd" type="Script" id=9]
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/Jump.gd" type="Script" id=10]
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/Fall.gd" type="Script" id=11]
 [ext_resource path="res://Scenes/Characters/RobotBase/Scripts/Action.gd" type="Script" id=12]
@@ -23,18 +19,26 @@
 [ext_resource path="res://Scenes/Characters/RobotIce/Sprites/RobotIce.png" type="Texture" id=21]
 [ext_resource path="res://Scenes/Characters/RobotIce/Sprites/RobotIceJump6.png" type="Texture" id=22]
 [ext_resource path="res://Scenes/Characters/RobotIce/Sprites/RobotIceFall.png" type="Texture" id=23]
-[ext_resource path="res://Scenes/Characters/RobotBase/Scripts/HitBoxBase.gd" type="Script" id=24]
+[ext_resource path="res://Scenes/Characters/RobotBase/Scripts/StateLabel.gd" type="Script" id=24]
+[ext_resource path="res://Scenes/Characters/RobotBase/SFX/Dust3/Dust3_2.png" type="Texture" id=25]
+[ext_resource path="res://Scenes/Characters/RobotBase/SFX/Dust2/Dust2_2.png" type="Texture" id=26]
+[ext_resource path="res://Scenes/Characters/RobotBase/SFX/Dust2/Dust2_3.png" type="Texture" id=27]
+[ext_resource path="res://Scenes/Characters/RobotBase/SFX/Dust2/Dust2_1.png" type="Texture" id=28]
+[ext_resource path="res://Scenes/Characters/RobotBase/SFX/Dust3/Dust3_4.png" type="Texture" id=29]
+[ext_resource path="res://Scenes/Characters/RobotBase/SFX/Dust3/Dust3_1.png" type="Texture" id=30]
+[ext_resource path="res://Scenes/Characters/RobotBase/SFX/Dust3/Dust3_3.png" type="Texture" id=31]
+[ext_resource path="res://Scenes/Characters/RobotBase/SFX/Dust2/Dust2_4.png" type="Texture" id=32]
+[ext_resource path="res://Scenes/Characters/RobotBase/SFX/DustBase.tscn" type="PackedScene" id=33]
+[ext_resource path="res://Scenes/Characters/RobotBase/Scripts/SFX_group_base.gd" type="Script" id=34]
+[ext_resource path="res://Scenes/Characters/RobotBase/Scripts/SFX_Base.gd" type="Script" id=35]
+[ext_resource path="res://Scenes/Characters/RobotBase/Scripts/JumpDust.gd" type="Script" id=36]
+[ext_resource path="res://Global/Lights/SeeThrouhMask.png" type="Texture" id=37]
+[ext_resource path="res://Scenes/Characters/RobotBase/Scripts/Shock.gd" type="Script" id=38]
+[ext_resource path="res://Scenes/Characters/RobotBase/Scripts/SeeThourghWalls.gd" type="Script" id=40]
+[ext_resource path="res://Global/Fonts/BoldCapsPixel64.tres" type="DynamicFont" id=42]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 15.5305, 20 )
-
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
-"loop": false,
-"name": "Action",
-"speed": 10.0
-}, {
 "frames": [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ) ],
 "loop": true,
 "name": "Move",
@@ -44,6 +48,11 @@ animations = [ {
 "loop": true,
 "name": "Idle",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
+"loop": false,
+"name": "Action",
+"speed": 20.0
 }, {
 "frames": [ ExtResource( 22 ) ],
 "loop": true,
@@ -56,43 +65,129 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 15.53, 20 )
+
+[sub_resource type="AnimatedTexture" id=3]
+frames = 4
+frame_0/texture = ExtResource( 28 )
+frame_1/texture = ExtResource( 26 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 27 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 32 )
+frame_3/delay_sec = 0.0
+
+[sub_resource type="AnimatedTexture" id=4]
+frames = 4
+fps = 9.0
+frame_0/texture = ExtResource( 30 )
+frame_1/texture = ExtResource( 25 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 31 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 29 )
+frame_3/delay_sec = 0.0
+
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 30, 30 )
+
+[sub_resource type="CapsuleShape2D" id=6]
+radius = 10.3682
+height = 1.0
+
+[sub_resource type="Animation" id=7]
+resource_name = "Default"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Animation:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "FadeOut"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Animation:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Animation:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.992157, 0.705882, 1, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Animation:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 1, 1.3, 1.6, 1.9, 2.1, 2.3, 2.4, 2.6, 2.8, 2.9, 3.1, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 4, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 18.2249, 20.9273 )
 
 [node name="Robot" type="KinematicBody2D"]
 z_index = -1
+collision_mask = 0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Animation" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "Idle"
+playing = true
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 4 )
-shape = SubResource( 1 )
-
-[node name="Physic" type="Node" parent="."]
-script = ExtResource( 2 )
-
-[node name="Direction" type="Node" parent="."]
-script = ExtResource( 3 )
-
-[node name="Attributes" type="Node" parent="."]
-script = ExtResource( 4 )
-speed = 400
-jump_force = -500
+shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Inputs" type="Node" parent="."]
 
-[node name="LayerChange" type="Node2D" parent="."]
-script = ExtResource( 5 )
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LayerChange"]
-stream = ExtResource( 6 )
-volume_db = -12.0
-pitch_scale = 2.5
-
-[node name="States" type="Node" parent="."]
-editor/display_folded = true
+[node name="States" type="Node2D" parent="."]
+z_index = 999
+z_as_relative = false
 script = ExtResource( 7 )
 
 [node name="Idle" type="Node" parent="States"]
@@ -105,32 +200,140 @@ script = ExtResource( 9 )
 script = ExtResource( 10 )
 
 [node name="Fall" type="Node" parent="States"]
-editor/display_folded = true
 script = ExtResource( 11 )
 
-[node name="FallTimer" type="Timer" parent="States/Fall"]
-process_mode = 0
-wait_time = 0.04
+[node name="ToleranceTimer" type="Timer" parent="States/Fall"]
+wait_time = 0.1
 one_shot = true
 
-[node name="Action" type="Node" parent="States"]
-editor/display_folded = true
+[node name="JumpBufferTimer" type="Timer" parent="States/Fall"]
+wait_time = 0.1
+one_shot = true
+
+[node name="Action" type="Node2D" parent="States"]
 script = ExtResource( 12 )
+breakable_type_array = PoolStringArray( "XionCrate" )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="States/Action"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="States/Action"]
 stream = ExtResource( 13 )
+bus = "Sounds"
 
-[node name="Animation" type="AnimatedSprite" parent="."]
-frames = SubResource( 2 )
-animation = "Action"
+[node name="Shock" type="Node" parent="States"]
+script = ExtResource( 38 )
 
-[node name="HitBox" type="Area2D" parent="."]
-editor/display_folded = true
+[node name="Label" type="Label" parent="States"]
+visible = false
+margin_left = -56.8554
+margin_top = -81.0958
+margin_right = 60.1446
+margin_bottom = -30.0958
+custom_fonts/font = ExtResource( 42 )
+align = 1
+valign = 1
+script = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SFX" type="Node2D" parent="."]
+script = ExtResource( 34 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="MoveDust" type="Node2D" parent="SFX"]
+script = ExtResource( 35 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Dust1" parent="SFX/MoveDust" instance=ExtResource( 33 )]
+position = Vector2( -35, 19.075 )
+z_index = 2
+z_as_relative = false
+amount = 1
+lifetime = 0.4
+
+[node name="Dust2" parent="SFX/MoveDust" instance=ExtResource( 33 )]
+position = Vector2( -29, 19.0747 )
+z_index = 2
+z_as_relative = false
+amount = 1
+lifetime = 0.3
+texture = SubResource( 3 )
+
+[node name="Dust3" parent="SFX/MoveDust" instance=ExtResource( 33 )]
+position = Vector2( -43.0917, 19.0747 )
+z_index = 2
+z_as_relative = false
+amount = 1
+lifetime = 0.3
+texture = SubResource( 4 )
+
+[node name="JumpDust" type="Node2D" parent="SFX"]
+script = ExtResource( 36 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ActionHitBox" type="Area2D" parent="."]
 space_override = 1
 linear_damp = 0.0
-script = ExtResource( 24 )
-breakable_group = "EarthBlock"
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionHitBox"]
 position = Vector2( 30, -6 )
-shape = SubResource( 3 )
+shape = SubResource( 5 )
+disabled = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="HeadHitBox" type="StaticBody2D" parent="."]
+visible = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HeadHitBox"]
+position = Vector2( 0, -17 )
+scale = Vector2( 1.65, 0.5 )
+shape = SubResource( 6 )
+one_way_collision = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 1.5
+anims/Default = SubResource( 7 )
+anims/FadeOut = SubResource( 8 )
+anims/MagentaFlash = SubResource( 9 )
+anims/Overheat = SubResource( 10 )
+
+[node name="SeeThourghWalls" type="Light2D" parent="."]
+light_mask = 0
+z_index = 512
+z_as_relative = false
+enabled = false
+texture = ExtResource( 37 )
+texture_scale = 0.7
+mode = 3
+range_layer_min = -512
+range_layer_max = 15
+range_item_cull_mask = 16
+shadow_item_cull_mask = 0
+script = ExtResource( 40 )
+
+[node name="Area2D" type="Area2D" parent="SeeThourghWalls"]
+collision_layer = 17
+collision_mask = 17
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="SeeThourghWalls/Area2D"]
+visible = false
+shape = SubResource( 11 )
+
+[node name="LayerChangeAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+volume_db = -12.0
+pitch_scale = 2.5
+bus = "Sounds"

@@ -1,128 +1,90 @@
 extends Camera2D
 
-export var speed : float = 10
-export var acceleration : float = 6
-var current_acceleration : float = 1
+onready var state_machine_node = $StateMachine
+onready var stop_state_node = $StateMachine/Stop
+onready var follow_state_node = $StateMachine/Follow
+onready var moveto_state_node = $StateMachine/MoveTo
+onready var shake_state_node = $StateMachine/Shake
 
-onready var checkpoints_nodes_array = get_tree().get_nodes_in_group("CameraCheckpoint")
-onready var start_area_node = get_node("StartMovingArea")
-onready var play_zone_node = get_node("PlayZone")
-onready var fast_forward_zone_node = get_node("FastForwardArea")
-onready var safe_area_node = get_node("SafeArea")
+export var camera_speed : float = 3.0
+export var x_zoom_enabled : bool = true
+export var y_zoom_enabled : bool = true
+export var default_state : String = "Follow"
 
-onready var original_forward_shape_ext = fast_forward_zone_node.get_node("CollisionShape2D").get_shape().get_extents()
-onready var original_safe_area_shape_ext = Vector2((screen_width / 2), (screen_height / 3))
+var destination_zoom := Vector2.ONE
+var zoom_speed : float = 0.02
+var current_zoom_speed : float = zoom_speed
 
-var players_nodes_array : Array
-
-signal player_outside_screen
-signal player_inside_screen
-
-export var cam_direction := Vector2(1, 0)
-
-var screen_width : float = ProjectSettings.get("display/window/size/width")
-var screen_height : float = ProjectSettings.get("display/window/size/height")
-var screen_size := Vector2(screen_width, screen_height)
+var instruction_stack : Array = []
 
 func _ready():
-	add_to_group("InteractivesObjects")
-	
-	# Set the camera play_area (the playable area, where the players need to stay in) to the size of the game window 
-	play_zone_node.get_node("CollisionShape2D").get_shape().set_extents(screen_size / 2)
-	
-	set_physics_process(false)
-	
-	# Connect signals
-	var _err
-	_err = start_area_node.connect("body_entered", self, "on_start_area_body_entered")
-	_err = play_zone_node.connect("body_exited", self, "on_play_area_zone_exited")
-	_err = play_zone_node.connect("body_entered", self, "on_play_area_zone_entered")
-	for checkpoint in checkpoints_nodes_array:
-		_err = checkpoint.connect("camera_reached_checkpoint", self, "_on_checkpoint_reached")
+	state_machine_node.setup()
+	set_state("Follow")
 
 
-# Set players array, called when the players are generated in the level 
-func set_players_array():
-	players_nodes_array = get_tree().get_nodes_in_group("Players")
-
-
-# Move the camera given by the last checkpoint
 func _physics_process(_delta):
-	if is_forwarding():
-		current_acceleration = acceleration
+	if zoom != destination_zoom:
+		_zoom_to(destination_zoom)
 	else:
-		current_acceleration = 1
-	position += (speed / 100) * cam_direction * current_acceleration
+		current_zoom_speed = zoom_speed
 
 
-# Start to move the camera if a player enter the start area
-func on_start_area_body_entered(body):
-	if body in players_nodes_array:
-		set_physics_process(true)
-
-
-# When a player exits the camera zone
-func on_play_area_zone_exited(body):
-	if body in players_nodes_array:
-		emit_signal("player_outside_screen", body)
-
-
-# When a player enter back the camera zone
-func on_play_area_zone_entered(body):
-	if body in players_nodes_array:
-		emit_signal("player_inside_screen", body)
-
-
-# Get the camera direction from the current check point, and adapt area in response
-func _on_checkpoint_reached(cp_dir):
-	cam_direction = cp_dir
-	adapt_area(fast_forward_zone_node, original_forward_shape_ext)
-	adapt_area(safe_area_node, original_safe_area_shape_ext)
-
-
-# Check if the players are inside/outise an area, depending on the value of the argument ouside (set to false by default)
-# Return true is they are inside/ouside, false if not
-# If the argument all is true, they all have to be inside/ouside for the method to return true
-# If the argument all is false, check if a least one player is inside/outside
-func players_in_area(area : Area2D, all : bool):
-	var bodies_in_area = area.get_overlapping_bodies()
+# Add an instruction in the stack
+func stack_instruction(instruction: Array):
+	instruction_stack.append(instruction)
 	
-	for player in players_nodes_array:
-		if(player in bodies_in_area) == (!all):
-			return !all
-	
-	return all
+	var current_state = state_machine_node.get_state_name()
+	if current_state == "Follow" or current_state == "Stop":
+		execute_next_instruction()
 
 
-# Check if one player or more is in the forward zone while all players are in the safe zone, return true if it is, false if not
-func is_forwarding() -> bool:
-	# Check if one of the players is inside the fast forward area
-	if players_in_area(fast_forward_zone_node, false):
-		# Check if all the players are in the safe area
-		if players_in_area(safe_area_node, true):
-			return true
-	return false
+# Unstack the next instruction and execute it
+func execute_next_instruction():
+	if len(instruction_stack) == 0:
+		return
+	
+	var instruction = instruction_stack.pop_front()
+	var intruction_funcref := funcref(self, instruction.pop_front())
+	intruction_funcref.call_funcv(instruction)
 
 
-# Compute the size and the direction of safe/forward area based on the direction of the camera
-func adapt_area(area : Area2D, original_ext : Vector2):
-	var collision_shape = area.get_node("CollisionShape2D")
-	var shape = collision_shape.get_shape()
+# Give the camera the order to move at the given position, and set it's state to move_to
+func move_to(dest: Vector2, average_w_players : bool = false, move_speed : float = -1.0, duration : float = 0.0):
+	moveto_state_node.destination = dest
+	moveto_state_node.average_w_players = average_w_players
 	
-	### TO SET AS DYNAMIC LATER ###
-	# Compute the size of the given shape
-	if cam_direction.x != 0:
-		shape.extents = original_ext
-	if cam_direction.y != 0:
-		if area == fast_forward_zone_node:
-			shape.extents.x = (screen_width / 2)
-			shape.extents.y = original_ext.x
-		else:
-			shape.extents.x = original_ext.x
-			shape.extents.y = original_ext.y
+	if move_speed != -1.0:
+		moveto_state_node.current_speed = move_speed
+		
+	moveto_state_node.wait_time = duration
+	state_machine_node.set_state("MoveTo")
+
+
+func set_state(state_name: String):
+	state_machine_node.set_state(state_name)
+
+
+func set_destination_zoom(dest_zoom : Vector2):
+	destination_zoom = dest_zoom
+
+
+# Progressively zoom/dezoom
+func _zoom_to(dest_zoom: Vector2):
+	zoom = zoom.linear_interpolate(dest_zoom, current_zoom_speed)
+
+
+# Set the average_pos variable to be at the average of every players position
+func compute_average_pos(players_array: Array) -> Vector2:
+	var average_pos = Vector2.ZERO
+	for player in players_array:
+		average_pos += player.global_position
+
+	average_pos /= len(players_array)
 	
-	var shape_extents = shape.get_extents()
-	
-	# Compute the position of the given area
-	collision_shape.position.x = ((screen_width / 2) - shape_extents.x) * sign(cam_direction.x)
-	collision_shape.position.y = ((screen_height / 2) - shape_extents.y) * sign(cam_direction.y)
+	return average_pos
+
+
+func shake(magnitude: float, duration: float):
+	shake_state_node.magnitude = magnitude
+	shake_state_node.duration = duration
+	set_state("Shake")

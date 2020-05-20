@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scenes/XionCloud/XionCloudBlack.shader" type="Shader" id=1]
+[ext_resource path="res://Scenes/Fog/CosmeticFog/FogTexture.tres" type="Texture" id=2]
+[ext_resource path="res://Scenes/XionCloud/XionCloud.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/XionCloud/XionCloud_shadermaterial.tres" type="Material" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 350, 350 )
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 1 )
+shader_param/fog_color = Color( 0, 0, 0, 1 )
+shader_param/distort_speed = Vector2( -0.03, 0.03 )
+shader_param/speed_multiplier = -1.0
+shader_param/opacity = 0.8
+shader_param/OCTAVES = 6
+shader_param/offset = Vector2( 50.104, 0 )
+shader_param/fade_distance = 0.01
+
+[node name="XionCloud" type="Area2D"]
+position = Vector2( 0, 270 )
+collision_layer = 49
+collision_mask = 49
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="PurpleFog" type="Sprite" parent="."]
+light_mask = 49
+material = ExtResource( 4 )
+z_index = 10
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 960, 960 )
+
+[node name="BlackFog" type="Sprite" parent="."]
+light_mask = 49
+material = SubResource( 2 )
+z_index = 10
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 960, 960 )
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

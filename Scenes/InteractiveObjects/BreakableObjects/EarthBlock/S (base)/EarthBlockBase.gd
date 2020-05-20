@@ -1,4 +1,9 @@
 extends BlockBase
 
-func _ready():
-	add_to_group("EarthBlock")
+class_name EarthBlock
+
+func is_class(value: String):
+	return value == "EarthBlock"
+
+func get_class() -> String:
+	return "EarthBlock"

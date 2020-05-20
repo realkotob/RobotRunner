@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Chapter1_Hard.ogg-ae2af5e1275b974dc81a99722f71e137.oggstr"
+
+[deps]
+
+source_file="res://Scenes/Levels/Chapter1/Music/Chapter1_Hard.ogg"
+dest_files=[ "res://.import/Chapter1_Hard.ogg-ae2af5e1275b974dc81a99722f71e137.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

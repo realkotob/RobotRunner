@@ -270,28 +270,20 @@ can_sleep = false
 [node name="Checkpoint" parent="Events/Checkpoints" index="0" instance=ExtResource( 14 )]
 position = Vector2( 1960, 352 )
 
-[node name="TriggerArea" parent="Events/Checkpoints/Checkpoint" index="0"]
-position = Vector2( 0, -34.251 )
-scale = Vector2( 3.227, 4.161 )
-
 [node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint" index="1"]
-position = Vector2( -8.00003, -16 )
+position = Vector2( 0, -16 )
 
 [node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint" index="2"]
-position = Vector2( 40, -48 )
+position = Vector2( 48, -56 )
 
 [node name="Checkpoint2" parent="Events/Checkpoints" index="1" instance=ExtResource( 14 )]
-position = Vector2( 3536, 399.96 )
-
-[node name="TriggerArea" parent="Events/Checkpoints/Checkpoint2" index="0"]
-position = Vector2( 0, -75.8119 )
-scale = Vector2( 3.227, 8.466 )
+position = Vector2( 3688, 424 )
 
 [node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint2" index="1"]
-position = Vector2( -80, 8 )
+position = Vector2( 80, -40 )
 
 [node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint2" index="2"]
-position = Vector2( 48, -15.9601 )
+position = Vector2( -88, -40 )
 
 [node name="CameraEvent" parent="Events/CameraEvents" index="0" instance=ExtResource( 15 )]
 position = Vector2( 2100, 288 )

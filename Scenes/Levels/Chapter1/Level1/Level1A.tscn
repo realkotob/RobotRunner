@@ -190,20 +190,7 @@ position = Vector2( 2952, 516 )
 position = Vector2( 2952, 516 )
 
 [node name="Checkpoint" parent="Events/Checkpoints" index="0" instance=ExtResource( 16 )]
-position = Vector2( 1536, 216 )
-
-[node name="TriggerArea" parent="Events/Checkpoints/Checkpoint" index="0"]
-position = Vector2( -128, -16 )
-scale = Vector2( 2.205, 9.973 )
-
-[node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint" index="1"]
-position = Vector2( -168, 48 )
-
-[node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint" index="2"]
-position = Vector2( -96, 48 )
-
-[node name="AnimatedSprite" parent="Events/Checkpoints/Checkpoint" index="3"]
-position = Vector2( -128, 49 )
+position = Vector2( 1416, 280 )
 
 [node name="XionCloud" parent="." index="7" instance=ExtResource( 2 )]
 position = Vector2( -793.881, 270 )

@@ -179,30 +179,22 @@ position = Vector2( 288, -636 )
 position = Vector2( 792, -672 )
 
 [node name="Checkpoint" parent="Events/Checkpoints" index="0" instance=ExtResource( 15 )]
-position = Vector2( 381.758, 136.168 )
-
-[node name="TriggerArea" parent="Events/Checkpoints/Checkpoint" index="0"]
-position = Vector2( -1.34692, -30.8005 )
-scale = Vector2( 3.203, 3.177 )
+position = Vector2( 384, 136 )
 
 [node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint" index="1"]
-position = Vector2( 2.44464, -14.6278 )
+position = Vector2( 0, -16 )
 
 [node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint" index="2"]
-position = Vector2( -4.62506, -111.654 )
+position = Vector2( -8, -112 )
 
 [node name="Checkpoint2" parent="Events/Checkpoints" index="1" instance=ExtResource( 15 )]
-position = Vector2( 537.45, -535.484 )
-
-[node name="TriggerArea" parent="Events/Checkpoints/Checkpoint2" index="0"]
-position = Vector2( -0.397217, -23.8329 )
-scale = Vector2( 3.326, 6.121 )
+position = Vector2( 528, -536 )
 
 [node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint2" index="1"]
-position = Vector2( 8.34955, -16.6391 )
+position = Vector2( 72, -32 )
 
 [node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint2" index="2"]
-position = Vector2( -176.402, 7.13678 )
+position = Vector2( -96, -32 )
 
 [node name="LavaGrowingEvent" parent="Events/LevelEvent" index="0" instance=ExtResource( 18 )]
 position = Vector2( 480, 132 )

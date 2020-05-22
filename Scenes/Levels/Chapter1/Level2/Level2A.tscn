@@ -771,9 +771,6 @@ position = Vector2( 3624, 420 )
 [node name="GreatDoor" parent="InteractivesObjects/GreatDoorGroup" index="6" instance=ExtResource( 13 )]
 position = Vector2( 3792, 168 )
 
-[node name="Events" parent="." index="6"]
-visible = true
-
 [node name="Checkpoint1" type="Node2D" parent="Events/Checkpoints" index="0"]
 script = ExtResource( 21 )
 __meta__ = {

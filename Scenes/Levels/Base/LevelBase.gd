@@ -74,8 +74,8 @@ func set_starting_points():
 	starting_point_array[1].set_global_position(new_starting_point2.global_position)
 	
 	# Set active every checkpoint before the current one (And also the current one)
-	for checkpoint in checkpoint_array:
-		checkpoint.set_active(true)
+	for i in range(current_checkpoint):
+		checkpoint_array[i].set_active(true)
 
 
 # Intanciate the players inside the level

@@ -23,10 +23,10 @@
 [node name="Level3D" instance=ExtResource( 2 )]
 
 [node name="StartingPointP1" parent="." index="0" instance=ExtResource( 4 )]
-position = Vector2( 80, 240 )
+position = Vector2( 1477.92, 239.008 )
 
 [node name="StartingPointP2" parent="." index="1" instance=ExtResource( 1 )]
-position = Vector2( 520, 240 )
+position = Vector2( 1420.85, 238.564 )
 
 [node name="Popups" parent="GUI" index="0"]
 visible = false

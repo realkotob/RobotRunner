@@ -266,7 +266,7 @@ GAME="*res://Global/Autoloads/Game/Game.tscn"
 COLLACTABLES="*res://Global/Autoloads/Collactables/Collactables.gd"
 CHAPTER_GEN="*res://Global/Autoloads/ChapterGeneration/ChapterGen.gd"
 MUSIC="*res://Global/Autoloads/Music/Music.tscn"
-TRANSLATION="*res://DialogueContainter.gd"
+DIALOGUE="*res://DialogueContainter.gd"
 
 [debug]
 

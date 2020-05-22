@@ -12,6 +12,8 @@ var entire_text : String = ""
 var paragraphs_array : Array = []
 var paragraph : String = ""
 
+var dialogue_key : String = ""
+
 func _ready():
 	set_process(false)
 	
@@ -46,11 +48,8 @@ func stop_typing():
 # Load the dialogue at its current index, store it in entire_text, 
 # And then increment the dialogue counter
 func load_text():
-	var dialogue_index = GAME.progression.dialogue
-	var key = TRANSLATION.get_dialogue_key(dialogue_index)
-	entire_text = TRANSLATION.get_current_translation().get_message(key)
+	entire_text = DIALOGUE.get_current_translation().get_message(dialogue_key)
 	split_in_paragraphs(entire_text)
-
 
 
 # Split the given text in printable paragraphs

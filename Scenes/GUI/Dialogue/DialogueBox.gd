@@ -22,7 +22,8 @@ func _ready():
 	
 	animation_player_node.play("Open")
 
-# Start the progressive typing process
+
+# Starts the progressive typing process
 func start_typing():
 	label_node.text = ""
 	text_head_index = -1
@@ -30,7 +31,7 @@ func start_typing():
 	timer_node.set_wait_time(0.1 * (1 / text_speed))
 	timer_node.start()
 
-
+# Stops the progressive typing process
 func stop_typing():
 	reading_timer_node.start()
 	timer_node.stop()
@@ -103,7 +104,6 @@ func write_text(text_head : int):
 		stop_typing()
 
 
-
 #### This should be useable in a next version of Godot ####
 #### There is currently a bug with get_visible_line_count ####
 
@@ -129,6 +129,7 @@ func is_needing_new_line(text_head: int) -> bool:
 #	return new_line_count > current_line_count and current_line_count != 0
 
 
+# Write the next character each time the timer is finished
 func on_timer_timeout():
 	text_head_index += 1
 	if text_head_index > paragraph.length() - 1:
@@ -138,6 +139,7 @@ func on_timer_timeout():
 	write_text(text_head_index)
 
 
+# Starts typing the next paragraph, or close the box if it was the last one
 func on_reading_timer_timeout():
 	if len(paragraphs_array) == 0:
 		label_node.text = ""

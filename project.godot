@@ -267,6 +267,7 @@ COLLACTABLES="*res://Global/Autoloads/Collactables/Collactables.gd"
 CHAPTER_GEN="*res://Global/Autoloads/ChapterGeneration/ChapterGen.gd"
 MUSIC="*res://Global/Autoloads/Music/Music.tscn"
 DIALOGUE="*res://DialogueContainter.gd"
+DEBUG="*res://Global/Autoloads/Debug/Debug.gd"
 
 [debug]
 
@@ -276,6 +277,8 @@ gdscript/completion/autocomplete_setters_and_getters=true
 
 window/size/width=960
 window/size/height=540
+window/size/fullscreen=true
+window/dpi/allow_hidpi=true
 window/vsync/use_vsync=false
 window/stretch/mode="2d"
 window/stretch/aspect="keep_width"
@@ -401,6 +404,16 @@ game_restart={
 HUD_switch_state={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777245,"unicode":0,"echo":false,"script":null)
+ ]
+}
+debug_fullscreen={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777254,"unicode":0,"echo":false,"script":null)
+ ]
+}
+debug_mute_sounds={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777250,"unicode":0,"echo":false,"script":null)
  ]
 }
 

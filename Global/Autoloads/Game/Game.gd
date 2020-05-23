@@ -14,6 +14,7 @@ var player2 = preload("res://Scenes/Characters/RobotHammer/RobotHammer.tscn")
 var level_array : Array
 var last_level_path : String
 
+
 func _ready():
 	var _err = gameover_timer_node.connect("timeout",self, "on_gameover_timer_timeout")
 	_err = transition_timer_node.connect("timeout",self, "on_transition_timer_timeout")

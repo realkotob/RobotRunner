@@ -17,19 +17,6 @@ func get_current_translation():
 	return current_translation
 
 
-func set_current_translation_by_locale(locale: String):
-	TranslationServer.set_locale(locale)
-	current_translation = get_translation_by_locale(locale)
-
-
-func get_translation_by_locale(locale: String) -> Translation:
-	for path in translations_path_array:
-		var trans = load(path)
-		if trans.get_locale() == locale:
-			return trans
-	return null
-
-
 func get_dialogue_key(index: int) -> String:
 	var scene_name = get_tree().get_current_scene().get_name()
 	scene_name = scene_name.to_upper()
@@ -41,12 +28,24 @@ func get_dialogue_key(index: int) -> String:
 #### BUILT-IN ####
 
 func _ready():
-	# debug = true
+	#debug = true
 	TranslationServer.set_locale(default_locale)
 	set_current_translation_by_locale(default_locale)
 
 
 #### LOGIC ####
+
+func set_current_translation_by_locale(locale: String):
+	TranslationServer.set_locale(locale)
+	current_translation = get_translation_by_locale(locale)
+
+
+func get_translation_by_locale(locale: String) -> Translation:
+	for path in translations_path_array:
+		var trans = load(path)
+		if trans.get_locale() == locale:
+			return trans
+	return null
 
 
 func instanciate_dialogue_box(index : int):

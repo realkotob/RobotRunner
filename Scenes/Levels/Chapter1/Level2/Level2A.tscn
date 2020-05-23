@@ -181,25 +181,25 @@ position = Vector2( 119.158, 358.731 )
 
 [node name="Light" parent="Map/Background/Paralaxe/Lights" index="0" instance=ExtResource( 22 )]
 position = Vector2( -277.276, -34.7347 )
-color = Color( 0.219608, 0.643137, 0.145098, 1 )
+color = Color( 0.14902, 1, 0, 1 )
 
 [node name="Light2" parent="Map/Background/Paralaxe/Lights" index="1" instance=ExtResource( 22 )]
 position = Vector2( 893.548, 178.463 )
 scale = Vector2( 1.91772, 1.85092 )
-color = Color( 0.0901961, 0.6, 0, 1 )
-energy = 1.5
+color = Color( 0.14902, 1, 0, 1 )
+energy = 1.17
 
 [node name="Light3" parent="Map/Background/Paralaxe/Lights" index="2" instance=ExtResource( 22 )]
 position = Vector2( 2029.09, 988.051 )
 scale = Vector2( 2.56964, 2.51343 )
-color = Color( 0.0901961, 0.596078, 0, 1 )
-energy = 1.25
+color = Color( 0.152941, 1, 0, 1 )
+energy = 1.1
 
 [node name="Light4" parent="Map/Background/Paralaxe/Lights" index="3" instance=ExtResource( 22 )]
 position = Vector2( 2915.6, 188.77 )
 scale = Vector2( 3.06881, 2.92452 )
-color = Color( 0.0431373, 0.27451, 0, 1 )
-energy = 1.6
+color = Color( 0, 1, 0.0627451, 1 )
+energy = 1.08
 
 [node name="Light5" parent="Map/Background/Paralaxe/Lights" index="4" instance=ExtResource( 22 )]
 position = Vector2( 2620.99, 931.851 )
@@ -797,7 +797,7 @@ position = Vector2( 0, -16 )
 [node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint4" index="2"]
 position = Vector2( -48, -64 )
 
-[node name="Camera" parent="." index="7"]
+[node name="Camera" parent="." index="8"]
 visible = false
 
 [editable path="InteractivesObjects/XionLiquid/Liquid"]

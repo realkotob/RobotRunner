@@ -51,7 +51,7 @@ func split_in_paragraphs(text : String):
 		var last_point = 0
 		var current_point = 0
 		
-		while current_point < 250 && current_point != -1:
+		while current_point < 220 && current_point != -1:
 			last_point = current_point
 			current_point = find_next_sentence_end(text, last_point + 2)
 		

@@ -197,10 +197,29 @@ position = Vector2( 2952, 516 )
 [node name="Checkpoint" parent="Events/Checkpoints" index="0" instance=ExtResource( 16 )]
 position = Vector2( 1416, 280 )
 
+[node name="TriggerArea" parent="Events/Checkpoints/Checkpoint" index="0"]
+scale = Vector2( 2.6, 5.752 )
+
 [node name="DialogueEvent" parent="Events/DialogueEvents" index="0" instance=ExtResource( 21 )]
-position = Vector2( 577.976, 368.859 )
+position = Vector2( 25.3403, 277 )
 scale = Vector2( 4.755, 4.275 )
+triggers_on_level_start = true
 dialogue_index = 1
+
+[node name="DialogueEvent2" parent="Events/DialogueEvents" index="1" instance=ExtResource( 21 )]
+position = Vector2( 1438.7, 254 )
+scale = Vector2( 4.755, 4.275 )
+dialogue_index = 2
+
+[node name="DialogueEvent3" parent="Events/DialogueEvents" index="2" instance=ExtResource( 21 )]
+position = Vector2( 2304, 330.11 )
+scale = Vector2( 2.368, 13.065 )
+dialogue_index = 3
+
+[node name="DialogueEvent4" parent="Events/DialogueEvents" index="3" instance=ExtResource( 21 )]
+position = Vector2( 2820, 228 )
+scale = Vector2( 2.368, 13.065 )
+dialogue_index = 4
 
 [node name="XionCloud" parent="." index="7" instance=ExtResource( 2 )]
 position = Vector2( -793.881, 270 )

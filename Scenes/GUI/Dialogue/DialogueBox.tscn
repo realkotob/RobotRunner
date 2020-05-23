@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://Global/Fonts/BoldCapsPixel24.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Global/Fonts/BoldCapsPixel32.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Scenes/GUI/Dialogue/Assets/DialogueBox.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/GUI/Dialogue/Assets/Overseer.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/GUI/Dialogue/DialogueBox.gd" type="Script" id=4]
@@ -23,7 +23,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 360, 116 ), Vector2( 100, 100 ) ]
+"values": [ Vector2( 500, 150 ), Vector2( 100, 100 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:modulate")
@@ -50,13 +50,13 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.6, 0.75, 0.9 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 100, 100 ), Vector2( 360, 116 ), Vector2( 340, 108 ), Vector2( 360, 116 ) ]
+"values": [ Vector2( 100, 100 ), Vector2( 500, 150 ), Vector2( 480, 130 ), Vector2( 500, 150 ) ]
 }
 
 [node name="DialogueBox" type="NinePatchRect"]
-self_modulate = Color( 1, 1, 1, 0.709804 )
-margin_right = 360.0
-margin_bottom = 116.0
+self_modulate = Color( 1, 1, 1, 0.627451 )
+margin_right = 500.0
+margin_bottom = 150.0
 rect_min_size = Vector2( 100, 100 )
 texture = ExtResource( 2 )
 patch_margin_left = 24
@@ -73,17 +73,16 @@ __meta__ = {
 [node name="PortraitFrame" type="TextureRect" parent="."]
 anchor_left = 0.08
 anchor_top = 0.206
-anchor_right = 0.275
-anchor_bottom = 0.888
+anchor_right = 0.08
+anchor_bottom = 0.794
 margin_left = 0.88158
 margin_top = 0.194147
-margin_right = -5.11543
-margin_bottom = -14.0459
+margin_right = 65.0846
+margin_bottom = -3.14191
 texture = ExtResource( 5 )
 stretch_mode = 4
 script = ExtResource( 7 )
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -125,14 +124,14 @@ __meta__ = {
 }
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-anchor_left = 0.319
-anchor_top = 0.36
-anchor_right = 0.319
-anchor_bottom = 0.36
-margin_left = -1.28001
-margin_top = -5.26002
-margin_right = 225.16
-margin_bottom = 37.74
+anchor_left = 0.278
+anchor_top = 0.213
+anchor_right = 0.278
+anchor_bottom = 0.213
+margin_left = -1.52588e-05
+margin_top = 0.0499973
+margin_right = 335.0
+margin_bottom = 87.05
 rect_clip_content = false
 custom_fonts/mono_font = ExtResource( 6 )
 custom_fonts/normal_font = ExtResource( 1 )
@@ -140,7 +139,6 @@ custom_colors/default_color = Color( 0, 0, 0, 1 )
 scroll_active = false
 script = ExtResource( 8 )
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 

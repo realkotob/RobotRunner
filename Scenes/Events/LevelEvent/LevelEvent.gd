@@ -1,5 +1,7 @@
 extends Event
 
+class_name LevelEvent
+
 export var target_name : String = ""
 export var target_as_group : bool = false
 export var method_name : String = ""
@@ -7,9 +9,14 @@ export var arguments_array : Array = []
 export var queue_free_after_trigger : bool = true
 
 
+
+func event():
+	method_call()
+
+
 # Call the given method in a single target or a group target
 # Pass any number of arguments stored in the arguments_array to this method
-func event():
+func method_call():
 	# Check for an empty field, send an error if there is one
 	if target_name == "" or method_name == "":
 		print("ERROR : The event %s has an undefined target and/or method to call" % name)

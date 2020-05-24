@@ -323,11 +323,6 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Tutos" type="Node2D" parent="."]
-__meta__ = {
-"_edit_lock_": true
-}
-
 [node name="Camera" parent="." instance=ExtResource( 2 )]
 z_index = 999
 limit_smoothed = true

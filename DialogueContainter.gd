@@ -48,8 +48,9 @@ func get_translation_by_locale(locale: String) -> Translation:
 	return null
 
 
-func instanciate_dialogue_box(index : int):
+func instanciate_dialogue_box(index : int, cut_scene : bool = false):
 	var box_node = dialogue_box_scene.instance()
 	box_node.dialogue_key = get_dialogue_key(index)
+	box_node.cut_scene = cut_scene
 	var GUI_node = get_tree().get_current_scene().find_node("GUI")
 	GUI_node.call_deferred("add_child", box_node)

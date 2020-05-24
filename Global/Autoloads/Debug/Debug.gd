@@ -1,5 +1,8 @@
 extends Node
 
+func _ready():
+	pause_mode = Node.PAUSE_MODE_PROCESS
+
 func _input(event):
 	if OS.is_debug_build():
 		if event.is_action_pressed("debug_fullscreen"):

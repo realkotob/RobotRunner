@@ -7,6 +7,10 @@ onready var danger_distance : float = screen_size.x / 2
 
 var playing : bool = false setget set_playing, is_playing
 
+func _ready():
+	pause_mode = Node.PAUSE_MODE_PROCESS
+
+
 func set_playing(value: bool):
 	playing = value
 

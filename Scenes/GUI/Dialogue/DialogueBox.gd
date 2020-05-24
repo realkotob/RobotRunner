@@ -14,6 +14,7 @@ var paragraph : String = ""
 
 var dialogue_key : String = ""
 
+var cut_scene : bool = false
 
 func _ready():
 	var _err = animation_player_node.connect("animation_finished", self, "on_animation_finished")
@@ -21,6 +22,10 @@ func _ready():
 	_err = reading_timer_node.connect("timeout", self, "on_reading_timer_timeout")
 	
 	animation_player_node.play("Open")
+	
+	if cut_scene:
+		get_tree().paused = true
+		pause_mode = PAUSE_MODE_PROCESS
 
 
 # Starts the progressive typing process
@@ -30,6 +35,7 @@ func start_typing():
 	paragraph = paragraphs_array.pop_front()
 	timer_node.set_wait_time(0.1 * (1 / text_speed))
 	timer_node.start()
+
 
 # Stops the progressive typing process
 func stop_typing():
@@ -154,3 +160,4 @@ func on_animation_finished(anim_name: String):
 		start_typing()
 	if anim_name == "Close":
 		queue_free()
+		get_tree().paused = false

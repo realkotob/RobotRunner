@@ -165,7 +165,7 @@ __meta__ = {
 self_modulate = Color( 1, 1, 1, 0.0392157 )
 show_behind_parent = true
 frames = SubResource( 2 )
-frame = 2
+frame = 3
 playing = true
 __meta__ = {
 "_edit_lock_": true

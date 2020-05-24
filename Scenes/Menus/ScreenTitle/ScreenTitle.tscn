@@ -7,7 +7,7 @@
 [ext_resource path="res://Global/Shaders/Glitch/texture/Glitch.png" type="Texture" id=5]
 [ext_resource path="res://Scenes/Menus/ScreenTitle/Scores.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Global/Shaders/Glitch/Glitch.shader" type="Shader" id=7]
-[ext_resource path="res://Scenes/Menus/ScreenTitle/Scripts/Logo.gd" type="Script" id=8]
+[ext_resource path="res://Global/Shaders/GlitchEffect.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Fog/CosmeticFog/FogTexture.tres" type="Texture" id=9]
 [ext_resource path="res://Scenes/Fog/CosmeticFog/Magenta_BG_fog.shader" type="Shader" id=10]
 [ext_resource path="res://Scenes/Menus/ScreenTitle/Sprites/RobotHead.png" type="Texture" id=11]
@@ -112,7 +112,6 @@ margin_top = 32.3001
 margin_right = 178.1
 margin_bottom = 282.3
 texture = ExtResource( 3 )
-script = ExtResource( 8 )
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -130,18 +129,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GlitchCoolDown" type="Timer" parent="Logo" index="1"]
-wait_time = 0.8
-one_shot = true
-autostart = true
+[node name="GlitchEffect" parent="Logo" index="1" instance=ExtResource( 8 )]
 
-[node name="GlitchDuration" type="Timer" parent="Logo" index="2"]
-one_shot = true
-
-[node name="SubGlitchDuration" type="Timer" parent="Logo" index="3"]
-one_shot = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Logo" index="4"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Logo" index="2"]
 autoplay = "HeadFloating"
 anims/HeadFloating = SubResource( 3 )
 

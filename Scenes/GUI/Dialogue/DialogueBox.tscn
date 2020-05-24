@@ -1,16 +1,37 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Global/Fonts/BoldCapsPixel32.tres" type="DynamicFont" id=1]
-[ext_resource path="res://Scenes/GUI/Dialogue/Assets/DialogueBox.png" type="Texture" id=2]
-[ext_resource path="res://Scenes/GUI/Dialogue/Assets/Overseer.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/GUI/Dialogue/Assets/Boxes/DialogueBox.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/GUI/Dialogue/Assets/Portrait/Overseer.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/GUI/Dialogue/DialogueBox.gd" type="Script" id=4]
-[ext_resource path="res://Scenes/GUI/Dialogue/Assets/PortraitFrame.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/GUI/Dialogue/Assets/Portrait/PortraitFrame.png" type="Texture" id=5]
 [ext_resource path="res://Global/Fonts/BoldCapsPixel48.tres" type="DynamicFont" id=6]
 [ext_resource path="res://Scenes/GUI/Dialogue/PortraitFrame.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/GUI/Dialogue/RichTextLabel.gd" type="Script" id=8]
+[ext_resource path="res://Global/Shaders/Glitch/Glitch.shader" type="Shader" id=9]
+[ext_resource path="res://Global/Shaders/GlitchEffect.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Global/Shaders/Glitch/texture/Glitch.png" type="Texture" id=11]
+[ext_resource path="res://Scenes/GUI/Dialogue/Assets/Portrait/ScreenEffect/ScreenEffect2.png" type="Texture" id=12]
+[ext_resource path="res://Scenes/GUI/Dialogue/Assets/Portrait/ScreenEffect/ScreenEffect3.png" type="Texture" id=13]
+[ext_resource path="res://Scenes/GUI/Dialogue/Assets/Portrait/ScreenEffect/ScreenEffect4.png" type="Texture" id=14]
+[ext_resource path="res://Scenes/GUI/Dialogue/Assets/Portrait/ScreenEffect/ScreenEffect1.png" type="Texture" id=15]
 
-[sub_resource type="Animation" id=1]
-resource_name = "Close"
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 9 )
+shader_param/apply = false
+shader_param/displace_amount = 1
+shader_param/aberation_amount = 1.0
+shader_param/displace_texture = ExtResource( 11 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 15 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
+"loop": true,
+"name": "default",
+"speed": 15.0
+} ]
+
+[sub_resource type="Animation" id=3]
 length = 1.3
 step = 0.05
 tracks/0/type = "value"
@@ -32,13 +53,37 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.5, 1.15 ),
+"times": PoolRealArray( 0.3, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("PortraitFrame/Portrait:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.1, 0.25, 0.3, 0.4, 0.55 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.3, 0.1 ), Vector2( 1.2, 0.3 ), Vector2( 1.3, 0.05 ), Vector2( 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("PortraitFrame:rect_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = false
+tracks/3/keys = {
+"times": PoolRealArray( 0.1, 0.25, 0.3, 0.4, 0.55 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.3, 0.1 ), Vector2( 1.2, 0.3 ), Vector2( 1.3, 0.05 ), Vector2( 0, 0 ) ]
+}
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=4]
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rect_size")
@@ -71,14 +116,13 @@ __meta__ = {
 }
 
 [node name="PortraitFrame" type="TextureRect" parent="."]
-anchor_left = 0.08
-anchor_top = 0.206
-anchor_right = 0.08
-anchor_bottom = 0.794
-margin_left = 0.88158
-margin_top = 0.194147
-margin_right = 65.0846
-margin_bottom = -3.14191
+anchor_left = 0.082
+anchor_top = 0.288
+anchor_right = 0.082
+anchor_bottom = 0.742
+margin_top = 0.0410881
+margin_right = 68.0
+margin_bottom = -0.0589142
 texture = ExtResource( 5 )
 stretch_mode = 4
 script = ExtResource( 7 )
@@ -92,35 +136,39 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -32.157
-margin_top = -32.0
-margin_right = 31.843
-margin_bottom = 32.0
+margin_left = -32.0
+margin_top = -33.0
+margin_right = 32.0
+margin_bottom = 31.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 5
 size_flags_vertical = 5
-color = Color( 0.317647, 0.333333, 0.509804, 1 )
+color = Color( 0.345098, 0.360784, 0.54902, 1 )
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": true
 }
 
-[node name="Portrait" type="TextureRect" parent="PortraitFrame"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -32.0
-margin_top = -33.0
-margin_right = 32.0
-margin_bottom = 32.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Portrait" type="Sprite" parent="PortraitFrame"]
+show_behind_parent = true
+material = SubResource( 1 )
+position = Vector2( 34, 33 )
 texture = ExtResource( 3 )
 __meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
+"_edit_lock_": true
+}
+
+[node name="GlitchEffect" parent="PortraitFrame/Portrait" instance=ExtResource( 10 )]
+
+[node name="ScreenEffect" type="AnimatedSprite" parent="PortraitFrame/Portrait"]
+self_modulate = Color( 1, 1, 1, 0.0392157 )
+show_behind_parent = true
+frames = SubResource( 2 )
+frame = 2
+playing = true
+__meta__ = {
+"_edit_lock_": true
 }
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
@@ -128,10 +176,9 @@ anchor_left = 0.278
 anchor_top = 0.213
 anchor_right = 0.278
 anchor_bottom = 0.213
-margin_left = -1.52588e-05
-margin_top = 0.0499973
-margin_right = 335.0
-margin_bottom = 87.05
+margin_top = -0.449917
+margin_right = 341.0
+margin_bottom = 86.5499
 rect_clip_content = false
 custom_fonts/mono_font = ExtResource( 6 )
 custom_fonts/normal_font = ExtResource( 1 )
@@ -144,8 +191,8 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 1.7
-anims/Close = SubResource( 1 )
-anims/Open = SubResource( 2 )
+anims/Close = SubResource( 3 )
+anims/Open = SubResource( 4 )
 
 [node name="TypeInTimer" type="Timer" parent="."]
 wait_time = 0.1

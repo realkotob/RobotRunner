@@ -426,7 +426,7 @@ debug_mute_sounds={
 
 [locale]
 
-translations=PoolStringArray( "res://Global/Autoloads/Translation/Text.en.translation", "res://Global/Autoloads/Translation/Text.fr.translation" )
+translations=PoolStringArray( "res://Global/Autoloads/Dialogue/Text.en.translation", "res://Global/Autoloads/Dialogue/Text.fr.translation" )
 locale_filter=[ 0, [ "en", "fr" ] ]
 translation_remaps={
 "res://Global/Autoloads/Dialogues/Text.en.translation": PoolStringArray(  ),

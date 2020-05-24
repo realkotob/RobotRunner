@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/DialogueBoxHUD.png-608aee3b15eff48d66f7d50e4620719b.stex"
+path="res://.import/ScreenEffect3.png-04e3cb499bcf017a1a75c7e69f9f9377.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/GUI/Dialogue/Assets/DialogueBoxHUD.png"
-dest_files=[ "res://.import/DialogueBoxHUD.png-608aee3b15eff48d66f7d50e4620719b.stex" ]
+source_file="res://Scenes/GUI/Dialogue/Assets/Portrait/ScreenEffect/ScreenEffect3.png"
+dest_files=[ "res://.import/ScreenEffect3.png-04e3cb499bcf017a1a75c7e69f9f9377.stex" ]
 
 [params]
 

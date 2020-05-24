@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/PortraitFrame.png-21777f54d069742c389082aa39146a44.stex"
+path="res://.import/ScreenEffect4.png-624046995f5f255a36567761288d8e7f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/GUI/Dialogue/Assets/PortraitFrame.png"
-dest_files=[ "res://.import/PortraitFrame.png-21777f54d069742c389082aa39146a44.stex" ]
+source_file="res://Scenes/GUI/Dialogue/Assets/Portrait/ScreenEffect/ScreenEffect4.png"
+dest_files=[ "res://.import/ScreenEffect4.png-624046995f5f255a36567761288d8e7f.stex" ]
 
 [params]
 

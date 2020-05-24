@@ -1,5 +1,6 @@
-extends TextureRect
+extends Node
 
+onready var target_texture = get_parent()
 onready var glitch_cool_down = $GlitchCoolDown
 onready var glitch_timer_node = $GlitchDuration
 onready var sub_glitch_timer_node = $SubGlitchDuration
@@ -16,7 +17,7 @@ func _ready():
 func on_glitch_duration_timeout():
 	glitch_timer_node.stop()
 	sub_glitch_timer_node.stop()
-	var shader_material = get_material()
+	var shader_material = target_texture.get_material()
 	shader_material.set_shader_param("apply", false)
 	
 	glitch_cool_down.set_wait_time(rand_range(3.5, 5.0))
@@ -36,9 +37,10 @@ func on_cooldown_timeout():
 
 
 func generate_glitch():
-	var shader_material = get_material()
+	var shader_material = target_texture.get_material()
 	
-	var rng_sign = randi() % 2 - 1
+	# Get a random sign
+	var rng_sign = sign(randf() - 0.5)
 	
 	shader_material.set_shader_param("apply", true)
 	shader_material.set_shader_param("displace_amount", int(rand_range(30.0, 60.0) * rng_sign))

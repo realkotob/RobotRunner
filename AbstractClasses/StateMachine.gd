@@ -8,6 +8,8 @@ class_name StatesMachine
 
 signal state_change
 
+export var default_state : String = ""
+
 onready var states_map = get_children()
 
 onready var current_state : Object
@@ -17,12 +19,12 @@ var state_name
 var new_state_name
 
 func _ready():
-	set_physics_process(false)
-
-
-func setup():
-	set_physics_process(true)
-	set_state(states_map[0])
+	yield(owner, "ready")
+	if states_map != []:
+		if default_state != "":
+			set_state(default_state)
+		else:
+			set_state(states_map[0])
 
 
 # Call for the current state process

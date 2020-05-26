@@ -2,11 +2,13 @@ extends StateBase
 
 class_name PlayerStateBase
 
-var animation_node : AnimatedSprite
-var state_node : Node
+onready var animation_node : AnimatedSprite
+onready var state_node : Node
 
-func setup():
-	pass
+func _ready():
+	yield(owner, "ready")
+	animation_node = owner.get_node("Animation")
+	state_node = get_parent()
 
 # Play the animation with a name corresponding to the current state
 func enter_state(_host):

@@ -6,13 +6,14 @@ class_name MoveBase
 
 signal layer_change
 
-var layer_change_node : Node
 var SFX_node : Node
 var inputs_node : Node
 
-func setup():
-	var _err
-	_err = connect("layer_change", owner, "on_layer_change")
+func _ready():
+	yield(owner, "ready")
+	SFX_node = owner.get_node("SFX")
+	inputs_node = owner.get_node("Inputs")
+	var _err = connect("layer_change", owner, "on_layer_change")
 
 
 func update(_host, _delta):

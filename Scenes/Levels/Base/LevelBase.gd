@@ -93,8 +93,7 @@ func instanciate_players():
 		player1_node.level_node = self
 		add_child(player1_node)
 		players_array.append(player1_node)
-		
-		player1_node.setup()
+	
 		
 	if player2_start_node != null:
 		var player2_start_pos = player2_start_node.get_global_position()
@@ -103,8 +102,7 @@ func instanciate_players():
 		player2_node.level_node = self
 		add_child(player2_node)
 		players_array.append(player2_node)
-		
-		player2_node.setup()
+
 
 
 func update_current_level_index():

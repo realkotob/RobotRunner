@@ -17,7 +17,7 @@ func update(_host : Node, delta : float):
 	if len(path) == 0:
 		return "Idle"
 	else:
-		if move_to(path_points_array[0], owner.SPEED, delta) == true:
+		if move_to(path_points_array[0], owner.speed, delta) == true:
 			path_points_array.pop_front()
 			var last_point = path.pop_front()
 			var event = last_point.event().to_lower()

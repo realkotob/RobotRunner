@@ -1,7 +1,7 @@
 extends KinematicBody2D
 class_name ActorBase
 
-const SPEED : float = 40.0
+export var speed : float = 60.0
 
 onready var animated_sprite_node = $AnimatedSprite
 onready var bubble_scene = preload("res://Scenes/GUI/Bubble/Bubble.tscn")
@@ -23,7 +23,7 @@ func get_velocity() -> Vector2:
 
 
 func _ready():
-	tuto_bubble()
+	set_visible(false)
 	var _err = connect("velocity_changed", self, "on_velocity_changed")
 
 
@@ -45,6 +45,11 @@ func get_reel_input(action_name : String) -> String:
 		return ""
 	else:
 		return input_event_array[0].as_text()
+
+
+func appear():
+	set_visible(true)
+	$StatesMachine.set_state("Move")
 
 
 func attack():

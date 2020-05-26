@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scenes/InteractiveObjects/Liquids/Lava/Lava.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/XionCloud/XionCloud.tscn" type="PackedScene" id=2]
@@ -19,16 +19,15 @@
 [ext_resource path="res://Scenes/Events/DialogueEvent/LeakEvent.gd" type="Script" id=17]
 [ext_resource path="res://Scenes/Actor/Robot/Babybot/Tank/BabyTank.tscn" type="PackedScene" id=18]
 [ext_resource path="res://AbstractClasses/PathPointBase.gd" type="Script" id=19]
-[ext_resource path="res://Scenes/Actor/ActorBase.gd" type="Script" id=20]
 [ext_resource path="res://Scenes/Events/DialogueEvent/DialogueEvent.tscn" type="PackedScene" id=21]
 
 [node name="Level1A" instance=ExtResource( 5 )]
 
 [node name="StartingPointP1" parent="." index="0" instance=ExtResource( 3 )]
-position = Vector2( -4311.93, 214.568 )
+position = Vector2( -3034.45, 144 )
 
 [node name="StartingPointP2" parent="." index="1" instance=ExtResource( 4 )]
-position = Vector2( -4309.55, 456.402 )
+position = Vector2( -3036, 384.402 )
 
 [node name="Popups" parent="GUI" index="0"]
 grow_horizontal = 2
@@ -284,23 +283,33 @@ position = Vector2( 2952, 516 )
 position = Vector2( 2952, 516 )
 
 [node name="BabyTank" parent="InteractivesObjects/Robot" index="0" instance=ExtResource( 18 )]
-position = Vector2( -4068, 228 )
-script = ExtResource( 20 )
+position = Vector2( -2700, 156 )
+action_name_bubble = " action_player_1"
 
 [node name="Path" type="Node2D" parent="InteractivesObjects/Robot/BabyTank" index="3"]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="PathPoint" type="Position2D" parent="InteractivesObjects/Robot/BabyTank/Path" index="0"]
-position = Vector2( 84, 0 )
+[node name="PathPoint0" type="Position2D" parent="InteractivesObjects/Robot/BabyTank/Path" index="0"]
+position = Vector2( 156, 0 )
+script = ExtResource( 19 )
+event_name = "tuto_bubble"
+
+[node name="PathPoint1" type="Position2D" parent="InteractivesObjects/Robot/BabyTank/Path" index="1"]
+position = Vector2( 192, 0 )
 script = ExtResource( 19 )
 event_name = "attack"
 
-[node name="PathPoint2" type="Position2D" parent="InteractivesObjects/Robot/BabyTank/Path" index="1"]
-position = Vector2( 144, 0 )
+[node name="PathPoint2" type="Position2D" parent="InteractivesObjects/Robot/BabyTank/Path" index="2"]
+position = Vector2( 216, 0 )
 script = ExtResource( 19 )
 event_name = "overheat"
+
+[node name="PathPoint3" type="Position2D" parent="InteractivesObjects/Robot/BabyTank/Path" index="3"]
+position = Vector2( 348, 0 )
+script = ExtResource( 19 )
+event_name = " "
 
 [node name="Checkpoint" parent="Events/Checkpoints" index="0" instance=ExtResource( 16 )]
 position = Vector2( 1416, 280 )
@@ -311,12 +320,14 @@ scale = Vector2( 2.6, 5.752 )
 [node name="Intro" parent="Events/DialogueEvents" index="0" instance=ExtResource( 21 )]
 position = Vector2( 25.3403, 277 )
 scale = Vector2( 4.755, 4.275 )
-triggers_on_level_start = true
 dialogue_index = 1
+cut_scene = true
 
 [node name="Minions" parent="Events/DialogueEvents" index="1" instance=ExtResource( 21 )]
-position = Vector2( -3240, 228 )
+position = Vector2( -2844, 204 )
 scale = Vector2( 3.376, 18.679 )
+target_name = "BabyTank"
+method_name = "appear"
 dialogue_index = 2
 
 [node name="Cloud" parent="Events/DialogueEvents" index="2" instance=ExtResource( 21 )]

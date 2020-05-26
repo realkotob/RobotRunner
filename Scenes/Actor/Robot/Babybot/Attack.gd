@@ -1,5 +1,6 @@
 extends ActorStateBase
 
+onready var hitbox_node = owner.get_node("HitBox")
 var animated_sprite_node : AnimatedSprite
 
 func _ready():
@@ -13,7 +14,7 @@ func enter_state(_host):
 	if animated_sprite_node.get_sprite_frames().has_animation(name):
 		animated_sprite_node.play(name)
 	
-	for body in $HitBox.get_overlapping_bodies():
+	for body in hitbox_node.get_overlapping_bodies():
 		if body is IceBlock:
 			body.destroy()
 

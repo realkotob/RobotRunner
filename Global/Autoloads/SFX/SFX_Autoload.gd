@@ -1,6 +1,7 @@
 extends Node
 
 onready var normal_explosion = preload("res://Global/Autoloads/SFX/NormalExplosion/NormalExplosion.tscn")
+onready var small_explosion = preload("res://Global/Autoloads/SFX/SmallExplosion/SmallExplosion.tscn")
 onready var xion_explosion = preload("res://Global/Autoloads/SFX/XionExplosion/XionExplosion.tscn")
 
 onready var normal_hit = preload("res://Global/Autoloads/SFX/Feedbacks/NormalHit/NormalHit.tscn")

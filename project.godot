@@ -164,6 +164,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://AbstractClasses/MoveBase.gd"
 }, {
+"base": "Position2D",
+"class": "PathPoint",
+"language": "GDScript",
+"path": "res://AbstractClasses/PathPointBase.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
@@ -256,6 +261,7 @@ _global_script_class_icons={
 "MenuBase": "",
 "MenuOptionsBase": "",
 "MoveBase": "",
+"PathPoint": "",
 "Player": "",
 "PlayerStateBase": "",
 "RayCastBase": "",

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/FrameBG.png-3567fc61605bf77f038a0a951e437e72.stex"
+path="res://.import/PortraitFrame.png-fcbf69d9734cda8797bd25371b95e8cd.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/GUI/Dialogue/Assets/FrameBG.png"
-dest_files=[ "res://.import/FrameBG.png-3567fc61605bf77f038a0a951e437e72.stex" ]
+source_file="res://Scenes/GUI/Dialogue/Assets/Portrait/PortraitFrame.png"
+dest_files=[ "res://.import/PortraitFrame.png-fcbf69d9734cda8797bd25371b95e8cd.stex" ]
 
 [params]
 

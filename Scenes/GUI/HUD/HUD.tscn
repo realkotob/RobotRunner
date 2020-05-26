@@ -5,7 +5,8 @@
 [ext_resource path="res://Scenes/GUI/HUD/XionLabel.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/GUI/HUD/Xion.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/GUI/HUD/Materials.png" type="Texture" id=5]
-[ext_resource path="res://Scenes/GUI/Dialogue/Assets/DialogueBoxHUD.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/GUI/Dialogue/Assets/Boxes/DialogueBoxHUD.png" type="Texture" id=6]
+
 
 [node name="HUD" type="Control"]
 anchor_right = 1.0

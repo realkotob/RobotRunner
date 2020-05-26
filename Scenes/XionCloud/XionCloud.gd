@@ -2,6 +2,7 @@ extends Area2D
 
 onready var timer_node = $Timer
 onready var path_node = get_node_or_null("CloudPath")
+onready var collision_shape_node = $CollisionShape2D
 
 export var speed : float = 40.0 
 
@@ -23,7 +24,6 @@ func _ready():
 		_err = connect("player_in_danger", owner, "on_player_in_danger")
 		_err = connect("player_out_of_danger", owner, "on_player_out_of_danger")
 	
-	
 	set_physics_process(false)
 	
 	if path_node != null:
@@ -38,7 +38,20 @@ func _ready():
 			timer_node.set_wait_time(time_before_moving)
 			timer_node.start()
 	
-	set_visible(cloud_active)
+	set_active(cloud_active)
+
+
+# Set the could active or not, 
+# if the cloud_active is false, set the cloud to invisible and make it stop
+func set_active(value : bool):
+	cloud_active = value
+	collision_shape_node.call_deferred("set_disabled", !value)
+	set_visible(value)
+	set_physics_process(value)
+
+
+func stop():
+	set_physics_process(false)
 
 
 # Move the cloud, until it's arrived to the next point
@@ -52,6 +65,7 @@ func _physics_process(delta):
 			path.remove(0)
 	else:
 		set_physics_process(false)
+
 
 # When the timer is over, triggers the cloud mouvement
 func on_timer_timeout():

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/PortraitFrame.png-21777f54d069742c389082aa39146a44.stex"
+path="res://.import/Overseer.png-77e869146ab12b08bcea63555c77e87e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/GUI/Dialogue/Assets/PortraitFrame.png"
-dest_files=[ "res://.import/PortraitFrame.png-21777f54d069742c389082aa39146a44.stex" ]
+source_file="res://Scenes/GUI/Dialogue/Assets/Portrait/Overseer.png"
+dest_files=[ "res://.import/Overseer.png-77e869146ab12b08bcea63555c77e87e.stex" ]
 
 [params]
 

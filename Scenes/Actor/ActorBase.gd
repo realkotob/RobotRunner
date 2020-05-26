@@ -52,10 +52,11 @@ func attack():
 
 
 func overheat():
-	$AnimationPlayer.play("Overheat")
+	$AnimationPlayer.play("Overheat", -1, 1.5)
 
 
 func destroy():
+	SFX.play_SFX(SFX.small_explosion, global_position)
 	queue_free()
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Scenes/InteractiveObjects/Liquids/Lava/Lava.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/XionCloud/XionCloud.tscn" type="PackedScene" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://Scenes/Events/DialogueEvent/LeakEvent.gd" type="Script" id=17]
 [ext_resource path="res://Scenes/Actor/Robot/Babybot/Tank/BabyTank.tscn" type="PackedScene" id=18]
 [ext_resource path="res://AbstractClasses/PathPointBase.gd" type="Script" id=19]
+[ext_resource path="res://Scenes/Actor/ActorBase.gd" type="Script" id=20]
 [ext_resource path="res://Scenes/Events/DialogueEvent/DialogueEvent.tscn" type="PackedScene" id=21]
 
 [node name="Level1A" instance=ExtResource( 5 )]
@@ -284,6 +285,7 @@ position = Vector2( 2952, 516 )
 
 [node name="BabyTank" parent="InteractivesObjects/Robot" index="0" instance=ExtResource( 18 )]
 position = Vector2( -4068, 228 )
+script = ExtResource( 20 )
 
 [node name="Path" type="Node2D" parent="InteractivesObjects/Robot/BabyTank" index="3"]
 __meta__ = {
@@ -291,13 +293,14 @@ __meta__ = {
 }
 
 [node name="PathPoint" type="Position2D" parent="InteractivesObjects/Robot/BabyTank/Path" index="0"]
-position = Vector2( 96, 0 )
+position = Vector2( 84, 0 )
 script = ExtResource( 19 )
 event_name = "attack"
 
 [node name="PathPoint2" type="Position2D" parent="InteractivesObjects/Robot/BabyTank/Path" index="1"]
-position = Vector2( -60, 0 )
+position = Vector2( 144, 0 )
 script = ExtResource( 19 )
+event_name = "overheat"
 
 [node name="Checkpoint" parent="Events/Checkpoints" index="0" instance=ExtResource( 16 )]
 position = Vector2( 1416, 280 )

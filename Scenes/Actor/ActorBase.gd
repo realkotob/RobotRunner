@@ -35,6 +35,7 @@ func tuto_bubble():
 	
 	var bubble_node = bubble_scene.instance()
 	bubble_node.button_name = input
+	bubble_node.set_position(Vector2(6, -28))
 	call_deferred("add_child", bubble_node)
 
 
@@ -49,6 +50,9 @@ func get_reel_input(action_name : String) -> String:
 
 func appear():
 	set_visible(true)
+	$StatesMachine.set_state("Rise")
+
+func move():
 	$StatesMachine.set_state("Move")
 
 
@@ -57,7 +61,7 @@ func attack():
 
 
 func overheat():
-	$AnimationPlayer.play("Overheat", -1, 1.5)
+	$AnimationPlayer.play("Overheat", -1, 2.5)
 
 
 func destroy():

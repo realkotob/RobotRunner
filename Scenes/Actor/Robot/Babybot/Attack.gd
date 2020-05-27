@@ -1,5 +1,7 @@
 extends ActorStateBase
 
+#### ATTACK STATE ####
+
 onready var hitbox_node = owner.get_node("HitBox")
 var animated_sprite_node : AnimatedSprite
 

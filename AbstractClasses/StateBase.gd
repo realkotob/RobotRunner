@@ -4,6 +4,9 @@ class_name StateBase
 
 onready var states_node = get_parent()
 
+func _ready():
+	yield(owner, "ready")
+
 func update(_host : Node, _delta : float):
 	pass
 

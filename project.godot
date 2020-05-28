@@ -12,7 +12,17 @@ _global_script_classes=[ {
 "base": "PlayerStateBase",
 "class": "ActionBase",
 "language": "GDScript",
-"path": "res://Scenes/Characters/RobotBase/Scripts/Action.gd"
+"path": "res://Scenes/Characters/PlayerBase/Scripts/Action.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "ActorBase",
+"language": "GDScript",
+"path": "res://Scenes/Actor/ActorBase.gd"
+}, {
+"base": "StateBase",
+"class": "ActorStateBase",
+"language": "GDScript",
+"path": "res://Scenes/Actor/ActorStateBase.gd"
 }, {
 "base": "Node",
 "class": "AttributesBase",
@@ -154,10 +164,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://AbstractClasses/MoveBase.gd"
 }, {
+"base": "Position2D",
+"class": "PathPoint",
+"language": "GDScript",
+"path": "res://AbstractClasses/PathPointBase.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
-"path": "res://Scenes/Characters/RobotBase/Scripts/RobotBase.gd"
+"path": "res://Scenes/Characters/PlayerBase/Scripts/RobotBase.gd"
 }, {
 "base": "StateBase",
 "class": "PlayerStateBase",
@@ -182,7 +197,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "SFX_group_base",
 "language": "GDScript",
-"path": "res://Scenes/Characters/RobotBase/Scripts/SFX_group_base.gd"
+"path": "res://Scenes/Characters/PlayerBase/Scripts/SFX_group_base.gd"
 }, {
 "base": "Node",
 "class": "StateBase",
@@ -216,6 +231,8 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "ActionBase": "",
+"ActorBase": "",
+"ActorStateBase": "",
 "AttributesBase": "",
 "AutoloadBase": "",
 "BlockBase": "",
@@ -244,6 +261,7 @@ _global_script_class_icons={
 "MenuBase": "",
 "MenuOptionsBase": "",
 "MoveBase": "",
+"PathPoint": "",
 "Player": "",
 "PlayerStateBase": "",
 "RayCastBase": "",
@@ -278,7 +296,7 @@ GAME="*res://Global/Autoloads/Game/Game.tscn"
 COLLACTABLES="*res://Global/Autoloads/Collactables/Collactables.gd"
 CHAPTER_GEN="*res://Global/Autoloads/ChapterGeneration/ChapterGen.gd"
 MUSIC="*res://Global/Autoloads/Music/Music.tscn"
-DIALOGUE="*res://DialogueContainter.gd"
+DIALOGUE="*res://Global/Autoloads/Dialogue/DialogueContainter.gd"
 DEBUG="*res://Global/Autoloads/Debug/Debug.gd"
 
 [debug]
@@ -426,6 +444,11 @@ debug_fullscreen={
 debug_mute_sounds={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777250,"unicode":0,"echo":false,"script":null)
+ ]
+}
+display_console={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777244,"unicode":0,"echo":false,"script":null)
  ]
 }
 

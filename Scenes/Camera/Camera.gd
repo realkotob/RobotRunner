@@ -17,11 +17,6 @@ var current_zoom_speed : float = zoom_speed
 
 var instruction_stack : Array = []
 
-func _ready():
-	state_machine_node.setup()
-	set_state("Follow")
-
-
 func _physics_process(_delta):
 	if zoom != destination_zoom:
 		_zoom_to(destination_zoom)

@@ -7,7 +7,7 @@ export var shake_duration : float = 0.3
 func play_animation():
 	var camera_node = get_tree().get_current_scene().find_node("Camera")
 	if camera_node != null:
-		camera_node.shake(4.0, 0.3)
+		camera_node.shake(shake_magnitude, shake_duration)
 	set_visible(true)
 	play()
 	$AudioStreamPlayer2D.play()

@@ -23,7 +23,6 @@ func appear():
 	# Fade in the bubble
 	animation_player_node.play_backwards("Fade")
 	
-	
 	# Resize the box dynamicly based on the button size
 	tween_node.interpolate_property(self, "rect_size",
 		Vector2(24, 24), button_node.get_size() + margin, 0.5,
@@ -32,7 +31,6 @@ func appear():
 	
 	yield(tween_node, "tween_all_completed")
 	
-	# Wait for the bubble to finish growing and then fade the button in
 	button_node.get_node("AnimationPlayer").play_backwards("Fade")
 
 

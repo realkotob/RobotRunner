@@ -1,0 +1,24 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Scenes/Characters/PlayerBase/SFX/Jump/JumpDustSFX.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Characters/PlayerBase/SFX/Jump/JumpDust4.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Characters/PlayerBase/SFX/Jump/JumpDust5.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Characters/PlayerBase/SFX/Jump/JumpDust2.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/Characters/PlayerBase/SFX/Jump/JumpDust6.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/Characters/PlayerBase/SFX/Jump/JumpDust3.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/Characters/PlayerBase/SFX/Jump/JumpDust1.png" type="Texture" id=7]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 7 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 5 ) ],
+"loop": false,
+"name": "default",
+"speed": 15.0
+} ]
+
+[node name="JumpDust" type="AnimatedSprite"]
+modulate = Color( 1, 1, 1, 0.462745 )
+z_index = 999
+frames = SubResource( 1 )
+offset = Vector2( 0, 12 )
+script = ExtResource( 1 )

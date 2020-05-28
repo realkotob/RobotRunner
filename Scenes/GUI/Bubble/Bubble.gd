@@ -15,6 +15,8 @@ func _ready():
 
 
 func appear():
+	button_node.set_modulate(Color.transparent)
+	
 	if button_name != "":
 		button_node.set_text(button_name)
 	
@@ -28,6 +30,8 @@ func appear():
 	tween_node.start()
 	
 	yield(tween_node, "tween_all_completed")
+	
+	button_node.get_node("AnimationPlayer").play_backwards("Fade")
 
 
 

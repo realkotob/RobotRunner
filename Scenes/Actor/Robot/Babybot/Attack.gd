@@ -17,7 +17,7 @@ func enter_state(_host):
 		animated_sprite_node.play(name)
 	
 	for body in hitbox_node.get_overlapping_bodies():
-		if body is IceBlock:
+		if body.is_class(owner.breakable_block_type):
 			body.destroy()
 
 

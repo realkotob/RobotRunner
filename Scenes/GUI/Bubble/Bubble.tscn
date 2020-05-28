@@ -36,7 +36,7 @@ script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-button_name = "A"
+button_name = "Shift"
 
 [node name="Button" parent="." instance=ExtResource( 2 )]
 anchor_bottom = 1.0

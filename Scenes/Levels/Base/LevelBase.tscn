@@ -96,8 +96,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Lights" type="ParallaxLayer" parent="Map/Background/Paralaxe"]
-motion_scale = Vector2( 0.1, 0 )
+[node name="Lights" type="Node2D" parent="Map/Background/Paralaxe"]
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true

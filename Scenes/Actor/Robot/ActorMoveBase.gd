@@ -5,7 +5,6 @@ extends ActorStateBase
 var path : Array = []
 var path_points_array : Array = []
 
-
 func _ready():
 	yield(owner, "ready")
 	if owner.path_node != null:
@@ -14,17 +13,18 @@ func _ready():
 			path_points_array.append(point.global_position)
 
 
-
-func update(_host : Node, delta : float):
+func update(_host : Node, _delta : float):
 	if len(path) == 0:
 		return "Idle"
 	else:
-		if move_to(path_points_array[0], owner.speed, delta) == true:
+		if move_to(path_points_array[0]) == true:
 			path_points_array.pop_front()
 			var last_point = path.pop_front()
-			var event = last_point.event().to_lower()
-			if event != "":
-				owner.call_deferred(event)
+			
+			# Trigger the event of the last point the free it
+			var event_array = last_point.get_event()
+			if event_array != []:
+				owner.callv("call_deferred", event_array)
 			
 			last_point.queue_free()
 
@@ -34,19 +34,15 @@ func enter_state(_host : Node):
 		owner.animated_sprite_node.play(name)
 
 
-
 func exit_state(_host : Node):
 	pass
 
 
 # Handle the movement to the next point on the path, return true if the node is arrived
-func move_to(destination : Vector2, speed: float, delta: float):
+func move_to(destination : Vector2):
 	var pos = owner.global_position
-	owner.set_velocity((destination - pos).normalized() * speed * delta)
+	var dir = pos.direction_to(destination)
+	owner.set_direction(dir)
+	owner.move()
 	
-	if pos.distance_to(destination) <= speed * delta:
-		owner.global_position = destination
-	else:
-		owner.global_position += owner.get_velocity()
-	
-	return destination == pos
+	return owner.global_position.distance_to(destination) < 3.0

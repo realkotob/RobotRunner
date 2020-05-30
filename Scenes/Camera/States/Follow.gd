@@ -6,7 +6,7 @@ extends StateBase
 # It computes the average position of all the players, and move the camera towards it
 # Progressivly, so the camera feels smooth
 
-func update(_host, delta):
+func update(_host, _delta):
 	var players_array = get_tree().get_nodes_in_group("Players")
 
 	# Move the camera speed towards the average postion

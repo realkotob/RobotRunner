@@ -46,6 +46,7 @@ func move_to(dest: Vector2, average_w_players : bool = false, move_speed : float
 func set_state(state_name: String):
 	state_machine_node.set_state(state_name)
 
+
 # Progressively move to the given destination
 func start_moving(dest_pos: Vector2, duration: float = 1.0):
 	tween_node.interpolate_property(self, "global_position",

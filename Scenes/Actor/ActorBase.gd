@@ -10,14 +10,23 @@ onready var path_node = get_node_or_null("Path")
 export var action_name_bubble : String = ""
 export var breakable_block_type : String = ""
 
+const GRAVITY : int = 30
+
+var direction := Vector2.ZERO setget set_direction
+var velocity := Vector2.ZERO setget set_velocity, get_velocity
+
 signal velocity_changed
 
-var velocity := Vector2.ZERO setget set_velocity, get_velocity
+
+func set_direction(value : Vector2):
+	direction = value.normalized()
+
 
 func set_velocity(value: Vector2):
 	if value != velocity:
 		emit_signal("velocity_changed", value)
 	velocity = value
+
 
 func get_velocity() -> Vector2:
 	return velocity
@@ -53,13 +62,8 @@ func appear():
 	set_visible(true)
 	$StatesMachine.set_state("Rise")
 
-func move():
-	$StatesMachine.set_state("Move")
-
-
-func attack():
-	$StatesMachine.set_state("Attack")
-
+func set_state(state_name: String):
+	$StatesMachine.set_state(state_name)
 
 func overheat():
 	$AnimationPlayer.play("Overheat", -1, 2.5)
@@ -70,6 +74,13 @@ func destroy():
 	queue_free()
 
 
+func move():
+	velocity = direction * speed
+	velocity.y += GRAVITY
+	velocity = move_and_slide(velocity)
+
+
+# Flip the sprite accordingly to the directon facing the robot
 func on_velocity_changed(new_velocity: Vector2):
 	if new_velocity.x < 0:
 		animated_sprite_node.set_flip_h(true)

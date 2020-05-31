@@ -45,5 +45,5 @@ func update(_host, _delta):
 
 # Move to the current destination, return true when it's arrived, false otherwise
 func move_to_destination():
-	owner.global_position = owner.global_position.linear_interpolate(destination, current_speed)
+	owner.start_moving(destination)
 	return owner.global_position.distance_to(destination) < 3.0

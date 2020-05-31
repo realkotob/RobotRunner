@@ -5,7 +5,7 @@
 [ext_resource path="res://Scenes/Actor/Robot/ActorMoveBase.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Actor/Overheat.tres" type="Animation" id=4]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 13, 13 )
 
 [node name="RobotBase" instance=ExtResource( 2 )]
@@ -23,4 +23,4 @@ anims/Overheat = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" index="0"]
 position = Vector2( 24, -1 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )

@@ -10,22 +10,44 @@ onready var path_node = get_node_or_null("Path")
 export var action_name_bubble : String = ""
 export var breakable_block_type : String = ""
 
+export var default_state : String = ""
+
+export var jump_force : int = -500 
+
+const GRAVITY : int = 30
+
+var snap_vector = Vector2(0, 10)
+var current_snap = snap_vector
+
+var direction := Vector2.ZERO setget set_direction
+var velocity := Vector2.ZERO setget set_velocity, get_velocity
+
 signal velocity_changed
 
-var velocity := Vector2.ZERO setget set_velocity, get_velocity
+
+func set_direction(value : Vector2):
+	direction = value.normalized()
+
 
 func set_velocity(value: Vector2):
 	if value != velocity:
 		emit_signal("velocity_changed", value)
 	velocity = value
 
+
 func get_velocity() -> Vector2:
 	return velocity
 
 
 func _ready():
-	set_visible(false)
 	var _err = connect("velocity_changed", self, "on_velocity_changed")
+	$StatesMachine.default_state = default_state
+
+
+func _physics_process(_delta):
+	velocity.x = direction.x * speed
+	velocity.y += GRAVITY
+	velocity = move_and_slide_with_snap(velocity, current_snap, Vector2.UP, true, 4, deg2rad(46), false)
 
 
 func tuto_bubble():
@@ -50,16 +72,10 @@ func get_reel_input(action_name : String) -> String:
 
 
 func appear():
-	set_visible(true)
 	$StatesMachine.set_state("Rise")
 
-func move():
-	$StatesMachine.set_state("Move")
-
-
-func attack():
-	$StatesMachine.set_state("Attack")
-
+func set_state(state_name: String):
+	$StatesMachine.set_state(state_name)
 
 func overheat():
 	$AnimationPlayer.play("Overheat", -1, 2.5)
@@ -70,6 +86,12 @@ func destroy():
 	queue_free()
 
 
+func jump():
+	if is_on_floor():
+		set_state("Jump")
+
+
+# Flip the sprite accordingly to the directon facing the robot
 func on_velocity_changed(new_velocity: Vector2):
 	if new_velocity.x < 0:
 		animated_sprite_node.set_flip_h(true)

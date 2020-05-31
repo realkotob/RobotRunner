@@ -77,12 +77,10 @@ func move_camera_to(dest: Vector2, average_w_players: bool = false, speed : floa
 
 
 # Give zoom the camera to the destination wanted zoom
-func zoom_camera_to(dest_zoom: Vector2, zoom_speed : float = -1.0):
+func zoom_camera_to(dest_zoom: Vector2, zoom_speed : float = 1.0):
 	var camera_node = get_tree().get_current_scene().find_node("Camera")
 	if camera_node != null:
-		camera_node.set_destination_zoom(dest_zoom)
-		if zoom_speed != -1.0:
-			camera_node.current_zoom_speed = zoom_speed
+		camera_node.start_zooming(dest_zoom, zoom_speed)
 
 
 func set_camera_on_follow():

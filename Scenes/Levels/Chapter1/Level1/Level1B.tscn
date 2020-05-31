@@ -277,20 +277,18 @@ position = Vector2( 0, -16 )
 position = Vector2( 48, -56 )
 
 [node name="Checkpoint2" parent="Events/Checkpoints" index="1" instance=ExtResource( 14 )]
-position = Vector2( 3688, 424 )
+position = Vector2( 3416, 424 )
 
 [node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint2" index="1"]
-position = Vector2( 80, -40 )
+position = Vector2( -176, -154.718 )
 
 [node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint2" index="2"]
-position = Vector2( -88, -40 )
+position = Vector2( -176, -58 )
 
 [node name="CameraEvent" parent="Events/CameraEvents" index="0" instance=ExtResource( 15 )]
 position = Vector2( 2100, 288 )
 scale = Vector2( 2.888, 3.606 )
 camera_new_zoom = Vector2( 2, 2 )
-camera_new_speed = 0.01
-camera_new_zoom_speed = 0.01
 
 [node name="Position2D" parent="Events/CameraEvents/CameraEvent" index="1"]
 position = Vector2( 186.981, 9.98335 )
@@ -298,8 +296,6 @@ position = Vector2( 186.981, 9.98335 )
 [node name="CameraEvent2" parent="Events/CameraEvents" index="1" instance=ExtResource( 15 )]
 position = Vector2( 3240, 324 )
 scale = Vector2( 7.214, 18.506 )
-camera_new_speed = 0.01
-camera_new_zoom_speed = 0.01
 follow_state = true
 
 [node name="CameraEvent3" parent="Events/CameraEvents" index="2" instance=ExtResource( 15 )]

@@ -130,6 +130,7 @@ __meta__ = {
 }
 
 [node name="GlitchEffect" parent="Logo" index="1" instance=ExtResource( 8 )]
+sound_volume = -6.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Logo" index="2"]
 autoplay = "HeadFloating"

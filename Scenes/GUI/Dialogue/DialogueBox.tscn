@@ -160,12 +160,13 @@ __meta__ = {
 }
 
 [node name="GlitchEffect" parent="PortraitFrame/Portrait" instance=ExtResource( 10 )]
+sound_volume = -12.0
 
 [node name="ScreenEffect" type="AnimatedSprite" parent="PortraitFrame/Portrait"]
 self_modulate = Color( 1, 1, 1, 0.0392157 )
 show_behind_parent = true
 frames = SubResource( 2 )
-frame = 3
+frame = 2
 playing = true
 __meta__ = {
 "_edit_lock_": true

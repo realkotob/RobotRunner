@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "PlayerStateBase",
 "class": "ActionBase",
 "language": "GDScript",
-"path": "res://Scenes/Characters/PlayerBase/Scripts/Action.gd"
+"path": "res://Scenes/Actor/Players/PlayerBase/Scripts/Action.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "ActorBase",
@@ -177,7 +177,7 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
-"path": "res://Scenes/Characters/PlayerBase/Scripts/RobotBase.gd"
+"path": "res://Scenes/Actor/Players/PlayerBase/Scripts/PlayerBase.gd"
 }, {
 "base": "StateBase",
 "class": "PlayerStateBase",
@@ -202,7 +202,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "SFX_group_base",
 "language": "GDScript",
-"path": "res://Scenes/Characters/PlayerBase/Scripts/SFX_group_base.gd"
+"path": "res://Scenes/Actor/Players/PlayerBase/Scripts/SFX_group_base.gd"
 }, {
 "base": "Node",
 "class": "StateBase",

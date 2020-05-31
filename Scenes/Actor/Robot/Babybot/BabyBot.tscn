@@ -8,6 +8,7 @@
 [ext_resource path="res://Scenes/Actor/Robot/Babybot/Fall.gd" type="Script" id=7]
 
 [node name="BabyBot" instance=ExtResource( 1 )]
+default_state = "Idle"
 
 [node name="Hidden" type="Node" parent="StatesMachine" index="0"]
 script = ExtResource( 4 )

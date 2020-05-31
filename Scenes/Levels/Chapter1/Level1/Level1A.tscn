@@ -375,6 +375,16 @@ script = ExtResource( 24 )
 [node name="PathPoint" parent="InteractivesObjects/Robot/BabyTank2/Path" index="0" instance=ExtResource( 25 )]
 method_name = "jump"
 
+[node name="BabyHammer2" parent="InteractivesObjects/Robot" index="3" instance=ExtResource( 23 )]
+position = Vector2( -4092, 468 )
+default_state = "Move"
+
+[node name="Path" type="Node2D" parent="InteractivesObjects/Robot/BabyHammer2" index="5"]
+script = ExtResource( 24 )
+
+[node name="PathPoint" parent="InteractivesObjects/Robot/BabyHammer2/Path" index="0" instance=ExtResource( 25 )]
+method_name = "jump"
+
 [node name="Checkpoint" parent="Events/Checkpoints" index="0" instance=ExtResource( 16 )]
 position = Vector2( 1416, 280 )
 

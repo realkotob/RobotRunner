@@ -15,7 +15,7 @@ func setup():
 func _process(_delta):
 	for SFX_node in SFX_nodes_array:
 		if SFX_node.has_method("set_fx_direction"):
-			SFX_node.set_fx_direction(owner.get_move_direction())
+			SFX_node.set_fx_direction(owner.get_direction())
 
 
 # When called with a String, search for a child node with this name and call his method that play/stop the SFX

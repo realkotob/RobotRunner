@@ -1,24 +1,13 @@
-extends KinematicBody2D
-
+extends ActorBase
 class_name Player
 
 # Store all the children references
 onready var inputs_node = get_node("Inputs")
-onready var animation_node = get_node("AnimatedSprite")
-onready var action_hitbox_node = get_node("ActionHitBox")
 onready var SFX_node = get_node("SFX")
 onready var anim_player_node = get_node("AnimationPlayer")
 
-export (int, 0, 200) var push = 2
-export var speed : int = 400 setget set_speed, get_speed
-export var jump_force : int = -500 setget set_jump_force, get_jump_force
+export var breakable_type_array : PoolStringArray = []
 
-const GRAVITY : int = 30
-
-var snap_vector = Vector2(0, 10)
-var current_snap = snap_vector
-
-var velocity : Vector2 setget set_velocity, get_velocity
 var dirLeft : int = 0 
 var dirRight : int = 0
 
@@ -33,29 +22,11 @@ func is_class(value: String):
 func get_class() -> String:
 	return "Player"
 
-func set_speed(value : int):
-	speed = value
-
-func get_speed() -> int:
-	return speed
-
-func set_velocity(value : Vector2):
-	velocity = value
-
-func get_velocity() -> Vector2:
-	return velocity
-
 func set_jump_force(value : int):
 	jump_force = value
 
 func get_jump_force() -> int:
 	return jump_force
-
-func set_state(value : String):
-	$StatesMachine.set_state(value)
-
-func get_state() -> String:
-	return $StatesMachine.get_state_name()
 
 func get_extents() -> Vector2:
 	return $CollisionShape2D.get_shape().get_extents()
@@ -64,46 +35,6 @@ func get_extents() -> Vector2:
 func _ready():
 	var _err = anim_player_node.connect("animation_finished", self, "on_animation_finished")
 	add_to_group("Players")
-
-
-#### PHYSIC BEHAVIOUR ####
-
-func _physics_process(delta):
-	var dir = get_move_direction()
-	
-	# Compute velocity
-	velocity.x = dir * speed
-	
-	# Flip the character in the right direction
-	if abs(velocity.x) > 0.0:
-		var is_looking_left = get_move_direction() == -1
-		animation_node.set_flip_h(is_looking_left)
-		if is_looking_left:
-			animation_node.offset.x = -abs(animation_node.offset.x)
-		else:
-			animation_node.offset.x = abs(animation_node.offset.x)
-		
-		flip_hit_box()
-	
-	velocity.y += GRAVITY
-	
-	# Jump corner correction
-	if get_state() == "Jump":
-		# Make a movement test to check collisions preemptively
-		var corner_col = move_and_collide(velocity * delta, true, true, true)
-		if corner_col != null:
-			var col_normal = corner_col.get_normal()
-			if col_normal.x < 0.2 && col_normal.x > -0.2:
-				corner_correct(20, delta)
-	
-	# Apply movement
-	velocity = move_and_slide_with_snap(velocity, current_snap, Vector2.UP, true, 4, deg2rad(46), false)
-	
-	# Apply force to bodies it hit
-	for index in get_slide_count():
-		var collision = get_slide_collision(index)
-		if collision.collider.is_in_group("MovableBodies"):
-			collision.collider.apply_central_impulse(-collision.normal * push)
 
 
 func corner_correct(amount : int, delta: float):
@@ -129,27 +60,11 @@ func _input(event):
 	
 	elif event.is_action_released(inputs_node.input_map["MoveRight"]):
 		dirRight = 0
+	
+	set_direction(dirRight - dirLeft)
 
 
 #### BEHAVIOUR RELATED FUNCTIONS ####
-
-# Returns the direction of the robot
-func get_move_direction() -> int:
-	return dirRight - dirLeft
-
-
-# Returns the direction of the robot
-func get_face_direction() -> int:
-	if animation_node.is_flipped_h():
-		return -1
-	else:
-		return 1
-
-
-# Flip the hit box shape
-func flip_hit_box():
-	var hit_box_shape_x_pos = action_hitbox_node.get_child(0).position.x
-	action_hitbox_node.get_child(0).position.x = abs(hit_box_shape_x_pos) * get_face_direction()
 
 
 # Triggers the overheat animation
@@ -168,7 +83,8 @@ func fade_out():
 func stop_overheat():
 	var anim : String = anim_player_node.get_current_animation()
 	if anim == "Overheat":
-		anim_player_node.play("Default")
+		anim_player_node.stop(true)
+		animated_sprite_node.set_modulate(Color.white)
 
 
 # Called when the robot is destroyed, triggers the death animation, the gameover,

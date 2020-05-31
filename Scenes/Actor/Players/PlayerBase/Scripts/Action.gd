@@ -7,15 +7,12 @@ class_name ActionBase
 var interact_able_array : Array
 var inputs_node : Node
 
-export var animation_offset : Vector2
 export var breakable_type_array : PoolStringArray
 export var interactables : PoolStringArray
 
 var action_hitbox_node : Area2D
 var hit_box_shape : Node
 
-var face_dir : int
-var base_offset := Vector2.ZERO
 var has_touch : bool = false
 
 onready var audio_node = get_node("AudioStreamPlayer")
@@ -27,21 +24,16 @@ func _ready():
 	inputs_node = owner.get_node("Inputs")
 	var _err = animation_node.connect("animation_finished", self, "on_animation_finished")
 	hit_box_shape = action_hitbox_node.get_node("CollisionShape2D")
-	
-	base_offset = animation_node.get_offset()
 
 
-# Aplly the offset of the animation every thick
 func update(_host, _delta):
-	offset_animation()
 	if !has_touch:
 		damage()
 
 
-# When the actor enters action state: set active the hit box, and play the right animation, applying it the defined offset
+# When the actor enters action state: set active the hit box, and play the right animation
 func enter_state(_host):
 	# Play the animation
-	offset_animation()
 	animation_node.play(self.name)
 	
 	# Play the audio
@@ -53,7 +45,6 @@ func enter_state(_host):
 
 # When the actor exits action state: set unactive the hit box and triggers the interaction if necesary
 func exit_state(_host):
-	animation_node.set_offset(base_offset)
 	interact()
 	
 	# Reset the was broke bool, for the next use of the action state
@@ -67,7 +58,7 @@ func exit_state(_host):
 func damage():
 	var bodies_in_hitbox = action_hitbox_node.get_overlapping_bodies()
 	for body in bodies_in_hitbox:
-		if body.get_class() in breakable_type_array:
+		if body.get_class() in owner.breakable_type_array:
 			var average_pos = (body.global_position + action_hitbox_node.global_position) / 2
 			damage_body(body, average_pos)
 
@@ -98,15 +89,6 @@ func on_animation_finished():
 			state_node.set_state("Idle")
 		else:
 			state_node.set_state("Fall")
-
-
-# Apply the offset to the animation, and orient it the right way, depending of the direction the character is facing
-func offset_animation():
-	face_dir = owner.get_face_direction()
-	var current_anim_offset = animation_offset
-	current_anim_offset.x *= face_dir
-	if animation_node.get_offset() != current_anim_offset:
-		animation_node.set_offset(current_anim_offset)
 
 
 # Define the actions the player can do in this state

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Scenes/Actor/Robot/Babybot/BabyBot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Actor/Robot/Babybot/Tank/Sprite/Move/TankMinionMove1.png" type="Texture" id=2]
@@ -12,6 +12,10 @@
 [ext_resource path="res://Scenes/Actor/Robot/Babybot/Tank/Sprite/Attack/TankMinionAttack7.png" type="Texture" id=10]
 [ext_resource path="res://Scenes/Actor/Robot/Babybot/Tank/Sprite/Attack/TankMinionAttack6.png" type="Texture" id=11]
 [ext_resource path="res://Scenes/Actor/Robot/Babybot/Tank/Sprite/Rise/TankMinionRise.png" type="Texture" id=12]
+[ext_resource path="res://Scenes/Actor/Robot/Babybot/Tank/Sprite/TankMinionStartJump.png" type="Texture" id=13]
+[ext_resource path="res://Scenes/Actor/Robot/Babybot/Tank/Sprite/TankMinionLand.png" type="Texture" id=14]
+[ext_resource path="res://Scenes/Actor/Robot/Babybot/Tank/Sprite/TankMinionJump.png" type="Texture" id=15]
+[ext_resource path="res://Scenes/Actor/Robot/Babybot/Tank/Sprite/TankMinionFall.png" type="Texture" id=16]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 12 )
@@ -53,7 +57,51 @@ region = Rect2( 416, 0, 52, 32 )
 atlas = ExtResource( 12 )
 region = Rect2( 468, 0, 52, 32 )
 
-[sub_resource type="SpriteFrames" id=11]
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 14 )
+region = Rect2( 0, 0, 52, 32 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 14 )
+region = Rect2( 52, 0, 52, 32 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 14 )
+region = Rect2( 104, 0, 52, 32 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 14 )
+region = Rect2( 156, 0, 52, 32 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 13 )
+region = Rect2( 0, 0, 52, 32 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 13 )
+region = Rect2( 52, 0, 52, 32 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 16 )
+region = Rect2( 0, 0, 52, 32 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 16 )
+region = Rect2( 52, 0, 52, 32 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 15 )
+region = Rect2( 0, 0, 52, 32 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 15 )
+region = Rect2( 52, 0, 52, 32 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 15 )
+region = Rect2( 104, 0, 52, 32 )
+
+[sub_resource type="SpriteFrames" id=22]
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 3 ) ],
 "loop": true,
@@ -65,18 +113,38 @@ animations = [ {
 "name": "Idle",
 "speed": 5.0
 }, {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"loop": false,
+"name": "Rise",
+"speed": 13.0
+}, {
 "frames": [ ExtResource( 5 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 11 ), ExtResource( 10 ) ],
 "loop": false,
 "name": "Attack",
 "speed": 8.0
 }, {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
 "loop": false,
-"name": "Rise",
+"name": "Land",
+"speed": 13.0
+}, {
+"frames": [ SubResource( 15 ), SubResource( 16 ) ],
+"loop": false,
+"name": "Jump",
+"speed": 13.0
+}, {
+"frames": [ SubResource( 17 ), SubResource( 18 ) ],
+"loop": true,
+"name": "Fall",
+"speed": 13.0
+}, {
+"frames": [ SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
+"loop": true,
+"name": "MidAir",
 "speed": 13.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=12]
+[sub_resource type="RectangleShape2D" id=23]
 extents = Vector2( 6, 10 )
 
 [node name="BabyTank" instance=ExtResource( 1 )]
@@ -86,10 +154,10 @@ action_name_bubble = "action_player1"
 breakable_block_type = "IceBlock"
 
 [node name="AnimatedSprite" parent="." index="0"]
-frames = SubResource( 11 )
+frames = SubResource( 22 )
 animation = "Idle"
 offset = Vector2( 10, -4 )
 
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2( 0, 2 )
-shape = SubResource( 12 )
+shape = SubResource( 23 )

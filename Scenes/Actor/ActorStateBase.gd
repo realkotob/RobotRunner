@@ -1,6 +1,8 @@
 extends StateBase
 class_name ActorStateBase
 
+onready var state_node = get_parent()
+
 func update(_host : Node, _delta : float):
 	pass
 

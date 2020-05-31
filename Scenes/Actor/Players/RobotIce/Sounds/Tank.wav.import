@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Tank.wav-0f205f68e3d2a4cd748888887a2b5ece.sample"
+
+[deps]
+
+source_file="res://Scenes/Actor/Players/RobotIce/Sounds/Tank.wav"
+dest_files=[ "res://.import/Tank.wav-0f205f68e3d2a4cd748888887a2b5ece.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

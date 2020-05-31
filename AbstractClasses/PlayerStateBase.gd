@@ -7,7 +7,7 @@ onready var state_node : Node
 
 func _ready():
 	yield(owner, "ready")
-	animation_node = owner.get_node("Animation")
+	animation_node = owner.get_node("AnimatedSprite")
 	state_node = get_parent()
 
 # Play the animation with a name corresponding to the current state

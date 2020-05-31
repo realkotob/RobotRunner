@@ -42,7 +42,7 @@ func enter_state(_host : Node):
 
 
 func exit_state(_host : Node):
-	owner.set_direction(Vector2.ZERO)
+	owner.set_direction(0)
 
 
 # Move to the next point in the path
@@ -56,7 +56,7 @@ func move_to_next_point():
 # Handle the movement to the next point on the path, return true if the node is arrived
 func move_to(destination : Vector2):
 	var pos = owner.global_position
-	var dir = pos.direction_to(destination)
+	var dir = sign(pos.direction_to(destination).x)
 	owner.set_direction(dir)
 
 

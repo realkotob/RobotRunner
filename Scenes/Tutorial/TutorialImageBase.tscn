@@ -1,6 +1,8 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Scenes/Characters/RobotIce/Sprites/Attack/RobotIceAttack1.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Actor/Players/RobotIce/Sprites/Attack/RobotIceAttack1.png" type="Texture" id=1]
+
+
 
 [node name="TutorialImage" type="Sprite"]
 modulate = Color( 1, 0, 0.819608, 1 )

@@ -38,7 +38,7 @@ func player_tracking():
 		for player in players_array:
 			var extents = player.get_extents()
 			
-			if player.global_position.y <= global_position.y - extents.y:
+			if player.is_on_floor() and player.global_position.y <= global_position.y - extents.y:
 				if instant_break:
 					destroy()
 				else:

@@ -53,9 +53,6 @@ margin_right = 960.0
 margin_bottom = 540.0
 mouse_filter = 2
 color = Color( 0.137255, 0.0980392, 0.152941, 1 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Fog" type="Sprite" parent="." index="1"]
 material = SubResource( 1 )

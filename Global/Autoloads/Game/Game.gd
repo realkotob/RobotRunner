@@ -8,8 +8,8 @@ export var progression : Resource
 var chapters_array = []
 var current_chapter : Resource = null
 
-var player1 = preload("res://Scenes/Characters/RobotIce/RobotIce.tscn")
-var player2 = preload("res://Scenes/Characters/RobotHammer/RobotHammer.tscn")
+var player1 = preload("res://Scenes/Actor/Players/RobotIce/RobotIce.tscn")
+var player2 = preload("res://Scenes/Actor/Players/RobotHammer/RobotHammer.tscn")
 
 var level_array : Array
 var last_level_path : String

@@ -307,16 +307,37 @@ position = Vector2( 2952, 516 )
 [node name="RedButton3" parent="InteractivesObjects/GreatDoorGroup" index="3" instance=ExtResource( 8 )]
 position = Vector2( 2952, 516 )
 
-[node name="BabyTank" parent="InteractivesObjects/Robot" index="0" instance=ExtResource( 18 )]
-position = Vector2( -2700, 156 )
+[node name="BabyTank1" parent="InteractivesObjects/Robot" index="0" instance=ExtResource( 18 )]
+position = Vector2( -4092, 228 )
+default_state = "Move"
+action_name_bubble = "jump_player1"
 
-[node name="Path" type="Node2D" parent="InteractivesObjects/Robot/BabyTank" index="3"]
+[node name="Path" type="Node2D" parent="InteractivesObjects/Robot/BabyTank1" index="5"]
 script = ExtResource( 24 )
 
-[node name="PathPoint0" parent="InteractivesObjects/Robot/BabyTank/Path" index="0" instance=ExtResource( 25 )]
+[node name="PathPoint" parent="InteractivesObjects/Robot/BabyTank1/Path" index="0" instance=ExtResource( 25 )]
+method_name = "jump"
+
+[node name="BabyHammer1" parent="InteractivesObjects/Robot" index="1" instance=ExtResource( 23 )]
+position = Vector2( -4092, 468 )
+default_state = "Move"
+
+[node name="Path" type="Node2D" parent="InteractivesObjects/Robot/BabyHammer1" index="5"]
+script = ExtResource( 24 )
+
+[node name="PathPoint" parent="InteractivesObjects/Robot/BabyHammer1/Path" index="0" instance=ExtResource( 25 )]
+method_name = "jump"
+
+[node name="BabyTank2" parent="InteractivesObjects/Robot" index="2" instance=ExtResource( 18 )]
+position = Vector2( -2700, 156 )
+
+[node name="Path" type="Node2D" parent="InteractivesObjects/Robot/BabyTank2" index="3"]
+script = ExtResource( 24 )
+
+[node name="PathPoint0" parent="InteractivesObjects/Robot/BabyTank2/Path" index="0" instance=ExtResource( 25 )]
 method_name = "tuto_bubble"
 
-[node name="PathPoint1" type="Position2D" parent="InteractivesObjects/Robot/BabyTank/Path" index="1"]
+[node name="PathPoint1" type="Position2D" parent="InteractivesObjects/Robot/BabyTank2/Path" index="1"]
 position = Vector2( 192, 0 )
 script = ExtResource( 19 )
 __meta__ = {
@@ -325,65 +346,45 @@ __meta__ = {
 method_name = "set_state"
 argument_array = [ "Attack" ]
 
-[node name="PathPoint2" type="Position2D" parent="InteractivesObjects/Robot/BabyTank/Path" index="2"]
+[node name="PathPoint2" type="Position2D" parent="InteractivesObjects/Robot/BabyTank2/Path" index="2"]
 position = Vector2( 216, 0 )
 script = ExtResource( 19 )
 method_name = "overheat"
 
-[node name="PathPoint3" type="Position2D" parent="InteractivesObjects/Robot/BabyTank/Path" index="3"]
+[node name="PathPoint3" type="Position2D" parent="InteractivesObjects/Robot/BabyTank2/Path" index="3"]
 position = Vector2( 336, 0 )
 script = ExtResource( 19 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="BabyHammer" parent="InteractivesObjects/Robot" index="1" instance=ExtResource( 23 )]
+[node name="BabyHammer2" parent="InteractivesObjects/Robot" index="3" instance=ExtResource( 23 )]
 position = Vector2( -2028, 420 )
+default_state = "Hidden"
 action_name_bubble = "action_player2"
 
-[node name="Path" type="Node2D" parent="InteractivesObjects/Robot/BabyHammer" index="5"]
+[node name="Path" type="Node2D" parent="InteractivesObjects/Robot/BabyHammer2" index="5"]
 script = ExtResource( 24 )
 
-[node name="PathPoint0" type="Position2D" parent="InteractivesObjects/Robot/BabyHammer/Path" index="0"]
+[node name="PathPoint0" type="Position2D" parent="InteractivesObjects/Robot/BabyHammer2/Path" index="0"]
 position = Vector2( 84, 0 )
 script = ExtResource( 19 )
 method_name = "tuto_bubble"
 
-[node name="PathPoint1" type="Position2D" parent="InteractivesObjects/Robot/BabyHammer/Path" index="1"]
+[node name="PathPoint1" type="Position2D" parent="InteractivesObjects/Robot/BabyHammer2/Path" index="1"]
 position = Vector2( 156, 0 )
 script = ExtResource( 19 )
 method_name = "set_state"
 argument_array = [ "Attack" ]
 
-[node name="PathPoint2" type="Position2D" parent="InteractivesObjects/Robot/BabyHammer/Path" index="2"]
+[node name="PathPoint2" type="Position2D" parent="InteractivesObjects/Robot/BabyHammer2/Path" index="2"]
 position = Vector2( 168, 0 )
 script = ExtResource( 19 )
 method_name = "overheat"
 
-[node name="PathPoint3" type="Position2D" parent="InteractivesObjects/Robot/BabyHammer/Path" index="3"]
+[node name="PathPoint3" type="Position2D" parent="InteractivesObjects/Robot/BabyHammer2/Path" index="3"]
 position = Vector2( 312, 0 )
 script = ExtResource( 19 )
-
-[node name="BabyTank2" parent="InteractivesObjects/Robot" index="2" instance=ExtResource( 18 )]
-position = Vector2( -4092, 228 )
-action_name_bubble = "jump_player1"
-default_state = "Move"
-
-[node name="Path" type="Node2D" parent="InteractivesObjects/Robot/BabyTank2" index="5"]
-script = ExtResource( 24 )
-
-[node name="PathPoint" parent="InteractivesObjects/Robot/BabyTank2/Path" index="0" instance=ExtResource( 25 )]
-method_name = "jump"
-
-[node name="BabyHammer2" parent="InteractivesObjects/Robot" index="3" instance=ExtResource( 23 )]
-position = Vector2( -4092, 468 )
-default_state = "Move"
-
-[node name="Path" type="Node2D" parent="InteractivesObjects/Robot/BabyHammer2" index="5"]
-script = ExtResource( 24 )
-
-[node name="PathPoint" parent="InteractivesObjects/Robot/BabyHammer2/Path" index="0" instance=ExtResource( 25 )]
-method_name = "jump"
 
 [node name="Checkpoint" parent="Events/Checkpoints" index="0" instance=ExtResource( 16 )]
 position = Vector2( 1416, 280 )
@@ -393,7 +394,7 @@ scale = Vector2( 2.6, 5.752 )
 
 [node name="LevelEvent" parent="Events/LevelEvent" index="0" instance=ExtResource( 22 )]
 position = Vector2( -2148, 336 )
-target_name = "BabyHammer"
+target_name = "BabyHammer2"
 method_name = "appear"
 
 [node name="TriggerArea" parent="Events/LevelEvent/LevelEvent" index="0" instance=ExtResource( 20 )]
@@ -408,7 +409,7 @@ cut_scene = true
 [node name="Minions" parent="Events/DialogueEvents" index="1" instance=ExtResource( 21 )]
 position = Vector2( -2916, 204 )
 scale = Vector2( 3.376, 18.679 )
-target_name = "BabyTank"
+target_name = "BabyTank2"
 method_name = "appear"
 dialogue_index = 2
 

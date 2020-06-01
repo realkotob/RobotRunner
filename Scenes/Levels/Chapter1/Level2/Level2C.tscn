@@ -190,9 +190,6 @@ position = Vector2( 960, 152 )
 [node name="2TilesBreakablePlateform7" parent="InteractivesObjects/Platform/2 Tiles" index="7" instance=ExtResource( 16 )]
 position = Vector2( 960, 104 )
 
-[node name="Events" parent="." index="6"]
-visible = true
-
 [node name="Checkpoint1" type="Node2D" parent="Events/Checkpoints" index="0"]
 script = ExtResource( 20 )
 __meta__ = {

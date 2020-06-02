@@ -44,21 +44,21 @@ offset = Vector2( -4000, -2000 )
 [node name="Light" parent="Map/Background/Paralaxe/Lights" index="0" instance=ExtResource( 9 )]
 position = Vector2( -3360, 922 )
 
-[node name="Light5" parent="Map/Background/Paralaxe/Lights" index="1" instance=ExtResource( 9 )]
-position = Vector2( 1020, 12 )
-
-[node name="Light10" parent="Map/Background/Paralaxe/Lights" index="2" instance=ExtResource( 9 )]
-position = Vector2( 1848, 288 )
-texture_scale = 1.38
-
-[node name="Light11" parent="Map/Background/Paralaxe/Lights" index="3" instance=ExtResource( 9 )]
-position = Vector2( 2532, 552 )
-texture_scale = 1.38
-
-[node name="Light2" parent="Map/Background/Paralaxe/Lights" index="4" instance=ExtResource( 9 )]
+[node name="Light2" parent="Map/Background/Paralaxe/Lights" index="1" instance=ExtResource( 9 )]
 position = Vector2( 276, 468 )
 texture_scale = 0.92
 energy = 0.89
+
+[node name="Light5" parent="Map/Background/Paralaxe/Lights" index="2" instance=ExtResource( 9 )]
+position = Vector2( 1020, 12 )
+
+[node name="Light10" parent="Map/Background/Paralaxe/Lights" index="3" instance=ExtResource( 9 )]
+position = Vector2( 1848, 288 )
+texture_scale = 1.38
+
+[node name="Light11" parent="Map/Background/Paralaxe/Lights" index="4" instance=ExtResource( 9 )]
+position = Vector2( 2532, 552 )
+texture_scale = 1.38
 
 [node name="Light3" parent="Map/Background/Paralaxe/Lights" index="5" instance=ExtResource( 9 )]
 position = Vector2( 708, 216 )
@@ -138,24 +138,6 @@ tile_data = PoolIntArray( -65525, 26, 196611, 65358, 26, 196611, 65506, 27, 1966
 
 [node name="Decoration2" parent="Map" index="4"]
 tile_data = PoolIntArray( 5, 22, 4, 28, 22, 3, 30, 22, 4, 130892, 30, 0, 131042, 30, 0, 131044, 30, 0, 65548, 28, 131073, 65549, 30, 0, 65616, 30, 0, 65618, 28, 131073, 196656, 29, 65536, 196658, 29, 65538, 196736, 20, 0, 327730, 30, 0, 327796, 30, 0, 393248, 22, 3, 393266, 29, 65536, 524425, 20, 0, 655255, 30, 0, 589825, 22, 4, 720738, 30, 0, 720816, 30, 0, 720902, 22, 4, 720911, 28, 131073, 720919, 22, 3, 786448, 22, 4, 917566, 536870922, 0, 1179604, 30, 0, 1245035, 28, 0, 1245036, 28, 131075, 1310571, 28, 196608, 1310674, 29, 65536, 1376102, 27, 131076, 1376103, 27, 1, 1376104, 27, 65539, 1376105, 29, 131073, 1376106, 27, 1, 1376107, 27, 3, 1376108, 27, 1, 1376109, 29, 131073, 1376110, 27, 2, 1376240, 30, 0, 1310721, 30, 0, 1310866, 30, 0, 1441640, 27, 196612, 1441646, 27, 131072, 1441647, 27, 131075, 1441744, 29, 131073, 1376271, 22, 3 )
-
-[node name="XionCrates" type="Node2D" parent="InteractivesObjects" index="0"]
-__meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true
-}
-
-[node name="XionCrate" parent="InteractivesObjects/XionCrates" index="0" instance=ExtResource( 6 )]
-position = Vector2( 828, 96 )
-
-[node name="XionCrate3" parent="InteractivesObjects/XionCrates" index="1" instance=ExtResource( 6 )]
-position = Vector2( 2820, 504 )
-
-[node name="XionCrate4" parent="InteractivesObjects/XionCrates" index="2" instance=ExtResource( 6 )]
-position = Vector2( 2316, 120 )
-
-[node name="XionCrate2" parent="InteractivesObjects/XionCrates" index="3" instance=ExtResource( 6 )]
-position = Vector2( 960, 360 )
 
 [node name="IceBlockBase" parent="InteractivesObjects/IceBlocks/S" index="0" instance=ExtResource( 15 )]
 position = Vector2( 900, 420 )
@@ -306,6 +288,18 @@ position = Vector2( 2952, 516 )
 
 [node name="RedButton3" parent="InteractivesObjects/GreatDoorGroup" index="3" instance=ExtResource( 8 )]
 position = Vector2( 2952, 516 )
+
+[node name="XionCrate" parent="InteractivesObjects/Collactables/XionCrates" index="0" instance=ExtResource( 6 )]
+position = Vector2( 828, 96 )
+
+[node name="XionCrate2" parent="InteractivesObjects/Collactables/XionCrates" index="1" instance=ExtResource( 6 )]
+position = Vector2( 960, 360 )
+
+[node name="XionCrate3" parent="InteractivesObjects/Collactables/XionCrates" index="2" instance=ExtResource( 6 )]
+position = Vector2( 2820, 504 )
+
+[node name="XionCrate4" parent="InteractivesObjects/Collactables/XionCrates" index="3" instance=ExtResource( 6 )]
+position = Vector2( 2316, 120 )
 
 [node name="BabyTank1" parent="InteractivesObjects/Robot" index="0" instance=ExtResource( 18 )]
 position = Vector2( -4092, 228 )

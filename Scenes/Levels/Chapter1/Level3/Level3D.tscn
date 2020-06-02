@@ -268,9 +268,6 @@ rotation = 1.5708
 [node name="RedButton3" parent="InteractivesObjects/GreatDoorGroup" index="3" instance=ExtResource( 7 )]
 position = Vector2( 2760, 180 )
 
-[node name="Events" parent="." index="6"]
-visible = true
-
 [node name="Checkpoint" type="Node2D" parent="Events/Checkpoints" index="0"]
 script = ExtResource( 18 )
 __meta__ = {

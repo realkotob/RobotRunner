@@ -372,30 +372,6 @@ tile_data = PoolIntArray( -1834965, 31, 0, -1834964, 6, 1, -1834963, 6, 1, -1834
 [node name="Decoration" parent="Map" index="3"]
 tile_data = PoolIntArray( -1179560, 536870932, 0, -1179553, 13, 0, -1179552, 536870932, 0, -1048490, 14, 0, -917503, 536870930, 65536, -917498, 536870930, 65536, -917496, 13, 0, -917495, 536870930, 65536, -917493, 20, 0, -917473, 536870932, 0, -917471, 13, 0, -917457, 536870925, 0, -917455, 20, 0, -917443, 20, 0, -917437, 14, 0, -917434, 20, 0, -917427, 536870932, 0, -917405, 20, 0, -917393, 536870932, 0, -917384, 536870932, 0, -851954, 536870926, 0, -851933, 536870932, 0, -851852, 536870926, 0, -851844, 20, 0, -851843, 14, 0, -786389, 536870932, 0, -786335, 536870932, 0, -786323, 14, 0, -655361, 20, 0, -720879, 20, 0, -720860, 13, 0, -720855, 536870926, 0, -720843, 20, 0, -589830, 13, 0, -655341, 13, 0, -655242, 536870932, 0, -589823, 536870926, 0, -589818, 20, 0, -589803, 20, 0, -589786, 536870932, 0, -589760, 20, 0, -589758, 536870932, 0, -458755, 20, 0, -524201, 536870932, 0, -458741, 14, 0, -458738, 20, 0, -458670, 20, 0, -458661, 20, 0, -458631, 536870925, 0, -327693, 20, 0, -327690, 536870925, 0, -393127, 14, 0, -393118, 13, 0, -327575, 20, 0, -327556, 536870932, 0, -327550, 20, 0, -262121, 536870931, 65536, -262119, 20, 0, -262018, 14, 0, -196605, 14, 0, -196586, -2147483629, 65536, -196555, 20, 0, -196554, 536870925, 0, -196553, 536870932, 0, -130955, 13, 0, -130954, 536870932, 0, -130943, 1073741843, 65536, -14, -2147483629, 65536, -65472, 20, 0, 131081, 536870932, 0, 131082, 536870926, 0, 131083, 536870932, 0, 131092, 14, 0, 131093, 20, 0, 131097, 536870925, 0, 131098, 536870932, 0, 131106, -1073741805, 65536, 131107, 536870926, 0, 131110, 20, 0, 131112, 536870925, 0, 131117, 536870932, 0, 131120, 536870932, 0, 131122, 13, 0, 131124, 536870932, 0, 131151, 536870932, 0, 131158, 536870931, 65536, 131159, 18, 65536, 131161, 536870932, 0, 131199, -1073741805, 65536, 196609, 20, 0, 196663, 536870932, 0, 196668, 536870932, 0, 196676, 536870932, 0, 196680, 536870932, 0, 196685, 20, 0, 262171, 536870932, 0, 262219, -2147483629, 65536, 262250, 13, 0, 327700, -2147483629, 65536, 458869, 536870925, 0, 524421, 536870930, 65536, 524423, 20, 0, 786449, 536870925, 0, 786460, 20, 0, 786462, 13, 0, 786487, 20, 0, 786499, 20, 0, 786509, 20, 0, 786529, -2147483629, 65536, 786541, 18, 65536, 786543, 536870932, 0, 786546, 536870925, 0, 786547, 18, 65536, 786549, 536870932, 0, 786561, 20, 0, 852002, 20, 0, 852020, 20, 0, 852044, 13, 0, 852092, 13, 0, 917566, 536870922, 0, 917631, 18, 65536, 983050, 536870932, 0, 983051, 13, 0, 983052, 536870932, 0, 983138, 20, 0, 983141, 536870925, 0, 1114103, 536870925, 0, 1048584, 20, 0, 1048681, 536870932, 0, 1114140, 536870932, 0, 1114219, 13, 0, 1114220, 18, 65536, 1114224, -1610612717, 65536, 1114245, 536870932, 0, 1179767, 536870930, 65536, 1179768, 536870925, 0, 1245216, 536870926, 0, 1245218, -2147483629, 65536, 1245282, -1610612717, 65536, 1310760, 1073741843, 65536, 1310830, 1610612755, 65536, 1376283, 13, 0, 1376284, 536870932, 0, 1441817, 20, 0, 1507383, 536870931, 65536, 1507392, 536870925, 0, 1507393, 536870932, 0, 1507396, 536870926, 0, 1507397, 18, 65536, 1507405, 536870931, 65536, 1507406, 14, 0, 1507415, 13, 0, 1507423, 536870931, 65536, 1507424, 14, 0, 1507428, 536870925, 0, 1703981, -2147483629, 65536, 1703990, 20, 0, 1703997, 18, 65536, 1704001, 18, 65536, 1704004, 536870930, 65536, 1704007, 18, 65536, 1704017, 18, 65536, 1704038, 536870926, 0 )
 
-[node name="XionCrate" type="Node2D" parent="InteractivesObjects" index="0"]
-__meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true
-}
-
-[node name="XionCrate" parent="InteractivesObjects/XionCrate" index="0" instance=ExtResource( 8 )]
-position = Vector2( 2040, -288 )
-
-[node name="XionCrate3" parent="InteractivesObjects/XionCrate" index="1" instance=ExtResource( 8 )]
-position = Vector2( -96, -312 )
-
-[node name="XionCrate4" parent="InteractivesObjects/XionCrate" index="2" instance=ExtResource( 8 )]
-position = Vector2( 408, 72 )
-
-[node name="XionCrate5" parent="InteractivesObjects/XionCrate" index="3" instance=ExtResource( 8 )]
-position = Vector2( 1728, 576 )
-
-[node name="XionCrate6" parent="InteractivesObjects/XionCrate" index="4" instance=ExtResource( 8 )]
-position = Vector2( 1488, 0 )
-
-[node name="XionCrate7" parent="InteractivesObjects/XionCrate" index="5" instance=ExtResource( 8 )]
-position = Vector2( -360, -48 )
-
 [node name="M_IceBlock" parent="InteractivesObjects/IceBlocks/M" index="0" instance=ExtResource( 10 )]
 position = Vector2( 928, -192 )
 
@@ -1094,6 +1070,24 @@ rotation = 1.5708
 [node name="GreatDoor" parent="InteractivesObjects/GreatDoorGroup" index="7" instance=ExtResource( 9 )]
 position = Vector2( 3408, 312 )
 
+[node name="XionCrate" parent="InteractivesObjects/Collactables/XionCrates" index="0" instance=ExtResource( 8 )]
+position = Vector2( 2040, -288 )
+
+[node name="XionCrate2" parent="InteractivesObjects/Collactables/XionCrates" index="1" instance=ExtResource( 8 )]
+position = Vector2( -96, -312 )
+
+[node name="XionCrate3" parent="InteractivesObjects/Collactables/XionCrates" index="2" instance=ExtResource( 8 )]
+position = Vector2( 408, 72 )
+
+[node name="XionCrate4" parent="InteractivesObjects/Collactables/XionCrates" index="3" instance=ExtResource( 8 )]
+position = Vector2( 1728, 576 )
+
+[node name="XionCrate5" parent="InteractivesObjects/Collactables/XionCrates" index="4" instance=ExtResource( 8 )]
+position = Vector2( 1488, 0 )
+
+[node name="XionCrate6" parent="InteractivesObjects/Collactables/XionCrates" index="5" instance=ExtResource( 8 )]
+position = Vector2( -360, -48 )
+
 [node name="3TilesBreakablePlateform" parent="InteractivesObjects/Platform/3 Tiles" index="0" instance=ExtResource( 26 )]
 position = Vector2( 1480, -520 )
 
@@ -1102,12 +1096,6 @@ position = Vector2( 1200, -520 )
 
 [node name="2TilesBreakablePlateform" parent="InteractivesObjects/Platform/2 Tiles" index="0" instance=ExtResource( 27 )]
 position = Vector2( 1344, -544 )
-
-[node name="Events" parent="." index="6"]
-visible = true
-
-[node name="Checkpoints" parent="Events" index="0"]
-visible = false
 
 [node name="Checkpoint1" parent="Events/Checkpoints" index="0" instance=ExtResource( 24 )]
 position = Vector2( 2440, -136 )

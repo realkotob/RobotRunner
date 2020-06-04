@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Scenes/Actor/Path.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Levels/Base/LevelBase.tscn" type="PackedScene" id=2]
@@ -19,7 +19,6 @@
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/ChildrenScenes/GreenButton.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Door/ChildrenScenes/GreenDoor.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Scenes/InteractiveObjects/Collactables/Materials/Gear/Gear.tscn" type="PackedScene" id=19]
-[ext_resource path="res://Scenes/Actor/Robot/Babybot/Hammer/BabyHammer.tscn" type="PackedScene" id=20]
 
 [node name="Level3B" instance=ExtResource( 2 )]
 
@@ -91,6 +90,7 @@ action_name_bubble = ""
 [node name="Path" type="Node2D" parent="InteractivesObjects/Robot/BabyTank1" index="6"]
 script = ExtResource( 1 )
 __meta__ = {
+"_edit_group_": true,
 "_edit_lock_": true
 }
 
@@ -145,20 +145,6 @@ position = Vector2( 552, -120 )
 method_name = "set_state"
 argument_array = [ "Idle" ]
 
-[node name="BabyHammer" parent="InteractivesObjects/Robot" index="2" instance=ExtResource( 20 )]
-position = Vector2( 1240, 396 )
-default_state = "Hidden"
-
-[node name="Path" type="Node2D" parent="InteractivesObjects/Robot/BabyHammer" index="6"]
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="PathPoint" parent="InteractivesObjects/Robot/BabyHammer/Path" index="0" instance=ExtResource( 4 )]
-position = Vector2( 16, 0 )
-method_name = "overheat"
-
 [node name="TriggerBabyTank1" parent="Events/LevelEvent" index="0" instance=ExtResource( 16 )]
 target_name = "BabyTank1"
 method_name = "appear"
@@ -174,11 +160,3 @@ method_name = "appear"
 [node name="TriggerEventArea" parent="Events/LevelEvent/TriggerBabyTank2" index="0" instance=ExtResource( 15 )]
 position = Vector2( 328, 288 )
 scale = Vector2( 1, 10.3 )
-
-[node name="TriggerBabyTank3" parent="Events/LevelEvent" index="2" instance=ExtResource( 16 )]
-target_name = "BabyHammer"
-method_name = "appear"
-
-[node name="TriggerEventArea" parent="Events/LevelEvent/TriggerBabyTank3" index="0" instance=ExtResource( 15 )]
-position = Vector2( 1264, 384 )
-scale = Vector2( 1, 2.4 )

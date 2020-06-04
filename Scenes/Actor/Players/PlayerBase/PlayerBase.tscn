@@ -4,7 +4,7 @@
 [ext_resource path="res://Scenes/Actor/Players/PlayerBase/Scripts/Idle.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Actor/Players/PlayerBase/Scripts/StateLabel.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Actor/Players/PlayerBase/Scripts/SFX_Base.gd" type="Script" id=4]
-[ext_resource path="res://Scenes/Actor/Players/PlayerBase/Scripts/SeeThourghWalls.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/Actor/Players/PlayerBase/Scripts/SeeThroughWalls.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Actor/Players/PlayerBase/Scripts/Action.gd" type="Script" id=6]
 [ext_resource path="res://Scenes/Actor/Players/PlayerBase/Scripts/Shock.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/Actor/Players/PlayerBase/Scripts/Fall.gd" type="Script" id=8]
@@ -49,7 +49,7 @@ frame_3/texture = ExtResource( 28 )
 frame_3/delay_sec = 0.0
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 30, 30 )
+extents = Vector2( 24, 24 )
 
 [sub_resource type="CapsuleShape2D" id=4]
 radius = 10.3682
@@ -189,7 +189,7 @@ playback_speed = 1.5
 anims/Default = SubResource( 5 )
 anims/MagentaFlash = SubResource( 6 )
 
-[node name="SeeThourghWalls" type="Light2D" parent="." index="8"]
+[node name="SeeThroughWalls" type="Light2D" parent="." index="8"]
 light_mask = 0
 z_index = 512
 z_as_relative = false
@@ -202,12 +202,15 @@ range_layer_max = 15
 range_item_cull_mask = 16
 shadow_item_cull_mask = 0
 script = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="Area2D" type="Area2D" parent="SeeThourghWalls" index="0"]
+[node name="Area2D" type="Area2D" parent="SeeThroughWalls" index="0"]
 collision_layer = 17
 collision_mask = 17
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="SeeThourghWalls/Area2D" index="0"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="SeeThroughWalls/Area2D" index="0"]
 visible = false
 shape = SubResource( 7 )
 

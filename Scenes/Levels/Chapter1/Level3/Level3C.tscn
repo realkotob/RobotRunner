@@ -64,30 +64,111 @@ position = Vector2( 0, 48 )
 
 [node name="M_EarthBlock" parent="InteractivesObjects/EarthBlocks/M" index="0" instance=ExtResource( 11 )]
 position = Vector2( 320, 96 )
+z_as_relative = false
+mode = 1
+gravity_scale = 10.0
+contacts_reported = 1
+contact_monitor = true
+sleeping = true
+angular_damp = 0.0
+nb_debris = 20
+explosion_impulse = 150.0
 
 [node name="M_EarthBlock2" parent="InteractivesObjects/EarthBlocks/M" index="1" instance=ExtResource( 11 )]
 position = Vector2( 632, 216 )
+z_as_relative = false
+mode = 1
+gravity_scale = 10.0
+contacts_reported = 1
+contact_monitor = true
+sleeping = true
+angular_damp = 0.0
+nb_debris = 20
+explosion_impulse = 150.0
 
 [node name="M_EarthBlock3" parent="InteractivesObjects/EarthBlocks/M" index="2" instance=ExtResource( 11 )]
 position = Vector2( 760, 216 )
+z_as_relative = false
+mode = 1
+gravity_scale = 10.0
+contacts_reported = 1
+contact_monitor = true
+sleeping = true
+angular_damp = 0.0
+nb_debris = 20
+explosion_impulse = 150.0
 
 [node name="M_EarthBlock4" parent="InteractivesObjects/EarthBlocks/M" index="3" instance=ExtResource( 11 )]
 position = Vector2( 328, 336 )
+z_as_relative = false
+mode = 1
+gravity_scale = 10.0
+contacts_reported = 1
+contact_monitor = true
+sleeping = true
+angular_damp = 0.0
+nb_debris = 20
+explosion_impulse = 150.0
 
 [node name="M_EarthBlock5" parent="InteractivesObjects/EarthBlocks/M" index="4" instance=ExtResource( 11 )]
 position = Vector2( 200, 336 )
+z_as_relative = false
+mode = 1
+gravity_scale = 10.0
+contacts_reported = 1
+contact_monitor = true
+sleeping = true
+angular_damp = 0.0
+nb_debris = 20
+explosion_impulse = 150.0
 
 [node name="M_EarthBlock6" parent="InteractivesObjects/EarthBlocks/M" index="5" instance=ExtResource( 11 )]
 position = Vector2( 360, 696 )
+z_as_relative = false
+mode = 1
+gravity_scale = 10.0
+contacts_reported = 1
+contact_monitor = true
+sleeping = true
+angular_damp = 0.0
+nb_debris = 20
+explosion_impulse = 150.0
 
 [node name="M_EarthBlock7" parent="InteractivesObjects/EarthBlocks/M" index="6" instance=ExtResource( 11 )]
 position = Vector2( 264, -96 )
+z_as_relative = false
+mode = 1
+gravity_scale = 10.0
+contacts_reported = 1
+contact_monitor = true
+sleeping = true
+angular_damp = 0.0
+nb_debris = 20
+explosion_impulse = 150.0
 
 [node name="M_EarthBlock8" parent="InteractivesObjects/EarthBlocks/M" index="7" instance=ExtResource( 11 )]
 position = Vector2( 264, -144 )
+z_as_relative = false
+mode = 1
+gravity_scale = 10.0
+contacts_reported = 1
+contact_monitor = true
+sleeping = true
+angular_damp = 0.0
+nb_debris = 20
+explosion_impulse = 150.0
 
 [node name="M_EarthBlock9" parent="InteractivesObjects/EarthBlocks/M" index="8" instance=ExtResource( 11 )]
 position = Vector2( 409, 696 )
+z_as_relative = false
+mode = 1
+gravity_scale = 10.0
+contacts_reported = 1
+contact_monitor = true
+sleeping = true
+angular_damp = 0.0
+nb_debris = 20
+explosion_impulse = 150.0
 
 [node name="WaterTiles" parent="InteractivesObjects" index="2"]
 position = Vector2( 0, 48 )

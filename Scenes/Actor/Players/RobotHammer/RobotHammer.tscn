@@ -159,8 +159,4 @@ position = Vector2( -14, 21.0747 )
 position = Vector2( -28.0917, 21.0747 )
 
 [node name="CollisionShape2D" parent="ActionHitBox" index="0"]
-position = Vector2( 30, -5 )
-
-[node name="SeeThourghWalls" parent="." index="8"]
-light_mask = 16
-z_index = 511
+position = Vector2( 16, -1 )

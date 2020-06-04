@@ -4,7 +4,7 @@
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Door/Sprites/Green/GreenDoorSprite.tres" type="SpriteFrames" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 23.7974, 23.7134 )
+extents = Vector2( 24.0036, 23.9946 )
 
 [node name="GreenDoor" instance=ExtResource( 1 )]
 

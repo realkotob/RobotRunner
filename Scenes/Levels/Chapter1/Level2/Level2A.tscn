@@ -728,21 +728,21 @@ position = Vector2( 2048, 1456 )
 [node name="GreenDoor" parent="InteractivesObjects/Buttons&Doors/BD_Group7" index="1" instance=ExtResource( 15 )]
 position = Vector2( 2448, 1392 )
 
-[node name="BD_GroupAAA" parent="InteractivesObjects/Buttons&Doors" index="7" instance=ExtResource( 5 )]
+[node name="BD_Group8" parent="InteractivesObjects/Buttons&Doors" index="7" instance=ExtResource( 5 )]
 
-[node name="BlueButton" parent="InteractivesObjects/Buttons&Doors/BD_GroupAAA" index="0" instance=ExtResource( 11 )]
+[node name="BlueButton" parent="InteractivesObjects/Buttons&Doors/BD_Group8" index="0" instance=ExtResource( 11 )]
 position = Vector2( 2287, 1488 )
 rotation = 1.5708
 
-[node name="BlueDoor" parent="InteractivesObjects/Buttons&Doors/BD_GroupAAA" index="1" instance=ExtResource( 12 )]
+[node name="BlueDoor" parent="InteractivesObjects/Buttons&Doors/BD_Group8" index="1" instance=ExtResource( 12 )]
 position = Vector2( 2592, 1488 )
 
-[node name="BD_GroupBBB" parent="InteractivesObjects/Buttons&Doors" index="8" instance=ExtResource( 5 )]
+[node name="BD_Group9" parent="InteractivesObjects/Buttons&Doors" index="8" instance=ExtResource( 5 )]
 
-[node name="GreenButton" parent="InteractivesObjects/Buttons&Doors/BD_GroupBBB" index="0" instance=ExtResource( 14 )]
+[node name="GreenButton" parent="InteractivesObjects/Buttons&Doors/BD_Group9" index="0" instance=ExtResource( 14 )]
 position = Vector2( 3144, 185 )
 
-[node name="GreenDoor" parent="InteractivesObjects/Buttons&Doors/BD_GroupBBB" index="1" instance=ExtResource( 15 )]
+[node name="GreenDoor" parent="InteractivesObjects/Buttons&Doors/BD_Group9" index="1" instance=ExtResource( 15 )]
 position = Vector2( 3096, 336 )
 
 [node name="RedButton1" parent="InteractivesObjects/GreatDoorGroup" index="0" instance=ExtResource( 6 )]

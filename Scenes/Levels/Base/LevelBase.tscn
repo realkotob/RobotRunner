@@ -273,10 +273,19 @@ __meta__ = {
 }
 
 [node name="XionCrates" type="Node2D" parent="InteractivesObjects/Collactables"]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Gears" type="Node2D" parent="InteractivesObjects/Collactables"]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="GoldenGears" type="Node2D" parent="InteractivesObjects/Collactables"]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Platform" type="Node2D" parent="InteractivesObjects"]
 __meta__ = {
@@ -300,6 +309,9 @@ __meta__ = {
 }
 
 [node name="Robot" type="Node2D" parent="InteractivesObjects"]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Events" type="Node2D" parent="."]
 __meta__ = {

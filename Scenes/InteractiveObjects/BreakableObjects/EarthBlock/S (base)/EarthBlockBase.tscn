@@ -4,7 +4,6 @@
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/S (base)/EarthBlockBase.gd" type="Script" id=2]
 
 [node name="EarthBlockBase" instance=ExtResource( 1 )]
-mode = 1
 script = ExtResource( 2 )
 
 [node name="AudioStreamPlayer" parent="." index="2"]
@@ -13,4 +12,3 @@ pitch_scale = 0.8
 
 [node name="CollisionShape2D" parent="AwakeArea" index="0"]
 position = Vector2( -0.113628, -14.886 )
-disabled = false

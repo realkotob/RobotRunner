@@ -54,6 +54,9 @@ func set_state(value : String):
 func get_state() -> String:
 	return $StatesMachine.get_state_name()
 
+func get_extents() -> Vector2:
+	return $CollisionShape2D.get_shape().get_extents()
+
 # Returns the direction of the robot
 func get_face_direction() -> int:
 	if animated_sprite_node.is_flipped_h():

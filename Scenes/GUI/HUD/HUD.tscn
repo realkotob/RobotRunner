@@ -7,7 +7,6 @@
 [ext_resource path="res://Scenes/GUI/HUD/Materials.png" type="Texture" id=5]
 [ext_resource path="res://Scenes/GUI/Dialogue/Assets/Boxes/DialogueBoxHUD.png" type="Texture" id=6]
 
-
 [node name="HUD" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 0.143

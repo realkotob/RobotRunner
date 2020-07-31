@@ -343,6 +343,9 @@ argument_array = [ "Attack" ]
 [node name="PathPoint2" type="Position2D" parent="InteractivesObjects/Robot/BabyTank2/Path" index="2"]
 position = Vector2( 216, 0 )
 script = ExtResource( 19 )
+__meta__ = {
+"_edit_lock_": true
+}
 method_name = "overheat"
 
 [node name="PathPoint3" type="Position2D" parent="InteractivesObjects/Robot/BabyTank2/Path" index="3"]

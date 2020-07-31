@@ -156,7 +156,7 @@ position = Vector2( -368, 132 )
 default_state = "Hidden"
 action_name_bubble = ""
 
-[node name="Path" type="Node2D" parent="InteractivesObjects/Robot/BabyTank1" index="6"]
+[node name="Path" type="Node2D" parent="InteractivesObjects/Robot/BabyTank1" index="5"]
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_group_": true,
@@ -177,7 +177,7 @@ speed = 140.0
 default_state = "Hidden"
 action_name_bubble = ""
 
-[node name="Path" type="Node2D" parent="InteractivesObjects/Robot/BabyTank2" index="6"]
+[node name="Path" type="Node2D" parent="InteractivesObjects/Robot/BabyTank2" index="5"]
 position = Vector2( -152, 0 )
 script = ExtResource( 4 )
 __meta__ = {

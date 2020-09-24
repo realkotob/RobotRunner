@@ -22,7 +22,7 @@ func is_playing() -> bool:
 func adapt_music(xion_cloud: Node, players_array: Array, player_in_danger: bool):
 	var closest_player : Player = null
 	
-	if xion_cloud == null:
+	if xion_cloud == null or !xion_cloud.visible:
 		return
 	
 	if len(players_array) > 1:

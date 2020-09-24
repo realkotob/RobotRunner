@@ -129,6 +129,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/S (BASE)/IceBlockBase.gd"
 }, {
+"base": "StateBase",
+"class": "InactiveState",
+"language": "GDScript",
+"path": "res://Scenes/Actor/Robot/Inactive.gd"
+}, {
 "base": "Node",
 "class": "InputsBase",
 "language": "GDScript",
@@ -264,6 +269,7 @@ _global_script_class_icons={
 "GrowingLava": "",
 "HUD_label": "",
 "IceBlock": "",
+"InactiveState": "",
 "InputsBase": "",
 "InteractAreaBase": "",
 "LavaZone": "",
@@ -310,6 +316,7 @@ CHAPTER_GEN="*res://Global/Autoloads/ChapterGeneration/ChapterGen.gd"
 MUSIC="*res://Global/Autoloads/Music/Music.tscn"
 DIALOGUE="*res://Global/Autoloads/Dialogue/DialogueContainter.gd"
 DEBUG="*res://Global/Autoloads/Debug/Debug.gd"
+SOLO_CONTROL="*res://Global/Autoloads/SoloControl/SoloControl.gd"
 
 [debug]
 

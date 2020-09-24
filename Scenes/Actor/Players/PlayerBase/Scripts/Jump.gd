@@ -51,6 +51,9 @@ func on_animation_finished():
 
 # Define the actions the player can do in this state
 func _input(event):
+	if !owner.active:
+		return
+	
 	if state_node.get_current_state() == self:
 		if event.is_action_pressed(inputs_node.get_input("Action")):
 			state_node.set_state("Action")

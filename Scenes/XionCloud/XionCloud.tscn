@@ -176,13 +176,15 @@ shape = SubResource( 1 )
 material = SubResource( 3 )
 position = Vector2( 32.68, 0 )
 z_index = 11
+z_as_relative = false
 texture = SubResource( 5 )
 region_rect = Rect2( 0, 0, 700, 700 )
 
 [node name="Cloud2" type="Sprite" parent="."]
 material = SubResource( 7 )
-position = Vector2( -23, 0 )
-z_index = 11
+position = Vector2( -73.94, 0 )
+z_index = -1
+z_as_relative = false
 texture = SubResource( 5 )
 region_rect = Rect2( 0, 0, 700, 700 )
 
@@ -190,6 +192,7 @@ region_rect = Rect2( 0, 0, 700, 700 )
 material = SubResource( 8 )
 position = Vector2( 57.961, 0 )
 z_index = 11
+z_as_relative = false
 texture = SubResource( 5 )
 region_rect = Rect2( 0, 0, 700, 700 )
 

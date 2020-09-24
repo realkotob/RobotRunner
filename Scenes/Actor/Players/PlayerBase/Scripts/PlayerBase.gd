@@ -8,13 +8,15 @@ onready var anim_player_node = get_node("AnimationPlayer")
 
 export var breakable_type_array : PoolStringArray = []
 
-export var player_control_id : int = 1
+export var player_id : int = 1 setget , get_player_id
 
 var dirLeft : int = 0 
 var dirRight : int = 0
 
 var teleport_node : Area2D = null
 var level_node : Node
+
+var active : bool = true
 
 #### ACCESSORS ####
 
@@ -32,6 +34,20 @@ func get_jump_force() -> int:
 
 func get_extents() -> Vector2:
 	return $CollisionShape2D.get_shape().get_extents()
+
+func set_active(value: bool):
+	active = value
+	
+	if active:
+		set_modulate(Color.white)
+	else:
+		set_modulate(Color.gray)
+
+
+func get_active() -> bool:
+	return active
+
+func get_player_id() -> int : return player_id
 
 
 func _ready():
@@ -51,6 +67,9 @@ func corner_correct(amount : int, delta: float):
 #### INPUT RESPONSES ####
 
 func _input(event):
+	if !active:
+		return
+	
 	if event.is_action_pressed(inputs_node.get_input("MoveLeft")):
 		dirLeft = 1
 	

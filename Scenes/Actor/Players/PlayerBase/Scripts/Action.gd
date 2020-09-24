@@ -93,6 +93,10 @@ func on_animation_finished():
 
 # Define the actions the player can do in this state
 func _input(event):
+	
+	if !owner.active:
+		return
+	
 	if event is InputEventKey:
 		if state_node.get_current_state() == self:
 			

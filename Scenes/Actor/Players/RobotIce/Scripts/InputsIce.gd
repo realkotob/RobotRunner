@@ -10,4 +10,5 @@ var input_map = {
 
 
 func get_input(input_name: String) -> String:
-	return input_map[input_name] + String(owner.player_control_id)
+	var id = String(owner.get_player_id()) if !SOLO_CONTROL.solo_mode else "1"
+	return input_map[input_name] + id

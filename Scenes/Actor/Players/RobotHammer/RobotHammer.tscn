@@ -133,7 +133,7 @@ extents = Vector2( 12, 22 )
 
 [node name="RobotHammer" instance=ExtResource( 1 )]
 breakable_type_array = PoolStringArray( "XionCrate", "EarthBlock" )
-player_control_id = 2
+player_id = 2
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = SubResource( 22 )

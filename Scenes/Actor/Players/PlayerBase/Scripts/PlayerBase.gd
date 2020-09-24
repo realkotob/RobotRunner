@@ -53,17 +53,7 @@ func get_player_id() -> int : return player_id
 func _ready():
 	var _err = anim_player_node.connect("animation_finished", self, "on_animation_finished")
 	add_to_group("Players")
-
-
-func corner_correct(amount : int, delta: float):
-	for i in range(1, amount + 1):
-		for j in [1, -1]:
-			var movement = Vector2(i * j, velocity.y * delta)
-			if !move_and_collide(movement, true, true, true):
-				global_position += movement
-				return
-
-
+		
 #### INPUT RESPONSES ####
 
 func _input(event):

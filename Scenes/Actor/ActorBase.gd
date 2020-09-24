@@ -14,14 +14,13 @@ export (int, 0, 200) var push = 2
 
 const GRAVITY : int = 30
 
-var snap_vector = Vector2(0, 10)
+var snap_vector = Vector2(0,10)
 var current_snap = snap_vector
 
 var direction : int = 0 setget set_direction, get_direction
 var velocity := Vector2.ZERO setget set_velocity, get_velocity
 
 signal velocity_changed
-
 
 #### ACCESORS ####
 
@@ -80,15 +79,21 @@ func _physics_process(delta):
 	velocity.x = dir * speed
 	
 	velocity.y += GRAVITY
-	
+		
+		
+		#Doesn't work, need to be reworked
+#	if get_state() == "Move" or get_state() == "Idle":
+#		if(ground_checker(delta)):
+#			return
+		
 	# Jump corner correction
-	if has_method("corner_correct") && get_state() == "Jump":
+	if get_state() == "Jump":
 		# Make a movement test to check collisions preemptively
 		var corner_col = move_and_collide(velocity * delta, true, true, true)
 		if corner_col != null:
 			var col_normal = corner_col.get_normal()
 			if col_normal.x < 0.2 && col_normal.x > -0.2:
-				call("corner_correct", 20, delta)
+				corner_correct(20,delta)
 	
 	# Apply movement
 	velocity = move_and_slide_with_snap(velocity, current_snap, Vector2.UP, true, 4, deg2rad(46), false)
@@ -146,3 +151,31 @@ func flip(dir: int):
 		var hit_box_shape_x_pos = action_hitbox_node.get_child(0).position.x
 		action_hitbox_node.get_child(0).position.x = abs(hit_box_shape_x_pos) * dir
 
+func corner_correct(amount : int, delta: float, vert: bool = true) -> bool:
+	print("CORNER_CORRECT HAS BEEN CALLED SUCCESSFULLY")
+	for i in range(1, amount + 1):
+		for j in [1, -1]:
+			var movement := Vector2.ZERO
+			if(vert):
+				movement = Vector2(i * j, velocity.y * delta)
+			else:
+				movement = Vector2(velocity.x * delta, -i)
+			
+			var move_collider = move_and_collide(movement, true, true, true)
+			
+			if(movement.y < -99):
+				print("MOVEMENT.Y < -10")
+			
+			if !move_collider:
+				global_position += movement
+				return true
+	return false
+
+
+func ground_checker(delta : float) -> bool:
+	var p_collider = move_and_collide(velocity * delta, true, true, true)
+	if(p_collider == null):
+		return false
+	if((p_collider.normal != Vector2.UP)):
+		return corner_correct(30, delta, false)
+	return false

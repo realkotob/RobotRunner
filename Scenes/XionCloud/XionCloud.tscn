@@ -1,14 +1,85 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://Scenes/XionCloud/XionCloudBlack.shader" type="Shader" id=1]
-[ext_resource path="res://Scenes/Fog/CosmeticFog/FogTexture.tres" type="Texture" id=2]
 [ext_resource path="res://Scenes/XionCloud/XionCloud.gd" type="Script" id=3]
-[ext_resource path="res://Scenes/XionCloud/XionCloud_shadermaterial.tres" type="Material" id=4]
 [ext_resource path="res://Scenes/XionCloud/CloudNoise.tres" type="Texture" id=6]
 [ext_resource path="res://Scenes/XionCloud/Clouds.shader" type="Shader" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 350, 350 )
+extents = Vector2( 600, 600 )
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+uniform sampler2D noiseTexture;
+
+uniform vec2 direction = vec2(-1.0, -1.0);
+
+uniform float speed : hint_range(0.0, 1.0) = 0.1;
+uniform float threshold : hint_range(0.0, 2.0) = 0.1;
+uniform float fluffiness : hint_range(0.0, 2.0) = 0.1;
+uniform float opacity : hint_range(0.0, 1.0) = 1.0;
+
+uniform float fade_distance = 0.2;
+
+uniform vec2 offset = vec2(0.0, 0.0);
+
+uniform vec4 cloud_color : hint_color = vec4(1.0, 1.0, 1.0, 1.0);
+
+// Handle the limit of the fog
+vec4 clamp_cloud(vec2 uv, vec4 color, vec4 noise){
+	
+	if(uv.x < fade_distance || uv.x > 1.0 - fade_distance || 
+	   uv.y < fade_distance || uv.y > 1.0 - fade_distance)
+	{
+		float dist_to_horizontal = min(uv.x, 1.0 - uv.x);
+		float dist_to_vertical = min(uv.y, 1.0 - uv.y);
+		float min_dist = min(dist_to_horizontal, dist_to_vertical) * 5.0;
+		
+		if (noise.r < threshold + (1.0 - min_dist)){
+			color.a = 0.0;
+		}
+		//color.a = color.a * clamp(min_dist, 0.0, 1.0);
+	}
+	return color;
+}
+
+
+void fragment() {
+	// Mixing two time-shifted textures to create fluffiness
+	vec4 noise1 = texture(noiseTexture, mod(UV + offset + TIME * 2.5 * speed * -direction / 10.0, 0.0));
+	vec4 noise2 = texture(noiseTexture, mod(UV + offset + TIME * (2.5 + fluffiness * 3.0) * speed * -direction / 10.0, 0.0));
+	vec4 combinedNoise = (noise1 + noise2) / 2.0;
+	
+	// In case of 
+	if (combinedNoise.r < threshold) {
+		COLOR.a = 0.0;
+	}
+	else { 
+		COLOR = cloud_color;
+		COLOR.a = combinedNoise.r;
+	}
+	
+	COLOR = clamp_cloud(UV, COLOR, combinedNoise);
+}"
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
+shader_param/direction = Vector2( 1.413, 0 )
+shader_param/speed = 0.1
+shader_param/threshold = 0.47
+shader_param/fluffiness = 0.436
+shader_param/opacity = 1.0
+shader_param/fade_distance = 0.2
+shader_param/offset = Vector2( 0, 0 )
+shader_param/cloud_color = Color( 0.47451, 0.105882, 0.431373, 1 )
+shader_param/noiseTexture = ExtResource( 6 )
+
+[sub_resource type="OpenSimplexNoise" id=4]
+
+[sub_resource type="NoiseTexture" id=5]
+width = 2000
+height = 2000
+noise = SubResource( 4 )
 
 [sub_resource type="Shader" id=6]
 code = "shader_type canvas_item;
@@ -67,83 +138,9 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=7]
 shader = SubResource( 6 )
-shader_param/direction = Vector2( 1.413, 0 )
-shader_param/speed = 0.103
-shader_param/threshold = 0.453
-shader_param/fluffiness = 0.436
-shader_param/opacity = 1.0
-shader_param/fade_distance = 0.2
-shader_param/offset = Vector2( 0, 0 )
-shader_param/cloud_color = Color( 0.360784, 0.14902, 0.337255, 1 )
-shader_param/noiseTexture = ExtResource( 6 )
-
-[sub_resource type="OpenSimplexNoise" id=8]
-
-[sub_resource type="NoiseTexture" id=9]
-width = 1100
-height = 1100
-noise = SubResource( 8 )
-
-[sub_resource type="Shader" id=10]
-code = "shader_type canvas_item;
-
-uniform sampler2D noiseTexture;
-
-uniform vec2 direction = vec2(-1.0, -1.0);
-
-uniform float speed : hint_range(0.0, 1.0) = 0.1;
-uniform float threshold : hint_range(0.0, 2.0) = 0.1;
-uniform float fluffiness : hint_range(0.0, 2.0) = 0.1;
-uniform float opacity : hint_range(0.0, 1.0) = 1.0;
-
-uniform float fade_distance = 0.2;
-
-uniform vec2 offset = vec2(0.0, 0.0);
-
-uniform vec4 cloud_color : hint_color = vec4(1.0, 1.0, 1.0, 1.0);
-
-// Handle the limit of the fog
-vec4 clamp_cloud(vec2 uv, vec4 color, vec4 noise){
-	
-	if(uv.x < fade_distance || uv.x > 1.0 - fade_distance || 
-	   uv.y < fade_distance || uv.y > 1.0 - fade_distance)
-	{
-		float dist_to_horizontal = min(uv.x, 1.0 - uv.x);
-		float dist_to_vertical = min(uv.y, 1.0 - uv.y);
-		float min_dist = min(dist_to_horizontal, dist_to_vertical) * 5.0;
-		
-		if (noise.r < threshold + (1.0 - min_dist)){
-			color.a = 0.0;
-		}
-		//color.a = color.a * clamp(min_dist, 0.0, 1.0);
-	}
-	return color;
-}
-
-
-void fragment() {
-	// Mixing two time-shifted textures to create fluffiness
-	vec4 noise1 = texture(noiseTexture, mod(UV + offset + TIME * 2.5 * speed * -direction / 10.0, 0.0));
-	vec4 noise2 = texture(noiseTexture, mod(UV + offset + TIME * (2.5 + fluffiness * 3.0) * speed * -direction / 10.0, 0.0));
-	vec4 combinedNoise = (noise1 + noise2) / 2.0;
-	
-	// In case of 
-	if (combinedNoise.r < threshold) {
-		COLOR.a = 0.0;
-	}
-	else { 
-		COLOR = cloud_color;
-		COLOR.a = combinedNoise.r;
-	}
-	
-	COLOR = clamp_cloud(UV, COLOR, combinedNoise);
-}"
-
-[sub_resource type="ShaderMaterial" id=11]
-shader = SubResource( 10 )
 shader_param/direction = Vector2( 1.347, 0 )
-shader_param/speed = 0.076
-shader_param/threshold = 0.471
+shader_param/speed = 0.126
+shader_param/threshold = 0.349
 shader_param/fluffiness = 0.541
 shader_param/opacity = 1.0
 shader_param/fade_distance = 0.231
@@ -151,10 +148,10 @@ shader_param/offset = Vector2( 0, 0 )
 shader_param/cloud_color = Color( 0.160784, 0.0196078, 0.0745098, 1 )
 shader_param/noiseTexture = ExtResource( 6 )
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=8]
 shader = ExtResource( 7 )
 shader_param/direction = Vector2( 1.413, 0 )
-shader_param/speed = 0.056
+shader_param/speed = 0.2
 shader_param/threshold = 0.535
 shader_param/fluffiness = 0.105
 shader_param/opacity = 0.504
@@ -162,16 +159,6 @@ shader_param/fade_distance = 0.2
 shader_param/offset = Vector2( 0, 0 )
 shader_param/cloud_color = Color( 0.270588, 0.0313726, 0.45098, 1 )
 shader_param/noiseTexture = ExtResource( 6 )
-
-[sub_resource type="ShaderMaterial" id=2]
-shader = ExtResource( 1 )
-shader_param/fog_color = Color( 0, 0, 0, 1 )
-shader_param/distort_speed = Vector2( 3.579, 0.03 )
-shader_param/speed_multiplier = -1.0
-shader_param/opacity = 0.8
-shader_param/OCTAVES = 6
-shader_param/offset = Vector2( 50.104, 0 )
-shader_param/fade_distance = 0.01
 
 [node name="XionCloud" type="Area2D"]
 collision_layer = 49
@@ -183,46 +170,28 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource( 1 )
 
 [node name="Cloud3" type="Sprite" parent="."]
-material = SubResource( 7 )
-position = Vector2( 13.255, 0 )
+material = SubResource( 3 )
+position = Vector2( 32.68, 0 )
 z_index = 11
-texture = SubResource( 9 )
+texture = SubResource( 5 )
 region_rect = Rect2( 0, 0, 700, 700 )
 
 [node name="Cloud2" type="Sprite" parent="."]
-material = SubResource( 11 )
+material = SubResource( 7 )
 position = Vector2( -23, 0 )
 z_index = 11
-texture = SubResource( 9 )
+texture = SubResource( 5 )
 region_rect = Rect2( 0, 0, 700, 700 )
 
 [node name="Cloud" type="Sprite" parent="."]
-material = SubResource( 3 )
+material = SubResource( 8 )
+position = Vector2( 57.961, 0 )
 z_index = 11
-texture = SubResource( 9 )
+texture = SubResource( 5 )
 region_rect = Rect2( 0, 0, 700, 700 )
-
-[node name="PurpleFog" type="Sprite" parent="."]
-visible = false
-light_mask = 49
-material = ExtResource( 4 )
-z_index = 10
-texture = ExtResource( 2 )
-region_enabled = true
-region_rect = Rect2( 0, 0, 960, 960 )
-
-[node name="BlackFog" type="Sprite" parent="."]
-visible = false
-light_mask = 49
-material = SubResource( 2 )
-z_index = 10
-texture = ExtResource( 2 )
-region_enabled = true
-region_rect = Rect2( 0, 0, 960, 960 )
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

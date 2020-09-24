@@ -28,19 +28,19 @@ shader_param/aberation_amount = 0.0
 
 [sub_resource type="Animation" id=3]
 resource_name = "HeadFloating"
-length = 1.5
+length = 2.044
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Head:rect_position")
-tracks/0/interp = 1
+tracks/0/path = NodePath("Head:position")
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.7, 1.5 ),
+"times": PoolRealArray( 0, 0.8, 1.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 98.1552, -1.19164 ), Vector2( 98.155, -6.198 ), Vector2( 98.1552, -1.19164 ) ]
+"values": [ Vector2( 133, 34 ), Vector2( 133, 22 ), Vector2( 133, 34 ) ]
 }
 
 [node name="ScreenTitle" instance=ExtResource( 1 )]
@@ -51,6 +51,10 @@ margin_right = 960.0
 margin_bottom = 540.0
 mouse_filter = 2
 color = Color( 0.137255, 0.0980392, 0.152941, 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
 
 [node name="Fog" type="Sprite" parent="." index="1"]
 material = SubResource( 1 )
@@ -112,17 +116,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Head" type="TextureRect" parent="Logo" index="0"]
+[node name="Head" type="Sprite" parent="Logo" index="0"]
 light_mask = 0
-margin_left = 98.1552
-margin_top = -1.19164
-margin_right = 168.155
-margin_bottom = 68.8084
+position = Vector2( 133, 24.5887 )
 texture = ExtResource( 11 )
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
 
 [node name="GlitchEffect" parent="Logo" index="1" instance=ExtResource( 8 )]
 sound_volume = -6.0

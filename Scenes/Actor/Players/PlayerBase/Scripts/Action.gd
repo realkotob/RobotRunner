@@ -96,10 +96,11 @@ func _input(event):
 	if event is InputEventKey:
 		if state_node.get_current_state() == self:
 			
-			if event.is_action_pressed(inputs_node.input_map["MoveLeft"]) or event.is_action_pressed(inputs_node.input_map["MoveRight"]):
+			if event.is_action_pressed(inputs_node.get_input("MoveLeft")) \
+			or event.is_action_pressed(inputs_node.get_input("MoveRight")):
 				if owner.is_on_floor():
 					state_node.set_state("Move")
 			
-			elif event.is_action_pressed(inputs_node.input_map["Jump"]):
+			elif event.is_action_pressed(inputs_node.get_input("Jump")):
 				if owner.is_on_floor():
 					state_node.set_state("Jump")

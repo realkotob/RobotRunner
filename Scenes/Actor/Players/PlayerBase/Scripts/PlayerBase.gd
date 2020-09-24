@@ -8,6 +8,8 @@ onready var anim_player_node = get_node("AnimationPlayer")
 
 export var breakable_type_array : PoolStringArray = []
 
+export var player_control_id : int = 1
+
 var dirLeft : int = 0 
 var dirRight : int = 0
 
@@ -49,16 +51,16 @@ func corner_correct(amount : int, delta: float):
 #### INPUT RESPONSES ####
 
 func _input(event):
-	if event.is_action_pressed(inputs_node.input_map["MoveLeft"]):
+	if event.is_action_pressed(inputs_node.get_input("MoveLeft")):
 		dirLeft = 1
 	
-	elif event.is_action_released(inputs_node.input_map["MoveLeft"]):
+	elif event.is_action_released(inputs_node.get_input("MoveLeft")):
 		dirLeft = 0
 	
-	elif event.is_action_pressed(inputs_node.input_map["MoveRight"]):
+	elif event.is_action_pressed(inputs_node.get_input("MoveRight")):
 		dirRight = 1
 	
-	elif event.is_action_released(inputs_node.input_map["MoveRight"]):
+	elif event.is_action_released(inputs_node.get_input("MoveRight")):
 		dirRight = 0
 	
 	set_direction(dirRight - dirLeft)

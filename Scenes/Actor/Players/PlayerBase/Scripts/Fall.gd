@@ -58,14 +58,14 @@ func _exit_state():
 func _input(event):
 	if event is InputEventKey:
 		if state_node.get_current_state() == self:
-			if event.is_action_pressed(inputs_node.input_map["Action"]):
+			if event.is_action_pressed(inputs_node.get_input("Action")):
 				state_node.set_state("Action")
 				
-			elif event.is_action_pressed(inputs_node.input_map["Teleport"]):
+			elif event.is_action_pressed(inputs_node.get_input("Teleport")):
 				emit_signal("layer_change")
 			
 			# The jump is tolerated only if the jump tolerence timer is still running
-			if event.is_action_pressed(inputs_node.input_map["Jump"]):
+			if event.is_action_pressed(inputs_node.get_input("Jump")):
 				if jump_tolerance == true:
 					state_node.set_state("Jump")
 				else:

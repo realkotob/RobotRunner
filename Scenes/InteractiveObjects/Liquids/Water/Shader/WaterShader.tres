@@ -93,7 +93,6 @@ void fragment(){
 	// Apply the whole calculation to the canvas
 	COLOR = color;
 }"
-custom_defines = ""
 
 [resource]
 render_priority = 1

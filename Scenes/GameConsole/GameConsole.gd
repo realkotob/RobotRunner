@@ -48,31 +48,51 @@ func _on_cmd_changed(_text):
 	else:
 		console_input_node.add_color_override("font_color", Color(1,1,1,1))
 
-# When the player submit a command
-## Check if it's valid
-### Action it
-#### !!! REFACTORY NEEDED !!!
+
+# Respond to the submition of a command, convert its arguments from string to the correct type and execute it
 func _on_cmd_submitted(cmd : String):
 	if cmd:
-		cmdsendingsound_node.play() #Play a sound when a player enter a command
+		cmdsendingsound_node.play() # Play a sound when a player enter a command
 		
 		var cmd_split : Array = cmd.to_upper().split(" ") # Separate every words in the commands by a space
 		var node_cmd : Node = find_node(cmd_split[0])
 		# Take the first index's value (commands)
 		# and try to find the corresponding node
 		
-		if(node_cmd): # If the node exist
+		if node_cmd: # If the node exist
 			node_cmd.cmd_args.clear()
-			if(node_cmd.args_number > 0): # If there is at least 1 required arguments for the cmd
-				if(cmd_split.size() > 1): 	# If the user cmd was followed by at least 1 argument
-											# (means his input is MAYBE correct)
-					for i in range (cmd_split.size()): # We go through the splitted array
-						node_cmd.cmd_args.append(cmd_split[i].to_int()) # We add every argument to the array of the command
-																		# (Even the cmd_name, but it will be handled and ignored later)
-
+			
+			# If there is at least 1 required arguments for the cmd
+			# If the user cmd was followed by at least 1 argument
+			# (means his input is MAYBE correct)
+			if node_cmd.args_number > 0 && cmd_split.size() > 1:
+				for i in range (cmd_split.size()): # We go through the splitted array
+					if i == 0:
+						continue
+					
+					# We add every argument to the array of the command
+					var arg = convert_argument_type(cmd_split[i])
+					node_cmd.cmd_args.append(arg) 
+		
 			node_cmd.exec_cmd() #We execute the command
-
+		
 		console_input_node.clear() #clear the input field
+
+
+# Take a string from the player input and return it correct converted type value
+func convert_argument_type(arg: String):
+	var cap_arg = arg.capitalize() 
+	if cap_arg == "True":
+		return true
+	elif cap_arg == "False":
+		return false
+	elif arg.is_valid_integer():
+		return arg.to_int()
+	elif arg.is_valid_float():
+		return arg.to_float()
+	else:
+		return arg
+
 
 func open_console():
 	get_tree().paused = !get_tree().paused

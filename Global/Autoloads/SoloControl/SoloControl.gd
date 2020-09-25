@@ -1,6 +1,6 @@
 extends Node
 
-var solo_mode : bool = true
+var solo_mode : bool = false
 
 #### ACCESSORS ####
 
@@ -47,7 +47,6 @@ func _input(_event):
 		# set it to active and every other one to inactive
 		var id = player.get_player_id()
 		player.set_active(id == target)
-		
 
 
 #### SIGNAL RESPONSES ####

@@ -22,8 +22,7 @@ func _ready():
 func update(_host, _delta):
 	if !owner.is_on_floor():
 		return "Fall"
-	
-	
+
 	# Chage state to move if the player is moving horizontaly
 	var horiz_movement = owner.get_velocity().x
 	if abs(horiz_movement) > 0.0 :

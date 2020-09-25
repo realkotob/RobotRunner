@@ -4,7 +4,12 @@ var solo_mode : bool = false setget set_solo_mode, get_solo_mode
 
 #### ACCESSORS ####
 
-func set_solo_mode(value: bool): solo_mode = value
+func set_solo_mode(value: bool): 
+	solo_mode = value
+	if !solo_mode:
+		for player in get_tree().get_nodes_in_group("Players"):
+			player.set_active(true)
+
 func get_solo_mode() -> bool: return solo_mode
 
 #### BUILT-IN ####

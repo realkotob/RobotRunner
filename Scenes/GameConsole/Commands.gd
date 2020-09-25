@@ -21,10 +21,24 @@ var cmd_args : Array = []
 # This function will execute the command
 func exec_cmd():
 	if(console.cheats_enabled or cheats_required == console.cheats_enabled):
+		
+		var error : bool = false
+		
 		if target == "":
 			console_cmdlog_node.add_item(" > The target object field is empty.")
+			error = true
+		
 		if target_method == "":
 			console_cmdlog_node.add_item(" > The target method field is empty.")
+			error = true
+		
+		if cmd_args.size() != args_number:
+			console_cmdlog_node.add_item(" > The number of arguments passed is wrong: expected"
+										 + String(args_number) + ".")
+			error = true
+		
+		if error:
+			return
 		
 		var target_array : Array = []
 		if target_as_group:
@@ -37,6 +51,8 @@ func exec_cmd():
 				tar = get_tree().get_current_scene().find_node(target)
 			if tar != null:
 				target_array.append(tar)
+			else:
+				console_cmdlog_node.add_item(" > No target can be found with the name " + target)
 		
 		if target_array.empty():
 			console_cmdlog_node.add_item(" > : The target can't be found")
@@ -48,10 +64,10 @@ func exec_cmd():
 				var call_def_funcref := funcref(target_name, "call_deferred")
 				cmd_args.push_front(target_method)
 				
-#				if(cmd_args.size() > 1):
-#					cmd_args.remove(1)
-				
 				call_def_funcref.call_funcv(cmd_args)
+				
+				# WE COULD ADD TO THE MESSAGE THE ARGUMENTS PASSED?
+				console_cmdlog_node.add_item(" > : " + target_method + " called in " + target)
 				return
 		
 		console_cmdlog_node.add_item(" > : The target method can't be found in the target node")

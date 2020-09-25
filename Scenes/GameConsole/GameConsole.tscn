@@ -165,7 +165,7 @@ cheats_required = true
 [node name="SOLO" type="Node" parent="CommandsList"]
 script = ExtResource( 5 )
 cmd_name = "SOLO"
-args_number = -1
+args_number = 1
 cmd_description = "Set solo mode (with a boolean)"
 target = "SOLO_CONTROL"
 target_method = "set_solo_mode"

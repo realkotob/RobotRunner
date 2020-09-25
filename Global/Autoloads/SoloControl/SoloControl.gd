@@ -1,10 +1,11 @@
 extends Node
 
-var solo_mode : bool = false
+var solo_mode : bool = false setget set_solo_mode, get_solo_mode
 
 #### ACCESSORS ####
 
-
+func set_solo_mode(value: bool): solo_mode = value
+func get_solo_mode() -> bool: return solo_mode
 
 #### BUILT-IN ####
 

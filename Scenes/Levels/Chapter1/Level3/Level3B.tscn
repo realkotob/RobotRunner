@@ -77,21 +77,20 @@ position = Vector2( 1248, -132 )
 [node name="G1" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="0"]
 script = ExtResource( 8 )
 __meta__ = {
-"_edit_group_": true,
 "_edit_lock_": true
 }
 
 [node name="RedButton" parent="InteractivesObjects/Buttons&Doors/G1" index="0" instance=ExtResource( 18 )]
-position = Vector2( 456, 110 )
+position = Vector2( 456.397, 112 )
 
 [node name="RedButton2" parent="InteractivesObjects/Buttons&Doors/G1" index="1" instance=ExtResource( 18 )]
-position = Vector2( 528, 110 )
+position = Vector2( 528, 112 )
 
 [node name="RedButton3" parent="InteractivesObjects/Buttons&Doors/G1" index="2" instance=ExtResource( 18 )]
-position = Vector2( 432, 494 )
+position = Vector2( 432.397, 496 )
 
 [node name="RedButton4" parent="InteractivesObjects/Buttons&Doors/G1" index="3" instance=ExtResource( 18 )]
-position = Vector2( 552, 494 )
+position = Vector2( 552, 496 )
 
 [node name="RedDoor" parent="InteractivesObjects/Buttons&Doors/G1" index="4" instance=ExtResource( 5 )]
 position = Vector2( 832, 72 )

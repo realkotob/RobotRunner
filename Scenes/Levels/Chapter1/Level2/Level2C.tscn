@@ -317,7 +317,7 @@ __meta__ = {
 }
 
 [node name="RedButton" parent="InteractivesObjects/Buttons&Doors/G2" index="0" instance=ExtResource( 13 )]
-position = Vector2( 300, 240 )
+position = Vector2( 296, 240 )
 rotation = 1.5708
 
 [node name="RedDoor" parent="InteractivesObjects/Buttons&Doors/G2" index="1" instance=ExtResource( 12 )]
@@ -355,11 +355,11 @@ __meta__ = {
 }
 
 [node name="RedButton" parent="InteractivesObjects/Buttons&Doors/G5" index="0" instance=ExtResource( 13 )]
-position = Vector2( 684, 376 )
+position = Vector2( 680, 376 )
 rotation = 1.5708
 
 [node name="RedButton2" parent="InteractivesObjects/Buttons&Doors/G5" index="1" instance=ExtResource( 13 )]
-position = Vector2( 984, 493 )
+position = Vector2( 984, 496 )
 
 [node name="RedDoor" parent="InteractivesObjects/Buttons&Doors/G5" index="2" instance=ExtResource( 12 )]
 position = Vector2( 1128, 432 )
@@ -415,7 +415,7 @@ __meta__ = {
 position = Vector2( 2624, 264 )
 
 [node name="RedButton" parent="InteractivesObjects/Buttons&Doors/G11" index="1" instance=ExtResource( 13 )]
-position = Vector2( 2772, 256 )
+position = Vector2( 2768, 256 )
 rotation = 1.5708
 
 [node name="G13" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="8"]
@@ -445,7 +445,7 @@ __meta__ = {
 }
 
 [node name="RedButton" parent="InteractivesObjects/Buttons&Doors/G14" index="0" instance=ExtResource( 13 )]
-position = Vector2( 4596, 192 )
+position = Vector2( 4592, 192 )
 rotation = 1.5708
 
 [node name="RedButton3" parent="InteractivesObjects/Buttons&Doors/G14" index="1" instance=ExtResource( 13 )]
@@ -489,10 +489,10 @@ position = Vector2( 3408, 568 )
 position = Vector2( 5424, 288 )
 
 [node name="RedButton" parent="InteractivesObjects/GreatDoorGroup" index="1" instance=ExtResource( 13 )]
-position = Vector2( 5136, 492 )
+position = Vector2( 5136, 496 )
 
 [node name="RedButton2" parent="InteractivesObjects/GreatDoorGroup" index="2" instance=ExtResource( 13 )]
-position = Vector2( 4990, 252 )
+position = Vector2( 4990, 256 )
 
 [node name="XionCrates" type="Node2D" parent="InteractivesObjects/Collactables/XionCrates" index="0"]
 __meta__ = {

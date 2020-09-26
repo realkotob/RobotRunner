@@ -281,13 +281,10 @@ position = Vector2( 3480, 288 )
 focus_on_door = false
 
 [node name="RedButton" parent="InteractivesObjects/GreatDoorGroup" index="1" instance=ExtResource( 8 )]
-position = Vector2( 3048, 156 )
+position = Vector2( 3060, 160 )
 
-[node name="RedButton2" parent="InteractivesObjects/GreatDoorGroup" index="2" instance=ExtResource( 8 )]
-position = Vector2( 2952, 516 )
-
-[node name="RedButton3" parent="InteractivesObjects/GreatDoorGroup" index="3" instance=ExtResource( 8 )]
-position = Vector2( 2952, 516 )
+[node name="RedButton3" parent="InteractivesObjects/GreatDoorGroup" index="2" instance=ExtResource( 8 )]
+position = Vector2( 2952, 520 )
 
 [node name="XionCrate" parent="InteractivesObjects/Collactables/XionCrates" index="0" instance=ExtResource( 6 )]
 position = Vector2( 828, 96 )

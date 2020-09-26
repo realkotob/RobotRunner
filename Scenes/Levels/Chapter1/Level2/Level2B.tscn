@@ -93,7 +93,7 @@ rotation = 1.5708
 [node name="BD_Group1" parent="InteractivesObjects/Buttons&Doors" index="0" instance=ExtResource( 22 )]
 
 [node name="RedButton" parent="InteractivesObjects/Buttons&Doors/BD_Group1" index="0" instance=ExtResource( 13 )]
-position = Vector2( 48, 276 )
+position = Vector2( 46.6652, 280 )
 
 [node name="RedDoor" parent="InteractivesObjects/Buttons&Doors/BD_Group1" index="1" instance=ExtResource( 12 )]
 position = Vector2( 48, 360 )
@@ -134,7 +134,7 @@ position = Vector2( 2432, 120 )
 position = Vector2( 4104, 216 )
 
 [node name="RedButton" parent="InteractivesObjects/GreatDoorGroup" index="1" instance=ExtResource( 13 )]
-position = Vector2( 3720, 324 )
+position = Vector2( 3720, 328 )
 
 [node name="XionCrate" parent="InteractivesObjects/Collactables/XionCrates" index="0" instance=ExtResource( 9 )]
 position = Vector2( 240, 240 )

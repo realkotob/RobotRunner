@@ -83,7 +83,6 @@ bus = "Sounds"
 script = ExtResource( 7 )
 
 [node name="Label" type="Label" parent="StatesMachine" index="6"]
-visible = false
 margin_left = -56.8554
 margin_top = -81.0958
 margin_right = 60.1446

@@ -35,7 +35,7 @@ position = Vector2( 280, 228 )
 position = Vector2( 400, 492 )
 
 [node name="TeleportArea2" parent="InteractivesObjects/TeleportGroups/G2" index="1" instance=ExtResource( 6 )]
-position = Vector2( 280, 376 )
+position = Vector2( 280, 372 )
 
 [node name="G3" type="Node2D" parent="InteractivesObjects/TeleportGroups" index="2"]
 
@@ -73,22 +73,22 @@ position = Vector2( 624, 156 )
 rotation = 3.14159
 
 [node name="RedButton" parent="InteractivesObjects/GreatDoorGroup" index="0" instance=ExtResource( 4 )]
-position = Vector2( 744, 493 )
+position = Vector2( 744, 496 )
 
 [node name="RedButton2" parent="InteractivesObjects/GreatDoorGroup" index="1" instance=ExtResource( 4 )]
-position = Vector2( 888, 493 )
+position = Vector2( 888, 496 )
 
 [node name="RedButton3" parent="InteractivesObjects/GreatDoorGroup" index="2" instance=ExtResource( 4 )]
-position = Vector2( 504, 493 )
+position = Vector2( 504.334, 496 )
 
 [node name="RedButton4" parent="InteractivesObjects/GreatDoorGroup" index="3" instance=ExtResource( 4 )]
-position = Vector2( 600, 493 )
+position = Vector2( 600, 496 )
 
 [node name="RedButton5" parent="InteractivesObjects/GreatDoorGroup" index="4" instance=ExtResource( 4 )]
-position = Vector2( 192, 373 )
+position = Vector2( 192, 376 )
 
 [node name="RedButton6" parent="InteractivesObjects/GreatDoorGroup" index="5" instance=ExtResource( 4 )]
-position = Vector2( 192, 229 )
+position = Vector2( 192, 232 )
 
 [node name="GreatDoor" parent="InteractivesObjects/GreatDoorGroup" index="6" instance=ExtResource( 5 )]
 position = Vector2( 792, 264 )

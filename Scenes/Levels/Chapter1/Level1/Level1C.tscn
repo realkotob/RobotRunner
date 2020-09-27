@@ -131,10 +131,10 @@ z_index = -1
 position = Vector2( 516, -792 )
 
 [node name="RedButton" parent="InteractivesObjects/GreatDoorGroup" index="1" instance=ExtResource( 12 )]
-position = Vector2( 600, -540 )
+position = Vector2( 600, -536 )
 
 [node name="RedButton2" parent="InteractivesObjects/GreatDoorGroup" index="2" instance=ExtResource( 12 )]
-position = Vector2( 432, -540 )
+position = Vector2( 432, -536 )
 
 [node name="XionCrate" parent="InteractivesObjects/Collactables/XionCrates" index="0" instance=ExtResource( 9 )]
 position = Vector2( 48, 120 )

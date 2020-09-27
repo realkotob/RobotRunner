@@ -9,7 +9,6 @@
 [ext_resource path="res://Scenes/Menus/PauseMenu/Leave.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/Menus/ScreenTitle/Scripts/Options.gd" type="Script" id=8]
 
-
 [node name="PauseMenu" instance=ExtResource( 1 )]
 grow_horizontal = 2
 grow_vertical = 2
@@ -17,6 +16,7 @@ mouse_filter = 2
 script = ExtResource( 3 )
 
 [node name="ColorRect" type="ColorRect" parent="." index="0"]
+light_mask = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -27,6 +27,7 @@ __meta__ = {
 
 [node name="Frame" type="ColorRect" parent="." index="1"]
 self_modulate = Color( 0.156863, 0.156863, 0.156863, 0.784314 )
+light_mask = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -59,41 +60,40 @@ margin_bottom = 328.0
 mouse_filter = 2
 
 [node name="Resume" type="Button" parent="HBoxContainer/V_OptContainer" index="0"]
-margin_top = 13.0
 margin_right = 116.0
-margin_bottom = 70.0
+margin_bottom = 57.0
 custom_fonts/font = ExtResource( 2 )
 text = "Resume"
 script = ExtResource( 4 )
 
 [node name="Retry" type="Button" parent="HBoxContainer/V_OptContainer" index="1"]
-margin_top = 74.0
+margin_top = 61.0
 margin_right = 116.0
-margin_bottom = 131.0
+margin_bottom = 118.0
 custom_fonts/font = ExtResource( 2 )
 text = "Retry"
 script = ExtResource( 5 )
 
 [node name="Options" type="Button" parent="HBoxContainer/V_OptContainer" index="2"]
-margin_top = 135.0
+margin_top = 122.0
 margin_right = 116.0
-margin_bottom = 192.0
+margin_bottom = 179.0
 custom_fonts/font = ExtResource( 2 )
 text = "Options"
 script = ExtResource( 8 )
 
 [node name="Menu" type="Button" parent="HBoxContainer/V_OptContainer" index="3"]
-margin_top = 196.0
+margin_top = 183.0
 margin_right = 116.0
-margin_bottom = 253.0
+margin_bottom = 240.0
 custom_fonts/font = ExtResource( 2 )
 text = "Menu"
 script = ExtResource( 6 )
 
 [node name="Leave" type="Button" parent="HBoxContainer/V_OptContainer" index="4"]
-margin_top = 257.0
+margin_top = 244.0
 margin_right = 116.0
-margin_bottom = 314.0
+margin_bottom = 301.0
 custom_fonts/font = ExtResource( 2 )
 text = "Quit"
 script = ExtResource( 7 )

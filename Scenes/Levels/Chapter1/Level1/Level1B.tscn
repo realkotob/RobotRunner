@@ -186,10 +186,10 @@ position = Vector2( 4320, 312 )
 short_focus = true
 
 [node name="RedButton" parent="InteractivesObjects/GreatDoorGroup" index="1" instance=ExtResource( 9 )]
-position = Vector2( 3240, 300 )
+position = Vector2( 3240, 304.965 )
 
 [node name="RedButton2" parent="InteractivesObjects/GreatDoorGroup" index="2" instance=ExtResource( 9 )]
-position = Vector2( 3240, 396 )
+position = Vector2( 3240, 400 )
 
 [node name="XionCrate" parent="InteractivesObjects/Collactables/XionCrates" index="0" instance=ExtResource( 7 )]
 position = Vector2( 120, 72 )

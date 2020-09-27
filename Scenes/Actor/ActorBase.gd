@@ -22,7 +22,6 @@ var velocity := Vector2.ZERO setget set_velocity, get_velocity
 
 signal velocity_changed
 
-
 #### ACCESORS ####
 
 func set_direction(value : int):
@@ -78,17 +77,23 @@ func _physics_process(delta):
 	
 	# Compute velocity
 	velocity.x = dir * speed
-	
 	velocity.y += GRAVITY
 	
+	var state = get_state()
+	
 	# Jump corner correction
-	if has_method("corner_correct") && get_state() == "Jump":
+	if state == "Jump":
 		# Make a movement test to check collisions preemptively
 		var corner_col = move_and_collide(velocity * delta, true, true, true)
 		if corner_col != null:
 			var col_normal = corner_col.get_normal()
 			if col_normal.x < 0.2 && col_normal.x > -0.2:
-				call("corner_correct", 20, delta)
+				var __ = corner_correct(20, delta, corner_col)
+	
+	# Check for little horizontal gap (few pxls)
+	elif velocity.x != 0 && (state =="Idle" or state == "Move"):
+		if ground_frontal_collision(delta):
+			return
 	
 	# Apply movement
 	velocity = move_and_slide_with_snap(velocity, current_snap, Vector2.UP, true, 4, deg2rad(46), false)
@@ -146,3 +151,57 @@ func flip(dir: int):
 		var hit_box_shape_x_pos = action_hitbox_node.get_child(0).position.x
 		action_hitbox_node.get_child(0).position.x = abs(hit_box_shape_x_pos) * dir
 
+
+# Try to correct the players position, if its supposed to collide with a corner
+# Do it verticaly by default (to correct ceiling corners), but can be done horizontaly
+# by setting vertical to false
+func corner_correct(amount : int, delta: float, collision2D = null, vertical: bool = true) -> bool:
+	if !collision2D:
+		return false
+	
+	for i in range(1, amount + 1):
+		for j in [1, -1]:
+			if !vertical && j == 1: continue
+			
+			var movement = Vector2(i * j, velocity.y * delta) if vertical\
+								   else Vector2(velocity.x * delta, i * j)
+			
+			var collision = test_collision(movement, collision2D, vertical)
+			
+			if !collision:
+				global_position += movement
+				return true
+	return false
+
+
+func test_collision(movement: Vector2, collision2D: KinematicCollision2D, vertical: bool) -> bool:
+	var collider = collision2D.get_collider()
+	var collision_pos = collision2D.get_position()
+	var collider_rect : Rect2
+	var mov = Vector2(0, movement.y) if vertical else Vector2(movement.x, 0)
+	
+	var self_rect = get_body_rect(self, movement)
+	
+	if collider is PhysicsBody2D:
+		collider_rect = get_body_rect(collider)
+	elif collider is TileMap:
+		var tile_grid_pos= collider.world_to_map(collision_pos + mov)
+		var cell_size = collider.cell_size
+		collider_rect = Rect2(tile_grid_pos * cell_size, cell_size)
+	
+	return self_rect.intersects(collider_rect)
+
+
+func get_body_rect(body: PhysicsBody2D, movement := Vector2.ZERO) -> Rect2:
+	var shape = body.get_node("CollisionShape2D").get_shape()
+	var extents = shape.get_extents()
+	return Rect2(body.get_global_position() - extents + movement, extents * 2)
+
+
+func ground_frontal_collision(delta : float) -> bool:
+	var collision2D = move_and_collide(velocity * delta, true, true, true)
+	if collision2D:
+		var normal = collision2D.get_normal()
+		if normal == Vector2.LEFT or normal == Vector2.RIGHT:
+			return corner_correct(16, delta, collision2D, false)
+	return false

@@ -1,5 +1,4 @@
 extends Node2D
-
 class_name GroupBase
 
 onready var children_array : Array = get_children()

@@ -22,6 +22,9 @@ shape = SubResource( 1 )
 [node name="AudioStreamPlayer" parent="StatesMachine/Action" index="0"]
 stream = ExtResource( 3 )
 
+[node name="Label" parent="StatesMachine" index="6"]
+visible = false
+
 [node name="Inputs" parent="." index="3"]
 script = ExtResource( 5 )
 

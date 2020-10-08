@@ -23,14 +23,15 @@ func _ready():
 func new_chapter():
 	progression.chapter += 1
 	current_chapter = chapters_array[progression.chapter]
-	level_array = current_chapter.load_levels()
+	level_array = [current_chapter.load_level(0)]
 
 
 func goto_level(index : int = 0):
 	if index == -1:
 		goto_last_level()
 	else:
-		var _err = get_tree().change_scene_to(level_array[index])
+		var level = current_chapter.load_level(index)
+		var _err = get_tree().change_scene_to(level)
 
 
 func goto_last_level():

@@ -313,10 +313,10 @@ MENUS="*res://Global/Autoloads/Menus/menus_autoload.gd"
 GAME="*res://Global/Autoloads/Game/Game.tscn"
 COLLACTABLES="*res://Global/Autoloads/Collactables/Collactables.gd"
 CHAPTER_GEN="*res://Global/Autoloads/ChapterGeneration/ChapterGen.gd"
-MUSIC="*res://Global/Autoloads/Music/Music.tscn"
 DIALOGUE="*res://Global/Autoloads/Dialogue/DialogueContainter.gd"
 DEBUG="*res://Global/Autoloads/Debug/Debug.gd"
 SOLO_CONTROL="*res://Global/Autoloads/SoloControl/SoloControl.gd"
+MUSIC="*res://Global/Autoloads/Music/Music.tscn"
 
 [debug]
 

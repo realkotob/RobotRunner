@@ -4,7 +4,7 @@ class_name ChapterBase
 
 export var levels_scenes_array : Array
 
-func load_levels():
+func load_all_levels():
 	var levels_array : Array = []
 	
 	for scene in levels_scenes_array:
@@ -12,3 +12,7 @@ func load_levels():
 		levels_array.append(lvl)
 	
 	return levels_array
+
+
+func load_level(index: int) -> Resource:
+	return load(levels_scenes_array[index])

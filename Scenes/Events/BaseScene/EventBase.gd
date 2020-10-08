@@ -3,6 +3,7 @@ extends Node2D
 class_name Event
 
 export var triggers_on_level_start : bool = false
+export var event_disabled : bool = false
 
 var triggers_area_array : Array = []
 

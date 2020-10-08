@@ -23,7 +23,7 @@ func _ready():
 func new_chapter():
 	progression.chapter += 1
 	current_chapter = chapters_array[progression.chapter]
-	level_array = [current_chapter.load_level(0)]
+	level_array = current_chapter.load_all_levels()
 
 
 func goto_level(index : int = 0):

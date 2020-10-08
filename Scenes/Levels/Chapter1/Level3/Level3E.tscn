@@ -722,9 +722,6 @@ __meta__ = {
 position = Vector2( 36, 288 )
 rotation = -1.5708
 
-[node name="AnimatedSprite" parent="InteractivesObjects/TeleportGroups/G8/TeleportArea" index="0"]
-frame = 0
-
 [node name="CollisionShape2D" parent="InteractivesObjects/TeleportGroups/G8/TeleportArea" index="1"]
 position = Vector2( 0.00012207, -36 )
 shape = SubResource( 16 )
@@ -741,9 +738,6 @@ __meta__ = {
 [node name="TeleportArea" parent="InteractivesObjects/TeleportGroups/G9" index="0" instance=ExtResource( 13 )]
 position = Vector2( -132, 288 )
 rotation = 4.71239
-
-[node name="AnimatedSprite" parent="InteractivesObjects/TeleportGroups/G9/TeleportArea" index="0"]
-frame = 0
 
 [node name="CollisionShape2D" parent="InteractivesObjects/TeleportGroups/G9/TeleportArea" index="1"]
 position = Vector2( 0, -20 )
@@ -1142,17 +1136,17 @@ position = Vector2( 61.1077, 45.3533 )
 position = Vector2( 5.10767, 45.3533 )
 
 [node name="Checkpoint4" parent="Events/Checkpoints" index="3" instance=ExtResource( 24 )]
-position = Vector2( -24, -176 )
+position = Vector2( -26.1022, -103.262 )
 
 [node name="TriggerArea" parent="Events/Checkpoints/Checkpoint4" index="0"]
-position = Vector2( 48, 0 )
+position = Vector2( -4.97647, -24.386 )
 scale = Vector2( 5.16988, 5.73198 )
 
 [node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint4" index="1"]
-position = Vector2( 24, 32 )
+position = Vector2( 25.6818, -42.4193 )
 
 [node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint4" index="2"]
-position = Vector2( -24, 56 )
+position = Vector2( -64.363, 0.500839 )
 
 [node name="Checkpoint5" parent="Events/Checkpoints" index="4" instance=ExtResource( 24 )]
 position = Vector2( 1168, 616 )

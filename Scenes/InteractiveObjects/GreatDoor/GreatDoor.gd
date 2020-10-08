@@ -9,7 +9,6 @@ extends Door
 onready var area_node = $Area2D
 
 export var focus_on_door : bool = true
-export var short_focus : bool = false
 
 signal player_exit_level
 

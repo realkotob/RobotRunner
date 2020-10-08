@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://Scenes/Levels/Base/LevelBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/StartingPoints/StartingPointP1.tscn" type="PackedScene" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://Scenes/InteractiveObjects/Platform/BreakablePlatform/2 Tiles/2TilesBreakablePlateform.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Scenes/InteractiveObjects/Platform/BreakablePlatform/3 Tiles/3TilesBreakablePlateform.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Global/Background/BackgroundLight.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Scenes/Events/CameraEvents/CameraEvent.tscn" type="PackedScene" id=23]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 255.161, 74 )
@@ -670,7 +671,7 @@ rotation = 4.71239
 [node name="BD_Group" parent="InteractivesObjects/Buttons&Doors" index="0" instance=ExtResource( 5 )]
 
 [node name="RedButton" parent="InteractivesObjects/Buttons&Doors/BD_Group" index="0" instance=ExtResource( 6 )]
-position = Vector2( 365, 301 )
+position = Vector2( 365, 305 )
 
 [node name="RedDoor" parent="InteractivesObjects/Buttons&Doors/BD_Group" index="1" instance=ExtResource( 7 )]
 position = Vector2( 480, 288 )
@@ -818,6 +819,20 @@ position = Vector2( 0, -16 )
 [node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint4" index="2"]
 position = Vector2( -48, -64 )
 
+[node name="CameraEvent" parent="Events/CameraEvents" index="0" instance=ExtResource( 23 )]
+position = Vector2( 728, 352 )
+scale = Vector2( 1, 8.84 )
+camera_new_zoom = Vector2( 2, 2 )
+zoom_duration = 6.0
+
+[node name="Position2D" parent="Events/CameraEvents/CameraEvent" index="1"]
+position = Vector2( 680, -3.6199 )
+
+[node name="CameraEvent2" parent="Events/CameraEvents" index="1" instance=ExtResource( 23 )]
+position = Vector2( 1920, 448 )
+scale = Vector2( 1, 17.08 )
+follow_state = true
+
 [node name="Camera" parent="." index="7"]
 visible = false
 
@@ -858,3 +873,5 @@ visible = false
 [editable path="Events/Checkpoints/Checkpoint2"]
 
 [editable path="Events/Checkpoints/Checkpoint4"]
+
+[editable path="Events/CameraEvents/CameraEvent"]

@@ -10,9 +10,13 @@ var button_index : int = 0 # Get the index where the player aim
 var prev_button_index : int = 0 # Get the index where the player aimed before changing
 var count_not_clickable_options : int # Count how many options are not clickable
 
+var default_button_state : Array = []
+
 # Check the options when the scenes is ready, to get sure at least one of them is clickable
 # Change the color of the option accordingly to their state
 func _ready():
+	var _err = RESOURCE_LOADER.connect("thread_finished", self, "on_thread_finished")
+	
 	if len(buttons_array) == 0:
 		return
 	
@@ -25,6 +29,10 @@ func _ready():
 		
 		if button.has_method("setup"):
 			button.setup()
+	
+	load_default_buttons_state()
+	set_buttons_disabled(true)
+
 
 
 # Main Navigation handling
@@ -48,6 +56,23 @@ func _unhandled_input(event):
 			
 			# Triggers the reponse of the button
 			on_button_aimed(buttons_array[button_index], false)
+
+
+# Stock the default state of every button
+func load_default_buttons_state():
+	for button in buttons_array:
+		var button_state = button.is_disabled()
+		default_button_state.append(button_state)
+
+
+func set_buttons_disabled(value : bool):
+	for button in buttons_array:
+		button.set_disabled(value)
+
+
+func set_buttons_default_state():
+	for i in range(buttons_array.size()):
+		buttons_array[i].set_disabled(default_button_state[i])
 
 
 # Exit the game if there is no clickable option
@@ -86,3 +111,7 @@ func on_button_aimed(button : Button, signal_call: bool):
 		button_index = button.get_index()
 	update_menu_option()
 	choice_sound_node.play()
+
+
+func on_thread_finished():
+	set_buttons_default_state()

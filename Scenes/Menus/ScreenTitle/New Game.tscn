@@ -3,7 +3,6 @@
 [ext_resource path="res://Scenes/Menus/MenuOptionBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Menus/ScreenTitle/Scripts/NewGame.gd" type="Script" id=2]
 
-
 [node name="New Game" instance=ExtResource( 1 )]
 text = "New Game"
 script = ExtResource( 2 )

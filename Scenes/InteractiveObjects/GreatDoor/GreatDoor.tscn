@@ -133,7 +133,7 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id=9]
-step = 0.05
+step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprites/LeftDoor/Lights/Light1:position")
 tracks/0/interp = 1
@@ -309,10 +309,10 @@ tracks/14/loop_wrap = true
 tracks/14/imported = false
 tracks/14/enabled = true
 tracks/14/keys = {
-"times": PoolRealArray( 0, 0.75 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.01, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ true, false ]
+"values": [ false, true, false ]
 }
 tracks/15/type = "value"
 tracks/15/path = NodePath("Sprites/RightDoor/Lights:visible")
@@ -321,10 +321,10 @@ tracks/15/loop_wrap = true
 tracks/15/imported = false
 tracks/15/enabled = true
 tracks/15/keys = {
-"times": PoolRealArray( 0, 0.75 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.01, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ true, false ]
+"values": [ false, true, false ]
 }
 
 [sub_resource type="Animation" id=10]
@@ -517,6 +517,7 @@ __meta__ = {
 }
 
 [node name="Lights" type="Node2D" parent="Sprites/LeftDoor"]
+visible = false
 
 [node name="Light1" type="Light2D" parent="Sprites/LeftDoor/Lights"]
 position = Vector2( -107.717, 75.3593 )
@@ -547,7 +548,6 @@ color = Color( 0.941176, 0.247059, 0.976471, 1 )
 energy = 1.5
 
 [node name="RightDoor" type="Sprite" parent="Sprites"]
-light_mask = 3
 texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 240, 240 )
@@ -556,6 +556,7 @@ __meta__ = {
 }
 
 [node name="Lights" type="Node2D" parent="Sprites/RightDoor"]
+visible = false
 
 [node name="Light1" type="Light2D" parent="Sprites/RightDoor/Lights"]
 position = Vector2( 106.746, -56.5488 )
@@ -563,7 +564,6 @@ texture = ExtResource( 6 )
 texture_scale = 0.03
 color = Color( 0.941176, 0.247059, 0.976471, 1 )
 energy = 0.0
-range_item_cull_mask = 2
 
 [node name="Light2" type="Light2D" parent="Sprites/RightDoor/Lights"]
 position = Vector2( 105.28, -33.0786 )
@@ -571,15 +571,13 @@ texture = ExtResource( 6 )
 texture_scale = 0.03
 color = Color( 0.941176, 0.247059, 0.976471, 1 )
 energy = 1.5
-range_item_cull_mask = 2
 
 [node name="Light3" type="Light2D" parent="Sprites/RightDoor/Lights"]
-position = Vector2( 20, 10.249 )
+position = Vector2( 103.22, -29.9578 )
 texture = ExtResource( 6 )
 texture_scale = 0.03
 color = Color( 0.941176, 0.247059, 0.976471, 1 )
 energy = 1.5
-range_item_cull_mask = 2
 
 [node name="Light4" type="Light2D" parent="Sprites/RightDoor/Lights"]
 position = Vector2( 104.395, 46.61 )
@@ -587,7 +585,6 @@ texture = ExtResource( 6 )
 texture_scale = 0.03
 color = Color( 0.941176, 0.247059, 0.976471, 1 )
 energy = 1.5
-range_item_cull_mask = 2
 
 [node name="Light5" type="Light2D" parent="Sprites/RightDoor/Lights"]
 position = Vector2( 59.0809, 123.159 )
@@ -595,10 +592,9 @@ texture = ExtResource( 6 )
 texture_scale = 0.03
 color = Color( 0.941176, 0.247059, 0.976471, 1 )
 energy = 1.5
-range_item_cull_mask = 2
 
 [node name="Border" type="Sprite" parent="Sprites"]
-light_mask = 1024
+light_mask = -2147483647
 texture = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
@@ -619,7 +615,6 @@ color = Color( 1, 0, 0, 1 )
 range_item_cull_mask = 1027
 
 [node name="Pipes" type="Sprite" parent="Sprites"]
-light_mask = 1024
 texture = ExtResource( 4 )
 __meta__ = {
 "_edit_lock_": true

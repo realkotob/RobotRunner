@@ -35,6 +35,13 @@ func new_chapter():
 
 
 func goto_level(index : int = 0):
+	
+	### IMPORTANT : TO BE MODIFIED AND CLEANED
+	
+	#Handling players' progression => Xion ; Materials
+	progression.set_main_xion(SCORE.get_xion())
+	progression.set_main_materials(SCORE.get_materials())
+	
 	if index == -1:
 		goto_last_level()
 	else:
@@ -43,6 +50,12 @@ func goto_level(index : int = 0):
 
 
 func goto_last_level():
+	### IMPORTANT : TO BE MODIFIED AND CLEANED
+	
+	#Handling players' progression => Xion ; Materials
+	progression.set_main_xion(SCORE.get_xion())
+	progression.set_main_materials(SCORE.get_materials())
+	
 	var last_level = load(last_level_path)
 	get_tree().current_scene.queue_free()
 	var _err = get_tree().change_scene_to(last_level)
@@ -53,7 +66,9 @@ func goto_last_level():
 # Which means the last level will be launched again
 func goto_next_level():
 	var last_level_index = find_string(current_chapter.levels_scenes_array, last_level_path)
+	#Handling players' progression => Levels 
 	progression.add_to_level(1)
+
 	if debug:
 		print("progression.level: " + String(progression.get_level()))
 	progression.set_checkpoint(0)

@@ -10,8 +10,12 @@ func _ready():
 
 func event():
 	GAME.progression.checkpoint += 1
-	GAME.progression.main_xion = SCORE.xion
-	GAME.progression.main_materials = SCORE.materials
+	GAME.progression.set_main_xion(SCORE.xion)
+	GAME.progression.set_main_materials(SCORE.materials)
+	
+	#DEBUG XION/MAIN XION
+	#print("XION : ", SCORE.xion , " / MAIN_XION : ", GAME.progression.get_main_xion())
+	
 	trigger_animation()
 
 

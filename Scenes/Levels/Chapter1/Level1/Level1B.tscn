@@ -24,7 +24,7 @@
 position = Vector2( 48, 264 )
 
 [node name="StartingPointP2" parent="." index="1" instance=ExtResource( 4 )]
-position = Vector2( 48, 360.5 )
+position = Vector2( 48, 360 )
 
 [node name="Light" parent="Map/Background/Paralaxe/Lights" index="0" instance=ExtResource( 13 )]
 position = Vector2( 240, 36 )

@@ -3,6 +3,7 @@ extends Node2D
 onready var gameover_timer_node = $GameoverTimer
 onready var transition_timer_node = $TransitionTimer
 
+export var debug : bool = false
 export var progression : Resource
 
 var chapters_array = []
@@ -14,15 +15,14 @@ var player2 = preload("res://Scenes/Actor/Players/RobotHammer/RobotHammer.tscn")
 var level_array : Array
 var last_level_path : String
 
-
 func _ready():
 	var _err = gameover_timer_node.connect("timeout",self, "on_gameover_timer_timeout")
 	_err = transition_timer_node.connect("timeout",self, "on_transition_timer_timeout")
 
 
 func new_chapter():
-	progression.chapter += 1
-	current_chapter = chapters_array[progression.chapter]
+	progression.add_to_chapter(1)
+	current_chapter = chapters_array[progression.get_chapter()]
 
 
 func goto_level(index : int = 0):
@@ -43,11 +43,16 @@ func goto_last_level():
 # If the last level was not in the list, set the progression to -1
 # Which means the last level will be launched again
 func goto_next_level():
-#	var last_level_index = find_string(current_chapter.levels_scenes_array, last_level_path)
-	progression.level += 1
-	progression.checkpoint = 0
+	var last_level_index = find_string(current_chapter.levels_scenes_array, last_level_path)
+	progression.add_to_level(1)
+	if debug:
+		print("progression.level: " + String(progression.get_level()))
+	progression.set_checkpoint(0)
 	
-	goto_level(progression.level)
+	if last_level_index == -1:
+		goto_last_level()
+	else:
+		goto_level(progression.get_level())
 
 
 # Triggers the timer before the gameover is triggered
@@ -84,9 +89,22 @@ func set_camera_on_follow():
 	camera_node.set_state("Follow")
 
 
+# Return the index of a given string in a given array
+# Return -1 if the string wasn't found
+func find_string(string_array: PoolStringArray, target_string : String):
+	var index = 0
+	for string in string_array:
+		if target_string.is_subsequence_of(string):
+			return index
+		else:
+			index += 1
+	return -1
+
+
+#### SIGNAL RESPONSES ####
+
 func on_player_level_exited(body: Node):
 	get_tree().get_current_scene().on_player_exited(body)
-
 
 # Called when a level is finished: wait for the transition to be finished
 func on_level_finished():
@@ -95,17 +113,3 @@ func on_level_finished():
 # When the transition is finished, go to the next level
 func on_transition_timer_timeout():
 	goto_next_level()
-
-
-# Return the index of a given string in a given array
-# Return -1 if the string wasn't found
-func find_string(string_array: PoolStringArray, target_string : String):
-	var index = 0
-	for string in string_array:
-		if string == target_string:
-			break
-		else:
-			index += 1
-			if index == len(string_array):
-				index = -1
-	return index

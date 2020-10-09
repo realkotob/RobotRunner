@@ -80,7 +80,6 @@ func set_starting_points():
 
 
 # Intanciate the players inside the level
-#### TO BE REFACTO -- NEED TO BE DYNAMIC ####
 func instanciate_players():
 	# Get the players starting positions
 	var player_start_array = [get_node_or_null("StartingPointP1"), get_node_or_null("StartingPointP2")]
@@ -94,7 +93,6 @@ func instanciate_players():
 			player_node.global_position = player_start_pos
 			player_node.level_node = self
 			add_child(player_node)
-	
 
 
 func set_camera_position_on_start():

@@ -103,9 +103,6 @@ func find_string(string_array: PoolStringArray, target_string : String):
 
 #### SIGNAL RESPONSES ####
 
-func on_player_level_exited(body: Node):
-	get_tree().get_current_scene().on_player_exited(body)
-
 # Called when a level is finished: wait for the transition to be finished
 func on_level_finished():
 	transition_timer_node.start()

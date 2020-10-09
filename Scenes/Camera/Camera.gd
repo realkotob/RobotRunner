@@ -10,7 +10,34 @@ onready var tween_node = $Tween
 export var camera_speed : float = 3.0
 export var default_state : String = "Follow"
 
+export var debug : bool = false
+
+var players_weakref_array : Array = [] setget set_players_weakref_array
 var instruction_stack : Array = []
+
+
+#### ACCESSORS ####
+
+
+# Feed the array of players with weakrefs
+func set_players_weakref_array(weakref_array: Array):
+	for element in weakref_array:
+		if not element is WeakRef:
+			if debug:
+				print("One of the elements of the array passed to set_players_weakref_array is not a WeakRef")
+			return
+	players_weakref_array = weakref_array
+
+
+# Return the player true ref
+func get_players_array() -> Array:
+	var players_array : Array = []
+	for player_weakref in players_weakref_array:
+		var player = player_weakref.get_ref()
+		if player != null:
+			players_array.append(player)
+	return players_array
+
 
 # Add an instruction in the stack
 func stack_instruction(instruction: Array):
@@ -67,7 +94,7 @@ func compute_average_pos(players_array: Array) -> Vector2:
 	var average_pos = Vector2.ZERO
 	for player in players_array:
 		average_pos += player.global_position
-
+	
 	average_pos /= len(players_array)
 	
 	return average_pos

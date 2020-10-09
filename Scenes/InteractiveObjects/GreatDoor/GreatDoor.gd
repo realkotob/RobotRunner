@@ -35,7 +35,6 @@ func open_door():
 
 # Notify the game autoload that a player exited the level 
 func on_area_body_entered(body : PhysicsBody2D):
-	if body != null:
-		if body.is_class("Player"):
-			emit_signal("player_exit_level", body)
-			body.fade_out()
+	if body != null && body.is_class("Player"):
+		emit_signal("player_exit_level", body)
+		body.fade_out()

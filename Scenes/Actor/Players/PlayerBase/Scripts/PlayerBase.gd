@@ -112,7 +112,7 @@ func destroy():
 func on_animation_finished(animation: String):
 	if animation == "Overheat":
 		destroy()
-	if animation == "Fadeout":
+	if animation == "FadeOut":
 		queue_free()
 
 

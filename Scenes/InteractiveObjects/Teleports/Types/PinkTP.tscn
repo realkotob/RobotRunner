@@ -90,7 +90,7 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[node name="BaseTeleporter" instance=ExtResource( 2 )]
+[node name="PinkTeleporter" instance=ExtResource( 2 )]
 script = SubResource( 1 )
 
 [node name="AnimatedSprite" parent="." index="0"]

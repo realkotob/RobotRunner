@@ -26,6 +26,7 @@ func _ready():
 	
 	set_starting_points()
 	instanciate_players()
+	set_camera_position_on_start()
 	
 	MUSIC.play()
 
@@ -102,6 +103,12 @@ func instanciate_players():
 		add_child(player2_node)
 		players_array.append(player2_node)
 
+
+func set_camera_position_on_start():
+	if(GAME.progression.checkpoint > 0):
+		var camera_node : Node = find_node("Camera")
+		var camera_position_on_start = camera_node.compute_average_pos(players_array)
+		camera_node.set_global_position(camera_position_on_start)
 
 
 #func update_current_level_index():

@@ -11,6 +11,7 @@ var player_in_danger : bool = false
 var players_exited : int = 0
 
 signal level_finished
+signal level_ready
 
 func is_class(value: String) -> bool:
 	return value == CLASS
@@ -21,13 +22,13 @@ func get_class() -> String:
 
 func _ready():
 	var _err = connect("level_finished", GAME, "on_level_finished")
-	GAME.last_level_path = filename
-#	update_current_level_index()
-	
+	_err = connect("level_ready", GAME, "on_level_ready")
+	emit_signal("level_ready", self)
+
 	set_starting_points()
 	instanciate_players()
 	set_camera_position_on_start()
-	
+
 	MUSIC.play()
 
 
@@ -39,11 +40,11 @@ func _process(_delta):
 # Update the players array, and the player_exited counter
 func on_player_exited(player : PhysicsBody2D):
 	players_exited += 1
-	
+
 	var player_index = players_array.find(player)
 	if player_index != -1:
 		players_array.remove(player_index)
-	
+
 	if players_exited == 2:
 		emit_signal("level_finished")
 
@@ -60,20 +61,20 @@ func on_player_out_of_danger():
 # Also disable every uneeded checkpoint
 func set_starting_points():
 	var current_checkpoint = GAME.progression.checkpoint
-	
+
 	if current_checkpoint <= 0:
 		return
-	
+
 	var checkpoint_array = get_node("Events/Checkpoints").get_children()
 	var starting_point_array = get_tree().get_nodes_in_group("StartingPoint")
-	
+
 	# Place the starting position based on the last checkpoint visited
 	var new_starting_point1 = checkpoint_array[current_checkpoint - 1].get_node("NewStartingPoint1")
 	var new_starting_point2 = checkpoint_array[current_checkpoint - 1].get_node("NewStartingPoint2")
-	
+
 	starting_point_array[0].set_global_position(new_starting_point1.global_position)
 	starting_point_array[1].set_global_position(new_starting_point2.global_position)
-	
+
 	# Set active every checkpoint before the current one (And also the current one)
 	for i in range(current_checkpoint):
 		checkpoint_array[i].set_active(true)
@@ -84,7 +85,7 @@ func instanciate_players():
 	# Get the players starting positions
 	var player_start_array = [get_node_or_null("StartingPointP1"), get_node_or_null("StartingPointP2")]
 	players_array += [GAME.player1.instance(), GAME.player2.instance()]
-	
+
 	# Add the players scene to the level scene a the position of the start position
 	for i in range(player_start_array.size()):
 		if player_start_array[i] != null:
@@ -94,19 +95,8 @@ func instanciate_players():
 			player_node.level_node = self
 			add_child(player_node)
 
-
 func set_camera_position_on_start():
 	if(GAME.progression.checkpoint > 0):
 		var camera_node : Node = find_node("Camera")
 		var camera_position_on_start = camera_node.compute_average_pos(players_array)
 		camera_node.set_global_position(camera_position_on_start)
-
-
-#func update_current_level_index():
-#	var i = 0
-#	for level in GAME.level_array:
-#		if name in level._bundled["names"]:
-#			break
-#		i += 1
-#
-#	GAME.progression.level = i

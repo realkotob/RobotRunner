@@ -44,10 +44,10 @@ func goto_last_level():
 # Which means the last level will be launched again
 func goto_next_level():
 	var last_level_index = find_string(current_chapter.levels_scenes_array, last_level_path)
-	
+
 	progression.level += 1
 	progression.checkpoint = 0
-	
+
 	if last_level_index == -1:
 		goto_last_level()
 	else:
@@ -70,7 +70,7 @@ func on_gameover_timer_timeout():
 # Move the camera to the given position
 func move_camera_to(dest: Vector2, average_w_players: bool = false, speed : float = -1.0, duration : float = 0.0):
 	var camera_node = get_tree().get_current_scene().find_node("Camera")
-	
+
 	if camera_node != null:
 		var func_call_array : Array = ["move_to", dest, average_w_players, speed, duration]
 		camera_node.stack_instruction(func_call_array)

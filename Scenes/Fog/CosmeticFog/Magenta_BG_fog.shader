@@ -2,10 +2,12 @@ shader_type canvas_item;
 
 uniform vec4 fog_color : hint_color = vec4(0.7, 0.0, 0.5, 1);
 uniform vec2 distort_speed = vec2(-0.03, 0.03);
-uniform float move_speed = 1.0;
+uniform float speed_multiplier = 0.5;
 uniform float opacity = 0.5;
 uniform int OCTAVES = 4;
 
+
+// Random value method
 float rand(vec2 coord){
 	return fract(sin(dot(coord, vec2(56, 78)) * 1000.0) * 1000.0);
 }
@@ -26,9 +28,9 @@ float noise(vec2 coord){
 	return mix(a, b, cubic.x) + (c - a) * cubic.y * (1.0 - cubic.x) + (d - b) * cubic.x * cubic.y;
 }
 
-// Noise generation
+// Fractal Noise method
 float fbm(vec2 coord){
-	float value = 0.0;
+	float value = 0.5;
 	float scale = 0.5;
 	
 	for(int i = 0; i< OCTAVES; i++){
@@ -40,12 +42,13 @@ float fbm(vec2 coord){
 	return value;
 }
 
+// Main rendering method 
 void fragment() {
 	vec2 coord = UV * 20.0;
-	vec2 motion = vec2(fbm(coord + TIME * distort_speed));
-	//vec4 fog_reslut = textureLod(TEXTURE, UV + motion, 1.0);
+	vec2 motion = vec2(fbm(coord + TIME * speed_multiplier));
+	
+	float surface = (UV.x + motion.x);
 	float final = fbm(coord + motion);
 	
-	//COLOR = mix(fog_reslut, fog_color, 0.65);
 	COLOR = vec4(vec3(fog_color.r, fog_color.g, fog_color.b), final * opacity);
 }

@@ -94,7 +94,6 @@ func instanciate_players():
 		add_child(player1_node)
 		players_array.append(player1_node)
 	
-		
 	if player2_start_node != null:
 		var player2_start_pos = player2_start_node.get_global_position()
 		var player2_node = GAME.player2.instance()

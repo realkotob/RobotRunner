@@ -1,5 +1,6 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
+[ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/XionCloud/XionCloud.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/XionCloud/CloudNoise.tres" type="Texture" id=6]
 [ext_resource path="res://Scenes/XionCloud/Clouds.shader" type="Shader" id=7]
@@ -18,6 +19,7 @@ uniform float speed : hint_range(0.0, 1.0) = 0.1;
 uniform float threshold : hint_range(0.0, 2.0) = 0.1;
 uniform float fluffiness : hint_range(0.0, 2.0) = 0.1;
 uniform float opacity : hint_range(0.0, 1.0) = 1.0;
+uniform float texture_zoom : hint_range(0.0, 100.0) = 20.0;
 
 uniform float fade_distance = 0.2;
 
@@ -69,19 +71,13 @@ shader_param/speed = 0.1
 shader_param/threshold = 0.47
 shader_param/fluffiness = 0.436
 shader_param/opacity = 1.0
+shader_param/texture_zoom = 5.15
 shader_param/fade_distance = 0.2
 shader_param/offset = Vector2( 0, 0 )
 shader_param/cloud_color = Color( 0.47451, 0.105882, 0.431373, 1 )
 shader_param/noiseTexture = ExtResource( 6 )
 
-[sub_resource type="OpenSimplexNoise" id=4]
-
-[sub_resource type="NoiseTexture" id=5]
-width = 2000
-height = 2000
-noise = SubResource( 4 )
-
-[sub_resource type="Shader" id=6]
+[sub_resource type="Shader" id=4]
 code = "shader_type canvas_item;
 
 uniform sampler2D noiseTexture;
@@ -136,8 +132,8 @@ void fragment() {
 	COLOR = clamp_cloud(UV, COLOR, combinedNoise);
 }"
 
-[sub_resource type="ShaderMaterial" id=7]
-shader = SubResource( 6 )
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 4 )
 shader_param/direction = Vector2( 1.347, 0 )
 shader_param/speed = 0.126
 shader_param/threshold = 0.349
@@ -148,7 +144,7 @@ shader_param/offset = Vector2( 0, 0 )
 shader_param/cloud_color = Color( 0.160784, 0.0196078, 0.0745098, 1 )
 shader_param/noiseTexture = ExtResource( 6 )
 
-[sub_resource type="ShaderMaterial" id=8]
+[sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 7 )
 shader_param/direction = Vector2( 1.413, 0 )
 shader_param/speed = 0.2
@@ -170,30 +166,34 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource( 1 )
 
 [node name="Cloud3" type="Sprite" parent="."]
 material = SubResource( 3 )
 position = Vector2( 32.68, 0 )
+scale = Vector2( 5, 5 )
 z_index = 11
 z_as_relative = false
-texture = SubResource( 5 )
-region_rect = Rect2( 0, 0, 700, 700 )
+texture = ExtResource( 1 )
+region_rect = Rect2( 0, 0, 2000, 2000 )
 
 [node name="Cloud2" type="Sprite" parent="."]
-material = SubResource( 7 )
+material = SubResource( 5 )
 position = Vector2( -73.94, 0 )
+scale = Vector2( 5, 5 )
 z_index = -1
 z_as_relative = false
-texture = SubResource( 5 )
+texture = ExtResource( 1 )
 region_rect = Rect2( 0, 0, 700, 700 )
 
 [node name="Cloud" type="Sprite" parent="."]
-material = SubResource( 8 )
+material = SubResource( 6 )
 position = Vector2( 57.961, 0 )
+scale = Vector2( 5, 5 )
 z_index = 11
 z_as_relative = false
-texture = SubResource( 5 )
+texture = ExtResource( 1 )
 region_rect = Rect2( 0, 0, 700, 700 )
 
 [node name="Timer" type="Timer" parent="."]

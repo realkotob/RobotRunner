@@ -14,11 +14,11 @@
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 10 )
-shader_param/fog_color = Color( 0.796078, 0, 0.545098, 1 )
-shader_param/distort_speed = Vector2( 1, 0.912 )
-shader_param/move_speed = 0.612
-shader_param/opacity = 0.564
-shader_param/OCTAVES = 5
+shader_param/fog_color = Color( 0.7, 0, 0.5, 1 )
+shader_param/distort_speed = Vector2( -0.03, 0.03 )
+shader_param/speed_multiplier = 0.5
+shader_param/opacity = 0.5
+shader_param/OCTAVES = 4
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 7 )
@@ -51,6 +51,9 @@ margin_right = 960.0
 margin_bottom = 540.0
 mouse_filter = 2
 color = Color( 0.137255, 0.0980392, 0.152941, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Fog" type="Sprite" parent="." index="1"]
 material = SubResource( 1 )
@@ -68,8 +71,8 @@ position = Vector2( 235, 100 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 12 )
 texture_scale = 1.29
-color = Color( 1, 0, 0, 1 )
-energy = 1.22
+color = Color( 0.968627, 0.266667, 0.266667, 0.658824 )
+energy = 1.76
 __meta__ = {
 "_edit_lock_": true
 }

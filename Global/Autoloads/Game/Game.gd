@@ -43,15 +43,11 @@ func goto_last_level():
 # If the last level was not in the list, set the progression to -1
 # Which means the last level will be launched again
 func goto_next_level():
-	var last_level_index = find_string(current_chapter.levels_scenes_array, last_level_path)
-
+#	var last_level_index = find_string(current_chapter.levels_scenes_array, last_level_path)
 	progression.level += 1
 	progression.checkpoint = 0
-
-	if last_level_index == -1:
-		goto_last_level()
-	else:
-		goto_level(progression.level)
+	
+	goto_level(progression.level)
 
 
 # Triggers the timer before the gameover is triggered

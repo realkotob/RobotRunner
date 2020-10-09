@@ -194,6 +194,9 @@ func test_collision(movement: Vector2, collision2D: KinematicCollision2D, vertic
 
 func get_body_rect(body: PhysicsBody2D, movement := Vector2.ZERO) -> Rect2:
 	var shape = body.get_node("CollisionShape2D").get_shape()
+	if !shape is RectangleShape2D:
+		return Rect2(Vector2.ZERO, Vector2.ZERO)
+	
 	var extents = shape.get_extents()
 	return Rect2(body.get_global_position() - extents + movement, extents * 2)
 

@@ -164,3 +164,6 @@ position = Vector2( -28.0917, 21.0747 )
 
 [node name="CollisionShape2D" parent="ActionHitBox" index="0"]
 position = Vector2( 16, -1 )
+
+[node name="HeadHitBox" parent="." index="6"]
+visible = true

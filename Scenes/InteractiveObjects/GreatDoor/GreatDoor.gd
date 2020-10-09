@@ -14,7 +14,7 @@ signal player_exit_level
 
 func _ready():
 	var _err = area_node.connect("body_entered", self, "on_area_body_entered")
-	_err = connect("player_exit_level", GAME, "on_player_level_exited")
+	_err = connect("player_exit_level", owner, "on_player_exited")
 
 
 # Triggers the opening of the door

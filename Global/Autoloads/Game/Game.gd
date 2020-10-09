@@ -15,12 +15,17 @@ var player2 = preload("res://Scenes/Actor/Players/RobotHammer/RobotHammer.tscn")
 var level_array : Array
 var last_level_path : String
 
-var camera_node
+
+#### BUILT-IN ####
+
 
 func _ready():
 	var _err = gameover_timer_node.connect("timeout",self, "on_gameover_timer_timeout")
 	_err = transition_timer_node.connect("timeout",self, "on_transition_timer_timeout")
 
+
+
+#### LOGIC ####
 
 func new_chapter():
 	progression.add_to_chapter(1)
@@ -72,7 +77,7 @@ func on_gameover_timer_timeout():
 
 # Move the camera to the given position
 func move_camera_to(dest: Vector2, average_w_players: bool = false, speed : float = -1.0, duration : float = 0.0):
-	camera_node = get_tree().get_current_scene().find_node("Camera")
+	var camera_node = get_tree().get_current_scene().find_node("Camera")
 	if camera_node != null:
 		var func_call_array : Array = ["move_to", dest, average_w_players, speed, duration]
 		camera_node.stack_instruction(func_call_array)
@@ -80,12 +85,12 @@ func move_camera_to(dest: Vector2, average_w_players: bool = false, speed : floa
 
 # Give zoom the camera to the destination wanted zoom
 func zoom_camera_to(dest_zoom: Vector2, zoom_speed : float = 1.0):
-	camera_node = get_tree().get_current_scene().find_node("Camera")
+	var camera_node = get_tree().get_current_scene().find_node("Camera")
 	if camera_node != null:
 		camera_node.start_zooming(dest_zoom, zoom_speed)
 
 func set_camera_on_follow():
-	camera_node = get_tree().get_current_scene().find_node("Camera")
+	var camera_node = get_tree().get_current_scene().find_node("Camera")
 	camera_node.set_state("Follow")
 
 
@@ -94,17 +99,22 @@ func set_camera_on_follow():
 func find_string(string_array: PoolStringArray, target_string : String):
 	var index = 0
 	for string in string_array:
-		if target_string.is_subsequence_of(string):
+		if target_string.is_subsequence_of(string) or target_string == string:
 			return index
 		else:
 			index += 1
 	return -1
 
 
-#### SIGNAL RESPONSES ####
+# Check if the current level index is the right one when a new level is ready
+# Usefull when testing a level standalone to keep track of the pro
+func update_current_level_index(level):
+	var level_filename = level.filename
+	var level_index = find_string(current_chapter.levels_scenes_array, level_filename)
+	GAME.progression.set_level(level_index)
 
-func on_player_level_exited(body: Node):
-	get_tree().get_current_scene().on_player_exited(body)
+
+#### SIGNAL RESPONSES ####
 
 # Called when a level is finished: wait for the transition to be finished
 func on_level_finished():
@@ -113,3 +123,9 @@ func on_level_finished():
 # When the transition is finished, go to the next level
 func on_transition_timer_timeout():
 	goto_next_level()
+
+# Called when the level is ready, correct
+func on_level_ready(level):
+	last_level_path = level.filename
+	if progression.level == 0:
+		update_current_level_index(level)

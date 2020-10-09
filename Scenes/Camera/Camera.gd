@@ -8,7 +8,6 @@ onready var shake_state_node = $StateMachine/Shake
 onready var tween_node = $Tween
 
 export var camera_speed : float = 3.0
-export var default_state : String = "Follow"
 
 export var debug : bool = false
 
@@ -18,6 +17,8 @@ var instruction_stack : Array = []
 
 #### ACCESSORS ####
 
+func set_state(state_name: String):
+	state_machine_node.set_state(state_name)
 
 # Feed the array of players with weakrefs
 func set_players_weakref_array(weakref_array: Array):
@@ -28,7 +29,6 @@ func set_players_weakref_array(weakref_array: Array):
 			return
 	players_weakref_array = weakref_array
 
-
 # Return the player true ref
 func get_players_array() -> Array:
 	var players_array : Array = []
@@ -38,6 +38,8 @@ func get_players_array() -> Array:
 			players_array.append(player)
 	return players_array
 
+
+#### BUILT-IN ####
 
 # Add an instruction in the stack
 func stack_instruction(instruction: Array):
@@ -69,9 +71,6 @@ func move_to(dest: Vector2, average_w_players : bool = false, move_speed : float
 	moveto_state_node.wait_time = duration
 	state_machine_node.set_state("MoveTo")
 
-
-func set_state(state_name: String):
-	state_machine_node.set_state(state_name)
 
 # Progressively move to the given destination
 func start_moving(dest_pos: Vector2, duration: float = 1.0):

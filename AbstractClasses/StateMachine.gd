@@ -14,7 +14,7 @@ onready var current_state : Object
 onready var previous_state : Object
 
 
-var default_state : String = ""
+export var default_state : String = ""
 var state_name
 var new_state_name
 

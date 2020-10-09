@@ -547,7 +547,7 @@ color = Color( 0.941176, 0.247059, 0.976471, 1 )
 energy = 1.5
 
 [node name="RightDoor" type="Sprite" parent="Sprites"]
-light_mask = 2
+light_mask = 3
 texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 240, 240 )

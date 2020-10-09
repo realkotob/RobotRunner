@@ -329,6 +329,7 @@ DIALOGUE="*res://Global/Autoloads/Dialogue/DialogueContainter.gd"
 DEBUG="*res://Global/Autoloads/Debug/Debug.gd"
 SOLO_CONTROL="*res://Global/Autoloads/SoloControl/SoloControl.gd"
 MUSIC="*res://Global/Autoloads/Music/Music.tscn"
+RESOURCE_LOADER="*res://Global/Autoloads/ResourceLoader/ResourceLoader.tscn"
 
 [debug]
 

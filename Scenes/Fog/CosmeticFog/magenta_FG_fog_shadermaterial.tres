@@ -4,3 +4,8 @@
 
 [resource]
 shader = ExtResource( 1 )
+shader_param/fog_color = Color( 0.701961, 0, 0.501961, 1 )
+shader_param/distort_speed = Vector2( -0.03, 0.03 )
+shader_param/speed_multiplier = 0.5
+shader_param/opacity = 0.17
+shader_param/OCTAVES = 4

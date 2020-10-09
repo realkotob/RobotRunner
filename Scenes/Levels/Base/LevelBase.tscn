@@ -8,10 +8,10 @@
 [ext_resource path="res://Global/Background/ProdLine.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Global/Background/Gears.png" type="Texture" id=7]
 [ext_resource path="res://Scenes/GameConsole/GameConsole.tscn" type="PackedScene" id=8]
+[ext_resource path="res://icon.png" type="Texture" id=9]
 [ext_resource path="res://Scenes/GUI/HUD/HUD.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Scenes/Fog/CosmeticFog/magenta_FG_fog_shadermaterial.tres" type="Material" id=20]
 [ext_resource path="res://Scenes/Fog/CosmeticFog/green_bg_fog_shadermaterial.tres" type="Material" id=21]
-[ext_resource path="res://Scenes/Fog/CosmeticFog/FogTexture.tres" type="Texture" id=23]
 [ext_resource path="res://Scenes/Levels/Base/LevelBase.gd" type="Script" id=24]
 
 [node name="LevelBase" type="Node2D"]
@@ -32,7 +32,9 @@ __meta__ = {
 material = ExtResource( 20 )
 position = Vector2( 470.01, 277.517 )
 scale = Vector2( 2.09202, 1.27633 )
-texture = ExtResource( 23 )
+texture = ExtResource( 9 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 480, 540 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -139,7 +141,7 @@ __meta__ = {
 material = ExtResource( 21 )
 position = Vector2( 470.01, 277.517 )
 scale = Vector2( 2.09202, 1.27633 )
-texture = ExtResource( 23 )
+texture = ExtResource( 9 )
 offset = Vector2( 10.943, 0 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 8000, 8000 )

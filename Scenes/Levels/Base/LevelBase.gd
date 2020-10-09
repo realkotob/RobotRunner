@@ -83,25 +83,18 @@ func set_starting_points():
 #### TO BE REFACTO -- NEED TO BE DYNAMIC ####
 func instanciate_players():
 	# Get the players starting positions
-	var player1_start_node = get_node_or_null("StartingPointP1")
-	var player2_start_node = get_node_or_null("StartingPointP2")
-
-	# Add the players scene to the level scene a the position of the start position
-	if player1_start_node != null:
-		var player1_start_pos = player1_start_node.get_global_position()
-		var player1_node = GAME.player1.instance()
-		player1_node.global_position = player1_start_pos
-		player1_node.level_node = self
-		add_child(player1_node)
-		players_array.append(player1_node)
+	var player_start_array = [get_node_or_null("StartingPointP1"), get_node_or_null("StartingPointP2")]
+	players_array += [GAME.player1.instance(), GAME.player2.instance()]
 	
-	if player2_start_node != null:
-		var player2_start_pos = player2_start_node.get_global_position()
-		var player2_node = GAME.player2.instance()
-		player2_node.global_position = player2_start_pos
-		player2_node.level_node = self
-		add_child(player2_node)
-		players_array.append(player2_node)
+	# Add the players scene to the level scene a the position of the start position
+	for i in range(player_start_array.size()):
+		if player_start_array[i] != null:
+			var player_start_pos = player_start_array[i].get_global_position()
+			var player_node = players_array[i]
+			player_node.global_position = player_start_pos
+			player_node.level_node = self
+			add_child(player_node)
+	
 
 
 func set_camera_position_on_start():

@@ -15,6 +15,8 @@ var player2 = preload("res://Scenes/Actor/Players/RobotHammer/RobotHammer.tscn")
 var level_array : Array
 var last_level_path : String
 
+var camera_node
+
 func _ready():
 	var _err = gameover_timer_node.connect("timeout",self, "on_gameover_timer_timeout")
 	_err = transition_timer_node.connect("timeout",self, "on_transition_timer_timeout")
@@ -48,7 +50,7 @@ func goto_next_level():
 	if debug:
 		print("progression.level: " + String(progression.get_level()))
 	progression.set_checkpoint(0)
-	
+
 	if last_level_index == -1:
 		goto_last_level()
 	else:
@@ -70,8 +72,7 @@ func on_gameover_timer_timeout():
 
 # Move the camera to the given position
 func move_camera_to(dest: Vector2, average_w_players: bool = false, speed : float = -1.0, duration : float = 0.0):
-	var camera_node = get_tree().get_current_scene().find_node("Camera")
-
+	camera_node = get_tree().get_current_scene().find_node("Camera")
 	if camera_node != null:
 		var func_call_array : Array = ["move_to", dest, average_w_players, speed, duration]
 		camera_node.stack_instruction(func_call_array)
@@ -79,13 +80,12 @@ func move_camera_to(dest: Vector2, average_w_players: bool = false, speed : floa
 
 # Give zoom the camera to the destination wanted zoom
 func zoom_camera_to(dest_zoom: Vector2, zoom_speed : float = 1.0):
-	var camera_node = get_tree().get_current_scene().find_node("Camera")
+	camera_node = get_tree().get_current_scene().find_node("Camera")
 	if camera_node != null:
 		camera_node.start_zooming(dest_zoom, zoom_speed)
 
-
 func set_camera_on_follow():
-	var camera_node = get_tree().get_current_scene().find_node("Camera")
+	camera_node = get_tree().get_current_scene().find_node("Camera")
 	camera_node.set_state("Follow")
 
 

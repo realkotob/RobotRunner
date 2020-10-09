@@ -298,7 +298,7 @@ position = Vector2( 225.762, 9.98335 )
 [node name="CameraEvent2" parent="Events/CameraEvents" index="1" instance=ExtResource( 15 )]
 position = Vector2( 3240, 328 )
 scale = Vector2( 2.78722, 18.5043 )
-event_disabled = true
+zoom_duration = 1.0
 follow_state = true
 
 [node name="CameraEvent3" parent="Events/CameraEvents" index="2" instance=ExtResource( 15 )]

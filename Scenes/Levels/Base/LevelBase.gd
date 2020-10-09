@@ -28,7 +28,8 @@ func _ready():
 	set_starting_points()
 	instanciate_players()
 	set_camera_position_on_start()
-
+	propagate_weakref_players_array()
+	
 	MUSIC.play()
 
 
@@ -95,8 +96,19 @@ func instanciate_players():
 			player_node.level_node = self
 			add_child(player_node)
 
+
 func set_camera_position_on_start():
 	if(GAME.progression.checkpoint > 0):
 		var camera_node : Node = find_node("Camera")
 		var camera_position_on_start = camera_node.compute_average_pos(players_array)
 		camera_node.set_global_position(camera_position_on_start)
+	
+
+# Feed every needing node with weak references of the players so it can follow them
+func propagate_weakref_players_array():
+	var players_weakref_array = []
+	for player in players_array:
+		players_weakref_array.append(weakref(player))
+	
+	propagate_call("set_players_weakref_array", [players_weakref_array])
+	MUSIC.set_players_weakref_array(players_weakref_array)

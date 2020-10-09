@@ -28,4 +28,4 @@ func on_timer_timeout():
 	if len(owner.instruction_stack) != 0:
 		owner.execute_next_instruction()
 	else:
-		states_node.set_state(owner.default_state)
+		states_node.set_state(states_node.default_state)

@@ -5,11 +5,31 @@ onready var children_array = get_children()
 onready var screen_size : Vector2 = get_viewport().get_size()
 onready var danger_distance : float = screen_size.x / 2
 
+onready var debug : bool = false
+
+var players_weakref_array setget set_players_weakref_array
 var playing : bool = false setget set_playing, is_playing
+
+
+#### ACCESSORS ####
+
+# Feed the array of players with weakrefs
+func set_players_weakref_array(weakref_array: Array):
+	for element in weakref_array:
+		if not element is WeakRef:
+			if debug:
+				print("One of the elements of the array passed to set_players_weakref_array is not a WeakRef")
+			return
+	players_weakref_array = weakref_array
+
+
+#### BUILT-IN ####
 
 func _ready():
 	pause_mode = Node.PAUSE_MODE_PROCESS
 
+
+#### LOGIC ####
 
 func set_playing(value: bool):
 	playing = value
@@ -25,8 +45,8 @@ func adapt_music(xion_cloud: Node, players_array: Array, player_in_danger: bool)
 	if xion_cloud == null or !xion_cloud.visible:
 		return
 	
-	if len(players_array) > 1:
-		closest_player = get_closest_player(xion_cloud, players_array)
+	if len(players_array) > 0:
+		closest_player = get_closest_player(xion_cloud, players_weakref_array)
 	
 	if closest_player == null:
 		return
@@ -53,17 +73,20 @@ func get_distance_to(element1: Node, element2: Node) -> float:
 
 
 # Return the closest player from the element
-func get_closest_player(element: Node, players_array: Array) -> Player:
+func get_closest_player(element: Node, players_wr_array: Array) -> Player:
 	var smaller_distance : float = INF
 	var current_distance : float = 0.0
-	var closest_player : Player = players_array[0]
+	var closest_player : Player = null
 	
-	if len(players_array) > 1:
-		for player in players_array:
-			current_distance = get_distance_to(element, player)
-			if current_distance < smaller_distance:
-				smaller_distance = current_distance
-				closest_player = player
+	for player_wr in players_wr_array:
+		var player = player_wr.get_ref() 
+		if player == null:
+			continue
+		
+		current_distance = get_distance_to(element, player)
+		if current_distance < smaller_distance:
+			smaller_distance = current_distance
+			closest_player = player
 	
 	return closest_player
 

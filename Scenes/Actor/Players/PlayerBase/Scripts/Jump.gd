@@ -1,7 +1,5 @@
 extends PlayerStateBase
 
-signal layer_change
-
 ### JUMP STATE ###
 
 var SFX_node : Node
@@ -13,8 +11,7 @@ func _ready():
 	SFX_node = owner.get_node("SFX")
 	inputs_node = owner.get_node("Inputs")
 	
-	var _err = connect("layer_change", owner, "on_layer_change")
-	_err = animation_node.connect("animation_finished", self, "on_animation_finished")
+	var _err = animation_node.connect("animation_finished", self, "on_animation_finished")
 
 
 func update(_host, _delta):
@@ -59,4 +56,4 @@ func _input(event):
 			state_node.set_state("Action")
 			
 		elif event.is_action_pressed(inputs_node.get_input("Teleport")):
-			emit_signal("layer_change")
+			owner.emit_signal("layer_change")

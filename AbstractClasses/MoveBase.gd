@@ -4,8 +4,6 @@ class_name MoveBase
 
 ### MOVE STATE ###
 
-signal layer_change
-
 var SFX_node : Node
 var inputs_node : Node
 
@@ -13,7 +11,6 @@ func _ready():
 	yield(owner, "ready")
 	SFX_node = owner.get_node("SFX")
 	inputs_node = owner.get_node("Inputs")
-	var _err = connect("layer_change", owner, "on_layer_change")
 
 
 func update(_host, _delta):
@@ -46,7 +43,7 @@ func _input(event):
 			state_node.set_state("Jump")
 		
 		elif event.is_action_pressed(inputs_node.get_input("Teleport")):
-			emit_signal("layer_change")
+			owner.emit_signal("layer_change")
 		
 		elif event.is_action_pressed(inputs_node.get_input("Action")):
 			state_node.set_state("Action")

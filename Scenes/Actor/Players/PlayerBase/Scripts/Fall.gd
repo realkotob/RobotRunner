@@ -1,7 +1,5 @@
 extends PlayerStateBase
 
-signal layer_change
-
 ### FALL STATE ###
 
 onready var tolerance_timer_node = $ToleranceTimer
@@ -17,8 +15,7 @@ func _ready():
 	
 	inputs_node = owner.get_node("Inputs")
 	
-	var _err = connect("layer_change", owner, "on_layer_change")
-	_err = animation_node.connect("animation_finished", self, "on_animation_finished")
+	var _err = animation_node.connect("animation_finished", self, "on_animation_finished")
 	_err = tolerance_timer_node.connect("timeout", self, "on_tolerence_timeout")
 	_err = jump_buffer_timer_node.connect("timeout", self, "on_jump_buffer_timeout")
 
@@ -66,7 +63,7 @@ func _input(event):
 				state_node.set_state("Action")
 				
 			elif event.is_action_pressed(inputs_node.get_input("Teleport")):
-				emit_signal("layer_change")
+				owner.emit_signal("layer_change")
 			
 			# The jump is tolerated only if the jump tolerence timer is still running
 			if event.is_action_pressed(inputs_node.get_input("Jump")):

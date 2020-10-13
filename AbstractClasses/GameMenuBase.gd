@@ -20,7 +20,6 @@ func _ready():
 	if len(buttons_array) == 0:
 		return
 	
-	check_clickable_options()
 	update_menu_option()
 	
 	for button in buttons_array:
@@ -32,7 +31,6 @@ func _ready():
 	
 	load_default_buttons_state()
 	set_buttons_disabled(true)
-
 
 
 # Main Navigation handling
@@ -75,26 +73,19 @@ func set_buttons_default_state():
 		buttons_array[i].set_disabled(default_button_state[i])
 
 
-# Exit the game if there is no clickable option
-# Also set the selected option to be the first not disabled
-func check_clickable_options():
-	var i : int = 0
+func are_all_options_disabled() -> bool:
 	for button in buttons_array:
-		if button.is_disabled():
-			count_not_clickable_options += 1
-			if button_index == i:
-				button_index += 1
-		i += 1
-	
-	if count_not_clickable_options == len(buttons_array):
-		print("There are no clickable options. Exiting...")
-		get_tree().quit()
-
+		if !button.is_disabled():
+			return false
+	return true
 
 # Navigate the menu up or down
 func increment_button_index(value : int):
+	if are_all_options_disabled():
+		return
+	
 	button_index = wrapi(button_index + value, 0, len(buttons_array))
-	if(buttons_array[button_index].is_disabled()):
+	if buttons_array[button_index].is_disabled():
 		increment_button_index(value)
 
 

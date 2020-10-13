@@ -1,6 +1,9 @@
 extends ActorBase
 class_name Player
 
+#warning-ignore:unused_signal
+signal layer_change
+
 # Store all the children references
 onready var inputs_node = get_node("Inputs")
 onready var SFX_node = get_node("SFX")
@@ -52,6 +55,7 @@ func get_player_id() -> int : return player_id
 
 func _ready():
 	var _err = anim_player_node.connect("animation_finished", self, "on_animation_finished")
+	_err = connect("layer_change", self, "on_layer_change")
 	add_to_group("Players")
 		
 #### INPUT RESPONSES ####

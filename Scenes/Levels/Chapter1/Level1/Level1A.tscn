@@ -305,16 +305,20 @@ action_name_bubble = "jump_player1"
 [node name="Path" type="Node2D" parent="InteractivesObjects/Robot/BabyTank1" index="5"]
 script = ExtResource( 24 )
 
-[node name="PathPoint" parent="InteractivesObjects/Robot/BabyTank1/Path" index="0" instance=ExtResource( 25 )]
+[node name="PathPoint0" parent="InteractivesObjects/Robot/BabyTank1/Path" index="0" instance=ExtResource( 25 )]
+method_name = "tuto_bubble"
+argument_array = [ "Jump" ]
+
+[node name="PathPoint1" parent="InteractivesObjects/Robot/BabyTank1/Path" index="1" instance=ExtResource( 25 )]
 position = Vector2( 188, 0 )
 method_name = "jump"
 argument_array = [ Vector2( 1, 0 ) ]
 
-[node name="PathPoint2" parent="InteractivesObjects/Robot/BabyTank1/Path" index="1" instance=ExtResource( 25 )]
+[node name="PathPoint2" parent="InteractivesObjects/Robot/BabyTank1/Path" index="2" instance=ExtResource( 25 )]
 position = Vector2( 252, -48 )
 method_name = "overheat"
 
-[node name="PathPoint3" parent="InteractivesObjects/Robot/BabyTank1/Path" index="2" instance=ExtResource( 25 )]
+[node name="PathPoint3" parent="InteractivesObjects/Robot/BabyTank1/Path" index="3" instance=ExtResource( 25 )]
 position = Vector2( 372, -48 )
 
 [node name="BabyHammer1" parent="InteractivesObjects/Robot" index="1" instance=ExtResource( 23 )]
@@ -324,16 +328,20 @@ default_state = "Move"
 [node name="Path" type="Node2D" parent="InteractivesObjects/Robot/BabyHammer1" index="5"]
 script = ExtResource( 24 )
 
-[node name="PathPoint" parent="InteractivesObjects/Robot/BabyHammer1/Path" index="0" instance=ExtResource( 25 )]
+[node name="PathPoint0" parent="InteractivesObjects/Robot/BabyHammer1/Path" index="0" instance=ExtResource( 25 )]
+method_name = "tuto_bubble"
+argument_array = [ "Jump" ]
+
+[node name="PathPoint1" parent="InteractivesObjects/Robot/BabyHammer1/Path" index="1" instance=ExtResource( 25 )]
 position = Vector2( 188, 0 )
 method_name = "jump"
 argument_array = [ Vector2( 1, 0 ) ]
 
-[node name="PathPoint2" parent="InteractivesObjects/Robot/BabyHammer1/Path" index="1" instance=ExtResource( 25 )]
+[node name="PathPoint2" parent="InteractivesObjects/Robot/BabyHammer1/Path" index="2" instance=ExtResource( 25 )]
 position = Vector2( 252, -48 )
 method_name = "overheat"
 
-[node name="PathPoint3" parent="InteractivesObjects/Robot/BabyHammer1/Path" index="2" instance=ExtResource( 25 )]
+[node name="PathPoint3" parent="InteractivesObjects/Robot/BabyHammer1/Path" index="3" instance=ExtResource( 25 )]
 position = Vector2( 384, -48 )
 
 [node name="BabyTank2" parent="InteractivesObjects/Robot" index="2" instance=ExtResource( 18 )]
@@ -344,6 +352,7 @@ script = ExtResource( 24 )
 
 [node name="PathPoint0" parent="InteractivesObjects/Robot/BabyTank2/Path" index="0" instance=ExtResource( 25 )]
 method_name = "tuto_bubble"
+argument_array = [ "Action" ]
 
 [node name="PathPoint1" parent="InteractivesObjects/Robot/BabyTank2/Path" index="1" instance=ExtResource( 25 )]
 position = Vector2( 202.107, 0 )
@@ -368,6 +377,7 @@ script = ExtResource( 24 )
 [node name="PathPoint" parent="InteractivesObjects/Robot/BabyHammer2/Path" index="0" instance=ExtResource( 25 )]
 position = Vector2( 84, 0 )
 method_name = "tuto_bubble"
+argument_array = [ "Action" ]
 
 [node name="PathPoint1" parent="InteractivesObjects/Robot/BabyHammer2/Path" index="1" instance=ExtResource( 25 )]
 position = Vector2( 156, 0 )

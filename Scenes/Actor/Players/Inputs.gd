@@ -11,4 +11,9 @@ var input_map = {
 
 func get_input(input_name: String) -> String:
 	var id = String(owner.get_player_id()) if !SOLO_CONTROL.solo_mode else "1"
+	
+	if !input_map.has(input_name):
+		print("input " + input_name + " Can't be found in the input dictonnary")
+		return ""
+	
 	return input_map[input_name] + id

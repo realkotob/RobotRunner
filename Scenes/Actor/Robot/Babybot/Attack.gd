@@ -13,6 +13,8 @@ func _ready():
 
 
 func enter_state(_host):
+	owner.set_direction(0)
+	
 	if animated_sprite_node.get_sprite_frames().has_animation(name):
 		animated_sprite_node.play(name)
 	

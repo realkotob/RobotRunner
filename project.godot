@@ -149,6 +149,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://AbstractClasses/InteractAreaBase.gd"
 }, {
+"base": "ActorStateBase",
+"class": "JumpBase",
+"language": "GDScript",
+"path": "res://Scenes/Actor/Robot/Babybot/Jump.gd"
+}, {
 "base": "Area2D",
 "class": "LavaZone",
 "language": "GDScript",
@@ -283,6 +288,7 @@ _global_script_class_icons={
 "InactiveState": "",
 "InputsBase": "",
 "InteractAreaBase": "",
+"JumpBase": "",
 "LavaZone": "",
 "Level": "",
 "LevelEvent": "",
@@ -330,6 +336,7 @@ DEBUG="*res://Global/Autoloads/Debug/Debug.gd"
 SOLO_CONTROL="*res://Global/Autoloads/SoloControl/SoloControl.gd"
 MUSIC="*res://Global/Autoloads/Music/Music.tscn"
 RESOURCE_LOADER="*res://Global/Autoloads/ResourceLoader/ResourceLoader.tscn"
+COLLISION_CHECKER="*res://Global/Autoloads/Collision.gd"
 
 [debug]
 

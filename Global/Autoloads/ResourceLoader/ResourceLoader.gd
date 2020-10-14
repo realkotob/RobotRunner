@@ -4,6 +4,8 @@ class_name Resource_Loader
 var thread : Thread = null
 var resource_array : Array = []
 
+signal thread_finished
+
 #### ACCESSORS ####
 
 
@@ -35,6 +37,8 @@ func load_resources(_userdata):
 		yield(get_tree(), "idle_frame")
 	if debug:
 		print("Resource loading finished")
+	
+	emit_signal("thread_finished")
 
 
 #### VIRTUALS ####

@@ -1,7 +1,5 @@
 extends PlayerStateBase
 
-signal layer_change
-
 ### IDLE STATE ###
 
 var SFX_node : Node
@@ -13,9 +11,7 @@ func _ready():
 	SFX_node = owner.get_node("SFX")
 	inputs_node = owner.get_node("Inputs")
 	
-	var _err
-	_err = connect("layer_change", owner, "on_layer_change")
-	_err = animation_node.connect("animation_finished", self, "on_animation_finished")
+	var _err = animation_node.connect("animation_finished", self, "on_animation_finished")
 
 
 # Check if the character is falling, before it triggers fall state
@@ -54,7 +50,7 @@ func _input(event):
 			state_node.set_state("Jump")
 		
 		elif event.is_action_pressed(inputs_node.get_input("Teleport")):
-			emit_signal("layer_change")
+			owner.emit_signal("layer_change")
 		
 		elif event.is_action_pressed(inputs_node.get_input("Action")):
 			state_node.set_state("Action")

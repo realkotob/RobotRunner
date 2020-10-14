@@ -1,4 +1,5 @@
 extends ActorStateBase
+class_name JumpBase
 
 #### JUMP STATE ####
 
@@ -23,7 +24,7 @@ func enter_state(_host):
 	owner.current_snap = Vector2.ZERO
 	
 	# Apply the jump force
-	owner.velocity.y = owner.jump_force
+	owner.set_velocity(Vector2(owner.get_velocity().x, owner.jump_force))
 
 
 func on_animation_finished():

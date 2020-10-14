@@ -6,7 +6,7 @@
 [ext_resource path="res://Scenes/XionCloud/Clouds.shader" type="Shader" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 600, 600 )
+extents = Vector2( 648, 600 )
 
 [sub_resource type="Shader" id=2]
 code = "shader_type canvas_item;
@@ -158,7 +158,7 @@ shader_param/noiseTexture = ExtResource( 6 )
 
 [node name="XionCloud" type="Area2D"]
 collision_layer = 49
-collision_mask = 49
+collision_mask = 16
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true,
@@ -166,10 +166,10 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource( 1 )
 
 [node name="Cloud3" type="Sprite" parent="."]
+light_mask = 16
 material = SubResource( 3 )
 position = Vector2( 32.68, 0 )
 scale = Vector2( 5, 5 )
@@ -179,6 +179,7 @@ texture = ExtResource( 1 )
 region_rect = Rect2( 0, 0, 2000, 2000 )
 
 [node name="Cloud2" type="Sprite" parent="."]
+light_mask = -2147483632
 material = SubResource( 5 )
 position = Vector2( -73.94, 0 )
 scale = Vector2( 5, 5 )
@@ -188,6 +189,7 @@ texture = ExtResource( 1 )
 region_rect = Rect2( 0, 0, 700, 700 )
 
 [node name="Cloud" type="Sprite" parent="."]
+light_mask = 16
 material = SubResource( 6 )
 position = Vector2( 57.961, 0 )
 scale = Vector2( 5, 5 )

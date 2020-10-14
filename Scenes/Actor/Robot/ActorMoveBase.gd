@@ -3,35 +3,28 @@ extends ActorStateBase
 #### MOVE STATE ####
 
 onready var original_pos = owner.get_global_position()
-var path : Array = []
-
-
-func _ready():
-	yield(owner, "ready")
-	if owner.path_node != null:
-		path = owner.path_node.get_children()
-
 
 func update(_host : Node, _delta : float):
-	if path == []:
+	if owner.is_path_empty():
 		return "Idle"
-	else:
-		if is_arrived(get_point_world_position(path[0])):
-			var last_point = path.pop_front()
+	
+	if owner.is_arrived(get_point_world_position(owner.path[0])):
+		var last_point = owner.path.pop_front()
+		
+		# Trigger the event of the last point the free it
+		var event_array = last_point.get_event()
+		if event_array != [] && len(event_array) != 0:
+			var method = event_array.pop_front()
+			if owner.has_method(method):
+				owner.callv(method, event_array)
+			else:
+				if method != "":
+					print("method named " + method + " can't be found in class " + owner.name)
 			
-			# Trigger the event of the last point the free it
-			var event_array = last_point.get_event()
-			if event_array != [] && len(event_array) != 0:
-				var method = event_array.pop_front()
-				if owner.has_method(method):
-					owner.callv(method, event_array)
-				else:
-					pass
-			
-			last_point.queue_free()
-			
-			if state_node.current_state == self:
-				move_to_next_point()
+		last_point.queue_free()
+		
+		if state_node.current_state == self:
+			move_to_next_point()
 
 
 func enter_state(_host : Node):
@@ -41,15 +34,11 @@ func enter_state(_host : Node):
 	move_to_next_point()
 
 
-func exit_state(_host : Node):
-	owner.set_direction(0)
-
-
 # Move to the next point in the path
 func move_to_next_point():
-	if path == []:
+	if owner.is_path_empty():
 		return
-	var dest = get_point_world_position(path[0])
+	var dest = get_point_world_position(owner.path[0])
 	move_to(dest)
 
 
@@ -63,8 +52,3 @@ func move_to(destination : Vector2):
 # Returns the world position of the given point
 func get_point_world_position(point: Position2D) -> Vector2:
 	return original_pos + point.get_global_position()
-
-
-# Check if the actor is arrived at the given position
-func is_arrived(destination: Vector2) -> bool:
-	return owner.global_position.distance_to(destination) < 1.0

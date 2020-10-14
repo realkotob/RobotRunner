@@ -157,7 +157,7 @@ shader_param/cloud_color = Color( 0.270588, 0.0313726, 0.45098, 1 )
 shader_param/noiseTexture = ExtResource( 6 )
 
 [node name="XionCloud" type="Area2D"]
-collision_layer = 16
+collision_layer = 49
 collision_mask = 16
 script = ExtResource( 3 )
 __meta__ = {

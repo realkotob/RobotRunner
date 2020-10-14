@@ -1,10 +1,10 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Scenes/Actor/Players/PlayerBase/Scripts/Jump.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Actor/Players/PlayerBase/Scripts/Idle.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Actor/Players/PlayerBase/Scripts/StateLabel.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Actor/Players/PlayerBase/Scripts/SFX_Base.gd" type="Script" id=4]
-[ext_resource path="res://Scenes/Actor/Players/PlayerBase/Scripts/SeeThroughWalls.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/Actor/SeeThroughWalls.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Actor/Players/PlayerBase/Scripts/Action.gd" type="Script" id=6]
 [ext_resource path="res://Scenes/Actor/Players/PlayerBase/Scripts/Shock.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/Actor/Players/PlayerBase/Scripts/Fall.gd" type="Script" id=8]
@@ -13,7 +13,6 @@
 [ext_resource path="res://Scenes/Actor/Players/PlayerBase/Scripts/JumpDust.gd" type="Script" id=11]
 [ext_resource path="res://Global/Fonts/BoldCapsPixel64.tres" type="DynamicFont" id=12]
 [ext_resource path="res://AbstractClasses/MoveBase.gd" type="Script" id=13]
-[ext_resource path="res://Global/Lights/SeeThrouhMask.png" type="Texture" id=14]
 [ext_resource path="res://Scenes/Actor/Players/PlayerBase/Scripts/PlayerBase.gd" type="Script" id=15]
 [ext_resource path="res://Scenes/Actor/Players/PlayerBase/Sounds/Teleport4.wav" type="AudioStream" id=22]
 [ext_resource path="res://Scenes/Actor/Players/PlayerBase/SFX/DustBase.tscn" type="PackedScene" id=23]
@@ -44,9 +43,6 @@ length = 0.1
 
 [sub_resource type="Animation" id=6]
 length = 0.3
-
-[sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 18.2249, 20.9273 )
 
 [node name="PlayerBase" instance=ExtResource( 10 )]
 script = ExtResource( 15 )
@@ -170,30 +166,7 @@ playback_speed = 1.5
 anims/Default = SubResource( 5 )
 anims/MagentaFlash = SubResource( 6 )
 
-[node name="SeeThroughWalls" type="Light2D" parent="." index="8"]
-light_mask = 0
-z_index = 512
-z_as_relative = false
-enabled = false
-texture = ExtResource( 14 )
-texture_scale = 0.7
-mode = 3
-range_layer_min = -512
-range_layer_max = 15
-range_item_cull_mask = 16
-shadow_item_cull_mask = 0
-script = ExtResource( 5 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Area2D" type="Area2D" parent="SeeThroughWalls" index="0"]
-collision_layer = 17
-collision_mask = 17
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="SeeThroughWalls/Area2D" index="0"]
-visible = false
-shape = SubResource( 7 )
+[node name="SeeThroughWalls" parent="." index="8" instance=ExtResource( 5 )]
 
 [node name="LayerChangeAudio" type="AudioStreamPlayer2D" parent="." index="9"]
 stream = ExtResource( 22 )

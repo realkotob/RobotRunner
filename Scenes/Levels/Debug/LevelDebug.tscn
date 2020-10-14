@@ -66,4 +66,4 @@ position = Vector2( 856, 120 )
 position = Vector2( 648, 232 )
 
 [node name="XionCloud" parent="." index="8" instance=ExtResource( 7 )]
-position = Vector2( -584, 160 )
+position = Vector2( -432, 160 )

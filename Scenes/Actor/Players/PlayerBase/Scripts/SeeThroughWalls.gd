@@ -5,7 +5,7 @@ var monitoring_overlaps : bool = false setget set_monitoring_overlaps, is_monito
 
 func _ready():
 	area_node.connect("body_entered", self, "on_body_entered")
-	#area_node.connect("area_entered", self, "on_area_entered")
+	area_node.connect("area_entered", self, "on_area_entered")
 
 
 func set_monitoring_overlaps(value: bool):

@@ -4,7 +4,7 @@
 [ext_resource path="res://Scenes/Actor/Robot/Babybot/Attack.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Actor/Robot/Babybot/Rise.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Actor/Robot/Babybot/Hidden.gd" type="Script" id=4]
-[ext_resource path="res://Scenes/Actor/Robot/Babybot/Jump.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/Actor/Robot/Babybot/BabyJump.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Actor/Robot/Babybot/BabyBot.gd" type="Script" id=6]
 [ext_resource path="res://Scenes/Actor/Robot/Babybot/Fall.gd" type="Script" id=7]
 

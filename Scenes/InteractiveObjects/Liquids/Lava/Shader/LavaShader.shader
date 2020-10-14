@@ -25,8 +25,8 @@ float rand(vec2 coord){
 
 // Returns a noise texture
 float noise(vec2 coord){
-	vec2 i = floor(coord);
-	vec2 f = fract(coord);
+	vec2 i = floor(coord * sprite_scale);
+	vec2 f = fract(coord * sprite_scale);
 	
 	// 4 corners of a rectangle surrounding our point
 	float a = rand(i);
@@ -36,14 +36,14 @@ float noise(vec2 coord){
 	
 	vec2 cubic = f * f * (3.0 - 2.0 * f);
 	
-	return mix(a, b, cubic.x) + (c - a) * cubic.y * (1.0 - cubic.x) + (d - b) * cubic.x * cubic.y;
+	return (mix(a, b, cubic.x) + (c - a) * cubic.y * (1.0 - cubic.x) + (d - b) * cubic.x * cubic.y);
 }
 
 void fragment(){
 	
 	// Calculate the noise coordonate for each pixel of the sprite
-	vec2 noisecoord1 = UV * sprite_scale * distort_scale;
-	vec2 noisecoord2 = UV * sprite_scale * distort_scale + 4.0;
+	vec2 noisecoord1 = UV * distort_scale;
+	vec2 noisecoord2 = UV * distort_scale + 4.0;
 	
 	// Calculate the motion of the noise layers
 	vec2 motion1 = vec2(TIME * 0.3, TIME * -0.4);
@@ -58,7 +58,7 @@ void fragment(){
 	
 	// Calulate separatly the effect of the disrotion on both the noise texture, and the rest of the screen
 	vec4 color = textureLod(TEXTURE, TIME * 0.1 + sin(UV) + distort_sum, 1.0);
-	vec4 background_color = textureLod(SCREEN_TEXTURE, SCREEN_UV + (distort_sum * refraction_amount), 1.0);
+	vec4 background_color = textureLod(SCREEN_TEXTURE, SCREEN_UV + (distort_sum * refraction_amount * distort_scale), 1.0);
 	
 	// Mix the noise and the screen distortion together
 	color = mix(background_color, color, water_opacity);

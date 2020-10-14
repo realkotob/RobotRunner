@@ -128,7 +128,8 @@ func destroy():
 	queue_free()
 
 
-func jump():
+func jump(dir := Vector2.ZERO):
+	set_direction(int(dir.x))
 	if is_on_floor():
 		set_state("Jump")
 

@@ -6,6 +6,8 @@ onready var transition_timer_node = $TransitionTimer
 export var debug : bool = false
 export var progression : Resource
 
+export var transition_time : float = 1.0
+
 var chapters_array = []
 var current_chapter : Resource = null
 
@@ -89,6 +91,7 @@ func zoom_camera_to(dest_zoom: Vector2, zoom_speed : float = 1.0):
 	if camera_node != null:
 		camera_node.start_zooming(dest_zoom, zoom_speed)
 
+
 func set_camera_on_follow():
 	var camera_node = get_tree().get_current_scene().find_node("Camera")
 	camera_node.set_state("Follow")
@@ -114,10 +117,26 @@ func update_current_level_index(level):
 	GAME.progression.set_level(level_index)
 
 
+func fade_in():
+	$Tween.interpolate_property($CanvasLayer/ColorRect, "modulate",
+		Color.black, Color.transparent, transition_time,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()
+
+func fade_out():
+	$Tween.interpolate_property($CanvasLayer/ColorRect, "modulate",
+		Color.transparent, Color.black, transition_time,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()
+
 #### SIGNAL RESPONSES ####
+
+func on_level_start():
+	fade_in()
 
 # Called when a level is finished: wait for the transition to be finished
 func on_level_finished():
+	fade_out()
 	transition_timer_node.start()
 
 # When the transition is finished, go to the next level

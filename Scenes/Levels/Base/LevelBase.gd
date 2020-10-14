@@ -30,6 +30,7 @@ func _ready():
 	set_camera_position_on_start()
 	propagate_weakref_players_array()
 	
+	GAME.on_level_start()
 	MUSIC.play()
 
 

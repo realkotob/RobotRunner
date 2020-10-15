@@ -10,6 +10,7 @@ onready var debug : bool = false
 var players_weakref_array setget set_players_weakref_array
 var playing : bool = false setget set_playing, is_playing
 
+var fading_out : bool = false
 
 #### ACCESSORS ####
 
@@ -27,6 +28,8 @@ func set_players_weakref_array(weakref_array: Array):
 
 func _ready():
 	pause_mode = Node.PAUSE_MODE_PROCESS
+	
+	var _err = $Tween.connect("tween_all_completed", self, "on_interpolation_finished")
 
 
 #### LOGIC ####
@@ -40,6 +43,9 @@ func is_playing() -> bool:
 # Adapt the differents music layers volumes based on the distance of the players from
 # The cloud
 func adapt_music(xion_cloud: Node, players_array: Array, player_in_danger: bool):
+	if fading_out:
+		return
+	
 	var closest_player : Player = null
 	
 	if xion_cloud == null or !xion_cloud.visible:
@@ -102,10 +108,16 @@ func index_volume_on_distance(dist_to : float) -> float:
 
 # Start playing every layers of music
 func play():
+	fading_out = false
 	if !is_playing():
 		set_playing(true)
 		for child in children_array:
-			child.play()
+			if child is AudioStreamPlayer:
+				child.play()
+	
+	var normal_stream = $Normal
+	if normal_stream.get_volume_db() != 0.0:
+		fade_in_stream(normal_stream)
 
 
 # Start playing every layers of music
@@ -113,7 +125,31 @@ func stop():
 	if is_playing():
 		set_playing(false)
 		for child in children_array:
-			child.stop()
+			if child is AudioStreamPlayer:
+				child.play()
+
+
+# Start fading out
+func fade_out(duration : float = 1.0):
+	fading_out = true
+	var tween_node = $Tween
+	for child in children_array:
+		if child is AudioStreamPlayer:
+			tween_node.interpolate_property(child, "volume_db",
+			child.get_volume_db(), -80.0, duration,
+			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	
+	tween_node.start()
+
+# Start fading in the given audio stream
+func fade_in_stream(stream: AudioStreamPlayer, duration : float = 1.0):
+	var tween_node = $Tween
+	
+	tween_node.interpolate_property(stream, "volume_db",
+		stream.get_volume_db(), 0.0, duration,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	
+	tween_node.start()
 
 
 # Interpolate the volume of the given stream
@@ -123,3 +159,8 @@ func interpolate_stream_volume(stream_name : String, dest_volume: float, weight 
 	if stream != null:
 		var current_volume = stream.get_volume_db()
 		stream.set_volume_db(lerp(current_volume, dest_volume, weight))
+
+
+func on_interpolation_finished():
+	if fading_out:
+		fading_out = false

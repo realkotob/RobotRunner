@@ -21,3 +21,5 @@ bus = "Music"
 stream = ExtResource( 4 )
 volume_db = -80.0
 bus = "Music"
+
+[node name="Tween" type="Tween" parent="."]

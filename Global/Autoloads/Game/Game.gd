@@ -123,11 +123,14 @@ func fade_in():
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
 
+
 func fade_out():
 	$Tween.interpolate_property($CanvasLayer/ColorRect, "modulate",
 		Color.transparent, Color.black, transition_time,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
+	
+	MUSIC.fade_out()
 
 #### SIGNAL RESPONSES ####
 

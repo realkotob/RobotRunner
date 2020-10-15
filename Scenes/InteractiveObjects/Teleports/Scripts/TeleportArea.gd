@@ -82,6 +82,7 @@ func teleport_layer(character : Node):
 	# Teleport back every other players on their original position
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
 	for i in range(other_players_array.size()):
 		if other_players_pos_array.size() == 0 : break
 		other_players_array[i].set_global_position(other_players_pos_array[i])

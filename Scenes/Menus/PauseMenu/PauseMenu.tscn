@@ -4,7 +4,7 @@
 [ext_resource path="res://Global/Fonts/BoldCapsPixel64.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Scenes/Menus/PauseMenu/PauseMenu.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Menus/PauseMenu/Resume.gd" type="Script" id=4]
-[ext_resource path="res://Scenes/Menus/PauseMenu/New Game.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/Menus/PauseMenu/Retry.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Menus/PauseMenu/GotoMenu.gd" type="Script" id=6]
 [ext_resource path="res://Scenes/Menus/PauseMenu/Leave.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/Menus/ScreenTitle/Scripts/Options.gd" type="Script" id=8]

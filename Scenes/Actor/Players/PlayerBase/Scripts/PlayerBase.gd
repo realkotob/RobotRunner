@@ -105,11 +105,6 @@ func stop_overheat():
 # Called when the robot is destroyed, triggers the death animation, the gameover,
 # and destroy this instance
 func destroy():
-	
-	#Reset Xion and Materials from MAIN XION and MAIN MATERIALS datas
-	SCORE.set_xion(GAME.progression.get_main_xion())
-	SCORE.set_materials(GAME.progression.get_main_materials())
-	
 	SFX.play_SFX(SFX.normal_explosion, global_position)
 	GAME.gameover()
 	queue_free()

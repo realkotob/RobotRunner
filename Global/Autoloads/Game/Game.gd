@@ -35,13 +35,12 @@ func new_chapter():
 
 
 func goto_level(index : int = 0):
-	
+
 	### IMPORTANT : TO BE MODIFIED AND CLEANED
-	
+
 	#Handling players' progression => Xion ; Materials
-	progression.set_main_xion(SCORE.get_xion())
-	progression.set_main_materials(SCORE.get_materials())
-	
+	update_collectable_progression()
+
 	if index == -1:
 		goto_last_level()
 	else:
@@ -51,11 +50,10 @@ func goto_level(index : int = 0):
 
 func goto_last_level():
 	### IMPORTANT : TO BE MODIFIED AND CLEANED
-	
+
 	#Handling players' progression => Xion ; Materials
-	progression.set_main_xion(SCORE.get_xion())
-	progression.set_main_materials(SCORE.get_materials())
-	
+	update_collectable_progression()
+
 	var last_level = load(last_level_path)
 	get_tree().current_scene.queue_free()
 	var _err = get_tree().change_scene_to(last_level)
@@ -66,7 +64,7 @@ func goto_last_level():
 # Which means the last level will be launched again
 func goto_next_level():
 	var last_level_index = find_string(current_chapter.levels_scenes_array, last_level_path)
-	#Handling players' progression => Levels 
+	#Handling players' progression => Levels
 	progression.add_to_level(1)
 
 	if debug:
@@ -123,6 +121,21 @@ func find_string(string_array: PoolStringArray, target_string : String):
 			index += 1
 	return -1
 
+	# XION AND MATERIALS METODS HANDLERS
+# Save the players' <level>progression into the main game progression
+func update_collectable_progression():
+	progression.set_main_xion(SCORE.get_xion())
+	progression.set_main_materials(SCORE.get_materials())
+
+# Update the HUD when a player retry or go to the next level
+func update_hud_collectable_progression():
+	SCORE.set_xion(progression.get_main_xion())
+	SCORE.set_materials(progression.get_main_materials())
+
+# Discard progression and get the lastest data
+func discard_collectable_progression():
+	pass
+
 
 # Check if the current level index is the right one when a new level is ready
 # Usefull when testing a level standalone to keep track of the pro
@@ -166,3 +179,9 @@ func on_level_ready(level):
 	last_level_path = level.filename
 	if progression.level == 0:
 		update_current_level_index(level)
+
+# When a player reach a checkpoint
+func on_checkpoint_reached():
+	GAME.progression.checkpoint += 1
+	GAME.progression.set_main_xion(SCORE.xion)
+	GAME.progression.set_main_materials(SCORE.materials)

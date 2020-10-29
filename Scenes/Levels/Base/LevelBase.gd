@@ -6,10 +6,12 @@ const CLASS : String = "Level"
 
 onready var xion_cloud_node = get_node_or_null("XionCloud")
 onready var hud_node = "GUI/HUD"
-
+onready var interactive_object_node = get_node("InteractivesObjects")
 var players_array : Array
 var player_in_danger : bool = false
 var players_exited : int = 0
+
+var InteractivesObjects_Array : Array
 
 signal level_finished
 signal level_ready
@@ -26,6 +28,12 @@ func _ready():
 	_err = connect("level_ready", GAME, "on_level_ready")
 	emit_signal("level_ready", self)
 
+	GAME.last_level_path = filename
+#	update_current_level_index()
+
+	if(GAME.progression.main_interactiveObjects.empty()):
+		pass
+
 	set_starting_points()
 	instanciate_players()
 	set_camera_position_on_start()
@@ -35,6 +43,10 @@ func _ready():
 	GAME.update_hud_collectable_progression()
 	MUSIC.play()
 
+	GAME.get_children_of_node(interactive_object_node, InteractivesObjects_Array)
+
+	for i in InteractivesObjects_Array:
+		print(i.get_name())
 
 func _process(_delta):
 	MUSIC.adapt_music(xion_cloud_node, players_array, player_in_danger)

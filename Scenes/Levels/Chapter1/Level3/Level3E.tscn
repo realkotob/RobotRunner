@@ -24,7 +24,6 @@
 [ext_resource path="res://Scenes/InteractiveObjects/Platform/BreakablePlatform/3 Tiles/3TilesBreakablePlateform.tscn" type="PackedScene" id=26]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/BD_Group.tscn" type="PackedScene" id=28]
 
-
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
 shader_param/fog_color = Color( 0.541176, 0.0784314, 0.392157, 1 )
@@ -722,9 +721,6 @@ __meta__ = {
 position = Vector2( 36, 288 )
 rotation = -1.5708
 
-[node name="AnimatedSprite" parent="InteractivesObjects/TeleportGroups/G8/TeleportArea" index="0"]
-frame = 0
-
 [node name="CollisionShape2D" parent="InteractivesObjects/TeleportGroups/G8/TeleportArea" index="1"]
 position = Vector2( 0.00012207, -36 )
 shape = SubResource( 16 )
@@ -741,9 +737,6 @@ __meta__ = {
 [node name="TeleportArea" parent="InteractivesObjects/TeleportGroups/G9" index="0" instance=ExtResource( 13 )]
 position = Vector2( -132, 288 )
 rotation = 4.71239
-
-[node name="AnimatedSprite" parent="InteractivesObjects/TeleportGroups/G9/TeleportArea" index="0"]
-frame = 0
 
 [node name="CollisionShape2D" parent="InteractivesObjects/TeleportGroups/G9/TeleportArea" index="1"]
 position = Vector2( 0, -20 )

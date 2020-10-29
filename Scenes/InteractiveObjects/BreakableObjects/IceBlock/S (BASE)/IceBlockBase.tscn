@@ -5,7 +5,7 @@
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/Sound/BreakIce.wav" type="AudioStream" id=7]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/S (BASE)/Smallice.png" type="Texture" id=8]
 
-[sub_resource type="ParticlesMaterial" id=2]
+[sub_resource type="ParticlesMaterial" id=1]
 emission_shape = 2
 emission_box_extents = Vector3( 10, 10, 1 )
 flag_disable_z = true
@@ -34,7 +34,7 @@ texture = ExtResource( 8 )
 stream = ExtResource( 7 )
 
 [node name="Particles2D" parent="." index="3"]
-process_material = SubResource( 2 )
+process_material = SubResource( 1 )
 
 [node name="CollisionShape2D" parent="AwakeArea" index="0"]
 position = Vector2( -0.113628, -14.6841 )

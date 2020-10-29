@@ -160,6 +160,16 @@ func fade_out():
 
 	MUSIC.fade_out()
 
+# Get every children of a node
+func get_children_of_node(parent_node, array_to_fill : Array):
+	for child in parent_node.get_children():
+		if child is PhysicsBody2D or child is Area2D:
+			#print("- "+child.get_name()) # DEBUG PURPOSE
+			array_to_fill.append(child)
+		elif child.get_child_count() != 0:
+				#print("["+child.get_name()+"]") # DEBUG PURPOSE
+				get_children_of_node(child, array_to_fill)
+
 #### SIGNAL RESPONSES ####
 
 func on_level_start():

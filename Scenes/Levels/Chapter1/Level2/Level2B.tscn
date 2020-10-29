@@ -27,7 +27,6 @@
 [ext_resource path="res://Scenes/Events/Checkpoint/Checkpoint.tscn" type="PackedScene" id=26]
 [ext_resource path="res://Scenes/Events/CameraEvents/CameraEvent.tscn" type="PackedScene" id=27]
 
-
 [node name="Level3B" instance=ExtResource( 3 )]
 
 [node name="StartingPointP1" parent="." index="0" instance=ExtResource( 2 )]

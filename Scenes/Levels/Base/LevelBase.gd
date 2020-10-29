@@ -5,10 +5,13 @@ class_name Level
 const CLASS : String = "Level"
 
 onready var xion_cloud_node = get_node_or_null("XionCloud")
-
+onready var hud_node = "GUI/HUD"
+onready var interactive_object_node = get_node("InteractivesObjects")
 var players_array : Array
 var player_in_danger : bool = false
 var players_exited : int = 0
+
+var InteractivesObjects_Array : Array
 
 signal level_finished
 signal level_ready
@@ -25,14 +28,25 @@ func _ready():
 	_err = connect("level_ready", GAME, "on_level_ready")
 	emit_signal("level_ready", self)
 
+	GAME.last_level_path = filename
+#	update_current_level_index()
+
+	if(GAME.progression.main_interactiveObjects.empty()):
+		pass
+
 	set_starting_points()
 	instanciate_players()
 	set_camera_position_on_start()
 	propagate_weakref_players_array()
-	
+
 	GAME.on_level_start()
+	GAME.update_hud_collectable_progression()
 	MUSIC.play()
 
+	GAME.get_children_of_node(interactive_object_node, InteractivesObjects_Array)
+
+	for i in InteractivesObjects_Array:
+		print(i.get_name())
 
 func _process(_delta):
 	MUSIC.adapt_music(xion_cloud_node, players_array, player_in_danger)
@@ -103,13 +117,13 @@ func set_camera_position_on_start():
 		var camera_node : Node = find_node("Camera")
 		var camera_position_on_start = camera_node.compute_average_pos(players_array)
 		camera_node.set_global_position(camera_position_on_start)
-	
+
 
 # Feed every needing node with weak references of the players so it can follow them
 func propagate_weakref_players_array():
 	var players_weakref_array = []
 	for player in players_array:
 		players_weakref_array.append(weakref(player))
-	
+
 	propagate_call("set_players_weakref_array", [players_weakref_array])
 	MUSIC.set_players_weakref_array(players_weakref_array)

@@ -4,12 +4,15 @@ export var active : bool = false
 
 onready var animated_sprite_node = $AnimatedSprite
 
-func _ready():
-	animated_sprite_node.connect("animation_finished", self, "on_animation_finished")
+signal checkpoint_reached
 
+func _ready():
+	var _err
+	_err = animated_sprite_node.connect("animation_finished", self, "on_animation_finished")
+	_err = connect("checkpoint_reached",GAME,"on_checkpoint_reached")
 
 func event():
-	GAME.progression.checkpoint += 1
+	emit_signal("checkpoint_reached")
 	trigger_animation()
 
 

@@ -9,6 +9,8 @@ chapter = -1
 level = 0
 checkpoint = 0
 dialogue = 0
+main_xion = 0
+main_materials = 0
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )

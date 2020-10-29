@@ -1,5 +1,4 @@
 extends Control
-
 class_name MenuBase
 
 onready var opt_container = get_node("HBoxContainer/V_OptContainer")
@@ -15,8 +14,6 @@ var default_button_state : Array = []
 # Check the options when the scenes is ready, to get sure at least one of them is clickable
 # Change the color of the option accordingly to their state
 func _ready():
-	var _err = RESOURCE_LOADER.connect("thread_finished", self, "on_thread_finished")
-	
 	if len(buttons_array) == 0:
 		return
 	
@@ -28,9 +25,6 @@ func _ready():
 		
 		if button.has_method("setup"):
 			button.setup()
-	
-	load_default_buttons_state()
-	set_buttons_disabled(true)
 
 
 # Main Navigation handling
@@ -103,6 +97,3 @@ func on_button_aimed(button : Button, signal_call: bool):
 	update_menu_option()
 	choice_sound_node.play()
 
-
-func on_thread_finished():
-	set_buttons_default_state()

@@ -94,8 +94,6 @@ func on_score_changed():
 
 
 func interpolate_score_display(score_type: String, score_final_value: int):
-	var tween_node = $Tween
-	
 	tween_node.interpolate_property(self, score_type,
 			get(score_type), score_final_value, 0.5,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)

@@ -2,17 +2,44 @@ extends Control
 
 onready var background_node = $Background
 onready var timer_node = $Timer
+onready var tween_node = $Tween
 
 export var hidden : bool = true setget set_hidden, get_hidden
 export var speed : int = 400
 
+var xion : int = 0 setget set_xion, get_xion
+var materials : int = 0 setget set_materials, get_materials
+
 onready var HUD_width = background_node.get_size().y + 8
+
+
+#### ACCESSORS ####
+
+func set_xion(value: int): 
+	if value != xion:
+		xion = value
+		on_xion_changed(xion)
+
+func get_xion() -> int : return xion
+
+func set_materials(value: int): 
+	if value != materials:
+		materials = value
+		on_materials_changed(materials)
+
+func get_materials() -> int : return materials
+
+
+#### BUILT-IN ###
 
 func _ready():
 	var _err = timer_node.connect("timeout", self, "on_timer_timeout")
 	_err = SCORE.connect("score_changed", self, "on_score_changed")
 	rect_position = Vector2(0, -HUD_width)
 	set_visible(true)
+
+
+#### LOGIC ####
 
 
 func set_hidden(value: bool):
@@ -58,7 +85,27 @@ func move_to(dest: Vector2, spd : float):
 func on_score_changed():
 	set_hidden(false)
 	timer_node.start(timer_node.get_wait_time())
+	
+	var total_xion = SCORE.get_xion()
+	var total_materials = SCORE.get_materials()
+	
+	interpolate_score_display("xion", total_xion)
+	interpolate_score_display("materials", total_materials)
 
+
+func interpolate_score_display(score_type: String, score_final_value: int):
+	tween_node.interpolate_property(self, score_type,
+			get(score_type), score_final_value, 0.5,
+			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween_node.start()
+
+
+
+func on_xion_changed(new_value: int):
+	$Background/Xion/Label.set_text(String(new_value))
+
+func on_materials_changed(new_value: int):
+	$Background/Materials/Label.set_text(String(new_value))
 
 # Whenever the timer finish, hide the HUD
 func on_timer_timeout():

@@ -27,26 +27,27 @@ func _ready():
 	var _err = connect("level_finished", GAME, "on_level_finished")
 	_err = connect("level_ready", GAME, "on_level_ready")
 	emit_signal("level_ready", self)
-
+	
 	GAME.last_level_path = filename
 #	update_current_level_index()
-
+	
 	if(GAME.progression.main_interactiveObjects.empty()):
 		pass
-
+	
 	set_starting_points()
 	instanciate_players()
 	set_camera_position_on_start()
 	propagate_weakref_players_array()
-
+	
 	GAME.on_level_start()
 	GAME.update_hud_collectable_progression()
 	MUSIC.play()
-
+	
 	GAME.get_children_of_node(interactive_object_node, InteractivesObjects_Array)
-
+	
 	for i in InteractivesObjects_Array:
 		print(i.get_name())
+
 
 func _process(_delta):
 	MUSIC.adapt_music(xion_cloud_node, players_array, player_in_danger)

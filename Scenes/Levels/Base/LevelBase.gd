@@ -7,6 +7,10 @@ const CLASS : String = "Level"
 onready var xion_cloud_node = get_node_or_null("XionCloud")
 onready var hud_node = "GUI/HUD"
 onready var interactive_object_node = get_node("InteractivesObjects")
+
+onready var music_bus_id = AudioServer.get_bus_index("Music")
+onready var master_bus_id = AudioServer.get_bus_index("Master")
+
 var players_array : Array
 var player_in_danger : bool = false
 var players_exited : int = 0
@@ -49,8 +53,9 @@ func _ready():
 		print(i.get_name())
 
 
-func _process(_delta):
-	MUSIC.adapt_music(xion_cloud_node, players_array, player_in_danger)
+func _physics_process(delta):
+	if !AudioServer.is_bus_mute(music_bus_id) && !AudioServer.is_bus_mute(master_bus_id):
+		MUSIC.adapt_music(xion_cloud_node, players_array, player_in_danger)
 
 
 # Called by GAME when a player exited the level

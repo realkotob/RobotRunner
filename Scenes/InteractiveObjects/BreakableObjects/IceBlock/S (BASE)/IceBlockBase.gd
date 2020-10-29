@@ -2,6 +2,13 @@ extends BlockBase
 
 class_name IceBlock
 
+func is_class(value: String):
+	return value == "IceBlock" or .is_class(value)
+
+func get_class() -> String:
+	return "IceBlock"
+
+
 ### ICEBLOCKS ###
 
 var floating_line_y : float = 0.0
@@ -10,13 +17,6 @@ var is_floating : bool = false setget set_is_floating
 
 var floating_force := Vector2(0, -150)
 onready var base_gravity_scale = get_gravity_scale()
-
-func is_class(value: String):
-	return value == "IceBlock"
-
-func get_class() -> String:
-	return "IceBlock"
-
 
 func _ready():
 	set_physics_process(false)

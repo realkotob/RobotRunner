@@ -1,4 +1,5 @@
 extends BreakableObjectBase
+class_name BreakablePlatfrom
 
 onready var area_node = $Area2D
 onready var animation_player_node = $AnimationPlayer
@@ -7,6 +8,17 @@ export var instant_break : bool = false
 export (int, 1, 10) var nb_shake = 3
 
 var track_actor : bool = false
+
+#### ACCESSORS ####
+
+func is_class(value: String):
+	return value == "BreakablePlatfrom" or .is_class(value)
+
+func get_class() -> String:
+	return "BreakablePlatfrom"
+
+
+#### BUILT-IN ####
 
 func _ready():
 	var _err = area_node.connect("body_entered", self, "on_body_entered")
@@ -18,9 +30,7 @@ func _physics_process(_delta):
 		actor_tracking()
 
 
-func on_body_entered(body : Node):
-	if body is ActorBase:
-		track_actor = true
+#### LOGIC ####
 
 
 func find_actor_in_array(array: Array) -> Array:
@@ -47,7 +57,14 @@ func actor_tracking():
 		track_actor = false
 
 
+#### SIGNAL RESPONSES ####
+
 func on_shake_finished():
 	nb_shake -= 1
 	if nb_shake <= 0:
 		destroy()
+
+
+func on_body_entered(body : Node):
+	if body is ActorBase:
+		track_actor = true

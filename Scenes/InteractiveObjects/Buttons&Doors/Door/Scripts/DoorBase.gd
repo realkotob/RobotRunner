@@ -1,10 +1,5 @@
 extends StaticBody2D
-
 class_name Door
-
-#### BASE CLASS FOR DOORS ####
-
-const cls_name = "Door"
 
 onready var animation_node = get_node_or_null("Animation")
 onready var collision_node = get_node_or_null("CollisionShape2D")
@@ -16,6 +11,17 @@ export var open_delay : float = 0.0
 
 var timer_door
 
+#### ACCESSORS ####
+
+func is_class(value: String):
+	return value == "Door" or .is_class(value)
+
+func get_class() -> String:
+	return "Door"
+
+
+#### BUILT-IN ####
+
 func _ready():
 	if need_delay:  		#If the door has a delay before opening we will create the timer
 							#to open it after an amount of time
@@ -24,14 +30,8 @@ func _ready():
 		timer_door.connect("timeout", self, "_on_doortimer_timeout")
 		timer_door.set_wait_time(open_delay)
 
-# Those 2 functions will be optional in godot 4.0 hopefully
-func get_class():
-	return cls_name
 
-
-func is_class(cls):
-	return cls == get_class()
-
+#### LOGIC ####
 
 func open_door():
 	if animation_node != null:
@@ -42,6 +42,9 @@ func open_door():
 	
 	if audio_node != null:
 		audio_node.play()
+
+
+#### SIGNAL RESPONSES ####
 
 func _on_doortimer_timeout():
 	open_door()

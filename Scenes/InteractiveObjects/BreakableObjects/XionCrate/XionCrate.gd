@@ -19,6 +19,18 @@ signal approch_collactable
 
 export var hitpoint : int = 3
 
+
+#### ACCESSORS ####
+
+func is_class(value: String):
+	return value == "XionCrate" or .is_class(value)
+
+func get_class() -> String:
+	return "XionCrate"
+
+
+#### BUILT-IN ####
+
 func _ready():
 	var _err = timer_node.connect("timeout", self, "on_timer_timeout")
 	_err = base_anim_node.connect("animation_finished", self, "on_sprite_animation_finished")
@@ -32,13 +44,12 @@ func _ready():
 			animated_sprite_node_array.append(child)
 
 
-func get_class():
-	return "XionCrate"
-
-
 func _physics_process(_delta):
 	if tracked_player != null:
 		raycast_node.search_for_target(tracked_player)
+
+
+#### LOGIC ####
 
 
 # Called by a character when its hitbox touches it
@@ -51,23 +62,6 @@ func damage(actor_damaging: Node = null):
 	
 	if hitpoint == 0:
 		destroy(actor_damaging)
-
-
-# Function called to destroy an object
-func on_destruction(actor: Node = null):
-	timer_node.stop()
-	
-	# Hide every non-destruction related sprite
-	hide_crate()
-	
-	# Play the Xion explosion animation
-	SFX.play_SFX(SFX.xion_explosion, global_position)
-	
-	# Play the crate explosion and triggers the fade out
-	base_anim_node.disconnect("animation_finished", self, "on_sprite_animation_finished")
-	animation_player_node.play("FadeOut")
-	
-	actor_destroying = actor
 
 
 
@@ -87,16 +81,18 @@ func start_sprite_anim():
 func start_vibrate_anim():
 	animation_player_node.play("Vibrate", -1, rand_range(0.8, 1.2))
 
+# Genereate xion collactables
+func generate_xion_collectable():
+	if actor_destroying != null:
+		for _i in range(5):
+			var xion_collactable_node = COLLACTABLES.xion.instance()
+			xion_collactable_node.position = global_position
+			xion_collactable_node.aimed_character_weakref = weakref(actor_destroying)
+			owner.add_child(xion_collactable_node)
 
-# Tiggers one of the two animations randomly and reset the timer to a random time
-func on_timer_timeout():
-	if randi() % 2 == 0:
-		start_sprite_anim()
-	else:
-		start_vibrate_anim()
-	
-	timer_node.set_wait_time(rand_range(1.5, 3.0))
 
+
+#### SIGNAL RESPONSES ####
 
 # Called when the sprite animation is over
 # Reset every animated_sprite to its first frame 
@@ -128,11 +124,28 @@ func on_fadeout_finished():
 	queue_free()
 
 
-# Genereate xion collactables
-func generate_xion_collectable():
-	if actor_destroying != null:
-		for _i in range(5):
-			var xion_collactable_node = COLLACTABLES.xion.instance()
-			xion_collactable_node.position = global_position
-			xion_collactable_node.aimed_character_weakref = weakref(actor_destroying)
-			owner.add_child(xion_collactable_node)
+# Tiggers one of the two animations randomly and reset the timer to a random time
+func on_timer_timeout():
+	if randi() % 2 == 0:
+		start_sprite_anim()
+	else:
+		start_vibrate_anim()
+	
+	timer_node.set_wait_time(rand_range(1.5, 3.0))
+
+
+# Function called to destroy an object
+func on_destruction(actor: Node = null):
+	timer_node.stop()
+	
+	# Hide every non-destruction related sprite
+	hide_crate()
+	
+	# Play the Xion explosion animation
+	SFX.play_SFX(SFX.xion_explosion, global_position)
+	
+	# Play the crate explosion and triggers the fade out
+	base_anim_node.disconnect("animation_finished", self, "on_sprite_animation_finished")
+	animation_player_node.play("FadeOut")
+	
+	actor_destroying = actor

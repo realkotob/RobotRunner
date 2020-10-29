@@ -1,5 +1,4 @@
 extends Area2D
-
 class_name CollactableBase
 
 var aimed_character_weakref : WeakRef = null
@@ -9,6 +8,17 @@ export var initial_impulse : bool = true
 
 var initial_velocity := Vector2.ZERO
 var velocity := Vector2.ZERO
+
+#### ACCESSORS ####
+
+func is_class(value: String):
+	return value == "CollactableBase" or .is_class(value)
+
+func get_class() -> String:
+	return "CollactableBase"
+
+
+#### BUILT-IN ####
 
 func _ready():
 	$TravellingSound.play()
@@ -37,10 +47,7 @@ func _physics_process(delta):
 		queue_free()
 
 
-func on_body_entered(body : PhysicsBody2D):
-	if body is Player:
-		collect()
-
+#### LOGIC ####
 
 func collect():
 	call_deferred("set_monitoring", false)
@@ -48,5 +55,11 @@ func collect():
 	$TravellingSound.stop()
 
 
+#### SIGNAL RESPONSES ####
+
 func on_collect_audio_finished():
 	queue_free()
+
+func on_body_entered(body : PhysicsBody2D):
+	if body is Player:
+		collect()

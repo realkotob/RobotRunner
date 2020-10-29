@@ -1,11 +1,22 @@
 extends Area2D
+class_name TeleportArea
 
 onready var destination_teleport_node : Node
-
 onready var teleport_master_node = get_parent()
 
 var teleporters_array : Array
 var player_on_top : bool
+
+#### ACCESSORS ####
+
+func is_class(value: String):
+	return value == "GrowingLava" or .is_class(value)
+
+func get_class() -> String:
+	return "GrowingLava"
+
+
+#### BUILT-IN ####
 
 func _ready():
 	var _err
@@ -23,30 +34,6 @@ func _ready():
 		suiv = 0
 	
 	destination_teleport_node = teleporters_array[suiv]
-
-
-# Whenever a character enters the area of this teleport, this method gives him the referecence to this node
-func on_body_entered(body):
-	if body.is_class("Player") and body.teleport_node != self:
-		body.teleport_node = self
-		player_on_top = true
-
-
-# Whenever a character exits the area of this teleport, set his teleport_node reference to null
-func on_body_exited(body):
-	if body.is_class("Player"):
-		var is_colliding = false
-		
-		# When the character get out of the area, check if it's because he left, or because he did teleport
-		for teleporter in teleporters_array:
-			if teleporter.overlaps_body(body) == true and teleporter != self:
-				is_colliding = true
-				player_on_top = false
-		
-		# If he left, set his teleport_node value to null
-		if is_colliding == false:
-			body.teleport_node = null
-			player_on_top = false
 
 
 # Teleport the player the the right destination teleporter
@@ -86,3 +73,30 @@ func teleport_layer(character : Node):
 	for i in range(other_players_array.size()):
 		if other_players_pos_array.size() == 0 : break
 		other_players_array[i].set_global_position(other_players_pos_array[i])
+
+
+#### SIGNAL RESPONSES ####
+
+
+# Whenever a character enters the area of this teleport, this method gives him the referecence to this node
+func on_body_entered(body):
+	if body.is_class("Player") and body.teleport_node != self:
+		body.teleport_node = self
+		player_on_top = true
+
+
+# Whenever a character exits the area of this teleport, set his teleport_node reference to null
+func on_body_exited(body):
+	if body.is_class("Player"):
+		var is_colliding = false
+		
+		# When the character get out of the area, check if it's because he left, or because he did teleport
+		for teleporter in teleporters_array:
+			if teleporter.overlaps_body(body) == true and teleporter != self:
+				is_colliding = true
+				player_on_top = false
+		
+		# If he left, set his teleport_node value to null
+		if is_colliding == false:
+			body.teleport_node = null
+			player_on_top = false

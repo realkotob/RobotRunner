@@ -52,6 +52,7 @@ margin_bottom = 540.0
 mouse_filter = 2
 color = Color( 0.137255, 0.0980392, 0.152941, 1 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 

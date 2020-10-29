@@ -1,7 +1,5 @@
 extends StaticBody2D
-
 class_name DoorButton
-const cls_name = "DoorButton"
 
 signal button_trigger
 
@@ -14,16 +12,24 @@ var collision_shape_initial_pos : Vector2
 
 export var is_push : bool = false
 
+#### ACCESSORS ####
+
+func is_class(value: String):
+	return value == "DoorButton" or .is_class(value)
+
+func get_class() -> String:
+	return "DoorButton"
+
+
+#### BUILT-IN ####
+
+
 func _ready():
 	collision_shape_initial_pos = collision_shape_node.position
 
-# Those 2 functions will be optional in godot 4.0 hopefuly
-func get_class():
-	return cls_name
 
-func is_class(cls):
-	return cls == get_class()
-	
+#### LOGIC ####
+
 
 func setup():
 	# Connect signals
@@ -31,6 +37,10 @@ func setup():
 	_err = area2D_node.connect("body_entered", self, "on_body_entered")
 	_err = animation_node.connect("frame_changed", self, "on_frame_change")
 	_err = animation_node.connect("animation_finished", self, "on_animation_finished")
+
+
+#### SIGNAL RESPONSES ####
+
 
 # Play the animation when a player touch the button
 func on_body_entered(body):

@@ -14,8 +14,25 @@ export (float, 0.0, 1.0) var explosion_impulse_modifier = 0.7
 
 export var maxvelocity_y : int
 
+
+#### ACCESSORS ####
+
+func is_class(value: String):
+	return value == "BreakableObjectBase" or .is_class(value)
+
+func get_class() -> String:
+	return "BreakableObjectBase"
+
+
+#### BUILT-IN ####
+
+
 func _ready():
 	var _err = connect("sleeping_state_changed", self, "on_sleeping_state_changed")
+
+
+#### LOGIC ####
+
 
 # Called by a character when its hitbox touches it
 # By default: call the destroy method
@@ -49,14 +66,6 @@ func destroy(actor_destroying : Node = null):
 	on_destruction(actor_destroying)
 
 
-
-# Abstract method: called by destroy
-# you can overwrite it to add stuff happening on the destruction of the object
-# or if you need to redertemine where the queue_free happens
-func on_destruction(_actor_destroying: Node = null):
-	queue_free()
-
-
 # Awake bodies in the area, so they can fall, if needed
 func awake_nearby_bodies():
 	var bodies_nearby = awake_area_node.get_overlapping_bodies()
@@ -76,7 +85,16 @@ func awake():
 	set_sleeping(false)
 
 
+#### SIGNAL RESPONSES ####
+
 # Set the mode back to static mode when the body is sleeping
 func on_sleeping_state_changed():
 	if get_mode() == RigidBody2D.MODE_RIGID && is_sleeping():
 		call_deferred("set_mode", RigidBody2D.MODE_STATIC)
+
+
+# Virtual method: called by destroy
+# you can overwrite it to add stuff happening on the destruction of the object
+# or if you need to redertemine where the queue_free happens
+func on_destruction(_actor_destroying: Node = null):
+	queue_free()

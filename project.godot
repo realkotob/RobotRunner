@@ -54,6 +54,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://AbstractClasses/BreakableObjectBase.gd"
 }, {
+"base": "BreakableObjectBase",
+"class": "BreakablePlatfrom",
+"language": "GDScript",
+"path": "res://Scenes/InteractiveObjects/Platform/BreakablePlatform/5 Tiles (Base)/BreakablePlateform.gd"
+}, {
 "base": "Sprite",
 "class": "BreakableSpriteBase",
 "language": "GDScript",
@@ -114,12 +119,17 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/GameConsole/GameConsole.gd"
 }, {
+"base": "Door",
+"class": "GreatDoor",
+"language": "GDScript",
+"path": "res://Scenes/InteractiveObjects/GreatDoor/GreatDoor.gd"
+}, {
 "base": "Node2D",
 "class": "GroupBase",
 "language": "GDScript",
 "path": "res://Scenes/InteractiveObjects/Buttons&Doors/GroupBase.gd"
 }, {
-"base": "LavaZone",
+"base": "Lava",
 "class": "GrowingLava",
 "language": "GDScript",
 "path": "res://Scenes/InteractiveObjects/Liquids/Lava/GrowingLava.gd"
@@ -155,7 +165,7 @@ _global_script_classes=[ {
 "path": "res://Scenes/Actor/Robot/Babybot/Jump.gd"
 }, {
 "base": "Area2D",
-"class": "LavaZone",
+"class": "Lava",
 "language": "GDScript",
 "path": "res://Scenes/InteractiveObjects/Liquids/Lava/Lava.gd"
 }, {
@@ -245,6 +255,11 @@ _global_script_classes=[ {
 "path": "res://AbstractClasses/SubMenuBase.gd"
 }, {
 "base": "Area2D",
+"class": "TeleportArea",
+"language": "GDScript",
+"path": "res://Scenes/InteractiveObjects/Teleports/Scripts/TeleportArea.gd"
+}, {
+"base": "Area2D",
 "class": "TriggerArea",
 "language": "GDScript",
 "path": "res://Scenes/Events/BaseScene/TriggerAreaBase.gd"
@@ -253,6 +268,11 @@ _global_script_classes=[ {
 "class": "Water",
 "language": "GDScript",
 "path": "res://Scenes/InteractiveObjects/Liquids/Water/Scripts/WaterTile.gd"
+}, {
+"base": "Area2D",
+"class": "XionCloud",
+"language": "GDScript",
+"path": "res://Scenes/XionCloud/XionCloud.gd"
 }, {
 "base": "BreakableObjectBase",
 "class": "XionCrate",
@@ -269,6 +289,7 @@ _global_script_class_icons={
 "BabyBot": "",
 "BlockBase": "",
 "BreakableObjectBase": "",
+"BreakablePlatfrom": "",
 "BreakableSpriteBase": "",
 "CameraEventBase": "",
 "ChapterBase": "",
@@ -281,6 +302,7 @@ _global_script_class_icons={
 "EarthBlock": "",
 "Event": "",
 "GameConsoleScript": "",
+"GreatDoor": "",
 "GroupBase": "",
 "GrowingLava": "",
 "HUD_label": "",
@@ -289,7 +311,7 @@ _global_script_class_icons={
 "InputsBase": "",
 "InteractAreaBase": "",
 "JumpBase": "",
-"LavaZone": "",
+"Lava": "",
 "Level": "",
 "LevelEvent": "",
 "MaterialCollactable": "",
@@ -307,8 +329,10 @@ _global_script_class_icons={
 "StateBase": "",
 "StatesMachine": "",
 "SubMenuBase": "",
+"TeleportArea": "",
 "TriggerArea": "",
 "Water": "",
+"XionCloud": "",
 "XionCrate": ""
 }
 

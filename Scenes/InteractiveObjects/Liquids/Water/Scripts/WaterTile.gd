@@ -1,13 +1,10 @@
 extends InteractAreaBase
-
 class_name Water
-const CLASS_NAME = "Water"
 
 #### WATER ####
 
 ## USE: CHANGE THE SIZE OF THE POOL BY CHANGING THE SCALE OF THIS NODE ##
-## PLEASE DO NOT USE CHANGE CHILDREN TO CHANGE THE SIZE ##
-
+## PLEASE DO NOT CHANGE CHILDREN SIZE OR SCALE TO CHANGE THE SIZE ##
 
 onready var iceblock_scene = load("res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/M/MIceBlock.tscn")
 onready var floating_line_node = get_node("FloatingLine")
@@ -16,33 +13,16 @@ onready var particules_node = get_node("Particles2D")
 
 var M_IceBlocks_node : Node2D
 
-# Return true is the given string is the name of the class 
-# (Necesary in 3.2 because Godot check the very parent class instead of the current class)
-func is_class(value : String):
-	return value == CLASS_NAME
+#### ACCESSORS ####
+
+func is_class(value: String):
+	return value == "Water" or .is_class(value)
+
+func get_class() -> String:
+	return "Water"
 
 
-# Return a string of the name of the class 
-# (Necesary in 3.2 because Godot check the very parent class instead of the current class)
-func get_class():
-	return CLASS_NAME
-
-
-# Make every ice block floating while they are in the water area
-func on_body_entered(body):
-	if body.is_class("IceBlock"):
-		body_floating(body, true)
-		
-	if body is RigidBody2D or body is KinematicBody2D:
-		particules_node.global_position.x = body.global_position.x
-		particules_node.set_emitting(true)
-
-
-# Whenever a body exits the area of this interact object, set his interact reference to null
-func on_body_exited(body):
-	if body.is_class("IceBlock"):
-		body_floating(body, false)
-
+#### LOGIC ####
 
 # Create an ice block on interaction, the position of the hit box has to be inside the water area to truly happen
 func interact(global_pos : Vector2):
@@ -69,3 +49,21 @@ func body_floating(body : PhysicsBody2D, float_or_not : bool):
 	
 	if float_or_not == true:
 		body.floating_line_y = floating_line_node.global_position.y
+
+
+#### SIGNAL RESPONSES ####
+
+# Make every ice block floating while they are in the water area
+func on_body_entered(body):
+	if body.is_class("IceBlock"):
+		body_floating(body, true)
+		
+	if body is RigidBody2D or body is KinematicBody2D:
+		particules_node.global_position.x = body.global_position.x
+		particules_node.set_emitting(true)
+
+
+# Whenever a body exits the area of this interact object, set his interact reference to null
+func on_body_exited(body):
+	if body.is_class("IceBlock"):
+		body_floating(body, false)

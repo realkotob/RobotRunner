@@ -35,9 +35,6 @@ func _ready():
 	GAME.last_level_path = filename
 #	update_current_level_index()
 	
-	if(GAME.progression.main_interactiveObjects.empty()):
-		pass
-	
 	set_starting_points()
 	instanciate_players()
 	set_camera_position_on_start()
@@ -53,7 +50,7 @@ func _ready():
 		print(i.get_name())
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if !AudioServer.is_bus_mute(music_bus_id) && !AudioServer.is_bus_mute(master_bus_id):
 		MUSIC.adapt_music(xion_cloud_node, players_array, player_in_danger)
 

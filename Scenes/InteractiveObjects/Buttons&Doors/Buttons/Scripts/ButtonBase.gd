@@ -7,7 +7,6 @@ onready var animation_node = get_node("Animation")
 onready var area2D_node = get_node("Area2D")
 onready var collision_shape_node = get_node("CollisionShape2D")
 
-var door_node_array : Array
 var collision_shape_initial_pos : Vector2
 
 export var is_push : bool = false
@@ -52,6 +51,7 @@ func on_body_entered(body):
 func on_animation_finished():
 	emit_signal("button_trigger")
 	collision_shape_node.set_disabled(true)
+	is_push = true
 
 
 # Move the shape at the same time as the sprite

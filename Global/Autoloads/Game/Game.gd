@@ -25,8 +25,6 @@ func _ready():
 	var _err = gameover_timer_node.connect("timeout",self, "on_gameover_timer_timeout")
 	_err = transition_timer_node.connect("timeout",self, "on_transition_timer_timeout")
 
-
-
 #### LOGIC ####
 
 func new_chapter():
@@ -51,12 +49,17 @@ func goto_level(index : int = 0):
 func goto_last_level():
 	### IMPORTANT : TO BE MODIFIED AND CLEANED
 
+	var level_to_load = load_level('res://Scenes/Levels/SavedLevel/saved_level.tscn')
+
 	#Handling players' progression => Xion ; Materials
 	update_collectable_progression()
-
-	var last_level = load(last_level_path)
 	get_tree().current_scene.queue_free()
-	var _err = get_tree().change_scene_to(last_level)
+	
+	if(level_to_load == null):
+		var last_level = load(last_level_path)
+		var _err = get_tree().change_scene_to(last_level)
+	else:
+		var _err = get_tree().change_scene_to(level_to_load)
 
 
 # Change scene to the next level scene
@@ -76,6 +79,15 @@ func goto_next_level():
 	else:
 		goto_level(progression.get_level())
 
+func save_level(level : Node2D):
+	var saved_level = PackedScene.new()
+	saved_level.pack(get_tree().get_current_scene())
+	ResourceSaver.save("res://Scenes/Levels/SavedLevel/saved_level.tscn", saved_level)
+	progression.saved_level = saved_level
+	
+func load_level(level_path : String) -> PackedScene:
+	var level_to_load = load(level_path)
+	return level_to_load
 
 # Triggers the timer before the gameover is triggered
 # Called when a player die
@@ -195,3 +207,4 @@ func on_checkpoint_reached():
 	GAME.progression.checkpoint += 1
 	GAME.progression.set_main_xion(SCORE.xion)
 	GAME.progression.set_main_materials(SCORE.materials)
+	save_level(get_tree().get_current_scene())

@@ -43,6 +43,7 @@ func open_door():
 	if audio_node != null:
 		audio_node.play()
 
+	is_open = true
 
 #### SIGNAL RESPONSES ####
 

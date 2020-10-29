@@ -74,6 +74,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://AbstractClasses/BreakableSpriteBase.gd"
 }, {
+"base": "Node2D",
+"class": "BtnDoorsGroup",
+"language": "GDScript",
+"path": "res://Scenes/InteractiveObjects/Buttons&Doors/GroupBase.gd"
+}, {
 "base": "Event",
 "class": "CameraEventBase",
 "language": "GDScript",
@@ -88,6 +93,11 @@ _global_script_classes=[ {
 "class": "ChapterBase",
 "language": "GDScript",
 "path": "res://AbstractClasses/ChapterBase.gd"
+}, {
+"base": "Event",
+"class": "Checkpoint",
+"language": "GDScript",
+"path": "res://Scenes/Events/Checkpoint/Checkpoint.gd"
 }, {
 "base": "Node",
 "class": "ChunckAutomata",
@@ -193,11 +203,6 @@ _global_script_classes=[ {
 "class": "GreatDoor",
 "language": "GDScript",
 "path": "res://Scenes/InteractiveObjects/GreatDoor/GreatDoor.gd"
-}, {
-"base": "Node2D",
-"class": "GroupBase",
-"language": "GDScript",
-"path": "res://Scenes/InteractiveObjects/Buttons&Doors/GroupBase.gd"
 }, {
 "base": "Lava",
 "class": "GrowingLava",
@@ -393,6 +398,7 @@ _global_script_class_icons={
 "BreakableObjectBase": "",
 "BreakablePlatfrom": "",
 "BreakableSpriteBase": "",
+"BtnDoorsGroup": "",
 "CameraEventBase": "",
 "CameraState": "",
 "ChapterBase": "",
@@ -404,6 +410,7 @@ _global_script_class_icons={
 "ChunckPath": "",
 "ChunckPlatform": "",
 "ChunckRoom": "",
+"Checkpoint": "",
 "ClassFinder": "",
 "CollactableBase": "",
 "Commands": "",
@@ -417,7 +424,6 @@ _global_script_class_icons={
 "GameCamera": "",
 "GameConsoleScript": "",
 "GreatDoor": "",
-"GroupBase": "",
 "GrowingLava": "",
 "HUD_label": "",
 "IceBlock": "",

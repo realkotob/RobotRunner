@@ -47,7 +47,7 @@ func set_hidden(value: bool):
 	set_physics_process(true)
 	
 	# Restart the timer each time, the HUD is notified tho show itself
-	if value == false:
+	if value == false and timer_node != null:
 		timer_node.start(timer_node.get_wait_time())
 
 

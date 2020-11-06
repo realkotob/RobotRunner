@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scenes/StartingPoints/StartingPointP2.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/ChildrenScenes/RedButton.tscn" type="PackedScene" id=2]
@@ -11,87 +11,8 @@
 [ext_resource path="res://Scenes/Events/Checkpoint/Checkpoint.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/InteractiveObjects/GreatDoor/GreatDoor.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/InteractiveObjects/Teleports/Types/BlueTeleporter.tscn" type="PackedScene" id=11]
-
-[sub_resource type="Animation" id=1]
-resource_name = "LightUp"
-tracks/0/type = "value"
-tracks/0/path = NodePath("AnimatedSprite/Light2D:enabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("AnimatedSprite/Light2D:energy")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0.4, 0.7 ),
-"transitions": PoolRealArray( 1, 2.14355 ),
-"update": 0,
-"values": [ 0.0, 1.0 ]
-}
-
-[sub_resource type="Animation" id=2]
-resource_name = "LightUp"
-tracks/0/type = "value"
-tracks/0/path = NodePath("AnimatedSprite/Light2D:enabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("AnimatedSprite/Light2D:energy")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0.4, 0.7 ),
-"transitions": PoolRealArray( 1, 2.14355 ),
-"update": 0,
-"values": [ 0.0, 1.0 ]
-}
-
-[sub_resource type="Animation" id=3]
-resource_name = "LightUp"
-tracks/0/type = "value"
-tracks/0/path = NodePath("AnimatedSprite/Light2D:enabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("AnimatedSprite/Light2D:energy")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0.4, 0.7 ),
-"transitions": PoolRealArray( 1, 2.14355 ),
-"update": 0,
-"values": [ 0.0, 1.0 ]
-}
+[ext_resource path="res://Scenes/Events/Checkpoint/NewStartingPoint2.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Events/Checkpoint/NewStartingPoint1.tscn" type="PackedScene" id=13]
 
 [node name="LevelDebug" instance=ExtResource( 4 )]
 
@@ -134,12 +55,9 @@ position = Vector2( 396, 384 )
 [node name="M_IceBlock10" parent="InteractivesObjects/IceBlocks/M" index="9" instance=ExtResource( 5 )]
 position = Vector2( 672, 488 )
 
-[node name="Lava" parent="InteractivesObjects/LavaTiles" index="0" instance=ExtResource( 6 )]
-position = Vector2( 712, 136 )
-scale = Vector2( 1.84915, 0.194533 )
-
-[node name="LavaLight" parent="InteractivesObjects/LavaTiles/Lava/LavaShader" index="0"]
-energy = 1.0
+[node name="GrosLacDeLaveImmense" parent="InteractivesObjects/LavaTiles" index="0" instance=ExtResource( 6 )]
+position = Vector2( 724.545, 46.9302 )
+scale = Vector2( 0.530325, 0.566897 )
 
 [node name="BlueTeleporter" parent="InteractivesObjects/TeleportGroups" index="0" instance=ExtResource( 11 )]
 position = Vector2( 512, 492 )
@@ -216,54 +134,29 @@ position = Vector2( 1336, 920 )
 [node name="Checkpoint" parent="Events/Checkpoints" index="0" instance=ExtResource( 9 )]
 position = Vector2( 128, 232 )
 
-[node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint" index="1"]
-position = Vector2( 24, -15.6167 )
+[node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint" index="3" instance=ExtResource( 13 )]
+position = Vector2( -1.7962, -150.283 )
 
-[node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint" index="2"]
-position = Vector2( -24.1608, -15.6167 )
+[node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint" index="4" instance=ExtResource( 12 )]
+position = Vector2( 135.225, -150.904 )
 
 [node name="Checkpoint2" parent="Events/Checkpoints" index="1" instance=ExtResource( 9 )]
 position = Vector2( 608, 232 )
 
-[node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint2" index="1"]
-position = Vector2( 24, -15.6167 )
+[node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint2" index="3" instance=ExtResource( 13 )]
+position = Vector2( -49.093, -75.6298 )
 
-[node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint2" index="2"]
-position = Vector2( -24.1608, -15.6167 )
-
-[node name="AnimationPlayer" parent="Events/Checkpoints/Checkpoint2" index="4"]
-anims/LightUp = SubResource( 1 )
+[node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint2" index="4" instance=ExtResource( 12 )]
+position = Vector2( 51.0833, -74.9664 )
 
 [node name="Checkpoint3" parent="Events/Checkpoints" index="2" instance=ExtResource( 9 )]
 position = Vector2( 833, 232 )
 
-[node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint3" index="1"]
-position = Vector2( 24, -15.6167 )
+[node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint3" index="3" instance=ExtResource( 13 )]
+position = Vector2( -48.4296, -82.9274 )
 
-[node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint3" index="2"]
-position = Vector2( -24.1608, -15.6167 )
-
-[node name="AnimationPlayer" parent="Events/Checkpoints/Checkpoint3" index="4"]
-anims/LightUp = SubResource( 2 )
+[node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint3" index="4" instance=ExtResource( 12 )]
+position = Vector2( 53.0735, -78.9469 )
 
 [node name="Checkpoint4" parent="Events/Checkpoints" index="3" instance=ExtResource( 9 )]
 position = Vector2( 1058, 232 )
-
-[node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint4" index="1"]
-position = Vector2( 24, -15.6167 )
-
-[node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint4" index="2"]
-position = Vector2( -24.1608, -15.6167 )
-
-[node name="AnimationPlayer" parent="Events/Checkpoints/Checkpoint4" index="4"]
-anims/LightUp = SubResource( 3 )
-
-[editable path="InteractivesObjects/LavaTiles/Lava"]
-
-[editable path="Events/Checkpoints/Checkpoint"]
-
-[editable path="Events/Checkpoints/Checkpoint2"]
-
-[editable path="Events/Checkpoints/Checkpoint3"]
-
-[editable path="Events/Checkpoints/Checkpoint4"]

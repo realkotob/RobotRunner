@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Scenes/InteractiveObjects/Liquids/Lava/Lava.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/XionCloud/XionCloud.tscn" type="PackedScene" id=2]
@@ -18,12 +18,14 @@
 [ext_resource path="res://Scenes/Events/Checkpoint/Checkpoint.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/Events/DialogueEvent/LeakEvent.gd" type="Script" id=17]
 [ext_resource path="res://Scenes/Actor/Robot/Babybot/Tank/BabyTank.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Scenes/Events/Checkpoint/NewStartingPoint2.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Scenes/Events/BaseScene/TriggerAreaBase.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Scenes/Events/DialogueEvent/DialogueEvent.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Scenes/Events/LevelEvent/LevelEvent.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Scenes/Actor/Robot/Babybot/Hammer/BabyHammer.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Scenes/Actor/Path.gd" type="Script" id=24]
 [ext_resource path="res://Scenes/Actor/Robot/PathPoint.tscn" type="PackedScene" id=25]
+[ext_resource path="res://Scenes/Events/Checkpoint/NewStartingPoint1.tscn" type="PackedScene" id=26]
 
 [node name="Level1A" instance=ExtResource( 5 )]
 
@@ -395,8 +397,11 @@ method_name = "overheat"
 [node name="Checkpoint" parent="Events/Checkpoints" index="0" instance=ExtResource( 16 )]
 position = Vector2( 1416, 280 )
 
-[node name="TriggerArea" parent="Events/Checkpoints/Checkpoint" index="0"]
-scale = Vector2( 2.6, 5.752 )
+[node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint" index="3" instance=ExtResource( 26 )]
+position = Vector2( -64, -16 )
+
+[node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint" index="4" instance=ExtResource( 19 )]
+position = Vector2( 64, -16 )
 
 [node name="LevelEvent" parent="Events/LevelEvent" index="0" instance=ExtResource( 22 )]
 position = Vector2( -2148, 336 )
@@ -458,5 +463,3 @@ limit_top = 0
 limit_right = 3700
 limit_bottom = 540
 editor_draw_limits = true
-
-[editable path="Events/Checkpoints/Checkpoint"]

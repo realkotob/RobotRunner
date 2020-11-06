@@ -7,7 +7,7 @@ export (int, 0, 999) var dialogue = 0
 export (int, 0, 999999999) var main_xion = 0 setget set_main_xion, get_main_xion
 export (int, 0, 9999) var main_materials = 0 setget set_main_materials, get_main_materials
 
-var main_interactiveObjects : Array
+var saved_level : PackedScene
 
 #### ACCESSORS ####
 

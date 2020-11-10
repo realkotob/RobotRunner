@@ -18,7 +18,7 @@ var player1 = preload("res://Scenes/Actor/Players/RobotIce/RobotIce.tscn")
 var player2 = preload("res://Scenes/Actor/Players/RobotHammer/RobotHammer.tscn")
 
 var level_array : Array
-var last_level_path : String
+var last_level_name : String
 
 #### BUILT-IN ####
 
@@ -34,7 +34,9 @@ func new_chapter():
 	current_chapter = chapters_array[progression.get_chapter()]
 
 
-func goto_last_level(previous_level: Level, from_start: bool = false):
+# Reload the last level played
+# If from_start is true, reload the native level scene, else load the saved level scene
+func goto_last_level(from_start: bool = false):
 	var level_to_load_path : String = ""
 	var level_scene : PackedScene
 
@@ -52,33 +54,26 @@ func goto_last_level(previous_level: Level, from_start: bool = false):
 		level_scene = current_chapter.load_level(0)
 
 	update_collectable_progression()
-	
+
 	var _err = get_tree().change_scene_to(level_scene)
 
 
 # Change scene to the next level scene
 # If the last level was not in the list, set the progression to -1
 # Which means the last level will be launched again
-func goto_next_level(last_level : Level = null):
-	var level_scene : PackedScene = null
+func goto_next_level():
+	var next_level : PackedScene = null
 
-	#### THE CASE WHERE THE LEVEL IS THE LAST OF THE CHAPTER ISN'T TAKEN CARE OF ####
-	progression.add_to_level(1)
 	progression.set_checkpoint(0)
 	update_collectable_progression()
 
-	if debug:
-		print("progression.level: " + String(progression.get_level()))
-
-	if last_level == null:
-		level_scene = current_chapter.load_level(0)
+	if last_level_name == "":
+		next_level = current_chapter.load_level(0)
 	else:
-		level_scene = current_chapter.load_level(progression.get_level())
+		next_level = current_chapter.load_next_level(last_level_name)
 
-	var _err = get_tree().change_scene_to(level_scene)
+	var _err = get_tree().change_scene_to(next_level)
 
-
-<<<<<<< HEAD
 func save_level(_level : Node2D):
 	var saved_level = PackedScene.new()
 	saved_level.pack(get_tree().get_current_scene())
@@ -90,8 +85,6 @@ func load_level(level_path : String) -> PackedScene:
 	var level_to_load = load(level_path)
 	return level_to_load
 
-=======
->>>>>>> f41f351 (refacto goto_last_level and goto_next_level)
 
 # Triggers the timer before the gameover is triggered
 # Called when a player die
@@ -132,11 +125,8 @@ func find_string(string_array: PoolStringArray, target_string : String):
 			index += 1
 	return -1
 
-<<<<<<< HEAD
 # XION AND MATERIALS METHODS HANDLERS
 # Save the players' <level>progression into the main game progression
-=======
-
 # Find the saved level with the corresponding name, and returns its path
 # Returns "" if nothing was found
 func find_saved_level_path(dir_path: String, level_name: String) -> String:
@@ -150,8 +140,9 @@ func find_saved_level_path(dir_path: String, level_name: String) -> String:
 				continue
 			else:
 				if level_name.is_subsequence_of(current_file_name):
-					print(current_file_name)
-					return current_file_name
+					return dir_path + current_file_name
+				else:
+					current_file_name = dir.get_next()
 	return ""
 
 
@@ -174,10 +165,10 @@ func discard_collectable_progression():
 
 
 # Check if the current level index is the right one when a new level is ready
-# Usefull when testing a level standalone to keep track of the pro
-func update_current_level_index(level):
-	var level_filename = level.filename
-	var level_index = find_string(current_chapter.levels_scenes_array, level_filename)
+# Usefull when testing a level standalone to keep track of the progression
+func update_current_level_index(level : Level):
+	var level_name = level.get_name()
+	var level_index = current_chapter.find_level_id(level_name)
 	GAME.progression.set_level(level_index)
 
 
@@ -280,7 +271,7 @@ func on_transition_timer_timeout():
 
 # Called when the level is ready, correct
 func on_level_ready(level):
-	last_level_path = level.filename
+	last_level_name = level.get_name()
 	if progression.level == 0:
 		update_current_level_index(level)
 
@@ -289,8 +280,10 @@ func on_level_ready(level):
 
 
 # When a player reach a checkpoint
-func on_checkpoint_reached(level):
-	GAME.progression.checkpoint += 1
+func on_checkpoint_reached(level: Level, checkpoint_id: int):
+	if checkpoint_id > GAME.progression.checkpoint:
+		GAME.progression.checkpoint = checkpoint_id
+
 	GAME.progression.set_main_xion(SCORE.xion)
 	GAME.progression.set_main_materials(SCORE.materials)
 	$LevelSaver.save_level(level, progression.main_stored_objects)

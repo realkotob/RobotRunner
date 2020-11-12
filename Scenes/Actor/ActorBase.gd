@@ -1,7 +1,9 @@
 extends KinematicBody2D
 class_name ActorBase
 
-export var speed : float = 60.0
+var current_speed : float = 0.0
+export var max_speed : float = 400.0
+export var acceleration : float = 15.0
 
 onready var animated_sprite_node = $AnimatedSprite
 onready var path_node = get_node_or_null("Path")
@@ -17,6 +19,7 @@ const GRAVITY : int = 30
 var snap_vector = Vector2(0, 10)
 var current_snap = snap_vector
 
+var last_direction : int = 0
 var direction : int = 0 setget set_direction, get_direction
 var velocity := Vector2.ZERO setget set_velocity, get_velocity
 
@@ -33,11 +36,11 @@ func set_direction(value : int):
 func get_direction() -> int:
 	return direction
 
-func set_speed(value : float):
-	speed = value
+func set_max_speed(value : float):
+	max_speed = value
 
-func get_speed() -> float:
-	return speed
+func get_max_speed() -> float:
+	return max_speed
 
 func set_velocity(value: Vector2):
 	if value != velocity:
@@ -75,8 +78,23 @@ func _ready():
 func _physics_process(delta):
 	var dir = get_direction()
 	
+	
+	# Handle actor's acceleration/decceleration
+	var base_speed = max_speed / 2
+	
+	if dir != 0:
+		if current_speed < base_speed:
+			current_speed = base_speed
+		else:
+			current_speed += acceleration
+		last_direction = dir
+	else:
+		current_speed -= acceleration * 3.3
+	
+	current_speed = clamp(current_speed, 0.0, max_speed)
+	
 	# Compute velocity
-	velocity.x = dir * speed
+	velocity.x = last_direction * current_speed
 	velocity.y += GRAVITY
 	
 	var state = get_state()

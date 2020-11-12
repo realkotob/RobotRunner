@@ -68,7 +68,7 @@ func goto_last_level(from_start: bool = false):
 func goto_next_level():
 	var next_level : PackedScene = null
 
-	progression.set_checkpoint(0)
+	progression.set_checkpoint(-1)
 	update_collectable_progression()
 
 	if last_level_name == "":
@@ -245,6 +245,21 @@ func toggle_camera_debug_mode():
 		camera_node.set_to_previous_state()
 	else:
 		camera_node.set_state("Debug")
+		
+func deserialize_level_properties(file_path : String):
+	var level_properties  : String = ""
+	var parsed_data : Dictionary = {}
+	var load_file = File.new()
+
+	if !load_file.file_exists(file_path):
+		return
+
+	load_file.open(file_path, load_file.READ)
+	level_properties = load_file.get_as_text()
+	parsed_data = parse_json(level_properties)
+	load_file.close()
+
+	return parsed_data
 
 	for player in get_tree().get_nodes_in_group("Players"):
 		player.set_active(was_camera_debug_mode)
@@ -286,13 +301,16 @@ func on_level_ready(level):
 
 	if(level.is_loaded_from_save == false):
 		$LevelSaver.save_level_properties_as_json(level.get_name(), level)
+	else:
+		level.load_level_properties_from_json(level.get_name())
+
 	fade_in()
 
 
 # When a player reach a checkpoint
 func on_checkpoint_reached(level: Level, checkpoint_id: int):
-	if checkpoint_id > GAME.progression.checkpoint:
-		GAME.progression.checkpoint = checkpoint_id
+	if checkpoint_id + 1 > GAME.progression.checkpoint:
+		GAME.progression.checkpoint = checkpoint_id + 1
 
 	GAME.progression.set_main_xion(SCORE.xion)
 	GAME.progression.set_main_materials(SCORE.materials)

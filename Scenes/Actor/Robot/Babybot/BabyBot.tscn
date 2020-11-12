@@ -12,7 +12,7 @@
 [node name="BabyBot" instance=ExtResource( 1 )]
 z_index = 0
 script = ExtResource( 6 )
-speed = 60.0
+max_speed = 60.0
 
 [node name="Hidden" type="Node" parent="StatesMachine" index="0"]
 script = ExtResource( 4 )

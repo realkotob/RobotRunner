@@ -2,6 +2,5 @@
 
 [ext_resource path="res://Global/Autoloads/Dialogue/DialogueContainter.gd" type="Script" id=1]
 
-
-[node name="DialogueContainter" type="Node"]
+[node name="Dialogue" type="Node"]
 script = ExtResource( 1 )

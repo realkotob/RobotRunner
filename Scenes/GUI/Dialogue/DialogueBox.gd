@@ -1,4 +1,6 @@
 extends NinePatchRect
+class_name DialogueBox
+
 
 onready var label_node = $RichTextLabel
 onready var animation_player_node = $AnimationPlayer

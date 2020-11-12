@@ -1,41 +1,41 @@
 [gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://Global/Tileset/LevelBase.tres" type="TileSet" id=1]
-[ext_resource path="res://Scenes/Camera/Camera.gd" type="Script" id=2]
-[ext_resource path="res://Scenes/StartingPoints/StartingPoint.gd" type="Script" id=3]
-[ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/Scripts/ButtonBase.gd" type="Script" id=4]
-[ext_resource path="res://Scenes/GUI/GUI.gd" type="Script" id=5]
-[ext_resource path="res://Scenes/GameConsole/GameConsole.gd" type="Script" id=6]
-[ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/GroupBase.gd" type="Script" id=7]
-[ext_resource path="res://Global/Background/Background.png" type="Texture" id=8]
-[ext_resource path="res://Global/Background/Gears.png" type="Texture" id=9]
-[ext_resource path="res://icon.png" type="Texture" id=10]
+[ext_resource path="res://Scenes/StartingPoints/StartingPoint.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/Scripts/ButtonBase.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/GroupBase.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/Levels/Base/LevelBase.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/S (BASE)/IceBlockBase.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/Camera/Camera.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/GUI/GUI.gd" type="Script" id=8]
+[ext_resource path="res://Scenes/InteractiveObjects/Liquids/Lava/Lava.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/GameConsole/GameConsole.gd" type="Script" id=10]
 [ext_resource path="res://Scenes/GUI/HUD/HUD.gd" type="Script" id=11]
-[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/S (BASE)/IceBlockBase.gd" type="Script" id=12]
-[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/XionCrate.gd" type="Script" id=13]
-[ext_resource path="res://Scenes/Levels/Base/LevelBase.gd" type="Script" id=14]
-[ext_resource path="res://Scenes/InteractiveObjects/GreatDoor/GreatDoor.gd" type="Script" id=15]
-[ext_resource path="res://Scenes/InteractiveObjects/Liquids/Lava/Lava.gd" type="Script" id=16]
+[ext_resource path="res://Scenes/Fog/CosmeticFog/green_bg_fog_shadermaterial.tres" type="Material" id=12]
+[ext_resource path="res://Global/Background/Gears.png" type="Texture" id=13]
+[ext_resource path="res://icon.png" type="Texture" id=14]
+[ext_resource path="res://Scenes/Fog/CosmeticFog/magenta_FG_fog_shadermaterial.tres" type="Material" id=15]
+[ext_resource path="res://Global/Background/Background.png" type="Texture" id=16]
 [ext_resource path="res://Scenes/Events/Checkpoint/Checkpoint.gd" type="Script" id=17]
 [ext_resource path="res://Scenes/InteractiveObjects/Collactables/Materials/Gear/Gear.gd" type="Script" id=18]
-[ext_resource path="res://Scenes/Fog/CosmeticFog/green_bg_fog_shadermaterial.tres" type="Material" id=19]
-[ext_resource path="res://Scenes/Fog/CosmeticFog/magenta_FG_fog_shadermaterial.tres" type="Material" id=20]
-[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/M/MIceBlock.tscn" type="PackedScene" id=21]
-[ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/ChildrenScenes/RedButton.tscn" type="PackedScene" id=22]
-[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/XionCrate.tscn" type="PackedScene" id=23]
-[ext_resource path="res://Scenes/InteractiveObjects/Collactables/Materials/Gear/Gear.tscn" type="PackedScene" id=24]
-[ext_resource path="res://Scenes/InteractiveObjects/Liquids/Lava/Lava.tscn" type="PackedScene" id=25]
-[ext_resource path="res://Scenes/InteractiveObjects/Teleports/Types/BlueTeleporter.tscn" type="PackedScene" id=26]
-[ext_resource path="res://Scenes/InteractiveObjects/GreatDoor/GreatDoor.tscn" type="PackedScene" id=27]
-[ext_resource path="res://Global/Background/ProdLine.tscn" type="PackedScene" id=28]
-[ext_resource path="res://Scenes/StartingPoints/StartingPointP1.tscn" type="PackedScene" id=29]
-[ext_resource path="res://Scenes/Events/Checkpoint/Checkpoint.tscn" type="PackedScene" id=30]
-[ext_resource path="res://Scenes/GUI/HUD/HUD.tscn" type="PackedScene" id=31]
-[ext_resource path="res://Scenes/Events/Checkpoint/NewStartingPoint1.tscn" type="PackedScene" id=32]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/XionCrate.gd" type="Script" id=19]
+[ext_resource path="res://Scenes/InteractiveObjects/GreatDoor/GreatDoor.gd" type="Script" id=20]
+[ext_resource path="res://Scenes/InteractiveObjects/Collactables/Materials/Gear/Gear.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Scenes/InteractiveObjects/GreatDoor/GreatDoor.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/M/MIceBlock.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/XionCrate.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/ChildrenScenes/RedButton.tscn" type="PackedScene" id=25]
+[ext_resource path="res://Scenes/InteractiveObjects/Liquids/Lava/Lava.tscn" type="PackedScene" id=26]
+[ext_resource path="res://Scenes/InteractiveObjects/Teleports/Types/BlueTeleporter.tscn" type="PackedScene" id=27]
+[ext_resource path="res://Scenes/StartingPoints/StartingPointP1.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Scenes/Events/Checkpoint/Checkpoint.tscn" type="PackedScene" id=29]
+[ext_resource path="res://Scenes/Events/Checkpoint/NewStartingPoint1.tscn" type="PackedScene" id=30]
+[ext_resource path="res://Scenes/Camera/Camera.tscn" type="PackedScene" id=31]
+[ext_resource path="res://Scenes/Events/Checkpoint/NewStartingPoint2.tscn" type="PackedScene" id=32]
 [ext_resource path="res://Scenes/StartingPoints/StartingPointP2.tscn" type="PackedScene" id=33]
-[ext_resource path="res://Scenes/Events/Checkpoint/NewStartingPoint2.tscn" type="PackedScene" id=34]
-[ext_resource path="res://Scenes/Camera/Camera.tscn" type="PackedScene" id=35]
-[ext_resource path="res://Scenes/GameConsole/GameConsole.tscn" type="PackedScene" id=36]
+[ext_resource path="res://Scenes/GameConsole/GameConsole.tscn" type="PackedScene" id=34]
+[ext_resource path="res://Global/Background/ProdLine.tscn" type="PackedScene" id=35]
+[ext_resource path="res://Scenes/GUI/HUD/HUD.tscn" type="PackedScene" id=36]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Area2D
@@ -105,7 +105,7 @@ func teleport_layer(character : Node):
 "
 
 [node name="LevelDebug" type="Node2D"]
-script = ExtResource( 14 )
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -119,10 +119,10 @@ __meta__ = {
 }
 
 [node name="Fog" type="Sprite" parent="Foreground/Fog"]
-material = ExtResource( 20 )
+material = ExtResource( 15 )
 position = Vector2( 470.01, 277.517 )
 scale = Vector2( 2.09202, 1.27633 )
-texture = ExtResource( 10 )
+texture = ExtResource( 14 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 480, 540 )
 __meta__ = {
@@ -131,7 +131,7 @@ __meta__ = {
 
 [node name="GUI" type="CanvasLayer" parent="."]
 layer = 2
-script = ExtResource( 5 )
+script = ExtResource( 8 )
 
 [node name="Popups" type="Control" parent="GUI"]
 anchor_right = 1.0
@@ -143,22 +143,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HUD" type="Control" parent="GUI" instance=ExtResource( 31 )]
+[node name="HUD" type="Control" parent="GUI" instance=ExtResource( 36 )]
 anchor_right = 1.0
 anchor_bottom = 0.143
-margin_bottom = -0.220001
+margin_top = -64.0
+margin_bottom = -64.22
 script = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-hidden = false
+hidden = true
 speed = 400
 
-[node name="GameConsole" type="Control" parent="GUI" instance=ExtResource( 36 )]
+[node name="GameConsole" type="Control" parent="GUI" instance=ExtResource( 34 )]
 pause_mode = 2
 visible = false
 margin_top = -1.0
-script = ExtResource( 6 )
+script = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -180,11 +181,11 @@ __meta__ = {
 [node name="Paralaxe" type="ParallaxBackground" parent="Map/Background"]
 layer = -1
 follow_viewport_enable = true
-scroll_offset = Vector2( 264.728, 75.4992 )
+scroll_offset = Vector2( 119.437, -15.4985 )
 scroll_ignore_camera_zoom = true
 
 [node name="Back" type="ParallaxLayer" parent="Map/Background/Paralaxe"]
-position = Vector2( 1269.24, 270 )
+position = Vector2( 1261.97, 270 )
 motion_scale = Vector2( 0.05, 0 )
 __meta__ = {
 "_edit_group_": true,
@@ -195,7 +196,7 @@ __meta__ = {
 modulate = Color( 1, 0.96, 0.96, 1 )
 light_mask = 2
 position = Vector2( -2330, -3040 )
-texture = ExtResource( 8 )
+texture = ExtResource( 16 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 15000, 15000 )
@@ -210,7 +211,7 @@ __meta__ = {
 }
 
 [node name="Gears" type="ParallaxLayer" parent="Map/Background/Paralaxe"]
-position = Vector2( 1254.17, 270 )
+position = Vector2( 1236.73, 270 )
 motion_scale = Vector2( 0.12, 0 )
 __meta__ = {
 "_edit_group_": true,
@@ -220,23 +221,23 @@ __meta__ = {
 [node name="Gears" type="Sprite" parent="Map/Background/Paralaxe/Gears"]
 modulate = Color( 1, 0.903333, 0.9, 1 )
 light_mask = 2
-texture = ExtResource( 9 )
+texture = ExtResource( 13 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 15000, 15000 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="ProdLine1" type="ParallaxLayer" parent="Map/Background/Paralaxe" instance=ExtResource( 28 )]
-position = Vector2( 447.709, 640 )
+[node name="ProdLine1" type="ParallaxLayer" parent="Map/Background/Paralaxe" instance=ExtResource( 35 )]
+position = Vector2( 425.916, 640 )
 motion_scale = Vector2( 0.15, 0 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
 
-[node name="ProdLine2" type="ParallaxLayer" parent="Map/Background/Paralaxe" instance=ExtResource( 28 )]
-position = Vector2( 443.404, 920 )
+[node name="ProdLine2" type="ParallaxLayer" parent="Map/Background/Paralaxe" instance=ExtResource( 35 )]
+position = Vector2( 418.704, 920 )
 motion_scale = Vector2( 0.17, 0 )
 __meta__ = {
 "_edit_group_": true,
@@ -244,7 +245,7 @@ __meta__ = {
 }
 
 [node name="Fog" type="ParallaxLayer" parent="Map/Background/Paralaxe"]
-position = Vector2( 436.946, 270 )
+position = Vector2( 407.887, 270 )
 motion_scale = Vector2( 0.2, 0 )
 __meta__ = {
 "_edit_group_": true,
@@ -252,10 +253,10 @@ __meta__ = {
 }
 
 [node name="Fog" type="Sprite" parent="Map/Background/Paralaxe/Fog"]
-material = ExtResource( 19 )
+material = ExtResource( 12 )
 position = Vector2( 470.01, 277.517 )
 scale = Vector2( 2.09202, 1.27633 )
-texture = ExtResource( 10 )
+texture = ExtResource( 14 )
 offset = Vector2( 10.943, 0 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 8000, 8000 )
@@ -311,15 +312,15 @@ __meta__ = {
 
 [node name="StartingPointP1" type="Node2D" parent="." groups=[
 "StartingPoint",
-] instance=ExtResource( 29 )]
+] instance=ExtResource( 28 )]
 position = Vector2( 304, 216.383 )
-script = ExtResource( 3 )
+script = ExtResource( 2 )
 
 [node name="StartingPointP2" type="Node2D" parent="." groups=[
 "StartingPoint",
 ] instance=ExtResource( 33 )]
 position = Vector2( 372, 216.383 )
-script = ExtResource( 3 )
+script = ExtResource( 2 )
 
 [node name="InteractivesObjects" type="Node2D" parent="."]
 __meta__ = {
@@ -342,7 +343,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="M_IceBlock" type="RigidBody2D" parent="InteractivesObjects/IceBlocks/M" instance=ExtResource( 21 )]
+[node name="M_IceBlock" type="RigidBody2D" parent="InteractivesObjects/IceBlocks/M" instance=ExtResource( 23 )]
 light_mask = 1024
 position = Vector2( 312, 480 )
 z_as_relative = false
@@ -353,13 +354,13 @@ contact_monitor = true
 sleeping = true
 linear_damp = 1.0
 angular_damp = 1.0
-script = ExtResource( 12 )
+script = ExtResource( 6 )
 nb_debris = 30
 explosion_impulse = 150.0
 explosion_impulse_modifier = 0.7
 maxvelocity_y = 0
 
-[node name="M_IceBlock2" type="RigidBody2D" parent="InteractivesObjects/IceBlocks/M" instance=ExtResource( 21 )]
+[node name="M_IceBlock2" type="RigidBody2D" parent="InteractivesObjects/IceBlocks/M" instance=ExtResource( 23 )]
 light_mask = 1024
 position = Vector2( 312, 432 )
 z_as_relative = false
@@ -370,13 +371,13 @@ contact_monitor = true
 sleeping = true
 linear_damp = 1.0
 angular_damp = 1.0
-script = ExtResource( 12 )
+script = ExtResource( 6 )
 nb_debris = 30
 explosion_impulse = 150.0
 explosion_impulse_modifier = 0.7
 maxvelocity_y = 0
 
-[node name="M_IceBlock3" type="RigidBody2D" parent="InteractivesObjects/IceBlocks/M" instance=ExtResource( 21 )]
+[node name="M_IceBlock3" type="RigidBody2D" parent="InteractivesObjects/IceBlocks/M" instance=ExtResource( 23 )]
 light_mask = 1024
 position = Vector2( 312, 384 )
 z_as_relative = false
@@ -387,13 +388,13 @@ contact_monitor = true
 sleeping = true
 linear_damp = 1.0
 angular_damp = 1.0
-script = ExtResource( 12 )
+script = ExtResource( 6 )
 nb_debris = 30
 explosion_impulse = 150.0
 explosion_impulse_modifier = 0.7
 maxvelocity_y = 0
 
-[node name="M_IceBlock4" type="RigidBody2D" parent="InteractivesObjects/IceBlocks/M" instance=ExtResource( 21 )]
+[node name="M_IceBlock4" type="RigidBody2D" parent="InteractivesObjects/IceBlocks/M" instance=ExtResource( 23 )]
 light_mask = 1024
 position = Vector2( 360, 480 )
 z_as_relative = false
@@ -404,13 +405,13 @@ contact_monitor = true
 sleeping = true
 linear_damp = 1.0
 angular_damp = 1.0
-script = ExtResource( 12 )
+script = ExtResource( 6 )
 nb_debris = 30
 explosion_impulse = 150.0
 explosion_impulse_modifier = 0.7
 maxvelocity_y = 0
 
-[node name="M_IceBlock5" type="RigidBody2D" parent="InteractivesObjects/IceBlocks/M" instance=ExtResource( 21 )]
+[node name="M_IceBlock5" type="RigidBody2D" parent="InteractivesObjects/IceBlocks/M" instance=ExtResource( 23 )]
 light_mask = 1024
 position = Vector2( 408, 480 )
 z_as_relative = false
@@ -421,13 +422,13 @@ contact_monitor = true
 sleeping = true
 linear_damp = 1.0
 angular_damp = 1.0
-script = ExtResource( 12 )
+script = ExtResource( 6 )
 nb_debris = 30
 explosion_impulse = 150.0
 explosion_impulse_modifier = 0.7
 maxvelocity_y = 0
 
-[node name="M_IceBlock6" type="RigidBody2D" parent="InteractivesObjects/IceBlocks/M" instance=ExtResource( 21 )]
+[node name="M_IceBlock6" type="RigidBody2D" parent="InteractivesObjects/IceBlocks/M" instance=ExtResource( 23 )]
 light_mask = 1024
 position = Vector2( 600, 485 )
 z_as_relative = false
@@ -438,13 +439,13 @@ contact_monitor = true
 sleeping = true
 linear_damp = 1.0
 angular_damp = 1.0
-script = ExtResource( 12 )
+script = ExtResource( 6 )
 nb_debris = 30
 explosion_impulse = 150.0
 explosion_impulse_modifier = 0.7
 maxvelocity_y = 0
 
-[node name="M_IceBlock7" type="RigidBody2D" parent="InteractivesObjects/IceBlocks/M" instance=ExtResource( 21 )]
+[node name="M_IceBlock7" type="RigidBody2D" parent="InteractivesObjects/IceBlocks/M" instance=ExtResource( 23 )]
 light_mask = 1024
 position = Vector2( 407.886, 432 )
 z_as_relative = false
@@ -455,13 +456,13 @@ contact_monitor = true
 sleeping = true
 linear_damp = 1.0
 angular_damp = 1.0
-script = ExtResource( 12 )
+script = ExtResource( 6 )
 nb_debris = 30
 explosion_impulse = 150.0
 explosion_impulse_modifier = 0.7
 maxvelocity_y = 0
 
-[node name="M_IceBlock8" type="RigidBody2D" parent="InteractivesObjects/IceBlocks/M" instance=ExtResource( 21 )]
+[node name="M_IceBlock8" type="RigidBody2D" parent="InteractivesObjects/IceBlocks/M" instance=ExtResource( 23 )]
 light_mask = 1024
 position = Vector2( 336, 336 )
 z_as_relative = false
@@ -472,13 +473,13 @@ contact_monitor = true
 sleeping = true
 linear_damp = 1.0
 angular_damp = 1.0
-script = ExtResource( 12 )
+script = ExtResource( 6 )
 nb_debris = 30
 explosion_impulse = 150.0
 explosion_impulse_modifier = 0.7
 maxvelocity_y = 0
 
-[node name="M_IceBlock9" type="RigidBody2D" parent="InteractivesObjects/IceBlocks/M" instance=ExtResource( 21 )]
+[node name="M_IceBlock9" type="RigidBody2D" parent="InteractivesObjects/IceBlocks/M" instance=ExtResource( 23 )]
 light_mask = 1024
 position = Vector2( 396, 384 )
 z_as_relative = false
@@ -489,13 +490,13 @@ contact_monitor = true
 sleeping = true
 linear_damp = 1.0
 angular_damp = 1.0
-script = ExtResource( 12 )
+script = ExtResource( 6 )
 nb_debris = 30
 explosion_impulse = 150.0
 explosion_impulse_modifier = 0.7
 maxvelocity_y = 0
 
-[node name="M_IceBlock10" type="RigidBody2D" parent="InteractivesObjects/IceBlocks/M" instance=ExtResource( 21 )]
+[node name="M_IceBlock10" type="RigidBody2D" parent="InteractivesObjects/IceBlocks/M" instance=ExtResource( 23 )]
 light_mask = 1024
 position = Vector2( 672, 488 )
 z_as_relative = false
@@ -506,7 +507,7 @@ contact_monitor = true
 sleeping = true
 linear_damp = 1.0
 angular_damp = 1.0
-script = ExtResource( 12 )
+script = ExtResource( 6 )
 nb_debris = 30
 explosion_impulse = 150.0
 explosion_impulse_modifier = 0.7
@@ -540,10 +541,10 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="GrosLacDeLaveImmense" type="Area2D" parent="InteractivesObjects/LavaTiles" instance=ExtResource( 25 )]
+[node name="GrosLacDeLaveImmense" type="Area2D" parent="InteractivesObjects/LavaTiles" instance=ExtResource( 26 )]
 position = Vector2( 724.545, 46.9302 )
 scale = Vector2( 0.530325, 0.566897 )
-script = ExtResource( 16 )
+script = ExtResource( 9 )
 
 [node name="XionLiquid" type="Node2D" parent="InteractivesObjects"]
 __meta__ = {
@@ -557,15 +558,15 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="BlueTeleporter" type="Area2D" parent="InteractivesObjects/TeleportGroups" instance=ExtResource( 26 )]
+[node name="BlueTeleporter" type="Area2D" parent="InteractivesObjects/TeleportGroups" instance=ExtResource( 27 )]
 position = Vector2( 512, 492 )
 script = SubResource( 1 )
 
-[node name="BlueTeleporter2" type="Area2D" parent="InteractivesObjects/TeleportGroups" instance=ExtResource( 26 )]
+[node name="BlueTeleporter2" type="Area2D" parent="InteractivesObjects/TeleportGroups" instance=ExtResource( 27 )]
 position = Vector2( 208, 228 )
 script = SubResource( 1 )
 
-[node name="BlueTeleporter3" type="Area2D" parent="InteractivesObjects/TeleportGroups" instance=ExtResource( 26 )]
+[node name="BlueTeleporter3" type="Area2D" parent="InteractivesObjects/TeleportGroups" instance=ExtResource( 27 )]
 position = Vector2( 936, 1211.68 )
 script = SubResource( 1 )
 
@@ -575,30 +576,30 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="RedButton" type="StaticBody2D" parent="InteractivesObjects/Buttons&Doors" instance=ExtResource( 22 )]
+[node name="RedButton" type="StaticBody2D" parent="InteractivesObjects/Buttons&Doors" instance=ExtResource( 25 )]
 position = Vector2( 856, 496 )
-script = ExtResource( 4 )
+script = ExtResource( 3 )
 is_push = false
 
 [node name="GreatDoorGroup" type="Node2D" parent="InteractivesObjects"]
-script = ExtResource( 7 )
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
 
-[node name="GreatDoor" type="StaticBody2D" parent="InteractivesObjects/GreatDoorGroup" instance=ExtResource( 27 )]
+[node name="GreatDoor" type="StaticBody2D" parent="InteractivesObjects/GreatDoorGroup" instance=ExtResource( 22 )]
 position = Vector2( 1352, 1106.01 )
 z_index = -1
-script = ExtResource( 15 )
+script = ExtResource( 20 )
 is_open = false
 need_delay = false
 open_delay = 0.0
 focus_on_door = true
 
-[node name="RedButton" type="StaticBody2D" parent="InteractivesObjects/GreatDoorGroup" instance=ExtResource( 22 )]
+[node name="RedButton" type="StaticBody2D" parent="InteractivesObjects/GreatDoorGroup" instance=ExtResource( 25 )]
 position = Vector2( 1136, 1216 )
-script = ExtResource( 4 )
+script = ExtResource( 3 )
 is_push = false
 
 [node name="Collactables" type="Node2D" parent="InteractivesObjects"]
@@ -612,120 +613,120 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="XionCrate" type="RigidBody2D" parent="InteractivesObjects/Collactables/XionCrates" instance=ExtResource( 23 )]
+[node name="XionCrate" type="RigidBody2D" parent="InteractivesObjects/Collactables/XionCrates" instance=ExtResource( 24 )]
 position = Vector2( 488, 216.096 )
 mode = 1
 gravity_scale = 5.0
 sleeping = true
-script = ExtResource( 13 )
+script = ExtResource( 19 )
 nb_debris = 30
 explosion_impulse = 150.0
 explosion_impulse_modifier = 0.7
 maxvelocity_y = 0
 hitpoint = 3
 
-[node name="XionCrate2" type="RigidBody2D" parent="InteractivesObjects/Collactables/XionCrates" instance=ExtResource( 23 )]
+[node name="XionCrate2" type="RigidBody2D" parent="InteractivesObjects/Collactables/XionCrates" instance=ExtResource( 24 )]
 position = Vector2( 720, 216.192 )
 mode = 1
 gravity_scale = 5.0
 sleeping = true
-script = ExtResource( 13 )
+script = ExtResource( 19 )
 nb_debris = 30
 explosion_impulse = 150.0
 explosion_impulse_modifier = 0.7
 maxvelocity_y = 0
 hitpoint = 3
 
-[node name="XionCrate3" type="RigidBody2D" parent="InteractivesObjects/Collactables/XionCrates" instance=ExtResource( 23 )]
+[node name="XionCrate3" type="RigidBody2D" parent="InteractivesObjects/Collactables/XionCrates" instance=ExtResource( 24 )]
 position = Vector2( 936, 215.809 )
 mode = 1
 gravity_scale = 5.0
 sleeping = true
-script = ExtResource( 13 )
+script = ExtResource( 19 )
 nb_debris = 30
 explosion_impulse = 150.0
 explosion_impulse_modifier = 0.7
 maxvelocity_y = 0
 hitpoint = 3
 
-[node name="XionCrate4" type="RigidBody2D" parent="InteractivesObjects/Collactables/XionCrates" instance=ExtResource( 23 )]
+[node name="XionCrate4" type="RigidBody2D" parent="InteractivesObjects/Collactables/XionCrates" instance=ExtResource( 24 )]
 position = Vector2( 1168, 216.287 )
 mode = 1
 gravity_scale = 5.0
 sleeping = true
-script = ExtResource( 13 )
+script = ExtResource( 19 )
 nb_debris = 30
 explosion_impulse = 150.0
 explosion_impulse_modifier = 0.7
 maxvelocity_y = 0
 hitpoint = 3
 
-[node name="XionCrate5" type="RigidBody2D" parent="InteractivesObjects/Collactables/XionCrates" instance=ExtResource( 23 )]
+[node name="XionCrate5" type="RigidBody2D" parent="InteractivesObjects/Collactables/XionCrates" instance=ExtResource( 24 )]
 position = Vector2( 1112, 816 )
 mode = 1
 gravity_scale = 5.0
 sleeping = true
-script = ExtResource( 13 )
+script = ExtResource( 19 )
 nb_debris = 30
 explosion_impulse = 150.0
 explosion_impulse_modifier = 0.7
 maxvelocity_y = 0
 hitpoint = 3
 
-[node name="XionCrate8" type="RigidBody2D" parent="InteractivesObjects/Collactables/XionCrates" instance=ExtResource( 23 )]
+[node name="XionCrate8" type="RigidBody2D" parent="InteractivesObjects/Collactables/XionCrates" instance=ExtResource( 24 )]
 position = Vector2( 1392, 624 )
 mode = 1
 gravity_scale = 5.0
 sleeping = true
-script = ExtResource( 13 )
+script = ExtResource( 19 )
 nb_debris = 30
 explosion_impulse = 150.0
 explosion_impulse_modifier = 0.7
 maxvelocity_y = 0
 hitpoint = 3
 
-[node name="XionCrate9" type="RigidBody2D" parent="InteractivesObjects/Collactables/XionCrates" instance=ExtResource( 23 )]
+[node name="XionCrate9" type="RigidBody2D" parent="InteractivesObjects/Collactables/XionCrates" instance=ExtResource( 24 )]
 position = Vector2( 919.839, 480.192 )
 mode = 1
 gravity_scale = 5.0
 sleeping = true
-script = ExtResource( 13 )
+script = ExtResource( 19 )
 nb_debris = 30
 explosion_impulse = 150.0
 explosion_impulse_modifier = 0.7
 maxvelocity_y = 0
 hitpoint = 3
 
-[node name="XionCrate10" type="RigidBody2D" parent="InteractivesObjects/Collactables/XionCrates" instance=ExtResource( 23 )]
+[node name="XionCrate10" type="RigidBody2D" parent="InteractivesObjects/Collactables/XionCrates" instance=ExtResource( 24 )]
 position = Vector2( 1304, 336 )
 mode = 1
 gravity_scale = 5.0
 sleeping = true
-script = ExtResource( 13 )
+script = ExtResource( 19 )
 nb_debris = 30
 explosion_impulse = 150.0
 explosion_impulse_modifier = 0.7
 maxvelocity_y = 0
 hitpoint = 3
 
-[node name="XionCrate6" type="RigidBody2D" parent="InteractivesObjects/Collactables/XionCrates" instance=ExtResource( 23 )]
+[node name="XionCrate6" type="RigidBody2D" parent="InteractivesObjects/Collactables/XionCrates" instance=ExtResource( 24 )]
 position = Vector2( 104, 480.096 )
 mode = 1
 gravity_scale = 5.0
 sleeping = true
-script = ExtResource( 13 )
+script = ExtResource( 19 )
 nb_debris = 30
 explosion_impulse = 150.0
 explosion_impulse_modifier = 0.7
 maxvelocity_y = 0
 hitpoint = 3
 
-[node name="XionCrate7" type="RigidBody2D" parent="InteractivesObjects/Collactables/XionCrates" instance=ExtResource( 23 )]
+[node name="XionCrate7" type="RigidBody2D" parent="InteractivesObjects/Collactables/XionCrates" instance=ExtResource( 24 )]
 position = Vector2( 104, 480.096 )
 mode = 1
 gravity_scale = 5.0
 sleeping = true
-script = ExtResource( 13 )
+script = ExtResource( 19 )
 nb_debris = 30
 explosion_impulse = 150.0
 explosion_impulse_modifier = 0.7
@@ -737,49 +738,37 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Gear" type="Area2D" parent="InteractivesObjects/Collactables/Gears" instance=ExtResource( 24 )]
+[node name="Gear" type="Area2D" parent="InteractivesObjects/Collactables/Gears" instance=ExtResource( 21 )]
 position = Vector2( 168, 352 )
 script = ExtResource( 18 )
 speed = 300
 initial_impulse = false
 
-[node name="Gear2" type="Area2D" parent="InteractivesObjects/Collactables/Gears" instance=ExtResource( 24 )]
-position = Vector2( 404.055, 187.56 )
+[node name="Gear2" type="Area2D" parent="InteractivesObjects/Collactables/Gears" instance=ExtResource( 21 )]
+position = Vector2( 232, 136 )
 script = ExtResource( 18 )
 speed = 300
 initial_impulse = false
 
-[node name="Gear3" type="Area2D" parent="InteractivesObjects/Collactables/Gears" instance=ExtResource( 24 )]
+[node name="Gear3" type="Area2D" parent="InteractivesObjects/Collactables/Gears" instance=ExtResource( 21 )]
 position = Vector2( 1056, 488 )
 script = ExtResource( 18 )
 speed = 300
 initial_impulse = false
 
-[node name="Gear4" type="Area2D" parent="InteractivesObjects/Collactables/Gears" instance=ExtResource( 24 )]
+[node name="Gear4" type="Area2D" parent="InteractivesObjects/Collactables/Gears" instance=ExtResource( 21 )]
 position = Vector2( 1008, 792 )
 script = ExtResource( 18 )
 speed = 300
 initial_impulse = false
 
-[node name="Gear5" type="Area2D" parent="InteractivesObjects/Collactables/Gears" instance=ExtResource( 24 )]
+[node name="Gear5" type="Area2D" parent="InteractivesObjects/Collactables/Gears" instance=ExtResource( 21 )]
 position = Vector2( 487.839, 904 )
 script = ExtResource( 18 )
 speed = 300
 initial_impulse = false
 
-[node name="Gear6" type="Area2D" parent="InteractivesObjects/Collactables/Gears" instance=ExtResource( 24 )]
-position = Vector2( 210, 1080 )
-script = ExtResource( 18 )
-speed = 300
-initial_impulse = false
-
-[node name="Gear7" type="Area2D" parent="InteractivesObjects/Collactables/Gears" instance=ExtResource( 24 )]
-position = Vector2( 848, 1128 )
-script = ExtResource( 18 )
-speed = 300
-initial_impulse = false
-
-[node name="Gear8" type="Area2D" parent="InteractivesObjects/Collactables/Gears" instance=ExtResource( 24 )]
+[node name="Gear8" type="Area2D" parent="InteractivesObjects/Collactables/Gears" instance=ExtResource( 21 )]
 position = Vector2( 1336, 920 )
 script = ExtResource( 18 )
 speed = 300
@@ -827,52 +816,52 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Checkpoint" type="Node2D" parent="Events/Checkpoints" instance=ExtResource( 30 )]
+[node name="Checkpoint" type="Node2D" parent="Events/Checkpoints" instance=ExtResource( 29 )]
 position = Vector2( 128, 232 )
 script = ExtResource( 17 )
 triggers_on_level_start = false
 event_disabled = false
 active = false
 
-[node name="NewStartingPoint1" type="Node2D" parent="Events/Checkpoints/Checkpoint" instance=ExtResource( 32 )]
+[node name="NewStartingPoint1" type="Node2D" parent="Events/Checkpoints/Checkpoint" instance=ExtResource( 30 )]
 position = Vector2( -1.7962, -150.283 )
-script = ExtResource( 3 )
+script = ExtResource( 2 )
 
-[node name="NewStartingPoint2" type="Node2D" parent="Events/Checkpoints/Checkpoint" instance=ExtResource( 34 )]
+[node name="NewStartingPoint2" type="Node2D" parent="Events/Checkpoints/Checkpoint" instance=ExtResource( 32 )]
 position = Vector2( 135.225, -150.904 )
-script = ExtResource( 3 )
+script = ExtResource( 2 )
 
-[node name="Checkpoint2" type="Node2D" parent="Events/Checkpoints" instance=ExtResource( 30 )]
+[node name="Checkpoint2" type="Node2D" parent="Events/Checkpoints" instance=ExtResource( 29 )]
 position = Vector2( 608, 232 )
 script = ExtResource( 17 )
 triggers_on_level_start = false
 event_disabled = false
 active = false
 
-[node name="NewStartingPoint1" type="Node2D" parent="Events/Checkpoints/Checkpoint2" instance=ExtResource( 32 )]
+[node name="NewStartingPoint1" type="Node2D" parent="Events/Checkpoints/Checkpoint2" instance=ExtResource( 30 )]
 position = Vector2( -49.093, -75.6298 )
-script = ExtResource( 3 )
+script = ExtResource( 2 )
 
-[node name="NewStartingPoint2" type="Node2D" parent="Events/Checkpoints/Checkpoint2" instance=ExtResource( 34 )]
+[node name="NewStartingPoint2" type="Node2D" parent="Events/Checkpoints/Checkpoint2" instance=ExtResource( 32 )]
 position = Vector2( 51.0833, -74.9664 )
-script = ExtResource( 3 )
+script = ExtResource( 2 )
 
-[node name="Checkpoint3" type="Node2D" parent="Events/Checkpoints" instance=ExtResource( 30 )]
+[node name="Checkpoint3" type="Node2D" parent="Events/Checkpoints" instance=ExtResource( 29 )]
 position = Vector2( 833, 232 )
 script = ExtResource( 17 )
 triggers_on_level_start = false
 event_disabled = false
 active = false
 
-[node name="NewStartingPoint1" type="Node2D" parent="Events/Checkpoints/Checkpoint3" instance=ExtResource( 32 )]
+[node name="NewStartingPoint1" type="Node2D" parent="Events/Checkpoints/Checkpoint3" instance=ExtResource( 30 )]
 position = Vector2( -48.4296, -82.9274 )
-script = ExtResource( 3 )
+script = ExtResource( 2 )
 
-[node name="NewStartingPoint2" type="Node2D" parent="Events/Checkpoints/Checkpoint3" instance=ExtResource( 34 )]
+[node name="NewStartingPoint2" type="Node2D" parent="Events/Checkpoints/Checkpoint3" instance=ExtResource( 32 )]
 position = Vector2( 53.0735, -78.9469 )
-script = ExtResource( 3 )
+script = ExtResource( 2 )
 
-[node name="Checkpoint4" type="Node2D" parent="Events/Checkpoints" instance=ExtResource( 30 )]
+[node name="Checkpoint4" type="Node2D" parent="Events/Checkpoints" instance=ExtResource( 29 )]
 position = Vector2( 1058, 232 )
 script = ExtResource( 17 )
 triggers_on_level_start = false
@@ -897,14 +886,15 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Camera" type="Camera2D" parent="." instance=ExtResource( 35 )]
-position = Vector2( 264.11, 193.368 )
+[node name="Camera" type="Camera2D" parent="." instance=ExtResource( 31 )]
+position = Vector2( 354.354, 279.074 )
 z_index = 999
 rotating = true
 current = true
+zoom = Vector2( 1.01901, 1.01901 )
 limit_smoothed = true
 smoothing_enabled = true
-script = ExtResource( 2 )
+script = ExtResource( 7 )
 __meta__ = {
 "_edit_lock_": true
 }

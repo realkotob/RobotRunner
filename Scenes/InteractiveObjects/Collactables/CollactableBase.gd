@@ -3,7 +3,7 @@ class_name CollactableBase
 
 var aimed_character_weakref : WeakRef = null
 
-export var speed : int = 300
+export var speed : int = 350
 export var initial_impulse : bool = true
 
 var initial_velocity := Vector2.ZERO
@@ -34,13 +34,22 @@ func _physics_process(delta):
 	
 	# Move toward the aimed player
 	if aimed_character != null:
+		var char_pos = aimed_character.get_global_position()
+		
 		if initial_impulse == false:
 			var direction = position.direction_to(aimed_character.position)
-			velocity = direction * speed
+			var dist_to_char = position.distance_to(char_pos)
+			var current_speed = clamp(speed + dist_to_char * 2, speed, speed * 10)
+			velocity = direction * current_speed
 		else :
 			velocity = initial_velocity
 		
-		position += velocity * delta
+		var futur_pos = position + (velocity * delta)
+		
+		if futur_pos.distance_to(char_pos) > position.distance_to(char_pos):
+			futur_pos = char_pos
+		
+		position = futur_pos
 	
 	# If the aimed player is dead, destroy this instance
 	else:

@@ -45,6 +45,7 @@ func set_active(value: bool):
 		set_modulate(Color.white)
 	else:
 		set_modulate(Color.gray)
+		set_direction(0)
 
 
 func get_active() -> bool:

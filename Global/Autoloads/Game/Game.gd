@@ -8,6 +8,8 @@ export var progression : Resource
 
 export var transition_time : float = 1.0
 
+const TILE_SIZE := Vector2(24, 24)
+
 var chapters_array = []
 var current_chapter : Resource = null
 
@@ -79,12 +81,14 @@ func goto_next_level():
 	else:
 		goto_level(progression.get_level())
 
-func save_level(level : Node2D):
+
+func save_level(_level : Node2D):
 	var saved_level = PackedScene.new()
 	saved_level.pack(get_tree().get_current_scene())
-	ResourceSaver.save("res://Scenes/Levels/SavedLevel/saved_level.tscn", saved_level)
+	var __ = ResourceSaver.save("res://Scenes/Levels/SavedLevel/saved_level.tscn", saved_level)
 	progression.saved_level = saved_level
-	
+
+
 func load_level(level_path : String) -> PackedScene:
 	var level_to_load = load(level_path)
 	return level_to_load

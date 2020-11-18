@@ -46,6 +46,13 @@ func _input(_event):
 	if Input.is_action_just_pressed("camera_speed_decrease"):
 		camera_debug_speed -= speed_increase_amount 
 	
+	if Input.is_action_just_pressed("camera_zoom_debug"):
+		owner.start_zooming(Vector2.ONE)
+	
+	if Input.is_action_just_pressed("camera_dezoom_debug"):
+		owner.start_zooming(Vector2(2.0, 2.0))
+	
+	
 	var move_up = int(Input.is_action_pressed("jump_player1") or Input.is_action_pressed("jump_player2"))
 	var move_down = int(Input.is_action_pressed("teleport_player1") or Input.is_action_pressed("teleport_player2"))
 	var move_left = int(Input.is_action_pressed("move_left_player1") or Input.is_action_pressed("move_left_player2"))

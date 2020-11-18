@@ -9,6 +9,8 @@ const chunk_tile_size := Vector2(41, 21)
 
 var nb_chunck : int = 0
 
+export var debug : bool = false
+
 #### ACCESSORS ####
 
 
@@ -24,6 +26,9 @@ var nb_chunck : int = 0
 func generate_level_chunck():
 	generate_rdm_noise()
 	bin_noise_map = noise_to_bin()
+	
+	if debug :
+		print_bin_array(bin_noise_map)
 
 
 func generate_rdm_noise():
@@ -73,11 +78,10 @@ func place_level_chunck():
 	if chunck_container_node.get_child_count() > 1:
 		chunck_container_node.get_child(0).queue_free()
 	
-	chunck_container_node.call_deferred("add_child", new_chunck)
+	chunck_container_node.add_child(new_chunck)
 	
-	yield(chunck_container_node, "ready")
 	place_wall_tiles(new_chunck.get_node("Walls"))
-	var _err = chunck_container_node.connect("new_chunck_reached", self, "on_new_chunck_reached")
+	var _err = new_chunck.connect("new_chunck_reached", self, "on_new_chunck_reached")
 
 
 # Place the tiles in the tilemap according the the bin_map value
@@ -103,7 +107,6 @@ func place_wall_tiles(tilemape_node: TileMap):
 func _input(_event):
 	if Input.is_action_just_pressed("LevelChunckGen"):
 		generate_level_chunck()
-		print_bin_array(bin_noise_map)
 		place_level_chunck()
 
 #### SIGNAL RESPONSES ####

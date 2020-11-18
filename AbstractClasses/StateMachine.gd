@@ -13,7 +13,6 @@ onready var states_map = get_children()
 onready var current_state : Object
 onready var previous_state : Object
 
-
 export var default_state : String = ""
 var state_name
 var new_state_name
@@ -32,7 +31,6 @@ func _physics_process(delta):
 	new_state_name = current_state.update(self, delta)
 	if new_state_name:
 		set_state(get_node(new_state_name))
-
 
 # Set a new state. The State can be either of type Node, or in type string, in that case, enter the Node name of your state
 func set_state(new_state):
@@ -71,3 +69,6 @@ func get_state_name() -> String:
 func get_current_state() -> Object:
 	return current_state
 
+
+func set_to_previous_state():
+	set_state(previous_state)

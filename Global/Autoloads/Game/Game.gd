@@ -137,7 +137,7 @@ func find_string(string_array: PoolStringArray, target_string : String):
 			index += 1
 	return -1
 
-	# XION AND MATERIALS METODS HANDLERS
+# XION AND MATERIALS METODS HANDLERS
 # Save the players' <level>progression into the main game progression
 func update_collectable_progression():
 	progression.set_main_xion(SCORE.get_xion())
@@ -185,6 +185,33 @@ func get_children_of_node(parent_node, array_to_fill : Array):
 		elif child.get_child_count() != 0:
 				#print("["+child.get_name()+"]") # DEBUG PURPOSE
 				get_children_of_node(child, array_to_fill)
+
+
+# Toggle the camera debug mode, and toggle the controls of the players
+func toggle_camera_debug_mode():
+	var level = get_tree().get_current_scene()
+	if not level is Level:
+		return
+	
+	var camera_node = level.find_node("Camera")
+	var was_camera_debug_mode = camera_node.get_state_name() == "Debug"
+	if was_camera_debug_mode:
+		camera_node.set_to_previous_state()
+	else:
+		camera_node.set_state("Debug")
+	
+	for player in get_tree().get_nodes_in_group("Players"):
+		player.set_active(was_camera_debug_mode)
+
+
+#### INPUTS ####
+
+
+func _input(_event):
+	if Input.is_action_just_pressed("toggle_camera_debug_mode"):
+		toggle_camera_debug_mode()
+
+
 
 #### SIGNAL RESPONSES ####
 

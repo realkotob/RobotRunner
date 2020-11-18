@@ -67,10 +67,11 @@ func print_bin_array(bin_array: Array):
 
 # Place a new chunck of level
 func place_level_chunck():
+	generate_level_chunck()
 	var chunck_container_node : Node2D = owner.find_node("ChunckContainer")
 	
 	var new_chunck = chunck_scene.instance()
-	new_chunck.set_position(GAME.TILE_SIZE * chunk_tile_size * nb_chunck)
+	new_chunck.set_position(GAME.TILE_SIZE * Vector2(chunk_tile_size.x, 0) * nb_chunck)
 	new_chunck.set_name("LevelChunck" + String(nb_chunck))
 	
 	nb_chunck += 1
@@ -106,10 +107,9 @@ func place_wall_tiles(tilemape_node: TileMap):
 
 func _input(_event):
 	if Input.is_action_just_pressed("LevelChunckGen"):
-		generate_level_chunck()
 		place_level_chunck()
 
 #### SIGNAL RESPONSES ####
 
 func on_new_chunck_reached():
-	pass
+	place_level_chunck()

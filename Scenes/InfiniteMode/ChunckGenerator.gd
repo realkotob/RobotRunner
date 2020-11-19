@@ -2,14 +2,19 @@ extends Node
 
 var chunck_scene = preload("res://Scenes/InfiniteMode/Chunck.tscn")
 
-var noise : OpenSimplexNoise
-var bin_noise_map : Array
-var noise_h_stretch_factor : float = 4
 const chunk_tile_size := Vector2(41, 21)
 
+var noise : OpenSimplexNoise
+var bin_noise_map : Array
+
+var noise_h_stretch_factor : float = 4
 var nb_chunck : int = 0
 
+onready var astar = AStar.new()
+
 export var debug : bool = false
+
+
 
 #### ACCESSORS ####
 

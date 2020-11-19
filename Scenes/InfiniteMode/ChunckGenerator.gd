@@ -22,7 +22,8 @@ export var debug : bool = false
 
 #### BUILT-IN ####
 
-
+func _ready():
+	randomize()
 
 #### LOGIC ####
 

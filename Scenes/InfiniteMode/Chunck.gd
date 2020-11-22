@@ -3,6 +3,7 @@ class_name LevelChunck
 
 signal new_chunck_reached
 
+var is_ready : bool = false
 
 #### ACCESSORS ####
 
@@ -16,6 +17,8 @@ func get_class() -> String:
 
 func _ready():
 	var _err = $Area2D.connect("body_entered", self, "on_body_entered")
+	
+	is_ready = true
 
 #### LOGIC ####
 

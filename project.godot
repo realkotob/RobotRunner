@@ -80,6 +80,16 @@ _global_script_classes=[ {
 "path": "res://AbstractClasses/ChapterBase.gd"
 }, {
 "base": "Node",
+"class": "ChunckChecker",
+"language": "GDScript",
+"path": "res://Scenes/InfiniteMode/ChunckChecker.gd"
+}, {
+"base": "Node",
+"class": "ChunckGenerator",
+"language": "GDScript",
+"path": "res://Scenes/InfiniteMode/ChunckGenerator.gd"
+}, {
+"base": "Node",
 "class": "ClassFinder",
 "language": "GDScript",
 "path": "res://AbstractClasses/ClassFinder.gd"
@@ -314,6 +324,8 @@ _global_script_class_icons={
 "BreakableSpriteBase": "",
 "CameraEventBase": "",
 "ChapterBase": "",
+"ChunckChecker": "",
+"ChunckGenerator": "",
 "ClassFinder": "",
 "CollactableBase": "",
 "Commands": "",

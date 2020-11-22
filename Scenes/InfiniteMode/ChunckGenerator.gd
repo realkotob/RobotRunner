@@ -1,19 +1,18 @@
 extends Node
+class_name ChunckGenerator
 
 var chunck_scene = preload("res://Scenes/InfiniteMode/Chunck.tscn")
 
-const chunk_tile_size := Vector2(41, 21)
+const chunk_tile_size := Vector2(40, 22)
 
 var noise : OpenSimplexNoise
+var last_noise_map : Array
 var bin_noise_map : Array
 
 var noise_h_stretch_factor : float = 4
 var nb_chunck : int = 0
 
-onready var astar = AStar.new()
-
 export var debug : bool = false
-
 
 
 #### ACCESSORS ####
@@ -24,19 +23,83 @@ export var debug : bool = false
 
 func _ready():
 	randomize()
+	
+	stress_test(100)
 
 #### LOGIC ####
 
+func stress_test(nb_test : int):
+	print("## CHUNCK GENERATION STRESS TEST STARTED ##")
+	
+	var time_before = OS.get_ticks_msec()
+	var total_gen_nb : int = 0
+	
+	for i in range(nb_test):
+		var first_chunck : bool = i == 0
+		var gen_nb = generate_level_chunck(first_chunck)
+		total_gen_nb += gen_nb
+	
+	var average_gen_nb : float = float(total_gen_nb) / nb_test
+	var total_time = (OS.get_ticks_msec() - time_before)
+	
+	print(" ")
+	print("Generating "  + String(nb_test) + " chuncks took " + String(total_time) + "ms")
+	print("Average numbers of generation per chunck: " + String(average_gen_nb))
+	print("Average time per chunck: " + String(float(total_time) / nb_test) + "ms")
+	print(" ")
+	print("## CHUNCK GENERATION STRESS TEST FINISHED ##")
+
 
 # Generate a chunck of map, from a simplex noise, at the size of the playable area
-func generate_level_chunck():
+# Return the number of generations it took to generate the chunck 
+func generate_level_chunck(is_first_chunck: bool = false) -> int:
+	
+	var next_starting_points = unit_chunck_gen(is_first_chunck)
+	var i = 1
+	
+	while !$ChunckChecker.is_chunck_valid(bin_noise_map, next_starting_points, 2):
+		next_starting_points = unit_chunck_gen(is_first_chunck)
+		i += 1
+
+	last_noise_map = bin_noise_map
+	
+	if debug:
+		print_bin_array(bin_noise_map)
+		print(" ")
+		print("Took " + String(i) +  " generations")
+	
+	return i
+
+
+# Generate one chunck (Used to be called in a loop, until one chunck is valid)
+func unit_chunck_gen(first_chunck: bool = false) -> PoolVector2Array:
 	generate_rdm_noise()
 	bin_noise_map = noise_to_bin()
+	var next_starting_points := PoolVector2Array()
 	
-	if debug :
-		print_bin_array(bin_noise_map)
+	if first_chunck:
+		next_starting_points = get_starting_points_cell_pos()
+	else:
+		next_starting_points = $ChunckChecker.get_next_starting_points(last_noise_map)
+	
+	return next_starting_points
 
 
+# Find the starting points, convert their position as cells and returns it in a PoolVector2Array
+func get_starting_points_cell_pos() -> PoolVector2Array:
+	var starting_points = get_tree().get_nodes_in_group("StartingPoint")
+	var starting_point_cells := PoolVector2Array()
+	
+	var wall_tilemap = get_tree().get_current_scene().find_node("Walls")
+	
+	for point in starting_points:
+		var cell = wall_tilemap.world_to_map(point.get_global_position())
+		starting_point_cells.append(cell)
+	
+	return starting_point_cells
+
+
+# Generate a new random noise from a random seed
 func generate_rdm_noise():
 	noise = OpenSimplexNoise.new()
 	
@@ -48,12 +111,10 @@ func generate_rdm_noise():
 # Generate a 2D array containing binary values based on a simplex noise
 # a value < 0 will fill the cell with a 0, a value > 0 will fill the cell with a 1 
 func noise_to_bin() -> Array:
-	#warning-ignore:unassigned_variable
-	var bin_map : Array
+	var bin_map := Array()
 	
 	for i in range(chunk_tile_size.y):
-		#warning-ignore:unassigned_variable
-		var line_array : Array
+		var line_array := Array()
 		for j in range(chunk_tile_size.x):
 			var bin_value = int(noise.get_noise_2d(i, j / noise_h_stretch_factor) < 0)
 			line_array.append(bin_value)
@@ -73,8 +134,9 @@ func print_bin_array(bin_array: Array):
 
 # Place a new chunck of level
 func place_level_chunck():
-	generate_level_chunck()
 	var chunck_container_node : Node2D = owner.find_node("ChunckContainer")
+	var first_chunck : bool = chunck_container_node.get_child_count() == 0
+	var __ = generate_level_chunck(first_chunck)
 	
 	var new_chunck = chunck_scene.instance()
 	new_chunck.set_position(GAME.TILE_SIZE * Vector2(chunk_tile_size.x, 0) * nb_chunck)
@@ -83,9 +145,15 @@ func place_level_chunck():
 	nb_chunck += 1
 	
 	if chunck_container_node.get_child_count() > 1:
-		chunck_container_node.get_child(0).queue_free()
+		var chunck_to_delete = chunck_container_node.get_child(0)
+		chunck_to_delete.queue_free()
+		if new_chunck != null:
+			yield(new_chunck, "tree_exited")
 	
 	chunck_container_node.add_child(new_chunck)
+	
+	if !new_chunck.is_ready:
+		yield(new_chunck, "ready")
 	
 	place_wall_tiles(new_chunck.get_node("Walls"))
 	var _err = new_chunck.connect("new_chunck_reached", self, "on_new_chunck_reached")

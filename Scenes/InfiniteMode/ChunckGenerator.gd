@@ -23,7 +23,6 @@ export var debug : bool = false
 
 func _ready():
 	randomize()
-	stress_test(10)
 
 #### LOGIC ####
 
@@ -35,8 +34,8 @@ func stress_test(nb_test : int):
 	
 	for i in range(nb_test):
 		var first_chunck : bool = i == 0
-		var gen_nb = generate_level_chunck(first_chunck)
-		total_gen_nb += gen_nb
+		var gen_data = generate_level_chunck(first_chunck)
+		total_gen_nb += gen_data.generations
 	
 	var average_gen_nb : float = float(total_gen_nb) / nb_test
 	var total_time = OS.get_ticks_msec() - time_before
@@ -52,38 +51,29 @@ func stress_test(nb_test : int):
 
 # Generate a chunck of map, from a simplex noise, at the size of the playable area
 # Return the number of generations it took to generate the chunck 
-func generate_level_chunck(is_first_chunck: bool = false) -> int:
-	
+func generate_level_chunck(is_first_chunck: bool = false) -> ChunckGenData:
 	var next_starting_points = unit_chunck_gen(is_first_chunck)
-	var i = 1
-	
-	var too_few_entries : int = 0
-	var too_few_exits : int = 0
-	var too_few_path : int = 0
+	var chunck_gen_data = ChunckGenData.new()
 	
 	var gen_state = $ChunckChecker.is_chunck_valid(bin_noise_map, next_starting_points, 2)
 	
 	while gen_state != ChunckChecker.GEN_STATE.SUCCESS:
 		match gen_state :
-			ChunckChecker.GEN_STATE.TOO_FEW_STARTING_POINT: too_few_entries += 1
-			ChunckChecker.GEN_STATE.TOO_FEW_EXITS: too_few_exits += 1
-			ChunckChecker.GEN_STATE.TOO_FEW_PATHS: too_few_path += 1 
+			ChunckChecker.GEN_STATE.TOO_FEW_STARTING_POINT: chunck_gen_data.too_few_entries += 1
+			ChunckChecker.GEN_STATE.TOO_FEW_EXITS: chunck_gen_data.too_few_exits += 1
+			ChunckChecker.GEN_STATE.TOO_FEW_PATHS: chunck_gen_data.too_few_path += 1 
 		
 		next_starting_points = unit_chunck_gen(is_first_chunck)
-		i += 1
+		chunck_gen_data.generations += 1
 		gen_state = $ChunckChecker.is_chunck_valid(bin_noise_map, next_starting_points, 2)
 	
 	last_noise_map = bin_noise_map
 	
 	if debug:
 		print_bin_array(bin_noise_map)
-		print(" ")
-		print("Took " + String(i) +  " generations")
-		print(String(too_few_entries) + " generation failed caused by too few entries")
-		print(String(too_few_exits) + " generation failed caused by too few exits")
-		print(String(too_few_path) + " generation failed caused by too few paths")
+		chunck_gen_data.print_data()
 	
-	return i
+	return chunck_gen_data
 
 
 # Generate one chunck (Used to be called in a loop, until one chunck is valid)

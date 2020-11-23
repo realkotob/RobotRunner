@@ -25,12 +25,13 @@ enum GEN_STATE{
 func is_chunck_valid(new_chunck_bin: Array, next_starting_points : Array = [],
 					 nb_player: int = 2) -> int:
 	
-	var valid_starting_points = get_correct_starting_points(new_chunck_bin, next_starting_points)
+	var starting_points = get_correct_starting_points(new_chunck_bin, next_starting_points)
 	
 	# Check if there is at least one starting points per player
-	var nb_valid_starting_points = valid_starting_points.size()
-	if nb_valid_starting_points < nb_player:
+	if starting_points.size() < nb_player:
 		return GEN_STATE.TOO_FEW_STARTING_POINT
+	
+	var valid_starting_points = erase_invalid_starting_point(starting_points, new_chunck_bin)
 	
 	var exits = find_every_exit_points(new_chunck_bin)
 	
@@ -122,6 +123,15 @@ func is_point_walkable(point: Vector2, chunck_bin: Array) -> bool:
 	return chunck_bin[point.y][point.x] == 0 && chunck_bin[point.y + 1][point.x] == 1 &&\
 			(point.y - 1 == 0 or chunck_bin[point.y - 1][point.x] == 0)
 
+
+# Check every cell underneath the given one, and return true if there is at least one ground tile
+func is_point_above_ground(point: Vector2, chunck_bin: Array) -> bool:
+	for i in range(point.y + 1, chunck_bin.size(), 1):
+		if chunck_bin[i][point.x] == 1:
+			return true
+	return false
+
+
 func are_points_adjacents(point1: Vector2, point2: Vector2) -> bool:
 	return point1.y == point2.y and (point1.x + 1 == point2.x or point1.x - 1 == point2.x) 
 
@@ -203,6 +213,15 @@ func get_next_starting_points(last_chunck_bin: Array) -> PoolVector2Array:
 	
 	return new_starting_points
 
+# Take PoolVector2Array of starting points an returns a similar array with only walkable points in it
+func erase_invalid_starting_point(points_array: PoolVector2Array, chunck_bin: Array) -> PoolVector2Array:
+	var valid_points := PoolVector2Array()
+	for point in points_array:
+		if is_point_walkable(point, chunck_bin):
+			valid_points.append(point)
+	
+	return valid_points 
+
 
 # Takes a binary representation of a chunck as a 2D array 
 # 0 representing empty space
@@ -213,7 +232,7 @@ func get_correct_starting_points(bin_map: Array,
 	
 	var valid_points := PoolVector2Array()
 	for point in starting_points_array:
-		if is_point_walkable(point, bin_map):
+		if is_point_above_ground(point, bin_map) && bin_map[point.y][point.x] == 0:
 			valid_points.append(point)
 	
 	return valid_points

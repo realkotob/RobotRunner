@@ -84,6 +84,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/InfiniteMode/ChunckChecker.gd"
 }, {
+"base": "Object",
+"class": "ChunckGenData",
+"language": "GDScript",
+"path": "res://Scenes/InfiniteMode/ChunckGenData.gd"
+}, {
 "base": "Node",
 "class": "ChunckGenerator",
 "language": "GDScript",
@@ -325,6 +330,7 @@ _global_script_class_icons={
 "CameraEventBase": "",
 "ChapterBase": "",
 "ChunckChecker": "",
+"ChunckGenData": "",
 "ChunckGenerator": "",
 "ClassFinder": "",
 "CollactableBase": "",

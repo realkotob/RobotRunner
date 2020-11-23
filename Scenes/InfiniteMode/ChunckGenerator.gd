@@ -3,7 +3,7 @@ class_name ChunckGenerator
 
 var chunck_scene = preload("res://Scenes/InfiniteMode/Chunck.tscn")
 
-const chunk_tile_size := Vector2(40, 22)
+const chunk_tile_size := Vector2(40, 23)
 
 var noise : OpenSimplexNoise
 var last_noise_map : Array
@@ -23,8 +23,7 @@ export var debug : bool = false
 
 func _ready():
 	randomize()
-	
-	stress_test(100)
+#	stress_test(100)
 
 #### LOGIC ####
 
@@ -40,11 +39,12 @@ func stress_test(nb_test : int):
 		total_gen_nb += gen_nb
 	
 	var average_gen_nb : float = float(total_gen_nb) / nb_test
-	var total_time = (OS.get_ticks_msec() - time_before)
+	var total_time = OS.get_ticks_msec() - time_before
 	
 	print(" ")
 	print("Generating "  + String(nb_test) + " chuncks took " + String(total_time) + "ms")
 	print("Average numbers of generation per chunck: " + String(average_gen_nb))
+	print("Average time per generation: " + String(float(total_time) / total_gen_nb) + "ms")
 	print("Average time per chunck: " + String(float(total_time) / nb_test) + "ms")
 	print(" ")
 	print("## CHUNCK GENERATION STRESS TEST FINISHED ##")
@@ -57,16 +57,31 @@ func generate_level_chunck(is_first_chunck: bool = false) -> int:
 	var next_starting_points = unit_chunck_gen(is_first_chunck)
 	var i = 1
 	
-	while !$ChunckChecker.is_chunck_valid(bin_noise_map, next_starting_points, 2):
+	var too_few_entries : int = 0
+	var too_few_exits : int = 0
+	var too_few_path : int = 0
+	
+	var gen_state = $ChunckChecker.is_chunck_valid(bin_noise_map, next_starting_points, 2)
+	
+	while gen_state != ChunckChecker.GEN_STATE.SUCCESS:
+		match gen_state :
+			ChunckChecker.GEN_STATE.TOO_FEW_STARTING_POINT: too_few_entries += 1
+			ChunckChecker.GEN_STATE.TOO_FEW_EXITS: too_few_exits += 1
+			ChunckChecker.GEN_STATE.TOO_FEW_PATHS: too_few_path += 1 
+		
 		next_starting_points = unit_chunck_gen(is_first_chunck)
 		i += 1
-
+		gen_state = $ChunckChecker.is_chunck_valid(bin_noise_map, next_starting_points, 2)
+	
 	last_noise_map = bin_noise_map
 	
 	if debug:
 		print_bin_array(bin_noise_map)
 		print(" ")
 		print("Took " + String(i) +  " generations")
+		print(String(too_few_entries) + " generation failed caused by too few entries")
+		print(String(too_few_exits) + " generation failed caused by too few exits")
+		print(String(too_few_path) + " generation failed caused by too few paths")
 	
 	return i
 

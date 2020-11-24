@@ -23,7 +23,7 @@ export var debug : bool = false
 
 func _ready():
 	randomize()
-	stress_test(10)
+#	stress_test(10)
 
 #### LOGIC ####
 
@@ -42,11 +42,13 @@ func stress_test(nb_test : int):
 		meta_gen_data.too_few_entries += gen_data.too_few_entries
 		meta_gen_data.too_few_exits += gen_data.too_few_exits
 		meta_gen_data.too_few_path += gen_data.too_few_path
-
+		gen_data.free()
+	
 	var total_time = OS.get_ticks_msec() - time_before
 	
 	meta_gen_data.total_time = total_time
 	meta_gen_data.print_data()
+	meta_gen_data.free()
 	print("## CHUNCK GENERATION STRESS TEST FINISHED ##")
 
 
@@ -158,7 +160,7 @@ func place_level_chunck():
 		if new_chunck != null:
 			yield(new_chunck, "tree_exited")
 	
-	chunck_container_node.add_child(new_chunck)
+	chunck_container_node.call_deferred("add_child", new_chunck)
 	
 	if !new_chunck.is_ready:
 		yield(new_chunck, "ready")
@@ -179,6 +181,7 @@ func place_wall_tiles(tilemape_node: TileMap):
 				tilemape_node.set_cellv(current_pos, wall_tile_id)
 	
 	tilemape_node.update_bitmask_region(origin_tile, origin_tile + chunk_tile_size)
+
 
 
 #### VIRTUALS ####

@@ -21,40 +21,62 @@ enum GEN_STATE{
 
 #### LOGIC ####
 
-
-func is_chunck_valid(new_chunck_bin: Array, next_starting_points : Array = [],
+# Check if a chunck is valid by checking:
+# 1) If it has enough valid starting points
+# 2) If it has enough valid exits
+# 3) If it has at least one path to an exit for as many entries as players
+# Returns a GEN_STATE code, to retrive how the gen done, and where it failed in the appropriate case
+func is_chunck_valid(chunck_bin: Array, next_starting_points : Array = [],
 					 nb_player: int = 2) -> int:
 	
-	var starting_points = get_correct_starting_points(new_chunck_bin, next_starting_points)
+	var starting_points = get_correct_starting_points(chunck_bin, next_starting_points)
 	
 	# Check if there is at least one starting points per player
 	if starting_points.size() < nb_player:
 		return GEN_STATE.TOO_FEW_STARTING_POINT
 	
-	var valid_starting_points = erase_invalid_starting_point(starting_points, new_chunck_bin)
+	var valid_starting_points = erase_invalid_starting_point(starting_points, chunck_bin)
 	
-	var exits = find_every_exit_points(new_chunck_bin)
+	var exits = find_every_exit_points(chunck_bin)
 	
 	# Check if there is at least on valid exit per player
 	if exits.size() < nb_player:
 		return GEN_STATE.TOO_FEW_EXITS
 	
 	astar.clear()
-	feed_astar(new_chunck_bin)
-	connect_astar_points(new_chunck_bin)
+	feed_astar(chunck_bin)
+	connect_astar_points(chunck_bin)
+	var paths = get_paths(valid_starting_points, exits, chunck_bin)
 	
 	# Check for entries correctly connected to exits
-	if is_there_enough_paths(valid_starting_points, exits, new_chunck_bin, nb_player):
+	if check_paths(paths, nb_player):
+		enlarge_path(chunck_bin)
+		for path in paths:
+			path.free()
 		return GEN_STATE.SUCCESS
 	else:
 		return GEN_STATE.TOO_FEW_PATHS
 
 
-# Count the number of starting point of the chunck that have at least one path to one exit
-func is_there_enough_paths(entries_array: Array, exits_array: Array, 
-							chunck: Array, nb_player: int) -> bool:
-	var nb_entry_with_path : int = 0
+# Check if their is enough entry-exit unique couple (At least as many as players)
+func check_paths(paths_array: Array, nb_player: int) -> bool:
+	var nb_entry_exit_couple : int = 0
+	for path in paths_array:
+		var entry_id = path.entry_id
+		var exit_id = path.exit_id
+		for path_to_check in paths_array:
+			if path == path_to_check or path_to_check.entry_id == entry_id\
+				or path_to_check.exit_id == exit_id: 
+				continue
+			nb_entry_exit_couple += 1
+			if nb_entry_exit_couple >= nb_player : return true
+	return false
+
+
+# Returns an array of valid paths
+func get_paths(entries_array: Array, exits_array: Array, chunck: Array) -> Array:
 	var nb_tiles_in_chunck = get_nb_tiles(chunck)
+	var path_array := Array()
 	
 	for entry in entries_array:
 		for exit in exits_array:
@@ -70,13 +92,12 @@ func is_there_enough_paths(entries_array: Array, exits_array: Array,
 						"position: " + String(exit) +")")
 				continue
 			
-			var path = astar.get_id_path(entry_id, exit_id)
+			var path = astar.get_point_path(entry_id, exit_id)
 			if !path.empty():
-				nb_entry_with_path += 1
-				if nb_entry_with_path >= nb_player: return true
-				break
+				var chunck_path = ChunckPath.new(entry_id, exit_id, path)
+				path_array.append(chunck_path)
 	
-	return false
+	return path_array
 
 
 # Feed the astar with every walkable empty tile (ie with a ground underneath it)
@@ -252,6 +273,11 @@ func find_every_exit_points(bin_map: Array) -> PoolVector2Array:
 			exits_array.append(current_cell_pos)
 	
 	return exits_array
+
+
+func enlarge_path(chunck_bin: Array):
+	pass
+
 
 #### VIRTUALS ####
 

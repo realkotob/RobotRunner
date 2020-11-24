@@ -44,7 +44,7 @@ func is_chunck_valid(new_chunck_bin: Array, next_starting_points : Array = [],
 	connect_astar_points(new_chunck_bin)
 	
 	var entries_w_valid_path = get_nb_entries_w_valid_path(valid_starting_points, exits, new_chunck_bin)
-	if entries_w_valid_path >= 1:
+	if entries_w_valid_path >= nb_player:
 		return GEN_STATE.SUCCESS
 	else:
 		return GEN_STATE.TOO_FEW_PATHS

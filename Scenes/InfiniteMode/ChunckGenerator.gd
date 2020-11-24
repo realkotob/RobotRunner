@@ -23,7 +23,7 @@ export var debug : bool = false
 
 func _ready():
 	randomize()
-	stress_test(400)
+	stress_test(10)
 
 #### LOGIC ####
 

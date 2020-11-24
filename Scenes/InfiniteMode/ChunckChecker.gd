@@ -43,15 +43,16 @@ func is_chunck_valid(new_chunck_bin: Array, next_starting_points : Array = [],
 	feed_astar(new_chunck_bin)
 	connect_astar_points(new_chunck_bin)
 	
-	var entries_w_valid_path = get_nb_entries_w_valid_path(valid_starting_points, exits, new_chunck_bin)
-	if entries_w_valid_path >= nb_player:
+	# Check for entries correctly connected to exits
+	if is_there_enough_paths(valid_starting_points, exits, new_chunck_bin, nb_player):
 		return GEN_STATE.SUCCESS
 	else:
 		return GEN_STATE.TOO_FEW_PATHS
 
 
 # Count the number of starting point of the chunck that have at least one path to one exit
-func get_nb_entries_w_valid_path(entries_array: Array, exits_array: Array, chunck: Array) -> int:
+func is_there_enough_paths(entries_array: Array, exits_array: Array, 
+							chunck: Array, nb_player: int) -> bool:
 	var nb_entry_with_path : int = 0
 	var nb_tiles_in_chunck = get_nb_tiles(chunck)
 	
@@ -72,9 +73,10 @@ func get_nb_entries_w_valid_path(entries_array: Array, exits_array: Array, chunc
 			var path = astar.get_id_path(entry_id, exit_id)
 			if !path.empty():
 				nb_entry_with_path += 1
+				if nb_entry_with_path >= nb_player: return true
 				break
 	
-	return nb_entry_with_path
+	return false
 
 
 # Feed the astar with every walkable empty tile (ie with a ground underneath it)

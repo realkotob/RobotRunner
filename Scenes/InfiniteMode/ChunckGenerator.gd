@@ -9,7 +9,7 @@ var noise : OpenSimplexNoise
 var last_noise_map : Array
 var bin_noise_map : Array
 
-var noise_h_stretch_factor : float = 4
+var noise_h_stretch_factor : float = 10
 var nb_chunck : int = 0
 
 export var debug : bool = false
@@ -23,6 +23,7 @@ export var debug : bool = false
 
 func _ready():
 	randomize()
+	stress_test(400)
 
 #### LOGIC ####
 
@@ -30,22 +31,22 @@ func stress_test(nb_test : int):
 	print("## CHUNCK GENERATION STRESS TEST STARTED ##")
 	
 	var time_before = OS.get_ticks_msec()
-	var total_gen_nb : int = 0
+	
+	var meta_gen_data = MetaChunckGenData.new()
+	meta_gen_data.nb_test = nb_test
 	
 	for i in range(nb_test):
 		var first_chunck : bool = i == 0
 		var gen_data = generate_level_chunck(first_chunck)
-		total_gen_nb += gen_data.generations
-	
-	var average_gen_nb : float = float(total_gen_nb) / nb_test
+		meta_gen_data.generations += gen_data.generations
+		meta_gen_data.too_few_entries += gen_data.too_few_entries
+		meta_gen_data.too_few_exits += gen_data.too_few_exits
+		meta_gen_data.too_few_path += gen_data.too_few_path
+
 	var total_time = OS.get_ticks_msec() - time_before
 	
-	print(" ")
-	print("Generating "  + String(nb_test) + " chuncks took " + String(total_time) + "ms")
-	print("Average numbers of generation per chunck: " + String(average_gen_nb))
-	print("Average time per generation: " + String(float(total_time) / total_gen_nb) + "ms")
-	print("Average time per chunck: " + String(float(total_time) / nb_test) + "ms")
-	print(" ")
+	meta_gen_data.total_time = total_time
+	meta_gen_data.print_data()
 	print("## CHUNCK GENERATION STRESS TEST FINISHED ##")
 
 
@@ -110,7 +111,9 @@ func generate_rdm_noise():
 	
 	noise.set_seed(randi())
 	noise.set_octaves(4)
-	noise.set_period(8.0)
+	noise.set_period(3.0)
+	noise.set_lacunarity(2.0)
+	noise.set_persistence(0.5)
 
 
 # Generate a 2D array containing binary values based on a simplex noise

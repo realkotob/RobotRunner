@@ -87,7 +87,7 @@ _global_script_classes=[ {
 "base": "Object",
 "class": "ChunckGenData",
 "language": "GDScript",
-"path": "res://Scenes/InfiniteMode/ChunckGenData.gd"
+"path": "res://Scenes/InfiniteMode/GenData/ChunckGenData.gd"
 }, {
 "base": "Node",
 "class": "ChunckGenerator",
@@ -224,6 +224,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://AbstractClasses/MenuOptionsBase.gd"
 }, {
+"base": "ChunckGenData",
+"class": "MetaChunckGenData",
+"language": "GDScript",
+"path": "res://Scenes/InfiniteMode/GenData/MetaChunckGenData.gd"
+}, {
 "base": "PlayerStateBase",
 "class": "MoveBase",
 "language": "GDScript",
@@ -358,6 +363,7 @@ _global_script_class_icons={
 "MaterialCollactable": "",
 "MenuBase": "",
 "MenuOptionsBase": "",
+"MetaChunckGenData": "",
 "MoveBase": "",
 "PathPoint": "",
 "Player": "",

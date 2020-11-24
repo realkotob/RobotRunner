@@ -19,7 +19,7 @@ __meta__ = {
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 2 )
-default_state = "Follow"
+default_state = "Stop"
 
 [node name="Stop" type="Node" parent="StateMachine"]
 script = ExtResource( 5 )

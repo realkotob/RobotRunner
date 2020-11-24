@@ -275,7 +275,7 @@ func find_every_exit_points(bin_map: Array) -> PoolVector2Array:
 	return exits_array
 
 
-func enlarge_path(chunck_bin: Array):
+func enlarge_path(_chunck_bin: Array):
 	pass
 
 

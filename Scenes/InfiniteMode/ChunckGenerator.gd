@@ -3,7 +3,7 @@ class_name ChunckGenerator
 
 var chunck_scene = preload("res://Scenes/InfiniteMode/Chunck.tscn")
 
-const chunk_tile_size := Vector2(40, 23)
+const chunck_tile_size := Vector2(40, 23)
 
 var noise : OpenSimplexNoise
 var last_noise_map : Array
@@ -29,19 +29,13 @@ func _ready():
 
 func stress_test(nb_test : int):
 	print("## CHUNCK GENERATION STRESS TEST STARTED ##")
-	
-	var time_before = OS.get_ticks_msec()
-	
 	var meta_gen_data = MetaChunckGenData.new()
+	var time_before = OS.get_ticks_msec()
 	meta_gen_data.nb_test = nb_test
 	
 	for i in range(nb_test):
 		var first_chunck : bool = i == 0
 		var gen_data = generate_level_chunck(first_chunck)
-		meta_gen_data.generations += gen_data.generations
-		meta_gen_data.too_few_entries += gen_data.too_few_entries
-		meta_gen_data.too_few_exits += gen_data.too_few_exits
-		meta_gen_data.too_few_path += gen_data.too_few_path
 		gen_data.free()
 	
 	var total_time = OS.get_ticks_msec() - time_before
@@ -55,20 +49,9 @@ func stress_test(nb_test : int):
 # Generate a chunck of map, from a simplex noise, at the size of the playable area
 # Return the number of generations it took to generate the chunck 
 func generate_level_chunck(is_first_chunck: bool = false) -> ChunckGenData:
-	var next_starting_points = unit_chunck_gen(is_first_chunck)
+	
+	bin_noise_map = generate_filled_bin_map()
 	var chunck_gen_data = ChunckGenData.new()
-	
-	var gen_state = $ChunckChecker.is_chunck_valid(bin_noise_map, next_starting_points, 2)
-	
-	while gen_state != ChunckChecker.GEN_STATE.SUCCESS:
-		match gen_state :
-			ChunckChecker.GEN_STATE.TOO_FEW_STARTING_POINT: chunck_gen_data.too_few_entries += 1
-			ChunckChecker.GEN_STATE.TOO_FEW_EXITS: chunck_gen_data.too_few_exits += 1
-			ChunckChecker.GEN_STATE.TOO_FEW_PATHS: chunck_gen_data.too_few_path += 1 
-		
-		next_starting_points = unit_chunck_gen(is_first_chunck)
-		chunck_gen_data.generations += 1
-		gen_state = $ChunckChecker.is_chunck_valid(bin_noise_map, next_starting_points, 2)
 	
 	last_noise_map = bin_noise_map
 	
@@ -79,18 +62,15 @@ func generate_level_chunck(is_first_chunck: bool = false) -> ChunckGenData:
 	return chunck_gen_data
 
 
-# Generate one chunck (Used to be called in a loop, until one chunck is valid)
-func unit_chunck_gen(first_chunck: bool = false) -> PoolVector2Array:
-	generate_rdm_noise()
-	bin_noise_map = noise_to_bin()
-	var next_starting_points := PoolVector2Array()
-	
-	if first_chunck:
-		next_starting_points = get_starting_points_cell_pos()
-	else:
-		next_starting_points = $ChunckChecker.get_next_starting_points(last_noise_map)
-	
-	return next_starting_points
+# Generate a bin_map filed with 1
+func generate_filled_bin_map() -> Array:
+	var bin_map := Array()
+	for i in range(chunck_tile_size.y):
+		var line_array := Array()
+		for j in range(chunck_tile_size.x):
+			line_array.append(1)
+		bin_map.append(line_array)
+	return bin_map
 
 
 # Find the starting points, convert their position as cells and returns it in a PoolVector2Array
@@ -123,9 +103,9 @@ func generate_rdm_noise():
 func noise_to_bin() -> Array:
 	var bin_map := Array()
 	
-	for i in range(chunk_tile_size.y):
+	for i in range(chunck_tile_size.y):
 		var line_array := Array()
-		for j in range(chunk_tile_size.x):
+		for j in range(chunck_tile_size.x):
 			var bin_value = int(noise.get_noise_2d(i, j / noise_h_stretch_factor) < 0)
 			line_array.append(bin_value)
 		bin_map.append(line_array)
@@ -133,7 +113,7 @@ func noise_to_bin() -> Array:
 	return bin_map
 
 
-# Print the givne binary array
+# Print the given binary array
 func print_bin_array(bin_array: Array):
 	for line_array in bin_array:
 		var line : String = ""
@@ -149,12 +129,12 @@ func place_level_chunck():
 	var __ = generate_level_chunck(first_chunck)
 	
 	var new_chunck = chunck_scene.instance()
-	new_chunck.set_position(GAME.TILE_SIZE * Vector2(chunk_tile_size.x, 0) * nb_chunck)
+	new_chunck.set_position(GAME.TILE_SIZE * Vector2(chunck_tile_size.x, 0) * nb_chunck)
 	new_chunck.set_name("LevelChunck" + String(nb_chunck))
 	
 	nb_chunck += 1
 	
-	if chunck_container_node.get_child_count() > 1:
+	if chunck_container_node.get_child_count() > 2:
 		var chunck_to_delete = chunck_container_node.get_child(0)
 		chunck_to_delete.queue_free()
 		if new_chunck != null:
@@ -180,7 +160,7 @@ func place_wall_tiles(tilemape_node: TileMap):
 			if bin_noise_map[i][j] == 1:
 				tilemape_node.set_cellv(current_pos, wall_tile_id)
 	
-	tilemape_node.update_bitmask_region(origin_tile, origin_tile + chunk_tile_size)
+	tilemape_node.update_bitmask_region(origin_tile, origin_tile + chunck_tile_size)
 
 
 

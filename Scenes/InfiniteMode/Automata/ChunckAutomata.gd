@@ -78,7 +78,7 @@ func move() -> bool:
 		return true
 
 
-
+# Choose a movement
 func choose_move() -> Vector2:
 	var near_celling : bool = is_near_ceiling()
 	var near_floor : bool = is_near_floor()

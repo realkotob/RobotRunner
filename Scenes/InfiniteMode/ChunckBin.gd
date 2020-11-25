@@ -57,6 +57,8 @@ func erase_automata_pos(pos: Vector2):
 			bin_map[pos.y - 1][pos.x + 1] = 0
 
 
+
+#### BUG WITH LEVEL START SOMTIMES ####
 func refine_chunck():
 	for i in range(chunck_tile_size.y):
 		for j in range(chunck_tile_size.x):

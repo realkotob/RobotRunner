@@ -28,29 +28,24 @@ func _ready():
 
 func stress_test(nb_test : int):
 	print("## CHUNCK GENERATION STRESS TEST STARTED ##")
-	var meta_gen_data = MetaChunckGenData.new()
 	var time_before = OS.get_ticks_msec()
-	meta_gen_data.nb_test = nb_test
 	
-	for i in range(nb_test):
-		var first_chunck : bool = i == 0
-		var gen_data = generate_level_chunck(first_chunck)
-		gen_data.free()
+	for _i in range(nb_test):
+		place_level_chunck()
+		yield(place_level_chunck(), "completed")
 	
 	var total_time = OS.get_ticks_msec() - time_before
 	
-	meta_gen_data.total_time = total_time
-	meta_gen_data.print_data()
-	meta_gen_data.free()
+	print("Generating " + String(nb_test) + " took " + String(total_time) + "ms")
+	print("Average generation time : " + String(float(nb_test) / total_time))
 	print("## CHUNCK GENERATION STRESS TEST FINISHED ##")
 
 
 # Generate a chunck of map, from a simplex noise, at the size of the playable area
 # Return the number of generations it took to generate the chunck 
-func generate_level_chunck(is_first_chunck: bool = false) -> ChunckBin:
-	var starting_points := get_starting_points_cell_pos() if is_first_chunck else PoolVector2Array()
+func generate_chunck_binary(starting_points : PoolVector2Array) -> ChunckBin:
 	var chunck_bin = ChunckBin.new()
-
+	
 	create_automatas(chunck_bin, starting_points)
 	
 	if debug:
@@ -80,38 +75,19 @@ func get_starting_points_cell_pos() -> PoolVector2Array:
 	return starting_point_cells
 
 
-# Generate a new random noise from a random seed
-func generate_rdm_noise():
-	noise = OpenSimplexNoise.new()
-	
-	noise.set_seed(randi())
-	noise.set_octaves(4)
-	noise.set_period(3.0)
-	noise.set_lacunarity(2.0)
-	noise.set_persistence(0.5)
-
-
-## Generate a 2D array containing binary values based on a simplex noise
-## a value < 0 will fill the cell with a 0, a value > 0 will fill the cell with a 1 
-#func noise_to_bin() -> Array:
-#	var bin_map := Array()
-#
-#	for i in range(chunck_tile_size.y):
-#		var line_array := Array()
-#		for j in range(chunck_tile_size.x):
-#			var bin_value = int(noise.get_noise_2d(i, j / noise_h_stretch_factor) < 0)
-#			line_array.append(bin_value)
-#		bin_map.append(line_array)
-#
-#	return bin_map
-
-
-
 # Place a new chunck of level
-func place_level_chunck():
+func place_level_chunck() -> LevelChunck:
 	var chunck_container_node : Node2D = owner.find_node("ChunckContainer")
-	var first_chunck : bool = chunck_container_node.get_child_count() == 0
-	var chunck_bin = generate_level_chunck(first_chunck)
+	var starting_points := PoolVector2Array()
+	
+	if chunck_container_node.get_child_count() == 0:
+		starting_points = get_starting_points_cell_pos()
+	else:
+		var last_child_id = chunck_container_node.get_child_count()
+		var last_chunck = chunck_container_node.get_child(last_child_id - 1)
+		starting_points = last_chunck.next_start_pos_array
+	
+	var chunck_bin = generate_chunck_binary(starting_points)
 	var chunck_tile_size = ChunckBin.chunck_tile_size
 	
 	var new_chunck = chunck_scene.instance()
@@ -134,6 +110,8 @@ func place_level_chunck():
 	
 	for automata in automata_array:
 		new_chunck.call_deferred("add_child", automata)
+	
+	return new_chunck
 
 
 

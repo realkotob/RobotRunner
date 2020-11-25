@@ -17,7 +17,7 @@ script = ExtResource( 5 )
 [node name="ChunckContainer" type="Node2D" parent="Map" index="5"]
 
 [node name="StartingPointP1" parent="." index="7" instance=ExtResource( 4 )]
-position = Vector2( 48, 144 )
+position = Vector2( 72, 132 )
 
 [node name="StartingPointP2" parent="." index="8" instance=ExtResource( 3 )]
-position = Vector2( 48, 420 )
+position = Vector2( 72, 420 )

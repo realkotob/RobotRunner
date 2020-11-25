@@ -55,8 +55,29 @@ func erase_automata_pos(pos: Vector2):
 		bin_map[pos.y][pos.x + 1] = 0
 		if pos.y - 1 >= 0:
 			bin_map[pos.y - 1][pos.x + 1] = 0
-	
-	emit_signal("bin_map_changed")
+
+
+func refine_chunck():
+	for i in range(chunck_tile_size.y):
+		for j in range(chunck_tile_size.x):
+			if i == 0 or j == 0 or i == chunck_tile_size.y - 1 or j == chunck_tile_size.x -1:
+				continue
+			var wall_neighbours : int = count_wall_neighbours(Vector2(j, i)) 
+			if bin_map[i][j] == 1 && wall_neighbours <= 1:
+				bin_map[i][j] = 0
+
+
+func count_wall_neighbours(pos: Vector2) -> int:
+	var nb_wall_neighbour : int = 0
+	if pos.x + 1 < chunck_tile_size.x && bin_map[pos.y][pos.x + 1] == 1:
+		nb_wall_neighbour += 1
+	if pos.x - 1 > 0 && bin_map[pos.y][pos.x - 1] == 1:
+		nb_wall_neighbour += 1
+	if pos.y + 1 < chunck_tile_size.y && bin_map[pos.y + 1][pos.x] == 1:
+		nb_wall_neighbour += 1
+	if pos.y - 1 > 0 && bin_map[pos.y - 1][pos.x] == 1:
+		nb_wall_neighbour += 1
+	return nb_wall_neighbour
 
 
 #### VIRTUALS ####
@@ -71,3 +92,7 @@ func erase_automata_pos(pos: Vector2):
 
 func on_automata_moved(to_pos: Vector2):
 	erase_automata_pos(to_pos)
+
+func on_automata_finished(_pos: Vector2):
+	refine_chunck()
+	emit_signal("bin_map_changed")

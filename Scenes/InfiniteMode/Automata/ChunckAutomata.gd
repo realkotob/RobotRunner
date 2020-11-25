@@ -1,14 +1,18 @@
 extends Node
 class_name ChunckAutomata
 
+export var debug : bool = false 
+
 var chunck_bin : ChunckBin = null 
 var bin_map_pos := Vector2.INF setget set_bin_map_pos, get_bin_map_pos
 
 var last_moves := PoolVector2Array()
 
+
 onready var move_timer = Timer.new()
 
 signal moved(to)
+signal finished(final_pos)
 
 #### ACCESSORS ####
 
@@ -36,16 +40,27 @@ func _init(chunck_binary: ChunckBin, pos: Vector2):
 
 
 func _ready():
-	add_child(move_timer)
-	move_timer.set_wait_time(0.1)
-	var _err = move_timer.connect("timeout", self, "on_move_timer_timeout")
 	emit_signal("moved", bin_map_pos)
+	var _err = connect("finished", get_parent(), "on_automata_finished")
+	_err = connect("finished", chunck_bin, "on_automata_finished")
+	
+	if debug:
+		add_child(move_timer)
+		move_timer.set_wait_time(0.1)
+		_err = move_timer.connect("timeout", self, "on_move_timer_timeout")
+	else:
+		var movement_finished : bool = false
+		while(!movement_finished):
+			movement_finished = move()
+		
+		emit_signal("finished", bin_map_pos)
+		queue_free()
 
 
 #### LOGIC ####
 
-func move() -> void:
-	
+
+func move() -> bool:
 	# Choose a movement
 	var chosen_move = choose_move()
 	
@@ -58,12 +73,13 @@ func move() -> void:
 	var projected_pos = bin_map_pos + chosen_move
 	if is_pos_inside_chunck(projected_pos):
 		set_bin_map_pos(projected_pos)
-	else: queue_free()
+		return false
+	else: 
+		return true
 
 
 
 func choose_move() -> Vector2:
-	var chunck_size = chunck_bin.chunck_tile_size
 	var near_celling : bool = is_near_ceiling()
 	var near_floor : bool = is_near_floor()
 	
@@ -74,6 +90,9 @@ func choose_move() -> Vector2:
 	
 	if near_floor or is_last_move(Vector2.UP):
 		possible_moves.erase(Vector2.DOWN)
+	
+	if near_chunck_end() or bin_map_pos.x == 0:
+		possible_moves = [Vector2.RIGHT]
 	
 	var random_id = randi() % possible_moves.size()
 	return possible_moves[random_id]
@@ -103,6 +122,10 @@ func is_near_floor() -> bool:
 		return bin_map_pos.y >= chunck_bin.chunck_tile_size.y - 2
 
 
+func near_chunck_end() -> bool:
+	return bin_map_pos.x >= chunck_bin.chunck_tile_size.x - 2
+
+
 func is_in_second_half() -> bool:
 	return bin_map_pos.y > chunck_bin.chunck_tile_size.y / 2
 
@@ -126,4 +149,4 @@ func _input(_event):
 #### SIGNAL RESPONSES ####
 
 func on_move_timer_timeout():
-	move()
+	var __ = move()

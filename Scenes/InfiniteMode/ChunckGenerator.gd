@@ -50,8 +50,7 @@ func stress_test(nb_test : int):
 func generate_level_chunck(is_first_chunck: bool = false) -> ChunckBin:
 	var starting_points := get_starting_points_cell_pos() if is_first_chunck else PoolVector2Array()
 	var chunck_bin = ChunckBin.new()
-	
-	free_automatas()
+
 	create_automatas(chunck_bin, starting_points)
 	
 	if debug:
@@ -60,12 +59,7 @@ func generate_level_chunck(is_first_chunck: bool = false) -> ChunckBin:
 	return chunck_bin
 
 
-func free_automatas() -> void:
-	for automata in automata_array:
-		automata.free()
-
-
-func create_automatas(chunck_bin, starting_points) -> void:
+func create_automatas(chunck_bin: ChunckBin, starting_points: PoolVector2Array) -> void:
 	automata_array = []
 	for point in starting_points:
 		var automata = ChunckAutomata.new(chunck_bin, point)
@@ -150,9 +144,6 @@ func place_level_chunck():
 
 #### INPUTS ####
 
-#func _input(_event):
-#	if Input.is_action_just_pressed("LevelChunckGen"):
-#		place_level_chunck()
 
 #### SIGNAL RESPONSES ####
 

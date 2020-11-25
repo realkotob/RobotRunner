@@ -47,9 +47,16 @@ func print_bin_map():
 
 
 func erase_automata_pos(pos: Vector2):
-	if bin_map[pos.y][pos.x] != 0:
-		bin_map[pos.y][pos.x] = 0
-		emit_signal("bin_map_changed")
+	bin_map[pos.y][pos.x] = 0
+	if pos.y - 1 >= 0:
+		bin_map[pos.y - 1][pos.x] = 0
+
+	if pos.x + 1 < chunck_tile_size.x:
+		bin_map[pos.y][pos.x + 1] = 0
+		if pos.y - 1 >= 0:
+			bin_map[pos.y - 1][pos.x + 1] = 0
+	
+	emit_signal("bin_map_changed")
 
 
 #### VIRTUALS ####

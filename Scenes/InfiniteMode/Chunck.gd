@@ -91,7 +91,10 @@ func place_rooms():
 		for i in range(room_rect.size.y):
 			for j in range(room_rect.size.x):
 				var pos = Vector2(j, i) + room_rect.position
-				chunck_bin.bin_map[pos.y][pos.x] = 0
+				if room.bin_map.empty():
+					chunck_bin.bin_map[pos.y][pos.x] = 0
+				else:
+					chunck_bin.bin_map[pos.y][pos.x] = room.bin_map[j][i]
 
 
 # Place the tiles in the tilemap according the the bin_map value
@@ -189,7 +192,7 @@ func is_cell_outside_chunck(cell: Vector2) -> bool:
 func find_room_form_cell(cell: Vector2) -> ChunckRoom:
 	for room in $Rooms.get_children():
 		var room_rect = room.get_room_rect()
-		if room_rect.has_point(cell): 
+		if room_rect.has_point(cell + Vector2.RIGHT): 
 			return room
 	return null
 

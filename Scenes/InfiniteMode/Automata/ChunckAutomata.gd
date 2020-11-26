@@ -64,12 +64,18 @@ func move() -> bool:
 	# Choose a movement
 	var room : ChunckRoom = chunck.find_room_form_cell(bin_map_pos)
 	var chosen_move = Vector2.ZERO
+	var room_rect := Rect2()
 	
-	chosen_move = choose_move()
-	
-	if room is SmallChunckRoom:
-		var room_rect = room.get_room_rect()
-		chosen_move = Vector2(room_rect.size.x - 1, 0)
+	if room != null:
+		room_rect = room.get_room_rect()
+		room.entry_point = Vector2(0, bin_map_pos.y - room.room_rect.position.y)
+		room.exit_point = room.entry_point + Vector2(room_rect.size.x -1, 0)
+		if room is SmallChunckRoom:
+			var random_y_offset = randi() % 3
+			var final_y = room_rect.size.y - room.entry_point.y - 1 - random_y_offset
+			chosen_move = Vector2(room_rect.size.x, final_y)
+		else:
+			chosen_move = Vector2(room_rect.size.x, 0)
 	else:
 		chosen_move = choose_move()
 	

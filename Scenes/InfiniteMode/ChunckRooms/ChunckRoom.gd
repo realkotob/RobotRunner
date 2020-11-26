@@ -5,6 +5,10 @@ export var min_room_size := Vector2(8, 6)
 export var max_room_size := Vector2(20, 9)
 
 var room_rect := Rect2() setget set_room_rect, get_room_rect
+var bin_map : Array = []
+
+var entry_point := Vector2.INF
+var exit_point := Vector2.INF
 
 #### ACCESSORS ####
 

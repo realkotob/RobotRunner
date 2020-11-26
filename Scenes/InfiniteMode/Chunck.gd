@@ -67,13 +67,13 @@ func place_slopes():
 				SLOPE_TYPE.ASCENDING: 
 					walls_tilemap.set_cell(cell.x, cell.y, slope_atlas,
 											false, false, false, Vector2.ZERO)
-					if is_cell_wall(cell + Vector2(-1, +1)) && is_cell_wall(cell + Vector2(0, 2)):
+					if is_cell_wall(cell + Vector2(-1, 1)) && is_cell_wall(cell + Vector2(0, 2)):
 						walls_tilemap.set_cell(cell.x, cell.y + 1, slope_atlas,
 											false, false, false, Vector2(1, 0))
 				SLOPE_TYPE.DESCENDING: 
 					walls_tilemap.set_cell(cell.x, cell.y, slope_atlas,
 											false, false, false, Vector2(1, 2))
-					if is_cell_wall(cell + Vector2(1, +1)) && is_cell_wall(cell + Vector2(0, 2)):
+					if is_cell_wall(cell + Vector2(1, 1)) && is_cell_wall(cell + Vector2(0, 2)):
 						walls_tilemap.set_cell(cell.x, cell.y +1, slope_atlas,
 											false, false, false, Vector2(1, 3))
 				_ : continue
@@ -92,11 +92,11 @@ func get_cell_stair_type(cell: Vector2) -> int:
 func is_cell_in_staircase(cell: Vector2, ascending: bool) -> bool:
 	if !is_cell_stair(cell, ascending): return false
 	if ascending:
-		return (is_cell_stair(cell + Vector2(-1, 1), true) && is_cell_floor(cell+ Vector2.RIGHT)\
-		&& !is_cell_stair(cell + Vector2.RIGHT, false)) or is_cell_slope(cell + Vector2(1, -1))
+		return (is_cell_stair(cell + Vector2(-1, 1), true) && \
+		!is_cell_stair(cell + Vector2.RIGHT, false)) or is_cell_slope(cell + Vector2(1, -1))
 	else:
-		return (is_cell_stair(cell + Vector2(1, 1), false) && is_cell_floor(cell+ Vector2.LEFT)\
-		&& !is_cell_stair(cell + Vector2.LEFT, false)) or is_cell_slope(cell + Vector2(-1, -1))
+		return (is_cell_stair(cell + Vector2(1, 1), false) && \
+		!is_cell_stair(cell + Vector2.LEFT, false)) or is_cell_slope(cell + Vector2(-1, -1))
 
 
 func is_cell_slope(cell: Vector2) -> bool:
@@ -106,12 +106,12 @@ func is_cell_slope(cell: Vector2) -> bool:
 
 
 func is_cell_stair(cell: Vector2, ascending: bool) -> bool:
-	if !is_cell_wall(cell): return false
+	if !is_cell_floor(cell): return false
 	if ascending:
-		return !is_cell_wall(cell + Vector2.UP) && !is_cell_wall(cell + Vector2.LEFT) && \
-			is_cell_wall(cell + Vector2.RIGHT) && is_cell_wall(cell + Vector2.DOWN)
+		return !is_cell_wall(cell + Vector2.LEFT) && is_cell_wall(cell + Vector2.RIGHT) && \
+			is_cell_wall(cell + Vector2.DOWN)
 	else:
-		return !is_cell_wall(cell + Vector2.UP) && is_cell_wall(cell + Vector2.LEFT) && \
+		return is_cell_wall(cell + Vector2.LEFT) && \
 			!is_cell_wall(cell + Vector2.RIGHT) && is_cell_wall(cell + Vector2.DOWN)
 
 

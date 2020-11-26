@@ -1,8 +1,6 @@
 extends Node2D
 class_name LevelChunck
 
-const min_room_size := Vector2(8, 6)
-const max_room_size := Vector2(20, 9)
 const max_nb_room : int = 3
 
 onready var walls_tilemap = $Walls
@@ -12,7 +10,6 @@ signal new_chunck_reached
 
 var chunck_bin : ChunckBin = null setget set_chunck_bin, get_chunck_bin
 
-var rooms_array := Array()
 var is_ready : bool = false
 var next_start_pos_array := PoolVector2Array()
 
@@ -42,32 +39,45 @@ func _ready():
 	is_ready = true
 	
 	place_wall_tiles()
-	generate_rooms()
-	room_debug_visualizer()
+	var last_room = generate_rooms()
+	
+	if last_room != null:
+		yield(last_room, "ready")
+		room_debug_visualizer()
 
 #### LOGIC ####
 
+func generate_rooms() -> Node:
+	var rng = randi() % 4
+	var room : Node = null
+	if rng == 0:
+		room = BigChunckRoom.new()
+		$Rooms.call_deferred("add_child", room)
+	else:
+		var nb_room = randi() % max_nb_room
+		for i in range(nb_room):
+			var next_room_half = SmallChunckRoom.ROOM_HALF.TOP_HALF
+			
+			if i == 0:
+				room = SmallChunckRoom.new()
+			else:
+				var last_room_half = room.get_room_half()
+				if last_room_half == next_room_half:
+					next_room_half = SmallChunckRoom.ROOM_HALF.BOTTOM_HALF
+			
+			room = SmallChunckRoom.new(next_room_half)
+			$Rooms.call_deferred("add_child", room)
+		
+	return room
 
-func generate_rooms():
-	var nb_room = randi() % max_nb_room
-	for _i in range(nb_room):
-		var size_x = int(rand_range(min_room_size.x, max_room_size.x + 1))
-		var size_y = int(rand_range(min_room_size.y, max_room_size.y + 1))
-		var room_size = Vector2(size_x, size_y)
-		
-		var pos_x = int(rand_range(1, chunck_bin.chunck_tile_size.x - size_x - 1))
-		var pos_y = int(rand_range(1, chunck_bin.chunck_tile_size.y - size_y - 1))
-		var room_pos = Vector2(pos_x, pos_y)
-		
-		var room_rect = Rect2(room_pos, room_size)
-		rooms_array.append(room_rect)
 
 func room_debug_visualizer():
-	for room in rooms_array:
+	for room in $Rooms.get_children():
 		var color_rect = ColorRect.new()
+		var room_rect = room.get_room_rect()
 		color_rect.set_frame_color(Color.red)
-		color_rect.set_position(room.position * GAME.TILE_SIZE)
-		color_rect.set_size(room.size * GAME.TILE_SIZE)
+		color_rect.set_position(room_rect.position * GAME.TILE_SIZE)
+		color_rect.set_size(room_rect.size * GAME.TILE_SIZE)
 		color_rect.color.a = 0.5
 		
 		call_deferred("add_child", color_rect)

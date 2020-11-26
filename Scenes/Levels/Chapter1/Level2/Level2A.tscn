@@ -25,9 +25,10 @@
 [ext_resource path="res://Scenes/Events/CameraEvents/CameraEvent.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Scenes/InteractiveObjects/Teleports/Types/RedTeleporter.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Scenes/InteractiveObjects/Teleports/Types/BlueTeleporter.tscn" type="PackedScene" id=25]
-[ext_resource path="res://Scenes/InteractiveObjects/Teleports/Types/PinkTP.tscn" type="PackedScene" id=26]
+[ext_resource path="res://Scenes/InteractiveObjects/Teleports/Types/PinkTeleporter.tscn" type="PackedScene" id=26]
 [ext_resource path="res://Scenes/Events/Checkpoint/NewStartingPoint1.tscn" type="PackedScene" id=27]
 [ext_resource path="res://Scenes/Events/Checkpoint/NewStartingPoint2.tscn" type="PackedScene" id=28]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 resource_local_to_scene = true

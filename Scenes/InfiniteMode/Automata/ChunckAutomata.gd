@@ -8,7 +8,6 @@ var bin_map_pos := Vector2.INF setget set_bin_map_pos, get_bin_map_pos
 
 var last_moves := PoolVector2Array()
 
-
 onready var move_timer = Timer.new()
 
 signal moved(to)
@@ -112,7 +111,7 @@ func is_near_ceiling() -> bool:
 	if !is_in_second_half():
 		return bin_map_pos.y <= 2
 	else:
-		return bin_map_pos.y <= chunck_bin.chunck_tile_size.y / 2 + 2
+		return bin_map_pos.y <= chunck_bin.chunck_tile_size.y / 2 + 3
 
 
 func is_near_floor() -> bool:
@@ -123,7 +122,7 @@ func is_near_floor() -> bool:
 
 
 func near_chunck_end() -> bool:
-	return bin_map_pos.x >= chunck_bin.chunck_tile_size.x - 2
+	return bin_map_pos.x >= chunck_bin.chunck_tile_size.x - 3
 
 
 func is_in_second_half() -> bool:

@@ -8,6 +8,9 @@ var noise : OpenSimplexNoise
 var noise_h_stretch_factor : float = 10
 var nb_chunck : int = 0
 
+
+var is_generating : bool = false
+
 export var debug : bool = false
 
 #### ACCESSORS ####
@@ -18,8 +21,8 @@ export var debug : bool = false
 
 func _ready():
 	randomize()
-#	place_level_chunck()
-	stress_test(10)
+	place_level_chunck()
+#	stress_test(10)
 
 #### LOGIC ####
 
@@ -71,6 +74,7 @@ func get_starting_points_cell_pos() -> PoolVector2Array:
 
 # Place a new chunck of level
 func place_level_chunck() -> LevelChunck:
+	is_generating = true
 	var chunck_container_node : Node2D = owner.find_node("ChunckContainer")
 	var starting_points := PoolVector2Array()
 	
@@ -103,6 +107,7 @@ func place_level_chunck() -> LevelChunck:
 	var _err = new_chunck.connect("new_chunck_reached", self, "on_new_chunck_reached")
 	
 	create_automatas(new_chunck, starting_points)
+	is_generating = false
 	
 	return new_chunck
 
@@ -119,4 +124,5 @@ func place_level_chunck() -> LevelChunck:
 #### SIGNAL RESPONSES ####
 
 func on_new_chunck_reached():
-	place_level_chunck()
+	if !is_generating:
+		place_level_chunck()

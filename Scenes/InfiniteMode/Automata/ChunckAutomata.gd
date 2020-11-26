@@ -4,6 +4,7 @@ class_name ChunckAutomata
 export var debug : bool = false 
 
 var chunck_bin : ChunckBin = null 
+onready var chunck = get_parent() 
 var bin_map_pos := Vector2.INF setget set_bin_map_pos, get_bin_map_pos
 
 var last_moves := PoolVector2Array()
@@ -40,7 +41,7 @@ func _init(chunck_binary: ChunckBin, pos: Vector2):
 
 func _ready():
 	emit_signal("moved", bin_map_pos)
-	var _err = connect("finished", get_parent(), "on_automata_finished")
+	var _err = connect("finished", chunck, "on_automata_finished")
 	_err = connect("finished", chunck_bin, "on_automata_finished")
 	
 	if debug:
@@ -61,7 +62,16 @@ func _ready():
 
 func move() -> bool:
 	# Choose a movement
-	var chosen_move = choose_move()
+	var room : ChunckRoom = chunck.find_room_form_cell(bin_map_pos)
+	var chosen_move = Vector2.ZERO
+	
+	chosen_move = choose_move()
+	
+	if room is SmallChunckRoom:
+		var room_rect = room.get_room_rect()
+		chosen_move = Vector2(room_rect.size.x - 1, 0)
+	else:
+		chosen_move = choose_move()
 	
 	# Update last moves
 	last_moves.append(chosen_move)

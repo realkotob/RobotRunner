@@ -39,12 +39,12 @@ func _ready():
 	is_ready = true
 	
 	place_wall_tiles()
-	var _last_room = generate_rooms()
+	var last_room = generate_rooms()
 	
-#	DEBUG
-#	if last_room != null:
-#		yield(last_room, "ready")
-#		room_debug_visualizer()
+	if last_room != null:
+		yield(last_room, "ready")
+		place_rooms()
+		#room_debug_visualizer()
 
 #### LOGIC ####
 
@@ -71,6 +71,7 @@ func generate_rooms() -> Node:
 		
 	return room
 
+
 # Display the room as a red semi transparant rectangle
 func room_debug_visualizer():
 	for room in $Rooms.get_children():
@@ -91,6 +92,7 @@ func place_rooms():
 			for j in range(room_rect.size.x):
 				var pos = Vector2(j, i) + room_rect.position
 				chunck_bin.bin_map[pos.y][pos.x] = 0
+
 
 # Place the tiles in the tilemap according the the bin_map value
 func place_wall_tiles():
@@ -181,6 +183,17 @@ func is_cell_outside_chunck(cell: Vector2) -> bool:
 	return cell.x < 0 or cell.y < 0 or\
 	cell.x >= chunck_bin.chunck_tile_size.x or cell.y >= chunck_bin.chunck_tile_size.y
 
+
+# Returns the rect of the room the given is in
+# Returns an empty Rect2 if the given pos isn't in a room
+func find_room_form_cell(cell: Vector2) -> ChunckRoom:
+	for room in $Rooms.get_children():
+		var room_rect = room.get_room_rect()
+		if room_rect.has_point(cell): 
+			return room
+	return null
+
+
 #### VIRTUALS ####
 
 
@@ -200,7 +213,6 @@ func on_body_entered(body: PhysicsBody2D):
 
 func on_bin_map_changed():
 	place_wall_tiles()
-	place_rooms()
 	walls_tilemap.update_bitmask_region(Vector2.ZERO, ChunckBin.chunck_tile_size)
 	place_slopes()
 

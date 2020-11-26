@@ -39,11 +39,12 @@ func _ready():
 	is_ready = true
 	
 	place_wall_tiles()
-	var last_room = generate_rooms()
+	var _last_room = generate_rooms()
 	
-	if last_room != null:
-		yield(last_room, "ready")
-		room_debug_visualizer()
+#	DEBUG
+#	if last_room != null:
+#		yield(last_room, "ready")
+#		room_debug_visualizer()
 
 #### LOGIC ####
 
@@ -70,7 +71,7 @@ func generate_rooms() -> Node:
 		
 	return room
 
-
+# Display the room as a red semi transparant rectangle
 func room_debug_visualizer():
 	for room in $Rooms.get_children():
 		var color_rect = ColorRect.new()
@@ -82,6 +83,14 @@ func room_debug_visualizer():
 		
 		call_deferred("add_child", color_rect)
 
+
+func place_rooms():
+	for room in $Rooms.get_children():
+		var room_rect : Rect2 = room.get_room_rect()
+		for i in range(room_rect.size.y):
+			for j in range(room_rect.size.x):
+				var pos = Vector2(j, i) + room_rect.position
+				chunck_bin.bin_map[pos.y][pos.x] = 0
 
 # Place the tiles in the tilemap according the the bin_map value
 func place_wall_tiles():
@@ -95,8 +104,6 @@ func place_wall_tiles():
 			var current_pos = Vector2(j, i)
 			if bin_noise_map[i][j] == 1:
 				walls_tilemap.set_cellv(current_pos, wall_tile_id)
-	
-	walls_tilemap.update_bitmask_region(Vector2.ZERO, chunck_tile_size)
 
 
 func place_slopes():
@@ -193,6 +200,8 @@ func on_body_entered(body: PhysicsBody2D):
 
 func on_bin_map_changed():
 	place_wall_tiles()
+	place_rooms()
+	walls_tilemap.update_bitmask_region(Vector2.ZERO, ChunckBin.chunck_tile_size)
 	place_slopes()
 
 

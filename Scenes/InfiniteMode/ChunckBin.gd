@@ -13,11 +13,7 @@ signal bin_map_changed
 func is_class(value: String): return value == "" or .is_class(value)
 func get_class() -> String: return ""
 
-func set_bin_map(map: Array): 
-	if map != null:
-		bin_map = map
-		emit_signal("bin_map_changed")
-
+func set_bin_map(map: Array): bin_map = map
 func get_bin_map() -> Array: return bin_map
 
 #### BUILT-IN ####

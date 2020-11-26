@@ -10,9 +10,6 @@ var nb_chunck : int = 0
 
 export var debug : bool = false
 
-var automata_array : Array = []
-
-
 #### ACCESSORS ####
 
 
@@ -21,8 +18,8 @@ var automata_array : Array = []
 
 func _ready():
 	randomize()
-	place_level_chunck()
-#	stress_test(10)
+#	place_level_chunck()
+	stress_test(10)
 
 #### LOGIC ####
 
@@ -37,16 +34,14 @@ func stress_test(nb_test : int):
 	var total_time = OS.get_ticks_msec() - time_before
 	
 	print("Generating " + String(nb_test) + " took " + String(total_time) + "ms")
-	print("Average generation time : " + String(float(nb_test) / total_time))
+	print("Average generation time : " + String(total_time / float(nb_test)) + "ms")
 	print("## CHUNCK GENERATION STRESS TEST FINISHED ##")
 
 
 # Generate a chunck of map, from a simplex noise, at the size of the playable area
 # Return the number of generations it took to generate the chunck 
-func generate_chunck_binary(starting_points : PoolVector2Array) -> ChunckBin:
+func generate_chunck_binary() -> ChunckBin:
 	var chunck_bin = ChunckBin.new()
-	
-	create_automatas(chunck_bin, starting_points)
 	
 	if debug:
 		chunck_bin.print_bin_map()
@@ -54,11 +49,10 @@ func generate_chunck_binary(starting_points : PoolVector2Array) -> ChunckBin:
 	return chunck_bin
 
 
-func create_automatas(chunck_bin: ChunckBin, starting_points: PoolVector2Array) -> void:
-	automata_array = []
+func create_automatas(chunck: LevelChunck, starting_points: PoolVector2Array) -> void:
 	for point in starting_points:
-		var automata = ChunckAutomata.new(chunck_bin, point)
-		automata_array.append(automata)
+		var automata = ChunckAutomata.new(chunck.chunck_bin, point)
+		chunck.call_deferred("add_child", automata)
 
 
 # Find the starting points, convert their position as cells and returns it in a PoolVector2Array
@@ -87,7 +81,7 @@ func place_level_chunck() -> LevelChunck:
 		var last_chunck = chunck_container_node.get_child(last_child_id - 1)
 		starting_points = last_chunck.next_start_pos_array
 	
-	var chunck_bin = generate_chunck_binary(starting_points)
+	var chunck_bin = generate_chunck_binary()
 	var chunck_tile_size = ChunckBin.chunck_tile_size
 	
 	var new_chunck = chunck_scene.instance()
@@ -108,8 +102,7 @@ func place_level_chunck() -> LevelChunck:
 	
 	var _err = new_chunck.connect("new_chunck_reached", self, "on_new_chunck_reached")
 	
-	for automata in automata_array:
-		new_chunck.call_deferred("add_child", automata)
+	create_automatas(new_chunck, starting_points)
 	
 	return new_chunck
 

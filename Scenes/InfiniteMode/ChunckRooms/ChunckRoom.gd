@@ -7,8 +7,7 @@ export var max_room_size := Vector2(20, 9)
 var room_rect := Rect2() setget set_room_rect, get_room_rect
 var bin_map : Array = []
 
-var entry_point := Vector2.INF
-var exit_point := Vector2.INF
+var entry_exit_couple_array := Array()
 
 #### ACCESSORS ####
 
@@ -46,3 +45,6 @@ func generate():
 
 
 #### SIGNAL RESPONSES ####
+
+func on_automata_entered(entry: Vector2, exit: Vector2):
+	entry_exit_couple_array.append([entry, exit])

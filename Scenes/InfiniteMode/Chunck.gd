@@ -13,6 +13,8 @@ var chunck_bin : ChunckBin = null setget set_chunck_bin, get_chunck_bin
 var is_ready : bool = false
 var next_start_pos_array := PoolVector2Array()
 
+var nb_automata : int = 2
+
 enum SLOPE_TYPE{
 	ASCENDING,
 	DESCENDING,
@@ -72,19 +74,7 @@ func generate_rooms() -> Node:
 	return room
 
 
-# Display the room as a red semi transparant rectangle
-func room_debug_visualizer():
-	for room in $Rooms.get_children():
-		var color_rect = ColorRect.new()
-		var room_rect = room.get_room_rect()
-		color_rect.set_frame_color(Color.red)
-		color_rect.set_position(room_rect.position * GAME.TILE_SIZE)
-		color_rect.set_size(room_rect.size * GAME.TILE_SIZE)
-		color_rect.color.a = 0.5
-		
-		call_deferred("add_child", color_rect)
-
-
+# Place the rooms in the chunck by carving modifing the chunck bin accordingly to the room bin
 func place_rooms():
 	for room in $Rooms.get_children():
 		var room_rect : Rect2 = room.get_room_rect()
@@ -111,6 +101,7 @@ func place_wall_tiles():
 				walls_tilemap.set_cellv(current_pos, wall_tile_id)
 
 
+# Replace the staircases with slopes
 func place_slopes():
 	var chunck_tile_size = ChunckBin.chunck_tile_size
 	var slope_atlas = walls_tilemap.get_tileset().find_tile_by_name("SlopesAtlas")
@@ -135,7 +126,8 @@ func place_slopes():
 				_ : continue
 
 
-
+# Take a cell, and return its slope type as defined in the SLOPE_TYPE enum
+# Return -1 if the cell isn't a stair
 func get_cell_stair_type(cell: Vector2) -> int:
 	if !is_cell_wall(cell): return -1
 	
@@ -145,6 +137,8 @@ func get_cell_stair_type(cell: Vector2) -> int:
 	return -1
 
 
+# Returns true if the cell is in a staircase
+# ie it must be a stair itself and there must be a stair before of after it
 func is_cell_in_staircase(cell: Vector2, ascending: bool) -> bool:
 	if !is_cell_stair(cell, ascending): return false
 	if ascending:
@@ -155,12 +149,14 @@ func is_cell_in_staircase(cell: Vector2, ascending: bool) -> bool:
 		!is_cell_stair(cell + Vector2.LEFT, false)) or is_cell_slope(cell + Vector2(-1, -1))
 
 
+# Returns true if the given cell is a slope
 func is_cell_slope(cell: Vector2) -> bool:
 	var slope_atlas = walls_tilemap.get_tileset().find_tile_by_name("SlopesAtlas")
 	var tile_id = walls_tilemap.get_cell(cell.x, cell.y)
 	return tile_id == slope_atlas
 
 
+# Verify if the given cell is a stair or not
 func is_cell_stair(cell: Vector2, ascending: bool) -> bool:
 	if !is_cell_floor(cell): return false
 	if ascending:
@@ -171,17 +167,21 @@ func is_cell_stair(cell: Vector2, ascending: bool) -> bool:
 			!is_cell_wall(cell + Vector2.RIGHT) && is_cell_wall(cell + Vector2.DOWN)
 
 
+# Verify if the given cell is a floor or not
 func is_cell_floor(cell: Vector2):
 	if is_cell_outside_chunck(cell + Vector2.UP): return false
 	return is_cell_wall(cell) && !is_cell_wall(cell + Vector2.UP)
 
 
+# Verify if the given cell is a wall cell or not 
+# (If their is any kind of wall tile on the cell, including slopes)
 func is_cell_wall(cell: Vector2) -> bool:
 	var bin_noise_map = chunck_bin.bin_map
 	if is_cell_outside_chunck(cell): return false
 	return bin_noise_map[cell.y][cell.x] == 1
 
 
+# Verify if the given cell is outside the chunck or not
 func is_cell_outside_chunck(cell: Vector2) -> bool:
 	return cell.x < 0 or cell.y < 0 or\
 	cell.x >= chunck_bin.chunck_tile_size.x or cell.y >= chunck_bin.chunck_tile_size.y
@@ -205,6 +205,39 @@ func find_room_form_cell(cell: Vector2) -> ChunckRoom:
 
 
 
+#### DEBUG ####
+
+# Display the room as a red semi transparant rectangle
+func room_debug_visualizer():
+	var tile_size = GAME.TILE_SIZE
+	
+	for room in $Rooms.get_children():
+		var color_rect = ColorRect.new()
+		var room_rect = room.get_room_rect()
+		color_rect.set_frame_color(Color.red)
+		color_rect.set_position(room_rect.position * tile_size)
+		color_rect.set_size(room_rect.size * tile_size)
+		color_rect.color.a = 0.5
+		
+		# Display entries and exits
+		for couple in room.entry_exit_couple_array:
+			var entry_color_rect = ColorRect.new()
+			entry_color_rect.set_position(color_rect.get_position() + (couple[0] * tile_size))
+			entry_color_rect.set_size(tile_size)
+			entry_color_rect.set_frame_color(Color.azure)
+			entry_color_rect.color.a = 0.5
+			
+			var exit_color_rect = ColorRect.new()
+			exit_color_rect.set_position(color_rect.get_position() + (couple[1] * tile_size))
+			exit_color_rect.set_size(tile_size)
+			entry_color_rect.set_frame_color(Color.violet)
+			entry_color_rect.color.a = 0.5
+			
+			call_deferred("add_child", entry_color_rect)
+			call_deferred("add_child", exit_color_rect)
+			call_deferred("add_child", color_rect)
+
+
 #### SIGNAL RESPONSES ####
 
 
@@ -215,11 +248,17 @@ func on_body_entered(body: PhysicsBody2D):
 
 
 func on_bin_map_changed():
-	place_wall_tiles()
-	walls_tilemap.update_bitmask_region(Vector2.ZERO, ChunckBin.chunck_tile_size)
-	place_slopes()
+	pass
 
 
 func on_automata_finished(final_pos: Vector2):
 	next_start_pos_array.append(Vector2(0, final_pos.y))
-	emit_signal("chunck_gen_finished")
+	nb_automata -= 1
+	
+	if nb_automata == 0:
+		place_wall_tiles()
+		walls_tilemap.update_bitmask_region(Vector2.ZERO, ChunckBin.chunck_tile_size)
+		place_slopes()
+		
+		emit_signal("chunck_gen_finished")
+		room_debug_visualizer()

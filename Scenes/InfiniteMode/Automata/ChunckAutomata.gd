@@ -13,6 +13,7 @@ onready var move_timer = Timer.new()
 
 signal moved(to)
 signal finished(final_pos)
+signal entered_room(entry_point, exit_point)
 
 #### ACCESSORS ####
 
@@ -75,9 +76,10 @@ func move() -> bool:
 	# If it's a big room, stay on the same y axis, if it's a small one
 	# set the y position to the bottom of the room so it is accesible from a jump
 	if room != null:
+		var _err = connect("entered_room", room, "on_automata_entered")
 		room_rect = room.get_room_rect()
-		room.entry_point = Vector2(0, bin_map_pos.y - room.room_rect.position.y)
-		room.exit_point = room.entry_point + Vector2(room_rect.size.x -1, 0)
+		var entry_point = Vector2(0, bin_map_pos.y - room.room_rect.position.y)
+		
 		if room is SmallChunckRoom:
 			var random_offset = (randi() % 3) * Vector2.UP
 			final_pos = room_rect.position + room_rect.size + random_offset + Vector2.UP
@@ -85,6 +87,9 @@ func move() -> bool:
 			var x = room_rect.position.x + room_rect.size.x
 			var y = clamp(bin_map_pos.y, room_rect.position.y, room_rect.position.y + room_rect.size.x)
 			final_pos = Vector2(x, y)
+		
+		emit_signal("entered_room", entry_point, final_pos - room_rect.position)
+		disconnect("entered_room", room, "on_automata_entered")
 	else:
 		chosen_move = choose_move()
 	
@@ -122,38 +127,44 @@ func choose_move() -> Vector2:
 	return possible_moves[random_id]
 
 
-
+# Compare the given move with the last move the automata has done.
+# Returns true if it is the same
 func is_last_move(move: Vector2) -> bool:
 	if last_moves.empty(): return false
 	return move == last_moves[last_moves.size() - 1]
 
 
+# Returns true if the two last moves of the automata are UP
 func are_two_last_moves_up() -> bool:
 	return last_moves.size() >= 2 && last_moves[0] == Vector2.UP && last_moves[1] == Vector2.UP
 
 
+# Returns true if the automata is close from the ceiling of its half
 func is_near_ceiling() -> bool:
-	if !is_in_second_half():
+	if !is_in_bottom_half():
 		return bin_map_pos.y <= 2
 	else:
 		return bin_map_pos.y <= chunck_bin.chunck_tile_size.y / 2 + 3
 
 
+# Returns true if the automata is close from the floor of its half
 func is_near_floor() -> bool:
-	if !is_in_second_half():
+	if !is_in_bottom_half():
 		return bin_map_pos.y >= chunck_bin.chunck_tile_size.y / 2 - 2
 	else:
 		return bin_map_pos.y >= chunck_bin.chunck_tile_size.y - 2
 
 
+# Returns true if the automata is close from the end of the floor
 func near_chunck_end() -> bool:
 	return bin_map_pos.x >= chunck_bin.chunck_tile_size.x - 3
 
-
-func is_in_second_half() -> bool:
+# Returns true if the automata is in the bottom half
+func is_in_bottom_half() -> bool:
 	return bin_map_pos.y > chunck_bin.chunck_tile_size.y / 2
 
 
+# Verify if the given position is inside the chunck
 func is_pos_inside_chunck(pos: Vector2):
 	return pos.x >= 0 && pos.y >= 0 \
 	&& pos.x < chunck_bin.chunck_tile_size.x && pos.y < chunck_bin.chunck_tile_size.y

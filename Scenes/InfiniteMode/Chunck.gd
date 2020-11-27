@@ -192,7 +192,7 @@ func is_cell_outside_chunck(cell: Vector2) -> bool:
 func find_room_form_cell(cell: Vector2) -> ChunckRoom:
 	for room in $Rooms.get_children():
 		var room_rect = room.get_room_rect()
-		if room_rect.has_point(cell + Vector2.RIGHT): 
+		if room_rect.has_point(cell): 
 			return room
 	return null
 

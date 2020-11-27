@@ -63,6 +63,11 @@ func refine_chunck():
 			var wall_neighbours : int = count_wall_neighbours(Vector2(j, i)) 
 			if bin_map[i][j] == 1 && wall_neighbours <= 1:
 				bin_map[i][j] = 0
+				
+				# Suppress the tile right above this one if its also a single tile
+				if i - 1 > 0 && bin_map[i - 1][j] == 1 && \
+				count_wall_neighbours(Vector2(j, i - 1)) <= 1:
+					bin_map[i - 1][j] = 0
 
 
 func count_wall_neighbours(pos: Vector2) -> int:

@@ -60,22 +60,31 @@ func _ready():
 #### LOGIC ####
 
 
+# Choose a movement, the movement can either be expressed if relative value (chosen_move)
+# or in absolute value (realtive to the whole chunck instead of relative to the automata pos)
+# if the final_pos is not set (is equal to Vector2.INF), the relative value will be used
+# if the final_pos have a value, the chosen_move should have the value of Vector2.INF
+# that way, we know this move was a teleportation
 func move() -> bool:
-	# Choose a movement
 	var room : ChunckRoom = chunck.find_room_form_cell(bin_map_pos)
-	var chosen_move = Vector2.ZERO
+	var chosen_move = Vector2.INF
+	var final_pos := Vector2.INF
 	var room_rect := Rect2()
 	
+	# If the current position is in a room, teleport to the other size of the room
+	# If it's a big room, stay on the same y axis, if it's a small one
+	# set the y position to the bottom of the room so it is accesible from a jump
 	if room != null:
 		room_rect = room.get_room_rect()
 		room.entry_point = Vector2(0, bin_map_pos.y - room.room_rect.position.y)
 		room.exit_point = room.entry_point + Vector2(room_rect.size.x -1, 0)
 		if room is SmallChunckRoom:
-			var random_y_offset = randi() % 3
-			var final_y = room_rect.size.y - room.entry_point.y - 1 - random_y_offset
-			chosen_move = Vector2(room_rect.size.x, final_y)
+			var random_offset = (randi() % 3) * Vector2.UP
+			final_pos = room_rect.position + room_rect.size + random_offset + Vector2.UP
 		else:
-			chosen_move = Vector2(room_rect.size.x, 0)
+			var x = room_rect.position.x + room_rect.size.x
+			var y = clamp(bin_map_pos.y, room_rect.position.y, room_rect.position.y + room_rect.size.x)
+			final_pos = Vector2(x, y)
 	else:
 		chosen_move = choose_move()
 	
@@ -85,7 +94,7 @@ func move() -> bool:
 		last_moves.remove(0)
 	
 	# Move the automata and check if the automata has finished moving (is outside the chunck)
-	var projected_pos = bin_map_pos + chosen_move
+	var projected_pos = bin_map_pos + chosen_move if final_pos == Vector2.INF else final_pos
 	if is_pos_inside_chunck(projected_pos):
 		set_bin_map_pos(projected_pos)
 		return false

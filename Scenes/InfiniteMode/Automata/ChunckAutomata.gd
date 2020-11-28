@@ -85,7 +85,7 @@ func move() -> bool:
 			final_pos = room_rect.position + room_rect.size + random_offset + Vector2.UP
 		else:
 			var x = room_rect.position.x + room_rect.size.x
-			var y = clamp(bin_map_pos.y, room_rect.position.y, room_rect.position.y + room_rect.size.x)
+			var y = clamp(bin_map_pos.y, room_rect.position.y + 2, room_rect.position.y + room_rect.size.x)
 			final_pos = Vector2(x, y)
 		
 		emit_signal("entered_room", entry_point, final_pos - room_rect.position)

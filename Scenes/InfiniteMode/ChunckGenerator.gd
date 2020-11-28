@@ -8,7 +8,6 @@ var noise : OpenSimplexNoise
 var noise_h_stretch_factor : float = 10
 var nb_chunck : int = 0
 
-
 var is_generating : bool = false
 
 export var debug : bool = false
@@ -55,6 +54,7 @@ func generate_chunck_binary() -> ChunckBin:
 func create_automatas(chunck: LevelChunck, starting_points: PoolVector2Array) -> void:
 	for point in starting_points:
 		var automata = ChunckAutomata.new(chunck.chunck_bin, point)
+		automata.name = "automata"
 		chunck.call_deferred("add_child", automata)
 
 

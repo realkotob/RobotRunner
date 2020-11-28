@@ -41,20 +41,18 @@ func _ready():
 	is_ready = true
 	
 	place_wall_tiles()
-	var last_room = generate_rooms()
-	
-	if last_room != null:
-		yield(last_room, "ready")
-		place_rooms()
-		#room_debug_visualizer()
+	var __ = generate_rooms()
+
 
 #### LOGIC ####
 
 func generate_rooms() -> Node:
-	var rng = randi() % 4
+	var rng = 0 #randi() % 4
 	var room : Node = null
 	if rng == 0:
 		room = BigChunckRoom.new()
+		room.name = "BigRoom"
+		room.chunck = self
 		$Rooms.call_deferred("add_child", room)
 	else:
 		var nb_room = randi() % max_nb_room
@@ -69,6 +67,8 @@ func generate_rooms() -> Node:
 					next_room_half = SmallChunckRoom.ROOM_HALF.BOTTOM_HALF
 			
 			room = SmallChunckRoom.new(next_room_half)
+			room.name = "SmallRoom"
+			room.chunck = self
 			$Rooms.call_deferred("add_child", room)
 		
 	return room
@@ -84,7 +84,8 @@ func place_rooms():
 				if room.bin_map.empty():
 					chunck_bin.bin_map[pos.y][pos.x] = 0
 				else:
-					chunck_bin.bin_map[pos.y][pos.x] = room.bin_map[j][i]
+					var room_cell = room.bin_map[i][j]
+					chunck_bin.bin_map[pos.y][pos.x] = room_cell
 
 
 # Place the tiles in the tilemap according the the bin_map value
@@ -214,20 +215,25 @@ func room_debug_visualizer():
 	for room in $Rooms.get_children():
 		var color_rect = ColorRect.new()
 		var room_rect = room.get_room_rect()
+		color_rect.name = "RoomColorRect"
 		color_rect.set_frame_color(Color.red)
 		color_rect.set_position(room_rect.position * tile_size)
 		color_rect.set_size(room_rect.size * tile_size)
 		color_rect.color.a = 0.5
 		
+		call_deferred("add_child", color_rect)
+		
 		# Display entries and exits
 		for couple in room.entry_exit_couple_array:
 			var entry_color_rect = ColorRect.new()
+			entry_color_rect.name = "EntryColorRect"
 			entry_color_rect.set_position(color_rect.get_position() + (couple[0] * tile_size))
 			entry_color_rect.set_size(tile_size)
 			entry_color_rect.set_frame_color(Color.azure)
 			entry_color_rect.color.a = 0.5
 			
 			var exit_color_rect = ColorRect.new()
+			exit_color_rect.name = "ExitColorRect"
 			exit_color_rect.set_position(color_rect.get_position() + (couple[1] * tile_size))
 			exit_color_rect.set_size(tile_size)
 			entry_color_rect.set_frame_color(Color.violet)
@@ -235,7 +241,6 @@ func room_debug_visualizer():
 			
 			call_deferred("add_child", entry_color_rect)
 			call_deferred("add_child", exit_color_rect)
-			call_deferred("add_child", color_rect)
 
 
 #### SIGNAL RESPONSES ####
@@ -256,6 +261,7 @@ func on_automata_finished(final_pos: Vector2):
 	nb_automata -= 1
 	
 	if nb_automata == 0:
+		place_rooms()
 		place_wall_tiles()
 		walls_tilemap.update_bitmask_region(Vector2.ZERO, ChunckBin.chunck_tile_size)
 		place_slopes()

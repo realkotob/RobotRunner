@@ -9,6 +9,7 @@ export var progression : Resource
 export var transition_time : float = 1.0
 
 const TILE_SIZE := Vector2(24, 24)
+const JUMP_MAX_DIST := Vector2(6, 2)
 
 var chapters_array = []
 var current_chapter : Resource = null

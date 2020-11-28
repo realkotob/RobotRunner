@@ -7,6 +7,8 @@ export var max_room_size := Vector2(20, 9)
 var room_rect := Rect2() setget set_room_rect, get_room_rect
 var bin_map : Array = []
 
+var chunck = null
+
 var entry_exit_couple_array := Array()
 
 #### ACCESSORS ####
@@ -35,6 +37,31 @@ func generate():
 	var room_pos = Vector2(pos_x, pos_y)
 	
 	set_room_rect(Rect2(room_pos, room_size))
+	create_bin_map()
+
+
+# Fill the bin map with 0, and set its size a the same size as the room
+func create_bin_map():
+	var room_size = get_room_rect().size
+	
+	for _i in range(room_size.y):
+		var line_array = Array()
+		for _j in range(room_size.x):
+			line_array.append(0)
+		bin_map.append(line_array)
+
+
+# Returns the top most couple of entry and exit
+func get_top_entry_exit_couple() -> Array:
+	var nb_couples = entry_exit_couple_array.size()
+	if nb_couples == 0: return []
+	elif nb_couples == 1: return entry_exit_couple_array[0]
+	
+	if entry_exit_couple_array[0][0].y < entry_exit_couple_array[1][0].y:
+		return entry_exit_couple_array[0]
+	else: 
+		return entry_exit_couple_array[1]
+
 
 #### VIRTUALS ####
 

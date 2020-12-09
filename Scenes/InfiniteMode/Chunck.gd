@@ -83,7 +83,7 @@ func place_rooms():
 			for j in range(room_rect.size.x):
 				var pos = Vector2(j, i) + room_rect.position
 				if room.bin_map.empty():
-					chunck_bin.bin_map[pos.y][pos.x] = 0
+					continue
 				else:
 					var room_cell = room.bin_map[i][j]
 					chunck_bin.bin_map[pos.y][pos.x] = room_cell
@@ -214,34 +214,37 @@ func room_debug_visualizer():
 	var tile_size = GAME.TILE_SIZE
 	
 	for room in $Rooms.get_children():
-		var color_rect = ColorRect.new()
+		var room_color_rect = ColorRect.new()
 		var room_rect = room.get_room_rect()
-		color_rect.name = "RoomColorRect"
-		color_rect.set_frame_color(Color.red)
-		color_rect.set_position(room_rect.position * tile_size)
-		color_rect.set_size(room_rect.size * tile_size)
-		color_rect.color.a = 0.5
+		room_color_rect.name = "RoomColorRect"
+		room_color_rect.set_frame_color(Color.red)
+		room_color_rect.set_position(room_rect.position * tile_size)
+		room_color_rect.set_size(room_rect.size * tile_size)
+		room_color_rect.color.a = 0.5
 		
-		call_deferred("add_child", color_rect)
+		call_deferred("add_child", room_color_rect)
 		
 		# Display entries and exits
 		for couple in room.entry_exit_couple_array:
-			var entry_color_rect = ColorRect.new()
-			entry_color_rect.name = "EntryColorRect"
-			entry_color_rect.set_position(color_rect.get_position() + (couple[0] * tile_size))
-			entry_color_rect.set_size(tile_size)
-			entry_color_rect.set_frame_color(Color.azure)
-			entry_color_rect.color.a = 0.5
+			var entry_cell = couple[0]
+			var exit_cell = couple[1]
 			
-			var exit_color_rect = ColorRect.new()
-			exit_color_rect.name = "ExitColorRect"
-			exit_color_rect.set_position(color_rect.get_position() + (couple[1] * tile_size))
-			exit_color_rect.set_size(tile_size)
-			entry_color_rect.set_frame_color(Color.violet)
-			entry_color_rect.color.a = 0.5
+			var entry_room_color_rect = ColorRect.new()
+			entry_room_color_rect.name = "EntryColorRect"
+			entry_room_color_rect.set_position(room_color_rect.get_position() + (entry_cell * tile_size))
+			entry_room_color_rect.set_size(tile_size)
+			entry_room_color_rect.set_frame_color(Color.azure)
+			entry_room_color_rect.color.a = 0.5
 			
-			call_deferred("add_child", entry_color_rect)
-			call_deferred("add_child", exit_color_rect)
+			var exit_room_color_rect = ColorRect.new()
+			exit_room_color_rect.name = "ExitColorRect"
+			exit_room_color_rect.set_position(room_color_rect.get_position() + (exit_cell * tile_size))
+			exit_room_color_rect.set_size(tile_size)
+			entry_room_color_rect.set_frame_color(Color.violet)
+			entry_room_color_rect.color.a = 0.5
+			 
+			call_deferred("add_child", entry_room_color_rect)
+			call_deferred("add_child", exit_room_color_rect)
 
 
 #### SIGNAL RESPONSES ####

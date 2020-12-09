@@ -54,7 +54,7 @@ func goto_last_level():
 
 	var level_to_load = load_level('res://Scenes/Levels/SavedLevel/saved_level.tscn')
 
-	#Handling players' progression => Xion ; Materials
+	# Handling players' progression => Xion ; Materials
 	update_collectable_progression()
 	get_tree().current_scene.queue_free()
 	

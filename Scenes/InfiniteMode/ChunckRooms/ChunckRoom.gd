@@ -40,6 +40,72 @@ func generate():
 	create_bin_map()
 
 
+# Generate the platforms in the room
+func place_platforms():
+	for couple in entry_exit_couple_array:
+		# If one exit is close enough from the ground, ignore it (Doesn't need platform)
+		if couple[1].y > room_rect.size.y - 2:
+			continue
+		 
+		var jump_max_dist : Vector2 = GAME.JUMP_MAX_DIST
+		var room_size = get_room_rect().size
+		
+		var nb_platform = int(round(room_size.x / jump_max_dist.x))
+		var entry_point_cell = get_playable_entry_point(couple[0])
+		var average_dist = int(room_size.x / nb_platform + 1)
+		
+		var last_platform_end = entry_point_cell
+		
+		var stair_needed : bool = entry_point_cell.y - couple[1].y > GAME.JUMP_MAX_DIST.y
+		
+		# Platform generation, loop through every platfroms
+		for i in range(nb_platform):
+			var platform_len = randi() % 2 + 2
+			var platform_start := Vector2.INF
+			if i == 0: 
+				platform_start = last_platform_end + Vector2(average_dist / 2, - i * int(stair_needed))
+			else:
+				platform_start = last_platform_end + Vector2(average_dist, - i * int(stair_needed))
+			
+			# Assure the platform position is at least 4 tiles away from the ceiling
+			platform_start = Vector2(platform_start.x, clamp(platform_start.y, 4, INF))
+			
+			# Loop through the cells resprensting a unit platform
+			for j in range(platform_len):
+				var current_x = platform_start.x + j
+				if current_x > room_size.x - 2 or platform_start.y + 1 >= bin_map.size(): 
+					continue
+				else: 
+					bin_map[platform_start.y + 1][current_x] = 1
+			
+			last_platform_end = platform_start + Vector2(platform_len, 0)
+
+
+# Convert the theorical entry point in the concrete one
+# ie the point from where the player can jump
+func get_playable_entry_point(entry: Vector2) -> Vector2:
+	var point = _cell_rel_to_abs(entry) + Vector2.LEFT
+	var chunck_bin_map = chunck.get_chunck_bin().bin_map
+	var chunck_size = ChunckBin.chunck_tile_size
+	
+	for i in range(chunck_size.y):
+		if chunck_bin_map[point.y + i][point.x] == 1:
+			return _cell_abs_to_rel(entry + Vector2(0, i - 1))
+	return _cell_abs_to_rel(point)
+
+
+# Convert a relative cell (relative to the room) to an absolute cell (relative to the whole chunck) 
+func _cell_rel_to_abs(cell: Vector2) -> Vector2:
+	return cell + room_rect.position
+
+# Convert a absolute cell (relative to the whole chunck) to a relative cell (relative to the room)
+func _cell_abs_to_rel(cell: Vector2, clamp_pos: bool = false) -> Vector2:
+	var rel_cell = cell - room_rect.position
+	if clamp_pos:
+		rel_cell = Vector2(clamp(rel_cell.x, 0, room_rect.size.x - 1),
+						   clamp(rel_cell.y, 0, room_rect.size.y - 1))
+	return rel_cell
+
 # Fill the bin map with 0, and set its size a the same size as the room
 func create_bin_map():
 	var room_size = get_room_rect().size
@@ -74,4 +140,4 @@ func get_top_entry_exit_couple() -> Array:
 #### SIGNAL RESPONSES ####
 
 func on_automata_entered(entry: Vector2, exit: Vector2):
-	entry_exit_couple_array.append([entry, exit])
+	entry_exit_couple_array.append([_cell_abs_to_rel(entry, true), _cell_abs_to_rel(exit, true)])

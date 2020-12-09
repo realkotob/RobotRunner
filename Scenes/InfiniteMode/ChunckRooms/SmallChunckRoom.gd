@@ -52,6 +52,7 @@ func generate():
 	var room_pos = Vector2(pos_x, pos_y)
 	
 	set_room_rect(Rect2(room_pos, room_size))
+	create_bin_map()
 
 
 #### VIRTUALS ####

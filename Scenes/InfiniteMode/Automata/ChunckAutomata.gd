@@ -78,17 +78,19 @@ func move() -> bool:
 	if room != null:
 		var _err = connect("entered_room", room, "on_automata_entered")
 		room_rect = room.get_room_rect()
-		var entry_point = Vector2(0, bin_map_pos.y - room.room_rect.position.y)
+		var entry_point = Vector2(0, bin_map_pos.y)
 		
 		if room is SmallChunckRoom:
 			var random_offset = (randi() % 3) * Vector2.UP
 			final_pos = room_rect.position + room_rect.size + random_offset + Vector2.UP
 		else:
 			var x = room_rect.position.x + room_rect.size.x
-			var y = clamp(bin_map_pos.y, room_rect.position.y + 2, room_rect.position.y + room_rect.size.x)
+			# Clamp the exit position so its not too close from the ceiling
+			# And it can't exceed the floor of the room
+			var y = clamp(bin_map_pos.y, room_rect.position.y + 4, room_rect.position.y + room_rect.size.x)
 			final_pos = Vector2(x, y)
 		
-		emit_signal("entered_room", entry_point, final_pos - room_rect.position)
+		emit_signal("entered_room", entry_point, final_pos)
 		disconnect("entered_room", room, "on_automata_entered")
 	else:
 		chosen_move = choose_move()

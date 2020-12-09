@@ -90,8 +90,8 @@ func get_playable_entry_point(entry: Vector2) -> Vector2:
 	
 	for i in range(chunck_size.y):
 		if chunck_bin_map[point.y + i][point.x] == 1:
-			return _cell_abs_to_rel(entry + Vector2(0, i - 1))
-	return _cell_abs_to_rel(point)
+			return entry + Vector2(0, i - 1)
+	return entry
 
 
 # Convert a relative cell (relative to the room) to an absolute cell (relative to the whole chunck) 

@@ -26,6 +26,13 @@ func load_next_level(level_name: String) -> Resource:
 	else:
 		return load(levels_scenes_array[level_id + 1])
 
+func get_level_name(id: int) -> String:
+	var level_path : String = levels_scenes_array[id]
+	var elem_array = level_path.split("/")
+	var file_name = elem_array[elem_array.size() - 1]
+	
+	return file_name.split(".")[0]
+
 # Return the index of a given string in a given array
 # Return -1 if the string wasn't found
 func find_level_id(level_name: String) -> int:

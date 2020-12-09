@@ -30,7 +30,7 @@ func save_level_as_tscn(level: Node2D):
 	var saved_level = PackedScene.new()
 	var level_name = level.get_name()
 	saved_level.pack(level)
-	var _err = ResourceSaver.save("res://Scenes/Levels/SavedLevel/tscn/saved_" + level_name + ".tscn", saved_level)
+	var _err = ResourceSaver.save("res://Scenes/Levels/SavedLevel/tscn/" + level_name + ".tscn", saved_level)
 	GAME.progression.saved_level = saved_level
 
 
@@ -66,7 +66,6 @@ func get_object_properties(object : Object, classname : String) -> Dictionary:
 
 
 # Convert the data to a JSON file
-# => Called by game.gd
 func save_level_properties_as_json(file_name : String, level : Level):
 	var dict_to_json : Dictionary = {}
 	serialize_level_properties(level, dict_to_json)

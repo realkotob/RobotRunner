@@ -18,9 +18,6 @@ var players_exited : int = 0
 
 var is_loaded_from_save : bool = false
 
-signal level_finished
-signal level_ready
-
 func is_class(value: String) -> bool:
 	return value == CLASS
 
@@ -29,18 +26,14 @@ func get_class() -> String:
 
 
 func _ready():
-	var _err = connect("level_finished", GAME, "on_level_finished")
-	_err = connect("level_ready", GAME, "on_level_ready")
-	
 	set_starting_points()
 	instanciate_players()
 	set_camera_position_on_start()
 	propagate_weakref_players_array()
 	
-	GAME.update_hud_collectable_progression()
 	MUSIC.play()
 	
-	emit_signal("level_ready", self)
+	EVENTS.emit_signal("level_ready", self)
 
 
 func _physics_process(_delta):
@@ -58,7 +51,7 @@ func on_player_exited(player : PhysicsBody2D):
 		players_array.remove(player_index)
 
 	if players_exited == 2:
-		emit_signal("level_finished")
+		EVENTS.emit_signal("level_finished", self)
 
 
 func on_player_in_danger():

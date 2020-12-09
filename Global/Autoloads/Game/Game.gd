@@ -3,6 +3,8 @@ extends Node2D
 onready var gameover_timer_node = $GameoverTimer
 onready var transition_timer_node = $TransitionTimer
 
+const SAVE_DIR : String = "res://Scenes/Levels/SavedLevel"
+
 export var debug : bool = false
 export var progression : Resource
 
@@ -25,6 +27,8 @@ var last_level_name : String
 func _ready():
 	var _err = gameover_timer_node.connect("timeout",self, "on_gameover_timer_timeout")
 	_err = transition_timer_node.connect("timeout",self, "on_transition_timer_timeout")
+	_err = EVENTS.connect("level_ready", self, "on_level_ready")
+	_err = EVENTS.connect("level_finished", self, "on_level_finished")
 
 
 #### LOGIC ####
@@ -34,48 +38,32 @@ func new_chapter():
 	current_chapter = chapters_array[progression.get_chapter()]
 
 
-# Reload the last level played
-# If from_start is true, reload the native level scene, else load the saved level scene
-
-### TO DELETE ###
-
-## CHECK METADATA TO SOLVE THE ISSUE ##
-## GAME CRASH WITH TWEEN AND TIMER ERRORS WHEN WE RETRY THE LEVEL AFTER CHECKPOINT ##
-## BUT THOSE ELEMENTS ARE STILL INSTANCIATED IN THE DISTANT ##
-
-func goto_last_level(from_start: bool = false):
-	var level_to_load_path : String = ""
-	var level_scene : PackedScene
-	var level_node
-
+# Try to find a save of the level to load it, if no save exits, reload the native level
+func goto_last_level():
 	if last_level_name == "":
 		print("GAME.goto_last_level needs a previous_level. previous level is currently null")
 		return
 
-	level_to_load_path = find_saved_level_path("res://Scenes/Levels/SavedLevel/tscn/", last_level_name)
+	var loaded_from_save : bool = false
+	var level_scene : PackedScene
+	var level_to_load_path : String = find_saved_level_path(SAVE_DIR + "/tscn/", last_level_name)
 
-	print (get_tree().get_current_scene().name)
+	# If no save of the current level exists, reload the same scene
+	if level_to_load_path != "":
+		level_scene = load(level_to_load_path)
+		loaded_from_save = true
 
-	if from_start:
-		level_scene = current_chapter.load_level(0)
-		level_node = level_scene.instance()
+	# If a save exists, load it
 	else:
-		if level_to_load_path != "":
-			level_scene = load(level_to_load_path)
-			level_node = level_scene.instance()
-			level_node.is_loaded_from_save = true
-		else:
-			level_scene = load(current_chapter.find_level_path(last_level_name))
-			var _err = get_tree().change_scene_to(level_scene)
-			return
+		level_scene = load(current_chapter.find_level_path(last_level_name))
 
-	update_collectable_progression()
+	var __ = get_tree().change_scene_to(level_scene)
 
-	var current_scene = get_tree().get_current_scene()
-	current_scene.queue_free()
-	yield(current_scene, "tree_exited")
-	get_tree().get_root().add_child(level_node)
-	get_tree().set_current_scene(level_node)
+	if loaded_from_save:
+		yield(EVENTS, "level_ready")
+		var level = get_tree().get_current_scene()
+		$LevelSaver.build_level_from_loaded_properties(level)
+
 
 
 # Change scene to the next level scene
@@ -83,6 +71,7 @@ func goto_last_level(from_start: bool = false):
 # Which means the last level will be launched again
 func goto_next_level():
 	var next_level : PackedScene = null
+	var next_level_id : int = 0
 
 	progression.set_checkpoint(-1)
 	update_collectable_progression()
@@ -91,8 +80,16 @@ func goto_next_level():
 		next_level = current_chapter.load_level(0)
 	else:
 		next_level = current_chapter.load_next_level(last_level_name)
+		next_level_id = current_chapter.find_level_id(last_level_name) + 1
+
+	var next_level_name = current_chapter.get_level_name(next_level_id)
+	delete_level_temp_saves(next_level_name)
 
 	var _err = get_tree().change_scene_to(next_level)
+
+	yield(EVENTS, "level_ready")
+	var level = get_tree().get_current_scene()
+	$LevelSaver.save_level_properties_as_json(level.get_name(), level)
 
 func save_level(_level : Node2D):
 	var saved_level = PackedScene.new()
@@ -169,6 +166,19 @@ func find_saved_level_path(dir_path: String, level_name: String) -> String:
 				else:
 					current_file_name = dir.get_next()
 	return ""
+
+
+# Delete the .tscn and .json temporary saves
+static func delete_level_temp_saves(level_name: String):
+	var dir = Directory.new()
+	var tscn_path : String = SAVE_DIR + "/tscn/" + level_name + ".tscn"
+	var json_path : String = SAVE_DIR + "/json/" + level_name + ".json"
+
+	if dir.file_exists(tscn_path):
+		dir.remove(tscn_path)
+
+	if dir.file_exists(json_path):
+		dir.remove(json_path)
 
 
 # Save the players' level progression into the main game progression
@@ -299,7 +309,7 @@ func _input(_event):
 #### SIGNAL RESPONSES ####
 
 # Called when a level is finished: wait for the transition to be finished
-func on_level_finished():
+func on_level_finished(_level : Level):
 	fade_out()
 	transition_timer_node.start()
 

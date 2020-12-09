@@ -36,6 +36,13 @@ func new_chapter():
 
 # Reload the last level played
 # If from_start is true, reload the native level scene, else load the saved level scene
+
+### TO DELETE ###
+
+## CHECK METADATA TO SOLVE THE ISSUE ##
+## GAME CRASH WITH TWEEN AND TIMER ERRORS WHEN WE RETRY THE LEVEL AFTER CHECKPOINT ##
+## BUT THOSE ELEMENTS ARE STILL INSTANCIATED IN THE DISTANT ##
+
 func goto_last_level(from_start: bool = false):
 	var level_to_load_path : String = ""
 	var level_scene : PackedScene

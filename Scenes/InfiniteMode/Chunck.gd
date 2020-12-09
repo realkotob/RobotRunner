@@ -10,6 +10,7 @@ signal new_chunck_reached
 
 var chunck_bin : ChunckBin = null setget set_chunck_bin, get_chunck_bin
 
+var first_chunck : bool = false
 var is_ready : bool = false
 var next_start_pos_array := PoolVector2Array()
 
@@ -47,7 +48,7 @@ func _ready():
 #### LOGIC ####
 
 func generate_rooms() -> Node:
-	var rng = 0 #randi() % 4
+	var rng = 1 if first_chunck else 0 #randi() % 4
 	var room : Node = null
 	if rng == 0:
 		room = BigChunckRoom.new()

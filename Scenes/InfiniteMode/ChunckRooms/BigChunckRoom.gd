@@ -20,7 +20,7 @@ func _init():
 func place_platforms():
 	for couple in entry_exit_couple_array:
 		# If one exit is close enough from the ground, ignore it (Doesn't need platform)
-		if couple[1].y > room_rect.size.y - 2:
+		if couple[1].y + room_rect.position.y > room_rect.size.y - 2:
 			continue
 		 
 		var jump_max_dist : Vector2 = GAME.JUMP_MAX_DIST
@@ -30,10 +30,16 @@ func place_platforms():
 		var last_platform_end = get_playable_entry_point(couple[0])
 		var average_dist = int(room_size.x / nb_platform + 1)
 		
-		for _i in range(nb_platform):
+		# Platform generation, loop through every platfroms
+		for i in range(nb_platform):
 			var platform_len = randi() % 2 + 2
-			var platform_start = last_platform_end + Vector2(average_dist, 0)
+			var platform_start := Vector2.INF
+			if i == 0: 
+				platform_start = last_platform_end + Vector2(average_dist / 2, 0)
+			else:
+				platform_start = last_platform_end + Vector2(average_dist, 0)
 			
+			# Loop through the cells resprensting a unit platform
 			for j in range(platform_len):
 				var current_x = platform_start.x + j
 				if current_x > room_size.x - 2 or platform_start.y + 1 >= bin_map.size(): 

@@ -92,6 +92,9 @@ func place_level_chunck() -> LevelChunck:
 	new_chunck.set_position(GAME.TILE_SIZE * Vector2(chunck_tile_size.x, 0) * nb_chunck)
 	new_chunck.set_name("LevelChunck" + String(nb_chunck))
 	
+	if nb_chunck == 0:
+		new_chunck.first_chunck = true
+	
 	nb_chunck += 1
 	
 	if chunck_container_node.get_child_count() > 2:

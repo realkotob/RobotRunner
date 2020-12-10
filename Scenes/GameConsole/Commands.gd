@@ -68,6 +68,9 @@ func exec_cmd():
 				
 				# WE COULD ADD TO THE MESSAGE THE ARGUMENTS PASSED?
 				console_cmdlog_node.add_item(" > : " + target_method + " called in " + target)
+				
+				get_tree().paused = !get_tree().paused
+				queue_free()
 				return
 		
 		console_cmdlog_node.add_item(" > : The target method can't be found in the target node")

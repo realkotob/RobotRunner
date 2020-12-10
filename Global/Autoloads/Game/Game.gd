@@ -64,8 +64,6 @@ func goto_last_level():
 		var level = get_tree().get_current_scene()
 		$LevelSaver.build_level_from_loaded_properties(level)
 
-
-
 # Change scene to the next level scene
 # If the last level was not in the list, set the progression to -1
 # Which means the last level will be launched again
@@ -91,17 +89,18 @@ func goto_next_level():
 	var level = get_tree().get_current_scene()
 	$LevelSaver.save_level_properties_as_json(level.get_name(), level)
 
-func save_level(_level : Node2D):
-	var saved_level = PackedScene.new()
-	saved_level.pack(get_tree().get_current_scene())
-	var __ = ResourceSaver.save("res://Scenes/Levels/SavedLevel/saved_level.tscn", saved_level)
-	progression.saved_level = saved_level
+func goto_level(level_index : int):
+	var level : PackedScene = null
+	var level_id : int = 0
 
-# Load the given level then returns it
-func load_level(level_path : String) -> PackedScene:
-	var level_to_load = load(level_path)
-	return level_to_load
+	progression.set_checkpoint(-1)
+	update_collectable_progression()
 
+	level = current_chapter.load_level(level_index-1)
+	var level_name = current_chapter.get_level_name(level_id)
+	delete_level_temp_saves(level_name)
+
+	var _err = get_tree().change_scene_to(level)
 
 # Triggers the timer before the gameover is triggered
 # Called when a player die
@@ -182,7 +181,7 @@ static func delete_level_temp_saves(level_name: String):
 
 
 # Save the players' level progression into the main game progression
->>>>>>> f41f351 (refacto goto_last_level and goto_next_level)
+
 func update_collectable_progression():
 	progression.set_main_xion(SCORE.get_xion())
 	progression.set_main_materials(SCORE.get_materials())

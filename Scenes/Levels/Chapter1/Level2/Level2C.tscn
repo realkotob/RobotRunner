@@ -35,7 +35,7 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 124.587, 289.079, 0, 0, 0, 0, 4047.73, 277.073 )
 }
 
-[node name="Level2B" instance=ExtResource( 3 )]
+[node name="Level2C" instance=ExtResource( 3 )]
 
 [node name="StartingPointP1" parent="." index="0" instance=ExtResource( 2 )]
 position = Vector2( 96, 288 )

@@ -1,6 +1,13 @@
 extends Node2D
 class_name LevelChunck
 
+var interactive_object_dict : Dictionary = {
+	"RedTeleporter": preload("res://Scenes/InteractiveObjects/Teleports/Types/RedTeleporter.tscn"),
+	"BlueTeleporter": preload("res://Scenes/InteractiveObjects/Teleports/Types/BlueTeleporter.tscn"),
+	"GreenTeleporter": preload("res://Scenes/InteractiveObjects/Teleports/Types/GreenTeleporter.tscn")
+}
+
+
 const max_nb_room : int = 3
 
 onready var walls_tilemap = $Walls
@@ -15,6 +22,8 @@ var is_ready : bool = false
 var next_start_pos_array := PoolVector2Array()
 
 var nb_automata : int = 2
+
+var object_to_add : Array = []
 
 enum SLOPE_TYPE{
 	ASCENDING,
@@ -40,15 +49,17 @@ func get_chunck_bin() -> ChunckBin: return chunck_bin
 func _ready():
 	var _err = $Area2D.connect("body_entered", self, "on_body_entered")
 	is_ready = true
-	
-	place_wall_tiles()
-	var __ = generate_rooms()
 
 
 #### LOGIC ####
 
+func generate_self():
+	place_wall_tiles()
+	var __ = generate_rooms()
+
+
 func generate_rooms() -> Node:
-	var rng = 1 if first_chunck else 0 #randi() % 4
+	var rng = 1 if first_chunck else randi() % 4
 	var room : Node = null
 	if rng == 0:
 		room = BigChunckRoom.new()
@@ -199,6 +210,20 @@ func find_room_form_cell(cell: Vector2) -> ChunckRoom:
 	return null
 
 
+# Genrerate the interactive objects in the chunck 
+func generate_objects():
+	for element in object_to_add:
+		if element is Node2D:
+			call_deferred("add_child", element)
+		elif element is Array:
+			call_deferred("add_child", element[0])
+			yield(element[0], "tree_entered")
+			
+			for i in range(element.size()):
+				if i == 0: continue
+				element[0].call_deferred("add_child", element[i])
+
+
 #### VIRTUALS ####
 
 
@@ -259,6 +284,8 @@ func on_body_entered(body: PhysicsBody2D):
 func on_bin_map_changed():
 	pass
 
+func on_automata_moved(_automata: ChunckAutomata, _to: Vector2):
+	pass
 
 func on_automata_finished(final_pos: Vector2):
 	next_start_pos_array.append(Vector2(0, final_pos.y))
@@ -270,5 +297,7 @@ func on_automata_finished(final_pos: Vector2):
 		walls_tilemap.update_bitmask_region(Vector2.ZERO, ChunckBin.chunck_tile_size)
 		place_slopes()
 		
+		generate_objects()
+		
 		emit_signal("chunck_gen_finished")
-		room_debug_visualizer()
+#		room_debug_visualizer()

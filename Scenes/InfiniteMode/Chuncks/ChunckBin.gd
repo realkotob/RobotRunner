@@ -43,6 +43,7 @@ func print_bin_map():
 
 
 func erase_automata_pos(pos: Vector2):
+	pos = Vector2(int(pos.x), int(pos.y))
 	bin_map[pos.y][pos.x] = 0
 	if pos.y - 1 >= 0:
 		bin_map[pos.y - 1][pos.x] = 0
@@ -94,7 +95,7 @@ func count_wall_neighbours(pos: Vector2) -> int:
 
 #### SIGNAL RESPONSES ####
 
-func on_automata_moved(to_pos: Vector2):
+func on_automata_moved(_automata: Object, to_pos: Vector2):
 	erase_automata_pos(to_pos)
 
 func on_automata_finished(_pos: Vector2):

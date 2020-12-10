@@ -95,7 +95,7 @@ func place_platforms():
 				
 				# Assure the last platform is close enough from the exit
 				if last_platform:
-					current_y = clamp(current_y, couple[1].y + 1, couple[1].y + 2)
+					current_y = int(clamp(current_y, couple[1].y + 1, couple[1].y + 2))
 				
 				if current_x > room_size.x - 3 or platform_start.y + 1 >= bin_map.size(): 
 					continue

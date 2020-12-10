@@ -4,14 +4,14 @@ class_name ChunckAutomata
 export var debug : bool = false 
 
 var chunck_bin : ChunckBin = null 
-onready var chunck = get_parent() 
+var chunck = null
 var bin_map_pos := Vector2.INF setget set_bin_map_pos, get_bin_map_pos
 
 var last_moves := PoolVector2Array()
 
 onready var move_timer = Timer.new()
 
-signal moved(to)
+signal moved(automata, to)
 signal finished(final_pos)
 signal entered_room(entry_point, exit_point)
 
@@ -26,7 +26,7 @@ func get_class() -> String:
 func set_bin_map_pos(value: Vector2):
 	if value != Vector2.INF && value != bin_map_pos:
 		bin_map_pos = value
-		emit_signal("moved", bin_map_pos)
+		emit_signal("moved", self, bin_map_pos)
 
 func get_bin_map_pos() -> Vector2:
 	return bin_map_pos
@@ -41,9 +41,10 @@ func _init(chunck_binary: ChunckBin, pos: Vector2):
 
 
 func _ready():
-	emit_signal("moved", bin_map_pos)
+	emit_signal("moved", self, bin_map_pos)
 	var _err = connect("finished", chunck, "on_automata_finished")
 	_err = connect("finished", chunck_bin, "on_automata_finished")
+	_err = connect("moved", chunck, "on_automata_moved")
 	
 	if debug:
 		add_child(move_timer)

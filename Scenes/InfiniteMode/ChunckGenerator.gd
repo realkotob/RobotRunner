@@ -1,7 +1,11 @@
 extends Node
 class_name ChunckGenerator
 
-var chunck_scene = preload("res://Scenes/InfiniteMode/Chunck.tscn")
+var normal_chunck_scene = preload("res://Scenes/InfiniteMode/Chuncks/Chunck.tscn")
+var special_chunck_scene_array = [
+	preload("res://Scenes/InfiniteMode/Chuncks/CrossChunck.tscn")
+]
+
 
 var noise : OpenSimplexNoise
 
@@ -51,10 +55,23 @@ func generate_chunck_binary() -> ChunckBin:
 	return chunck_bin
 
 
+func generate_chunck() -> LevelChunck:
+	var rng = randi() % 4
+	var chunck : LevelChunck
+	var rdm_id 
+	if rng == 3:
+		rdm_id = randi() % special_chunck_scene_array.size()
+		chunck = special_chunck_scene_array[rdm_id].instance()
+	else:
+		chunck = normal_chunck_scene.instance()
+	
+	return chunck
+
 func create_automatas(chunck: LevelChunck, starting_points: PoolVector2Array) -> void:
 	for point in starting_points:
 		var automata = ChunckAutomata.new(chunck.chunck_bin, point)
 		automata.name = "automata"
+		automata.chunck = chunck
 		chunck.call_deferred("add_child", automata)
 
 
@@ -88,7 +105,7 @@ func place_level_chunck() -> LevelChunck:
 	var chunck_bin = generate_chunck_binary()
 	var chunck_tile_size = ChunckBin.chunck_tile_size
 	
-	var new_chunck = chunck_scene.instance()
+	var new_chunck = generate_chunck()
 	new_chunck.set_position(GAME.TILE_SIZE * Vector2(chunck_tile_size.x, 0) * nb_chunck)
 	new_chunck.set_name("LevelChunck" + String(nb_chunck))
 	
@@ -115,10 +132,7 @@ func place_level_chunck() -> LevelChunck:
 	return new_chunck
 
 
-
-
 #### VIRTUALS ####
-
 
 
 #### INPUTS ####

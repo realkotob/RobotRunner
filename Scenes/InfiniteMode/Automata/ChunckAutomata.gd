@@ -8,6 +8,7 @@ var chunck = null
 var bin_map_pos := Vector2.INF setget set_bin_map_pos, get_bin_map_pos
 
 var last_moves := PoolVector2Array()
+var stoped : bool = false setget set_stoped, is_stoped
 
 onready var move_timer = Timer.new()
 
@@ -31,6 +32,13 @@ func set_bin_map_pos(value: Vector2):
 func get_bin_map_pos() -> Vector2:
 	return bin_map_pos
 
+func set_stoped(value: bool): 
+	stoped = value
+	if stoped == false:
+		automata_carving_movement()
+
+func is_stoped() -> bool: return stoped
+
 
 #### BUILT-IN ####
 
@@ -51,15 +59,23 @@ func _ready():
 		move_timer.set_wait_time(0.1)
 		_err = move_timer.connect("timeout", self, "on_move_timer_timeout")
 	else:
-		var movement_finished : bool = false
-		while(!movement_finished):
-			movement_finished = move()
-		
-		emit_signal("finished", bin_map_pos)
-		queue_free()
+		automata_carving_movement()
 
 
 #### LOGIC ####
+
+
+func automata_carving_movement() -> void:
+	var movement_finished : bool = false
+	
+	while(!stoped):
+		movement_finished = move()
+		if movement_finished:
+			set_stoped(true)
+	
+	if movement_finished:
+		emit_signal("finished", bin_map_pos)
+		queue_free()
 
 
 # Choose a movement, the movement can either be expressed if relative value (chosen_move)

@@ -61,6 +61,7 @@ func place_platforms():
 		
 		# Platform generation, loop through every platfroms
 		for i in range(nb_platform):
+			var last_platform : bool = i == nb_platform - 1
 			var platform_len = randi() % 2 + 2
 			var platform_x_dist = average_dist + int(round(rand_range(-1.0, 1.0)))
 			var rdm_y_offset = int(round(rand_range(-1.0, 1.0)))
@@ -82,10 +83,16 @@ func place_platforms():
 			# Loop through the cells resprensting a unit platform
 			for j in range(platform_len):
 				var current_x = platform_start.x + j
+				var current_y = platform_start.y + 1
+				
+				# Assure the last platform is close enough from the exit
+				if last_platform:
+					current_y = clamp(current_y, couple[1].y + 1, couple[1].y + 2)
+				
 				if current_x > room_size.x - 3 or platform_start.y + 1 >= bin_map.size(): 
 					continue
 				else: 
-					bin_map[platform_start.y + 1][current_x] = 1
+					bin_map[current_y][current_x] = 1
 			
 			last_platform_end = platform_start + Vector2(platform_len, 0)
 

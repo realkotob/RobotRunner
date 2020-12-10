@@ -17,6 +17,7 @@ func _init():
 	max_room_size = ChunckBin.chunck_tile_size - Vector2(2, 2)
 
 
+# Enlarge the entry and the exit of the room, so its easier to reach by jumping
 func enlarge_entry_exit(tile_wide: int = randi() % 2 + 3):
 	for couple in entry_exit_couple_array:
 		var entry_abs_cell = _cell_rel_to_abs(couple[0]) + Vector2.LEFT

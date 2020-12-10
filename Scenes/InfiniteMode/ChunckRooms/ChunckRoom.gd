@@ -57,7 +57,10 @@ func place_platforms():
 		var last_platform_end : Vector2 = entry_point_cell
 		var platform_avg_y = entry_point_cell.y
 		
+		var half_chuck_y = int(ChunckBin.chunck_tile_size.y / 2) 
+		var first_half : bool = couple[0].y + room_rect.position.y <= half_chuck_y
 		var stair_needed : bool = entry_point_cell.y - couple[1].y > GAME.JUMP_MAX_DIST.y
+		
 		
 		# Platform generation, loop through every platfroms
 		for i in range(nb_platform):
@@ -78,12 +81,17 @@ func place_platforms():
 			var platform_start := Vector2(last_platform_end.x, platform_avg_y + rdm_y_offset) + dist
 			
 			# Assure the platform position is at least 4 tiles away from the ceiling & 2 away from the floor
-			platform_start = Vector2(platform_start.x, clamp(platform_start.y, 4, room_rect.size.y - 3))
+			platform_start = Vector2(platform_start.x, clamp(platform_start.y + 1, 4, room_rect.size.y - 3))
 			
 			# Loop through the cells resprensting a unit platform
 			for j in range(platform_len):
 				var current_x = platform_start.x + j
-				var current_y = platform_start.y + 1
+				var current_y = platform_start.y
+				
+				if first_half:
+					current_y = clamp(current_y, 4, half_chuck_y)
+				else:
+					current_y = clamp(current_y, half_chuck_y + 4, room_size.y - 1)
 				
 				# Assure the last platform is close enough from the exit
 				if last_platform:

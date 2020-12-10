@@ -44,7 +44,7 @@ func generate():
 func place_platforms():
 	for couple in entry_exit_couple_array:
 		# If one exit is close enough from the ground, ignore it (Doesn't need platform)
-		if couple[1].y > room_rect.size.y - 2:
+		if couple[1].y > room_rect.size.y - 3:
 			continue
 		 
 		var jump_max_dist : Vector2 = GAME.JUMP_MAX_DIST
@@ -52,28 +52,37 @@ func place_platforms():
 		
 		var nb_platform = int(round(room_size.x / jump_max_dist.x))
 		var entry_point_cell = get_playable_entry_point(couple[0])
-		var average_dist = int(room_size.x / nb_platform + 1)
+		var average_dist = int(room_size.x / nb_platform + 1) - 2
 		
-		var last_platform_end = entry_point_cell
+		var last_platform_end : Vector2 = entry_point_cell
+		var platform_avg_y = entry_point_cell.y
 		
 		var stair_needed : bool = entry_point_cell.y - couple[1].y > GAME.JUMP_MAX_DIST.y
 		
 		# Platform generation, loop through every platfroms
 		for i in range(nb_platform):
 			var platform_len = randi() % 2 + 2
-			var platform_start := Vector2.INF
-			if i == 0: 
-				platform_start = last_platform_end + Vector2(average_dist / 2, - i * int(stair_needed))
-			else:
-				platform_start = last_platform_end + Vector2(average_dist, - i * int(stair_needed))
+			var platform_x_dist = average_dist + int(round(rand_range(-1.0, 1.0)))
+			var rdm_y_offset = int(round(rand_range(-1.0, 1.0)))
 			
-			# Assure the platform position is at least 4 tiles away from the ceiling
-			platform_start = Vector2(platform_start.x, clamp(platform_start.y, 4, INF))
+			# Assure the first platform is close enough from the starting point
+			# But far enough for it not to block the way
+			# it should also always be a the level of the starting point or lower
+			if i == 0: 
+				platform_x_dist /= 2
+				platform_x_dist = clamp(platform_x_dist, 2, INF)
+				rdm_y_offset = clamp(rdm_y_offset, 0 , 1.0)
+			
+			var dist := Vector2(platform_x_dist, - i * int(stair_needed))
+			var platform_start := Vector2(last_platform_end.x, platform_avg_y + rdm_y_offset) + dist
+			
+			# Assure the platform position is at least 4 tiles away from the ceiling & 2 away from the floor
+			platform_start = Vector2(platform_start.x, clamp(platform_start.y, 4, room_rect.size.y - 3))
 			
 			# Loop through the cells resprensting a unit platform
 			for j in range(platform_len):
 				var current_x = platform_start.x + j
-				if current_x > room_size.x - 2 or platform_start.y + 1 >= bin_map.size(): 
+				if current_x > room_size.x - 3 or platform_start.y + 1 >= bin_map.size(): 
 					continue
 				else: 
 					bin_map[platform_start.y + 1][current_x] = 1

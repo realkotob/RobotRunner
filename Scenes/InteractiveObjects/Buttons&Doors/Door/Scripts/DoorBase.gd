@@ -23,13 +23,15 @@ func get_class() -> String:
 #### BUILT-IN ####
 
 func _ready():
-	if need_delay:  		#If the door has a delay before opening we will create the timer
-							#to open it after an amount of time
-		timer_door = Timer.new()
-		add_child(timer_door)
-		timer_door.connect("timeout", self, "_on_doortimer_timeout")
-		timer_door.set_wait_time(open_delay)
-	if is_open:
+	if !is_open:
+		if need_delay:  		#If the door has a delay before opening we will create the timer
+								#to open it after an amount of time
+			timer_door = Timer.new()
+			add_child(timer_door)
+			timer_door.connect("timeout", self, "_on_doortimer_timeout")
+			timer_door.set_wait_time(open_delay)
+			timer_door.set_one_shot(true)
+	else:
 		open_door(true)
 
 

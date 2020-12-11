@@ -43,7 +43,7 @@ func open_door(instant : bool = false):
 			# Triggers the camera movement
 			GAME.move_camera_to(position, !focus_on_door, -1.0, 3.0)
 		else:
-			animation_node.play("Open", -1, 10, false)
+			animation_node.advance(5)
 	
 	if collision_node != null:
 		collision_node.set_disabled(true)

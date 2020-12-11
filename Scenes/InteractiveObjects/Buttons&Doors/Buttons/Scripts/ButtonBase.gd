@@ -26,8 +26,7 @@ func get_class() -> String:
 func _ready():
 	collision_shape_initial_pos = collision_shape_node.position
 	if is_push:
-		animation_node.set_frame(animation_node.get_sprite_frames().get_frame_count("default")-1)
-		collision_shape_node.set_disabled(true)
+		update_button_state_to_pushed()
 		
 #### LOGIC ####
 
@@ -38,6 +37,12 @@ func setup():
 	_err = area2D_node.connect("body_entered", self, "on_body_entered")
 	_err = animation_node.connect("frame_changed", self, "on_frame_change")
 	_err = animation_node.connect("animation_finished", self, "on_animation_finished")
+
+# If a level load and a button is already pushed
+# Set its state to pushed state (animation, signals, etc...)
+func update_button_state_to_pushed():
+	animation_node.set_frame(animation_node.get_sprite_frames().get_frame_count("default")-1)
+	animation_node.play()
 
 #### SIGNAL RESPONSES ####
 
@@ -53,7 +58,6 @@ func on_animation_finished():
 	emit_signal("button_trigger")
 	collision_shape_node.set_disabled(true)
 	is_push = true
-
 
 # Move the shape at the same time as the sprite
 func on_frame_change():

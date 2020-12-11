@@ -27,8 +27,10 @@ local_coords = false
 process_material = ExtResource( 2 )
 
 [node name="WaterShader" parent="." index="3" instance=ExtResource( 3 )]
-position = Vector2( -0.588234, -19.4496 )
-scale = Vector2( 5.10604, 1.87992 )
+position = Vector2( 0, 0 )
+scale = Vector2( 1, 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 512, 184 )
 
 [node name="WaterLight" parent="WaterShader" index="0" instance=ExtResource( 4 )]
 position = Vector2( -2.38419e-07, 1.90735e-06 )

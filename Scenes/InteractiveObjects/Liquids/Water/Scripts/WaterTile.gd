@@ -21,6 +21,12 @@ func is_class(value: String):
 func get_class() -> String:
 	return "Water"
 
+func set_pool_size(size: Vector2):
+	set_scale(Vector2.ONE)
+	$WaterShader.set_scale(Vector2.ONE)
+	$WaterShader.set_region(true)
+	$WaterShader.set_region_rect(Rect2(Vector2.ZERO, size))
+	$CollisionShape2D.get_shape().set_extents(size / 2)
 
 #### LOGIC ####
 

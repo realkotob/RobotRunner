@@ -13,6 +13,7 @@ onready var walls_tilemap = $Walls
 
 signal chunck_gen_finished
 signal new_chunck_reached
+signal every_automata_finished
 
 var chunck_bin : ChunckBin = null setget set_chunck_bin, get_chunck_bin
 
@@ -67,7 +68,7 @@ func generate_self():
 	place_slopes()
 	
 	generate_objects()
-	#room_debug_visualizer()
+#	room_debug_visualizer()
 	emit_signal("chunck_gen_finished")
 
 
@@ -103,13 +104,17 @@ func generate_rooms() -> Node:
 			room.name = "SmallRoom"
 			room.chunck = self
 			$Rooms.call_deferred("add_child", room)
-		
 	return room
 
 
 # Place the rooms in the chunck by carving modifing the chunck bin accordingly to the room bin
 func place_rooms():
 	for room in $Rooms.get_children():
+		
+		# If no automata has entered this room, ignore it
+		if room.entry_exit_couple_array.empty():
+			continue
+		
 		var room_rect : Rect2 = room.get_room_rect()
 		for i in range(room_rect.size.y):
 			for j in range(room_rect.size.x):
@@ -119,6 +124,8 @@ func place_rooms():
 				else:
 					var room_cell = room.bin_map[i][j]
 					chunck_bin.bin_map[pos.y][pos.x] = room_cell
+		
+		object_to_add += room.interactive_objects
 
 
 # Place the tiles in the tilemap according the the bin_map value
@@ -316,4 +323,5 @@ func on_automata_finished(final_pos: Vector2):
 	nb_automata -= 1
 	
 	if nb_automata == 0:
+		emit_signal("every_automata_finished")
 		generate_self()

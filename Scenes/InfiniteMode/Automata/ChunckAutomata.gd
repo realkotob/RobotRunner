@@ -113,6 +113,8 @@ func move() -> bool:
 		
 		emit_signal("entered_room", entry_point, final_pos)
 		disconnect("entered_room", room, "on_automata_entered")
+		
+		forced_moves.append(Vector2.RIGHT)
 	else:
 		chosen_move = choose_move()
 	

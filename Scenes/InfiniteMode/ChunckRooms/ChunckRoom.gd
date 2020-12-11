@@ -1,6 +1,8 @@
 extends Node
 class_name ChunckRoom
 
+var water_scene = preload("res://Scenes/InteractiveObjects/Liquids/Water/Water.tscn")
+
 export var min_room_size := Vector2(8, 6)
 export var max_room_size := Vector2(20, 9)
 
@@ -10,6 +12,8 @@ var bin_map : Array = []
 var chunck = null
 
 var entry_exit_couple_array := Array()
+var interactive_objects := Array()
+
 
 #### ACCESSORS ####
 
@@ -23,7 +27,11 @@ func get_room_rect() -> Rect2: return room_rect
 #### BUILT-IN ####
 
 func _ready():
+	var _err = chunck.connect("every_automata_finished", self, "on_every_automata_finished")
+	
 	generate()
+
+
 
 #### LOGIC ####
 
@@ -153,15 +161,43 @@ func get_top_entry_exit_couple() -> Array:
 		return entry_exit_couple_array[1]
 
 
+# Generate a liquid in the room of the conditions are met
+func generate_liquids():
+	var lowest_access = find_lowest_room_access()
+	var y_max_pool_size = room_rect.size.y - lowest_access.y - 1
+	
+	if y_max_pool_size <= 1:
+		return
+	
+	var water_node = water_scene.instance()
+	interactive_objects.append(water_node)
+	
+	var pool_size = Vector2(room_rect.size.x, y_max_pool_size) * GAME.TILE_SIZE
+	water_node.set_pool_size(pool_size)
+	
+	var pos = (room_rect.position + room_rect.size) * GAME.TILE_SIZE - pool_size / 2
+	water_node.set_position(pos)
+
+
+# Find the lowest access to the room (The closest access to the floor pf the room)
+func find_lowest_room_access() -> Vector2:
+	var lowest_access := -Vector2.INF
+	for couple in entry_exit_couple_array:
+		for access in couple:
+			if access.y > lowest_access.y:
+				lowest_access = access
+	return lowest_access
+
 #### VIRTUALS ####
 
 
-
 #### INPUTS ####
-
 
 
 #### SIGNAL RESPONSES ####
 
 func on_automata_entered(entry: Vector2, exit: Vector2):
 	entry_exit_couple_array.append([_cell_abs_to_rel(entry, true), _cell_abs_to_rel(exit, true)])
+
+func on_every_automata_finished():
+	pass

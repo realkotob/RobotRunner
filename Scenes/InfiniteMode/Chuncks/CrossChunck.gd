@@ -5,6 +5,8 @@ var automata_arrived : Array = []
 var automata_ready_to_teleport : Array = []
 var chunck_quarter = ChunckBin.chunck_tile_size.x / 4
 
+var already_teleported : bool = false
+
 #### ACCESSORS ####
 
 func is_class(value: String): return value == "CrossChunck" or .is_class(value)
@@ -39,7 +41,7 @@ func teleport_automatas() -> void:
 		var automata_pos = automata_pos_array[i]
 		var other_aut_pos = automata_pos_array[other_aut_id]
 		
-		var dest_cell = Vector2(int(chunck_quarter * 3), other_aut_pos.y)
+		var dest_cell = Vector2(int(chunck_quarter * 3) - 3, other_aut_pos.y)
 		automata.set_bin_map_pos(dest_cell)
 		
 		var group := Node2D.new()
@@ -56,10 +58,11 @@ func teleport_automatas() -> void:
 	
 	
 	for automata in automata_ready_to_teleport:
-		automata.forced_moves += [Vector2.RIGHT, Vector2.RIGHT, Vector2.RIGHT]
+		automata.forced_moves += [Vector2.RIGHT, Vector2.RIGHT]
 		automata.set_stoped(false)
 	
 	automata_ready_to_teleport = []
+	already_teleported = true
 
 
 #### INPUTS ####
@@ -69,7 +72,7 @@ func teleport_automatas() -> void:
 #### SIGNAL RESPONSES ####
 
 func on_automata_moved(automata: ChunckAutomata, to: Vector2):
-	if automata in automata_arrived:
+	if automata in automata_arrived or already_teleported:
 		return
 	
 	if to.x >= chunck_quarter:

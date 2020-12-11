@@ -74,15 +74,6 @@ func generate_chunck() -> LevelChunck:
 	return chunck
 
 
-# Create an automata, and add it to the chunck
-func create_automatas(chunck: LevelChunck, starting_points: PoolVector2Array) -> void:
-	for point in starting_points:
-		var automata = ChunckAutomata.new(chunck.chunck_bin, point)
-		automata.name = "automata"
-		automata.chunck = chunck
-		chunck.call_deferred("add_child", automata)
-
-
 # Retruns the last chunck created
 func get_last_chunck() -> Node:
 	var nb_chuncks = chunck_container_node.get_child_count()
@@ -120,6 +111,7 @@ func place_level_chunck() -> LevelChunck:
 	var chunck_tile_size = ChunckBin.chunck_tile_size
 	
 	var new_chunck = generate_chunck()
+	new_chunck.starting_points = starting_points
 	new_chunck.set_position(GAME.TILE_SIZE * Vector2(chunck_tile_size.x, 0) * nb_chunck)
 	new_chunck.set_name("LevelChunck" + String(nb_chunck))
 	
@@ -141,9 +133,7 @@ func place_level_chunck() -> LevelChunck:
 	
 	var _err = new_chunck.connect("new_chunck_reached", self, "on_new_chunck_reached")
 	
-	create_automatas(new_chunck, starting_points)
 	is_generating = false
-	
 	return new_chunck
 
 

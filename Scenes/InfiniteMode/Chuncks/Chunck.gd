@@ -18,6 +18,7 @@ var chunck_bin : ChunckBin = null setget set_chunck_bin, get_chunck_bin
 
 var first_chunck : bool = false
 var is_ready : bool = false
+var starting_points : Array = []
 var next_start_pos_array := PoolVector2Array()
 
 var nb_automata : int = 2
@@ -48,18 +49,18 @@ func get_chunck_bin() -> ChunckBin: return chunck_bin
 func _ready():
 	var _err = $Area2D.connect("body_entered", self, "on_body_entered")
 	is_ready = true
-
-
-#### LOGIC ####
-
-func generate_self():
 	
-	place_wall_tiles()
 	var last_room = generate_rooms()
 	
 	if last_room != null:
 		yield(last_room, "ready")
 	
+	create_automatas()
+
+
+#### LOGIC ####
+
+func generate_self():
 	place_rooms()
 	place_wall_tiles()
 	walls_tilemap.update_bitmask_region(Vector2.ZERO, ChunckBin.chunck_tile_size)
@@ -68,6 +69,14 @@ func generate_self():
 	generate_objects()
 	#room_debug_visualizer()
 	emit_signal("chunck_gen_finished")
+
+
+func create_automatas() -> void:
+	for point in starting_points:
+		var automata = ChunckAutomata.new(chunck_bin, point)
+		automata.name = "automata"
+		automata.chunck = self
+		call_deferred("add_child", automata)
 
 
 func generate_rooms() -> Node:
@@ -296,14 +305,11 @@ func on_body_entered(body: PhysicsBody2D):
 func on_bin_map_changed():
 	pass
 
-
 func on_automata_moved(_automata: ChunckAutomata, _to: Vector2):
 	pass
 
-
 func on_automata_forced_move_finished(_automata: ChunckAutomata, _pos: Vector2):
 	pass
-
 
 func on_automata_finished(final_pos: Vector2):
 	next_start_pos_array.append(Vector2(0, final_pos.y))
@@ -311,4 +317,3 @@ func on_automata_finished(final_pos: Vector2):
 	
 	if nb_automata == 0:
 		generate_self()
-

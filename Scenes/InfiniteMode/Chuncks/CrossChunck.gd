@@ -24,11 +24,10 @@ func _ready():
 
 #### LOGIC ####
 
-func generate_self():
-	place_wall_tiles()
-	walls_tilemap.update_bitmask_region(Vector2.ZERO, ChunckBin.chunck_tile_size)
-	place_slopes()
-	generate_objects()
+
+# Function overide - No room should be generated in that chunck
+func generate_rooms() -> Node:
+	return null
 
 
 # Teleport the automatas so they invert their position
@@ -58,7 +57,6 @@ func teleport_automatas() -> void:
 		exit_teleporter.set_position((dest_cell + Vector2.RIGHT) * GAME.TILE_SIZE + GAME.TILE_SIZE / 2)
 		
 		object_to_add.append([group, entry_teleporter, exit_teleporter])
-	
 	
 	for automata in automata_ready_to_teleport:
 		automata.forced_moves += [Vector2.RIGHT, Vector2.RIGHT]

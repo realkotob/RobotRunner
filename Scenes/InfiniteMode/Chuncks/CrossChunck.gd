@@ -1,4 +1,4 @@
-extends LevelChunck
+extends SpecialChunck
 class_name CrossChunck
 
 var automata_arrived : Array = []
@@ -26,6 +26,9 @@ func _ready():
 
 func generate_self():
 	place_wall_tiles()
+	walls_tilemap.update_bitmask_region(Vector2.ZERO, ChunckBin.chunck_tile_size)
+	place_slopes()
+	generate_objects()
 
 
 # Teleport the automatas so they invert their position

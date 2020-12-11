@@ -7,7 +7,6 @@ var interactive_object_dict : Dictionary = {
 	"GreenTeleporter": preload("res://Scenes/InteractiveObjects/Teleports/Types/GreenTeleporter.tscn")
 }
 
-
 const max_nb_room : int = 3
 
 onready var walls_tilemap = $Walls
@@ -54,8 +53,21 @@ func _ready():
 #### LOGIC ####
 
 func generate_self():
+	
 	place_wall_tiles()
-	var __ = generate_rooms()
+	var last_room = generate_rooms()
+	
+	if last_room != null:
+		yield(last_room, "ready")
+	
+	place_rooms()
+	place_wall_tiles()
+	walls_tilemap.update_bitmask_region(Vector2.ZERO, ChunckBin.chunck_tile_size)
+	place_slopes()
+	
+	generate_objects()
+	#room_debug_visualizer()
+	emit_signal("chunck_gen_finished")
 
 
 func generate_rooms() -> Node:
@@ -298,12 +310,5 @@ func on_automata_finished(final_pos: Vector2):
 	nb_automata -= 1
 	
 	if nb_automata == 0:
-		place_rooms()
-		place_wall_tiles()
-		walls_tilemap.update_bitmask_region(Vector2.ZERO, ChunckBin.chunck_tile_size)
-		place_slopes()
-		
-		generate_objects()
-		
-		emit_signal("chunck_gen_finished")
-#		room_debug_visualizer()
+		generate_self()
+

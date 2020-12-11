@@ -134,7 +134,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/GameConsole/Commands.gd"
 }, {
-"base": "LevelChunck",
+"base": "SpecialChunck",
 "class": "CrossChunck",
 "language": "GDScript",
 "path": "res://Scenes/InfiniteMode/Chuncks/CrossChunck.gd"
@@ -314,6 +314,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/InfiniteMode/ChunckRooms/SmallChunckRoom.gd"
 }, {
+"base": "LevelChunck",
+"class": "SpecialChunck",
+"language": "GDScript",
+"path": "res://Scenes/InfiniteMode/Chuncks/SpecialChunck.gd"
+}, {
 "base": "Node",
 "class": "StateBase",
 "language": "GDScript",
@@ -416,6 +421,7 @@ _global_script_class_icons={
 "SFX_group_base": "",
 "ScreenTitleMenu": "",
 "SmallChunckRoom": "",
+"SpecialChunck": "",
 "StateBase": "",
 "StatesMachine": "",
 "SubMenuBase": "",

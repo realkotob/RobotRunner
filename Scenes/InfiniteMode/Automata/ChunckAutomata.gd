@@ -10,11 +10,14 @@ var bin_map_pos := Vector2.INF setget set_bin_map_pos, get_bin_map_pos
 var last_moves := PoolVector2Array()
 var stoped : bool = false setget set_stoped, is_stoped
 
+var forced_moves = []
+
 onready var move_timer = Timer.new()
 
 signal moved(automata, to)
 signal finished(final_pos)
 signal entered_room(entry_point, exit_point)
+signal forced_move_finished(automata, pos)
 
 #### ACCESSORS ####
 
@@ -53,6 +56,7 @@ func _ready():
 	var _err = connect("finished", chunck, "on_automata_finished")
 	_err = connect("finished", chunck_bin, "on_automata_finished")
 	_err = connect("moved", chunck, "on_automata_moved")
+	_err = connect("forced_move_finished", chunck, "on_automata_forced_move_finished")
 	
 	if debug:
 		add_child(move_timer)
@@ -130,6 +134,12 @@ func move() -> bool:
 func choose_move() -> Vector2:
 	var near_celling : bool = is_near_ceiling()
 	var near_floor : bool = is_near_floor()
+	
+	if !forced_moves.empty():
+		var move = forced_moves.pop_front()
+		if forced_moves.empty():
+			emit_signal("forced_move_finished", self, get_bin_map_pos() + move)
+		return move
 	
 	var possible_moves = [Vector2.RIGHT, Vector2.UP, Vector2.DOWN]
 	

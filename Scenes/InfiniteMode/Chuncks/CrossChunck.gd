@@ -2,6 +2,7 @@ extends LevelChunck
 class_name CrossChunck
 
 var automata_arrived : Array = []
+var automata_ready_to_teleport : Array = []
 var chunck_quarter = ChunckBin.chunck_tile_size.x / 4
 
 #### ACCESSORS ####
@@ -25,13 +26,15 @@ func generate_self():
 	place_wall_tiles()
 
 
+# Teleport the automatas so they invert their position
 func teleport_automatas() -> void:
+	automata_arrived = []
 	var automata_pos_array : Array = []
-	for automata in automata_arrived:
+	for automata in automata_ready_to_teleport:
 		automata_pos_array.append(automata.get_bin_map_pos())
 	
-	for i in range(automata_arrived.size()):
-		var automata = automata_arrived[i]
+	for i in range(automata_ready_to_teleport.size()):
+		var automata = automata_ready_to_teleport[i]
 		var other_aut_id : int = 0 if i == 1 else 1
 		var automata_pos = automata_pos_array[i]
 		var other_aut_pos = automata_pos_array[other_aut_id]
@@ -47,12 +50,16 @@ func teleport_automatas() -> void:
 		var exit_teleporter = interactive_object_dict[tel_type].instance()
 		
 		entry_teleporter.set_position(automata_pos * GAME.TILE_SIZE + GAME.TILE_SIZE / 2)
-		exit_teleporter.set_position(dest_cell * GAME.TILE_SIZE + GAME.TILE_SIZE / 2)
+		exit_teleporter.set_position((dest_cell + Vector2.RIGHT) * GAME.TILE_SIZE + GAME.TILE_SIZE / 2)
 		
 		object_to_add.append([group, entry_teleporter, exit_teleporter])
 	
-	for automata in automata_arrived:
+	
+	for automata in automata_ready_to_teleport:
+		automata.forced_moves += [Vector2.RIGHT, Vector2.RIGHT, Vector2.RIGHT]
 		automata.set_stoped(false)
+	
+	automata_ready_to_teleport = []
 
 
 #### INPUTS ####
@@ -67,9 +74,13 @@ func on_automata_moved(automata: ChunckAutomata, to: Vector2):
 	
 	if to.x >= chunck_quarter:
 		automata_arrived.append(automata)
-		automata.set_stoped(true)
-	
-	if automata_arrived.size() == 2:
-		teleport_automatas()
+		automata.forced_moves += [Vector2.RIGHT, Vector2.RIGHT, Vector2.RIGHT]
 
+
+func on_automata_forced_move_finished(automata: ChunckAutomata, _pos: Vector2):
+	automata.set_stoped(true)
+	automata_ready_to_teleport.append(automata)
+	
+	if automata_ready_to_teleport.size() == 2:
+		teleport_automatas()
 

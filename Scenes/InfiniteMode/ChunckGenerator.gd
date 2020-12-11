@@ -27,6 +27,7 @@ func _ready():
 	place_level_chunck()
 #	stress_test(10)
 
+
 #### LOGIC ####
 
 func stress_test(nb_test : int):
@@ -55,6 +56,8 @@ func generate_chunck_binary() -> ChunckBin:
 	return chunck_bin
 
 
+# Generate a chunck
+# Have a chance on 4 to create a Cross chunck
 func generate_chunck() -> LevelChunck:
 	var rng = randi() % 4
 	var chunck : LevelChunck
@@ -67,6 +70,8 @@ func generate_chunck() -> LevelChunck:
 	
 	return chunck
 
+
+# Create an automata, and add it to the chunck
 func create_automatas(chunck: LevelChunck, starting_points: PoolVector2Array) -> void:
 	for point in starting_points:
 		var automata = ChunckAutomata.new(chunck.chunck_bin, point)

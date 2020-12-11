@@ -284,8 +284,14 @@ func on_body_entered(body: PhysicsBody2D):
 func on_bin_map_changed():
 	pass
 
+
 func on_automata_moved(_automata: ChunckAutomata, _to: Vector2):
 	pass
+
+
+func on_automata_forced_move_finished(_automata: ChunckAutomata, _pos: Vector2):
+	pass
+
 
 func on_automata_finished(final_pos: Vector2):
 	next_start_pos_array.append(Vector2(0, final_pos.y))

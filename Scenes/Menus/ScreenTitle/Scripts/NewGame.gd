@@ -8,3 +8,4 @@ const START_LEVEL_INDEX : int = 1
 # Player Selection -> New Game
 func on_pressed():
 	var _err = GAME.goto_level(START_LEVEL_INDEX)
+	GAME.delete_all_level_temp_saves(false)

@@ -179,6 +179,40 @@ static func delete_level_temp_saves(level_name: String):
 	if dir.file_exists(json_path):
 		dir.remove(json_path)
 
+# Navigate through SAVE_DIR/tscn/ and /json/ then remove all files and folders there
+### IGNORE . , .. , AND HIDDEN FILES/FOLDERS 
+#### ARGS : display_warning (DEBUG.gd > on game start > true = display warnings)
+#### ARGS : display_warning (NewGame.gd > when button NewGame pressed on menu > false = doesn't display warnings)
+static func delete_all_level_temp_saves(display_warning : bool = false):
+	var dir = Directory.new()
+	
+	var tscn_path : String = SAVE_DIR + "/tscn/"
+	var json_path : String = SAVE_DIR + "/json/"
+	var folders_array : Array = [tscn_path, json_path]
+	
+	for folder in folders_array:
+		if dir.open(folder) == OK:
+			if display_warning:
+				print(folder + " has been opened successfully")
+			dir.list_dir_begin(true, true)
+			var file_name = dir.get_next()
+			if display_warning:
+				if file_name == "":
+					print("No folder or file detected in " + folder)
+			while file_name != "":
+				if dir.current_is_dir():
+					if display_warning:
+						print("Found dir: " + file_name)
+					dir.remove(file_name)
+				else:
+					if display_warning:
+						print("Found file: " + file_name)
+					dir.remove(file_name)
+				file_name = dir.get_next()
+			dir.list_dir_end()
+		else:
+			print("An error occured when trying to access the path : " + folder)
+
 
 # Save the players' level progression into the main game progression
 

@@ -7,4 +7,3 @@
 
 [node name="Animation" parent="." index="0"]
 frames = ExtResource( 2 )
-animation = "Default"

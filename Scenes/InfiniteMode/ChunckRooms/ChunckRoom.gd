@@ -1,7 +1,10 @@
 extends Node
 class_name ChunckRoom
 
-var water_scene = preload("res://Scenes/InteractiveObjects/Liquids/Water/Water.tscn")
+var liquid_scenes : Dictionary = {
+	"Water" : preload("res://Scenes/InteractiveObjects/Liquids/Water/Water.tscn"),
+	"Lava" : preload("res://Scenes/InteractiveObjects/Liquids/Lava/Lava.tscn")
+}
 
 export var min_room_size := Vector2(8, 6)
 export var max_room_size := Vector2(20, 9)
@@ -13,6 +16,7 @@ var chunck = null
 
 var entry_exit_couple_array := Array()
 var interactive_objects := Array()
+var platforms_array := Array()
 
 
 #### ACCESSORS ####
@@ -32,7 +36,6 @@ func _ready():
 	generate()
 
 
-
 #### LOGIC ####
 
 func generate():
@@ -48,11 +51,12 @@ func generate():
 	create_bin_map()
 
 
-# Generate the platforms in the room
-func place_platforms():
+# Generate the platform so they are always playable and add a node representation 
+# of their data as a child of this node
+func generate_platforms():
 	for couple in entry_exit_couple_array:
 		# If one exit is close enough from the ground, ignore it (Doesn't need platform)
-		if couple[1].y > room_rect.size.y - 3:
+		if couple[1].y >= room_rect.size.y - 3:
 			continue
 		 
 		var jump_max_dist : Vector2 = GAME.JUMP_MAX_DIST
@@ -69,10 +73,9 @@ func place_platforms():
 		var first_half : bool = couple[0].y + room_rect.position.y <= half_chuck_y
 		var stair_needed : bool = entry_point_cell.y - couple[1].y > GAME.JUMP_MAX_DIST.y
 		
-		
 		# Platform generation, loop through every platfroms
 		for i in range(nb_platform):
-			var last_platform : bool = i == nb_platform - 1
+			var final_platform : bool = i == nb_platform - 1
 			var platform_len = randi() % 2 + 2
 			var platform_x_dist = average_dist + int(round(rand_range(-1.0, 1.0)))
 			var rdm_y_offset = int(round(rand_range(-1.0, 1.0)))
@@ -91,26 +94,33 @@ func place_platforms():
 			# Assure the platform position is at least 4 tiles away from the ceiling & 2 away from the floor
 			platform_start = Vector2(platform_start.x, clamp(platform_start.y + 1, 4, room_rect.size.y - 3))
 			
-			# Loop through the cells resprensting a unit platform
-			for j in range(platform_len):
-				var current_x = platform_start.x + j
-				var current_y = platform_start.y
+			# Assure the last platform is close enough from the exit in the y axis
+			# & not to close in the x axis (so their is a )
+			if final_platform:
+				var current_y = int(clamp(platform_start.y, couple[1].y + 1, couple[1].y + 2))
 				
-				if first_half:
-					current_y = clamp(current_y, 4, half_chuck_y)
-				else:
-					current_y = clamp(current_y, half_chuck_y + 4, room_size.y - 1)
-				
-				# Assure the last platform is close enough from the exit
-				if last_platform:
-					current_y = int(clamp(current_y, couple[1].y + 1, couple[1].y + 2))
-				
-				if current_x > room_size.x - 3 or platform_start.y + 1 >= bin_map.size(): 
-					continue
-				else: 
-					bin_map[current_y][current_x] = 1
+				platform_start = Vector2(platform_start.x, current_y)
+			
+			var dist_to_room_end = (room_size.x - 2) - (platform_start.x + platform_len)
+			if dist_to_room_end < 0:
+				platform_len += dist_to_room_end
+			
+			# Add the platform as a node child of this one 
+			if platform_len > 1:
+				var platform = ChunckPlatform.new(platform_start, Vector2(platform_len, 1))
+				platforms_array.append(platform)
 			
 			last_platform_end = platform_start + Vector2(platform_len, 0)
+
+
+# Place the platforms into the bin map
+func place_platforms():
+	for plt in platforms_array:
+		for j in range(plt.get_size().y):
+			for i in range(plt.get_size().x):
+				var current_x = plt.get_start_cell().x + i
+				var current_y = plt.get_start_cell().y + j
+				bin_map[current_y][current_x] = 1
 
 
 # Convert the theorical entry point in the concrete one
@@ -162,21 +172,28 @@ func get_top_entry_exit_couple() -> Array:
 
 
 # Generate a liquid in the room of the conditions are met
-func generate_liquids():
+func generate_liquid(liquid_type: String):
 	var lowest_access = find_lowest_room_access()
-	var y_max_pool_size = room_rect.size.y - lowest_access.y - 1
+	var y_max_pool_size = room_rect.size.y - lowest_access.y - 2
 	
 	if y_max_pool_size <= 1:
 		return
 	
-	var water_node = water_scene.instance()
-	interactive_objects.append(water_node)
+	var existing_liquid_types = liquid_scenes.keys()
+	
+	if !(liquid_type in existing_liquid_types):
+		print("The liquid type: " + liquid_type + " passed in generate_liquid in class " + name + " doesn't exists")
+		return
+	
+	var liquid_node = liquid_scenes[liquid_type].instance()
+	interactive_objects.append(liquid_node)
 	
 	var pool_size = Vector2(room_rect.size.x, y_max_pool_size) * GAME.TILE_SIZE
-	water_node.set_pool_size(pool_size)
+	liquid_node.set_pool_size(pool_size)
 	
-	var pos = (room_rect.position + room_rect.size) * GAME.TILE_SIZE - pool_size / 2
-	water_node.set_position(pos)
+	var pool_sprite_size = Vector2(pool_size.x, pool_size.y + liquid_node.empty_part)
+	var pos = (room_rect.position + room_rect.size) * GAME.TILE_SIZE - pool_sprite_size / 2
+	liquid_node.set_position(pos)
 
 
 # Find the lowest access to the room (The closest access to the floor pf the room)

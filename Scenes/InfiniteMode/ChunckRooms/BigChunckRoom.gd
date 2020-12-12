@@ -42,5 +42,9 @@ func on_automata_entered(entry: Vector2, exit: Vector2):
 	.on_automata_entered(entry, exit)
 	
 	if entry_exit_couple_array.size() == 2:
+		generate_platforms()
 		place_platforms()
 		enlarge_entry_exit()
+
+func on_every_automata_finished():
+	generate_liquid("Lava")

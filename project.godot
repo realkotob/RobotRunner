@@ -115,6 +115,11 @@ _global_script_classes=[ {
 "path": "res://Scenes/InfiniteMode/ChunckPath/ChunckPath.gd"
 }, {
 "base": "Node",
+"class": "ChunckPlatform",
+"language": "GDScript",
+"path": "res://Scenes/InfiniteMode/ChunckRooms/ChunckPlatform/ChunckPlatform.gd"
+}, {
+"base": "Node",
 "class": "ChunckRoom",
 "language": "GDScript",
 "path": "res://Scenes/InfiniteMode/ChunckRooms/ChunckRoom.gd"
@@ -219,7 +224,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/Actor/Robot/Babybot/Jump.gd"
 }, {
-"base": "Area2D",
+"base": "Liquid",
 "class": "Lava",
 "language": "GDScript",
 "path": "res://Scenes/InteractiveObjects/Liquids/Lava/Lava.gd"
@@ -238,6 +243,11 @@ _global_script_classes=[ {
 "class": "LevelEvent",
 "language": "GDScript",
 "path": "res://Scenes/Events/LevelEvent/LevelEvent.gd"
+}, {
+"base": "InteractAreaBase",
+"class": "Liquid",
+"language": "GDScript",
+"path": "res://Scenes/InteractiveObjects/Liquids/Liquid.gd"
 }, {
 "base": "CollactableBase",
 "class": "MaterialCollactable",
@@ -344,10 +354,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/Events/BaseScene/TriggerAreaBase.gd"
 }, {
-"base": "InteractAreaBase",
+"base": "Liquid",
 "class": "Water",
 "language": "GDScript",
-"path": "res://Scenes/InteractiveObjects/Liquids/Water/Scripts/WaterTile.gd"
+"path": "res://Scenes/InteractiveObjects/Liquids/Water/Scripts/Water.gd"
 }, {
 "base": "Area2D",
 "class": "XionCloud",
@@ -381,6 +391,7 @@ _global_script_class_icons={
 "ChunckGenData": "",
 "ChunckGenerator": "",
 "ChunckPath": "",
+"ChunckPlatform": "",
 "ChunckRoom": "",
 "ClassFinder": "",
 "CollactableBase": "",
@@ -406,6 +417,7 @@ _global_script_class_icons={
 "Level": "",
 "LevelChunck": "",
 "LevelEvent": "",
+"Liquid": "",
 "MaterialCollactable": "",
 "MenuBase": "",
 "MenuOptionsBase": "",

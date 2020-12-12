@@ -1,11 +1,8 @@
-extends Area2D
+extends Liquid
 class_name Lava
+tool
 
 #### LAVA MAIN NODE ####
-
-## USE: CHANGE THE SIZE OF THE POOL BY CHANGING THE SCALE OF THIS NODE ##
-## PLEASE DO NOT USE CHANGE CHILDREN TO CHANGE THE SIZE ##
-
 
 #### ACCESSORS ####
 
@@ -18,8 +15,6 @@ func get_class() -> String:
 
 #### BUILT-IN ####
 
-func _ready():
-	var _err = connect("body_entered", self, "on_body_entered")
 
 
 #### SIGNAL RESPONSES ####

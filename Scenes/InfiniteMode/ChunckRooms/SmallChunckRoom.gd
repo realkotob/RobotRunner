@@ -66,4 +66,4 @@ func generate():
 #### SIGNAL RESPONSES ####
 
 func on_every_automata_finished():
-	generate_liquids()
+	generate_liquid("Water")

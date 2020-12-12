@@ -1,5 +1,6 @@
-extends InteractAreaBase
+extends Liquid
 class_name Water
+tool
 
 #### WATER ####
 
@@ -7,9 +8,7 @@ class_name Water
 ## PLEASE DO NOT CHANGE CHILDREN SIZE OR SCALE TO CHANGE THE SIZE ##
 
 onready var iceblock_scene = load("res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/M/MIceBlock.tscn")
-onready var floating_line_node = get_node("FloatingLine")
-onready var water_area = get_node_or_null("CollisionShape2D")
-onready var particules_node = get_node("Particles2D")
+onready var floating_line_node = get_node_or_null("FloatingLine")
 
 var M_IceBlocks_node : Node2D
 
@@ -21,19 +20,19 @@ func is_class(value: String):
 func get_class() -> String:
 	return "Water"
 
-func set_pool_size(size: Vector2):
-	set_scale(Vector2.ONE)
-	$WaterShader.set_scale(Vector2.ONE)
-	$WaterShader.set_region(true)
-	$WaterShader.set_region_rect(Rect2(Vector2.ZERO, size))
-	$CollisionShape2D.get_shape().set_extents(size / 2)
+
+#### BUILT-IN ####
+
+func _ready():
+	var size = $LiquidShader.get_region_rect().size
+	floating_line_node.set_position(Vector2(0, -size.y / 2))
 
 #### LOGIC ####
 
 # Create an ice block on interaction, the position of the hit box has to be inside the water area to truly happen
 func interact(global_pos : Vector2):
-	if water_area != null:
-		if is_position_in_area(global_pos, water_area):
+	if collision_shape != null:
+		if is_position_in_area(global_pos, collision_shape):
 			M_IceBlocks_node = iceblock_scene.instance()
 			
 			add_child(M_IceBlocks_node)

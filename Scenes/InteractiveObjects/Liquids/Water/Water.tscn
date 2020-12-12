@@ -4,19 +4,16 @@
 [ext_resource path="res://Scenes/InteractiveObjects/Liquids/Water/Particles/WaterParticle.tres" type="Material" id=2]
 [ext_resource path="res://Scenes/InteractiveObjects/Liquids/Water/Shader/WaterShaderNode.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/InteractiveObjects/Liquids/Water/WaterLight.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/InteractiveObjects/Liquids/Water/Scripts/WaterTile.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/InteractiveObjects/Liquids/Water/Scripts/Water.gd" type="Script" id=5]
 
 [node name="Water" instance=ExtResource( 1 )]
 script = ExtResource( 5 )
-
-[node name="CollisionShape2D" parent="." index="0"]
-visible = false
 
 [node name="FloatingLine" type="Position2D" parent="." index="1"]
 position = Vector2( 0.22644, -73.8394 )
 
 [node name="Particles2D" type="Particles2D" parent="." index="2"]
-position = Vector2( 0.22644, -73.8394 )
+position = Vector2( 0, -73.839 )
 emitting = false
 amount = 30
 lifetime = 0.4
@@ -26,12 +23,12 @@ randomness = 0.53
 local_coords = false
 process_material = ExtResource( 2 )
 
-[node name="WaterShader" parent="." index="3" instance=ExtResource( 3 )]
+[node name="LiquidShader" parent="." index="3" instance=ExtResource( 3 )]
 position = Vector2( 0, 0 )
 scale = Vector2( 1, 1 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 512, 184 )
 
-[node name="WaterLight" parent="WaterShader" index="0" instance=ExtResource( 4 )]
+[node name="WaterLight" parent="LiquidShader" index="0" instance=ExtResource( 4 )]
 position = Vector2( -2.38419e-07, 1.90735e-06 )
 scale = Vector2( 0.91, 1.2 )

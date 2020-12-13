@@ -23,20 +23,13 @@ var active : bool = true
 
 #### ACCESSORS ####
 
-func is_class(value: String):
-	return value == "Player"
+func is_class(value: String): return value == "Player"
+func get_class() -> String: return "Player"
 
-func get_class() -> String:
-	return "Player"
+func set_jump_force(value : int): jump_force = value
+func get_jump_force() -> int: return jump_force
 
-func set_jump_force(value : int):
-	jump_force = value
-
-func get_jump_force() -> int:
-	return jump_force
-
-func get_extents() -> Vector2:
-	return $CollisionShape2D.get_shape().get_extents()
+func get_extents() -> Vector2: return $CollisionShape2D.get_shape().get_extents()
 
 func set_active(value: bool):
 	active = value
@@ -47,40 +40,20 @@ func set_active(value: bool):
 		set_modulate(Color.gray)
 		set_direction(0)
 
-
-func get_active() -> bool:
-	return active
+func get_active() -> bool: return active
 
 func get_player_id() -> int : return player_id
 
+#### BUILT-IN ####
 
 func _ready():
 	var _err = anim_player_node.connect("animation_finished", self, "on_animation_finished")
 	_err = connect("layer_change", self, "on_layer_change")
 	add_to_group("Players")
-		
-#### INPUT RESPONSES ####
-
-func _input(event):
-	if !active:
-		return
-	
-	if event.is_action_pressed(inputs_node.get_input("MoveLeft")):
-		dirLeft = 1
-	
-	elif event.is_action_released(inputs_node.get_input("MoveLeft")):
-		dirLeft = 0
-	
-	elif event.is_action_pressed(inputs_node.get_input("MoveRight")):
-		dirRight = 1
-	
-	elif event.is_action_released(inputs_node.get_input("MoveRight")):
-		dirRight = 0
-	
-	set_direction(dirRight - dirLeft)
 
 
-#### BEHAVIOUR RELATED FUNCTIONS ####
+
+#### LOGIC ####
 
 
 # Triggers the overheat animation
@@ -109,6 +82,26 @@ func destroy():
 	SFX.play_SFX(SFX.normal_explosion, global_position)
 	GAME.gameover()
 	queue_free()
+
+#### INPUT RESPONSES ####
+
+func _input(event):
+	if !active:
+		return
+	
+	if event.is_action_pressed(inputs_node.get_input("MoveLeft")):
+		dirLeft = 1
+	
+	elif event.is_action_released(inputs_node.get_input("MoveLeft")):
+		dirLeft = 0
+	
+	elif event.is_action_pressed(inputs_node.get_input("MoveRight")):
+		dirRight = 1
+	
+	elif event.is_action_released(inputs_node.get_input("MoveRight")):
+		dirRight = 0
+	
+	set_direction(dirRight - dirLeft)
 
 
 #### SIGNALS RESPONSES ####

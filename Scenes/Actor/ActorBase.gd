@@ -33,14 +33,10 @@ func set_direction(value : int):
 		flip(value)
 	direction = value
 
-func get_direction() -> int:
-	return direction
+func get_direction() -> int: return direction
 
-func set_max_speed(value : float):
-	max_speed = value
-
-func get_max_speed() -> float:
-	return max_speed
+func set_max_speed(value : float): max_speed = value
+func get_max_speed() -> float: return max_speed
 
 func set_velocity(value: Vector2):
 	if value != velocity:
@@ -50,14 +46,10 @@ func set_velocity(value: Vector2):
 func get_velocity() -> Vector2:
 	return velocity
 
-func set_state(value : String):
-	$StatesMachine.set_state(value)
+func set_state(value : String): $StatesMachine.set_state(value)
+func get_state() -> String: return $StatesMachine.get_state_name()
 
-func get_state() -> String:
-	return $StatesMachine.get_state_name()
-
-func get_extents() -> Vector2:
-	return $CollisionShape2D.get_shape().get_extents()
+func get_extents() -> Vector2: return $CollisionShape2D.get_shape().get_extents()
 
 # Returns the direction of the robot
 func get_face_direction() -> int:

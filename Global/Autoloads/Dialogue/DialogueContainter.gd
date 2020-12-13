@@ -48,7 +48,6 @@ func get_translation_by_locale(locale: String) -> Translation:
 	return null
 
 
-
 func destroy_all_dialogue_boxes():
 	var dialogue_container = get_tree().get_current_scene().find_node("DialogueContainer")
 	for child in dialogue_container.get_children():

@@ -47,6 +47,7 @@
 [ext_resource path="res://Scenes/Fog/CosmeticFog/magenta_FG_fog_shadermaterial.tres" type="Material" id=45]
 [ext_resource path="res://Scenes/Fog/CosmeticFog/green_bg_fog_shadermaterial.tres" type="Material" id=46]
 
+
 [sub_resource type="Curve2D" id=1]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, -120, 288, 0, 0, 0, 0, 3744, 288 )
@@ -180,7 +181,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Light" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 36 )]
+[node name="Light" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 37 )]
 light_mask = 2
 position = Vector2( -3360, 922 )
 texture = ExtResource( 1 )
@@ -190,7 +191,7 @@ range_z_min = -1261
 range_layer_min = -2
 range_item_cull_mask = 983938
 
-[node name="Light2" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 36 )]
+[node name="Light2" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 37 )]
 light_mask = 2
 position = Vector2( 276, 468 )
 texture = ExtResource( 1 )
@@ -201,7 +202,7 @@ range_z_min = -1261
 range_layer_min = -2
 range_item_cull_mask = 983938
 
-[node name="Light5" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 36 )]
+[node name="Light5" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 37 )]
 light_mask = 2
 position = Vector2( 1020, 12 )
 texture = ExtResource( 1 )
@@ -211,7 +212,7 @@ range_z_min = -1261
 range_layer_min = -2
 range_item_cull_mask = 983938
 
-[node name="Light10" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 36 )]
+[node name="Light10" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 37 )]
 light_mask = 2
 position = Vector2( 1848, 288 )
 texture = ExtResource( 1 )
@@ -222,7 +223,7 @@ range_z_min = -1261
 range_layer_min = -2
 range_item_cull_mask = 983938
 
-[node name="Light11" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 36 )]
+[node name="Light11" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 37 )]
 light_mask = 2
 position = Vector2( 2532, 552 )
 texture = ExtResource( 1 )
@@ -233,7 +234,7 @@ range_z_min = -1261
 range_layer_min = -2
 range_item_cull_mask = 983938
 
-[node name="Light3" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 36 )]
+[node name="Light3" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 37 )]
 light_mask = 2
 position = Vector2( 708, 216 )
 texture = ExtResource( 1 )
@@ -244,7 +245,7 @@ range_z_min = -1261
 range_layer_min = -2
 range_item_cull_mask = 983938
 
-[node name="Light9" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 36 )]
+[node name="Light9" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 37 )]
 light_mask = 2
 position = Vector2( -4548, 24 )
 texture = ExtResource( 1 )
@@ -254,7 +255,7 @@ range_z_min = -1261
 range_layer_min = -2
 range_item_cull_mask = 983938
 
-[node name="Light12" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 36 )]
+[node name="Light12" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 37 )]
 light_mask = 2
 position = Vector2( -3972, 439.5 )
 texture = ExtResource( 1 )
@@ -264,7 +265,7 @@ range_z_min = -1261
 range_layer_min = -2
 range_item_cull_mask = 983938
 
-[node name="Light18" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 36 )]
+[node name="Light18" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 37 )]
 light_mask = 2
 position = Vector2( -4404, 180 )
 texture = ExtResource( 1 )
@@ -275,7 +276,7 @@ range_z_min = -1261
 range_layer_min = -2
 range_item_cull_mask = 983938
 
-[node name="Light19" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 36 )]
+[node name="Light19" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 37 )]
 light_mask = 2
 position = Vector2( -5064, 384 )
 texture = ExtResource( 1 )
@@ -286,7 +287,7 @@ range_z_min = -1261
 range_layer_min = -2
 range_item_cull_mask = 983938
 
-[node name="Light20" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 36 )]
+[node name="Light20" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 37 )]
 light_mask = 2
 position = Vector2( -5640, 96 )
 texture = ExtResource( 1 )
@@ -297,7 +298,7 @@ range_z_min = -1261
 range_layer_min = -2
 range_item_cull_mask = 983938
 
-[node name="Light21" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 36 )]
+[node name="Light21" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 37 )]
 light_mask = 2
 position = Vector2( -6552, 468 )
 texture = ExtResource( 1 )
@@ -308,7 +309,7 @@ range_z_min = -1261
 range_layer_min = -2
 range_item_cull_mask = 983938
 
-[node name="Light13" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 36 )]
+[node name="Light13" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 37 )]
 light_mask = 2
 position = Vector2( -3216, 156 )
 texture = ExtResource( 1 )
@@ -319,7 +320,7 @@ range_z_min = -1261
 range_layer_min = -2
 range_item_cull_mask = 983938
 
-[node name="Light14" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 36 )]
+[node name="Light14" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 37 )]
 light_mask = 2
 position = Vector2( -2220, 444 )
 texture = ExtResource( 1 )
@@ -330,7 +331,7 @@ range_z_min = -1261
 range_layer_min = -2
 range_item_cull_mask = 983938
 
-[node name="Light15" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 36 )]
+[node name="Light15" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 37 )]
 light_mask = 2
 position = Vector2( -1188, 144 )
 texture = ExtResource( 1 )
@@ -341,7 +342,7 @@ range_z_min = -1261
 range_layer_min = -2
 range_item_cull_mask = 983938
 
-[node name="Light16" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 36 )]
+[node name="Light16" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 37 )]
 light_mask = 2
 position = Vector2( -708, 428.948 )
 texture = ExtResource( 1 )
@@ -352,7 +353,7 @@ range_z_min = -1261
 range_layer_min = -2
 range_item_cull_mask = 983938
 
-[node name="Light17" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 36 )]
+[node name="Light17" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 37 )]
 light_mask = 2
 position = Vector2( -180, 204 )
 texture = ExtResource( 1 )
@@ -363,7 +364,7 @@ range_z_min = -1261
 range_layer_min = -2
 range_item_cull_mask = 983938
 
-[node name="Light6" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 36 )]
+[node name="Light6" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 37 )]
 light_mask = 2
 position = Vector2( 2424, 432 )
 texture = ExtResource( 1 )
@@ -373,7 +374,7 @@ range_z_min = -1261
 range_layer_min = -2
 range_item_cull_mask = 983938
 
-[node name="Light7" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 36 )]
+[node name="Light7" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 37 )]
 light_mask = 2
 position = Vector2( 2724, 48 )
 texture = ExtResource( 1 )
@@ -383,7 +384,7 @@ range_z_min = -1261
 range_layer_min = -2
 range_item_cull_mask = 983938
 
-[node name="Light8" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 36 )]
+[node name="Light8" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 37 )]
 light_mask = 2
 position = Vector2( 3144, 360 )
 texture = ExtResource( 1 )
@@ -393,7 +394,7 @@ range_z_min = -1261
 range_layer_min = -2
 range_item_cull_mask = 983938
 
-[node name="Light4" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 36 )]
+[node name="Light4" type="Light2D" parent="Map/Background/Paralaxe/Lights" instance=ExtResource( 37 )]
 light_mask = 2
 position = Vector2( 240, 168 )
 texture = ExtResource( 1 )

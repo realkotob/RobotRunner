@@ -23,6 +23,10 @@ func _ready():
 	_err = connect("body_entered", self, "on_body_entered")
 	_err = connect("body_exited", self, "on_body_exited")
 	
+	update_destination_teleporter()
+
+
+func update_destination_teleporter():
 	# Get all the teleporters in the group
 	teleporters_array = teleport_master_node.get_children()
 	var teleport_index = get_index()
@@ -38,6 +42,8 @@ func _ready():
 
 # Teleport the player the the right destination teleporter
 func teleport_layer(character : Node):
+	update_destination_teleporter()
+	
 	if destination_teleport_node.player_on_top:
 		return
 	

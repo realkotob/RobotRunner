@@ -8,6 +8,9 @@ export var progression : Resource
 
 export var transition_time : float = 1.0
 
+const TILE_SIZE := Vector2(24, 24)
+const JUMP_MAX_DIST := Vector2(6, 2)
+
 var chapters_array = []
 var current_chapter : Resource = null
 
@@ -51,7 +54,7 @@ func goto_last_level():
 
 	var level_to_load = load_level('res://Scenes/Levels/SavedLevel/saved_level.tscn')
 
-	#Handling players' progression => Xion ; Materials
+	# Handling players' progression => Xion ; Materials
 	update_collectable_progression()
 	get_tree().current_scene.queue_free()
 	
@@ -79,12 +82,14 @@ func goto_next_level():
 	else:
 		goto_level(progression.get_level())
 
-func save_level(level : Node2D):
+
+func save_level(_level : Node2D):
 	var saved_level = PackedScene.new()
 	saved_level.pack(get_tree().get_current_scene())
-	ResourceSaver.save("res://Scenes/Levels/SavedLevel/saved_level.tscn", saved_level)
+	var __ = ResourceSaver.save("res://Scenes/Levels/SavedLevel/saved_level.tscn", saved_level)
 	progression.saved_level = saved_level
-	
+
+
 func load_level(level_path : String) -> PackedScene:
 	var level_to_load = load(level_path)
 	return level_to_load
@@ -133,7 +138,7 @@ func find_string(string_array: PoolStringArray, target_string : String):
 			index += 1
 	return -1
 
-	# XION AND MATERIALS METODS HANDLERS
+# XION AND MATERIALS METODS HANDLERS
 # Save the players' <level>progression into the main game progression
 func update_collectable_progression():
 	progression.set_main_xion(SCORE.get_xion())
@@ -181,6 +186,33 @@ func get_children_of_node(parent_node, array_to_fill : Array):
 		elif child.get_child_count() != 0:
 				#print("["+child.get_name()+"]") # DEBUG PURPOSE
 				get_children_of_node(child, array_to_fill)
+
+
+# Toggle the camera debug mode, and toggle the controls of the players
+func toggle_camera_debug_mode():
+	var level = get_tree().get_current_scene()
+	if not level is Level:
+		return
+	
+	var camera_node = level.find_node("Camera")
+	var was_camera_debug_mode = camera_node.get_state_name() == "Debug"
+	if was_camera_debug_mode:
+		camera_node.set_to_previous_state()
+	else:
+		camera_node.set_state("Debug")
+	
+	for player in get_tree().get_nodes_in_group("Players"):
+		player.set_active(was_camera_debug_mode)
+
+
+#### INPUTS ####
+
+
+func _input(_event):
+	if Input.is_action_just_pressed("toggle_camera_debug_mode"):
+		toggle_camera_debug_mode()
+
+
 
 #### SIGNAL RESPONSES ####
 

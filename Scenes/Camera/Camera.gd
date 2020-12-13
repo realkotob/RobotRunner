@@ -20,6 +20,15 @@ var instruction_stack : Array = []
 func set_state(state_name: String):
 	state_machine_node.set_state(state_name)
 
+func get_state() -> StateBase:
+	return state_machine_node.get_current_state()
+
+func get_state_name() -> String:
+	return get_state().get_name()
+
+func set_to_previous_state():
+	state_machine_node.set_to_previous_state()
+
 # Feed the array of players with weakrefs
 func set_players_weakref_array(weakref_array: Array):
 	for element in weakref_array:
@@ -70,6 +79,11 @@ func move_to(dest: Vector2, average_w_players : bool = false, move_speed : float
 
 	moveto_state_node.wait_time = duration
 	state_machine_node.set_state("MoveTo")
+
+
+# Move according to the given velocity
+func move_vel(delta: float, velocity: Vector2):
+	position += velocity * delta
 
 
 # Progressively move to the given destination

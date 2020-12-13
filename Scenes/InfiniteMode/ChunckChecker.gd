@@ -158,6 +158,7 @@ func is_point_above_ground(point: Vector2, chunck_bin: Array) -> bool:
 func are_points_adjacents(point1: Vector2, point2: Vector2) -> bool:
 	return point1.y == point2.y and (point1.x + 1 == point2.x or point1.x - 1 == point2.x) 
 
+
 func are_point_at_jump_distance(point1 : Vector2, point2: Vector2) -> bool:
 	return (point1.x < point2.x && point1.y - 2 > point2.y) or \
 			(point2.x < point1.x && point2.y - 2 > point1.y)

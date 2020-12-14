@@ -16,6 +16,7 @@ empty_part = 10.0
 pool_size = Vector2( 507.882, 197.108 )
 
 [node name="CollisionShape2D" parent="." index="0"]
+visible = false
 position = Vector2( 0, 5 )
 shape = SubResource( 1 )
 

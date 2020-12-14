@@ -1,5 +1,8 @@
 extends Camera2D
 
+const DEFAULT_INTERPOL_DUR : float = 1.5
+
+
 onready var state_machine_node = $StateMachine
 onready var stop_state_node = $StateMachine/Stop
 onready var follow_state_node = $StateMachine/Follow
@@ -87,7 +90,7 @@ func move_vel(delta: float, velocity: Vector2):
 
 
 # Progressively move to the given destination
-func start_moving(dest_pos: Vector2, duration: float = 1.0):
+func start_moving(dest_pos: Vector2, duration: float = DEFAULT_INTERPOL_DUR):
 	tween_node.interpolate_property(self, "global_position",
 		global_position, dest_pos, duration,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -95,7 +98,7 @@ func start_moving(dest_pos: Vector2, duration: float = 1.0):
 
 
 # Progressively zoom/dezoom
-func start_zooming(dest_zoom: Vector2, duration: float = 1.0):
+func start_zooming(dest_zoom: Vector2, duration: float = DEFAULT_INTERPOL_DUR):
 	tween_node.interpolate_property(self, "zoom",
 		get_zoom(), dest_zoom, duration,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)

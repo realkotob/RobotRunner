@@ -1,7 +1,7 @@
 extends StateBase
 
-const ANTICIP_DIST : float = 170.0
-const ANTICIP_TRIGGER_RATIO : float = 0.25
+const ANTICIP_DIST : float = 200.0
+const ANTICIP_TRIGGER_RATIO : float = 0.3
 
 onready var border_anticip_label = $CanvasLayer/Control/VBoxContainer/BordersAnticip
 
@@ -50,16 +50,15 @@ func update(_host, _delta):
 	if len(players_array) > 0:
 		
 		# Compute the dest of the camera
-		var average_pos : Vector2 = camera.compute_average_pos(players_array)
+		var average_pos : Vector2 = camera.get_average_player_pos()
 		set_borders_anticipated(get_border_approched(average_pos))
-		var dest = average_pos
+		var offset = Vector2.ZERO
 		
 		if borders_anticipated.size() == 1:
-			dest += borders_anticipated[0] * ANTICIP_DIST
+			offset += borders_anticipated[0] * ANTICIP_DIST
 		
-		# Move the camera
-		if camera.get_global_position().distance_to(dest) > 3.0:
-			camera.start_moving(dest)
+		camera.start_moving_pivot(average_pos)
+		camera.start_moving(average_pos + offset)
 		
 		# Zoom/Dezoom if necesary
 		var max_dist = screen_size * 0.6
@@ -103,57 +102,38 @@ func get_border_approched(ply_average_pos: Vector2) -> Array:
 	for player in players_array:
 		var player_pos = player.get_global_position()
 		
-		if player_pos.x > ply_average_pos.x + (screen_size.x / 2) - screen_size.x * ANTICIP_TRIGGER_RATIO && \
+		var pivot_pos = camera.get_pivot_position()
+		
+		# Check individual player position
+		if player_pos.x > pivot_pos.x + (screen_size.x / 2) - screen_size.x * ANTICIP_TRIGGER_RATIO && \
 		player.last_direction == 1:
 			if !(Vector2.RIGHT in border_array):
 				border_array.append(Vector2.RIGHT)
+				continue
 		
-		elif player_pos.x < ply_average_pos.x - (screen_size.y / 2) + screen_size.x * ANTICIP_TRIGGER_RATIO && \
+		elif player_pos.x < pivot_pos.x - (screen_size.y / 2) + screen_size.x * ANTICIP_TRIGGER_RATIO && \
 		player.last_direction == -1:
 			if !(Vector2.LEFT in border_array):
 				border_array.append(Vector2.LEFT)
+				continue
+		
+		var cam_pos = camera.get_global_position()
+		var cam_zoom = camera.get_zoom()
+		var cam_size = screen_size * cam_zoom
+		
+		# Check average players position
+		if ply_average_pos.x > cam_pos.x + (cam_size.x / 2) - cam_size.x * ANTICIP_TRIGGER_RATIO:
+			if !(Vector2.RIGHT in border_array):
+				border_array.append(Vector2.RIGHT)
+				break
+		
+		if ply_average_pos.x < cam_pos.x - (cam_size.x / 2) + cam_size.x * ANTICIP_TRIGGER_RATIO:
+			if !(Vector2.LEFT in border_array):
+				border_array.append(Vector2.LEFT)
+				break
 	
 	return border_array
 
-
-## Find the direction of the nearest border of the theorical screen
-## (If the camera wasn't dezoomed of anticipated) form the average player position
-#func find_nearest_border(couples_array: Array, play_avg_pos: Vector2) -> Vector2:
-#	var dist_array := Array()
-#	for couple in couples_array:
-#		var player = couple[1]
-#		var border_dir = couple[0]
-#		var player_pos = player.get_global_position()
-#
-#		if is_pos_outside_theorical_screen(player_pos, play_avg_pos):
-#			return border_dir
-#
-#		var border_pos = play_avg_pos.x + (screen_size.x / 2)
-#		if border_dir == Vector2.RIGHT:
-#			border_pos = play_avg_pos.x - (screen_size.x / 2)
-#
-#		dist_array.append(abs(player_pos - border_pos))
-#
-#	var nearest_border_id = find_smallest_value_id(dist_array)
-#	return couples_array[nearest_border_id][0]
-
-
-## Retrun true if the given pos is outside the theorical space of the screen
-## If the camera had no zoom and no anticipation offset
-#func is_pos_outside_theorical_screen(pos: Player, play_avg_pos: Vector2) -> bool:
-#	return pos.x > play_avg_pos.x + screen_size.x / 2 or pos.x < play_avg_pos.x - screen_size.x / 2 or \
-#		pos.y > play_avg_pos.y + screen_size.y / 2 or pos.y < play_avg_pos.y - screen_size.y / 2
-
-
-## Returns the id of the smallest value in the array
-#func find_smallest_value_id(array: Array) -> int:
-#	var smallest_value : float = INF
-#	var smallest_value_id : int = -1
-#	for i in range(array.size()):
-#		if array[i] < smallest_value:
-#			smallest_value = array[i]
-#			smallest_value_id = i
-#	return smallest_value_id
 
 
 # Convert a global position to a relative position to the camera origin (center)

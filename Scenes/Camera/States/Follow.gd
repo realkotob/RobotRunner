@@ -98,7 +98,7 @@ func find_nearest_border(couples_array: Array, play_avg_pos: Vector2) -> Vector2
 		var border_dir = couple[0]
 		var player_pos = player.get_global_position()
 		
-		if is_pos_outside_theorical_screen(player_pos):
+		if is_pos_outside_theorical_screen(player_pos, play_avg_pos):
 			return border_dir
 		
 		var border_pos = play_avg_pos.x + (screen_size.x / 2)
@@ -113,10 +113,9 @@ func find_nearest_border(couples_array: Array, play_avg_pos: Vector2) -> Vector2
 
 # Retrun true if the given pos is outside the theorical space of the screen
 # If the camera had no zoom and no anticipation offset
-func is_pos_outside_theorical_screen(pos: Player) -> bool:
-	var avg_pos = camera.compute_average_pos()
-	return pos.x > avg_pos.x + screen_size.x / 2 or pos.x < avg_pos.x - screen_size.x / 2 or \
-		pos.y > avg_pos.y + screen_size.y / 2 or pos.y < avg_pos.y - screen_size.y / 2
+func is_pos_outside_theorical_screen(pos: Player, play_avg_pos: Vector2) -> bool:
+	return pos.x > play_avg_pos.x + screen_size.x / 2 or pos.x < play_avg_pos.x - screen_size.x / 2 or \
+		pos.y > play_avg_pos.y + screen_size.y / 2 or pos.y < play_avg_pos.y - screen_size.y / 2
 
 
 # Returns the id of the smallest value in the array

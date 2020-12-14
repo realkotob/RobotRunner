@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Scenes/Fog/CosmeticFog/Magenta_BG_fog.shader" type="Shader" id=2]
 [ext_resource path="res://Scenes/StartingPoints/StartingPointP1.tscn" type="PackedScene" id=3]
@@ -40,9 +40,13 @@ seamless = true
 noise = SubResource( 2 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 32, 48 )
+resource_local_to_scene = true
+extents = Vector2( 374.045, 41.9765 )
 
 [sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 32, 48 )
+
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 21.0893, 40 )
 
 [node name="Level3E" instance=ExtResource( 5 )]
@@ -216,15 +220,15 @@ position = Vector2( 2312, 384 )
 
 [node name="Water" parent="InteractivesObjects/WaterTiles" index="0" instance=ExtResource( 14 )]
 position = Vector2( 1568, -144 )
-pool_size = Vector2( 250, 100 )
+pool_size = Vector2( 250, 123.489 )
 
 [node name="Water2" parent="InteractivesObjects/WaterTiles" index="1" instance=ExtResource( 14 )]
 position = Vector2( 3138.9, 473.497 )
-pool_size = Vector2( 150, 33.445 )
+pool_size = Vector2( 150, 75.667 )
 
 [node name="Water3" parent="InteractivesObjects/WaterTiles" index="2" instance=ExtResource( 14 )]
 position = Vector2( 364.778, 444.074 )
-pool_size = Vector2( 450, 150 )
+pool_size = Vector2( 450, 182.04 )
 
 [node name="Lava" parent="InteractivesObjects/LavaTiles" index="0" instance=ExtResource( 12 )]
 position = Vector2( 1032, -130.883 )
@@ -297,6 +301,9 @@ pool_size = Vector2( 424.595, 81.462 )
 [node name="XionLiquid" parent="InteractivesObjects/XionLiquid" index="0" instance=ExtResource( 15 )]
 position = Vector2( 1536, 272 )
 scale = Vector2( 1, 2.976 )
+
+[node name="CollisionShape2D" parent="InteractivesObjects/XionLiquid/XionLiquid" index="0"]
+shape = SubResource( 4 )
 
 [node name="XionLiquid2" parent="InteractivesObjects/XionLiquid" index="1" instance=ExtResource( 15 )]
 position = Vector2( 2096, -304 )
@@ -399,7 +406,7 @@ rotation = -1.5708
 
 [node name="CollisionShape2D" parent="InteractivesObjects/TeleportGroups/G8/TeleportArea" index="1"]
 position = Vector2( 0.00012207, -36 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="TeleportArea2" parent="InteractivesObjects/TeleportGroups/G8" index="1" instance=ExtResource( 13 )]
 position = Vector2( 156, 80 )
@@ -416,7 +423,7 @@ rotation = 4.71239
 
 [node name="CollisionShape2D" parent="InteractivesObjects/TeleportGroups/G9/TeleportArea" index="1"]
 position = Vector2( 0, -20 )
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 
 [node name="TeleportArea2" parent="InteractivesObjects/TeleportGroups/G9" index="1" instance=ExtResource( 13 )]
 position = Vector2( 0, 132 )

@@ -264,11 +264,11 @@ position = Vector2( 3584, 696 )
 
 [node name="Water" parent="InteractivesObjects/WaterTiles" index="0" instance=ExtResource( 14 )]
 position = Vector2( 516, 356 )
-pool_size = Vector2( 100, 80 )
+pool_size = Vector2( 100, 95.627 )
 
 [node name="Water2" parent="InteractivesObjects/WaterTiles" index="1" instance=ExtResource( 14 )]
 position = Vector2( 2924, 359 )
-pool_size = Vector2( 200, 60 )
+pool_size = Vector2( 200, 69.736 )
 
 [node name="Lava" parent="InteractivesObjects/LavaTiles" index="0" instance=ExtResource( 25 )]
 position = Vector2( 1768, 384 )

@@ -111,11 +111,14 @@ position = Vector2( 744, -408 )
 position = Vector2( 792, -624 )
 
 [node name="GrowingLava" parent="InteractivesObjects/LavaTiles" index="0" instance=ExtResource( 16 )]
-position = Vector2( 472, 504 )
+position = Vector2( 472, 475.327 )
 pool_size = Vector2( 1500, 80 )
 
 [node name="LiquidShader" parent="InteractivesObjects/LavaTiles/GrowingLava" index="0"]
 region_rect = Rect2( 0, 0, 1500, 128 )
+
+[node name="Light" parent="InteractivesObjects/LavaTiles/GrowingLava/LiquidShader" index="0"]
+texture_scale = 1.68224
 
 [node name="CollisionShape2D" parent="InteractivesObjects/LavaTiles/GrowingLava" index="1"]
 position = Vector2( 0, 24 )

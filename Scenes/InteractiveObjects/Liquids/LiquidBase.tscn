@@ -1,7 +1,8 @@
 [gd_scene load_steps=2 format=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 255.161, 74 )
+resource_local_to_scene = true
+extents = Vector2( 374.045, 41.9765 )
 
 [node name="Liquid" type="Area2D"]
 

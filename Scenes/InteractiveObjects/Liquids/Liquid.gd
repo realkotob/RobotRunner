@@ -2,13 +2,16 @@ extends InteractAreaBase
 class_name Liquid
 tool
 
+const DEFAULT_POOL_SIZE := Vector2(512, 184)
+
 export (float, 0.0, 999.0) var empty_part = 48.0 setget set_empty_part, get_empty_part
 
 onready var collision_shape = get_node_or_null("CollisionShape2D")
 onready var particules_node = get_node_or_null("Particles2D")
 onready var liquid_shader = $LiquidShader
+onready var light : Light2D = get_node_or_null("LiquidShader/Light")
 
-export var pool_size := Vector2(512, 184) setget set_pool_size, get_pool_size
+export var pool_size := DEFAULT_POOL_SIZE setget set_pool_size, get_pool_size
 var is_ready : bool = false
 
 #### ACCESSORS ####
@@ -59,9 +62,14 @@ func update_pool_size():
 	var shape_ext = pool_size / 2 
 	collision_shape.get_shape().set_extents(shape_ext)
 	collision_shape.set_position(Vector2(0, empty_part / 2))
+	
+	if light != null:
+		var current_scale = get_pool_size() / DEFAULT_POOL_SIZE
+		var float_scale = (current_scale.x + current_scale.y) /2
+		light.set_texture_scale(float_scale)
+
 
 #### INPUTS ####
-
 
 
 #### SIGNAL RESPONSES ####

@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Scenes/Fog/CosmeticFog/Magenta_BG_fog.shader" type="Shader" id=2]
 [ext_resource path="res://Scenes/StartingPoints/StartingPointP1.tscn" type="PackedScene" id=3]
@@ -39,318 +39,10 @@ octaves = 4
 seamless = true
 noise = SubResource( 2 )
 
-[sub_resource type="GDScript" id=4]
-script/source = "extends InteractAreaBase
-
-class_name Water
-const CLASS_NAME = \"Water\"
-
-#### WATER ####
-
-# To instanciate a water zone:
-# 1) Instanciate this scene
-# 2) Instanciate the scene WaterShader & a CollisionShape as children of it
-# 3) Instanciate the WaterLight as a child of the WaterShader
-# 4) Set the size of the texture, of the shape and of the light as you will
-
-
-onready var iceblock_scene = load(\"res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/M/MIceBlock.tscn\")
-onready var floating_line_node = get_node(\"FloatingLine\")
-onready var water_area = get_node_or_null(\"CollisionShape2D\")
-onready var particules_node = get_node(\"Particles2D\")
-
-var M_IceBlocks_node : Node2D
-
-# Return true is the given string is the name of the class
-# (Necesary in 3.2 because Godot check the very parent class instead of the current class)
-func is_class(value : String):
-	return value == CLASS_NAME
-
-
-# Return a string of the name of the class
-# (Necesary in 3.2 because Godot check the very parent class instead of the current class)
-func get_class():
-	return CLASS_NAME
-
-
-# Make every ice block floating while they are in the water area
-func on_body_entered(body):
-	if body.is_class(\"IceBlock\"):
-		body_floating(body, true)
-
-	if body is RigidBody2D or body is KinematicBody2D:
-		particules_node.global_position.x = body.global_position.x
-		particules_node.set_emitting(true)
-
-
-# Whenever a body exits the area of this interact object, set his interact reference to null
-func on_body_exited(body):
-	if body.is_class(\"IceBlock\"):
-		body_floating(body, false)
-
-
-# Create an ice block on interaction, the position of the hit box has to be inside the water area to truly happen
-func interact(global_pos : Vector2):
-	if water_area != null:
-		if is_position_in_area(global_pos, water_area):
-			M_IceBlocks_node = iceblock_scene.instance()
-
-			add_child(M_IceBlocks_node)
-			M_IceBlocks_node.set_global_position(global_pos)
-			body_floating(M_IceBlocks_node, true)
-
-
-# Return true if the given position is inside the given area, false if not
-func is_position_in_area(pos: Vector2, collision_shape : CollisionShape2D) -> bool:
-	var shape_pos = collision_shape.get_global_position()
-	var shape_ext = collision_shape.get_shape().get_extents()
-
-	return pos.y > shape_pos.y - shape_ext.y && pos.y < shape_pos.y + shape_ext.y && pos.x > shape_pos.x - shape_ext.x && pos.x < shape_pos.x + shape_ext.x
-
-
-# Setup the floating on the given body
-func body_floating(body : PhysicsBody2D, float_or_not : bool):
-	body.is_floating = float_or_not
-
-	if float_or_not == true:
-		body.floating_line_y = floating_line_node.global_position.y
-"
-
-[sub_resource type="GDScript" id=5]
-script/source = "extends Area2D
-
-#### LAVA MAIN NODE ####
-
-# To instanciate a lave zone:
-# 1) Instanciate this scene
-# 2) Instanciate the scene LavaShader & a CollisionShape as children of it
-# 3) Instanciate the LavaLight as a child of the LavaShader
-# 4) Set the size of the texture, of the shape and of the light as you will
-
-func _ready():
-	var _err = connect(\"body_entered\", self, \"on_body_entered\")
-
-
-# Destroy the body entering the lava
-func on_body_entered(body):
-	if body.is_class(\"Player\"):
-		body.destroy()
-"
-
-[sub_resource type="GDScript" id=6]
-script/source = "extends Area2D
-
-#### LAVA MAIN NODE ####
-
-# To instanciate a lave zone:
-# 1) Instanciate this scene
-# 2) Instanciate the scene LavaShader & a CollisionShape as children of it
-# 3) Instanciate the LavaLight as a child of the LavaShader
-# 4) Set the size of the texture, of the shape and of the light as you will
-
-func _ready():
-	var _err = connect(\"body_entered\", self, \"on_body_entered\")
-
-
-# Destroy the body entering the lava
-func on_body_entered(body):
-	if body.is_class(\"Player\"):
-		body.destroy()
-"
-
-[sub_resource type="GDScript" id=7]
-script/source = "extends Area2D
-
-#### LAVA MAIN NODE ####
-
-# To instanciate a lave zone:
-# 1) Instanciate this scene
-# 2) Instanciate the scene LavaShader & a CollisionShape as children of it
-# 3) Instanciate the LavaLight as a child of the LavaShader
-# 4) Set the size of the texture, of the shape and of the light as you will
-
-func _ready():
-	var _err = connect(\"body_entered\", self, \"on_body_entered\")
-
-
-# Destroy the body entering the lava
-func on_body_entered(body):
-	if body.is_class(\"Player\"):
-		body.destroy()
-"
-
-[sub_resource type="GDScript" id=8]
-script/source = "extends Area2D
-
-#### LAVA MAIN NODE ####
-
-# To instanciate a lave zone:
-# 1) Instanciate this scene
-# 2) Instanciate the scene LavaShader & a CollisionShape as children of it
-# 3) Instanciate the LavaLight as a child of the LavaShader
-# 4) Set the size of the texture, of the shape and of the light as you will
-
-func _ready():
-	var _err = connect(\"body_entered\", self, \"on_body_entered\")
-
-
-# Destroy the body entering the lava
-func on_body_entered(body):
-	if body.is_class(\"Player\"):
-		body.destroy()
-"
-
-[sub_resource type="GDScript" id=9]
-script/source = "extends Area2D
-
-#### LAVA MAIN NODE ####
-
-# To instanciate a lave zone:
-# 1) Instanciate this scene
-# 2) Instanciate the scene LavaShader & a CollisionShape as children of it
-# 3) Instanciate the LavaLight as a child of the LavaShader
-# 4) Set the size of the texture, of the shape and of the light as you will
-
-func _ready():
-	var _err = connect(\"body_entered\", self, \"on_body_entered\")
-
-
-# Destroy the body entering the lava
-func on_body_entered(body):
-	if body.is_class(\"Player\"):
-		body.destroy()
-"
-
-[sub_resource type="GDScript" id=10]
-script/source = "extends Area2D
-
-#### LAVA MAIN NODE ####
-
-# To instanciate a lave zone:
-# 1) Instanciate this scene
-# 2) Instanciate the scene LavaShader & a CollisionShape as children of it
-# 3) Instanciate the LavaLight as a child of the LavaShader
-# 4) Set the size of the texture, of the shape and of the light as you will
-
-func _ready():
-	var _err = connect(\"body_entered\", self, \"on_body_entered\")
-
-
-# Destroy the body entering the lava
-func on_body_entered(body):
-	if body.is_class(\"Player\"):
-		body.destroy()
-"
-
-[sub_resource type="GDScript" id=11]
-script/source = "extends Area2D
-
-#### LAVA MAIN NODE ####
-
-# To instanciate a lave zone:
-# 1) Instanciate this scene
-# 2) Instanciate the scene LavaShader & a CollisionShape as children of it
-# 3) Instanciate the LavaLight as a child of the LavaShader
-# 4) Set the size of the texture, of the shape and of the light as you will
-
-func _ready():
-	var _err = connect(\"body_entered\", self, \"on_body_entered\")
-
-
-# Destroy the body entering the lava
-func on_body_entered(body):
-	if body.is_class(\"Player\"):
-		body.destroy()
-"
-
-[sub_resource type="GDScript" id=12]
-script/source = "extends Area2D
-
-#### LAVA MAIN NODE ####
-
-# To instanciate a lave zone:
-# 1) Instanciate this scene
-# 2) Instanciate the scene LavaShader & a CollisionShape as children of it
-# 3) Instanciate the LavaLight as a child of the LavaShader
-# 4) Set the size of the texture, of the shape and of the light as you will
-
-func _ready():
-	var _err = connect(\"body_entered\", self, \"on_body_entered\")
-
-
-# Destroy the body entering the lava
-func on_body_entered(body):
-	if body.is_class(\"Player\"):
-		body.destroy()
-"
-
-[sub_resource type="GDScript" id=13]
-script/source = "extends Area2D
-
-#### LAVA MAIN NODE ####
-
-# To instanciate a lave zone:
-# 1) Instanciate this scene
-# 2) Instanciate the scene LavaShader & a CollisionShape as children of it
-# 3) Instanciate the LavaLight as a child of the LavaShader
-# 4) Set the size of the texture, of the shape and of the light as you will
-
-func _ready():
-	var _err = connect(\"body_entered\", self, \"on_body_entered\")
-
-
-# Destroy the body entering the lava
-func on_body_entered(body):
-	if body.is_class(\"Player\"):
-		body.destroy()
-"
-
-[sub_resource type="GDScript" id=14]
-script/source = "extends Area2D
-
-#### LAVA MAIN NODE ####
-
-# To instanciate a lave zone:
-# 1) Instanciate this scene
-# 2) Instanciate the scene LavaShader & a CollisionShape as children of it
-# 3) Instanciate the LavaLight as a child of the LavaShader
-# 4) Set the size of the texture, of the shape and of the light as you will
-
-func _ready():
-	var _err = connect(\"body_entered\", self, \"on_body_entered\")
-
-
-# Destroy the body entering the lava
-func on_body_entered(body):
-	if body.is_class(\"Player\"):
-		body.destroy()
-"
-
-[sub_resource type="GDScript" id=15]
-script/source = "extends Area2D
-
-#### LAVA MAIN NODE ####
-
-# To instanciate a lave zone:
-# 1) Instanciate this scene
-# 2) Instanciate the scene LavaShader & a CollisionShape as children of it
-# 3) Instanciate the LavaLight as a child of the LavaShader
-# 4) Set the size of the texture, of the shape and of the light as you will
-
-func _ready():
-	var _err = connect(\"body_entered\", self, \"on_body_entered\")
-
-
-# Destroy the body entering the lava
-func on_body_entered(body):
-	if body.is_class(\"Player\"):
-		body.destroy()
-"
-
-[sub_resource type="RectangleShape2D" id=16]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 32, 48 )
 
-[sub_resource type="RectangleShape2D" id=17]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 21.0893, 40 )
 
 [node name="Level3E" instance=ExtResource( 5 )]
@@ -524,103 +216,87 @@ position = Vector2( 2312, 384 )
 
 [node name="Water" parent="InteractivesObjects/WaterTiles" index="0" instance=ExtResource( 14 )]
 position = Vector2( 1568, -144 )
-scale = Vector2( 0.600005, 0.759999 )
+pool_size = Vector2( 250, 100 )
 
 [node name="Water2" parent="InteractivesObjects/WaterTiles" index="1" instance=ExtResource( 14 )]
-position = Vector2( 3138.9, 466 )
-scale = Vector2( 0.33, 0.842 )
-script = SubResource( 4 )
+position = Vector2( 3138.9, 473.497 )
+pool_size = Vector2( 150, 33.445 )
 
 [node name="Water3" parent="InteractivesObjects/WaterTiles" index="2" instance=ExtResource( 14 )]
-position = Vector2( 350.068, 456 )
-scale = Vector2( 1, 1.159 )
+position = Vector2( 364.778, 444.074 )
+pool_size = Vector2( 450, 150 )
 
 [node name="Lava" parent="InteractivesObjects/LavaTiles" index="0" instance=ExtResource( 12 )]
-position = Vector2( 1032, -112 )
-scale = Vector2( 0.194, 0.768 )
+position = Vector2( 1032, -130.883 )
+pool_size = Vector2( 100, 76.901 )
 
 [node name="Lava2" parent="InteractivesObjects/LavaTiles" index="1" instance=ExtResource( 12 )]
-position = Vector2( 2018.71, -14.2001 )
-scale = Vector2( 0.675, 0.448 )
+position = Vector2( 2018.71, -28.691 )
+pool_size = Vector2( 336.162, 48 )
 
 [node name="Lava3" parent="InteractivesObjects/LavaTiles" index="2" instance=ExtResource( 12 )]
 position = Vector2( 2328, -24 )
-scale = Vector2( 0.311, 0.287 )
-script = SubResource( 5 )
+pool_size = Vector2( 146.97, 50 )
 
 [node name="Lava4" parent="InteractivesObjects/LavaTiles" index="3" instance=ExtResource( 12 )]
-position = Vector2( 2856, 64 )
-scale = Vector2( 0.659339, 0.863953 )
-script = SubResource( 6 )
+position = Vector2( 2856, 60.31 )
+pool_size = Vector2( 348.559, 111.459 )
 
 [node name="Lava5" parent="InteractivesObjects/LavaTiles" index="4" instance=ExtResource( 12 )]
 position = Vector2( 3104, 216 )
-scale = Vector2( 0.167, 0.267 )
-script = SubResource( 7 )
+pool_size = Vector2( 90, 32 )
 
 [node name="Lava6" parent="InteractivesObjects/LavaTiles" index="5" instance=ExtResource( 12 )]
 position = Vector2( 2528, 200 )
-scale = Vector2( 0.175, 0.367 )
-script = SubResource( 8 )
+pool_size = Vector2( 100, 32 )
 
 [node name="Lava7" parent="InteractivesObjects/LavaTiles" index="6" instance=ExtResource( 12 )]
-position = Vector2( 2688, 256 )
-scale = Vector2( 0.342, 0.183 )
-script = SubResource( 9 )
+position = Vector2( 2688, 245.098 )
+pool_size = Vector2( 80, 32 )
 
 [node name="Lava8" parent="InteractivesObjects/LavaTiles" index="7" instance=ExtResource( 12 )]
-position = Vector2( 2928, 256 )
-scale = Vector2( 0.192, 0.18 )
-script = SubResource( 9 )
+position = Vector2( 2928, 247.229 )
+pool_size = Vector2( 80, 32 )
 
 [node name="Lava9" parent="InteractivesObjects/LavaTiles" index="8" instance=ExtResource( 12 )]
-position = Vector2( 312, -32 )
-scale = Vector2( 0.296, 0.513 )
-script = SubResource( 10 )
+position = Vector2( 327.751, -55.23 )
+pool_size = Vector2( 250, 100 )
 
 [node name="Lava10" parent="InteractivesObjects/LavaTiles" index="9" instance=ExtResource( 12 )]
-position = Vector2( -176, 464 )
-scale = Vector2( 0.357, 0.886 )
-script = SubResource( 11 )
+position = Vector2( -176, 439.313 )
+pool_size = Vector2( 180, 83.25 )
 
 [node name="Lava11" parent="InteractivesObjects/LavaTiles" index="10" instance=ExtResource( 12 )]
-position = Vector2( 0, 455 )
-scale = Vector2( 0.214, 0.763 )
-script = SubResource( 12 )
+position = Vector2( 0, 396.878 )
+pool_size = Vector2( 100, 80 )
 
 [node name="Lava12" parent="InteractivesObjects/LavaTiles" index="11" instance=ExtResource( 12 )]
-position = Vector2( 1824, 472 )
-scale = Vector2( 0.109, 0.744 )
+position = Vector2( 1824, 457.924 )
+pool_size = Vector2( 80, 48 )
 
 [node name="Lava13" parent="InteractivesObjects/LavaTiles" index="12" instance=ExtResource( 12 )]
-position = Vector2( 2196.99, 472 )
-scale = Vector2( 0.165, 0.816 )
-script = SubResource( 13 )
+position = Vector2( 2196.99, 446.136 )
+pool_size = Vector2( 80, 74.846 )
 
 [node name="Lava14" parent="InteractivesObjects/LavaTiles" index="13" instance=ExtResource( 12 )]
-position = Vector2( 2424, 486.688 )
-scale = Vector2( 0.104, 0.349 )
-script = SubResource( 14 )
+position = Vector2( 2424, 472.204 )
+pool_size = Vector2( 80, 48 )
 
 [node name="Lava15" parent="InteractivesObjects/LavaTiles" index="14" instance=ExtResource( 12 )]
 position = Vector2( 2896, 448 )
-scale = Vector2( 0.582, 0.776 )
-script = SubResource( 15 )
+pool_size = Vector2( 300, 98.177 )
 
 [node name="Lava16" parent="InteractivesObjects/LavaTiles" index="15" instance=ExtResource( 12 )]
-position = Vector2( 2024, 218 )
-scale = Vector2( 0.89, 0.587934 )
+position = Vector2( 2024, 205.268 )
+pool_size = Vector2( 421.201, 104.923 )
 
 [node name="Lava17" parent="InteractivesObjects/LavaTiles" index="16" instance=ExtResource( 12 )]
 position = Vector2( 1336, -416 )
-scale = Vector2( 0.965239, 0.753485 )
+pool_size = Vector2( 424.595, 81.462 )
 
 [node name="XionLiquid" parent="InteractivesObjects/XionLiquid" index="0" instance=ExtResource( 15 )]
 position = Vector2( 1536, 272 )
 scale = Vector2( 1, 2.976 )
-
-[node name="XionLiquidLight" parent="InteractivesObjects/XionLiquid/XionLiquid/XionLiquidShader" index="0"]
-texture_scale = 0.7
 
 [node name="XionLiquid2" parent="InteractivesObjects/XionLiquid" index="1" instance=ExtResource( 15 )]
 position = Vector2( 2096, -304 )
@@ -723,7 +399,7 @@ rotation = -1.5708
 
 [node name="CollisionShape2D" parent="InteractivesObjects/TeleportGroups/G8/TeleportArea" index="1"]
 position = Vector2( 0.00012207, -36 )
-shape = SubResource( 16 )
+shape = SubResource( 4 )
 
 [node name="TeleportArea2" parent="InteractivesObjects/TeleportGroups/G8" index="1" instance=ExtResource( 13 )]
 position = Vector2( 156, 80 )
@@ -740,7 +416,7 @@ rotation = 4.71239
 
 [node name="CollisionShape2D" parent="InteractivesObjects/TeleportGroups/G9/TeleportArea" index="1"]
 position = Vector2( 0, -20 )
-shape = SubResource( 17 )
+shape = SubResource( 5 )
 
 [node name="TeleportArea2" parent="InteractivesObjects/TeleportGroups/G9" index="1" instance=ExtResource( 13 )]
 position = Vector2( 0, 132 )
@@ -1100,24 +776,12 @@ position = Vector2( 2448, -80 )
 position = Vector2( 0, -48 )
 scale = Vector2( 5.39998, 5.48 )
 
-[node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint1" index="1"]
-position = Vector2( 24, -16 )
-
-[node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint1" index="2"]
-position = Vector2( 72, -112 )
-
 [node name="Checkpoint2" parent="Events/Checkpoints" index="1" instance=ExtResource( 24 )]
 position = Vector2( 2808, 232 )
 
 [node name="TriggerArea" parent="Events/Checkpoints/Checkpoint2" index="0"]
 position = Vector2( 0, -24 )
 scale = Vector2( 3.40002, 3.68 )
-
-[node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint2" index="1"]
-position = Vector2( 24, -16 )
-
-[node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint2" index="2"]
-position = Vector2( -24, -16 )
 
 [node name="Checkpoint3" parent="Events/Checkpoints" index="2" instance=ExtResource( 24 )]
 position = Vector2( 1760, -392 )
@@ -1126,24 +790,12 @@ position = Vector2( 1760, -392 )
 position = Vector2( -0.000183105, -40 )
 scale = Vector2( 2.71237, 4.76098 )
 
-[node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint3" index="1"]
-position = Vector2( 31.9999, -16 )
-
-[node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint3" index="2"]
-position = Vector2( -16.0001, -16 )
-
 [node name="Checkpoint4" parent="Events/Checkpoints" index="3" instance=ExtResource( 24 )]
 position = Vector2( -26.1022, -103.262 )
 
 [node name="TriggerArea" parent="Events/Checkpoints/Checkpoint4" index="0"]
 position = Vector2( -4.97647, -24.386 )
 scale = Vector2( 5.16988, 5.73198 )
-
-[node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint4" index="1"]
-position = Vector2( 34.1022, -40.738 )
-
-[node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint4" index="2"]
-position = Vector2( -61.8978, 7.262 )
 
 [node name="Checkpoint5" parent="Events/Checkpoints" index="4" instance=ExtResource( 24 )]
 position = Vector2( 1168, 664 )
@@ -1156,12 +808,6 @@ position = Vector2( 2112, 664 )
 position = Vector2( 8, -16 )
 scale = Vector2( 6.35607, 2.48452 )
 
-[node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint6" index="1"]
-position = Vector2( 32, -16 )
-
-[node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint6" index="2"]
-position = Vector2( -24, -16 )
-
 [node name="Checkpoint7" parent="Events/Checkpoints" index="6" instance=ExtResource( 24 )]
 position = Vector2( 2328, 664 )
 
@@ -1169,24 +815,12 @@ position = Vector2( 2328, 664 )
 position = Vector2( 8, -16 )
 scale = Vector2( 6.35607, 2.48452 )
 
-[node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint7" index="1"]
-position = Vector2( 24, -16 )
-
-[node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint7" index="2"]
-position = Vector2( -24, -16 )
-
 [node name="Checkpoint8" parent="Events/Checkpoints" index="7" instance=ExtResource( 24 )]
 position = Vector2( 2552, 472 )
 
 [node name="TriggerArea" parent="Events/Checkpoints/Checkpoint8" index="0"]
 position = Vector2( 16, -16 )
 scale = Vector2( 5.19607, 2.48452 )
-
-[node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint8" index="1"]
-position = Vector2( 40, -16 )
-
-[node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint8" index="2"]
-position = Vector2( -8, -16 )
 
 [editable path="InteractivesObjects/XionLiquid/XionLiquid"]
 

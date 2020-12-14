@@ -264,38 +264,39 @@ position = Vector2( 3584, 696 )
 
 [node name="Water" parent="InteractivesObjects/WaterTiles" index="0" instance=ExtResource( 14 )]
 position = Vector2( 516, 356 )
-scale = Vector2( 0.186188, 0.740922 )
+pool_size = Vector2( 100, 80 )
 
 [node name="Water2" parent="InteractivesObjects/WaterTiles" index="1" instance=ExtResource( 14 )]
 position = Vector2( 2924, 359 )
-scale = Vector2( 0.437331, 0.434218 )
+pool_size = Vector2( 200, 60 )
 
 [node name="Lava" parent="InteractivesObjects/LavaTiles" index="0" instance=ExtResource( 25 )]
 position = Vector2( 1768, 384 )
+pool_size = Vector2( 512, 120 )
 
 [node name="Lava3" parent="InteractivesObjects/LavaTiles" index="1" instance=ExtResource( 25 )]
-position = Vector2( 4072, 704 )
-scale = Vector2( 0.640819, 0.234733 )
+position = Vector2( 4072, 697.209 )
+pool_size = Vector2( 340.789, 48 )
 
 [node name="Lava4" parent="InteractivesObjects/LavaTiles" index="2" instance=ExtResource( 25 )]
-position = Vector2( 4376, 704 )
-scale = Vector2( 0.640819, 0.234733 )
+position = Vector2( 4376, 699.895 )
+pool_size = Vector2( 300, 48 )
 
 [node name="Lava5" parent="InteractivesObjects/LavaTiles" index="3" instance=ExtResource( 25 )]
-position = Vector2( 4608, 704 )
-scale = Vector2( 0.233135, 0.234733 )
+position = Vector2( 4608, 691.926 )
+pool_size = Vector2( 100, 44.307 )
 
 [node name="Lava6" parent="InteractivesObjects/LavaTiles" index="4" instance=ExtResource( 25 )]
-position = Vector2( 3984, 269 )
-scale = Vector2( 0.574352, 0.245179 )
+position = Vector2( 3984, 236.051 )
+pool_size = Vector2( 367.635, 70 )
 
 [node name="Lava7" parent="InteractivesObjects/LavaTiles" index="5" instance=ExtResource( 25 )]
-position = Vector2( 4400, 216 )
-scale = Vector2( 0.588839, 0.722718 )
+position = Vector2( 4400, 198.531 )
+pool_size = Vector2( 300, 110 )
 
 [node name="Lava2" parent="InteractivesObjects/LavaTiles" index="6" instance=ExtResource( 25 )]
-position = Vector2( 2784, 696 )
-scale = Vector2( 0.760808, 0.34798 )
+position = Vector2( 2784, 688.381 )
+pool_size = Vector2( 512, 87.791 )
 
 [node name="G1" type="Node2D" parent="InteractivesObjects/Buttons&Doors" index="0"]
 script = ExtResource( 6 )
@@ -549,25 +550,13 @@ position = Vector2( 1272, 496 )
 [node name="Checkpoint3" parent="Events/Checkpoints" index="1" instance=ExtResource( 26 )]
 position = Vector2( 2352, 88 )
 
-[node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint3" index="1"]
-position = Vector2( -64, -16 )
-
-[node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint3" index="2"]
-position = Vector2( 64, -16 )
-
-[node name="AnimationPlayer" parent="Events/Checkpoints/Checkpoint3" index="4"]
+[node name="AnimationPlayer" parent="Events/Checkpoints/Checkpoint3" index="2"]
 anims/LightUp = SubResource( 1 )
 
 [node name="Checkpoint4" parent="Events/Checkpoints" index="2" instance=ExtResource( 26 )]
 position = Vector2( 3888, 664 )
 
-[node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint4" index="1"]
-position = Vector2( -176, -544 )
-
-[node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint4" index="2"]
-position = Vector2( -176, 32 )
-
-[node name="AnimationPlayer" parent="Events/Checkpoints/Checkpoint4" index="4"]
+[node name="AnimationPlayer" parent="Events/Checkpoints/Checkpoint4" index="2"]
 anims/LightUp = SubResource( 2 )
 
 [node name="CameraEvent" parent="Events/CameraEvents" index="0" instance=ExtResource( 27 )]

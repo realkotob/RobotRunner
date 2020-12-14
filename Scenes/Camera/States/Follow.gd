@@ -64,24 +64,6 @@ func compute_player_distance(players_array: Array) -> Vector2:
 	return distance
 
 
-## Retunrs the direction of the border to anticipate
-#func get_appropriate_border_direction(ply_average_pos: Vector2) -> Vector2:
-#	var borders_array = get_borders_approched(ply_average_pos)
-#	if borders_array.size() == 0: 
-#		return Vector2.ZERO
-#	elif borders_array.size() == 1: 
-#		return borders_array[0]
-#	else:
-#		var xion_cloud = get_tree().get_current_scene().find_node("XionCloud")
-#		if xion_cloud == null: return Vector2.RIGHT
-#
-#		var cloud_dir = xion_cloud.get_direction()
-#		if cloud_dir in borders_array:
-#			return borders_array[0]
-#		elif Vector2.RIGHT in borders_array : return Vector2.RIGHT
-#		else: return borders_array[0]
-
-### IDEA TO IMPROVE THE ANTICIPATION ALGORITME ###
 # 1) Check if at least one player is in the anticipation zone
 # 2) Find which player is the nearest form the border of the screen if it
 # wasn't zoomed and/or anticipated and returns its the nearest border

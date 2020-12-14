@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Scenes/Levels/Base/LevelBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/StartingPoints/StartingPointP1.tscn" type="PackedScene" id=2]
@@ -28,15 +28,19 @@
 [ext_resource path="res://Scenes/InteractiveObjects/Teleports/Types/PinkTeleporter.tscn" type="PackedScene" id=26]
 
 [sub_resource type="RectangleShape2D" id=1]
+resource_local_to_scene = true
+extents = Vector2( 50, 10.2005 )
+
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 255.161, 74 )
 
-[sub_resource type="Gradient" id=2]
+[sub_resource type="Gradient" id=3]
 colors = PoolColorArray( 0.726385, 0.953613, 0.942296, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=3]
-gradient = SubResource( 2 )
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
 
-[sub_resource type="ParticlesMaterial" id=4]
+[sub_resource type="ParticlesMaterial" id=5]
 lifetime_randomness = 0.43
 emission_shape = 2
 emission_box_extents = Vector3( 30, 1, 1 )
@@ -54,126 +58,8 @@ orbit_velocity_random = 0.0
 linear_accel_random = 0.61
 scale = 2.5
 scale_random = 1.0
-color_ramp = SubResource( 3 )
+color_ramp = SubResource( 4 )
 hue_variation_random = 0.2
-
-[sub_resource type="Shader" id=5]
-code = "shader_type canvas_item;
-
-// Define the color of the water
-uniform vec4 water_tint : hint_color = vec4(0.0, 0.8, 1, 1);
-
-// Define the color of the surface of the water
-uniform vec4 surface_tint : hint_color = vec4(0.3, 0.93, 0.93, 1);
-
-// Define the scale of the water pool
-uniform vec2 sprite_scale = vec2(30, 0.5);
-
-// Define the amount of distortion
-uniform float distort_scale = 0.8;
-
-// Define the amount of recfration (the distortion of what is behind or under water)
-uniform float refraction_amount = 0.2;
-
-// Define the opacity of the water
-uniform float water_opacity = 0.2;
-
-// Returns a random number
-float rand(vec2 coord){
-	return fract(sin(dot(coord, vec2(19.9898, 78.233))) * 43758.5453123);
-}
-
-// Returns a noise texture
-float noise(vec2 coord){
-	vec2 i = floor(coord);
-	vec2 f = fract(coord);
-	
-	// 4 corners of a rectangle surrounding our point
-	float a = rand(i);
-	float b = rand(i + vec2(1.0, 0.0));
-	float c = rand(i + vec2(0.0, 1.0));
-	float d = rand(i + vec2(1.0, 1.0));
-	
-	vec2 cubic = f * f * (3.0 - 2.0 * f);
-	
-	return mix(a, b, cubic.x) + (c - a) * cubic.y * (1.0 - cubic.x) + (d - b) * cubic.x * cubic.y;
-}
-
-void fragment(){
-	
-	// Calculate the noise coordonate for each pixel of the sprite
-	vec2 noisecoord1 = UV * sprite_scale * distort_scale;
-	vec2 noisecoord2 = UV * sprite_scale * distort_scale + 4.0;
-	
-	// Calculate the motion of the noise layers
-	vec2 motion1 = vec2(TIME * 0.3, TIME * -0.4);
-	vec2 motion2 = vec2(TIME * 0.1, TIME * 0.5);
-	
-	// Calculate the distortion over time using the noise and the motion
-	vec2 distort1 = vec2(noise(noisecoord1 + motion1), noise(noisecoord2 + motion1)) - vec2(0.5);
-	vec2 distort2 = vec2(noise(noisecoord1 + motion2), noise(noisecoord2 + motion2)) - vec2(0.5);
-	
-	// Calculate the overall distortion
-	vec2 distort_sum = (distort1 + distort2) / 60.0;
-	
-	// Calulate separatly the effect of the disrotion on both the noise texture, and the rest of the screen
-	vec4 color = textureLod(TEXTURE, TIME * 0.1 + sin(UV) + distort_sum, -1.0);
-	vec4 background_color = textureLod(SCREEN_TEXTURE, SCREEN_UV + (distort_sum * refraction_amount), -1.0);
-	
-	// Mix the noise and the screen distortion together
-	color = mix(background_color, color, water_opacity);
-	
-	// Apply the color tint to the water
-	color = mix(color, water_tint, 0.3);
-	
-	// Cull the contrasts
-	color.rgb = mix(vec3(0.5), color.rgb, 1.4);
-	
-	// Handle the water surface
-	float near_top = (UV.y + distort_sum.y) / (0.2 / sprite_scale.y);
-	near_top = clamp(near_top, 0.0, 1.0);
-	near_top = 1.0 - near_top;
-	
-	color = mix(color, surface_tint, near_top);
-	
-	float edge_lower = 0.5;
-	float edge_upper = edge_lower + 0.1;
-	
-	if (near_top > edge_lower){
-		color.a = 0.0;
-		
-		if (near_top < edge_upper){
-			color.a = (edge_upper - near_top) / (edge_upper - edge_lower);
-		}
-	}
-	
-	// Apply the whole calculation to the canvas
-	COLOR = color;
-}"
-
-[sub_resource type="ShaderMaterial" id=6]
-render_priority = 1
-shader = SubResource( 5 )
-shader_param/water_tint = Color( 0.47451, 0, 0.721569, 1 )
-shader_param/surface_tint = Color( 0.211765, 0, 0.364706, 1 )
-shader_param/sprite_scale = Vector2( 30, 0.5 )
-shader_param/distort_scale = 0.8
-shader_param/refraction_amount = 0.2
-shader_param/water_opacity = 0.2
-
-[sub_resource type="OpenSimplexNoise" id=7]
-period = 13.6
-lacunarity = 2.37
-
-[sub_resource type="NoiseTexture" id=8]
-width = 100
-height = 100
-seamless = true
-bump_strength = 1.5
-noise = SubResource( 7 )
-
-[sub_resource type="StreamTexture" id=9]
-load_path = "res://.import/Light300.png-52f4b423ac92f48283761156830cb1c0.stex"
 
 [node name="Level2A" instance=ExtResource( 1 )]
 
@@ -342,249 +228,175 @@ position = Vector2( 3536, 360 )
 position = Vector2( 3536, 312 )
 
 [node name="Lava" parent="InteractivesObjects/LavaTiles" index="0" instance=ExtResource( 9 )]
-position = Vector2( 2320, 665 )
-scale = Vector2( 0.187, 0.194982 )
+position = Vector2( 2320, 649.342 )
+pool_size = Vector2( 100, 20.401 )
+
+[node name="LiquidShader" parent="InteractivesObjects/LavaTiles/Lava" index="0"]
+region_rect = Rect2( 0, 0, 100, 68.401 )
+
+[node name="Light" parent="InteractivesObjects/LavaTiles/Lava/LiquidShader" index="0"]
+texture_scale = 7.06958
+
+[node name="CollisionShape2D" parent="InteractivesObjects/LavaTiles/Lava" index="1"]
+shape = SubResource( 1 )
 
 [node name="Lava2" parent="InteractivesObjects/LavaTiles" index="1" instance=ExtResource( 9 )]
-position = Vector2( 2436, 855 )
-scale = Vector2( 0.147, 0.18 )
+position = Vector2( 2436, 843.06 )
+pool_size = Vector2( 100, 20 )
 
 [node name="Lava3" parent="InteractivesObjects/LavaTiles" index="2" instance=ExtResource( 9 )]
-position = Vector2( 2316, 1011 )
-scale = Vector2( 0.147, 0.25 )
+position = Vector2( 2316, 1000.45 )
+pool_size = Vector2( 100, 48 )
 
 [node name="Lava4" parent="InteractivesObjects/LavaTiles" index="3" instance=ExtResource( 9 )]
-position = Vector2( 2344, 1395 )
-scale = Vector2( 0.25, 0.25 )
+position = Vector2( 2344, 1386.01 )
+pool_size = Vector2( 150, 48 )
 
 [node name="Lava5" parent="InteractivesObjects/LavaTiles" index="4" instance=ExtResource( 9 )]
-position = Vector2( 2305, 1236 )
-scale = Vector2( 0.1, 0.14 )
+position = Vector2( 2305, 1230.39 )
+pool_size = Vector2( 80, 30 )
 
 [node name="Lava6" parent="InteractivesObjects/LavaTiles" index="5" instance=ExtResource( 9 )]
-position = Vector2( 2449, 1236 )
-scale = Vector2( 0.1, 0.14 )
+position = Vector2( 2449, 1233.02 )
+pool_size = Vector2( 80, 30 )
 
 [node name="Lava7" parent="InteractivesObjects/LavaTiles" index="6" instance=ExtResource( 9 )]
-position = Vector2( 2856, 1113 )
-scale = Vector2( 0.1, 0.45998 )
+position = Vector2( 2856, 1109.15 )
+pool_size = Vector2( 50, 48 )
 
 [node name="Lava8" parent="InteractivesObjects/LavaTiles" index="7" instance=ExtResource( 9 )]
-position = Vector2( 3277, 243 )
-scale = Vector2( 0.184196, 0.362209 )
+position = Vector2( 3277, 231.558 )
+pool_size = Vector2( 74.019, 48 )
 
 [node name="Lava9" parent="InteractivesObjects/LavaTiles" index="8" instance=ExtResource( 9 )]
 position = Vector2( 3384, 232 )
-scale = Vector2( 0.104176, 0.162208 )
+pool_size = Vector2( 50, 54.873 )
 
 [node name="Lava10" parent="InteractivesObjects/LavaTiles" index="9" instance=ExtResource( 9 )]
 position = Vector2( 1488, 570 )
-scale = Vector2( 0.344186, 0.362208 )
+pool_size = Vector2( 150, 60 )
 
 [node name="Lava11" parent="InteractivesObjects/LavaTiles" index="10" instance=ExtResource( 9 )]
-position = Vector2( 1912, 599 )
-scale = Vector2( 0.424, 0.300002 )
+position = Vector2( 1895.06, 599 )
+pool_size = Vector2( 160, 100 )
 
 [node name="Lava13" parent="InteractivesObjects/LavaTiles" index="11" instance=ExtResource( 9 )]
-position = Vector2( 2000, 395.98 )
-scale = Vector2( 0.28, 0.360002 )
+position = Vector2( 2000, 390.029 )
+pool_size = Vector2( 150, 70 )
 
 [node name="Lava14" parent="InteractivesObjects/LavaTiles" index="12" instance=ExtResource( 9 )]
 position = Vector2( 1272, 328 )
-scale = Vector2( 0.846249, 0.714455 )
+pool_size = Vector2( 480, 70 )
 
 [node name="Lava15" parent="InteractivesObjects/LavaTiles" index="13" instance=ExtResource( 9 )]
 position = Vector2( 1128, 624 )
-scale = Vector2( 0.424024, 0.637436 )
+pool_size = Vector2( 200, 100 )
 
 [node name="Liquid" parent="InteractivesObjects/XionLiquid" index="0" instance=ExtResource( 10 )]
 position = Vector2( 2512, 256 )
 scale = Vector2( 0.102221, 3.10323 )
 
-[node name="XionLiquidLight" parent="InteractivesObjects/XionLiquid/Liquid/XionLiquidShader" index="0"]
-energy = 0.4
-
 [node name="Liquid2" parent="InteractivesObjects/XionLiquid" index="1" instance=ExtResource( 10 )]
 position = Vector2( 2680, 256 )
 scale = Vector2( 0.102221, 3.10323 )
-
-[node name="XionLiquidLight" parent="InteractivesObjects/XionLiquid/Liquid2/XionLiquidShader" index="0"]
-energy = 0.4
 
 [node name="Liquid3" parent="InteractivesObjects/XionLiquid" index="2" instance=ExtResource( 10 )]
 position = Vector2( 2672, 1248 )
 scale = Vector2( 0.102, 2.65 )
 
-[node name="XionLiquidLight" parent="InteractivesObjects/XionLiquid/Liquid3/XionLiquidShader" index="0"]
-energy = 0.4
-
 [node name="Liquid4" parent="InteractivesObjects/XionLiquid" index="3" instance=ExtResource( 10 )]
 position = Vector2( 2508, 1248 )
 scale = Vector2( 0.102, 2.65 )
-
-[node name="XionLiquidLight" parent="InteractivesObjects/XionLiquid/Liquid4/XionLiquidShader" index="0"]
-energy = 0.4
 
 [node name="Liquid5" parent="InteractivesObjects/XionLiquid" index="4" instance=ExtResource( 10 )]
 position = Vector2( 2504, 768 )
 scale = Vector2( 0.1, 3.6 )
 
-[node name="XionLiquidLight" parent="InteractivesObjects/XionLiquid/Liquid5/XionLiquidShader" index="0"]
-energy = 0.4
-
 [node name="Liquid6" parent="InteractivesObjects/XionLiquid" index="5" instance=ExtResource( 10 )]
 position = Vector2( 2672, 776 )
 scale = Vector2( 0.1, 3.6 )
-
-[node name="XionLiquidLight" parent="InteractivesObjects/XionLiquid/Liquid6/XionLiquidShader" index="0"]
-energy = 0.4
 
 [node name="Liquid7" parent="InteractivesObjects/XionLiquid" index="6" instance=ExtResource( 10 )]
 position = Vector2( 2592, 266 )
 scale = Vector2( 0.2, 3.3 )
 
-[node name="XionLiquidLight" parent="InteractivesObjects/XionLiquid/Liquid7/XionLiquidShader" index="0"]
-energy = 0.7
-
 [node name="Liquid8" parent="InteractivesObjects/XionLiquid" index="7" instance=ExtResource( 10 )]
 position = Vector2( 2592, 770 )
 scale = Vector2( 0.2, 3.3 )
 
-[node name="XionLiquidLight" parent="InteractivesObjects/XionLiquid/Liquid8/XionLiquidShader" index="0"]
-energy = 0.7
-
 [node name="Liquid9" parent="InteractivesObjects/XionLiquid" index="8" instance=ExtResource( 10 )]
 position = Vector2( 2592, 1234 )
 scale = Vector2( 0.2, 2.8 )
-
-[node name="XionLiquidLight" parent="InteractivesObjects/XionLiquid/Liquid9/XionLiquidShader" index="0"]
-energy = 0.7
 
 [node name="Liquid10" parent="InteractivesObjects/XionLiquid" index="9" instance=ExtResource( 10 )]
 position = Vector2( 2845, 841 )
 scale = Vector2( 0.05, 1 )
 
 [node name="CollisionShape2D" parent="InteractivesObjects/XionLiquid/Liquid10" index="0"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Particles2D" parent="InteractivesObjects/XionLiquid/Liquid10" index="2"]
-process_material = SubResource( 4 )
-
-[node name="XionLiquidShader" parent="InteractivesObjects/XionLiquid/Liquid10" index="3"]
-material = SubResource( 6 )
-texture = SubResource( 8 )
-
-[node name="XionLiquidLight" parent="InteractivesObjects/XionLiquid/Liquid10/XionLiquidShader" index="0"]
-texture = SubResource( 9 )
-energy = 0.4
+process_material = SubResource( 5 )
 
 [node name="Liquid11" parent="InteractivesObjects/XionLiquid" index="10" instance=ExtResource( 10 )]
 position = Vector2( 2892, 841 )
 scale = Vector2( 0.05, 1 )
 
 [node name="CollisionShape2D" parent="InteractivesObjects/XionLiquid/Liquid11" index="0"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Particles2D" parent="InteractivesObjects/XionLiquid/Liquid11" index="2"]
-process_material = SubResource( 4 )
-
-[node name="XionLiquidShader" parent="InteractivesObjects/XionLiquid/Liquid11" index="3"]
-material = SubResource( 6 )
-texture = SubResource( 8 )
-
-[node name="XionLiquidLight" parent="InteractivesObjects/XionLiquid/Liquid11/XionLiquidShader" index="0"]
-texture = SubResource( 9 )
-energy = 0.4
+process_material = SubResource( 5 )
 
 [node name="Liquid12" parent="InteractivesObjects/XionLiquid" index="11" instance=ExtResource( 10 )]
 position = Vector2( 2724, 208 )
 scale = Vector2( -0.074647, 0.547695 )
 
 [node name="CollisionShape2D" parent="InteractivesObjects/XionLiquid/Liquid12" index="0"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Particles2D" parent="InteractivesObjects/XionLiquid/Liquid12" index="2"]
-process_material = SubResource( 4 )
-
-[node name="XionLiquidShader" parent="InteractivesObjects/XionLiquid/Liquid12" index="3"]
-material = SubResource( 6 )
-texture = SubResource( 8 )
-
-[node name="XionLiquidLight" parent="InteractivesObjects/XionLiquid/Liquid12/XionLiquidShader" index="0"]
-texture = SubResource( 9 )
-energy = 0.4
+process_material = SubResource( 5 )
 
 [node name="Liquid13" parent="InteractivesObjects/XionLiquid" index="12" instance=ExtResource( 10 )]
 position = Vector2( 2916, 256 )
 scale = Vector2( -0.074647, 0.547695 )
 
 [node name="CollisionShape2D" parent="InteractivesObjects/XionLiquid/Liquid13" index="0"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Particles2D" parent="InteractivesObjects/XionLiquid/Liquid13" index="2"]
-process_material = SubResource( 4 )
-
-[node name="XionLiquidShader" parent="InteractivesObjects/XionLiquid/Liquid13" index="3"]
-material = SubResource( 6 )
-texture = SubResource( 8 )
-
-[node name="XionLiquidLight" parent="InteractivesObjects/XionLiquid/Liquid13/XionLiquidShader" index="0"]
-texture = SubResource( 9 )
-energy = 0.4
+process_material = SubResource( 5 )
 
 [node name="Liquid14" parent="InteractivesObjects/XionLiquid" index="13" instance=ExtResource( 10 )]
 position = Vector2( 4008, 200 )
 scale = Vector2( 0.119486, 2.22769 )
 
 [node name="CollisionShape2D" parent="InteractivesObjects/XionLiquid/Liquid14" index="0"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Particles2D" parent="InteractivesObjects/XionLiquid/Liquid14" index="2"]
-process_material = SubResource( 4 )
-
-[node name="XionLiquidShader" parent="InteractivesObjects/XionLiquid/Liquid14" index="3"]
-material = SubResource( 6 )
-texture = SubResource( 8 )
-
-[node name="XionLiquidLight" parent="InteractivesObjects/XionLiquid/Liquid14/XionLiquidShader" index="0"]
-texture = SubResource( 9 )
-energy = 0.4
+process_material = SubResource( 5 )
 
 [node name="Liquid15" parent="InteractivesObjects/XionLiquid" index="14" instance=ExtResource( 10 )]
 position = Vector2( 3848, 384 )
 scale = Vector2( 0.559486, 0.507695 )
 
 [node name="CollisionShape2D" parent="InteractivesObjects/XionLiquid/Liquid15" index="0"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Particles2D" parent="InteractivesObjects/XionLiquid/Liquid15" index="2"]
-process_material = SubResource( 4 )
-
-[node name="XionLiquidShader" parent="InteractivesObjects/XionLiquid/Liquid15" index="3"]
-material = SubResource( 6 )
-texture = SubResource( 8 )
-
-[node name="XionLiquidLight" parent="InteractivesObjects/XionLiquid/Liquid15/XionLiquidShader" index="0"]
-texture = SubResource( 9 )
-energy = 0.4
+process_material = SubResource( 5 )
 
 [node name="Liquid16" parent="InteractivesObjects/XionLiquid" index="15" instance=ExtResource( 10 )]
 position = Vector2( 3096, 275 )
 scale = Vector2( 0.198416, 0.190232 )
 
 [node name="CollisionShape2D" parent="InteractivesObjects/XionLiquid/Liquid16" index="0"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Particles2D" parent="InteractivesObjects/XionLiquid/Liquid16" index="2"]
-process_material = SubResource( 4 )
-
-[node name="XionLiquidShader" parent="InteractivesObjects/XionLiquid/Liquid16" index="3"]
-material = SubResource( 6 )
-texture = SubResource( 8 )
-
-[node name="XionLiquidLight" parent="InteractivesObjects/XionLiquid/Liquid16/XionLiquidShader" index="0"]
-texture = SubResource( 9 )
-energy = 0.4
+process_material = SubResource( 5 )
 
 [node name="G" type="Node2D" parent="InteractivesObjects/TeleportGroups" index="0"]
 __meta__ = {
@@ -834,6 +646,8 @@ follow_state = true
 
 [node name="Camera" parent="." index="7"]
 visible = false
+
+[editable path="InteractivesObjects/LavaTiles/Lava"]
 
 [editable path="InteractivesObjects/XionLiquid/Liquid"]
 

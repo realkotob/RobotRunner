@@ -60,24 +60,24 @@ position = Vector2( 768, -95 )
 position = Vector2( 768, -143 )
 
 [node name="Lava" parent="InteractivesObjects/LavaTiles" index="0" instance=ExtResource( 25 )]
-position = Vector2( 936, 248 )
-scale = Vector2( 0.2, 0.3 )
+position = Vector2( 936, 224.927 )
+pool_size = Vector2( 100, 32 )
 
 [node name="Lava2" parent="InteractivesObjects/LavaTiles" index="1" instance=ExtResource( 25 )]
-position = Vector2( 1782.49, 253.22 )
-scale = Vector2( 0.284, 0.444 )
+position = Vector2( 1782.49, 234.824 )
+pool_size = Vector2( 140, 64 )
 
 [node name="Lava3" parent="InteractivesObjects/LavaTiles" index="2" instance=ExtResource( 25 )]
-position = Vector2( 2248, 384 )
-scale = Vector2( 0.290449, 0.461858 )
+position = Vector2( 2248, 368.663 )
+pool_size = Vector2( 150, 64.37 )
 
 [node name="Lava4" parent="InteractivesObjects/LavaTiles" index="3" instance=ExtResource( 25 )]
-position = Vector2( 2440, 392 )
-scale = Vector2( 0.278809, 0.537707 )
+position = Vector2( 2440, 373.75 )
+pool_size = Vector2( 150, 80 )
 
 [node name="Lava5" parent="InteractivesObjects/LavaTiles" index="4" instance=ExtResource( 25 )]
-position = Vector2( 3368, 600 )
-scale = Vector2( 0.811055, 0.899533 )
+position = Vector2( 3368, 574.587 )
+pool_size = Vector2( 512, 102.032 )
 
 [node name="Liquid" parent="InteractivesObjects/XionLiquid" index="0" instance=ExtResource( 17 )]
 position = Vector2( 4104, 48 )
@@ -173,7 +173,6 @@ argument_array = [ "Idle" ]
 
 [node name="BabyTank2" parent="InteractivesObjects/Robot" index="1" instance=ExtResource( 19 )]
 position = Vector2( 328, 132 )
-speed = 140.0
 default_state = "Hidden"
 action_name_bubble = ""
 

@@ -8,12 +8,17 @@
 
 [node name="Water" instance=ExtResource( 1 )]
 script = ExtResource( 5 )
+pool_size = Vector2( 512, 182.569 )
+
+[node name="CollisionShape2D" parent="." index="0"]
+visible = false
+position = Vector2( 0, 24 )
 
 [node name="FloatingLine" type="Position2D" parent="." index="1"]
-position = Vector2( 0.22644, -73.8394 )
+position = Vector2( 0, -115.285 )
 
 [node name="Particles2D" type="Particles2D" parent="." index="2"]
-position = Vector2( 0, -73.839 )
+position = Vector2( 0, -91.2845 )
 emitting = false
 amount = 30
 lifetime = 0.4
@@ -27,8 +32,8 @@ process_material = ExtResource( 2 )
 position = Vector2( 0, 0 )
 scale = Vector2( 1, 1 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 512, 184 )
+region_rect = Rect2( 0, 0, 512, 230.569 )
 
-[node name="WaterLight" parent="LiquidShader" index="0" instance=ExtResource( 4 )]
+[node name="Light" parent="LiquidShader" index="0" instance=ExtResource( 4 )]
 position = Vector2( -2.38419e-07, 1.90735e-06 )
 scale = Vector2( 0.91, 1.2 )

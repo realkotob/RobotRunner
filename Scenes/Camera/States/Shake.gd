@@ -1,4 +1,4 @@
-extends StateBase
+extends CameraState
 
 onready var timer_node = $Timer
 

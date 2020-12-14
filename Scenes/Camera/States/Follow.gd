@@ -1,12 +1,9 @@
-extends StateBase
+extends CameraState
 
 const ANTICIP_DIST : float = 200.0
 const ANTICIP_TRIGGER_RATIO : float = 0.3
 
-onready var border_anticip_label = $CanvasLayer/Control/VBoxContainer/BordersAnticip
-
-var camera : Camera2D
-var screen_size : Vector2
+onready var border_anticip_label = $DebugLayer/Control/VBoxContainer/BordersAnticip
 
 var borders_anticipated := Array() setget set_borders_anticipated, get_borders_anticipated
 
@@ -30,13 +27,8 @@ func get_borders_anticipated() -> Array: return borders_anticipated
 
 #### BUILT-IN ####
 
-func _ready():
-	yield(owner, "ready")
-	camera = owner
-	screen_size = get_viewport().get_size() / 2
 
-
-#### LOGIC ####
+#### VIRTUAL ####
 
 
 # This state is used to follow the players
@@ -78,6 +70,8 @@ func update(_host, _delta):
 			camera.start_zooming(dest_zoom)
 
 
+#### LOGIC ####
+
 # Compute the distance between the players
 func compute_player_distance(players_array: Array) -> Vector2:
 	var distance := Vector2.ZERO
@@ -103,16 +97,17 @@ func get_border_approched(ply_average_pos: Vector2) -> Array:
 		var player_pos = player.get_global_position()
 		
 		var pivot_pos = camera.get_pivot_position()
+		var anticip_dist = screen_size.x * ANTICIP_TRIGGER_RATIO
 		
 		# Check individual player position
-		if player_pos.x > pivot_pos.x + (screen_size.x / 2) - screen_size.x * ANTICIP_TRIGGER_RATIO && \
-		player.last_direction == 1:
+		if player_pos.x > pivot_pos.x + (screen_size.x / 2) - anticip_dist && \
+							player.last_direction == 1:
 			if !(Vector2.RIGHT in border_array):
 				border_array.append(Vector2.RIGHT)
 				continue
 		
-		elif player_pos.x < pivot_pos.x - (screen_size.y / 2) + screen_size.x * ANTICIP_TRIGGER_RATIO && \
-		player.last_direction == -1:
+		elif player_pos.x < pivot_pos.x - (screen_size.y / 2) + anticip_dist && \
+							player.last_direction == -1:
 			if !(Vector2.LEFT in border_array):
 				border_array.append(Vector2.LEFT)
 				continue
@@ -120,14 +115,15 @@ func get_border_approched(ply_average_pos: Vector2) -> Array:
 		var cam_pos = camera.get_global_position()
 		var cam_zoom = camera.get_zoom()
 		var cam_size = screen_size * cam_zoom
+		var cam_anticip_dist = cam_size.x * ANTICIP_TRIGGER_RATIO
 		
 		# Check average players position
-		if ply_average_pos.x > cam_pos.x + (cam_size.x / 2) - cam_size.x * ANTICIP_TRIGGER_RATIO:
+		if ply_average_pos.x > cam_pos.x + (cam_size.x / 2) - cam_anticip_dist:
 			if !(Vector2.RIGHT in border_array):
 				border_array.append(Vector2.RIGHT)
 				break
 		
-		if ply_average_pos.x < cam_pos.x - (cam_size.x / 2) + cam_size.x * ANTICIP_TRIGGER_RATIO:
+		if ply_average_pos.x < cam_pos.x - (cam_size.x / 2) + cam_anticip_dist:
 			if !(Vector2.LEFT in border_array):
 				border_array.append(Vector2.LEFT)
 				break

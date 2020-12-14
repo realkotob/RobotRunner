@@ -17,7 +17,6 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
-debug = true
 
 [node name="StateMachine" type="Node2D" parent="."]
 script = ExtResource( 2 )
@@ -32,9 +31,10 @@ one_shot = true
 [node name="Follow" type="Node2D" parent="StateMachine"]
 script = ExtResource( 3 )
 
-[node name="CanvasLayer" type="CanvasLayer" parent="StateMachine/Follow"]
+[node name="DebugLayer" type="CanvasLayer" parent="StateMachine/Follow"]
 
-[node name="Control" type="Control" parent="StateMachine/Follow/CanvasLayer"]
+[node name="Control" type="Control" parent="StateMachine/Follow/DebugLayer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -960.0
@@ -43,14 +43,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="StateMachine/Follow/CanvasLayer/Control"]
+[node name="VBoxContainer" type="VBoxContainer" parent="StateMachine/Follow/DebugLayer/Control"]
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BordersAnticip" type="Label" parent="StateMachine/Follow/CanvasLayer/Control/VBoxContainer"]
+[node name="BordersAnticip" type="Label" parent="StateMachine/Follow/DebugLayer/Control/VBoxContainer"]
 margin_right = 126.0
 margin_bottom = 14.0
 text = "Border anticipated: "

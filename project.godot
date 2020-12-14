@@ -79,6 +79,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/Events/CameraEvents/CameraEvent.gd"
 }, {
+"base": "StateBase",
+"class": "CameraState",
+"language": "GDScript",
+"path": "res://Scenes/Camera/States/CameraState.gd"
+}, {
 "base": "Resource",
 "class": "ChapterBase",
 "language": "GDScript",
@@ -173,6 +178,11 @@ _global_script_classes=[ {
 "class": "Event",
 "language": "GDScript",
 "path": "res://Scenes/Events/BaseScene/EventBase.gd"
+}, {
+"base": "Camera2D",
+"class": "GameCamera",
+"language": "GDScript",
+"path": "res://Scenes/Camera/Camera.gd"
 }, {
 "base": "Control",
 "class": "GameConsoleScript",
@@ -384,6 +394,7 @@ _global_script_class_icons={
 "BreakablePlatfrom": "",
 "BreakableSpriteBase": "",
 "CameraEventBase": "",
+"CameraState": "",
 "ChapterBase": "",
 "ChunckAutomata": "",
 "ChunckBin": "",
@@ -403,6 +414,7 @@ _global_script_class_icons={
 "DoorButton": "",
 "EarthBlock": "",
 "Event": "",
+"GameCamera": "",
 "GameConsoleScript": "",
 "GreatDoor": "",
 "GroupBase": "",

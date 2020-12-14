@@ -1,4 +1,5 @@
 extends Camera2D
+class_name GameCamera
 
 const DEFAULT_INTERPOL_DUR : float = 1.3
 
@@ -31,10 +32,16 @@ func get_state_name() -> String: return get_state().get_name()
 func set_debug(value: bool):
 	if value != debug:
 		debug = value
+		
 		if !is_ready:
 			yield(self, "ready")
+		
 		avg_pos_visualizer.set_visible(debug)
 		pivot.set_visible(debug)
+		
+		var state = get_state()
+		if state != null:
+		 state.set_debug_panel_visible(debug)
 
 func is_debug() -> bool: return debug
 

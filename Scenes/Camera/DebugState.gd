@@ -1,4 +1,4 @@
-extends StateBase
+extends CameraState
 
 var camera_debug_speed : float = 1000.0 
 var speed_increase_amount : float = 100.0

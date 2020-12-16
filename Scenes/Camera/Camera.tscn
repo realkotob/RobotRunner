@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Camera/Camera.gd" type="Script" id=1]
 [ext_resource path="res://AbstractClasses/StateMachine.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Scenes/Camera/States/Stop.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Camera/States/Shake.gd" type="Script" id=6]
 [ext_resource path="res://Scenes/Camera/DebugState.gd" type="Script" id=7]
+[ext_resource path="res://icon.png" type="Texture" id=8]
 
 [node name="Camera" type="Camera2D"]
 position = Vector2( 480, 272 )
@@ -17,7 +18,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="StateMachine" type="Node2D" parent="."]
 script = ExtResource( 2 )
 default_state = "Follow"
 
@@ -27,8 +28,32 @@ script = ExtResource( 5 )
 [node name="Timer" type="Timer" parent="StateMachine/Stop"]
 one_shot = true
 
-[node name="Follow" type="Node" parent="StateMachine"]
+[node name="Follow" type="Node2D" parent="StateMachine"]
 script = ExtResource( 3 )
+
+[node name="DebugLayer" type="CanvasLayer" parent="StateMachine/Follow"]
+
+[node name="Control" type="Control" parent="StateMachine/Follow/DebugLayer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -960.0
+margin_bottom = -540.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StateMachine/Follow/DebugLayer/Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BordersAnticip" type="Label" parent="StateMachine/Follow/DebugLayer/Control/VBoxContainer"]
+margin_right = 126.0
+margin_bottom = 14.0
+text = "Border anticipated: "
 
 [node name="MoveTo" type="Node" parent="StateMachine"]
 script = ExtResource( 4 )
@@ -43,3 +68,21 @@ one_shot = true
 script = ExtResource( 7 )
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="AveragePos" type="Position2D" parent="."]
+visible = false
+z_index = 999
+
+[node name="Sprite" type="Sprite" parent="AveragePos"]
+modulate = Color( 1, 0, 0, 0.407843 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 8 )
+
+[node name="Pivot" type="Position2D" parent="."]
+visible = false
+z_index = 999
+
+[node name="Sprite" type="Sprite" parent="Pivot"]
+modulate = Color( 0.00784314, 0, 1, 0.341176 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 8 )

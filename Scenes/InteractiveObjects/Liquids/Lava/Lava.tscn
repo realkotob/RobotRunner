@@ -26,8 +26,10 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 512, 96 )
 script = ExtResource( 5 )
 
-[node name="LavaLight" parent="LiquidShader" index="0" instance=ExtResource( 3 )]
+[node name="Light" parent="LiquidShader" index="0" instance=ExtResource( 3 )]
+texture_scale = 2.41667
 
 [node name="CollisionShape2D" parent="." index="1"]
+visible = false
 position = Vector2( 0, 24 )
 shape = SubResource( 2 )

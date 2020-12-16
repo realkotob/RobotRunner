@@ -1,4 +1,4 @@
-extends StateBase
+extends CameraState
 
 #### STOP STATE CAMERA ####
 

@@ -20,7 +20,7 @@
 [ext_resource path="res://Scenes/Events/LevelEvent/LevelEvent.tscn" type="PackedScene" id=18]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 256, 62.4667 )
+extents = Vector2( 750, 40 )
 
 [node name="Level1C" instance=ExtResource( 1 )]
 
@@ -111,21 +111,23 @@ position = Vector2( 744, -408 )
 position = Vector2( 792, -624 )
 
 [node name="GrowingLava" parent="InteractivesObjects/LavaTiles" index="0" instance=ExtResource( 16 )]
-position = Vector2( 472, 504 )
-scale = Vector2( 3.21, 0.893 )
+position = Vector2( 472, 475.327 )
+pool_size = Vector2( 1500, 80 )
 
-[node name="LavaShader" parent="InteractivesObjects/LavaTiles/GrowingLava" index="0"]
-position = Vector2( 3.73831, -13.4379 )
-scale = Vector2( 1, 0.527 )
+[node name="LiquidShader" parent="InteractivesObjects/LavaTiles/GrowingLava" index="0"]
+region_rect = Rect2( 0, 0, 1500, 128 )
+
+[node name="Light" parent="InteractivesObjects/LavaTiles/GrowingLava/LiquidShader" index="0"]
+texture_scale = 1.68224
 
 [node name="CollisionShape2D" parent="InteractivesObjects/LavaTiles/GrowingLava" index="1"]
-visible = true
+position = Vector2( 0, 24 )
 shape = SubResource( 1 )
 
 [node name="Lava2" parent="InteractivesObjects/LavaTiles" index="1" instance=ExtResource( 2 )]
 position = Vector2( 492, 180 )
-scale = Vector2( 0.356, 0.447 )
 z_index = -1
+pool_size = Vector2( 210, 48 )
 
 [node name="GreatDoor" parent="InteractivesObjects/GreatDoorGroup" index="0" instance=ExtResource( 11 )]
 position = Vector2( 516, -792 )
@@ -181,20 +183,8 @@ position = Vector2( 792, -672 )
 [node name="Checkpoint" parent="Events/Checkpoints" index="0" instance=ExtResource( 15 )]
 position = Vector2( 384, 136 )
 
-[node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint" index="1"]
-position = Vector2( 0, -16 )
-
-[node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint" index="2"]
-position = Vector2( -8, -112 )
-
 [node name="Checkpoint2" parent="Events/Checkpoints" index="1" instance=ExtResource( 15 )]
 position = Vector2( 528, -536 )
-
-[node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint2" index="1"]
-position = Vector2( 72, -32 )
-
-[node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint2" index="2"]
-position = Vector2( -96, -32 )
 
 [node name="LavaGrowingEvent" parent="Events/LevelEvent" index="0" instance=ExtResource( 18 )]
 position = Vector2( 480, 132 )

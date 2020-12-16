@@ -259,23 +259,23 @@ position = Vector2( -1056, 168 )
 
 [node name="Water" parent="InteractivesObjects/WaterTiles" index="0" instance=ExtResource( 10 )]
 position = Vector2( 585.101, 477.957 )
-scale = Vector2( 0.416, 0.495 )
+pool_size = Vector2( 200.364, 79.405 )
 
 [node name="Water2" parent="InteractivesObjects/WaterTiles" index="1" instance=ExtResource( 10 )]
-position = Vector2( 2688, 384 )
-scale = Vector2( 0.436, 0.457 )
+position = Vector2( 2688, 375.073 )
+pool_size = Vector2( 200, 68.898 )
 
 [node name="Water3" parent="InteractivesObjects/WaterTiles" index="2" instance=ExtResource( 10 )]
-position = Vector2( -3234.95, 240.059 )
-scale = Vector2( 0.596, 0.576 )
+position = Vector2( -3234.95, 220 )
+pool_size = Vector2( 253.449, 60.504 )
 
 [node name="Water4" parent="InteractivesObjects/WaterTiles" index="3" instance=ExtResource( 10 )]
 position = Vector2( -2461.68, 499.246 )
-scale = Vector2( 1.469, 0.424 )
+pool_size = Vector2( 748.09, 83.953 )
 
 [node name="Lava" parent="InteractivesObjects/LavaTiles" index="0" instance=ExtResource( 1 )]
 position = Vector2( 1812, 441.406 )
-scale = Vector2( 1, 1.399 )
+pool_size = Vector2( 512, 150 )
 
 [node name="GreatDoor" parent="InteractivesObjects/GreatDoorGroup" index="0" instance=ExtResource( 13 )]
 position = Vector2( 3480, 288 )

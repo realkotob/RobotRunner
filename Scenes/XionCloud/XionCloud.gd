@@ -24,6 +24,11 @@ func is_class(value: String):
 func get_class() -> String:
 	return "GrowingLava"
 
+func get_direction() -> Vector2:
+	if path.empty(): return Vector2.ZERO
+	else:
+		var dir = global_position.direction_to(path[0])
+		return Vector2(round(dir.x), round(dir.y))
 
 #### BUILT-IN ####
 
@@ -31,6 +36,8 @@ func _ready():
 	var _err = connect("body_entered", self, "on_body_entered")
 	_err = connect("body_exited", self, "on_body_exited")
 	_err = timer_node.connect("timeout", self, "on_timer_timeout")
+	
+	add_to_group("XionCloud")
 	
 	# Connect the signals only if the scene is not playing alone
 	if owner != null:

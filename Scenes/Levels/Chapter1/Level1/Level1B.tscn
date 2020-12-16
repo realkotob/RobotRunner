@@ -160,27 +160,27 @@ can_sleep = false
 
 [node name="Lava" parent="InteractivesObjects/LavaTiles" index="0" instance=ExtResource( 2 )]
 position = Vector2( 275.12, 269.282 )
-scale = Vector2( 0.34, 0.355 )
+pool_size = Vector2( 130, 64 )
 
 [node name="Lava2" parent="InteractivesObjects/LavaTiles" index="1" instance=ExtResource( 2 )]
 position = Vector2( 230, 501.457 )
-scale = Vector2( 0.276, 0.302 )
+pool_size = Vector2( 130, 80 )
 
 [node name="Lava3" parent="InteractivesObjects/LavaTiles" index="2" instance=ExtResource( 2 )]
 position = Vector2( 1452, 564 )
-scale = Vector2( 0.621, 0.409 )
+pool_size = Vector2( 350, 48 )
 
 [node name="Lava4" parent="InteractivesObjects/LavaTiles" index="3" instance=ExtResource( 2 )]
 position = Vector2( 1848, 180 )
-scale = Vector2( 0.316, 0.423 )
+pool_size = Vector2( 150, 48 )
 
 [node name="Lava5" parent="InteractivesObjects/LavaTiles" index="4" instance=ExtResource( 2 )]
 position = Vector2( 2616, 648 )
-scale = Vector2( 1.905, 1.295 )
+pool_size = Vector2( 1200, 240 )
 
 [node name="Lava6" parent="InteractivesObjects/LavaTiles" index="5" instance=ExtResource( 2 )]
 position = Vector2( 3900, 744 )
-scale = Vector2( 0.342, 0.405 )
+pool_size = Vector2( 170, 60 )
 
 [node name="GreatDoor" parent="InteractivesObjects/GreatDoorGroup" index="0" instance=ExtResource( 10 )]
 position = Vector2( 4320, 312 )
@@ -272,20 +272,8 @@ can_sleep = false
 [node name="Checkpoint" parent="Events/Checkpoints" index="0" instance=ExtResource( 14 )]
 position = Vector2( 1960, 352 )
 
-[node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint" index="1"]
-position = Vector2( 0, -16 )
-
-[node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint" index="2"]
-position = Vector2( 48, -56 )
-
 [node name="Checkpoint2" parent="Events/Checkpoints" index="1" instance=ExtResource( 14 )]
 position = Vector2( 3416, 424 )
-
-[node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint2" index="1"]
-position = Vector2( -176, -154.718 )
-
-[node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint2" index="2"]
-position = Vector2( -176, -58 )
 
 [node name="CameraEvent" parent="Events/CameraEvents" index="0" instance=ExtResource( 15 )]
 position = Vector2( 2100, 288 )

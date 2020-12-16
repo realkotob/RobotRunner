@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scenes/StartingPoints/StartingPointP2.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Levels/Base/LevelBase.tscn" type="PackedScene" id=2]
@@ -16,9 +16,23 @@
 [ext_resource path="res://Scenes/Events/Checkpoint/Checkpoint.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/InteractiveObjects/Liquids/Water/Water.tscn" type="PackedScene" id=19]
 
+[sub_resource type="RectangleShape2D" id=1]
+resource_local_to_scene = true
+extents = Vector2( 256, 75.717 )
 
-[sub_resource type="Animation" id=1]
-resource_name = "LightUp"
+[sub_resource type="RectangleShape2D" id=2]
+resource_local_to_scene = true
+extents = Vector2( 70, 24 )
+
+[sub_resource type="RectangleShape2D" id=3]
+resource_local_to_scene = true
+extents = Vector2( 70, 24 )
+
+[sub_resource type="RectangleShape2D" id=4]
+resource_local_to_scene = true
+extents = Vector2( 26.4015, 35.4525 )
+
+[sub_resource type="Animation" id=5]
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite/Light2D:enabled")
 tracks/0/interp = 1
@@ -93,35 +107,59 @@ position = Vector2( 299.908, 408 )
 
 [node name="Water2" parent="InteractivesObjects/WaterTiles" index="1" instance=ExtResource( 19 )]
 position = Vector2( 966.345, 456 )
+pool_size = Vector2( 300, 151.316 )
 
 [node name="Lava" parent="InteractivesObjects/LavaTiles" index="0" instance=ExtResource( 13 )]
-position = Vector2( 1453.47, 377 )
-scale = Vector2( 1.046, 0.991 )
+position = Vector2( 1453.47, 365.229 )
+pool_size = Vector2( 512, 151.434 )
 
-[node name="LavaLight" parent="InteractivesObjects/LavaTiles/Lava/LavaShader" index="0"]
-position = Vector2( 2.41882, 14.6603 )
-energy = 1.2
+[node name="LiquidShader" parent="InteractivesObjects/LavaTiles/Lava" index="0"]
+region_rect = Rect2( 0, 0, 512, 199.434 )
+
+[node name="Light" parent="InteractivesObjects/LavaTiles/Lava/LiquidShader" index="0"]
+texture_scale = 0.911505
+
+[node name="CollisionShape2D" parent="InteractivesObjects/LavaTiles/Lava" index="1"]
+shape = SubResource( 1 )
 
 [node name="Lava2" parent="InteractivesObjects/LavaTiles" index="1" instance=ExtResource( 13 )]
-position = Vector2( 1831.47, 488.304 )
-scale = Vector2( 0.27, 0.344 )
+position = Vector2( 1831.47, 478.282 )
+pool_size = Vector2( 140, 48 )
 
-[node name="LavaLight" parent="InteractivesObjects/LavaTiles/Lava2/LavaShader" index="0"]
-energy = 1.1
+[node name="LiquidShader" parent="InteractivesObjects/LavaTiles/Lava2" index="0"]
+region_rect = Rect2( 0, 0, 140, 96 )
+
+[node name="Light" parent="InteractivesObjects/LavaTiles/Lava2/LiquidShader" index="0"]
+texture_scale = 0.267154
+
+[node name="CollisionShape2D" parent="InteractivesObjects/LavaTiles/Lava2" index="1"]
+shape = SubResource( 2 )
 
 [node name="Lava3" parent="InteractivesObjects/LavaTiles" index="2" instance=ExtResource( 13 )]
-position = Vector2( 2218.25, 488.304 )
-scale = Vector2( 0.282, 0.363 )
+position = Vector2( 2218.25, 476.879 )
+pool_size = Vector2( 140, 48 )
 
-[node name="LavaLight" parent="InteractivesObjects/LavaTiles/Lava3/LavaShader" index="0"]
-energy = 1.1
+[node name="LiquidShader" parent="InteractivesObjects/LavaTiles/Lava3" index="0"]
+region_rect = Rect2( 0, 0, 140, 96 )
+
+[node name="Light" parent="InteractivesObjects/LavaTiles/Lava3/LiquidShader" index="0"]
+texture_scale = 0.267154
+
+[node name="CollisionShape2D" parent="InteractivesObjects/LavaTiles/Lava3" index="1"]
+shape = SubResource( 3 )
 
 [node name="Lava4" parent="InteractivesObjects/LavaTiles" index="3" instance=ExtResource( 13 )]
-position = Vector2( 2348.02, 377 )
-scale = Vector2( 0.144, 0.853 )
+position = Vector2( 2352.61, 351.591 )
+pool_size = Vector2( 52.803, 70.905 )
 
-[node name="LavaLight" parent="InteractivesObjects/LavaTiles/Lava4/LavaShader" index="0"]
-energy = 1.3
+[node name="LiquidShader" parent="InteractivesObjects/LavaTiles/Lava4" index="0"]
+region_rect = Rect2( 0, 0, 52.803, 118.905 )
+
+[node name="Light" parent="InteractivesObjects/LavaTiles/Lava4/LiquidShader" index="0"]
+texture_scale = 0.244242
+
+[node name="CollisionShape2D" parent="InteractivesObjects/LavaTiles/Lava4" index="1"]
+shape = SubResource( 4 )
 
 [node name="G1" type="Node2D" parent="InteractivesObjects/TeleportGroups" index="0"]
 __meta__ = {
@@ -275,23 +313,11 @@ position = Vector2( 2760, 184 )
 [node name="Checkpoint" parent="Events/Checkpoints" index="0" instance=ExtResource( 15 )]
 position = Vector2( 1448, 256 )
 
-[node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint" index="1"]
-position = Vector2( 24, -16 )
-
-[node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint" index="2"]
-position = Vector2( -24, -16 )
-
 [node name="Checkpoint2" parent="Events/Checkpoints" index="1" instance=ExtResource( 15 )]
 position = Vector2( 2024, 256 )
 
-[node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint2" index="1"]
-position = Vector2( 24, -16 )
-
-[node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint2" index="2"]
-position = Vector2( -24, -16 )
-
-[node name="AnimationPlayer" parent="Events/Checkpoints/Checkpoint2" index="4"]
-anims/LightUp = SubResource( 1 )
+[node name="AnimationPlayer" parent="Events/Checkpoints/Checkpoint2" index="2"]
+anims/LightUp = SubResource( 5 )
 
 [editable path="InteractivesObjects/LavaTiles/Lava"]
 

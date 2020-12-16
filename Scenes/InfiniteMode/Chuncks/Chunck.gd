@@ -301,4 +301,5 @@ func on_automata_finished(final_pos: Vector2):
 
 
 func on_automata_block_placable(cell: Vector2):
-	place_block(cell)
+	if !first_chunck:
+		place_block(cell)

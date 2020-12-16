@@ -68,7 +68,7 @@ func generate_self():
 	place_rooms()
 	place_wall_tiles()
 	walls_tilemap.update_bitmask_region(Vector2.ZERO, ChunckBin.chunck_tile_size)
-	SlopePlacer.place_slopes(self)
+	SlopePlacer.place_slopes(walls_tilemap)
 	
 	generate_objects()
 #	room_debug_visualizer()
@@ -203,6 +203,10 @@ func stack_object_at_cell(obj_key: String, cell: Vector2):
 	
 	var obj = interactive_object_dict[obj_key].instance()
 	obj.set_position(cell * GAME.TILE_SIZE)
+	
+	if obj.has_method("awake"):
+		obj.awake()
+	
 	object_to_add.append(obj)
 
 

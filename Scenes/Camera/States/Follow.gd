@@ -53,7 +53,7 @@ func update(_host, _delta):
 		camera.start_moving(average_pos + offset)
 		
 		# Zoom/Dezoom if necesary
-		var max_dist = screen_size * 0.6
+		var max_dist = screen_size * 0.5
 		var players_distance = compute_player_distance(players_array)
 		var dest_zoom := Vector2.ONE
 		
@@ -62,7 +62,7 @@ func update(_host, _delta):
 			
 			if borders_anticipated.size() > 1:
 				distance_ratio += distance_ratio * 0.3
-				
+			
 			distance_ratio = clamp(distance_ratio, 1.0, 2.0)
 			dest_zoom = Vector2(distance_ratio, distance_ratio)
 		

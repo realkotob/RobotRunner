@@ -88,3 +88,8 @@ func on_automata_forced_move_finished(automata: ChunckAutomata, _pos: Vector2):
 	if automata_ready_to_teleport.size() == 2:
 		teleport_automatas()
 
+
+# Function overide: we don't want a block in this kind of chuncks
+func on_automata_block_placable(_cell: Vector2):
+	pass
+

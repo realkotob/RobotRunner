@@ -1,0 +1,106 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/BreakableBlockBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/Sound/BreakIce.wav" type="AudioStream" id=7]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends BlockBase
+
+class_name IceBlock
+
+func is_class(value: String):
+	return value == \"IceBlock\" or .is_class(value)
+
+func get_class() -> String:
+	return \"IceBlock\"
+
+
+### ICEBLOCKS ###
+
+var floating_line_y : float = 0.0
+var floating_speed : int = 50
+var is_floating : bool = false setget set_is_floating
+
+var floating_force := Vector2(0, -150)
+onready var base_gravity_scale = get_gravity_scale()
+
+func _ready():
+	set_physics_process(false)
+
+
+# When the block is destroyed, lauch the destroy animation
+func destroy(_actor_destroying: Node = null):
+	awake_nearby_bodies()
+	audio_node.play()
+	call_deferred(\"set_mode\", RigidBody2D.MODE_STATIC)
+	collision_shape_node.call_deferred(\"set_disabled\", true)
+	$Particles2D.set_emitting(true)
+	SFX.scatter_sprite(self, nb_debris, explosion_impulse)
+	SFX.scatter_sprite(self, int(nb_debris / 6), explosion_impulse * 0.7)
+	sprite_node.set_visible(false)
+
+
+
+func _physics_process(_delta):
+	if floating_line_y != 0.0:
+		if global_position.y >= floating_line_y:
+			apply_floating(true)
+		else:
+			apply_floating(false)
+
+
+func apply_floating(value: bool):
+	var y_direction : int
+	if value == true:
+		y_direction = 1
+	else:
+		y_direction = -1
+
+	if(get_applied_force()) != floating_force * y_direction:
+		add_central_force(Vector2(0,0))
+		add_central_force(floating_force * y_direction)
+
+
+func set_is_floating(value: bool):
+	is_floating = value
+	apply_floating(true)
+	set_physics_process(true)
+	add_to_group(\"MovableBodies\")
+"
+
+[sub_resource type="StreamTexture" id=2]
+load_path = "res://.import/Smallice.png-66dce34a692e82e4a965162695fb0af8.stex"
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 2
+emission_box_extents = Vector3( 10, 10, 1 )
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 60.0
+gravity = Vector3( 0, 150, 0 )
+initial_velocity = 96.15
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 1.88
+scale_random = 1.0
+color = Color( 0.266667, 0.913725, 1, 0.0823529 )
+hue_variation = -0.5
+hue_variation_random = 0.51
+
+[node name="IceBlockBase" instance=ExtResource( 1 )]
+light_mask = 1024
+angular_damp = 1.0
+script = SubResource( 1 )
+
+[node name="Sprite" parent="." index="0"]
+light_mask = 1024
+texture = SubResource( 2 )
+
+[node name="AudioStreamPlayer" parent="." index="2"]
+stream = ExtResource( 7 )
+
+[node name="Particles2D" parent="." index="3"]
+process_material = SubResource( 3 )
+
+[node name="CollisionShape2D" parent="AwakeArea" index="0"]
+position = Vector2( -0.113628, -14.6841 )

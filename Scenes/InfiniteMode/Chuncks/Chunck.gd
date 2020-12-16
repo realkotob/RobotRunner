@@ -4,12 +4,14 @@ class_name LevelChunck
 var interactive_object_dict : Dictionary = {
 	"RedTeleporter": preload("res://Scenes/InteractiveObjects/Teleports/Types/RedTeleporter.tscn"),
 	"BlueTeleporter": preload("res://Scenes/InteractiveObjects/Teleports/Types/BlueTeleporter.tscn"),
-	"GreenTeleporter": preload("res://Scenes/InteractiveObjects/Teleports/Types/GreenTeleporter.tscn")
+	"GreenTeleporter": preload("res://Scenes/InteractiveObjects/Teleports/Types/GreenTeleporter.tscn"),
+	"IceBlock": preload("res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/M/MIceBlock.tscn")
 }
 
 const max_nb_room : int = 3
 
 onready var walls_tilemap = $Walls
+onready var new_chunck_area = $NewChunckGenArea
 
 signal chunck_gen_finished
 signal new_chunck_reached
@@ -48,7 +50,7 @@ func get_chunck_bin() -> ChunckBin: return chunck_bin
 #### BUILT-IN ####
 
 func _ready():
-	var _err = $Area2D.connect("body_entered", self, "on_body_entered")
+	var _err = new_chunck_area.connect("body_entered", self, "on_body_entered")
 	is_ready = true
 	
 	var last_room = generate_rooms()
@@ -300,13 +302,24 @@ func room_debug_visualizer():
 			call_deferred("add_child", exit_room_color_rect)
 
 
+# Add an object to the object_to_add array postioned at the given cell
+func stack_object_at_cell(obj_key: String, cell: Vector2):
+	if !obj_key in interactive_object_dict.keys():
+		print("The request object: " + obj_key + " is not in the interactive_objects_dict")
+		return
+	
+	var obj = interactive_object_dict[obj_key].instance()
+	obj.set_position(cell * GAME.TILE_SIZE)
+	object_to_add.append(obj)
+
+
 #### SIGNAL RESPONSES ####
 
 
 func on_body_entered(body: PhysicsBody2D):
 	if body is Player:
 		emit_signal("new_chunck_reached")
-		$Area2D.queue_free()
+		new_chunck_area.queue_free()
 
 
 func on_bin_map_changed():
@@ -325,3 +338,6 @@ func on_automata_finished(final_pos: Vector2):
 	if nb_automata == 0:
 		emit_signal("every_automata_finished")
 		generate_self()
+
+func on_automata_block_placable(cell: Vector2):
+	stack_object_at_cell("IceBlock", cell)

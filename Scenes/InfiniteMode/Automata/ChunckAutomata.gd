@@ -18,6 +18,7 @@ signal moved(automata, to)
 signal finished(final_pos)
 signal entered_room(entry_point, exit_point)
 signal forced_move_finished(automata, pos)
+signal block_placable(cell)
 
 #### ACCESSORS ####
 
@@ -57,6 +58,7 @@ func _ready():
 	_err = connect("finished", chunck_bin, "on_automata_finished")
 	_err = connect("moved", chunck, "on_automata_moved")
 	_err = connect("forced_move_finished", chunck, "on_automata_forced_move_finished")
+	_err = connect("block_placable", chunck, "on_automata_block_placable")
 	
 	if debug:
 		add_child(move_timer)
@@ -76,6 +78,11 @@ func automata_carving_movement() -> void:
 		movement_finished = move()
 		if movement_finished:
 			set_stoped(true)
+		
+		# Emit the signal block placable each time the conditions are met
+		if last_moves.size() >= 2:
+			if last_moves[-1] == Vector2.RIGHT && last_moves[-2] == Vector2.RIGHT:
+				emit_signal("block_placable", get_bin_map_pos())
 	
 	if movement_finished:
 		emit_signal("finished", bin_map_pos)

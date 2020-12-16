@@ -62,9 +62,14 @@ func generate_chunck_binary() -> ChunckBin:
 # Have a chance on 4 to create a Cross chunck
 func generate_chunck() -> LevelChunck:
 	var last_chunck = get_last_chunck()
-	var rng = randi() % 4 if !(last_chunck is SpecialChunck) else randi() % 3
+	
+	var rng = randi() % 4
+	if last_chunck is SpecialChunck or last_chunck == null:
+		rng = randi() % 3
+	
 	var chunck : LevelChunck
-	var rdm_id 
+	var rdm_id
+	
 	if rng == 3:
 		rdm_id = randi() % special_chunck_scene_array.size()
 		chunck = special_chunck_scene_array[rdm_id].instance()
@@ -99,8 +104,9 @@ func get_starting_points_cell_pos() -> PoolVector2Array:
 func place_level_chunck() -> LevelChunck:
 	is_generating = true
 	var starting_points := PoolVector2Array()
+	var first_chunck : bool = chunck_container_node.get_child_count() == 0
 	
-	if chunck_container_node.get_child_count() == 0:
+	if first_chunck:
 		starting_points = get_starting_points_cell_pos()
 	else:
 		var last_child_id = chunck_container_node.get_child_count()

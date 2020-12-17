@@ -57,6 +57,7 @@ mode = 1
 gravity_scale = 0.0
 contact_monitor = true
 script = ExtResource( 2 )
+floor_obj = false
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

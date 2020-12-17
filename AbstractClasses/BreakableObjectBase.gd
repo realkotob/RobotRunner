@@ -14,6 +14,7 @@ export (float, 0.0, 1.0) var explosion_impulse_modifier = 0.7
 
 export var maxvelocity_y : int
 
+export var floor_obj : bool = true
 
 #### ACCESSORS ####
 

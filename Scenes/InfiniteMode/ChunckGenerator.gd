@@ -8,12 +8,7 @@ var special_chunck_scene_array = [
 	preload("res://Scenes/InfiniteMode/Chuncks/CrossChunck.tscn")
 ]
 
-
-var noise : OpenSimplexNoise
-
-var noise_h_stretch_factor : float = 10
 var nb_chunck : int = 0
-
 var is_generating : bool = false
 
 export var debug : bool = false

@@ -185,6 +185,9 @@ func find_room_form_cell(cell: Vector2) -> ChunckRoom:
 func generate_objects():
 	for element in object_to_add:
 		if element is Node2D:
+			if element is BlockBase && !is_block_placable(element):
+				element.queue_free()
+				continue
 			call_deferred("add_child", element)
 		elif element is Array:
 			call_deferred("add_child", element[0])
@@ -227,12 +230,23 @@ func place_block(cell: Vector2):
 	
 	stack_object_at_cell(block_type, cell)
 
+
+
+func is_block_placable(block: BlockBase) -> bool:
+	if block == null : return false
+	var block_cell = walls_tilemap.world_to_map(block.get_position())
+	var used_cells = walls_tilemap.get_used_cells()
+	
+	# To be placable the two cells on its left must be empty cells, and it shall have a floorunderneath
+	if block_cell + Vector2.LEFT * 2 in used_cells or block_cell + Vector2.LEFT * 3 in used_cells or \
+	 !(block_cell + Vector2.DOWN in used_cells && block_cell + Vector2(-1, 1) in used_cells):
+		return false
+	return true
+
 #### VIRTUALS ####
 
 
-
 #### INPUTS ####
-
 
 
 #### DEBUG ####
@@ -306,4 +320,6 @@ func on_automata_finished(final_pos: Vector2):
 
 func on_automata_block_placable(cell: Vector2):
 	if !first_chunck:
-		place_block(cell)
+		var rng = randi() % 3
+		if rng == 0:
+			place_block(cell)

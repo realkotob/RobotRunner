@@ -62,7 +62,7 @@ func goto_last_level():
 	if loaded_from_save:
 		yield(EVENTS, "level_ready")
 		var level = get_tree().get_current_scene()
-		$LevelSaver.build_level_from_loaded_properties(level)
+		LevelSaver.build_level_from_loaded_properties(level)
 
 # Change scene to the next level scene
 # If the last level was not in the list, set the progression to -1
@@ -81,13 +81,13 @@ func goto_next_level():
 		next_level_id = current_chapter.find_level_id(last_level_name) + 1
 
 	var next_level_name = current_chapter.get_level_name(next_level_id)
-	delete_level_temp_saves(next_level_name)
+	LevelSaver.delete_level_temp_saves(next_level_name)
 
 	var _err = get_tree().change_scene_to(next_level)
 
 	yield(EVENTS, "level_ready")
 	var level = get_tree().get_current_scene()
-	$LevelSaver.save_level_properties_as_json(level.get_name(), level)
+	LevelSaver.save_level_properties_as_json(level.get_name(), level)
 
 func goto_level(level_index : int):
 	var level : PackedScene = null
@@ -98,9 +98,12 @@ func goto_level(level_index : int):
 
 	level = current_chapter.load_level(level_index-1)
 	var level_name = current_chapter.get_level_name(level_id)
-	delete_level_temp_saves(level_name)
+	LevelSaver.delete_level_temp_saves(level_name)
 
 	var _err = get_tree().change_scene_to(level)
+	yield(EVENTS, "level_ready")
+	var current_level = get_tree().get_current_scene()
+	LevelSaver.save_level_properties_as_json(current_level.get_name(), current_level)
 
 # Triggers the timer before the gameover is triggered
 # Called when a player die
@@ -166,54 +169,6 @@ func find_saved_level_path(dir_path: String, level_name: String) -> String:
 					current_file_name = dir.get_next()
 	return ""
 
-
-# Delete the .tscn and .json temporary saves
-static func delete_level_temp_saves(level_name: String):
-	var dir = Directory.new()
-	var tscn_path : String = SAVE_DIR + "/tscn/" + level_name + ".tscn"
-	var json_path : String = SAVE_DIR + "/json/" + level_name + ".json"
-
-	if dir.file_exists(tscn_path):
-		dir.remove(tscn_path)
-
-	if dir.file_exists(json_path):
-		dir.remove(json_path)
-
-# Navigate through SAVE_DIR/tscn/ and /json/ then remove all files and folders there
-### IGNORE . , .. , AND HIDDEN FILES/FOLDERS 
-#### ARGS : display_warning (DEBUG.gd > on game start > true = display warnings)
-#### ARGS : display_warning (NewGame.gd > when button NewGame pressed on menu > false = doesn't display warnings)
-static func delete_all_level_temp_saves(display_warning : bool = false):
-	var dir = Directory.new()
-	
-	var tscn_path : String = SAVE_DIR + "/tscn/"
-	var json_path : String = SAVE_DIR + "/json/"
-	var folders_array : Array = [tscn_path, json_path]
-	
-	for folder in folders_array:
-		if dir.open(folder) == OK:
-			if display_warning:
-				print(folder + " has been opened successfully")
-			dir.list_dir_begin(true, true)
-			var file_name = dir.get_next()
-			if display_warning:
-				if file_name == "":
-					print("No folder or file detected in " + folder)
-			while file_name != "":
-				if dir.current_is_dir():
-					if display_warning:
-						print("Found dir: " + file_name)
-					dir.remove(file_name)
-				else:
-					if display_warning:
-						print("Found file: " + file_name)
-					dir.remove(file_name)
-				file_name = dir.get_next()
-			dir.list_dir_end()
-		else:
-			print("An error occured when trying to access the path : " + folder)
-
-
 # Save the players' level progression into the main game progression
 
 func update_collectable_progression():
@@ -255,78 +210,7 @@ func fade_out():
 
 	MUSIC.fade_out()
 
-#Load the current level state
-func save_current_level_state(level, dict : Dictionary):
-	dict.clear()
-	get_children_of_node([level.get_node('InteractivesObjects'), level.get_node('Events')], dict)
-#	if(debug):
-#		print_weakref(array)
-
-# Get every children of a node
-func get_children_of_node(nodes_to_scan_array : Array, dict_to_fill : Dictionary):
-	var classes_to_scan_array = objects_datatype_storage.keys()
-	for node in nodes_to_scan_array:
-		for child in node.get_children():
-			#print(child.name)
-			for node_class in classes_to_scan_array:
-				if child.is_class(node_class):
-#					if(debug):
-#						print("- "+child.get_name()) # DEBUG PURPOSE
-					var object_properties = get_object_properties(child, node_class)
-
-					dict_to_fill[child.get_path()] = object_properties
-					continue
-			if child.get_child_count() != 0:
-#				if(debug):
-#					print("["+child.get_name()+"]") # DEBUG PURPOSE
-				get_children_of_node([child], dict_to_fill)
-
-func get_object_properties(object : Object, classname : String) -> Dictionary:
-	var property_list : Array = objects_datatype_storage[classname]
-	var property_data_dict : Dictionary = {}
-	property_data_dict['name'] = object.get_name()
-	for property in property_list:
-		if(property in object):
-			property_data_dict[property] = object.get(property)
-		else:
-			print("Property : " + property + " could not be found in " + object.name)
-	return property_data_dict
-
-# Toggle the camera debug mode, and toggle the controls of the players
-func toggle_camera_debug_mode():
-	var level = get_tree().get_current_scene()
-	if not level is Level:
-		return
-
-	var camera_node = level.find_node("Camera")
-	var was_camera_debug_mode = camera_node.get_state_name() == "Debug"
-	if was_camera_debug_mode:
-		camera_node.set_to_previous_state()
-	else:
-		camera_node.set_state("Debug")
-
-func deserialize_level_properties(file_path : String):
-	var level_properties  : String = ""
-	var parsed_data : Dictionary = {}
-	var load_file = File.new()
-
-	if !load_file.file_exists(file_path):
-		return
-
-	load_file.open(file_path, load_file.READ)
-	level_properties = load_file.get_as_text()
-	parsed_data = parse_json(level_properties)
-	load_file.close()
-
-	return parsed_data
-
-	for player in get_tree().get_nodes_in_group("Players"):
-		player.set_active(was_camera_debug_mode)
-
-#func print_weakref(array : Array):
-#	for weakref_ref in array:
-#		if(weakref_ref.get_ref() != null):
-#			print('Weakref object : ', weakref_ref.get_ref().name)
+#### SIGNAL RESPONSES ####
 
 #  Change scene to go to the gameover scene after the timer has finished
 func on_gameover_timer_timeout():
@@ -370,8 +254,8 @@ func on_level_ready(level : Level):
 # When a player reach a checkpoint
 func on_checkpoint_reached(level: Level, checkpoint_id: int):
 	if checkpoint_id + 1 > GAME.progression.checkpoint:
-		GAME.progression.checkpoint = checkpoint_id + 1
+		progression.checkpoint = checkpoint_id + 1
 
-	GAME.progression.set_main_xion(SCORE.xion)
-	GAME.progression.set_main_materials(SCORE.materials)
-	$LevelSaver.save_level(level, progression.main_stored_objects)
+	progression.set_main_xion(SCORE.xion)
+	progression.set_main_materials(SCORE.materials)
+	LevelSaver.save_level(level, progression.main_stored_objects)

@@ -2,7 +2,7 @@ extends Node
 
 func _ready():
 	pause_mode = Node.PAUSE_MODE_PROCESS
-	GAME.delete_all_level_temp_saves(true)
+	LevelSaver.delete_all_level_temp_saves(true)
 
 func _input(event):
 	if OS.is_debug_build():

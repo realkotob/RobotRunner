@@ -1,8 +1,10 @@
 extends Node
 
-export var debug : bool = false
+class_name LevelSaver
 
-var objects_datatype_storage = {
+const debug : bool = false
+
+const objects_datatype_storage = {
 	'Camera': ['zoom']
 }
 
@@ -17,7 +19,7 @@ var objects_datatype_storage = {
 #### LOGIC ####
 
 # Save the current state of the level: Call both the .tscn save and the serialized save in the given dict
-func save_level(level: Node, dict_to_fill: Dictionary):
+static func save_level(level: Node, dict_to_fill: Dictionary):
 	dict_to_fill.clear()
 	save_level_as_tscn(level)
 	
@@ -26,16 +28,15 @@ func save_level(level: Node, dict_to_fill: Dictionary):
 
 
 # Save the level in a .tscn file
-func save_level_as_tscn(level: Node2D):
+static func save_level_as_tscn(level: Node2D):
 	var saved_level = PackedScene.new()
 	var level_name = level.get_name()
 	saved_level.pack(level)
 	var _err = ResourceSaver.save("res://Scenes/Levels/SavedLevel/tscn/" + level_name + ".tscn", saved_level)
-	GAME.progression.saved_level = saved_level
 
 
 # Find recursivly every wanted nodes, and extract their wanted properties
-func serialize_level_properties(current_node : Node, dict_to_fill : Dictionary):
+static func serialize_level_properties(current_node : Node, dict_to_fill : Dictionary):
 	var classes_to_scan_array = objects_datatype_storage.keys()
 	for child in current_node.get_children():
 		for node_class in classes_to_scan_array:
@@ -48,10 +49,24 @@ func serialize_level_properties(current_node : Node, dict_to_fill : Dictionary):
 		if child.get_child_count() != 0:
 			serialize_level_properties(child, dict_to_fill)
 
+static func deserialize_level_properties(file_path : String):
+	var level_properties  : String = ""
+	var parsed_data : Dictionary = {}
+	var load_file = File.new()
+	
+	if !load_file.file_exists(file_path):
+		return
+	
+	load_file.open(file_path, load_file.READ)
+	level_properties = load_file.get_as_text()
+	parsed_data = parse_json(level_properties)
+	load_file.close()
+
+	return parsed_data
 
 # Take an object, find every properties needed in it and retrun the data as a dict
 # => NEVER CALLED, Except by serialize_level_properties method
-func get_object_properties(object : Object, classname : String) -> Dictionary:
+static func get_object_properties(object : Object, classname : String) -> Dictionary:
 	var property_list : Array = objects_datatype_storage[classname]
 	var property_data_dict : Dictionary = {}
 	property_data_dict['name'] = object.get_name()
@@ -66,7 +81,7 @@ func get_object_properties(object : Object, classname : String) -> Dictionary:
 
 
 # Convert the data to a JSON file
-func save_level_properties_as_json(file_name : String, level : Level):
+static func save_level_properties_as_json(file_name : String, level : Level):
 	var dict_to_json : Dictionary = {}
 	serialize_level_properties(level, dict_to_json)
 	
@@ -77,7 +92,7 @@ func save_level_properties_as_json(file_name : String, level : Level):
 
 
 # Print the current state of the level data
-func print_level_data(dict: Dictionary):
+static func print_level_data(dict: Dictionary):
 	for obj_path in dict.keys():
 		for property in dict[obj_path].keys():
 			var to_print = property + ": " + String(dict[obj_path][property])
@@ -86,7 +101,7 @@ func print_level_data(dict: Dictionary):
 			print(to_print)
 
 
-func load_level_properties_from_json(level_loaded_from_scene : bool, level_name : String) -> Dictionary:
+static func load_level_properties_from_json(level_loaded_from_scene : bool, level_name : String) -> Dictionary:
 	var loaded_level_properties : Dictionary = {}
 	if level_loaded_from_scene:
 		var loaded_objects : Dictionary = GAME.deserialize_level_properties("res://Scenes/Levels/SavedLevel/json/"+level_name+".json")
@@ -107,15 +122,15 @@ func load_level_properties_from_json(level_loaded_from_scene : bool, level_name 
 	return loaded_level_properties
 
 
-func apply_properties_to_level(_level : Level, dict_properties : Dictionary):
+static func apply_properties_to_level(level : Level, dict_properties : Dictionary):
 	for object_path in dict_properties.keys():
 		object_path = object_path.trim_prefix('root/')
-		var object = get_tree().get_root().get_node(object_path)
+		var object = level.get_node(object_path)
 		for property in dict_properties[object_path].keys():
 			object.set(property, dict_properties[object_path][property])
 
 
-func build_level_from_loaded_properties(level : Level):
+static func build_level_from_loaded_properties(level : Level):
 	if !level.is_inside_tree():
 		yield(level, "tree_entered")
 	
@@ -124,7 +139,7 @@ func build_level_from_loaded_properties(level : Level):
 
 
 # Get the type of a value string (vector2 bool float or int) by checking its content
-func get_string_value_type(value : String) -> String:
+static func get_string_value_type(value : String) -> String:
 	if '(' in value:
 		return "Vector2"
 	if value.countn('true') == 1 or value.countn('false') == 1:
@@ -134,10 +149,55 @@ func get_string_value_type(value : String) -> String:
 		
 	return "int"
 
+# Navigate through SAVE_DIR/tscn/ and /json/ then remove all files and folders there
+### IGNORE . , .. , AND HIDDEN FILES/FOLDERS 
+#### ARGS : display_warning (DEBUG.gd > on game start > true = display warnings)
+#### ARGS : display_warning (NewGame.gd > when button NewGame pressed on menu > false = doesn't display warnings)
+static func delete_all_level_temp_saves(display_warning : bool = false):
+	var dir = Directory.new()
+	
+	var tscn_path : String = GAME.SAVE_DIR + "/tscn/"
+	var json_path : String = GAME.SAVE_DIR + "/json/"
+	var folders_array : Array = [tscn_path, json_path]
+	
+	for folder in folders_array:
+		if dir.open(folder) == OK:
+			if display_warning:
+				print(folder + " has been opened successfully")
+			dir.list_dir_begin(true, true)
+			var file_name = dir.get_next()
+			if display_warning:
+				if file_name == "":
+					print("No folder or file detected in " + folder)
+			while file_name != "":
+				if dir.current_is_dir():
+					if display_warning:
+						print("Found dir: " + file_name)
+					dir.remove(file_name)
+				else:
+					if display_warning:
+						print("Found file: " + file_name)
+					dir.remove(file_name)
+				file_name = dir.get_next()
+			dir.list_dir_end()
+		else:
+			print("An error occured when trying to access the path : " + folder)
+
+# Delete the .tscn and .json temporary saves
+static func delete_level_temp_saves(level_name: String):
+	var dir = Directory.new()
+	var tscn_path : String = GAME.SAVE_DIR + "/tscn/" + level_name + ".tscn"
+	var json_path : String = GAME.SAVE_DIR + "/json/" + level_name + ".json"
+
+	if dir.file_exists(tscn_path):
+		dir.remove(tscn_path)
+	
+	if dir.file_exists(json_path):
+		dir.remove(json_path)
 
 # Convert String variable to Vector2 by removing some characters and splitting commas
 # return Vector2
-func get_vector_from_string(string_vector : String) -> Vector2:
+static func get_vector_from_string(string_vector : String) -> Vector2:
 	string_vector = string_vector.trim_prefix('(')
 	string_vector = string_vector.trim_suffix(')')
 	var split_string_array = string_vector.split(',')
@@ -147,7 +207,7 @@ func get_vector_from_string(string_vector : String) -> Vector2:
 
 # Convert String variable to Boolean
 # return bool
-func get_bool_from_string(string_bool : String) -> bool:
+static func get_bool_from_string(string_bool : String) -> bool:
 	return string_bool.countn('true') == 1
 
 

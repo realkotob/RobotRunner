@@ -5,7 +5,9 @@ class_name LevelSaver
 const debug : bool = false
 
 const objects_datatype_storage = {
-	'Camera': ['zoom']
+	"Camera": ["zoom"],
+	"ParallaxBackground": ["scroll_offset", "scale"],
+	"ParallaxLayer": ["position", "scale"]
 }
 
 #### ACCESSORS ####
@@ -101,23 +103,22 @@ static func print_level_data(dict: Dictionary):
 			print(to_print)
 
 
-static func load_level_properties_from_json(level_loaded_from_scene : bool, level_name : String) -> Dictionary:
+static func load_level_properties_from_json(level_name : String) -> Dictionary:
 	var loaded_level_properties : Dictionary = {}
-	if level_loaded_from_scene:
-		var loaded_objects : Dictionary = GAME.deserialize_level_properties("res://Scenes/Levels/SavedLevel/json/"+level_name+".json")
-		for object_dict in loaded_objects.keys():
-			var property_dict : Dictionary = {}
-			for keys in loaded_objects[object_dict].keys():
-				if keys == "name":
-					continue
-				var property_value
-				match get_string_value_type(loaded_objects[object_dict][keys]):
-					"Vector2" : property_value = get_vector_from_string(loaded_objects[object_dict][keys])
-					"int"  : property_value = int(loaded_objects[object_dict][keys])
-					"float" : property_value = float(loaded_objects[object_dict][keys])
-					"bool" : property_value = get_bool_from_string(loaded_objects[object_dict][keys])
-				property_dict[keys] = property_value
-			loaded_level_properties[object_dict] = property_dict
+	var loaded_objects : Dictionary = deserialize_level_properties("res://Scenes/Levels/SavedLevel/json/"+level_name+".json")
+	for object_dict in loaded_objects.keys():
+		var property_dict : Dictionary = {}
+		for keys in loaded_objects[object_dict].keys():
+			if keys == "name":
+				continue
+			var property_value
+			match get_string_value_type(loaded_objects[object_dict][keys]):
+				"Vector2" : property_value = get_vector_from_string(loaded_objects[object_dict][keys])
+				"int"  : property_value = int(loaded_objects[object_dict][keys])
+				"float" : property_value = float(loaded_objects[object_dict][keys])
+				"bool" : property_value = get_bool_from_string(loaded_objects[object_dict][keys])
+			property_dict[keys] = property_value
+		loaded_level_properties[object_dict] = property_dict
 	
 	return loaded_level_properties
 
@@ -127,14 +128,15 @@ static func apply_properties_to_level(level : Level, dict_properties : Dictionar
 		object_path = object_path.trim_prefix('root/')
 		var object = level.get_node(object_path)
 		for property in dict_properties[object_path].keys():
-			object.set(property, dict_properties[object_path][property])
+			var value = dict_properties[object_path][property]
+			object.set(property, value)
 
 
 static func build_level_from_loaded_properties(level : Level):
 	if !level.is_inside_tree():
 		yield(level, "tree_entered")
 	
-	var level_properties : Dictionary = load_level_properties_from_json(level.is_loaded_from_save, level.get_name())
+	var level_properties : Dictionary = load_level_properties_from_json(level.get_name())
 	apply_properties_to_level(level, level_properties)
 
 

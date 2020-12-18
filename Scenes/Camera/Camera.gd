@@ -78,6 +78,10 @@ func get_players_array() -> Array:
 
 #### BUILT-IN ####
 
+func _enter_tree() -> void:
+	set_zoom(Vector2.ONE)
+
+
 func _ready() -> void:
 	pivot.set_as_toplevel(true)
 	avg_pos_visualizer.set_as_toplevel(true)

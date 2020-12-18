@@ -273,8 +273,6 @@ can_sleep = false
 
 [node name="Checkpoint" parent="Events/Checkpoints" index="0" instance=ExtResource( 14 )]
 position = Vector2( 1960, 352 )
-triggers_on_level_start = false
-event_disabled = false
 
 [node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint" index="3" instance=ExtResource( 19 )]
 position = Vector2( -16, -16 )
@@ -284,8 +282,6 @@ position = Vector2( 32, -40 )
 
 [node name="Checkpoint2" parent="Events/Checkpoints" index="1" instance=ExtResource( 14 )]
 position = Vector2( 3416, 424 )
-triggers_on_level_start = false
-event_disabled = false
 
 [node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint2" index="3" instance=ExtResource( 19 )]
 position = Vector2( -8, -16 )

@@ -56,7 +56,7 @@ func goto_last_level():
 	# If a save exists, load it
 	else:
 		level_scene = load(current_chapter.find_level_path(last_level_name))
-
+	
 	var __ = get_tree().change_scene_to(level_scene)
 
 	if loaded_from_save:
@@ -257,13 +257,6 @@ func on_level_ready(level : Level):
 	last_level_name = level.get_name()
 	if progression.level == 0:
 		update_current_level_index(level)
-
-	if(level.is_loaded_from_save == false):
-		LevelSaver.save_level_properties_as_json(level.get_name(), level)
-
-	else:
-		LevelSaver.build_level_from_loaded_properties(level)
-
 	fade_in()
 
 

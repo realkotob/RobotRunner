@@ -8,6 +8,12 @@ var liquid_scenes : Dictionary = {
 	"Lava" : preload("res://Scenes/InteractiveObjects/Liquids/Lava/Lava.tscn")
 }
 
+var breakable_platform_scenes : Dictionary = {
+	"Small": preload("res://Scenes/InteractiveObjects/Platform/BreakablePlatform/2Tiles/2TilesBreakablePlateform.tscn"),
+	"Medium": preload("res://Scenes/InteractiveObjects/Platform/BreakablePlatform/3Tiles/3TilesBreakablePlateform.tscn"),
+	"Large": preload("res://Scenes/InteractiveObjects/Platform/BreakablePlatform/5Tiles(Base)/BreakablePlateform.tscn")
+}
+
 export var min_room_size := Vector2(8, 6)
 export var max_room_size := Vector2(20, 9)
 
@@ -78,7 +84,7 @@ func generate_platforms():
 		
 		# Platform generation, loop through every platfroms
 		for i in range(nb_platform):
-			var final_platform : bool = i == nb_platform - 1_
+			var final_platform : bool = i == nb_platform - 1
 			var platform_len = randi() % 2 + 2
 			var platform_x_dist = average_dist + int(round(rand_range(-1.0, 1.0)))
 			var rdm_y_offset = int(round(rand_range(-1.0, 1.0)))
@@ -136,11 +142,41 @@ func is_jump_possible(from: Vector2, to: Vector2):
 # Place the platforms into the bin map
 func place_platforms():
 	for plt in platforms_array:
+		var rng = randi() % 3
+		var plt_len = plt.get_size().x
+		
+		# Generate a BreakablePlatform
+		if rng == 0 && plt.get_size().y == 1 && plt_len in [2, 3, 5]:
+			generate_breakable_platfrom(plt)
+			continue
+		
+		# Generate a standart platform
 		for j in range(plt.get_size().y):
 			for i in range(plt.get_size().x):
 				var current_x = plt.get_start_cell().x + i
 				var current_y = plt.get_start_cell().y + j
 				bin_map[current_y][current_x] = 1
+
+
+func generate_breakable_platfrom(plt: ChunckPlatform):
+	var scene_key : String = ""
+	var plt_len = plt.get_size().x
+	
+	if plt_len == 2:
+		scene_key = "Small"
+	elif plt_len == 3: 
+		scene_key = "Medium"
+	elif plt_len == 5: 
+		scene_key = "Large"
+	
+	var breakable_pltf = breakable_platform_scenes[scene_key].instance()
+	
+	var top_left_pos = plt.get_start_cell() * GAME.TILE_SIZE - GAME.TILE_SIZE / 2
+	var pltf_size = breakable_pltf.sprite_size
+	
+	breakable_pltf.set_position(top_left_pos + pltf_size / 2)
+	
+	interactive_objects.append(breakable_pltf)
 
 
 # Convert the theorical entry point in the concrete one
@@ -223,7 +259,7 @@ func generate_liquid(liquid_type: String):
 	liquid_node.set_pool_size(pool_size)
 	
 	var pool_sprite_size = Vector2(pool_size.x, pool_size.y + liquid_node.empty_part)
-	var pos = (room_rect.position + room_rect.size) * GAME.TILE_SIZE - pool_sprite_size / 2
+	var pos =  room_rect.size * GAME.TILE_SIZE - pool_sprite_size / 2
 	liquid_node.set_position(pos)
 
 

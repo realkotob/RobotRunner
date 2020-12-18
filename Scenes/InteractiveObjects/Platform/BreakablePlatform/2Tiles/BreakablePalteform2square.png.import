@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/BreakablePalteform2square.png-ced649a9d6086b34e0ceda5c520893e4.stex"
+path="res://.import/BreakablePalteform2square.png-21545da9eb515d86387e700c3aced1cb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/InteractiveObjects/Platform/BreakablePlatform/2 Tiles/BreakablePalteform2square.png"
-dest_files=[ "res://.import/BreakablePalteform2square.png-ced649a9d6086b34e0ceda5c520893e4.stex" ]
+source_file="res://Scenes/InteractiveObjects/Platform/BreakablePlatform/2Tiles/BreakablePalteform2square.png"
+dest_files=[ "res://.import/BreakablePalteform2square.png-21545da9eb515d86387e700c3aced1cb.stex" ]
 
 [params]
 

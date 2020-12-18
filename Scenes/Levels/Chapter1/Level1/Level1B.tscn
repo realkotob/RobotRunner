@@ -7,7 +7,7 @@
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/M/MEarthBlock.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/M/MIceBlock.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/XionCrate.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/InteractiveObjects/Platform/BreakablePlatform/5 Tiles (Base)/BreakablePlateform.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/InteractiveObjects/Platform/BreakablePlatform/5Tiles(Base)/BreakablePlateform.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/ChildrenScenes/RedButton.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/InteractiveObjects/GreatDoor/GreatDoor.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/XionCloud/CloudPath.tscn" type="PackedScene" id=11]
@@ -19,6 +19,7 @@
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Door/ChildrenScenes/RedDoor.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scenes/Events/Checkpoint/NewStartingPoint2.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Scenes/Events/Checkpoint/NewStartingPoint1.tscn" type="PackedScene" id=19]
+
 
 [node name="Level1B" instance=ExtResource( 1 )]
 

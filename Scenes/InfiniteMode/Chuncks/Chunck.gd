@@ -86,7 +86,7 @@ func create_automatas() -> void:
 
 
 func generate_rooms() -> Node:
-	var rng = 1 if first_chunck else randi() % 4
+	var rng = 1 if first_chunck else 0 #randi() % 4
 	var room : Node = null
 	if rng == 0:
 		room = BigChunckRoom.new()
@@ -130,7 +130,9 @@ func place_rooms():
 					var room_cell = room.bin_map[i][j]
 					chunck_bin.bin_map[pos.y][pos.x] = room_cell
 		
-		object_to_add += room.interactive_objects
+		for obj in room.interactive_objects:
+			obj.set_position(obj.get_position() + room_rect.position * GAME.TILE_SIZE)
+			object_to_add.append(obj)
 
 
 # Place the tiles in the tilemap according the the bin_map value

@@ -1,6 +1,8 @@
 extends Node
 class_name ChunckRoom
 
+const AVERAGE_PLTF_LEN : int = 3
+
 var liquid_scenes : Dictionary = {
 	"Water" : preload("res://Scenes/InteractiveObjects/Liquids/Water/Water.tscn"),
 	"Lava" : preload("res://Scenes/InteractiveObjects/Liquids/Lava/Lava.tscn")
@@ -63,9 +65,9 @@ func generate_platforms():
 		var jump_max_dist : Vector2 = GAME.JUMP_MAX_DIST
 		var room_size = get_room_rect().size
 		
-		var nb_platform = int(round(room_size.x / jump_max_dist.x))
+		var nb_platform = int(round(room_size.x / (jump_max_dist.x + AVERAGE_PLTF_LEN) + 1))
 		var entry_point_cell = get_playable_access(entry)
-		var average_dist = int(room_size.x / nb_platform + 1) - 2
+		var average_dist = clamp(int(room_size.x / nb_platform + 1), 3.0, GAME.JUMP_MAX_DIST.x - 1)
 		
 		var last_platform_end : Vector2 = entry_point_cell
 		var platform_avg_y = entry_point_cell.y
@@ -76,7 +78,7 @@ func generate_platforms():
 		
 		# Platform generation, loop through every platfroms
 		for i in range(nb_platform):
-			var final_platform : bool = i == nb_platform - 1
+			var final_platform : bool = i == nb_platform - 1_
 			var platform_len = randi() % 2 + 2
 			var platform_x_dist = average_dist + int(round(rand_range(-1.0, 1.0)))
 			var rdm_y_offset = int(round(rand_range(-1.0, 1.0)))
@@ -129,6 +131,7 @@ func generate_platforms():
 func is_jump_possible(from: Vector2, to: Vector2):
 	return to.x - from.x < GAME.JUMP_MAX_DIST.x && \
 	 to.y - from.y < GAME.JUMP_MAX_DIST.y
+
 
 # Place the platforms into the bin map
 func place_platforms():

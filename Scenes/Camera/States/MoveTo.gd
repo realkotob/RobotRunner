@@ -16,7 +16,7 @@ var wait_time : float = 0.0
 func enter_state(_host):
 	if average_w_players == true:
 		var players_array = get_tree().get_nodes_in_group("Players")
-		destination += owner.compute_average_pos(players_array)
+		destination += owner.compute_average_pos()
 		destination /= 2
 
 

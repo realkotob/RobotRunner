@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Scenes/Levels/Base/LevelBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/InteractiveObjects/Liquids/Lava/Lava.tscn" type="PackedScene" id=2]
@@ -18,9 +18,15 @@
 [ext_resource path="res://Scenes/InteractiveObjects/Liquids/Lava/GrowingLava.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/Events/BaseScene/TriggerAreaBase.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scenes/Events/LevelEvent/LevelEvent.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Scenes/Events/Checkpoint/NewStartingPoint1.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Scenes/Events/Checkpoint/NewStartingPoint2.tscn" type="PackedScene" id=20]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 750, 40 )
+
+[sub_resource type="RectangleShape2D" id=2]
+resource_local_to_scene = true
+extents = Vector2( 105, 24 )
 
 [node name="Level1C" instance=ExtResource( 1 )]
 
@@ -112,7 +118,11 @@ position = Vector2( 792, -624 )
 
 [node name="GrowingLava" parent="InteractivesObjects/LavaTiles" index="0" instance=ExtResource( 16 )]
 position = Vector2( 472, 475.327 )
+group_name = ""
+empty_part = 48.0
 pool_size = Vector2( 1500, 80 )
+speed = 20
+is_growing = false
 
 [node name="LiquidShader" parent="InteractivesObjects/LavaTiles/GrowingLava" index="0"]
 region_rect = Rect2( 0, 0, 1500, 128 )
@@ -128,6 +138,15 @@ shape = SubResource( 1 )
 position = Vector2( 492, 180 )
 z_index = -1
 pool_size = Vector2( 210, 48 )
+
+[node name="LiquidShader" parent="InteractivesObjects/LavaTiles/Lava2" index="0"]
+region_rect = Rect2( 0, 0, 210, 96 )
+
+[node name="Light" parent="InteractivesObjects/LavaTiles/Lava2/LiquidShader" index="0"]
+texture_scale = 0.335513
+
+[node name="CollisionShape2D" parent="InteractivesObjects/LavaTiles/Lava2" index="1"]
+shape = SubResource( 2 )
 
 [node name="GreatDoor" parent="InteractivesObjects/GreatDoorGroup" index="0" instance=ExtResource( 11 )]
 position = Vector2( 516, -792 )
@@ -182,9 +201,25 @@ position = Vector2( 792, -672 )
 
 [node name="Checkpoint" parent="Events/Checkpoints" index="0" instance=ExtResource( 15 )]
 position = Vector2( 384, 136 )
+triggers_on_level_start = false
+event_disabled = false
+
+[node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint" index="3" instance=ExtResource( 19 )]
+position = Vector2( 0, -16 )
+
+[node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint" index="4" instance=ExtResource( 20 )]
+position = Vector2( 200, -16 )
 
 [node name="Checkpoint2" parent="Events/Checkpoints" index="1" instance=ExtResource( 15 )]
 position = Vector2( 528, -536 )
+triggers_on_level_start = false
+event_disabled = false
+
+[node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint2" index="3" instance=ExtResource( 19 )]
+position = Vector2( 0, -40 )
+
+[node name="NewStartingPoint2" parent="Events/Checkpoints/Checkpoint2" index="4" instance=ExtResource( 20 )]
+position = Vector2( -96, -40 )
 
 [node name="LavaGrowingEvent" parent="Events/LevelEvent" index="0" instance=ExtResource( 18 )]
 position = Vector2( 480, 132 )
@@ -197,6 +232,4 @@ scale = Vector2( 51.23, 2.399 )
 
 [editable path="InteractivesObjects/LavaTiles/GrowingLava"]
 
-[editable path="Events/Checkpoints/Checkpoint"]
-
-[editable path="Events/Checkpoints/Checkpoint2"]
+[editable path="InteractivesObjects/LavaTiles/Lava2"]

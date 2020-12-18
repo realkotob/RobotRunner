@@ -146,8 +146,11 @@ cheats_required = true
 [node name="GOTOLEVEL" type="Node" parent="CommandsList"]
 script = ExtResource( 5 )
 cmd_name = "GOTOLEVEL"
-cmd_description = "Go to a specific level"
+args_number = 1
+cmd_description = "Go to a specific level (specify the index)"
 cheats_required = true
+target = "GAME"
+target_method = "goto_level"
 
 [node name="DIE" type="Node" parent="CommandsList"]
 script = ExtResource( 5 )

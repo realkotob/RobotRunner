@@ -74,6 +74,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://AbstractClasses/BreakableSpriteBase.gd"
 }, {
+"base": "Node2D",
+"class": "BtnDoorsGroup",
+"language": "GDScript",
+"path": "res://Scenes/InteractiveObjects/Buttons&Doors/GroupBase.gd"
+}, {
 "base": "Event",
 "class": "CameraEventBase",
 "language": "GDScript",
@@ -88,6 +93,11 @@ _global_script_classes=[ {
 "class": "ChapterBase",
 "language": "GDScript",
 "path": "res://AbstractClasses/ChapterBase.gd"
+}, {
+"base": "Event",
+"class": "Checkpoint",
+"language": "GDScript",
+"path": "res://Scenes/Events/Checkpoint/Checkpoint.gd"
 }, {
 "base": "Node",
 "class": "ChunckAutomata",
@@ -194,11 +204,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/InteractiveObjects/GreatDoor/GreatDoor.gd"
 }, {
-"base": "Node2D",
-"class": "GroupBase",
-"language": "GDScript",
-"path": "res://Scenes/InteractiveObjects/Buttons&Doors/GroupBase.gd"
-}, {
 "base": "Lava",
 "class": "GrowingLava",
 "language": "GDScript",
@@ -253,6 +258,11 @@ _global_script_classes=[ {
 "class": "LevelEvent",
 "language": "GDScript",
 "path": "res://Scenes/Events/LevelEvent/LevelEvent.gd"
+}, {
+"base": "Node",
+"class": "LevelSaver",
+"language": "GDScript",
+"path": "res://Global/Autoloads/Game/LevelSaver.gd"
 }, {
 "base": "InteractAreaBase",
 "class": "Liquid",
@@ -393,9 +403,11 @@ _global_script_class_icons={
 "BreakableObjectBase": "",
 "BreakablePlatfrom": "",
 "BreakableSpriteBase": "",
+"BtnDoorsGroup": "",
 "CameraEventBase": "",
 "CameraState": "",
 "ChapterBase": "",
+"Checkpoint": "",
 "ChunckAutomata": "",
 "ChunckBin": "",
 "ChunckChecker": "",
@@ -417,7 +429,6 @@ _global_script_class_icons={
 "GameCamera": "",
 "GameConsoleScript": "",
 "GreatDoor": "",
-"GroupBase": "",
 "GrowingLava": "",
 "HUD_label": "",
 "IceBlock": "",
@@ -429,6 +440,7 @@ _global_script_class_icons={
 "Level": "",
 "LevelChunck": "",
 "LevelEvent": "",
+"LevelSaver": "",
 "Liquid": "",
 "MaterialCollactable": "",
 "MenuBase": "",
@@ -481,6 +493,7 @@ SOLO_CONTROL="*res://Global/Autoloads/SoloControl/SoloControl.gd"
 MUSIC="*res://Global/Autoloads/Music/Music.tscn"
 RESOURCE_LOADER="*res://Global/Autoloads/ResourceLoader/ResourceLoader.tscn"
 COLLISION_CHECKER="*res://Global/Autoloads/Collision.gd"
+EVENTS="*res://Global/Autoloads/Events.gd"
 
 [debug]
 
@@ -700,6 +713,5 @@ translation_remaps={
 
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0
-quality/2d/use_pixel_snap=true
 quality/shadows/filter_mode=0
 environment/default_environment="res://default_env.tres"

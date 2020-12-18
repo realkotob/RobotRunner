@@ -96,7 +96,7 @@ func get_starting_points_cell_pos() -> PoolVector2Array:
 
 
 # Place a new chunck of level
-func place_level_chunck() -> LevelChunck:
+func place_level_chunck(invert_player_pos : bool = false) -> LevelChunck:
 	is_generating = true
 	var starting_points := PoolVector2Array()
 	var first_chunck : bool = chunck_container_node.get_child_count() == 0
@@ -115,6 +115,7 @@ func place_level_chunck() -> LevelChunck:
 	new_chunck.starting_points = starting_points
 	new_chunck.set_position(GAME.TILE_SIZE * Vector2(chunck_tile_size.x, 0) * nb_chunck)
 	new_chunck.set_name("LevelChunck" + String(nb_chunck))
+	new_chunck.invert_player_placement = invert_player_pos
 	
 	if nb_chunck == 0:
 		new_chunck.first_chunck = true
@@ -146,6 +147,6 @@ func place_level_chunck() -> LevelChunck:
 
 #### SIGNAL RESPONSES ####
 
-func on_new_chunck_reached():
+func on_new_chunck_reached(invert_player_pos: bool):
 	if !is_generating:
-		place_level_chunck()
+		place_level_chunck(invert_player_pos)

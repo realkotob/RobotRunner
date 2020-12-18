@@ -15,7 +15,7 @@ onready var walls_tilemap = $Walls
 onready var new_chunck_area = $NewChunckGenArea
 
 signal chunck_gen_finished
-signal new_chunck_reached
+signal new_chunck_reached(invert_player_pos)
 signal every_automata_finished
 
 var chunck_bin : ChunckBin = null setget set_chunck_bin, get_chunck_bin
@@ -27,6 +27,8 @@ var next_start_pos_array := PoolVector2Array()
 
 var nb_automata : int = 2
 var object_to_add : Array = []
+
+var invert_player_placement : bool = false
 
 var players_disposition : Dictionary = {
 	"top": null,
@@ -153,10 +155,12 @@ func initialize_player_placement():
 		var player_pos = player.get_global_position()
 		var bottom = is_pos_in_bottom_half(player_pos)
 		
-		if bottom:
-			players_disposition["bottom"] = weakref(player)
-		else:
-			players_disposition["top"] = weakref(player)
+		var key = "bottom"
+		if (!bottom && !invert_player_placement) or (bottom && invert_player_placement):
+			key = "top"
+
+		players_disposition[key] = weakref(player)
+
 
 
 # Verify if the given cell is outside the chunck or not
@@ -237,7 +241,8 @@ func is_block_placable(block: BlockBase) -> bool:
 	var block_cell = walls_tilemap.world_to_map(block.get_position())
 	var used_cells = walls_tilemap.get_used_cells()
 	
-	# To be placable the two cells on its left must be empty cells, and it shall have a floorunderneath
+	# for the block to be placable the two cells on its left must be empty cells,
+	# and it shall have a floor underneath
 	if block_cell + Vector2.LEFT * 2 in used_cells or block_cell + Vector2.LEFT * 3 in used_cells or \
 	 !(block_cell + Vector2.DOWN in used_cells && block_cell + Vector2(-1, 1) in used_cells):
 		return false
@@ -295,15 +300,17 @@ func room_debug_visualizer():
 
 func on_body_entered(body: PhysicsBody2D):
 	if body is Player:
-		emit_signal("new_chunck_reached")
+		emit_signal("new_chunck_reached", false)
 		new_chunck_area.queue_free()
 
 
 func on_bin_map_changed():
 	pass
 
+
 func on_automata_moved(_automata: ChunckAutomata, _to: Vector2):
 	pass
+
 
 func on_automata_forced_move_finished(_automata: ChunckAutomata, _pos: Vector2):
 	pass

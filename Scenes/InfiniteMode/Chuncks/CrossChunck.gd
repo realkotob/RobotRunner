@@ -72,6 +72,14 @@ func teleport_automatas() -> void:
 
 #### SIGNAL RESPONSES ####
 
+# FUNC OVERIDE - invert player placement in the next chunck
+# So interactive objects can be placed accordingly
+func on_body_entered(body: PhysicsBody2D):
+	if body is Player:
+		emit_signal("new_chunck_reached", true)
+		new_chunck_area.queue_free()
+
+
 func on_automata_moved(automata: ChunckAutomata, to: Vector2):
 	if automata in automata_arrived or already_teleported:
 		return

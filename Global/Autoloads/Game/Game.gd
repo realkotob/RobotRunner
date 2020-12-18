@@ -210,6 +210,7 @@ func toggle_camera_debug_mode():
 	for player in get_tree().get_nodes_in_group("Players"):
 		player.set_active(was_camera_debug_mode)
 
+
 func fade_in():
 	$Tween.interpolate_property($CanvasLayer/ColorRect, "modulate",
 		Color.black, Color.transparent, transition_time,

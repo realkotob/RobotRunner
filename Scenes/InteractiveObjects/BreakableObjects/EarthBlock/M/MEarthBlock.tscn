@@ -11,6 +11,7 @@ extents = Vector2( 22.6009, 3.99571 )
 
 [node name="M_EarthBlock" instance=ExtResource( 1 )]
 linear_damp = -1.0
+block_size = Vector2( 48, 48 )
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )

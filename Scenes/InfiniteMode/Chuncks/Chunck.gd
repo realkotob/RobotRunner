@@ -235,7 +235,7 @@ func place_block(cell: Vector2):
 	stack_object_at_cell(block_type, cell)
 
 
-
+# Check if the block is on a correct possition to be placed
 func is_block_placable(block: BlockBase) -> bool:
 	if block == null : return false
 	var block_cell = walls_tilemap.world_to_map(block.get_position())
@@ -243,10 +243,41 @@ func is_block_placable(block: BlockBase) -> bool:
 	
 	# for the block to be placable the two cells on its left must be empty cells,
 	# and it shall have a floor underneath
-	if block_cell + Vector2.LEFT * 2 in used_cells or block_cell + Vector2.LEFT * 3 in used_cells or \
+	if !are_cells_empty(block_cell, 4, Vector2.LEFT) or \
 	 !(block_cell + Vector2.DOWN in used_cells && block_cell + Vector2(-1, 1) in used_cells):
 		return false
+	
+	var block_pos = block.get_position()
+	var block_size = block.block_size
+	
+	# Check if a block has already a block on its left or right
+	# (to avoid adjacent blocks)
+	for obj in object_to_add:
+		if obj == block or !(obj is BlockBase): 
+			continue
+		var obj_pos = obj.get_position()
+		
+		if obj_pos.y != block_pos.y: continue
+		
+		if (obj_pos.x >= block_pos.x - block_size.x - 1 \
+		&& obj_pos.x < block_pos.x) or \
+		(obj_pos.x <= block_pos.x + block_size.x + 1 \
+		&& obj_pos.x > block_pos.x):
+			return false
+	
 	return true
+
+# Check from an origin cell, by going nb_cells in the given dir
+# if each cells are empty
+func are_cells_empty(o_cell: Vector2, nb_cells: int, dir: Vector2) -> bool:
+	var used_cells = walls_tilemap.get_used_cells()
+	
+	for i in range(nb_cells):
+		var cell_to_check = o_cell + (dir * (i + 1))
+		if cell_to_check in used_cells:
+			return false
+	return true
+
 
 #### VIRTUALS ####
 

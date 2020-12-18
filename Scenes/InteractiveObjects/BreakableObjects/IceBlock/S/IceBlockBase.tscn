@@ -91,6 +91,7 @@ hue_variation_random = 0.51
 light_mask = 1024
 angular_damp = 1.0
 script = SubResource( 1 )
+block_size = Vector2( 24, 24 )
 
 [node name="Sprite" parent="." index="0"]
 light_mask = 1024

@@ -6,5 +6,8 @@
 [node name="CrossChunck" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
-[node name="Area2D" parent="." index="1"]
+[node name="NewChunckGenArea" parent="." index="1"]
+position = Vector2( 120, 276 )
+
+[node name="Area2D" parent="." index="3"]
 position = Vector2( 144, 276 )

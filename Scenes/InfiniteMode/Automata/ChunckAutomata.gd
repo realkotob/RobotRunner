@@ -18,6 +18,7 @@ signal moved(automata, to)
 signal finished(final_pos)
 signal entered_room(entry_point, exit_point)
 signal forced_move_finished(automata, pos)
+signal block_placable(cell)
 
 #### ACCESSORS ####
 
@@ -57,6 +58,7 @@ func _ready():
 	_err = connect("finished", chunck_bin, "on_automata_finished")
 	_err = connect("moved", chunck, "on_automata_moved")
 	_err = connect("forced_move_finished", chunck, "on_automata_forced_move_finished")
+	_err = connect("block_placable", chunck, "on_automata_block_placable")
 	
 	if debug:
 		add_child(move_timer)
@@ -76,6 +78,10 @@ func automata_carving_movement() -> void:
 		movement_finished = move()
 		if movement_finished:
 			set_stoped(true)
+		
+		# Emit the signal block placable each time the conditions are met
+		if compare_last_moves(Vector2.RIGHT, 3):
+			emit_signal("block_placable", get_bin_map_pos())
 	
 	if movement_finished:
 		emit_signal("finished", bin_map_pos)
@@ -120,7 +126,7 @@ func move() -> bool:
 	
 	# Update last moves
 	last_moves.append(chosen_move)
-	if last_moves.size() > 2:
+	if last_moves.size() > 5:
 		last_moves.remove(0)
 	
 	# Move the automata and check if the automata has finished moving (is outside the chunck)
@@ -145,7 +151,7 @@ func choose_move() -> Vector2:
 	
 	var possible_moves = [Vector2.RIGHT, Vector2.UP, Vector2.DOWN]
 	
-	if near_celling or are_two_last_moves_up() or is_last_move(Vector2.DOWN):
+	if near_celling or compare_last_moves(Vector2.UP, 2) or is_last_move(Vector2.DOWN):
 		possible_moves.erase(Vector2.UP)
 	
 	if near_floor or is_last_move(Vector2.UP):
@@ -163,11 +169,24 @@ func choose_move() -> Vector2:
 func is_last_move(move: Vector2) -> bool:
 	if last_moves.empty(): return false
 	return move == last_moves[last_moves.size() - 1]
+	
+
+# Takes an array of moves an compare it with the last moves
+func a_compare_last_moves(comp_moves: Array) -> bool:
+	if last_moves.size() < comp_moves.size(): return false
+	for i in range(comp_moves.size()):
+		if last_moves[-i - 1] != comp_moves[-i - 1]:
+			return false
+	return true
 
 
-# Returns true if the two last moves of the automata are UP
-func are_two_last_moves_up() -> bool:
-	return last_moves.size() >= 2 && last_moves[0] == Vector2.UP && last_moves[1] == Vector2.UP
+# Returns true if the last n moves are the given move
+func compare_last_moves(move: Vector2, n: int) -> bool:
+	if last_moves.size() < n: return false
+	for i in range(n):
+		if last_moves[-i -1] != move:
+			return false
+	return true
 
 
 # Returns true if the automata is close from the ceiling of its half

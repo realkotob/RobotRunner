@@ -25,7 +25,7 @@ var velocity := Vector2.ZERO setget set_velocity, get_velocity
 
 signal velocity_changed
 
-#### ACCESORS ####
+#### ACCESSORS ####
 
 func set_direction(value : int):
 	value = int(sign(value))
@@ -59,7 +59,7 @@ func get_face_direction() -> int:
 		return 1
 
 
-#### BUILT-IN FUNCTIONS ####
+#### BUILT-IN ####
 
 func _ready():
 	$StatesMachine.default_state = default_state

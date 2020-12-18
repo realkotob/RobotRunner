@@ -6,6 +6,7 @@ onready var animation_player_node = $AnimationPlayer
 
 export var instant_break : bool = false
 export (int, 1, 10) var nb_shake = 3
+export var sprite_size := Vector2.ZERO
 
 var track_actor : bool = false
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Scenes/InteractiveObjects/Platform/BreakablePlatform/3 Tiles/BreakablePalteform3square.png" type="Texture" id=1]
-[ext_resource path="res://Scenes/InteractiveObjects/Platform/BreakablePlatform/5 Tiles (Base)/BreakablePlateform.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/InteractiveObjects/Platform/BreakablePlatform/3Tiles/BreakablePalteform3square.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/InteractiveObjects/Platform/BreakablePlatform/5Tiles(Base)/BreakablePlateform.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 36, 12 )
@@ -10,6 +10,7 @@ extents = Vector2( 36, 12 )
 extents = Vector2( 36, 2 )
 
 [node name="3TilesBreakablePlateform" instance=ExtResource( 2 )]
+sprite_size = Vector2( 72, 24 )
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 1 )

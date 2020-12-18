@@ -1,9 +1,17 @@
 extends Node
 class_name ChunckRoom
 
+const AVERAGE_PLTF_LEN : int = 3
+
 var liquid_scenes : Dictionary = {
 	"Water" : preload("res://Scenes/InteractiveObjects/Liquids/Water/Water.tscn"),
 	"Lava" : preload("res://Scenes/InteractiveObjects/Liquids/Lava/Lava.tscn")
+}
+
+var breakable_platform_scenes : Dictionary = {
+	"Small": preload("res://Scenes/InteractiveObjects/Platform/BreakablePlatform/2Tiles/2TilesBreakablePlateform.tscn"),
+	"Medium": preload("res://Scenes/InteractiveObjects/Platform/BreakablePlatform/3Tiles/3TilesBreakablePlateform.tscn"),
+	"Large": preload("res://Scenes/InteractiveObjects/Platform/BreakablePlatform/5Tiles(Base)/BreakablePlateform.tscn")
 }
 
 export var min_room_size := Vector2(8, 6)
@@ -63,9 +71,9 @@ func generate_platforms():
 		var jump_max_dist : Vector2 = GAME.JUMP_MAX_DIST
 		var room_size = get_room_rect().size
 		
-		var nb_platform = int(round(room_size.x / jump_max_dist.x))
+		var nb_platform = int(round(room_size.x / (jump_max_dist.x + AVERAGE_PLTF_LEN) + 1))
 		var entry_point_cell = get_playable_access(entry)
-		var average_dist = int(room_size.x / nb_platform + 1) - 2
+		var average_dist = clamp(int(room_size.x / nb_platform + 1), 3.0, GAME.JUMP_MAX_DIST.x - 1)
 		
 		var last_platform_end : Vector2 = entry_point_cell
 		var platform_avg_y = entry_point_cell.y
@@ -130,14 +138,45 @@ func is_jump_possible(from: Vector2, to: Vector2):
 	return to.x - from.x < GAME.JUMP_MAX_DIST.x && \
 	 to.y - from.y < GAME.JUMP_MAX_DIST.y
 
+
 # Place the platforms into the bin map
 func place_platforms():
 	for plt in platforms_array:
+		var rng = randi() % 3
+		var plt_len = plt.get_size().x
+		
+		# Generate a BreakablePlatform
+		if rng == 0 && plt.get_size().y == 1 && plt_len in [2, 3, 5]:
+			generate_breakable_platfrom(plt)
+			continue
+		
+		# Generate a standart platform
 		for j in range(plt.get_size().y):
 			for i in range(plt.get_size().x):
 				var current_x = plt.get_start_cell().x + i
 				var current_y = plt.get_start_cell().y + j
 				bin_map[current_y][current_x] = 1
+
+
+func generate_breakable_platfrom(plt: ChunckPlatform):
+	var scene_key : String = ""
+	var plt_len = plt.get_size().x
+	
+	if plt_len == 2:
+		scene_key = "Small"
+	elif plt_len == 3: 
+		scene_key = "Medium"
+	elif plt_len == 5: 
+		scene_key = "Large"
+	
+	var breakable_pltf = breakable_platform_scenes[scene_key].instance()
+	
+	var top_left_pos = plt.get_start_cell() * GAME.TILE_SIZE - GAME.TILE_SIZE / 2
+	var pltf_size = breakable_pltf.sprite_size
+	
+	breakable_pltf.set_position(top_left_pos + pltf_size / 2)
+	
+	interactive_objects.append(breakable_pltf)
 
 
 # Convert the theorical entry point in the concrete one
@@ -220,7 +259,7 @@ func generate_liquid(liquid_type: String):
 	liquid_node.set_pool_size(pool_size)
 	
 	var pool_sprite_size = Vector2(pool_size.x, pool_size.y + liquid_node.empty_part)
-	var pos = (room_rect.position + room_rect.size) * GAME.TILE_SIZE - pool_sprite_size / 2
+	var pos =  room_rect.size * GAME.TILE_SIZE - pool_sprite_size / 2
 	liquid_node.set_position(pos)
 
 

@@ -5,6 +5,7 @@
 
 [node name="EarthBlockBase" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+block_size = Vector2( 24, 24 )
 
 [node name="AudioStreamPlayer" parent="." index="2"]
 volume_db = -7.0

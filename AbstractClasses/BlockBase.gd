@@ -2,6 +2,8 @@ extends BreakableObjectBase
 
 class_name BlockBase
 
+export var block_size := Vector2(48, 48)
+
 #### ACCESSORS ####
 
 func is_class(value: String):

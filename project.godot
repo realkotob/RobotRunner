@@ -67,7 +67,7 @@ _global_script_classes=[ {
 "base": "BreakableObjectBase",
 "class": "BreakablePlatfrom",
 "language": "GDScript",
-"path": "res://Scenes/InteractiveObjects/Platform/BreakablePlatform/5 Tiles (Base)/BreakablePlateform.gd"
+"path": "res://Scenes/InteractiveObjects/Platform/BreakablePlatform/5Tiles(Base)/BreakablePlateform.gd"
 }, {
 "base": "Sprite",
 "class": "BreakableSpriteBase",
@@ -217,7 +217,7 @@ _global_script_classes=[ {
 "base": "BlockBase",
 "class": "IceBlock",
 "language": "GDScript",
-"path": "res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/S (BASE)/IceBlockBase.gd"
+"path": "res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/S/IceBlockBase.gd"
 }, {
 "base": "StateBase",
 "class": "InactiveState",
@@ -339,6 +339,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/Menus/ScreenTitle/Scripts/ScreenTitleMenu.gd"
 }, {
+"base": "Node",
+"class": "SlopePlacer",
+"language": "GDScript",
+"path": "res://Scenes/InfiniteMode/Chuncks/SlopePlacer.gd"
+}, {
 "base": "ChunckRoom",
 "class": "SmallChunckRoom",
 "language": "GDScript",
@@ -456,6 +461,7 @@ _global_script_class_icons={
 "SFX_Explosion": "",
 "SFX_group_base": "",
 "ScreenTitleMenu": "",
+"SlopePlacer": "",
 "SmallChunckRoom": "",
 "SpecialChunck": "",
 "StateBase": "",

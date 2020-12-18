@@ -5,8 +5,6 @@
 [ext_resource path="res://Scenes/Actor/Players/RobotIce/Sounds/Tank3.wav" type="AudioStream" id=3]
 [ext_resource path="res://Scenes/Actor/Players/Inputs.gd" type="Script" id=5]
 
-
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 15.5305, 20 )
 

@@ -4,15 +4,18 @@ class_name LevelChunck
 var interactive_object_dict : Dictionary = {
 	"RedTeleporter": preload("res://Scenes/InteractiveObjects/Teleports/Types/RedTeleporter.tscn"),
 	"BlueTeleporter": preload("res://Scenes/InteractiveObjects/Teleports/Types/BlueTeleporter.tscn"),
-	"GreenTeleporter": preload("res://Scenes/InteractiveObjects/Teleports/Types/GreenTeleporter.tscn")
+	"GreenTeleporter": preload("res://Scenes/InteractiveObjects/Teleports/Types/GreenTeleporter.tscn"),
+	"IceBlock": preload("res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/M/MIceBlock.tscn"),
+	"EarthBlock": preload("res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/M/MEarthBlock.tscn")
 }
 
 const max_nb_room : int = 3
 
 onready var walls_tilemap = $Walls
+onready var new_chunck_area = $NewChunckGenArea
 
 signal chunck_gen_finished
-signal new_chunck_reached
+signal new_chunck_reached(invert_player_pos)
 signal every_automata_finished
 
 var chunck_bin : ChunckBin = null setget set_chunck_bin, get_chunck_bin
@@ -23,15 +26,15 @@ var starting_points : Array = []
 var next_start_pos_array := PoolVector2Array()
 
 var nb_automata : int = 2
-
 var object_to_add : Array = []
 
-enum SLOPE_TYPE{
-	ASCENDING,
-	DESCENDING,
-	CEILING_ASC,
-	CEILING_DES
+var invert_player_placement : bool = false
+
+var players_disposition : Dictionary = {
+	"top": null,
+	"bottom": null
 }
+
 
 #### ACCESSORS ####
 
@@ -45,10 +48,11 @@ func set_chunck_bin(value: ChunckBin):
 
 func get_chunck_bin() -> ChunckBin: return chunck_bin
 
+
 #### BUILT-IN ####
 
 func _ready():
-	var _err = $Area2D.connect("body_entered", self, "on_body_entered")
+	var _err = new_chunck_area.connect("body_entered", self, "on_body_entered")
 	is_ready = true
 	
 	var last_room = generate_rooms()
@@ -56,6 +60,7 @@ func _ready():
 	if last_room != null:
 		yield(last_room, "ready")
 	
+	initialize_player_placement()
 	create_automatas()
 
 
@@ -65,7 +70,7 @@ func generate_self():
 	place_rooms()
 	place_wall_tiles()
 	walls_tilemap.update_bitmask_region(Vector2.ZERO, ChunckBin.chunck_tile_size)
-	place_slopes()
+	SlopePlacer.place_slopes(walls_tilemap)
 	
 	generate_objects()
 #	room_debug_visualizer()
@@ -81,7 +86,7 @@ func create_automatas() -> void:
 
 
 func generate_rooms() -> Node:
-	var rng = 1 if first_chunck else 0  #randi() % 4
+	var rng = 1 if first_chunck else 0 #randi() % 4
 	var room : Node = null
 	if rng == 0:
 		room = BigChunckRoom.new()
@@ -125,7 +130,9 @@ func place_rooms():
 					var room_cell = room.bin_map[i][j]
 					chunck_bin.bin_map[pos.y][pos.x] = room_cell
 		
-		object_to_add += room.interactive_objects
+		for obj in room.interactive_objects:
+			obj.set_position(obj.get_position() + room_rect.position * GAME.TILE_SIZE)
+			object_to_add.append(obj)
 
 
 # Place the tiles in the tilemap according the the bin_map value
@@ -142,90 +149,32 @@ func place_wall_tiles():
 				walls_tilemap.set_cellv(current_pos, wall_tile_id)
 
 
-# Replace the staircases with slopes
-func place_slopes():
-	var chunck_tile_size = ChunckBin.chunck_tile_size
-	var slope_atlas = walls_tilemap.get_tileset().find_tile_by_name("SlopesAtlas")
+# Initialize the player disposition dictionary
+func initialize_player_placement():
+	var players_array = get_tree().get_nodes_in_group("Players")
 	
-	for i in range(chunck_tile_size.y):
-		for j in range(chunck_tile_size.x):
-			var cell = Vector2(j, i)
-			match get_cell_stair_type(cell):
-				-1 : continue
-				SLOPE_TYPE.ASCENDING: 
-					walls_tilemap.set_cell(cell.x, cell.y, slope_atlas,
-											false, false, false, Vector2.ZERO)
-					if is_cell_wall(cell + Vector2(-1, 1)) && is_cell_wall(cell + Vector2(0, 2)):
-						walls_tilemap.set_cell(cell.x, cell.y + 1, slope_atlas,
-											false, false, false, Vector2(1, 0))
-				SLOPE_TYPE.DESCENDING: 
-					walls_tilemap.set_cell(cell.x, cell.y, slope_atlas,
-											false, false, false, Vector2(1, 2))
-					if is_cell_wall(cell + Vector2(1, 1)) && is_cell_wall(cell + Vector2(0, 2)):
-						walls_tilemap.set_cell(cell.x, cell.y +1, slope_atlas,
-											false, false, false, Vector2(1, 3))
-				_ : continue
+	for player in players_array:
+		var player_pos = player.get_global_position()
+		var bottom = is_pos_in_bottom_half(player_pos)
+		
+		var key = "bottom"
+		if (!bottom && !invert_player_placement) or (bottom && invert_player_placement):
+			key = "top"
 
+		players_disposition[key] = weakref(player)
 
-# Take a cell, and return its slope type as defined in the SLOPE_TYPE enum
-# Return -1 if the cell isn't a stair
-func get_cell_stair_type(cell: Vector2) -> int:
-	if !is_cell_wall(cell): return -1
-	
-	if is_cell_in_staircase(cell, true): return SLOPE_TYPE.ASCENDING
-	if is_cell_in_staircase(cell, false): return SLOPE_TYPE.DESCENDING
-	
-	return -1
-
-
-# Returns true if the cell is in a staircase
-# ie it must be a stair itself and there must be a stair before of after it
-func is_cell_in_staircase(cell: Vector2, ascending: bool) -> bool:
-	if !is_cell_stair(cell, ascending): return false
-	if ascending:
-		return (is_cell_stair(cell + Vector2(-1, 1), true) && \
-		!is_cell_stair(cell + Vector2.RIGHT, false)) or is_cell_slope(cell + Vector2(1, -1))
-	else:
-		return (is_cell_stair(cell + Vector2(1, 1), false) && \
-		!is_cell_stair(cell + Vector2.LEFT, false)) or is_cell_slope(cell + Vector2(-1, -1))
-
-
-# Returns true if the given cell is a slope
-func is_cell_slope(cell: Vector2) -> bool:
-	var slope_atlas = walls_tilemap.get_tileset().find_tile_by_name("SlopesAtlas")
-	var tile_id = walls_tilemap.get_cell(cell.x, cell.y)
-	return tile_id == slope_atlas
-
-
-# Verify if the given cell is a stair or not
-func is_cell_stair(cell: Vector2, ascending: bool) -> bool:
-	if !is_cell_floor(cell): return false
-	if ascending:
-		return !is_cell_wall(cell + Vector2.LEFT) && is_cell_wall(cell + Vector2.RIGHT) && \
-			is_cell_wall(cell + Vector2.DOWN)
-	else:
-		return is_cell_wall(cell + Vector2.LEFT) && \
-			!is_cell_wall(cell + Vector2.RIGHT) && is_cell_wall(cell + Vector2.DOWN)
-
-
-# Verify if the given cell is a floor or not
-func is_cell_floor(cell: Vector2):
-	if is_cell_outside_chunck(cell + Vector2.UP): return false
-	return is_cell_wall(cell) && !is_cell_wall(cell + Vector2.UP)
-
-
-# Verify if the given cell is a wall cell or not 
-# (If their is any kind of wall tile on the cell, including slopes)
-func is_cell_wall(cell: Vector2) -> bool:
-	var bin_noise_map = chunck_bin.bin_map
-	if is_cell_outside_chunck(cell): return false
-	return bin_noise_map[cell.y][cell.x] == 1
 
 
 # Verify if the given cell is outside the chunck or not
 func is_cell_outside_chunck(cell: Vector2) -> bool:
 	return cell.x < 0 or cell.y < 0 or\
 	cell.x >= chunck_bin.chunck_tile_size.x or cell.y >= chunck_bin.chunck_tile_size.y
+
+
+# Returns true if the given position is in the bottom half of the chunck
+# False if the pos is in the top half
+func is_pos_in_bottom_half(pos: Vector2) -> bool:
+	return pos.y > (ChunckBin.chunck_tile_size.y * GAME.TILE_SIZE.y) / 2
 
 
 # Returns the rect of the room the given is in
@@ -242,6 +191,9 @@ func find_room_form_cell(cell: Vector2) -> ChunckRoom:
 func generate_objects():
 	for element in object_to_add:
 		if element is Node2D:
+			if element is BlockBase && !is_block_placable(element):
+				element.queue_free()
+				continue
 			call_deferred("add_child", element)
 		elif element is Array:
 			call_deferred("add_child", element[0])
@@ -252,12 +204,87 @@ func generate_objects():
 				element[0].call_deferred("add_child", element[i])
 
 
+# Add an object to the object_to_add array postioned at the given cell
+func stack_object_at_cell(obj_key: String, cell: Vector2):
+	if !obj_key in interactive_object_dict.keys():
+		print("The request object: " + obj_key + " is not in the interactive_objects_dict")
+		return
+	
+	var obj = interactive_object_dict[obj_key].instance()
+	obj.set_position(cell * GAME.TILE_SIZE)
+	
+	if obj.has_method("awake"):
+		obj.awake()
+	
+	object_to_add.append(obj)
+
+
+# Place a block at the given cell, and adapt the block type to the expected player 
+func place_block(cell: Vector2):
+	var cell_pos = cell * GAME.TILE_SIZE
+	var pos_in_bottom_half = is_pos_in_bottom_half(cell_pos)
+	var key = "bottom" if pos_in_bottom_half else "top"
+	var player_weakref = players_disposition[key]
+	
+	if player_weakref == null:
+		return
+	
+	var player = player_weakref.get_ref()
+	
+	var breakable_objs = player.breakable_type_array
+	var block_type = "IceBlock" if "IceBlock" in breakable_objs else "EarthBlock"
+	
+	stack_object_at_cell(block_type, cell)
+
+
+# Check if the block is on a correct possition to be placed
+func is_block_placable(block: BlockBase) -> bool:
+	if block == null : return false
+	var block_cell = walls_tilemap.world_to_map(block.get_position())
+	var used_cells = walls_tilemap.get_used_cells()
+	
+	# for the block to be placable the two cells on its left must be empty cells,
+	# and it shall have a floor underneath
+	if !are_cells_empty(block_cell, 4, Vector2.LEFT) or \
+	 !(block_cell + Vector2.DOWN in used_cells && block_cell + Vector2(-1, 1) in used_cells):
+		return false
+	
+	var block_pos = block.get_position()
+	var block_size = block.block_size
+	
+	# Check if a block has already a block on its left or right
+	# (to avoid adjacent blocks)
+	for obj in object_to_add:
+		if obj == block or !(obj is BlockBase): 
+			continue
+		var obj_pos = obj.get_position()
+		
+		if obj_pos.y != block_pos.y: continue
+		
+		if (obj_pos.x >= block_pos.x - block_size.x - 1 \
+		&& obj_pos.x < block_pos.x) or \
+		(obj_pos.x <= block_pos.x + block_size.x + 1 \
+		&& obj_pos.x > block_pos.x):
+			return false
+	
+	return true
+
+# Check from an origin cell, by going nb_cells in the given dir
+# if each cells are empty
+func are_cells_empty(o_cell: Vector2, nb_cells: int, dir: Vector2) -> bool:
+	var used_cells = walls_tilemap.get_used_cells()
+	
+	for i in range(nb_cells):
+		var cell_to_check = o_cell + (dir * (i + 1))
+		if cell_to_check in used_cells:
+			return false
+	return true
+
+
 #### VIRTUALS ####
 
 
-
 #### INPUTS ####
-
 
 
 #### DEBUG ####
@@ -300,23 +327,27 @@ func room_debug_visualizer():
 			call_deferred("add_child", exit_room_color_rect)
 
 
+
 #### SIGNAL RESPONSES ####
 
 
 func on_body_entered(body: PhysicsBody2D):
 	if body is Player:
-		emit_signal("new_chunck_reached")
-		$Area2D.queue_free()
+		emit_signal("new_chunck_reached", false)
+		new_chunck_area.queue_free()
 
 
 func on_bin_map_changed():
 	pass
 
+
 func on_automata_moved(_automata: ChunckAutomata, _to: Vector2):
 	pass
 
+
 func on_automata_forced_move_finished(_automata: ChunckAutomata, _pos: Vector2):
 	pass
+
 
 func on_automata_finished(final_pos: Vector2):
 	next_start_pos_array.append(Vector2(0, final_pos.y))
@@ -325,3 +356,10 @@ func on_automata_finished(final_pos: Vector2):
 	if nb_automata == 0:
 		emit_signal("every_automata_finished")
 		generate_self()
+
+
+func on_automata_block_placable(cell: Vector2):
+	if !first_chunck:
+		var rng = randi() % 3
+		if rng == 0:
+			place_block(cell)

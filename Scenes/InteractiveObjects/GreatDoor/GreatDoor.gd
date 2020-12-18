@@ -3,7 +3,6 @@ class_name GreatDoor
 
 #### GREAT DOOR CLASS ####
 
-
 onready var area_node = $Area2D
 
 # When set to true (default), the camera will move until it reach the position of the door
@@ -27,8 +26,6 @@ func get_class() -> String:
 func _ready():
 	var _err = area_node.connect("body_entered", self, "on_area_body_entered")
 	_err = connect("player_exit_level", owner, "on_player_exited")
-	if is_open:
-		open_door(true)
 
 #### LOGIC ####
 
@@ -41,10 +38,15 @@ func open_door(instant : bool = false):
 				audio_node.play()
 				
 			# Triggers the camera movement
-			GAME.move_camera_to(position, !focus_on_door, -1.0, 3.0)
+			GAME.move_camera_to(position, !focus_on_door, -1.0, 1.0)
 		else:
-			animation_node.advance(5)
-	
+			#print("Self : ", self, " Children  : ", self.get_children())
+			for child in self.get_children():
+				if child is AnimationPlayer:
+					print(child, " is an AnimationPlayer !")
+					child.set_speed_scale(64)
+			animation_node.play("Open")
+			
 	if collision_node != null:
 		collision_node.set_disabled(true)
 	

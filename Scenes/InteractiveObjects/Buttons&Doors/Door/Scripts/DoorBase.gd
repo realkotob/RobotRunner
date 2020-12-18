@@ -31,8 +31,6 @@ func _ready():
 			timer_door.connect("timeout", self, "_on_doortimer_timeout")
 			timer_door.set_wait_time(open_delay)
 			timer_door.set_one_shot(true)
-	else:
-		open_door(true)
 
 
 #### LOGIC ####
@@ -49,8 +47,6 @@ func open_door(instant : bool = false):
 	
 	if audio_node != null and !instant:
 		audio_node.play()
-	
-	is_open = true
 
 #### SIGNAL RESPONSES ####
 

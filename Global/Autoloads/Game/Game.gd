@@ -89,6 +89,7 @@ func goto_next_level():
 	var level = get_tree().get_current_scene()
 	LevelSaver.save_level_properties_as_json(level.get_name(), level)
 
+
 func goto_level(level_index : int):
 	var level : PackedScene = null
 	var level_id : int = 0

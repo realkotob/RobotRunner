@@ -22,17 +22,15 @@ func get_class() -> String: return "Liquid"
 func set_pool_size(value: Vector2): 
 	if pool_size != value && value.x > 0 && value.y > 0:
 		pool_size = value
-		if !is_ready:
-			yield(self, "ready")
-		update_pool_size()
+		if is_ready:
+			update_pool_size()
 
 func get_pool_size() -> Vector2: return pool_size
 
 func set_empty_part(value: float):
 	empty_part = value
-	if !is_ready:
-		yield(self, "ready")
-	update_pool_size()
+	if is_ready:
+		update_pool_size()
 
 func get_empty_part() -> float: return empty_part
 

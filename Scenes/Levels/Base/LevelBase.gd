@@ -104,6 +104,7 @@ func set_camera_position_on_start():
 		var camera_position_on_start = camera_node.compute_average_pos()
 		camera_node.set_global_position(camera_position_on_start)
 
+
 # Feed every needing node with weak references of the players so it can follow them
 func propagate_weakref_players_array():
 	var players_weakref_array = []

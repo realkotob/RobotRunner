@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Scenes/Events/BaseScene/TriggerAreaBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/InteractiveObjects/Platform/BreakablePlatform/5 Tiles (Base)/BreakablePlateform.tscn" type="PackedScene" id=2]
@@ -20,7 +20,6 @@
 [ext_resource path="res://Scenes/Actor/Robot/PathPoint.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Scenes/Events/Checkpoint/Checkpoint.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Scenes/Events/Checkpoint/NewStartingPoint1.tscn" type="PackedScene" id=20]
-[ext_resource path="res://Scenes/InteractiveObjects/Liquids/Lava/Lava.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Scenes/Events/Checkpoint/NewStartingPoint2.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Scenes/Events/CameraEvents/CameraEvent.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Scenes/Events/LevelEvent/LevelEvent.tscn" type="PackedScene" id=24]
@@ -63,23 +62,18 @@ position = Vector2( 768, -143 )
 
 [node name="Lava" parent="InteractivesObjects/LavaTiles" index="0" instance=ExtResource( 25 )]
 position = Vector2( 936, 224.927 )
-pool_size = Vector2( 100, 32 )
 
 [node name="Lava2" parent="InteractivesObjects/LavaTiles" index="1" instance=ExtResource( 25 )]
 position = Vector2( 1782.49, 234.824 )
-pool_size = Vector2( 140, 64 )
 
 [node name="Lava3" parent="InteractivesObjects/LavaTiles" index="2" instance=ExtResource( 25 )]
 position = Vector2( 2248, 368.663 )
-pool_size = Vector2( 150, 64.37 )
 
 [node name="Lava4" parent="InteractivesObjects/LavaTiles" index="3" instance=ExtResource( 25 )]
 position = Vector2( 2440, 373.75 )
-pool_size = Vector2( 150, 80 )
 
 [node name="Lava5" parent="InteractivesObjects/LavaTiles" index="4" instance=ExtResource( 25 )]
 position = Vector2( 3368, 574.587 )
-pool_size = Vector2( 512, 102.032 )
 
 [node name="Liquid" parent="InteractivesObjects/XionLiquid" index="0" instance=ExtResource( 27 )]
 position = Vector2( 4104, 48 )
@@ -226,6 +220,8 @@ argument_array = [ "Idle" ]
 
 [node name="Checkpoint" parent="Events/Checkpoints" index="0" instance=ExtResource( 19 )]
 position = Vector2( 1560, 472 )
+triggers_on_level_start = false
+event_disabled = false
 
 [node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint" index="3" instance=ExtResource( 20 )]
 position = Vector2( -32, -16 )

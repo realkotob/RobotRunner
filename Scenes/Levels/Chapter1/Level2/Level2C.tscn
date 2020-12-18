@@ -212,10 +212,12 @@ position = Vector2( 3584, 696 )
 
 [node name="Water" parent="InteractivesObjects/WaterTiles" index="0" instance=ExtResource( 14 )]
 position = Vector2( 516, 356 )
+group_name = ""
 pool_size = Vector2( 100, 95.627 )
 
 [node name="Water2" parent="InteractivesObjects/WaterTiles" index="1" instance=ExtResource( 14 )]
 position = Vector2( 2924, 359 )
+group_name = ""
 pool_size = Vector2( 200, 69.736 )
 
 [node name="Lava" parent="InteractivesObjects/LavaTiles" index="0" instance=ExtResource( 25 )]
@@ -494,6 +496,8 @@ position = Vector2( 4080, 660 )
 
 [node name="Checkpoint" parent="Events/Checkpoints" index="0" instance=ExtResource( 26 )]
 position = Vector2( 1272, 496 )
+triggers_on_level_start = false
+event_disabled = false
 
 [node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint" index="3" instance=ExtResource( 28 )]
 position = Vector2( -32, -16 )
@@ -503,6 +507,8 @@ position = Vector2( 32, -16 )
 
 [node name="Checkpoint2" parent="Events/Checkpoints" index="1" instance=ExtResource( 26 )]
 position = Vector2( 2352, 88 )
+triggers_on_level_start = false
+event_disabled = false
 
 [node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint2" index="3" instance=ExtResource( 28 )]
 position = Vector2( -32, -16 )
@@ -512,6 +518,8 @@ position = Vector2( 32, -16 )
 
 [node name="Checkpoint3" parent="Events/Checkpoints" index="2" instance=ExtResource( 26 )]
 position = Vector2( 3888, 664 )
+triggers_on_level_start = false
+event_disabled = false
 
 [node name="NewStartingPoint1" parent="Events/Checkpoints/Checkpoint3" index="3" instance=ExtResource( 28 )]
 position = Vector2( -24, -16 )

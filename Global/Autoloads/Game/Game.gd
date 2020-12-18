@@ -194,6 +194,20 @@ func update_current_level_index(level : Level):
 	var level_index = current_chapter.find_level_id(level_name)
 	GAME.progression.set_level(level_index)
 
+func toggle_camera_debug_mode():
+	var level = get_tree().get_current_scene()
+	if not level is Level:
+		return
+	
+	var camera_node = level.find_node("Camera")
+	var was_camera_debug_mode = camera_node.get_state_name() == "Debug"
+	if was_camera_debug_mode:
+		camera_node.set_to_previous_state()
+	else:
+		camera_node.set_state("Debug")
+	
+	for player in get_tree().get_nodes_in_group("Players"):
+		player.set_active(was_camera_debug_mode)
 
 func fade_in():
 	$Tween.interpolate_property($CanvasLayer/ColorRect, "modulate",
@@ -243,10 +257,10 @@ func on_level_ready(level : Level):
 		update_current_level_index(level)
 
 	if(level.is_loaded_from_save == false):
-		$LevelSaver.save_level_properties_as_json(level.get_name(), level)
+		LevelSaver.save_level_properties_as_json(level.get_name(), level)
 
 	else:
-		$LevelSaver.build_level_from_loaded_properties(level)
+		LevelSaver.build_level_from_loaded_properties(level)
 
 	fade_in()
 

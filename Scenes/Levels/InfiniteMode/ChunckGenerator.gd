@@ -3,9 +3,9 @@ class_name ChunckGenerator
 
 onready var chunck_container_node : Node2D = owner.find_node("ChunckContainer")
 
-var normal_chunck_scene = preload("res://Scenes/InfiniteMode/Chuncks/Chunck.tscn")
+var normal_chunck_scene = preload("res://Scenes/Levels/InfiniteMode/Chuncks/Chunck.tscn")
 var special_chunck_scene_array = [
-	preload("res://Scenes/InfiniteMode/Chuncks/CrossChunck.tscn")
+	preload("res://Scenes/Levels/InfiniteMode/Chuncks/CrossChunck.tscn")
 ]
 
 var nb_chunck : int = 0

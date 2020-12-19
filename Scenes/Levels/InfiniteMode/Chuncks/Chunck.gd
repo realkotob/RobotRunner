@@ -86,7 +86,7 @@ func create_automatas() -> void:
 
 
 func generate_rooms() -> Node:
-	var rng = 1 if first_chunck else 0 #randi() % 4
+	var rng = 1 if first_chunck else randi() % 4
 	var room : Node = null
 	if rng == 0:
 		room = BigChunckRoom.new()

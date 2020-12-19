@@ -1,8 +1,5 @@
 extends Node2D
-
 class_name Level
-
-const CLASS : String = "Level"
 
 onready var xion_cloud_node = get_node_or_null("XionCloud")
 onready var hud_node = "GUI/HUD"
@@ -18,11 +15,8 @@ var players_exited : int = 0
 
 var is_loaded_from_save : bool = false
 
-func is_class(value: String) -> bool:
-	return value == CLASS
-
-func get_class() -> String:
-	return CLASS
+func is_class(value: String) -> bool: return value == "Level" or .is_class(value)
+func get_class() -> String: return "Level"
 
 
 func _ready():

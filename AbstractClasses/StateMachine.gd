@@ -6,7 +6,7 @@ class_name StatesMachine
 # The states are distinguished by the name of their corresponding node
 # The default state is always the first in the tree
 
-signal state_change
+signal state_changed
 
 onready var states_map = get_children()
 
@@ -57,7 +57,7 @@ func set_state(new_state):
 	if new_state != null:
 		current_state.enter_state(self)
 	
-	emit_signal("state_change")
+	emit_signal("state_changed", current_state)
 
 
 # Returns the String name of the current state

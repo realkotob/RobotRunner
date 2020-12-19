@@ -11,6 +11,9 @@ onready var shake_state_node = $StateMachine/Shake
 onready var tween_node = $Tween
 onready var avg_pos_visualizer = $AveragePos
 onready var pivot = $Pivot
+onready var state_label = $DebugLayer/Control/VBoxContainer/StateLabel
+onready var pos_label = $DebugLayer/Control/VBoxContainer/PosLabel
+onready var zoom_label = $DebugLayer/Control/VBoxContainer/ZoomLabel
 
 export var camera_speed : float = 3.0
 
@@ -38,6 +41,7 @@ func set_debug(value: bool):
 		
 		avg_pos_visualizer.set_visible(debug)
 		pivot.set_visible(debug)
+		$DebugLayer/Control.set_visible(debug)
 		
 		var state = get_state()
 		if state != null:
@@ -83,6 +87,8 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
+	var _err = state_machine_node.connect("state_changed", self, "on_state_changed")
+	
 	pivot.set_as_toplevel(true)
 	avg_pos_visualizer.set_as_toplevel(true)
 	is_ready = true
@@ -90,6 +96,10 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	set_average_player_pos(compute_average_pos())
+	
+	if debug:
+		pos_label.set_text("Global position: " + String(global_position))
+		zoom_label.set_text("Zoom: " + String(zoom))
 
 
 #### LOGIC ####
@@ -173,3 +183,10 @@ func shake(magnitude: float, duration: float):
 	shake_state_node.magnitude = magnitude
 	shake_state_node.duration = duration
 	set_state("Shake")
+
+
+#### SIGNAL RESPONSES ####
+
+func on_state_changed(new_state: StateBase):
+	var string = "State: " + new_state.name
+	state_label.set_text(string)

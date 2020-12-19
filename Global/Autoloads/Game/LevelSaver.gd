@@ -5,9 +5,9 @@ class_name LevelSaver
 const debug : bool = false
 
 const objects_datatype_storage = {
-	"Camera": ["zoom"],
-	"ParallaxBackground": ["scroll_offset", "scale"],
-	"ParallaxLayer": ["position", "scale"]
+	"Camera": ["zoom", "instruction_stack"]#,
+#	"ParallaxBackground": ["scroll_offset", "scroll_base_scale", "scale"],
+#	"ParallaxLayer": ["position", "scale"]
 }
 
 #### ACCESSORS ####

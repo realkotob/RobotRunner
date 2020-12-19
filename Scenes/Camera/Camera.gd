@@ -98,8 +98,8 @@ func _physics_process(_delta: float) -> void:
 	set_average_player_pos(compute_average_pos())
 	
 	if debug:
-		pos_label.set_text("Global position: " + String(global_position))
-		zoom_label.set_text("Zoom: " + String(zoom))
+		pos_label.set_text("Global position: " + String(global_position.round()))
+		zoom_label.set_text("Zoom: " + String(Vector2(stepify(zoom.x, 0.01), stepify(zoom.y, 0.01))))
 
 
 #### LOGIC ####

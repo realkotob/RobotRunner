@@ -14,6 +14,7 @@ export (float, 0.0, 1.0) var explosion_impulse_modifier = 0.7
 
 export var maxvelocity_y : int
 
+export var floor_obj : bool = true
 
 #### ACCESSORS ####
 
@@ -68,6 +69,8 @@ func destroy(actor_destroying : Node = null):
 
 # Awake bodies in the area, so they can fall, if needed
 func awake_nearby_bodies():
+	if awake_area_node == null : return
+	
 	var bodies_nearby = awake_area_node.get_overlapping_bodies()
 	for body in bodies_nearby:
 		if body is PhysicsBody2D && body != self:

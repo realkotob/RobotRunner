@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/BreakablePalteform2square.png-ced649a9d6086b34e0ceda5c520893e4.stex"
+path="res://.import/Smallice.png-79b86ae44b906d15409338d73cafd148.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/InteractiveObjects/Platform/BreakablePlatform/2 Tiles/BreakablePalteform2square.png"
-dest_files=[ "res://.import/BreakablePalteform2square.png-ced649a9d6086b34e0ceda5c520893e4.stex" ]
+source_file="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/S/Smallice.png"
+dest_files=[ "res://.import/Smallice.png-79b86ae44b906d15409338d73cafd148.stex" ]
 
 [params]
 

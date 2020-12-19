@@ -21,8 +21,9 @@
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/ChildrenScenes/BlueButton.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Scenes/Events/Checkpoint/Checkpoint.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/S (base)/EarthBlockBase.tscn" type="PackedScene" id=25]
-[ext_resource path="res://Scenes/InteractiveObjects/Platform/BreakablePlatform/3 Tiles/3TilesBreakablePlateform.tscn" type="PackedScene" id=26]
+[ext_resource path="res://Scenes/InteractiveObjects/Platform/BreakablePlatform/3Tiles/3TilesBreakablePlateform.tscn" type="PackedScene" id=26]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/BD_Group.tscn" type="PackedScene" id=28]
+
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )

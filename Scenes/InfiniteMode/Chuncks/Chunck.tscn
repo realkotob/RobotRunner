@@ -14,13 +14,17 @@ tile_set = ExtResource( 2 )
 cell_size = Vector2( 24, 24 )
 format = 1
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="NewChunckGenArea" type="Area2D" parent="."]
 position = Vector2( 492, 264 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NewChunckGenArea"]
 shape = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="Rooms" type="Node" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]

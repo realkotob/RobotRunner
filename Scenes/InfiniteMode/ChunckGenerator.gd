@@ -8,12 +8,7 @@ var special_chunck_scene_array = [
 	preload("res://Scenes/InfiniteMode/Chuncks/CrossChunck.tscn")
 ]
 
-
-var noise : OpenSimplexNoise
-
-var noise_h_stretch_factor : float = 10
 var nb_chunck : int = 0
-
 var is_generating : bool = false
 
 export var debug : bool = false
@@ -62,9 +57,14 @@ func generate_chunck_binary() -> ChunckBin:
 # Have a chance on 4 to create a Cross chunck
 func generate_chunck() -> LevelChunck:
 	var last_chunck = get_last_chunck()
-	var rng = randi() % 4 if !(last_chunck is SpecialChunck) else randi() % 3
+	
+	var rng = randi() % 4
+	if last_chunck is SpecialChunck or last_chunck == null:
+		rng = randi() % 3
+	
 	var chunck : LevelChunck
-	var rdm_id 
+	var rdm_id
+	
 	if rng == 3:
 		rdm_id = randi() % special_chunck_scene_array.size()
 		chunck = special_chunck_scene_array[rdm_id].instance()
@@ -96,11 +96,12 @@ func get_starting_points_cell_pos() -> PoolVector2Array:
 
 
 # Place a new chunck of level
-func place_level_chunck() -> LevelChunck:
+func place_level_chunck(invert_player_pos : bool = false) -> LevelChunck:
 	is_generating = true
 	var starting_points := PoolVector2Array()
+	var first_chunck : bool = chunck_container_node.get_child_count() == 0
 	
-	if chunck_container_node.get_child_count() == 0:
+	if first_chunck:
 		starting_points = get_starting_points_cell_pos()
 	else:
 		var last_child_id = chunck_container_node.get_child_count()
@@ -114,6 +115,7 @@ func place_level_chunck() -> LevelChunck:
 	new_chunck.starting_points = starting_points
 	new_chunck.set_position(GAME.TILE_SIZE * Vector2(chunck_tile_size.x, 0) * nb_chunck)
 	new_chunck.set_name("LevelChunck" + String(nb_chunck))
+	new_chunck.invert_player_placement = invert_player_pos
 	
 	if nb_chunck == 0:
 		new_chunck.first_chunck = true
@@ -145,6 +147,6 @@ func place_level_chunck() -> LevelChunck:
 
 #### SIGNAL RESPONSES ####
 
-func on_new_chunck_reached():
+func on_new_chunck_reached(invert_player_pos: bool):
 	if !is_generating:
-		place_level_chunck()
+		place_level_chunck(invert_player_pos)

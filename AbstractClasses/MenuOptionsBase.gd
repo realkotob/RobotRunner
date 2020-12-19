@@ -6,9 +6,9 @@ var menu_node = Control
 
 signal aimed
 
-const NORMAL := Color(1, 1, 1, 1)
+const NORMAL := Color.white
 const DISABLED := Color(0.25, 0.25, 0.25, 1)
-const SELECTED := Color(1, 0, 0, 1)
+const SELECTED := Color.red
 
 var selected : bool = false setget set_selected
 

@@ -54,6 +54,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/Levels/InfiniteMode/ChunckRooms/BigChunckRoom.gd"
 }, {
+"base": "LevelChunck",
+"class": "BigRoomChunck",
+"language": "GDScript",
+"path": "res://Scenes/Levels/InfiniteMode/Chuncks/BigRoomChunck.gd"
+}, {
 "base": "BreakableObjectBase",
 "class": "BlockBase",
 "language": "GDScript",
@@ -414,6 +419,7 @@ _global_script_class_icons={
 "Autotiler": "",
 "BabyBot": "",
 "BigChunckRoom": "",
+"BigRoomChunck": "",
 "BlockBase": "",
 "BreakableObjectBase": "",
 "BreakablePlatfrom": "",

@@ -13,7 +13,7 @@
 [ext_resource path="res://Scenes/Menus/ScreenTitle/Sprites/RobotHead.png" type="Texture" id=11]
 [ext_resource path="res://Global/Lights/Light500.png" type="Texture" id=12]
 [ext_resource path="res://Scenes/Menus/MenuOptionBase.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scenes/Menus/ScreenTitle/Scripts/InfiniteMode.gd" type="Script" id=14]
+[ext_resource path="res://AbstractClasses/MenuOptionsBase.gd" type="Script" id=14]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 10 )
@@ -155,27 +155,29 @@ margin_right = 258.0
 margin_bottom = 188.0
 mouse_filter = 2
 
-[node name="New Game" parent="HBoxContainer/V_OptContainer" index="0" instance=ExtResource( 4 )]
+[node name="NewGame" parent="HBoxContainer/V_OptContainer" index="0" instance=ExtResource( 4 )]
 margin_right = 165.0
+script = ExtResource( 14 )
 
 [node name="Scores" parent="HBoxContainer/V_OptContainer" index="1" instance=ExtResource( 6 )]
 margin_top = 48.0
 margin_right = 165.0
 margin_bottom = 92.0
 disabled = true
+script = ExtResource( 14 )
 
-[node name="Infinite Mode" parent="HBoxContainer/V_OptContainer" index="2" instance=ExtResource( 13 )]
+[node name="InfiniteMode" parent="HBoxContainer/V_OptContainer" index="2" instance=ExtResource( 13 )]
 margin_top = 96.0
 margin_right = 165.0
 margin_bottom = 140.0
 text = "Infinite Mode"
-script = ExtResource( 14 )
 
 [node name="Quit" parent="HBoxContainer/V_OptContainer" index="3" instance=ExtResource( 2 )]
 margin_top = 144.0
 margin_right = 165.0
 margin_bottom = 188.0
 text = "Quit"
+script = ExtResource( 14 )
 
 [node name="OptionChoiceSound" parent="." index="4"]
 bus = "Sounds"

@@ -5,6 +5,7 @@ class_name MenuOptionsBase
 var menu_node = Control
 
 signal aimed
+signal option_chose
 
 const NORMAL := Color.white
 const DISABLED := Color(0.25, 0.25, 0.25, 1)
@@ -35,7 +36,7 @@ func on_selected_changed():
 
 
 func on_pressed():
-	pass
+	emit_signal("option_chose", self)
 
 
 func on_mouse_entered():

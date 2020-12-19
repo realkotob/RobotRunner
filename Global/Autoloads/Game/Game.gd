@@ -87,7 +87,7 @@ func goto_next_level():
 
 	yield(EVENTS, "level_ready")
 	var level = get_tree().get_current_scene()
-	LevelSaver.save_level_properties_as_json(level.get_name(), level)
+	LevelSaver.save_level_properties_as_json(level)
 
 
 func goto_level(level_index : int):
@@ -104,7 +104,7 @@ func goto_level(level_index : int):
 	var _err = get_tree().change_scene_to(level)
 	yield(EVENTS, "level_ready")
 	var current_level = get_tree().get_current_scene()
-	LevelSaver.save_level_properties_as_json(current_level.get_name(), current_level)
+	LevelSaver.save_level_properties_as_json(current_level)
 
 # Triggers the timer before the gameover is triggered
 # Called when a player die

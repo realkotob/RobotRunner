@@ -83,12 +83,12 @@ static func get_object_properties(object : Object, classname : String) -> Dictio
 
 
 # Convert the data to a JSON file
-static func save_level_properties_as_json(file_name : String, level : Level):
+static func save_level_properties_as_json(level : Level):
 	var dict_to_json : Dictionary = {}
 	serialize_level_properties(level, dict_to_json)
 	
 	var json_file = File.new()
-	json_file.open("res://Scenes/Levels/SavedLevel/json/" + file_name + ".json", File.WRITE)
+	json_file.open("res://Scenes/Levels/SavedLevel/json/" + level.name + ".json", File.WRITE)
 	json_file.store_line(to_json(dict_to_json))
 	json_file.close()
 

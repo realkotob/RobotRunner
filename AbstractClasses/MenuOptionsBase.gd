@@ -5,7 +5,7 @@ class_name MenuOptionsBase
 var menu_node = Control
 
 signal aimed
-signal option_chose
+signal option_chose(menu_option)
 
 const NORMAL := Color.white
 const DISABLED := Color(0.25, 0.25, 0.25, 1)

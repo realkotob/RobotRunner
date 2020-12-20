@@ -14,9 +14,6 @@ func get_class() -> String: return "ScreenTitleMenu"
 func _ready():
 	var _err = RESOURCE_LOADER.connect("thread_finished", self, "on_thread_finished")
 	
-	for child in $HBoxContainer/V_OptContainer.get_children():
-		_err = child.connect("option_chose", self, "on_menu_option_chose")
-	
 	load_default_buttons_state()
 	set_buttons_disabled(true)
 

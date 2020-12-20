@@ -294,6 +294,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://AbstractClasses/GameMenuBase.gd"
 }, {
+"base": "SubMenuBase",
+"class": "MenuOptions",
+"language": "GDScript",
+"path": "res://Scenes/Menus/OptionsMenu/OptionsMenu.gd"
+}, {
 "base": "Button",
 "class": "MenuOptionsBase",
 "language": "GDScript",
@@ -313,6 +318,11 @@ _global_script_classes=[ {
 "class": "PathPoint",
 "language": "GDScript",
 "path": "res://AbstractClasses/PathPointBase.gd"
+}, {
+"base": "MenuBase",
+"class": "PauseMenu",
+"language": "GDScript",
+"path": "res://Scenes/Menus/PauseMenu/PauseMenu.gd"
 }, {
 "base": "ActorBase",
 "class": "Player",
@@ -467,10 +477,12 @@ _global_script_class_icons={
 "Liquid": "",
 "MaterialCollactable": "",
 "MenuBase": "",
+"MenuOptions": "",
 "MenuOptionsBase": "",
 "MetaChunckGenData": "",
 "MoveBase": "",
 "PathPoint": "",
+"PauseMenu": "",
 "Player": "",
 "PlayerStateBase": "",
 "RayCastBase": "",

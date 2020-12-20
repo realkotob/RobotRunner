@@ -1,13 +1,13 @@
 extends MenuBase
 class_name ScreenTitleMenu
 
+onready var infinite_level_scene = preload("res://Scenes/Levels/InfiniteMode/InfiniteLevel.tscn")
+
+
 #### ACCESSORS ####
 
-func is_class(value: String):
-	return value == "" or .is_class(value)
-
-func get_class() -> String:
-	return ""
+func is_class(value: String): return value == "ScreenTitleMenu" or .is_class(value)
+func get_class() -> String: return "ScreenTitleMenu"
 
 #### BUILT-IN ####
 
@@ -34,3 +34,12 @@ func _ready():
 
 func on_thread_finished():
 	set_buttons_default_state()
+
+func on_menu_option_chose(option: MenuOptionsBase):
+	var option_name = option.name
+	
+	match(option_name):
+		"NewGame": var _err = GAME.goto_level(1)
+		"Scores": pass
+		"InfiniteMode": var _err = get_tree().change_scene_to(infinite_level_scene)
+		"Quit": get_tree().quit()

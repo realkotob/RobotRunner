@@ -258,6 +258,9 @@ func on_level_ready(level : Level):
 	if progression.level == 0:
 		update_current_level_index(level)
 	fade_in()
+	
+	if level is InfiniteLevel:
+		LevelSaver.save_level(level, progression.main_stored_objects)
 
 
 # When a player reach a checkpoint

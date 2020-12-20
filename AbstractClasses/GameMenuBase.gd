@@ -11,6 +11,8 @@ var count_not_clickable_options : int # Count how many options are not clickable
 
 var default_button_state : Array = []
 
+#### BUILT-IN ####
+
 # Check the options when the scenes is ready, to get sure at least one of them is clickable
 # Change the color of the option accordingly to their state
 func _ready():
@@ -25,30 +27,11 @@ func _ready():
 		
 		if button.has_method("setup"):
 			button.setup()
-
-
-# Main Navigation handling
-func _unhandled_input(event):
-	if event is InputEventKey:
-		# If the player hit confirm
-		if Input.is_action_just_pressed("ui_accept"):
-			buttons_array[button_index].on_pressed()
 		
-		# Play the sound and set the previous option to be the opti
-		if Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("ui_down"):
-			prev_button_index = button_index
-			
-			# If the player hit up -> Navigate up
-			if Input.is_action_just_pressed("ui_up"):
-				increment_button_index(-1)
-				
-			# If the player hit down -> Navigate down
-			elif Input.is_action_just_pressed("ui_down"):
-				increment_button_index(1)
-			
-			# Triggers the reponse of the button
-			on_button_aimed(buttons_array[button_index], false)
+		var _err = button.connect("option_chose", self, "on_menu_option_chose")
 
+
+#### LOGIC ####
 
 # Stock the default state of every button
 func load_default_buttons_state():
@@ -73,14 +56,17 @@ func are_all_options_disabled() -> bool:
 			return false
 	return true
 
+
 # Navigate the menu up or down
-func increment_button_index(value : int):
+func increment_button_index(value : int = 1):
 	if are_all_options_disabled():
 		return
 	
 	button_index = wrapi(button_index + value, 0, len(buttons_array))
 	if buttons_array[button_index].is_disabled():
 		increment_button_index(value)
+	
+	update_menu_option()
 
 
 # Change the color of menu option according if it is selected by a player or not
@@ -88,6 +74,50 @@ func update_menu_option():
 	buttons_array[prev_button_index].set_selected(false)
 	buttons_array[button_index].set_selected(true)
 
+
+func navigate_sub_menu(menu: Control):
+	get_parent().add_child(menu)
+	queue_free()
+
+
+#### VIRTUAL ####
+
+func cancel():
+	pass
+
+
+#### INPUT ####
+
+# Main Navigation handling
+func _unhandled_input(event):
+	if event.is_action_pressed("ui_cancel"):
+		cancel()
+	
+	if buttons_array.empty():
+		return
+	
+	if event is InputEventKey:
+		# If the player hit confirm
+		if Input.is_action_just_pressed("ui_accept"):
+			buttons_array[button_index].on_pressed()
+		
+		# Play the sound and set the previous option to be the opti
+		if Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("ui_down"):
+			prev_button_index = button_index
+			
+			# If the player hit up -> Navigate up
+			if Input.is_action_just_pressed("ui_up"):
+				increment_button_index(-1)
+				
+			# If the player hit down -> Navigate down
+			elif Input.is_action_just_pressed("ui_down"):
+				increment_button_index(1)
+			
+			# Triggers the reponse of the button
+			on_button_aimed(buttons_array[button_index], false)
+
+
+#### SIGNAL RESPONSES ####
 
 # When a button is aimed (with a mouse for exemple)
 func on_button_aimed(button : Button, signal_call: bool):
@@ -97,3 +127,6 @@ func on_button_aimed(button : Button, signal_call: bool):
 	update_menu_option()
 	choice_sound_node.play()
 
+
+func on_menu_option_chose(_option):
+	pass

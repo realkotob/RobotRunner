@@ -1,13 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Menus/MenuBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Global/Fonts/BoldCapsPixel64.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Scenes/Menus/PauseMenu/PauseMenu.gd" type="Script" id=3]
-[ext_resource path="res://Scenes/Menus/PauseMenu/Resume.gd" type="Script" id=4]
-[ext_resource path="res://Scenes/Menus/PauseMenu/Retry.gd" type="Script" id=5]
-[ext_resource path="res://Scenes/Menus/PauseMenu/GotoMenu.gd" type="Script" id=6]
-[ext_resource path="res://Scenes/Menus/PauseMenu/Leave.gd" type="Script" id=7]
-[ext_resource path="res://Scenes/Menus/ScreenTitle/Scripts/Options.gd" type="Script" id=8]
+[ext_resource path="res://AbstractClasses/MenuOptionsBase.gd" type="Script" id=4]
 
 [node name="PauseMenu" instance=ExtResource( 1 )]
 grow_horizontal = 2
@@ -72,7 +68,7 @@ margin_right = 116.0
 margin_bottom = 118.0
 custom_fonts/font = ExtResource( 2 )
 text = "Retry"
-script = ExtResource( 5 )
+script = ExtResource( 4 )
 
 [node name="Options" type="Button" parent="HBoxContainer/V_OptContainer" index="2"]
 margin_top = 122.0
@@ -80,7 +76,7 @@ margin_right = 116.0
 margin_bottom = 179.0
 custom_fonts/font = ExtResource( 2 )
 text = "Options"
-script = ExtResource( 8 )
+script = ExtResource( 4 )
 
 [node name="Menu" type="Button" parent="HBoxContainer/V_OptContainer" index="3"]
 margin_top = 183.0
@@ -88,7 +84,7 @@ margin_right = 116.0
 margin_bottom = 240.0
 custom_fonts/font = ExtResource( 2 )
 text = "Menu"
-script = ExtResource( 6 )
+script = ExtResource( 4 )
 
 [node name="Leave" type="Button" parent="HBoxContainer/V_OptContainer" index="4"]
 margin_top = 244.0
@@ -96,4 +92,4 @@ margin_right = 116.0
 margin_bottom = 301.0
 custom_fonts/font = ExtResource( 2 )
 text = "Quit"
-script = ExtResource( 7 )
+script = ExtResource( 4 )

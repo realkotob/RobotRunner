@@ -85,30 +85,26 @@ func create_automatas() -> void:
 		call_deferred("add_child", automata)
 
 
+# Generate the rooms that will be added to the chunck. 
+# By default generate only small rooms. 
+# Overide it to generate different kind of rooms
 func generate_rooms() -> Node:
-	var rng = 1 if first_chunck else 0 #randi() % 4
 	var room : Node = null
-	if rng == 0:
-		room = BigChunckRoom.new()
-		room.name = "BigRoom"
+	var nb_room = randi() % max_nb_room
+	for i in range(nb_room):
+		var next_room_half = SmallChunckRoom.ROOM_HALF.TOP_HALF
+		
+		if i == 0:
+			room = SmallChunckRoom.new()
+		else:
+			var last_room_half = room.get_room_half()
+			if last_room_half == next_room_half:
+				next_room_half = SmallChunckRoom.ROOM_HALF.BOTTOM_HALF
+		
+		room = SmallChunckRoom.new(next_room_half)
+		room.name = "SmallRoom"
 		room.chunck = self
 		$Rooms.call_deferred("add_child", room)
-	else:
-		var nb_room = randi() % max_nb_room
-		for i in range(nb_room):
-			var next_room_half = SmallChunckRoom.ROOM_HALF.TOP_HALF
-			
-			if i == 0:
-				room = SmallChunckRoom.new()
-			else:
-				var last_room_half = room.get_room_half()
-				if last_room_half == next_room_half:
-					next_room_half = SmallChunckRoom.ROOM_HALF.BOTTOM_HALF
-			
-			room = SmallChunckRoom.new(next_room_half)
-			room.name = "SmallRoom"
-			room.chunck = self
-			$Rooms.call_deferred("add_child", room)
 	return room
 
 

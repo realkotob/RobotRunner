@@ -3,13 +3,16 @@ class_name ChunckGenerator
 
 onready var chunck_container_node : Node2D = owner.find_node("ChunckContainer")
 
-var normal_chunck_scene = preload("res://Scenes/InfiniteMode/Chuncks/Chunck.tscn")
+var normal_chunck_scene = preload("res://Scenes/Levels/InfiniteMode/Chuncks/Chunck.tscn")
 var special_chunck_scene_array = [
-	preload("res://Scenes/InfiniteMode/Chuncks/CrossChunck.tscn")
+	preload("res://Scenes/Levels/InfiniteMode/Chuncks/CrossChunck.tscn"),
+	preload("res://Scenes/Levels/InfiniteMode/Chuncks/BigRoomChunck.tscn")
 ]
 
 var nb_chunck : int = 0
 var is_generating : bool = false
+
+var last_chunck_scene : PackedScene = null
 
 export var debug : bool = false
 
@@ -54,20 +57,22 @@ func generate_chunck_binary() -> ChunckBin:
 
 
 # Generate a chunck
-# Have a chance on 4 to create a Cross chunck
+# Have a chance on 4 to create a special chunck
 func generate_chunck() -> LevelChunck:
-	var last_chunck = get_last_chunck()
 	
 	var rng = randi() % 4
-	if last_chunck is SpecialChunck or last_chunck == null:
+	
+	if last_chunck_scene in special_chunck_scene_array or last_chunck_scene == null:
 		rng = randi() % 3
 	
 	var chunck : LevelChunck
-	var rdm_id
 	
 	if rng == 3:
-		rdm_id = randi() % special_chunck_scene_array.size()
-		chunck = special_chunck_scene_array[rdm_id].instance()
+		# Pick a random special chunck, but different from the last one
+		var possible_chunck = special_chunck_scene_array.duplicate()
+		possible_chunck.erase(last_chunck_scene)
+		var rdm_id = randi() % possible_chunck.size()
+		chunck = possible_chunck[rdm_id].instance()
 	else:
 		chunck = normal_chunck_scene.instance()
 	

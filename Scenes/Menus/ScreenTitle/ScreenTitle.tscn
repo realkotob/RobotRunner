@@ -1,17 +1,15 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scenes/Menus/MenuBase.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/Menus/ScreenTitle/Leave.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Menus/ScreenTitle/Sprites/TitleScreenXL.png" type="Texture" id=3]
-[ext_resource path="res://Scenes/Menus/ScreenTitle/New Game.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Menus/ScreenTitle/Scripts/ScreenTitleMenu.gd" type="Script" id=5]
-[ext_resource path="res://Scenes/Menus/ScreenTitle/Scores.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Global/Shaders/Glitch/Glitch.shader" type="Shader" id=7]
 [ext_resource path="res://Global/Shaders/GlitchEffect.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Fog/CosmeticFog/FogTexture.tres" type="Texture" id=9]
 [ext_resource path="res://Scenes/Fog/CosmeticFog/Magenta_BG_fog.shader" type="Shader" id=10]
 [ext_resource path="res://Scenes/Menus/ScreenTitle/Sprites/RobotHead.png" type="Texture" id=11]
 [ext_resource path="res://Global/Lights/Light500.png" type="Texture" id=12]
+[ext_resource path="res://Scenes/Menus/MenuOptionBase.tscn" type="PackedScene" id=13]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 10 )
@@ -148,23 +146,24 @@ margin_bottom = 200.0
 mouse_filter = 2
 
 [node name="V_OptContainer" parent="HBoxContainer" index="0"]
-margin_left = 111.0
-margin_right = 240.0
+margin_left = 93.0
+margin_right = 258.0
 margin_bottom = 153.0
 mouse_filter = 2
 
-[node name="New Game" parent="HBoxContainer/V_OptContainer" index="0" instance=ExtResource( 4 )]
-margin_right = 129.0
+[node name="NewGame" parent="HBoxContainer/V_OptContainer" index="0" instance=ExtResource( 13 )]
+margin_right = 165.0
+text = "New Game"
 
-[node name="Scores" parent="HBoxContainer/V_OptContainer" index="1" instance=ExtResource( 6 )]
+[node name="InfiniteMode" parent="HBoxContainer/V_OptContainer" index="1" instance=ExtResource( 13 )]
 margin_top = 48.0
-margin_right = 129.0
+margin_right = 165.0
 margin_bottom = 92.0
-disabled = true
+text = "Infinite Mode"
 
-[node name="Quit" parent="HBoxContainer/V_OptContainer" index="2" instance=ExtResource( 2 )]
+[node name="Quit" parent="HBoxContainer/V_OptContainer" index="2" instance=ExtResource( 13 )]
 margin_top = 96.0
-margin_right = 129.0
+margin_right = 165.0
 margin_bottom = 140.0
 text = "Quit"
 

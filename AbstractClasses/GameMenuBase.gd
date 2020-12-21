@@ -63,7 +63,9 @@ func increment_button_index(value : int = 1):
 	if are_all_options_disabled():
 		return
 	
-	prev_button_index = button_index
+	if !buttons_array[button_index].is_disabled():
+		prev_button_index = button_index
+	
 	button_index = wrapi(button_index + value, 0, buttons_array.size())
 	if buttons_array[button_index].is_disabled():
 		increment_button_index(value)
@@ -125,6 +127,7 @@ func _on_menu_option_focus_changed(button : Button, focus: bool):
 		if button.get_index() != button_index:
 			prev_button_index = button_index
 			button_index = button.get_index()
+			update_menu_option()
 
 
 func _on_menu_option_chose(_option):

@@ -1,5 +1,4 @@
 extends Button
-
 class_name MenuOptionsBase
 
 var menu_node = Control

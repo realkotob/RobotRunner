@@ -39,11 +39,10 @@ func on_seed_field_text_changed(new_text: String):
 	EVENTS.emit_signal("seed_change_query" ,int(new_text))
 
 
-func on_menu_option_chose(option: MenuOptionsBase):
+func _on_menu_option_chose(option: MenuOptionsBase):
 	var option_name = option.name
 	
 	match(option_name):
 		"NewGame": var _err = GAME.goto_level(1)
-		"Scores": pass
 		"InfiniteMode": var _err = get_tree().change_scene_to(infinite_level_scene)
 		"Quit": get_tree().quit()

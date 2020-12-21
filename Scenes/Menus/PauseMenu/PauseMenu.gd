@@ -24,7 +24,7 @@ func _input(_event: InputEvent) -> void:
 
 #### SIGNAL RESPONSES ####
 
-func on_menu_option_chose(option: MenuOptionsBase):
+func _on_menu_option_chose(option: MenuOptionsBase):
 	match(option.name):
 		"Resume": 
 			get_tree().set_pause(false)

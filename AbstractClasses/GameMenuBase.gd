@@ -6,7 +6,7 @@ onready var choice_sound_node = get_node("OptionChoiceSound")
 onready var buttons_array = opt_container.get_children()
 
 var button_index : int = 0 # Get the index where the player aim
-var prev_button_index : int = 0 # Get the index where the player aimed before changing
+var prev_button_index : int = -1 # Get the index where the player aimed before changing
 var count_not_clickable_options : int # Count how many options are not clickable
 
 var default_button_state : Array = []
@@ -28,7 +28,8 @@ func _ready():
 		if button.has_method("setup"):
 			button.setup()
 		
-		var _err = button.connect("option_chose", self, "on_menu_option_chose")
+		var _err = button.connect("option_chose", self, "_on_menu_option_chose")
+		_err = button.connect("focus_changed", self, "_on_menu_option_focus_changed")
 
 
 #### LOGIC ####
@@ -62,7 +63,8 @@ func increment_button_index(value : int = 1):
 	if are_all_options_disabled():
 		return
 	
-	button_index = wrapi(button_index + value, 0, len(buttons_array))
+	prev_button_index = button_index
+	button_index = wrapi(button_index + value, 0, buttons_array.size())
 	if buttons_array[button_index].is_disabled():
 		increment_button_index(value)
 	
@@ -71,8 +73,9 @@ func increment_button_index(value : int = 1):
 
 # Change the color of menu option according if it is selected by a player or not
 func update_menu_option():
-	buttons_array[prev_button_index].set_selected(false)
-	buttons_array[button_index].set_selected(true)
+	buttons_array[button_index].set_focused(true)
+	if prev_button_index != -1:
+		buttons_array[prev_button_index].set_focused(false)
 
 
 func navigate_sub_menu(menu: Control):
@@ -103,8 +106,6 @@ func _unhandled_input(event):
 		
 		# Play the sound and set the previous option to be the opti
 		if Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("ui_down"):
-			prev_button_index = button_index
-			
 			# If the player hit up -> Navigate up
 			if Input.is_action_just_pressed("ui_up"):
 				increment_button_index(-1)
@@ -112,21 +113,19 @@ func _unhandled_input(event):
 			# If the player hit down -> Navigate down
 			elif Input.is_action_just_pressed("ui_down"):
 				increment_button_index(1)
-			
-			# Triggers the reponse of the button
-			on_button_aimed(buttons_array[button_index], false)
 
 
 #### SIGNAL RESPONSES ####
 
 # When a button is aimed (with a mouse for exemple)
-func on_button_aimed(button : Button, signal_call: bool):
-	if signal_call:
-		prev_button_index = button_index
-		button_index = button.get_index()
-	update_menu_option()
-	choice_sound_node.play()
+func _on_menu_option_focus_changed(button : Button, focus: bool):
+	if focus:
+		choice_sound_node.play()
+		
+		if button.get_index() != button_index:
+			prev_button_index = button_index
+			button_index = button.get_index()
 
 
-func on_menu_option_chose(_option):
+func _on_menu_option_chose(_option):
 	pass

@@ -1,7 +1,9 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scenes/Menus/MenuBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Global/Fonts/BoldCapsPixel48.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Scenes/Menus/ScreenTitle/Sprites/TitleScreenXL.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/GUI/TextField.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/Menus/ScreenTitle/Scripts/ScreenTitleMenu.gd" type="Script" id=5]
 [ext_resource path="res://Global/Shaders/Glitch/Glitch.shader" type="Shader" id=7]
 [ext_resource path="res://Global/Shaders/GlitchEffect.tscn" type="PackedScene" id=8]
@@ -160,6 +162,19 @@ margin_top = 48.0
 margin_right = 165.0
 margin_bottom = 92.0
 text = "Infinite Mode"
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer/V_OptContainer/InfiniteMode" index="0"]
+margin_left = 205.0
+margin_top = 7.0
+margin_right = 395.0
+margin_bottom = 55.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/selection_color = Color( 1, 1, 1, 1 )
+text = "13254635"
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Quit" parent="HBoxContainer/V_OptContainer" index="2" instance=ExtResource( 13 )]
 margin_top = 96.0

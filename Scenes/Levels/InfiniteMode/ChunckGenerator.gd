@@ -12,12 +12,10 @@ var special_chunck_scene_array = [
 var nb_chunck : int = 0
 var is_generating : bool = false
 
-var current_seed : int = 0 setget set_current_seed
 var last_chunck_scene : PackedScene = null
 
 export var debug : bool = false
 
-signal seed_changed
 signal first_chunck_ready
 
 #### ACCESSORS ####
@@ -25,33 +23,19 @@ signal first_chunck_ready
 func is_class(value: String): return value == "ChunckGenerator" or .is_class(value)
 func get_class() -> String: return "ChunckGenerator"
 
-func set_current_seed(value: int):
-	current_seed = value
-	seed(current_seed)
-	emit_signal("seed_changed")
-
 
 #### BUILT-IN ####
 
 func _ready() -> void:
-	if current_seed == 0:
-		set_current_seed(generate_new_seed())
+	if GAME.get_current_seed() == 0:
+		randomize()
+		EVENTS.emit_signal("seed_change_query", randi())
 	
 	place_level_chunck()
 #	stress_test(10)
 
 
 #### LOGIC ####
-
-
-func generate_new_seed():
-	randomize()
-	var random_seed = randi()
-	
-	if debug:
-		print("New seed : " + String(random_seed))
-	
-	return random_seed
 
 
 func stress_test(nb_test : int):

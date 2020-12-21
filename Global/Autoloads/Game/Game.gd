@@ -20,6 +20,18 @@ var player2 = preload("res://Scenes/Actor/Players/RobotHammer/RobotHammer.tscn")
 var level_array : Array
 var last_level_name : String
 
+var current_seed : int = 0 setget _set_current_seed, get_current_seed
+
+
+#### ACCESSORS ####
+
+func _set_current_seed(value: int): 
+	current_seed = value
+	seed(current_seed)
+
+func get_current_seed() -> int: return current_seed
+
+
 #### BUILT-IN ####
 
 func _ready():
@@ -27,6 +39,7 @@ func _ready():
 	_err = transition_timer_node.connect("timeout",self, "on_transition_timer_timeout")
 	_err = EVENTS.connect("level_ready", self, "on_level_ready")
 	_err = EVENTS.connect("level_finished", self, "on_level_finished")
+	_err = EVENTS.connect("seed_change_query", self, "on_seed_change_query")
 
 	LevelSaver.create_savedlevel_dirs(["json","tscn"])
 	
@@ -273,3 +286,7 @@ func on_checkpoint_reached(level: Level, checkpoint_id: int):
 	progression.set_main_xion(SCORE.xion)
 	progression.set_main_materials(SCORE.materials)
 	LevelSaver.save_level(level, progression.main_stored_objects)
+
+
+func on_seed_change_query(new_seed: int):
+	_set_current_seed(new_seed)

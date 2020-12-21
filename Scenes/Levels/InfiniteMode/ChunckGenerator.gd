@@ -22,7 +22,7 @@ signal first_chunck_ready
 
 #### ACCESSORS ####
 
-func is_class(value: String): return value == "ChunckGenerator" && .is_class(value)
+func is_class(value: String): return value == "ChunckGenerator" or .is_class(value)
 func get_class() -> String: return "ChunckGenerator"
 
 func set_current_seed(value: int):
@@ -34,9 +34,6 @@ func set_current_seed(value: int):
 #### BUILT-IN ####
 
 func _ready() -> void:
-	if owner.is_loaded_from_save:
-		yield(self, "seed_changed")
-	
 	if current_seed == 0:
 		set_current_seed(generate_new_seed())
 	

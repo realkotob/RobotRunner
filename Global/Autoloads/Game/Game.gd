@@ -64,6 +64,7 @@ func goto_last_level():
 		level.is_loaded_from_save = loaded_from_save
 		LevelSaver.build_level_from_loaded_properties(level)
 
+
 # Change scene to the next level scene
 # If the last level was not in the list, set the progression to -1
 # Which means the last level will be launched again

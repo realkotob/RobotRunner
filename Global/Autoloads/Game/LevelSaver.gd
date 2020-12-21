@@ -9,7 +9,7 @@ const SAVEDLEVEL_JSON_DIR : String = "/json"
 const SAVEDLEVEL_TSCN_DIR : String = "/tscn"
 
 const objects_datatype_storage = {
-	"Camera": ["zoom", "instruction_stack"],
+	"GameCamera": ["zoom", "instruction_stack"],
 	"ChunckGenerator": ["current_seed"]
 }
 
@@ -132,11 +132,12 @@ static func load_level_properties_from_json(level_name : String) -> Dictionary:
 			if keys == "name":
 				continue
 			var property_value
-			match get_string_value_type(loaded_objects[object_dict][keys]):
-				"Vector2" : property_value = get_vector_from_string(loaded_objects[object_dict][keys])
-				"int"  : property_value = int(loaded_objects[object_dict][keys])
-				"float" : property_value = float(loaded_objects[object_dict][keys])
-				"bool" : property_value = get_bool_from_string(loaded_objects[object_dict][keys])
+			var string_property_value = String(loaded_objects[object_dict][keys])
+			match get_string_value_type(string_property_value):
+				"Vector2" : property_value = get_vector_from_string(string_property_value)
+				"int"  : property_value = int(string_property_value)
+				"float" : property_value = float(string_property_value)
+				"bool" : property_value = get_bool_from_string(string_property_value)
 			property_dict[keys] = property_value
 		loaded_level_properties[object_dict] = property_dict
 	

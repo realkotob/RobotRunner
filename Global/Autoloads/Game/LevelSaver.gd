@@ -4,6 +4,10 @@ class_name LevelSaver
 
 const debug : bool = false
 
+const SAVEDLEVEL_DIR : String = "res://Scenes/Levels/SavedLevel"
+const SAVEDLEVEL_JSON_DIR : String = "/json"
+const SAVEDLEVEL_TSCN_DIR : String = "/tscn"
+
 const objects_datatype_storage = {
 	"Camera": ["zoom", "instruction_stack"]#,
 #	"ParallaxBackground": ["scroll_offset", "scroll_base_scale", "scale"],
@@ -20,6 +24,22 @@ const objects_datatype_storage = {
 
 #### LOGIC ####
 
+static func create_savedlevel_dirs(directories_to_create : Array):
+	var dir = Directory.new()
+	
+	for directory_to_check in directories_to_create:
+		var directoryExist = dir.dir_exists(SAVEDLEVEL_DIR + "/" + directory_to_check)
+		
+		if !directoryExist:
+			if debug:
+				print("DIRECTORY DOES NOT EXIST. Creating one in " + SAVEDLEVEL_DIR + "...")
+			dir.open(SAVEDLEVEL_DIR)
+			dir.make_dir(directory_to_check)
+			
+			var created_directory_path = SAVEDLEVEL_DIR + "/" + directory_to_check
+			if debug:
+				print("Done ! Directory can in be found in : " + created_directory_path)
+		
 # Save the current state of the level: Call both the .tscn save and the serialized save in the given dict
 static func save_level(level: Node, dict_to_fill: Dictionary):
 	dict_to_fill.clear()
@@ -34,7 +54,7 @@ static func save_level_as_tscn(level: Node2D):
 	var saved_level = PackedScene.new()
 	var level_name = level.get_name()
 	saved_level.pack(level)
-	var _err = ResourceSaver.save("res://Scenes/Levels/SavedLevel/tscn/" + level_name + ".tscn", saved_level)
+	var _err = ResourceSaver.save(SAVEDLEVEL_DIR + "/tscn/" + level_name + ".tscn", saved_level)
 
 
 # Find recursivly every wanted nodes, and extract their wanted properties
@@ -88,7 +108,7 @@ static func save_level_properties_as_json(level : Level):
 	serialize_level_properties(level, dict_to_json)
 	
 	var json_file = File.new()
-	json_file.open("res://Scenes/Levels/SavedLevel/json/" + level.name + ".json", File.WRITE)
+	json_file.open(SAVEDLEVEL_DIR + "/json/" + level.name + ".json", File.WRITE)
 	json_file.store_line(to_json(dict_to_json))
 	json_file.close()
 
@@ -105,7 +125,7 @@ static func print_level_data(dict: Dictionary):
 
 static func load_level_properties_from_json(level_name : String) -> Dictionary:
 	var loaded_level_properties : Dictionary = {}
-	var loaded_objects : Dictionary = deserialize_level_properties("res://Scenes/Levels/SavedLevel/json/"+level_name+".json")
+	var loaded_objects : Dictionary = deserialize_level_properties(SAVEDLEVEL_DIR + "/json/"+level_name+".json")
 	for object_dict in loaded_objects.keys():
 		var property_dict : Dictionary = {}
 		for keys in loaded_objects[object_dict].keys():
@@ -158,8 +178,8 @@ static func get_string_value_type(value : String) -> String:
 static func delete_all_level_temp_saves(display_warning : bool = false):
 	var dir = Directory.new()
 	
-	var tscn_path : String = GAME.SAVE_DIR + "/tscn/"
-	var json_path : String = GAME.SAVE_DIR + "/json/"
+	var tscn_path : String = SAVEDLEVEL_DIR + "/tscn/"
+	var json_path : String = SAVEDLEVEL_DIR + "/json/"
 	var folders_array : Array = [tscn_path, json_path]
 	
 	for folder in folders_array:
@@ -188,8 +208,8 @@ static func delete_all_level_temp_saves(display_warning : bool = false):
 # Delete the .tscn and .json temporary saves
 static func delete_level_temp_saves(level_name: String):
 	var dir = Directory.new()
-	var tscn_path : String = GAME.SAVE_DIR + "/tscn/" + level_name + ".tscn"
-	var json_path : String = GAME.SAVE_DIR + "/json/" + level_name + ".json"
+	var tscn_path : String = SAVEDLEVEL_DIR + "/tscn/" + level_name + ".tscn"
+	var json_path : String = SAVEDLEVEL_DIR + "/json/" + level_name + ".json"
 
 	if dir.file_exists(tscn_path):
 		dir.remove(tscn_path)

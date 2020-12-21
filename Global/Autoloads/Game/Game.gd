@@ -3,8 +3,6 @@ extends Node2D
 onready var gameover_timer_node = $GameoverTimer
 onready var transition_timer_node = $TransitionTimer
 
-const SAVE_DIR : String = "res://Scenes/Levels/SavedLevel"
-
 export var debug : bool = false
 export var progression : Resource
 
@@ -30,7 +28,8 @@ func _ready():
 	_err = EVENTS.connect("level_ready", self, "on_level_ready")
 	_err = EVENTS.connect("level_finished", self, "on_level_finished")
 
-
+	LevelSaver.create_savedlevel_dirs(["json","tscn"])
+	
 #### LOGIC ####
 
 func new_chapter():
@@ -46,7 +45,7 @@ func goto_last_level():
 
 	var loaded_from_save : bool = false
 	var level_scene : PackedScene
-	var level_to_load_path : String = find_saved_level_path(SAVE_DIR + "/tscn/", last_level_name)
+	var level_to_load_path : String = find_saved_level_path(LevelSaver.SAVEDLEVEL_DIR + LevelSaver.SAVEDLEVEL_TSCN_DIR, last_level_name)
 
 	# If no save of the current level exists, reload the same scene
 	if level_to_load_path != "":

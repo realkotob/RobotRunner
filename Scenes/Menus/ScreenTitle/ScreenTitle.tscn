@@ -164,19 +164,18 @@ margin_bottom = 92.0
 text = "Infinite Mode"
 script = ExtResource( 2 )
 
-[node name="SeedField" type="SpinBox" parent="HBoxContainer/V_OptContainer/InfiniteMode" index="0"]
-visible = false
-margin_left = 205.0
-margin_top = 7.0
-margin_right = 279.0
-margin_bottom = 31.0
-max_value = 0.0
-rounded = true
-allow_greater = true
+[node name="SeedField" type="LineEdit" parent="HBoxContainer/V_OptContainer/InfiniteMode" index="0"]
+margin_left = 205.5
+margin_top = 16.5
+margin_right = 321.5
+margin_bottom = 40.5
+text = "RANDOM"
+align = 1
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+default_text = "RANDOM"
 
 [node name="Quit" parent="HBoxContainer/V_OptContainer" index="2" instance=ExtResource( 13 )]
 margin_top = 96.0

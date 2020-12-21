@@ -369,7 +369,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/Menus/ScreenTitle/Scripts/ScreenTitleMenu.gd"
 }, {
-"base": "SpinBox",
+"base": "LineEdit",
 "class": "SeedField",
 "language": "GDScript",
 "path": "res://Scenes/GUI/TextField.gd"

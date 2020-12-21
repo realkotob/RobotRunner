@@ -59,8 +59,9 @@ func goto_last_level():
 	var __ = get_tree().change_scene_to(level_scene)
 
 	if loaded_from_save:
-		yield(EVENTS, "level_ready")
-		var level = get_tree().get_current_scene()
+		yield(EVENTS, "level_entered_tree")
+		var level : Level = get_tree().get_current_scene()
+		level.is_loaded_from_save = loaded_from_save
 		LevelSaver.build_level_from_loaded_properties(level)
 
 # Change scene to the next level scene
@@ -260,6 +261,7 @@ func on_level_ready(level : Level):
 	
 	if level is InfiniteLevel:
 		LevelSaver.save_level(level, progression.main_stored_objects)
+		LevelSaver.save_level_properties_as_json(level)
 
 
 # When a player reach a checkpoint

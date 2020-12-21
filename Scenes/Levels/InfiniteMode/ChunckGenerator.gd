@@ -12,23 +12,50 @@ var special_chunck_scene_array = [
 var nb_chunck : int = 0
 var is_generating : bool = false
 
+var current_seed : int = 0 setget set_current_seed
 var last_chunck_scene : PackedScene = null
 
 export var debug : bool = false
 
+signal seed_changed
+signal first_chunck_ready
+
 #### ACCESSORS ####
 
+func is_class(value: String): return value == "ChunckGenerator" && .is_class(value)
+func get_class() -> String: return "ChunckGenerator"
+
+func set_current_seed(value: int):
+	current_seed = value
+	seed(current_seed)
+	emit_signal("seed_changed")
 
 
 #### BUILT-IN ####
 
-func _ready():
-	randomize()
+func _ready() -> void:
+	if owner.is_loaded_from_save:
+		yield(self, "seed_changed")
+	
+	if current_seed == 0:
+		set_current_seed(generate_new_seed())
+	
 	place_level_chunck()
 #	stress_test(10)
 
 
 #### LOGIC ####
+
+
+func generate_new_seed():
+	randomize()
+	var random_seed = randi()
+	
+	if debug:
+		print("New seed : " + String(random_seed))
+	
+	return random_seed
+
 
 func stress_test(nb_test : int):
 	print("## CHUNCK GENERATION STRESS TEST STARTED ##")
@@ -59,22 +86,23 @@ func generate_chunck_binary() -> ChunckBin:
 # Generate a chunck
 # Have a chance on 4 to create a special chunck
 func generate_chunck() -> LevelChunck:
-	
-	var rng = randi() % 4
+	var rng = randi() % 3
+	var chose_chunck_scene : PackedScene = null
 	
 	if last_chunck_scene in special_chunck_scene_array or last_chunck_scene == null:
-		rng = randi() % 3
+		rng = randi() % 2
 	
-	var chunck : LevelChunck
-	
-	if rng == 3:
+	if rng == 2:
 		# Pick a random special chunck, but different from the last one
 		var possible_chunck = special_chunck_scene_array.duplicate()
 		possible_chunck.erase(last_chunck_scene)
 		var rdm_id = randi() % possible_chunck.size()
-		chunck = possible_chunck[rdm_id].instance()
+		chose_chunck_scene = possible_chunck[rdm_id]
 	else:
-		chunck = normal_chunck_scene.instance()
+		chose_chunck_scene = normal_chunck_scene
+	
+	var chunck = chose_chunck_scene.instance()
+	last_chunck_scene = chose_chunck_scene
 	
 	return chunck
 
@@ -141,6 +169,10 @@ func place_level_chunck(invert_player_pos : bool = false) -> LevelChunck:
 	var _err = new_chunck.connect("new_chunck_reached", self, "on_new_chunck_reached")
 	
 	is_generating = false
+	
+	if first_chunck:
+		emit_signal("first_chunck_ready")
+	
 	return new_chunck
 
 

@@ -9,9 +9,8 @@ const SAVEDLEVEL_JSON_DIR : String = "/json"
 const SAVEDLEVEL_TSCN_DIR : String = "/tscn"
 
 const objects_datatype_storage = {
-	"Camera": ["zoom", "instruction_stack"]#,
-#	"ParallaxBackground": ["scroll_offset", "scroll_base_scale", "scale"],
-#	"ParallaxLayer": ["position", "scale"]
+	"Camera": ["zoom", "instruction_stack"],
+	"ChunckGenerator": ["current_seed"]
 }
 
 #### ACCESSORS ####
@@ -70,6 +69,7 @@ static func serialize_level_properties(current_node : Node, dict_to_fill : Dicti
 		
 		if child.get_child_count() != 0:
 			serialize_level_properties(child, dict_to_fill)
+
 
 static func deserialize_level_properties(file_path : String):
 	var level_properties  : String = ""

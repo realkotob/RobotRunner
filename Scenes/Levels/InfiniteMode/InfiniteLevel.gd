@@ -17,7 +17,11 @@ func get_class() -> String: return "InfiniteLevel"
 
 #### LOGIC ####
 
-
+func instanciate_players() -> void:
+	if is_loaded_from_save:
+		yield($ChunckGenerator, "first_chunck_ready")
+	
+	.instanciate_players()
 
 #### INPUTS ####
 

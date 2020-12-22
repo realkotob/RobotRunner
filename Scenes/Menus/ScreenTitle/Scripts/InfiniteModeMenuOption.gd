@@ -35,7 +35,7 @@ func _on_seed_field_submit(seed_value: int):
 	emit_signal("option_chose", self)
 
 func _on_seed_field_focus_entered():
-	set_self_modulate(SELECTED)
+	pass
 
 func _on_seed_field_focus_exited():
-	set_self_modulate(NORMAL)
+	pass

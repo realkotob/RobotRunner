@@ -203,6 +203,22 @@ func discard_collectable_progression():
 	pass
 
 
+func fade_in():
+	$Tween.interpolate_property($CanvasLayer/ColorRect, "modulate",
+		Color.black, Color.transparent, transition_time,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()
+
+
+func fade_out():
+	$Tween.interpolate_property($CanvasLayer/ColorRect, "modulate",
+		Color.transparent, Color.black, transition_time,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()
+
+	MUSIC.fade_out()
+
+
 # Check if the current level index is the right one when a new level is ready
 # Usefull when testing a level standalone to keep track of the progression
 func update_current_level_index(level : Level):
@@ -225,21 +241,6 @@ func toggle_camera_debug_mode():
 	for player in get_tree().get_nodes_in_group("Players"):
 		player.set_active(was_camera_debug_mode)
 
-
-func fade_in():
-	$Tween.interpolate_property($CanvasLayer/ColorRect, "modulate",
-		Color.black, Color.transparent, transition_time,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
-
-
-func fade_out():
-	$Tween.interpolate_property($CanvasLayer/ColorRect, "modulate",
-		Color.transparent, Color.black, transition_time,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
-
-	MUSIC.fade_out()
 
 #### SIGNAL RESPONSES ####
 

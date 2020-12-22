@@ -22,7 +22,7 @@ __meta__ = {
 }
 
 [node name="Foreground" type="CanvasLayer" parent="."]
-layer = 2
+layer = 3
 
 [node name="Fog" type="Node2D" parent="Foreground"]
 __meta__ = {
@@ -41,7 +41,7 @@ __meta__ = {
 }
 
 [node name="GUI" type="CanvasLayer" parent="."]
-layer = 2
+layer = 3
 script = ExtResource( 3 )
 
 [node name="Popups" type="Control" parent="GUI"]

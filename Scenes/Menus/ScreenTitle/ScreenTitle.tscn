@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scenes/Menus/MenuBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Menus/ScreenTitle/Scripts/InfiniteModeMenuOption.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Menus/ScreenTitle/Sprites/TitleScreenXL.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/GUI/TextField.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/Menus/ScreenTitle/Scripts/ScreenTitleMenu.gd" type="Script" id=5]
+[ext_resource path="res://Global/Fonts/BoldCapsPixel32.tres" type="DynamicFont" id=6]
 [ext_resource path="res://Global/Shaders/Glitch/Glitch.shader" type="Shader" id=7]
 [ext_resource path="res://Global/Shaders/GlitchEffect.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Fog/CosmeticFog/FogTexture.tres" type="Texture" id=9]
@@ -45,6 +46,10 @@ tracks/0/keys = {
 }
 
 [node name="ScreenTitle" instance=ExtResource( 1 )]
+margin_left = 0.89093
+margin_top = -1.3364
+margin_right = 0.89093
+margin_bottom = -1.33643
 mouse_filter = 2
 script = ExtResource( 5 )
 
@@ -167,12 +172,30 @@ margin_bottom = 92.0
 text = "Infinite Mode"
 script = ExtResource( 2 )
 
-[node name="SeedField" type="LineEdit" parent="HBoxContainer/V_OptContainer/InfiniteMode" index="0"]
-visible = false
-margin_left = 205.5
-margin_top = 16.5
-margin_right = 321.5
-margin_bottom = 40.5
+[node name="SeedField" type="VBoxContainer" parent="HBoxContainer/V_OptContainer/InfiniteMode" index="0"]
+margin_left = 200.0
+margin_top = -9.591
+margin_right = 295.397
+margin_bottom = 37.409
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HBoxContainer/V_OptContainer/InfiniteMode/SeedField" index="0"]
+light_mask = 0
+margin_right = 106.0
+margin_bottom = 19.0
+custom_fonts/font = ExtResource( 6 )
+text = "Seed"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer/V_OptContainer/InfiniteMode/SeedField" index="1"]
+margin_top = 23.0
+margin_right = 106.0
+margin_bottom = 52.0
+custom_fonts/font = ExtResource( 6 )
 text = "RANDOM"
 align = 1
 script = ExtResource( 4 )

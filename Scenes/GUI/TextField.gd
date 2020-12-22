@@ -57,7 +57,6 @@ func _on_text_changed(new_text: String):
 
 
 func _on_text_entered(new_text: String) -> void:
-	set_visible(false)
 	emit_signal("submit", int(new_text))
 
 

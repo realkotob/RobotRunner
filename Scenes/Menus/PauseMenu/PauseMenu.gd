@@ -41,4 +41,5 @@ func _on_menu_option_chose(option: MenuOptionsBase):
 			var _err = navigate_sub_menu(MENUS.option_menu_scene.instance())
 		
 		"Quit": 
-			 var _err = get_tree().change_scene_to(MENUS.title_screen_scene)
+			get_tree().set_pause(false)
+			var _err = get_tree().change_scene_to(MENUS.title_screen_scene)

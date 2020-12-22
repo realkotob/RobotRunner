@@ -14,7 +14,9 @@ func get_class() -> String: return "ScreenTitleMenu"
 func _ready():
 	var _err = RESOURCE_LOADER.connect("thread_finished", self, "on_thread_finished")
 	load_default_buttons_state()
-	set_buttons_disabled(true)
+	
+	if RESOURCE_LOADER.thread != null && RESOURCE_LOADER.thread.is_active():
+		set_buttons_disabled(true)
 
 
 #### LOGIC ####

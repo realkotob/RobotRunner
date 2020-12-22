@@ -4,7 +4,7 @@ class_name MenuOptions
 func cancel():
 	navigate_sub_menu(MENUS.pause_menu_scene.instance())
 
-func on_menu_option_chose(option):
+func _on_menu_option_chose(option):
 	match(option.name):
 		"Graphics": pass
 		"Sounds": 

@@ -28,6 +28,9 @@ var is_ready : bool = false
 
 #### ACCESSORS ####
 
+func is_class(value: String) -> bool: return value == "GameCamera" or .is_class(value)
+func get_class() -> String: return "GameCamera"
+
 func set_state(state_name: String): state_machine_node.set_state(state_name)
 func get_state() -> StateBase: return state_machine_node.get_current_state()
 func get_state_name() -> String: return get_state().get_name()

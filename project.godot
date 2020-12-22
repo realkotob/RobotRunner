@@ -239,6 +239,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/Levels/InfiniteMode/InfiniteLevel.gd"
 }, {
+"base": "MenuOptionsBase",
+"class": "InfiniteModeMenuOption",
+"language": "GDScript",
+"path": "res://Scenes/Menus/ScreenTitle/Scripts/InfiniteModeMenuOption.gd"
+}, {
 "base": "Node",
 "class": "InputsBase",
 "language": "GDScript",
@@ -364,6 +369,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/Menus/ScreenTitle/Scripts/ScreenTitleMenu.gd"
 }, {
+"base": "LineEdit",
+"class": "SeedField",
+"language": "GDScript",
+"path": "res://Scenes/GUI/TextField.gd"
+}, {
 "base": "Node",
 "class": "SlopePlacer",
 "language": "GDScript",
@@ -466,6 +476,7 @@ _global_script_class_icons={
 "IceBlock": "",
 "InactiveState": "",
 "InfiniteLevel": "",
+"InfiniteModeMenuOption": "",
 "InputsBase": "",
 "InteractAreaBase": "",
 "JumpBase": "",
@@ -491,6 +502,7 @@ _global_script_class_icons={
 "SFX_Explosion": "",
 "SFX_group_base": "",
 "ScreenTitleMenu": "",
+"SeedField": "",
 "SlopePlacer": "",
 "SmallChunckRoom": "",
 "SpecialChunck": "",

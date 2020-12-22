@@ -19,6 +19,10 @@ func is_class(value: String) -> bool: return value == "Level" or .is_class(value
 func get_class() -> String: return "Level"
 
 
+func _enter_tree() -> void:
+	EVENTS.emit_signal("level_entered_tree", self)
+
+
 func _ready():
 	set_starting_points()
 	instanciate_players()

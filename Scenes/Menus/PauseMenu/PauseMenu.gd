@@ -16,11 +16,14 @@ func resume_game():
 	queue_free()
 
 
+#### VITRUAL ####
+
+func cancel() -> void:
+	resume_game()
+
+
 #### INPUTS ####
 
-func _input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("ui_cancel"):
-		resume_game()
 
 #### SIGNAL RESPONSES ####
 

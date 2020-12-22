@@ -155,6 +155,9 @@ mouse_filter = 2
 
 [node name="NewGame" parent="HBoxContainer/V_OptContainer" index="0" instance=ExtResource( 13 )]
 margin_right = 165.0
+custom_colors/font_color_disabled = Color( 0.337255, 0.337255, 0.337255, 1 )
+custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0.623529, 0.215686, 0.160784, 1 )
 text = "New Game"
 
 [node name="InfiniteMode" parent="HBoxContainer/V_OptContainer" index="1" instance=ExtResource( 13 )]
@@ -165,6 +168,7 @@ text = "Infinite Mode"
 script = ExtResource( 2 )
 
 [node name="SeedField" type="LineEdit" parent="HBoxContainer/V_OptContainer/InfiniteMode" index="0"]
+visible = false
 margin_left = 205.5
 margin_top = 16.5
 margin_right = 321.5

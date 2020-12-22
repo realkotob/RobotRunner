@@ -1,8 +1,6 @@
 extends Button
 class_name MenuOptionsBase
 
-var menu_node = Control
-
 signal focus_changed(entity, focus)
 signal option_chose(menu_option)
 
@@ -25,22 +23,34 @@ func set_focused(value: bool):
 
 func is_focused() -> bool: return focused
 
+#### BUILT-IN ####
 
-#### LOGIC ####
-
-func setup():
-	var _err = connect("pressed", self, "on_pressed")
-	_err = connect("mouse_entered", self, "on_mouse_entered")
+func _ready() -> void:
+	var _err = connect("focus_entered", self, "_on_focus_entered")
+	_err = connect("focus_exited", self, "_on_focus_exited")
+	_err = connect("pressed", self, "_on_pressed")
+	_err = connect("gui_input", self, "_on_gui_input")
+	_err = connect("mouse_entered", self, "_on_mouse_entered")
 	
 	if disabled:
 		set_self_modulate(DISABLED)
 
+#### LOGIC ####
 
 
-func on_pressed():
-	emit_signal("option_chose", self)
+func _on_gui_input(event : InputEvent): 
+	if event.is_action_pressed("ui_accept") && is_focused():
+		set_pressed(true)
+
+func _on_pressed(): emit_signal("option_chose", self)
 
 
-func on_mouse_entered():
+func _on_mouse_entered():
 	if !is_disabled():
-		set_focused(true)
+		grab_focus()
+
+func _on_focus_entered():
+	set_focused(true)
+
+func _on_focus_exited():
+	set_focused(false)

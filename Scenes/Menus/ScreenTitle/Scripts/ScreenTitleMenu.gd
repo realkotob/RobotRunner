@@ -45,6 +45,6 @@ func _on_menu_option_chose(option: MenuOptionsBase):
 
 
 func _on_menu_option_focus_changed(button : Button, focus: bool):
-	if focus:
+	if focus && seed_field != null:
 		seed_field.set_visible(button.name == "InfiniteMode")
 	._on_menu_option_focus_changed(button, focus)

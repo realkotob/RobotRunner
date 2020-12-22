@@ -12,6 +12,8 @@ func get_class() -> String: return "InfiniteModeMenuOption"
 
 func _ready() -> void:
 	var _err = $SeedField.connect("submit", self, "_on_seed_field_submit")
+	_err = $SeedField.connect("focus_entered", self, "_on_seed_field_focus_entered")
+	_err = $SeedField.connect("focus_exited", self, "_on_seed_field_focus_exited")
 
 
 #### VIRTUALS ####
@@ -31,3 +33,9 @@ func _ready() -> void:
 func _on_seed_field_submit(seed_value: int):
 	EVENTS.emit_signal("seed_change_query", seed_value)
 	emit_signal("option_chose", self)
+
+func _on_seed_field_focus_entered():
+	set_self_modulate(SELECTED)
+
+func _on_seed_field_focus_exited():
+	set_self_modulate(NORMAL)

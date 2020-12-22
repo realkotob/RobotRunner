@@ -1,13 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Global/Fonts/BoldCapsPixel48.tres" type="DynamicFont" id=1]
 [ext_resource path="res://AbstractClasses/MenuOptionsBase.gd" type="Script" id=2]
-
-[sub_resource type="InputEventAction" id=1]
-action = "ui_accept"
-
-[sub_resource type="ShortCut" id=2]
-shortcut = SubResource( 1 )
 
 [node name="MenuOptionBase" type="Button"]
 margin_right = 141.0
@@ -15,7 +9,6 @@ margin_bottom = 44.0
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 shortcut_in_tooltip = false
-shortcut = SubResource( 2 )
 text = "Button"
 flat = true
 script = ExtResource( 2 )

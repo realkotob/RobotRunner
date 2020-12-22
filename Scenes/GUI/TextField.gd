@@ -70,6 +70,6 @@ func _on_focus_exited():
 	set_text(default_text)
 	set_focused(false)
 
-#func _on_gui_input(event: InputEvent):
-#	if event.is_action_pressed("ui_cancel") && is_focused():
-#		Input.action_press()
+func _on_gui_input(event: InputEvent):
+	if event.is_action_pressed("ui_cancel") && is_focused():
+		get_parent().grab_focus()

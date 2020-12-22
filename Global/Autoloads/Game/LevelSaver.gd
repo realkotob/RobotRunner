@@ -12,7 +12,6 @@ const objects_datatype_storage = {
 	"GameCamera": ["zoom", "instruction_stack"],
 	"ParallaxBackground" : ["scroll_offset", "scroll_base_offset", "scroll_base_scale", "scale"],
 	"ParallaxLayer" : ["motion_scale", "motion_offset", "scale"],
-	"ChunckGenerator": ["current_seed"]
 }
 
 #### ACCESSORS ####

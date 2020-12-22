@@ -5,8 +5,8 @@ class_name LevelSaver
 const debug : bool = false
 
 const SAVEDLEVEL_DIR : String = "res://Scenes/Levels/SavedLevel"
-const SAVEDLEVEL_JSON_DIR : String = "/json"
-const SAVEDLEVEL_TSCN_DIR : String = "/tscn"
+const SAVEDLEVEL_JSON_DIR : String = "/json/"
+const SAVEDLEVEL_TSCN_DIR : String = "/tscn/"
 
 const objects_datatype_storage = {
 	"GameCamera": ["zoom", "instruction_stack"],

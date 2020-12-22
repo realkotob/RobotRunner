@@ -88,6 +88,7 @@ layer = -1
 script = ExtResource( 10 )
 
 [node name="Back" type="ParallaxLayer" parent="Map/Background/Paralaxe"]
+motion_scale = Vector2( 0.2, 0.2 )
 motion_mirroring = Vector2( 2048, 1152 )
 __meta__ = {
 "_edit_group_": true,
@@ -106,13 +107,15 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Lights" type="Node2D" parent="Map/Background/Paralaxe"]
+[node name="Lights" type="ParallaxLayer" parent="Map/Background/Paralaxe"]
+motion_scale = Vector2( 0.25, 0.25 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
 
 [node name="Gears" type="ParallaxLayer" parent="Map/Background/Paralaxe"]
+motion_scale = Vector2( 0.3, 0.3 )
 motion_mirroring = Vector2( 2048, 1152 )
 __meta__ = {
 "_edit_group_": true,
@@ -132,13 +135,14 @@ __meta__ = {
 
 [node name="ProdLine1" parent="Map/Background/Paralaxe" instance=ExtResource( 6 )]
 position = Vector2( 0, 370 )
-motion_scale = Vector2( 1, 1 )
+motion_scale = Vector2( 0.37, 0.37 )
 
 [node name="ProdLine2" parent="Map/Background/Paralaxe" instance=ExtResource( 6 )]
 position = Vector2( 0, 650 )
-motion_scale = Vector2( 1, 1 )
+motion_scale = Vector2( 0.4, 0.4 )
 
 [node name="Fog" type="ParallaxLayer" parent="Map/Background/Paralaxe"]
+motion_scale = Vector2( 0.5, 0.5 )
 motion_mirroring = Vector2( 2048, 2048 )
 __meta__ = {
 "_edit_group_": true,

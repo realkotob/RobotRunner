@@ -58,7 +58,8 @@ func goto_last_level():
 
 	var loaded_from_save : bool = false
 	var level_scene : PackedScene
-	var level_to_load_path : String = find_saved_level_path(LevelSaver.SAVEDLEVEL_DIR + LevelSaver.SAVEDLEVEL_TSCN_DIR, last_level_name)
+	var dir = LevelSaver.SAVEDLEVEL_DIR + LevelSaver.SAVEDLEVEL_TSCN_DIR
+	var level_to_load_path : String = find_saved_level_path(dir, last_level_name)
 
 	# If no save of the current level exists, reload the same scene
 	if level_to_load_path != "":

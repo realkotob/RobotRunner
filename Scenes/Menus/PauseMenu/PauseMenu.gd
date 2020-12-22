@@ -32,15 +32,13 @@ func _on_menu_option_chose(option: MenuOptionsBase):
 		"Resume": 
 			get_tree().set_pause(false)
 			resume_game()
+		
 		"Retry": 
 			get_tree().set_pause(false)
 			var _err = GAME.goto_last_level()
-			
+		
 		"Options": 
 			var _err = navigate_sub_menu(MENUS.option_menu_scene.instance())
-			
-		"ScreenTitle":
-			 var _err = navigate_sub_menu(MENUS.title_screen_scene.instance())
-			
-		"Leave": 
-			get_tree().quit()
+		
+		"Quit": 
+			 var _err = get_tree().change_scene_to(MENUS.title_screen_scene)

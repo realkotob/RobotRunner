@@ -12,6 +12,7 @@ func get_class() -> String: return "InfiniteModeMenuOption"
 
 func _ready() -> void:
 	var _err = $SeedField/LineEdit.connect("submit", self, "_on_seed_field_submit")
+	_err = $SeedField/LineEdit.connect("canceled", self, "_on_seed_field_canceled")
 
 
 #### VIRTUALS ####
@@ -33,3 +34,7 @@ func _on_seed_field_submit(seed_value: int):
 	emit_signal("option_chose", self)
 	$SeedField.set_visible(false)
 
+
+func _on_seed_field_canceled():
+	grab_focus()
+	$SeedField.set_visible(false)

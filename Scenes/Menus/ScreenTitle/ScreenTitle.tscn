@@ -8,7 +8,7 @@
 [ext_resource path="res://Global/Fonts/BoldCapsPixel32.tres" type="DynamicFont" id=6]
 [ext_resource path="res://Global/Shaders/Glitch/Glitch.shader" type="Shader" id=7]
 [ext_resource path="res://Global/Shaders/GlitchEffect.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Fog/CosmeticFog/FogTexture.tres" type="Texture" id=9]
+[ext_resource path="res://icon.png" type="Texture" id=9]
 [ext_resource path="res://Scenes/Fog/CosmeticFog/Magenta_BG_fog.shader" type="Shader" id=10]
 [ext_resource path="res://Scenes/Menus/ScreenTitle/Sprites/RobotHead.png" type="Texture" id=11]
 [ext_resource path="res://Global/Lights/Light500.png" type="Texture" id=12]
@@ -173,6 +173,7 @@ text = "Infinite Mode"
 script = ExtResource( 2 )
 
 [node name="SeedField" type="VBoxContainer" parent="HBoxContainer/V_OptContainer/InfiniteMode" index="0"]
+visible = false
 margin_left = 200.0
 margin_top = -9.591
 margin_right = 295.397

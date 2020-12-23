@@ -4,6 +4,7 @@ tool
 
 signal focus_changed(entity, focus)
 signal submit(seed_value)
+signal canceled()
 
 var focused : bool = false setget set_focused, is_focused
 
@@ -71,4 +72,4 @@ func _on_focus_exited():
 
 func _on_gui_input(event: InputEvent):
 	if event.is_action_pressed("ui_cancel") && is_focused():
-		get_parent().grab_focus()
+		emit_signal("canceled")

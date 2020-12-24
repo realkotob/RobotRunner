@@ -230,7 +230,8 @@ func update_current_level_index(level : Level):
 	var level_index = current_chapter.find_level_id(level_name)
 	GAME.progression.set_level(level_index)
 
-func toggle_camera_debug_mode():
+
+func toggle_free_camera_mode():
 	var level = get_tree().get_current_scene()
 	if not level is Level:
 		return
@@ -256,8 +257,8 @@ func on_gameover_timer_timeout():
 #### INPUTS ####
 
 func _input(_event):
-	if Input.is_action_just_pressed("toggle_camera_debug_mode"):
-		toggle_camera_debug_mode()
+	if Input.is_action_just_pressed("toggle_free_camera_mode"):
+		toggle_free_camera_mode()
 
 #### SIGNAL RESPONSES ####
 

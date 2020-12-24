@@ -172,3 +172,10 @@ args_number = 1
 cmd_description = "Set solo mode (with a boolean)"
 target = "SOLO_CONTROL"
 target_method = "set_solo_mode"
+
+[node name="CAMERA_DEBUG" type="Node" parent="CommandsList"]
+script = ExtResource( 5 )
+cmd_name = "CAMERA_DEBUG"
+args_number = 1
+target = "Camera"
+target_method = "set_debug"

@@ -1,5 +1,4 @@
 extends Node
-
 class_name Commands
 
 var console : Node
@@ -15,11 +14,9 @@ export var target : String = "" # node target
 export var target_as_group : bool = false # is the target a group of target ?
 export var target_method : String = "" # target method
 
-# array of all argument gave by the player (=> Filled from GameConsole.gd)
-var cmd_args : Array = [] 
 
 # This function will execute the command
-func exec_cmd():
+func exec_cmd(cmd_args: Array):
 	if(console.cheats_enabled or cheats_required == console.cheats_enabled):
 		
 		var error : bool = false
@@ -68,9 +65,6 @@ func exec_cmd():
 				
 				# WE COULD ADD TO THE MESSAGE THE ARGUMENTS PASSED?
 				console_cmdlog_node.add_item(" > : " + target_method + " called in " + target)
-				
-				get_tree().paused = !get_tree().paused
-				queue_free()
 				return
 		
 		console_cmdlog_node.add_item(" > : The target method can't be found in the target node")

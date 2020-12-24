@@ -2,9 +2,9 @@
 
 [sub_resource type="OpenSimplexNoise" id=1]
 octaves = 4
-period = 12.3
-persistence = 0.466
-lacunarity = 2.87
+period = 10.0
+persistence = 0.674
+lacunarity = 2.54
 
 [resource]
 width = 200

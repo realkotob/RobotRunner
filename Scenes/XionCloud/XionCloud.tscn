@@ -68,7 +68,7 @@ void fragment() {
 shader = SubResource( 2 )
 shader_param/direction = Vector2( 1.413, 0 )
 shader_param/speed = 0.1
-shader_param/threshold = 0.47
+shader_param/threshold = 0.425
 shader_param/fluffiness = 0.436
 shader_param/opacity = 1.0
 shader_param/texture_zoom = 5.15
@@ -148,7 +148,7 @@ shader_param/noiseTexture = ExtResource( 2 )
 shader = ExtResource( 7 )
 shader_param/direction = Vector2( 1.413, 0 )
 shader_param/speed = 0.2
-shader_param/threshold = 0.535
+shader_param/threshold = 0.511
 shader_param/fluffiness = 0.105
 shader_param/opacity = 0.504
 shader_param/fade_distance = 0.2
@@ -166,6 +166,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource( 1 )
 
 [node name="Cloud3" type="Sprite" parent="."]

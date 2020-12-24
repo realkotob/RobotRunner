@@ -41,7 +41,7 @@ func _ready():
 	_err = EVENTS.connect("level_finished", self, "on_level_finished")
 	_err = EVENTS.connect("seed_change_query", self, "on_seed_change_query")
 
-	LevelSaver.create_savedlevel_dirs(["json","tscn"])
+	LevelSaver.create_savedlevel_dirs(["json", "tscn"])
 	
 #### LOGIC ####
 

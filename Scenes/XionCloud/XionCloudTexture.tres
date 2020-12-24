@@ -2,9 +2,12 @@
 
 [sub_resource type="OpenSimplexNoise" id=1]
 octaves = 4
+period = 12.3
+persistence = 0.466
+lacunarity = 2.87
 
 [resource]
+width = 200
+height = 200
 seamless = true
-as_normalmap = true
-bump_strength = 22.7
 noise = SubResource( 1 )

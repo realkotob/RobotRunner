@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/Fog/CosmeticFog/Fog.shader" type="Shader" id=1]
+[ext_resource path="res://Scenes/Fog/CosmeticFog/FogNoise1.tres" type="Texture" id=2]
+[ext_resource path="res://Scenes/Fog/CosmeticFog/FogNoise2.tres" type="Texture" id=3]
+
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/fog_color = Color( 1, 0.447059, 0.839216, 1 )
+shader_param/speed_multiplier = -0.031
+shader_param/opacity = 0.4
+shader_param/noise1 = ExtResource( 2 )
+shader_param/noise2 = ExtResource( 3 )

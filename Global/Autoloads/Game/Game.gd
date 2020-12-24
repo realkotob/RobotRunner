@@ -11,6 +11,10 @@ export var transition_time : float = 1.0
 const TILE_SIZE := Vector2(24, 24)
 const JUMP_MAX_DIST := Vector2(6, 2)
 
+var window_width = ProjectSettings.get_setting("display/window/size/width")
+var window_height = ProjectSettings.get_setting("display/window/size/height")
+var window_size = Vector2(window_width, window_height)
+
 var chapters_array = []
 var current_chapter : Resource = null
 

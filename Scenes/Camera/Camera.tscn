@@ -17,6 +17,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
+debug = true
 
 [node name="StateMachine" type="Node2D" parent="."]
 script = ExtResource( 2 )
@@ -78,6 +79,11 @@ modulate = Color( 1, 0, 0, 0.407843 )
 scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 8 )
 
+[node name="Label" type="Label" parent="AveragePos"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "AveragePlayerPos"
+
 [node name="Pivot" type="Position2D" parent="."]
 visible = false
 z_index = 999
@@ -87,10 +93,14 @@ modulate = Color( 0.00784314, 0, 1, 0.341176 )
 scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 8 )
 
+[node name="Label" type="Label" parent="Pivot"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Pivot"
+
 [node name="DebugLayer" type="CanvasLayer" parent="."]
 
 [node name="Control" type="Control" parent="DebugLayer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 3.56763
@@ -104,23 +114,33 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="DebugLayer/Control"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_top = -50.0001
-margin_right = 40.0
+margin_top = -86.0
+margin_right = 36.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="StateLabel" type="Label" parent="DebugLayer/Control/VBoxContainer"]
-margin_right = 40.0
+margin_right = 36.0
 margin_bottom = 14.0
 text = "State:"
 
 [node name="PosLabel" type="Label" parent="DebugLayer/Control/VBoxContainer"]
 margin_top = 18.0
-margin_right = 40.0
+margin_right = 36.0
 margin_bottom = 32.0
 
 [node name="ZoomLabel" type="Label" parent="DebugLayer/Control/VBoxContainer"]
 margin_top = 36.0
-margin_right = 40.0
+margin_right = 36.0
 margin_bottom = 50.0
+
+[node name="TopLimitLabel" type="Label" parent="DebugLayer/Control/VBoxContainer"]
+margin_top = 54.0
+margin_right = 36.0
+margin_bottom = 68.0
+
+[node name="BottomLimitLabel" type="Label" parent="DebugLayer/Control/VBoxContainer"]
+margin_top = 72.0
+margin_right = 36.0
+margin_bottom = 86.0

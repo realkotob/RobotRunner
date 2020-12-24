@@ -15,6 +15,11 @@ onready var state_label = $DebugLayer/Control/VBoxContainer/StateLabel
 onready var pos_label = $DebugLayer/Control/VBoxContainer/PosLabel
 onready var zoom_label = $DebugLayer/Control/VBoxContainer/ZoomLabel
 
+onready var default_limit_top = get_limit(MARGIN_TOP)
+onready var default_limit_bottom = get_limit(MARGIN_BOTTOM)
+onready var default_limit_left = get_limit(MARGIN_LEFT)
+onready var default_limit_right = get_limit(MARGIN_RIGHT)
+
 export var camera_speed : float = 3.0
 
 export var debug : bool = false setget set_debug, is_debug
@@ -64,6 +69,7 @@ func get_average_player_pos() -> Vector2: return average_player_pos
 func set_pivot_position(value: Vector2): pivot.set_global_position(value)
 func get_pivot_position() -> Vector2: return pivot.get_global_position()
 
+
 # Feed the array of players with weakrefs
 func set_players_weakref_array(weakref_array: Array):
 	for element in weakref_array:
@@ -72,6 +78,7 @@ func set_players_weakref_array(weakref_array: Array):
 				print("One of the elements of the array passed to set_players_weakref_array is not a WeakRef")
 			return
 	players_weakref_array = weakref_array
+
 
 # Return the player true ref
 func get_players_array() -> Array:
@@ -181,7 +188,34 @@ func compute_average_pos() -> Vector2:
 	
 	return average_pos
 
+# Dynamicly push the camera limits if it tresspasses it by dezooming
+func update_camera_limits() -> void:
+	var screen_extents = GAME.window_size / 2
+	var current_cam_extents = screen_extents * get_zoom()
+	var crossing_amount : Vector2 = current_cam_extents - screen_extents
+	
+	var top = default_limit_top - crossing_amount.y
+	var bottom = default_limit_bottom + crossing_amount.y
+	var left = default_limit_left - crossing_amount.x
+	var right = default_limit_right + crossing_amount.x
+	
+	# The camera passed the top or bottom limit by dezooming
+	set_limit(MARGIN_TOP, top)
+	set_limit(MARGIN_BOTTOM, bottom)
+	set_limit(MARGIN_LEFT, left)
+	set_limit(MARGIN_RIGHT, right)
+	
+	if debug:
+		update_limit_debug_labels(top, bottom)
 
+
+# Update the debug labels displaying the limits of the camera
+func update_limit_debug_labels(top: float, bottom: float) -> void:
+	$DebugLayer/Control/VBoxContainer/TopLimitLabel.set_text("TopLimit: " + String(top))
+	$DebugLayer/Control/VBoxContainer/BottomLimitLabel.set_text("BottomLimit: " + String(bottom))
+
+
+# Make the camera shake for the given magnitude & duration
 func shake(magnitude: float, duration: float):
 	shake_state_node.magnitude = magnitude
 	shake_state_node.duration = duration

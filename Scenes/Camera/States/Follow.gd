@@ -68,7 +68,8 @@ func update(_host, _delta):
 		
 		if camera.zoom != dest_zoom:
 			camera.start_zooming(dest_zoom)
-
+		
+		camera.update_camera_limits()
 
 #### LOGIC ####
 

@@ -14,6 +14,9 @@ const CONSOLE_CMDLOGS_FONTSIZE : int = 45
 var cheats_enabled : bool = false
 var console_cmdlog_itemcount = 1
 
+
+#### BUILT-IN ####
+
 # This function ready will initialize signals and init the console logs
 ## init_console_cmdlog : init font size of console's log
 func _ready():
@@ -21,7 +24,7 @@ func _ready():
 	var _err
 	_err = console_input_node.connect("text_entered", self, "_on_cmd_submitted")
 	_err = console_quit_node.connect("pressed", self, "toggle_console")
-	_err = console_input_node.connect("text_changed", self, "_on_cmd_changed")
+	_err = console_input_node.connect("text_changed", self, "_on_text_changed")
 	
 	for child in children_cmd:
 		if "console_cmdlog_node" in child:
@@ -33,24 +36,10 @@ func _ready():
 	
 	init_console_cmdlog()
 
-# Check when a player press "display_console" input (Default: F3).
-## Display the console and pause the game
-func _input(_e):
-	if Input.is_action_just_pressed("display_console"):
-		toggle_console()
 
-# Detect when the player type in the console
-## Change the color of his input if it corresponds to any commands listed in the dictionnary
-func _on_cmd_changed(_text):
-	var cmd_split : Array = _text.to_upper().split(" ")
-	if(find_node(cmd_split[0])):
-		console_input_node.add_color_override("font_color", Color(1,0,1,1))
-	else:
-		console_input_node.add_color_override("font_color", Color(1,1,1,1))
-
-
-# Respond to the submition of a command, convert its arguments from string to the correct type and execute it
-func _on_cmd_submitted(cmd : String):
+# Respond to the submition of a command, convert its arguments from string 
+# to the correct type and execute it
+func submit_command(cmd : String):
 	if cmd == "": return
 	cmdsendingsound_node.play() # Play a sound when a player enter a command
 	
@@ -104,3 +93,35 @@ func toggle_console():
 
 func init_console_cmdlog():
 	console_cmdlog_node.get_font("font").set_size(CONSOLE_CMDLOGS_FONTSIZE)
+
+
+#### INPUT ####
+
+# Check when a player press "display_console" input (Default: F3).
+## Display the console and pause the game
+func _input(_e):
+	if Input.is_action_just_pressed("display_console"):
+		toggle_console()
+	
+	if Input.is_action_just_pressed("ui_cancel") && is_visible():
+		toggle_console()
+		get_tree().set_input_as_handled()
+
+
+
+#### SIGNAL RESPONSES ####
+
+
+# Detect when the player type in the console
+# Change the color of his input if it corresponds 
+# to any commands listed in the dictionnary
+func _on_text_changed(text: String):
+	var cmd_split : Array = text.to_upper().split(" ")
+	if(find_node(cmd_split[0])):
+		console_input_node.add_color_override("font_color", Color(1,0,1,1))
+	else:
+		console_input_node.add_color_override("font_color", Color(1,1,1,1))
+
+
+func _on_cmd_submitted(cmd : String):
+	submit_command(cmd)

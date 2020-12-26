@@ -131,6 +131,12 @@ func get_border_approched(ply_average_pos: Vector2) -> Array:
 	
 	return border_array
 
+### PROBABLY UNECESSARY ####
+
+## Check if the camera is currently anticipating or not
+#func is_currently_anticipating(cam_pos: Vector2, ply_avg_pos: Vector2, anticip_dist: int) -> bool:
+#	return (ply_avg_pos + Vector2.LEFT * anticip_dist).distance_to(cam_pos) < 10 or \
+#		(ply_avg_pos + Vector2.RIGHT * anticip_dist).distance_to(cam_pos) < 10
 
 
 # Convert a global position to a relative position to the camera origin (center)

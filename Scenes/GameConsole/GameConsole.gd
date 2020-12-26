@@ -97,8 +97,7 @@ func init_console_cmdlog():
 
 #### INPUT ####
 
-# Check when a player press "display_console" input (Default: F3).
-## Display the console and pause the game
+
 func _input(_e):
 	if Input.is_action_just_pressed("display_console"):
 		toggle_console()
@@ -108,9 +107,7 @@ func _input(_e):
 		get_tree().set_input_as_handled()
 
 
-
 #### SIGNAL RESPONSES ####
-
 
 # Detect when the player type in the console
 # Change the color of his input if it corresponds 

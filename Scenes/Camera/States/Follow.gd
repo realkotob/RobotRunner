@@ -2,6 +2,7 @@ extends CameraState
 
 const ANTICIP_DIST : float = 200.0
 const ANTICIP_TRIGGER_RATIO : float = 0.3
+const BUFFER_DIST = 40.0
 
 onready var border_anticip_label = $DebugLayer/Control/VBoxContainer/BordersAnticip
 
@@ -43,7 +44,8 @@ func update(_host, _delta):
 		
 		# Compute the dest of the camera
 		var average_pos : Vector2 = camera.get_average_player_pos()
-		set_borders_anticipated(get_border_approched(average_pos))
+		var new_borders_approched = get_border_approched(average_pos)
+		set_borders_anticipated(new_borders_approched)
 		var offset = Vector2.ZERO
 		
 		if borders_anticipated.size() == 1:
@@ -100,13 +102,15 @@ func get_border_approched(ply_average_pos: Vector2) -> Array:
 		var pivot_pos = camera.get_pivot_position()
 		var anticip_dist = screen_size.x * ANTICIP_TRIGGER_RATIO
 		
-		# Check individual player position
+		# Check individual players position
+		# Check for right border beeing approched
 		if player_pos.x > pivot_pos.x + (screen_size.x / 2) - anticip_dist && \
 							player.last_direction == 1:
 			if !(Vector2.RIGHT in border_array):
 				border_array.append(Vector2.RIGHT)
 				continue
 		
+		# Check for left border beeing approched
 		elif player_pos.x < pivot_pos.x - (screen_size.y / 2) + anticip_dist && \
 							player.last_direction == -1:
 			if !(Vector2.LEFT in border_array):
@@ -130,14 +134,6 @@ func get_border_approched(ply_average_pos: Vector2) -> Array:
 				break
 	
 	return border_array
-
-### PROBABLY UNECESSARY ####
-
-## Check if the camera is currently anticipating or not
-#func is_currently_anticipating(cam_pos: Vector2, ply_avg_pos: Vector2, anticip_dist: int) -> bool:
-#	return (ply_avg_pos + Vector2.LEFT * anticip_dist).distance_to(cam_pos) < 10 or \
-#		(ply_avg_pos + Vector2.RIGHT * anticip_dist).distance_to(cam_pos) < 10
-
 
 # Convert a global position to a relative position to the camera origin (center)
 func global_to_relative(global : Vector2) -> Vector2:

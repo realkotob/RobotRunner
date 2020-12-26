@@ -154,7 +154,7 @@ func move_vel(delta: float, velocity: Vector2):
 func start_moving_pivot(dest_pos: Vector2, duration: float = DEFAULT_INTERPOL_DUR):
 	tween_node.remove(pivot, "global_position")
 	tween_node.interpolate_property(pivot, "global_position",
-		global_position, dest_pos, duration,
+		pivot.global_position, dest_pos, duration,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween_node.start()
 

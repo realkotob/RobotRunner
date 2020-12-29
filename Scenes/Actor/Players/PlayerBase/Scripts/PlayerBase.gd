@@ -4,14 +4,16 @@ class_name Player
 #warning-ignore:unused_signal
 signal layer_change
 
+
 # Store all the children references
 onready var inputs_node = get_node("Inputs")
 onready var SFX_node = get_node("SFX")
 onready var anim_player_node = get_node("AnimationPlayer")
 
 export var breakable_type_array : PoolStringArray = []
-
 export var player_id : int = 1 setget , get_player_id
+export var robot_name : String = ""
+
 
 var dirLeft : int = 0 
 var dirRight : int = 0

@@ -10,6 +10,7 @@ extents = Vector2( 15.5305, 20 )
 
 [node name="RobotIce" instance=ExtResource( 1 )]
 breakable_type_array = PoolStringArray( "XionCrate", "IceBlock" )
+robot_name = "Mr.Cold"
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = ExtResource( 2 )

@@ -175,7 +175,7 @@ func is_pos_in_bottom_half(pos: Vector2) -> bool:
 
 # Returns the rect of the room the given is in
 # Returns an empty Rect2 if the given pos isn't in a room
-func find_room_form_cell(cell: Vector2) -> ChunckRoom:
+func find_room_from_cell(cell: Vector2) -> ChunckRoom:
 	for room in $Rooms.get_children():
 		var room_rect = room.get_room_rect()
 		if room_rect.has_point(cell): 

@@ -1,8 +1,6 @@
 extends Node
 class_name ChunckGenerator
 
-onready var chunck_container_node : Node2D = owner.find_node("ChunckContainer")
-
 var normal_chunck_scene = preload("res://Scenes/Levels/InfiniteMode/Chuncks/Chunck.tscn")
 var special_chunck_scene_array = [
 	preload("res://Scenes/Levels/InfiniteMode/Chuncks/CrossChunck.tscn"),
@@ -90,9 +88,9 @@ func generate_chunck() -> LevelChunck:
 
 # Retruns the last chunck created
 func get_last_chunck() -> Node:
-	var nb_chuncks = chunck_container_node.get_child_count()
+	var nb_chuncks = get_child_count()
 	if nb_chuncks == 0: return null
-	else: return chunck_container_node.get_child(nb_chuncks - 1)
+	else: return get_child(nb_chuncks - 1)
 
 
 # Find the starting points, convert their position as cells and returns it in a PoolVector2Array
@@ -113,13 +111,13 @@ func get_starting_points_cell_pos() -> PoolVector2Array:
 func place_level_chunck(invert_player_pos : bool = false) -> LevelChunck:
 	is_generating = true
 	var starting_points := PoolVector2Array()
-	var first_chunck : bool = chunck_container_node.get_child_count() == 0
+	var first_chunck : bool = get_child_count() == 0
 	
 	if first_chunck:
 		starting_points = get_starting_points_cell_pos()
 	else:
-		var last_child_id = chunck_container_node.get_child_count()
-		var last_chunck = chunck_container_node.get_child(last_child_id - 1)
+		var last_child_id = get_child_count()
+		var last_chunck = get_child(last_child_id - 1)
 		starting_points = last_chunck.next_start_pos_array
 	
 	var chunck_bin = generate_chunck_binary()
@@ -136,13 +134,13 @@ func place_level_chunck(invert_player_pos : bool = false) -> LevelChunck:
 	
 	nb_chunck += 1
 	
-	if chunck_container_node.get_child_count() > 2:
-		var chunck_to_delete = chunck_container_node.get_child(0)
+	if get_child_count() > 2:
+		var chunck_to_delete = get_child(0)
 		chunck_to_delete.queue_free()
 		yield(chunck_to_delete, "tree_exited")
 	
 	new_chunck.set_chunck_bin(chunck_bin)
-	chunck_container_node.call_deferred("add_child", new_chunck)
+	call_deferred("add_child", new_chunck)
 	
 	if !new_chunck.is_ready:
 		yield(new_chunck, "ready")

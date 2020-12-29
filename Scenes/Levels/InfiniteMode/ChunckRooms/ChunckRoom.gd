@@ -255,9 +255,11 @@ func generate_liquid(liquid_type: String):
 	var liquid_node = liquid_scenes[liquid_type].instance()
 	interactive_objects.append(liquid_node)
 	
+	# Determine the pool size in pixels
 	var pool_size = Vector2(room_rect.size.x, y_max_pool_size) * GAME.TILE_SIZE
 	liquid_node.set_pool_size(pool_size)
 	
+	# Determine the position of the pool in the room
 	var pool_sprite_size = Vector2(pool_size.x, pool_size.y + liquid_node.empty_part)
 	var pos =  room_rect.size * GAME.TILE_SIZE - pool_sprite_size / 2
 	liquid_node.set_position(pos)
@@ -285,6 +287,7 @@ func find_lowest_platfrom() -> ChunckPlatform:
 			lowest_pos = pltf_pos
 			lowest_platform = platform
 	return lowest_platform
+
 
 #### VIRTUALS ####
 

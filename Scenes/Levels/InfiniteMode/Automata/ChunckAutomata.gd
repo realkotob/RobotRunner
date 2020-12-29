@@ -94,7 +94,7 @@ func automata_carving_movement() -> void:
 # if the final_pos have a value, the chosen_move should have the value of Vector2.INF
 # that way, we know this move was a teleportation
 func move() -> bool:
-	var room : ChunckRoom = chunck.find_room_form_cell(bin_map_pos)
+	var room : ChunckRoom = chunck.find_room_from_cell(bin_map_pos)
 	var chosen_move = Vector2.INF
 	var final_pos := Vector2.INF
 	var room_rect := Rect2()
@@ -108,12 +108,17 @@ func move() -> bool:
 		var entry_point = Vector2(0, bin_map_pos.y)
 		
 		if room is SmallChunckRoom:
-			var random_offset = (randi() % 3) * Vector2.UP
+			var player_key = "bottom" if is_in_bottom_half() else "top"
+			var player = chunck.players_disposition[player_key].get_ref()
+			var max_exit_height = 5 if player.robot_name == "Mr.Cold" else 3
+			max_exit_height = clamp(max_exit_height, 3, room_rect.position.y + room_rect.size.y - entry_point.y)
+			
+			var random_offset = (randi() % int(max_exit_height)) * Vector2.UP
 			final_pos = room_rect.position + room_rect.size + random_offset + Vector2.UP
 		else:
-			var x = room_rect.position.x + room_rect.size.x
 			# Clamp the exit position so its not too close from the ceiling
 			# And it can't exceed the floor of the room
+			var x = room_rect.position.x + room_rect.size.x
 			var y = clamp(bin_map_pos.y, room_rect.position.y + 4, room_rect.position.y + room_rect.size.x)
 			final_pos = Vector2(x, y)
 		

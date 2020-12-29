@@ -9,19 +9,17 @@
 [node name="InfiniteLevel" instance=ExtResource( 4 )]
 script = ExtResource( 5 )
 
-[node name="ChunckGenerator" type="Node2D" parent="." index="0"]
+[node name="ChunckContainer" type="Node2D" parent="Map" index="5"]
 script = ExtResource( 1 )
 
-[node name="ChunckContainer" type="Node2D" parent="Map" index="5"]
-
-[node name="Camera" parent="." index="6"]
+[node name="Camera" parent="." index="5"]
 limit_left = 0
 limit_top = 0
 limit_bottom = 540
 editor_draw_limits = true
 
-[node name="StartingPointP1" parent="." index="7" instance=ExtResource( 3 )]
+[node name="StartingPointP1" parent="." index="6" instance=ExtResource( 3 )]
 position = Vector2( 72, 132 )
 
-[node name="StartingPointP2" parent="." index="8" instance=ExtResource( 2 )]
+[node name="StartingPointP2" parent="." index="7" instance=ExtResource( 2 )]
 position = Vector2( 72, 420 )

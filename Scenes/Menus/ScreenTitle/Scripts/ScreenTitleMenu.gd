@@ -18,6 +18,8 @@ func _ready():
 	if RESOURCE_LOADER.thread != null && RESOURCE_LOADER.thread.is_active():
 		set_buttons_disabled(true)
 
+func _setup():
+	pass
 
 #### LOGIC ####
 
@@ -35,6 +37,7 @@ func _ready():
 
 func on_thread_finished():
 	set_buttons_default_state()
+	._setup()
 
 
 func _on_menu_option_chose(option: MenuOptionsBase):

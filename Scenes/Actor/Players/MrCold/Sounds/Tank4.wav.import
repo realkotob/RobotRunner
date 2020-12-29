@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Tank4.wav-3ad02a0a5e3cdcd5c6eb44e546f7ed23.sample"
+
+[deps]
+
+source_file="res://Scenes/Actor/Players/MrCold/Sounds/Tank4.wav"
+dest_files=[ "res://.import/Tank4.wav-3ad02a0a5e3cdcd5c6eb44e546f7ed23.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

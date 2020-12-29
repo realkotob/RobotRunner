@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/RoboHammer.png-aabf590121ed32bd396e9d759e9a09d3.stex"
+path="res://.import/RoboHammer.png-07aa94485601e5fd455b8c4c015167a6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/Actor/Players/RobotHammer/Sprites/RoboHammer.png"
-dest_files=[ "res://.import/RoboHammer.png-aabf590121ed32bd396e9d759e9a09d3.stex" ]
+source_file="res://Scenes/Actor/Players/MrStonks/Sprites/RoboHammer.png"
+dest_files=[ "res://.import/RoboHammer.png-07aa94485601e5fd455b8c4c015167a6.stex" ]
 
 [params]
 

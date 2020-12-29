@@ -70,7 +70,7 @@ func interact():
 	# Check if one on the areas in the hitbox area is an interative one, and interact with it if it is
 	# Also verify if no block were broke in this use of the action state
 	for area in interact_areas:
-		if area.get_class() in interactables && has_touch == false:
+		if area.get_class() in interactables:
 			area.interact(hit_box_shape.global_position)
 
 

@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Tank.wav-0f205f68e3d2a4cd748888887a2b5ece.sample"
+path="res://.import/Tank.wav-27af27b628fdb46c5a016c8c3067dcc1.sample"
 
 [deps]
 
-source_file="res://Scenes/Actor/Players/RobotIce/Sounds/Tank.wav"
-dest_files=[ "res://.import/Tank.wav-0f205f68e3d2a4cd748888887a2b5ece.sample" ]
+source_file="res://Scenes/Actor/Players/MrCold/Sounds/Tank.wav"
+dest_files=[ "res://.import/Tank.wav-27af27b628fdb46c5a016c8c3067dcc1.sample" ]
 
 [params]
 

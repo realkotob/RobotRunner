@@ -110,7 +110,7 @@ func move() -> bool:
 		if room is SmallChunckRoom:
 			var player_key = "bottom" if is_in_bottom_half() else "top"
 			var player = chunck.players_disposition[player_key].get_ref()
-			var max_exit_height = 5 if player.robot_name == "Mr.Cold" else 3
+			var max_exit_height = 5 if player.name == "MrCold" else 3
 			max_exit_height = clamp(max_exit_height, 3, room_rect.position.y + room_rect.size.y - entry_point.y)
 			
 			var random_offset = (randi() % int(max_exit_height)) * Vector2.UP

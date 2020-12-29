@@ -18,8 +18,8 @@ var window_size = Vector2(window_width, window_height)
 var chapters_array = []
 var current_chapter : Resource = null
 
-var player1 = preload("res://Scenes/Actor/Players/RobotIce/RobotIce.tscn")
-var player2 = preload("res://Scenes/Actor/Players/RobotHammer/RobotHammer.tscn")
+var player1 = preload("res://Scenes/Actor/Players/MrCold/MrCold.tscn")
+var player2 = preload("res://Scenes/Actor/Players/MrStonks/MrStonks.tscn")
 
 var level_array : Array
 var last_level_name : String

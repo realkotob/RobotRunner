@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/RobotIce.png-d6ff5e71446678d80c88632079226bef.stex"
+path="res://.import/RobotIce.png-6f69b4651c23404a17c75ce941c44bb7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/Actor/Players/RobotIce/Sprites/RobotIce.png"
-dest_files=[ "res://.import/RobotIce.png-d6ff5e71446678d80c88632079226bef.stex" ]
+source_file="res://Scenes/Actor/Players/MrCold/Sprites/RobotIce.png"
+dest_files=[ "res://.import/RobotIce.png-6f69b4651c23404a17c75ce941c44bb7.stex" ]
 
 [params]
 

@@ -14,11 +14,8 @@ var M_IceBlocks_node : Node2D
 
 #### ACCESSORS ####
 
-func is_class(value: String):
-	return value == "Water" or .is_class(value)
-
-func get_class() -> String:
-	return "Water"
+func is_class(value: String): return value == "Water" or .is_class(value)
+func get_class() -> String: return "Water"
 
 
 #### BUILT-IN ####

@@ -129,6 +129,14 @@ func generate_rooms() -> Node:
 	return room
 
 
+func fetch_rooms_objects():
+	for room in $Room.get_children():
+		var room_rect = room.get_room_rect()
+		for obj in room.interactive_objects:
+			obj.set_position(obj.get_position() + room_rect.position * GAME.TILE_SIZE)
+			object_to_add.append(obj) 
+
+
 # Place the rooms in the chunck by carving modifing the chunck bin accordingly to the room bin
 func place_room(room : ChunckRoom):
 	var room_rect : Rect2 = room.get_room_rect()
@@ -140,11 +148,11 @@ func place_room(room : ChunckRoom):
 			else:
 				var room_cell = room.bin_map[i][j]
 				chunck_bin.bin_map[pos.y][pos.x] = room_cell
+				walls_tilemap.set_cellv(pos, -1)
 	
-	for obj in room.interactive_objects:
-		obj.set_position(obj.get_position() + room_rect.position * GAME.TILE_SIZE)
-		object_to_add.append(obj)
-
+	var top_left_corner = room_rect.position - Vector2.ONE
+	var bottom_right_corner = room_rect.position + room_rect.size + Vector2.ONE
+	walls_tilemap.update_bitmask_region(top_left_corner, bottom_right_corner)
 
 # Place the tiles in the tilemap according the the bin_map value
 func place_wall_tiles(pos := Vector2.INF):
@@ -156,12 +164,13 @@ func place_wall_tiles(pos := Vector2.INF):
 	if pos != Vector2.INF:
 		for i in range(2):
 			for j in range(2):
-				if pos.y + i >= bin_noise_map.size() or pos.x + j >= bin_noise_map[0].size():
+				var current_pos = pos + Vector2(j, i)
+				if chunck_bin.is_cell_outside_chunck(current_pos):
 					continue
-				if bin_noise_map[pos.y + i][pos.x + j] == 1:
-					walls_tilemap.set_cellv(pos, wall_tile_id)
+				if bin_noise_map[current_pos.y][current_pos.x] == 1:
+					walls_tilemap.set_cellv(current_pos, wall_tile_id)
 				else:
-					walls_tilemap.set_cellv(pos, -1)
+					walls_tilemap.set_cellv(current_pos, -1)
 		return
 	
 	# Update the whole tilemap
@@ -189,13 +198,6 @@ func initialize_player_placement():
 			key = "top"
 
 		players_disposition[key] = weakref(player)
-
-
-
-# Verify if the given cell is outside the chunck or not
-func is_cell_outside_chunck(cell: Vector2) -> bool:
-	return cell.x < 0 or cell.y < 0 or\
-	cell.x >= chunck_bin.chunck_tile_size.x or cell.y >= chunck_bin.chunck_tile_size.y
 
 
 # Returns true if the given position is in the bottom half of the chunck

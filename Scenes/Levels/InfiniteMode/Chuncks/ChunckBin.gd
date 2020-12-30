@@ -42,17 +42,14 @@ func print_bin_map():
 		print(line)
 
 
+# Erase the 2*2 tiles at the given automata position
 func erase_automata_pos(pos: Vector2):
-	pos = Vector2(int(pos.x), int(pos.y))
-	bin_map[pos.y][pos.x] = 0
-	if pos.y - 1 >= 0:
-		bin_map[pos.y - 1][pos.x] = 0
-
-	if pos.x + 1 < chunck_tile_size.x:
-		bin_map[pos.y][pos.x + 1] = 0
-		if pos.y - 1 >= 0:
-			bin_map[pos.y - 1][pos.x + 1] = 0
-
+	for i in range(2):
+		for j in range(2):
+			var current_pos = pos + Vector2(j, i)
+			if is_cell_outside_chunck(current_pos): 
+				continue
+			bin_map[current_pos.y][current_pos.x] = 0
 
 
 #### BUG WITH LEVEL START SOMTIMES ####
@@ -83,6 +80,12 @@ func count_wall_neighbours(pos: Vector2) -> int:
 	if pos.y - 1 > 0 && bin_map[pos.y - 1][pos.x] == 1:
 		nb_wall_neighbour += 1
 	return nb_wall_neighbour
+
+
+# Verify if the given cell is outside the chunck or not
+func is_cell_outside_chunck(cell: Vector2) -> bool:
+	return cell.x < 0 or cell.y < 0 or\
+	cell.x >= chunck_tile_size.x or cell.y >= chunck_tile_size.y
 
 
 #### VIRTUALS ####

@@ -106,7 +106,7 @@ func move() -> bool:
 		var _err = connect("room_crossed", room, "_on_automata_crossed")
 		room_rect = room.get_room_rect()
 		var entry_point = Vector2(0, bin_map_pos.y)
-		var rel_entry = theorical_to_rel_access(entry_point)
+		var rel_entry = theorical_to_rel_access(bin_map_pos, Vector2.LEFT)
 		var room_floor_y = room_rect.position.y + room_rect.size.y
 		
 		rel_entry = Vector2(rel_entry.x, clamp(rel_entry.y, entry_point.y, room_floor_y))
@@ -117,13 +117,14 @@ func move() -> bool:
 			var player = chunck.players_disposition[player_key].get_ref()
 			
 			# Compute the y pos of the exit based on whether there is a pool or not
-			var is_pool_possible = room_floor_y - 1 - rel_entry.y > 2 && player.name == "MrCold"
+			var dist_to_floor = room_floor_y - 1 - rel_entry.y 
+			var is_pool_possible = dist_to_floor > 2 && player.name == "MrCold"
 			var min_exit_height = 2 if is_pool_possible else 0
 			var max_exit_height = 5 - min_exit_height if is_pool_possible else 3
 			
 			# Get a random offset value between min_exit_height & max_exit_height
 			var random_offset = (randi() % int(max_exit_height) + min_exit_height) * Vector2.UP
-			final_pos = room_rect.position + room_rect.size + random_offset + Vector2.UP
+			final_pos = room_rect.position + room_rect.size + random_offset + Vector2(0, -2)
 			
 			if is_pool_possible:
 				pass
@@ -134,7 +135,7 @@ func move() -> bool:
 			var y = clamp(bin_map_pos.y, room_rect.position.y + GAME.JUMP_MAX_DIST.y, room_floor_y)
 			final_pos = Vector2(x, y)
 		
-		emit_signal("room_crossed", entry_point, final_pos)
+		emit_signal("room_crossed", rel_entry, final_pos)
 		disconnect("room_crossed", room, "_on_automata_crossed")
 		
 		forced_moves.append(Vector2.RIGHT)
@@ -185,14 +186,14 @@ func choose_move() -> Vector2:
 # ie the lowest point from where the player pass
 func theorical_to_rel_access(access: Vector2, offset := Vector2.ZERO) -> Vector2:
 	var point = access + offset
-	var chunck_bin_map = chunck.get_chunck_bin().bin_map
+	var chunck_bin_map = chunck_bin.bin_map
 	var chunck_size = ChunckBin.chunck_tile_size
 	var rel_access = Vector2.ZERO
 	
 	for i in range(chunck_size.y):
 		if point.y + i > chunck_size.y: break
 		if chunck_bin_map[point.y + i][point.x] == 1:
-			rel_access = point + Vector2(0, i - 1) * int(i != 0)
+			rel_access = access + Vector2(0, i - 2) * int(i != 0 && i != 1)
 			return rel_access
 	return access
 
@@ -233,9 +234,9 @@ func is_near_ceiling() -> bool:
 # Returns true if the automata is close from the floor of its half
 func is_near_floor() -> bool:
 	if !is_in_bottom_half():
-		return bin_map_pos.y >= chunck_bin.chunck_tile_size.y / 2 - 2
+		return bin_map_pos.y >= chunck_bin.chunck_tile_size.y / 2 - 3
 	else:
-		return bin_map_pos.y >= chunck_bin.chunck_tile_size.y - 2
+		return bin_map_pos.y >= chunck_bin.chunck_tile_size.y - 3
 
 
 # Returns true if the automata is close from the end of the floor

@@ -220,7 +220,7 @@ func get_top_entry_exit_couple() -> Array:
 # Generate a liquid in the room if the conditions are met
 func generate_liquid(liquid_type: String):
 	var lowest_access = find_lowest_room_access()
-	var y_max_pool_size = room_rect.size.y - lowest_access.y - 2
+	var y_max_pool_size = room_rect.size.y - lowest_access.y - 3
 	
 	var lowest_platform = find_lowest_platfrom()
 	

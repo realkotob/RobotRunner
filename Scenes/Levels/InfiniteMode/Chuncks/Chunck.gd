@@ -80,6 +80,7 @@ func _ready():
 func generate_self():
 	update_wall_tiles()
 	SlopePlacer.place_slopes(walls_tilemap)
+	fetch_rooms_objects()
 	generate_objects()
 	
 	if debug:
@@ -131,7 +132,7 @@ func generate_rooms() -> Node:
 
 
 func fetch_rooms_objects():
-	for room in $Room.get_children():
+	for room in $Rooms.get_children():
 		var room_rect = room.get_room_rect()
 		for obj in room.interactive_objects:
 			obj.set_position(obj.get_position() + room_rect.position * GAME.TILE_SIZE)

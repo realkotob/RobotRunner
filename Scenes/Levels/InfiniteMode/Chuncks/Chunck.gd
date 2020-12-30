@@ -14,9 +14,7 @@ const max_nb_room : int = 3
 onready var walls_tilemap = $Walls
 onready var new_chunck_area = $NewChunckGenArea
 
-signal chunck_gen_finished
-signal new_chunck_reached(invert_player_pos)
-signal every_automata_finished
+export var debug : bool = true
 
 var chunck_bin : ChunckBin = null setget set_chunck_bin, get_chunck_bin
 
@@ -35,6 +33,10 @@ var players_disposition : Dictionary = {
 	"bottom": null
 }
 
+signal chunck_gen_finished
+signal new_chunck_reached(invert_player_pos)
+signal every_automata_finished
+signal walls_updated
 
 #### ACCESSORS ####
 
@@ -55,10 +57,16 @@ func _ready():
 	var _err = new_chunck_area.connect("body_entered", self, "on_body_entered")
 	is_ready = true
 	
+	if debug:
+		GAME.set_screen_fade_visible(false)
+	
 	var last_room = generate_rooms()
 	
 	if last_room != null:
 		yield(last_room, "ready")
+	
+	set_chunck_bin(ChunckBin.new())
+	update_wall_tiles()
 	
 	initialize_player_placement()
 	create_automatas()
@@ -68,13 +76,24 @@ func _ready():
 
 func generate_self():
 	place_rooms()
-	place_wall_tiles()
-	walls_tilemap.update_bitmask_region(Vector2.ZERO, ChunckBin.chunck_tile_size)
+	update_wall_tiles()
 	SlopePlacer.place_slopes(walls_tilemap)
-	
 	generate_objects()
-#	room_debug_visualizer()
+	
+	if debug:
+		room_debug_visualizer()
 	emit_signal("chunck_gen_finished")
+
+
+func update_wall_tiles(pos := Vector2.INF):
+	place_wall_tiles(pos)
+	if pos == Vector2.INF:
+		walls_tilemap.update_bitmask_region(Vector2.ZERO, ChunckBin.chunck_tile_size)
+	else:
+		walls_tilemap.update_bitmask_region(pos - Vector2.ONE, pos + Vector2.ONE)
+	
+	walls_tilemap.update_dirty_quadrants()
+	emit_signal("walls_updated")
 
 
 func create_automatas() -> void:
@@ -132,10 +151,18 @@ func place_rooms():
 
 
 # Place the tiles in the tilemap according the the bin_map value
-func place_wall_tiles():
+func place_wall_tiles(pos := Vector2.INF):
 	var wall_tile_id = walls_tilemap.get_tileset().find_tile_by_name("AutotileWall")
 	var chunck_tile_size = ChunckBin.chunck_tile_size
-	var bin_noise_map = chunck_bin.bin_map
+	var bin_noise_map = chunck_bin.get_bin_map()
+	
+	if pos != Vector2.INF:
+		if bin_noise_map[pos.y][pos.x] == 1:
+			walls_tilemap.set_cellv(pos, wall_tile_id)
+		else:
+			walls_tilemap.set_cellv(pos, -1)
+		return
+	
 	walls_tilemap.clear()
 	
 	for i in range(chunck_tile_size.y):
@@ -143,6 +170,8 @@ func place_wall_tiles():
 			var current_pos = Vector2(j, i)
 			if bin_noise_map[i][j] == 1:
 				walls_tilemap.set_cellv(current_pos, wall_tile_id)
+			else:
+				walls_tilemap.set_cellv(current_pos, -1)
 
 
 # Initialize the player disposition dictionary
@@ -337,8 +366,10 @@ func on_bin_map_changed():
 	pass
 
 
-func on_automata_moved(_automata: ChunckAutomata, _to: Vector2):
-	pass
+func on_automata_moved(_automata: ChunckAutomata, to: Vector2):
+	chunck_bin.erase_automata_pos(to)
+	if debug:
+		update_wall_tiles()
 
 
 func on_automata_forced_move_finished(_automata: ChunckAutomata, _pos: Vector2):

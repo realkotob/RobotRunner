@@ -72,15 +72,14 @@ func generate_platforms():
 		var room_size = get_room_rect().size
 		
 		var nb_platform = int(round(room_size.x / (jump_max_dist.x + AVERAGE_PLTF_LEN) + 1))
-		var entry_point_cell = get_playable_access(entry)
 		var average_dist = clamp(int(room_size.x / nb_platform + 1), 3.0, GAME.JUMP_MAX_DIST.x - 1)
 		
-		var last_platform_end : Vector2 = entry_point_cell
-		var platform_avg_y = entry_point_cell.y
+		var last_platform_end : Vector2 = entry
+		var platform_avg_y = entry.y
 		
 		var half_chuck_y = int(ChunckBin.chunck_tile_size.y / 2) 
 		var first_half : bool = entry.y + room_rect.position.y <= half_chuck_y
-		var stair_needed : bool = entry_point_cell.y - exit.y > GAME.JUMP_MAX_DIST.y
+		var stair_needed : bool = entry.y - exit.y > GAME.JUMP_MAX_DIST.y
 		
 		# Platform generation, loop through every platfroms
 		for i in range(nb_platform):
@@ -179,20 +178,6 @@ func generate_breakable_platfrom(plt: ChunckPlatform):
 	interactive_objects.append(breakable_pltf)
 
 
-# Convert the theorical entry point in the concrete one
-# ie the point from where the player can jump
-func get_playable_access(access: Vector2, exit: bool = false) -> Vector2:
-	var rel_access = _cell_rel_to_abs(access)
-	var point = rel_access + Vector2.LEFT if !exit else rel_access + Vector2.RIGHT
-	var chunck_bin_map = chunck.get_chunck_bin().bin_map
-	var chunck_size = ChunckBin.chunck_tile_size
-	
-	for i in range(chunck_size.y):
-		if chunck_bin_map[point.y + i][point.x] == 1:
-			return access + Vector2(0, i - 1)
-	return access
-
-
 # Convert a relative cell (relative to the room) to an absolute cell (relative to the whole chunck) 
 func _cell_rel_to_abs(cell: Vector2) -> Vector2:
 	return cell + room_rect.position
@@ -270,8 +255,7 @@ func find_lowest_room_access() -> Vector2:
 	var lowest_access := -Vector2.INF
 	for couple in entry_exit_couple_array:
 		for i in range(couple.size()):
-			var is_exit : bool = i == 1
-			var access = get_playable_access(couple[i], is_exit) 
+			var access = couple[i]
 			if access.y > lowest_access.y:
 				lowest_access = access
 	return lowest_access

@@ -95,9 +95,6 @@ func count_wall_neighbours(pos: Vector2) -> int:
 
 #### SIGNAL RESPONSES ####
 
-func on_automata_moved(_automata: Object, to_pos: Vector2):
-	erase_automata_pos(to_pos)
-
 func on_automata_finished(_pos: Vector2):
 	refine_chunck()
 	emit_signal("bin_map_changed")

@@ -223,6 +223,10 @@ func fade_out():
 	MUSIC.fade_out()
 
 
+func set_screen_fade_visible(value: bool):
+	$CanvasLayer/ColorRect.set_visible(value)
+
+
 # Check if the current level index is the right one when a new level is ready
 # Usefull when testing a level standalone to keep track of the progression
 func update_current_level_index(level : Level):

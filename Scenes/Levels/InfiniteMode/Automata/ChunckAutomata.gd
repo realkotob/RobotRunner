@@ -16,7 +16,8 @@ onready var move_timer = Timer.new()
 
 signal moved(automata, to)
 signal finished(final_pos)
-signal entered_room(entry_point, exit_point)
+signal room_reached(automata, room)
+signal room_crossed(entry_point, exit_point)
 signal forced_move_finished(automata, pos)
 signal block_placable(cell)
 
@@ -48,11 +49,12 @@ func _init(chunck_binary: ChunckBin, pos: Vector2):
 
 
 func _ready():
-	var _err = connect("finished", chunck, "on_automata_finished")
-	_err = connect("finished", chunck_bin, "on_automata_finished")
-	_err = connect("moved", chunck, "on_automata_moved")
-	_err = connect("forced_move_finished", chunck, "on_automata_forced_move_finished")
-	_err = connect("block_placable", chunck, "on_automata_block_placable")
+	var _err = connect("finished", chunck, "_on_automata_finished")
+	_err = connect("finished", chunck_bin, "_on_automata_finished")
+	_err = connect("moved", chunck, "_on_automata_moved")
+	_err = connect("forced_move_finished", chunck, "_on_automata_forced_move_finished")
+	_err = connect("block_placable", chunck, "_on_automata_block_placable")
+	_err = connect("room_reached", chunck, "_on_automata_room_reached")
 	
 	emit_signal("moved", self, bin_map_pos)
 	
@@ -99,7 +101,9 @@ func move() -> bool:
 	# If it's a big room, stay on the same y axis, if it's a small one
 	# set the y position to the bottom of the room so it is accesible from a jump
 	if room != null:
-		var _err = connect("entered_room", room, "on_automata_entered")
+		emit_signal("room_reached", self, room)
+		
+		var _err = connect("room_crossed", room, "_on_automata_crossed")
 		room_rect = room.get_room_rect()
 		var entry_point = Vector2(0, bin_map_pos.y)
 		var rel_entry = theorical_to_rel_access(entry_point)
@@ -113,13 +117,16 @@ func move() -> bool:
 			var player = chunck.players_disposition[player_key].get_ref()
 			
 			# Compute the y pos of the exit based on whether there is a pool or not
-			var is_pool_possible = room_floor_y - rel_entry.y >= 2 && player.name == "MrCold"
+			var is_pool_possible = room_floor_y - 1 - rel_entry.y > 2 && player.name == "MrCold"
 			var min_exit_height = 2 if is_pool_possible else 0
 			var max_exit_height = 5 - min_exit_height if is_pool_possible else 3
 			
 			# Get a random offset value between min_exit_height & max_exit_height
 			var random_offset = (randi() % int(max_exit_height) + min_exit_height) * Vector2.UP
 			final_pos = room_rect.position + room_rect.size + random_offset + Vector2.UP
+			
+			if is_pool_possible:
+				pass
 		else:
 			# Clamp the exit position so its not too close from the ceiling
 			# And it can't exceed the floor of the room
@@ -127,8 +134,8 @@ func move() -> bool:
 			var y = clamp(bin_map_pos.y, room_rect.position.y + GAME.JUMP_MAX_DIST.y, room_floor_y)
 			final_pos = Vector2(x, y)
 		
-		emit_signal("entered_room", entry_point, final_pos)
-		disconnect("entered_room", room, "on_automata_entered")
+		emit_signal("room_crossed", entry_point, final_pos)
+		disconnect("room_crossed", room, "_on_automata_crossed")
 		
 		forced_moves.append(Vector2.RIGHT)
 	else:
@@ -185,7 +192,7 @@ func theorical_to_rel_access(access: Vector2, offset := Vector2.ZERO) -> Vector2
 	for i in range(chunck_size.y):
 		if point.y + i > chunck_size.y: break
 		if chunck_bin_map[point.y + i][point.x] == 1:
-			rel_access = point + Vector2(0, i - 1)
+			rel_access = point + Vector2(0, i - 1) * int(i != 0)
 			return rel_access
 	return access
 

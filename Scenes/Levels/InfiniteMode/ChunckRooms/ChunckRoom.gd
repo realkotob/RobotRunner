@@ -281,7 +281,7 @@ func find_lowest_platfrom() -> ChunckPlatform:
 
 #### SIGNAL RESPONSES ####
 
-func on_automata_entered(entry: Vector2, exit: Vector2):
+func _on_automata_crossed(entry: Vector2, exit: Vector2):
 	entry_exit_couple_array.append([_cell_abs_to_rel(entry, true), _cell_abs_to_rel(exit, true)])
 
 func on_every_automata_finished():

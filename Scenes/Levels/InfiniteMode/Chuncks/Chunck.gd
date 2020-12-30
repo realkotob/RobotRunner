@@ -18,6 +18,8 @@ export var debug : bool = true
 
 var chunck_bin : ChunckBin = null setget set_chunck_bin, get_chunck_bin
 
+var unplaced_rooms : Array = []
+
 var first_chunck : bool = false
 var is_ready : bool = false
 var starting_points : Array = []
@@ -75,7 +77,6 @@ func _ready():
 #### LOGIC ####
 
 func generate_self():
-	place_rooms()
 	update_wall_tiles()
 	SlopePlacer.place_slopes(walls_tilemap)
 	generate_objects()
@@ -90,7 +91,7 @@ func update_wall_tiles(pos := Vector2.INF):
 	if pos == Vector2.INF:
 		walls_tilemap.update_bitmask_region(Vector2.ZERO, ChunckBin.chunck_tile_size)
 	else:
-		walls_tilemap.update_bitmask_region(pos - Vector2.ONE, pos + Vector2.ONE)
+		walls_tilemap.update_bitmask_region(pos - Vector2.ONE, pos + Vector2(2, 2))
 	
 	walls_tilemap.update_dirty_quadrants()
 	emit_signal("walls_updated")
@@ -124,30 +125,25 @@ func generate_rooms() -> Node:
 		room.name = "SmallRoom"
 		room.chunck = self
 		$Rooms.call_deferred("add_child", room)
+		unplaced_rooms.append(room)
 	return room
 
 
 # Place the rooms in the chunck by carving modifing the chunck bin accordingly to the room bin
-func place_rooms():
-	for room in $Rooms.get_children():
-		
-		# If no automata has entered this room, ignore it
-		if room.entry_exit_couple_array.empty():
-			continue
-		
-		var room_rect : Rect2 = room.get_room_rect()
-		for i in range(room_rect.size.y):
-			for j in range(room_rect.size.x):
-				var pos = Vector2(j, i) + room_rect.position
-				if room.bin_map.empty():
-					continue
-				else:
-					var room_cell = room.bin_map[i][j]
-					chunck_bin.bin_map[pos.y][pos.x] = room_cell
-		
-		for obj in room.interactive_objects:
-			obj.set_position(obj.get_position() + room_rect.position * GAME.TILE_SIZE)
-			object_to_add.append(obj)
+func place_room(room : ChunckRoom):
+	var room_rect : Rect2 = room.get_room_rect()
+	for i in range(room_rect.size.y):
+		for j in range(room_rect.size.x):
+			var pos = Vector2(j, i) + room_rect.position
+			if room.bin_map.empty():
+				continue
+			else:
+				var room_cell = room.bin_map[i][j]
+				chunck_bin.bin_map[pos.y][pos.x] = room_cell
+	
+	for obj in room.interactive_objects:
+		obj.set_position(obj.get_position() + room_rect.position * GAME.TILE_SIZE)
+		object_to_add.append(obj)
 
 
 # Place the tiles in the tilemap according the the bin_map value
@@ -156,13 +152,19 @@ func place_wall_tiles(pos := Vector2.INF):
 	var chunck_tile_size = ChunckBin.chunck_tile_size
 	var bin_noise_map = chunck_bin.get_bin_map()
 	
+	# Update a single given automata position (2*2 tiles)
 	if pos != Vector2.INF:
-		if bin_noise_map[pos.y][pos.x] == 1:
-			walls_tilemap.set_cellv(pos, wall_tile_id)
-		else:
-			walls_tilemap.set_cellv(pos, -1)
+		for i in range(2):
+			for j in range(2):
+				if pos.y + i >= bin_noise_map.size() or pos.x + j >= bin_noise_map[0].size():
+					continue
+				if bin_noise_map[pos.y + i][pos.x + j] == 1:
+					walls_tilemap.set_cellv(pos, wall_tile_id)
+				else:
+					walls_tilemap.set_cellv(pos, -1)
 		return
 	
+	# Update the whole tilemap
 	walls_tilemap.clear()
 	
 	for i in range(chunck_tile_size.y):
@@ -366,17 +368,17 @@ func on_bin_map_changed():
 	pass
 
 
-func on_automata_moved(_automata: ChunckAutomata, to: Vector2):
+func _on_automata_moved(_automata: ChunckAutomata, to: Vector2):
 	chunck_bin.erase_automata_pos(to)
 	if debug:
-		update_wall_tiles()
+		update_wall_tiles(to)
 
 
-func on_automata_forced_move_finished(_automata: ChunckAutomata, _pos: Vector2):
+func _on_automata_forced_move_finished(_automata: ChunckAutomata, _pos: Vector2):
 	pass
 
 
-func on_automata_finished(final_pos: Vector2):
+func _on_automata_finished(final_pos: Vector2):
 	next_start_pos_array.append(Vector2(0, final_pos.y))
 	nb_automata -= 1
 	
@@ -385,8 +387,12 @@ func on_automata_finished(final_pos: Vector2):
 		generate_self()
 
 
-func on_automata_block_placable(cell: Vector2):
+func _on_automata_block_placable(cell: Vector2):
 	if !first_chunck:
 		var rng = randi() % 3
 		if rng == 0:
 			place_block(cell)
+
+func _on_automata_room_reached(_automata: ChunckAutomata, room: ChunckRoom):
+	if room in unplaced_rooms:
+		place_room(room)

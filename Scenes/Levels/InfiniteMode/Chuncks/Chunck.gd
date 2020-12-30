@@ -52,6 +52,7 @@ func set_chunck_bin(value: ChunckBin):
 
 func get_chunck_bin() -> ChunckBin: return chunck_bin
 
+func get_rooms() -> Array : return $Rooms.get_children()
 
 #### BUILT-IN ####
 
@@ -67,7 +68,7 @@ func _ready():
 	if last_room != null:
 		yield(last_room, "ready")
 	
-	set_chunck_bin(ChunckBin.new())
+	set_chunck_bin(ChunckBin.new(self))
 	update_wall_tiles()
 	
 	initialize_player_placement()

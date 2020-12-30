@@ -3,6 +3,7 @@ class_name ChunckBin
 
 const chunck_tile_size := Vector2(40, 23)
 
+var chunck = null
 var bin_map : Array setget set_bin_map, get_bin_map
 var entry_exit_couple_array : Array = []
 
@@ -18,8 +19,9 @@ func get_bin_map() -> Array: return bin_map
 
 #### BUILT-IN ####
 
-func _init():
+func _init(chunck_ref):
 	generate_filled_bin_map()
+	chunck = chunck_ref
 
 #### LOGIC ####
 
@@ -57,9 +59,11 @@ func erase_automata_pos(pos: Vector2):
 func refine_chunck():
 	for i in range(chunck_tile_size.y):
 		for j in range(chunck_tile_size.x):
-			if i == 0 or j == 0 or i == chunck_tile_size.y - 1 or j == chunck_tile_size.x -1:
+			if i == 0 or j == 0 or i == chunck_tile_size.y - 1 or j == chunck_tile_size.x -1\
+					or is_cell_inside_room_walls(Vector2(j, i)):
 				continue
 			var wall_neighbours : int = count_wall_neighbours(Vector2(j, i)) 
+			
 			if bin_map[i][j] == 1 && wall_neighbours <= 1:
 				bin_map[i][j] = 0
 				
@@ -67,6 +71,16 @@ func refine_chunck():
 				if i - 1 > 0 && bin_map[i - 1][j] == 1 && \
 				count_wall_neighbours(Vector2(j, i - 1)) <= 1:
 					bin_map[i - 1][j] = 0
+
+
+# Check if the given cell is inside the room, including its walls
+func is_cell_inside_room_walls(cell: Vector2) -> bool:
+	for room in chunck.get_rooms():
+		var top_left = room.get_top_left() - Vector2.ONE
+		var room_walls_rect := Rect2(top_left, room.get_room_rect().size + Vector2(2, 2))
+		if room_walls_rect.has_point(cell):
+			return true
+	return false
 
 
 func count_wall_neighbours(pos: Vector2) -> int:

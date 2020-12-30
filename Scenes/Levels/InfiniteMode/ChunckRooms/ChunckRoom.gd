@@ -35,6 +35,8 @@ func get_class() -> String: return "ChunckRoom"
 func set_room_rect(value: Rect2): room_rect = value
 func get_room_rect() -> Rect2: return room_rect
 
+func get_top_left() -> Vector2: return room_rect.position
+func get_bottom_right() -> Vector2 : return room_rect.position + room_rect.size
 
 #### BUILT-IN ####
 

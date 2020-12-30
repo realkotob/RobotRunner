@@ -109,7 +109,7 @@ func move() -> bool:
 		var rel_entry = theorical_to_rel_access(bin_map_pos, Vector2.LEFT)
 		var room_floor_y = room_rect.position.y + room_rect.size.y
 		
-		rel_entry = Vector2(rel_entry.x, clamp(rel_entry.y, entry_point.y, room_floor_y))
+		rel_entry = Vector2(rel_entry.x, clamp(rel_entry.y, entry_point.y, room_floor_y - 2))
 		
 		if room is SmallChunckRoom:
 			# Get the player in the same half of the chunck as the automata

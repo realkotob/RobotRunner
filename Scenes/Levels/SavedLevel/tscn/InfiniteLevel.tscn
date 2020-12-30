@@ -3,22 +3,22 @@
 [ext_resource path="res://Scenes/Levels/InfiniteMode/ChunckGenerator.gd" type="Script" id=1]
 [ext_resource path="res://Global/Tileset/LevelBase.tres" type="TileSet" id=2]
 [ext_resource path="res://Scenes/Camera/Camera.gd" type="Script" id=3]
-[ext_resource path="res://Scenes/GUI/GUI.gd" type="Script" id=4]
-[ext_resource path="res://Scenes/GameConsole/GameConsole.gd" type="Script" id=5]
-[ext_resource path="res://Scenes/StartingPoints/StartingPoint.gd" type="Script" id=6]
-[ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/GroupBase.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/GroupBase.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/StartingPoints/StartingPoint.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/GUI/GUI.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/GameConsole/GameConsole.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/GUI/HUD/HUD.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/StartingPoints/StartingPointP1.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/GameConsole/GameConsole.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Camera/Camera.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Global/Background/ProdLine.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/StartingPoints/StartingPointP2.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Scenes/GameConsole/GameConsole.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Global/Background/Background.png" type="Texture" id=14]
+[ext_resource path="res://Scenes/StartingPoints/StartingPointP1.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/Fog/CosmeticFog/FogMaterial.tres" type="Material" id=14]
 [ext_resource path="res://Global/Background/Gears.png" type="Texture" id=15]
-[ext_resource path="res://Scenes/Fog/CosmeticFog/FogMaterial.tres" type="Material" id=16]
-[ext_resource path="res://icon.png" type="Texture" id=17]
-[ext_resource path="res://Scenes/GUI/HUD/HUD.gd" type="Script" id=18]
-[ext_resource path="res://Scenes/Levels/Base/Paralaxe.gd" type="Script" id=19]
+[ext_resource path="res://icon.png" type="Texture" id=16]
+[ext_resource path="res://Global/Background/Background.png" type="Texture" id=17]
+[ext_resource path="res://Scenes/Levels/Base/Paralaxe.gd" type="Script" id=18]
+[ext_resource path="res://Scenes/GUI/HUD/HUD.gd" type="Script" id=19]
 [ext_resource path="res://Scenes/Levels/InfiniteMode/InfiniteLevel.gd" type="Script" id=20]
 
 [node name="InfiniteLevel" type="Node2D"]
@@ -36,10 +36,10 @@ __meta__ = {
 }
 
 [node name="Fog" type="Sprite" parent="Foreground/Fog"]
-material = ExtResource( 16 )
+material = ExtResource( 14 )
 position = Vector2( 470.01, 277.517 )
 scale = Vector2( 2.09202, 1.27633 )
-texture = ExtResource( 17 )
+texture = ExtResource( 16 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 480, 540 )
 __meta__ = {
@@ -48,7 +48,7 @@ __meta__ = {
 
 [node name="GUI" type="CanvasLayer" parent="."]
 layer = 3
-script = ExtResource( 4 )
+script = ExtResource( 6 )
 
 [node name="Popups" type="Control" parent="GUI"]
 anchor_right = 1.0
@@ -65,18 +65,18 @@ anchor_right = 1.0
 anchor_bottom = 0.143
 margin_top = -64.0
 margin_bottom = -64.22
-script = ExtResource( 18 )
+script = ExtResource( 19 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 hidden = true
 speed = 400
 
-[node name="GameConsole" type="Control" parent="GUI" instance=ExtResource( 13 )]
+[node name="GameConsole" type="Control" parent="GUI" instance=ExtResource( 9 )]
 pause_mode = 2
 visible = false
 margin_top = -1.0
-script = ExtResource( 5 )
+script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -106,10 +106,10 @@ __meta__ = {
 
 [node name="Paralaxe" type="ParallaxBackground" parent="Map/Background"]
 layer = -1
-script = ExtResource( 19 )
+script = ExtResource( 18 )
 
 [node name="Back" type="ParallaxLayer" parent="Map/Background/Paralaxe"]
-position = Vector2( -896, -504 )
+position = Vector2( -1664, -936 )
 motion_scale = Vector2( 0.2, 0.2 )
 motion_mirroring = Vector2( 2048, 1152 )
 __meta__ = {
@@ -120,7 +120,7 @@ __meta__ = {
 [node name="BGBase" type="Sprite" parent="Map/Background/Paralaxe/Back"]
 modulate = Color( 1, 0.96, 0.96, 1 )
 light_mask = 2
-texture = ExtResource( 14 )
+texture = ExtResource( 17 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 2048, 1152 )
@@ -130,7 +130,7 @@ __meta__ = {
 }
 
 [node name="Lights" type="ParallaxLayer" parent="Map/Background/Paralaxe"]
-position = Vector2( 6840, 3847.5 )
+position = Vector2( 11880, 6682.5 )
 motion_scale = Vector2( 0.25, 0.25 )
 __meta__ = {
 "_edit_group_": true,
@@ -138,7 +138,7 @@ __meta__ = {
 }
 
 [node name="Gears" type="ParallaxLayer" parent="Map/Background/Paralaxe"]
-position = Vector2( -1808, -1017 )
+position = Vector2( -1200, -675 )
 motion_scale = Vector2( 0.3, 0.3 )
 motion_mirroring = Vector2( 2048, 1152 )
 __meta__ = {
@@ -158,7 +158,7 @@ __meta__ = {
 }
 
 [node name="ProdLine1" type="ParallaxLayer" parent="Map/Background/Paralaxe" instance=ExtResource( 11 )]
-position = Vector2( -398.4, -238.1 )
+position = Vector2( -260.8, -416.7 )
 motion_scale = Vector2( 0.37, 0.37 )
 motion_mirroring = Vector2( 2048, 640 )
 __meta__ = {
@@ -167,7 +167,7 @@ __meta__ = {
 }
 
 [node name="ProdLine2" type="ParallaxLayer" parent="Map/Background/Paralaxe" instance=ExtResource( 11 )]
-position = Vector2( -672, -112 )
+position = Vector2( -736, -404 )
 motion_scale = Vector2( 0.4, 0.4 )
 motion_mirroring = Vector2( 2048, 640 )
 __meta__ = {
@@ -296,7 +296,7 @@ __meta__ = {
 }
 
 [node name="GreatDoorGroup" type="Node2D" parent="InteractivesObjects"]
-script = ExtResource( 7 )
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -398,15 +398,15 @@ debug = false
 
 [node name="StartingPointP1" type="Node2D" parent="." groups=[
 "StartingPoint",
-] instance=ExtResource( 9 )]
+] instance=ExtResource( 13 )]
 position = Vector2( 72, 132 )
-script = ExtResource( 6 )
+script = ExtResource( 5 )
 
 [node name="StartingPointP2" type="Node2D" parent="." groups=[
 "StartingPoint",
 ] instance=ExtResource( 12 )]
 position = Vector2( 72, 420 )
-script = ExtResource( 6 )
+script = ExtResource( 5 )
 
 [node name="MusicTimer" type="Timer" parent="."]
 wait_time = 0.05

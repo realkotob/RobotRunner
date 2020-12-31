@@ -126,13 +126,13 @@ func get_border_approched(ply_average_pos: Vector2) -> Array:
 		var cam_size = screen_size * cam_zoom
 		var cam_anticip_dist = cam_size.x * ANTICIP_TRIGGER_RATIO
 		
-		# Check average players position
-		if ply_average_pos.x > cam_pos.x + (cam_size.x / 2) - cam_anticip_dist:
+		# Check average players position being in one of the border buffer
+		if ply_average_pos.x > cam_pos.x + (cam_size.x / 2) - cam_anticip_dist - right_buffer_dist:
 			if !(Vector2.RIGHT in border_array) && player.last_direction == 1:
 				border_array.append(Vector2.RIGHT)
 				break
 		
-		if ply_average_pos.x < cam_pos.x - (cam_size.x / 2) + cam_anticip_dist:
+		if ply_average_pos.x < cam_pos.x - (cam_size.x / 2) + cam_anticip_dist + left_buffer_dist:
 			if !(Vector2.LEFT in border_array) && player.last_direction == -1:
 				border_array.append(Vector2.LEFT)
 				break

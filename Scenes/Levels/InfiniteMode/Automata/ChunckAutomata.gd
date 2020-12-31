@@ -1,6 +1,8 @@
 extends Node
 class_name ChunckAutomata
 
+const SIZE := Vector2(2, 2)
+
 export var debug : bool = false 
 
 var chunck_bin : ChunckBin = null 
@@ -92,6 +94,8 @@ func carving_movement_loop() -> void:
 # that way, we know this move was a teleportation
 func move() -> bool:
 	var room : ChunckRoom = chunck.find_room_from_cell(bin_map_pos)
+	if room != null && !is_inside_room(room):
+		room = null
 	var chosen_move = Vector2.INF
 	var final_pos := Vector2.INF
 	var room_rect := Rect2()
@@ -105,10 +109,10 @@ func move() -> bool:
 		var _err = connect("room_crossed", room, "_on_automata_crossed")
 		room_rect = room.get_room_rect()
 		var entry_point = Vector2(0, bin_map_pos.y)
-		var rel_entry = theorical_to_rel_access(bin_map_pos, Vector2.LEFT)
-		var room_floor_y = room_rect.position.y + room_rect.size.y - 1
+		var rel_entry = theorical_to_rel_access(bin_map_pos, room)
+		var room_floor_y = room_rect.position.y + room_rect.size.y
 		
-		rel_entry = Vector2(rel_entry.x, clamp(rel_entry.y, entry_point.y, room_floor_y - 2))
+		rel_entry = Vector2(rel_entry.x, clamp(rel_entry.y, entry_point.y, room_floor_y - SIZE.y))
 		
 		if room is SmallChunckRoom:
 			# Get the player in the same half of the chunck as the automata
@@ -116,9 +120,9 @@ func move() -> bool:
 			var player = chunck.players_disposition[player_key].get_ref()
 			
 			# Compute the y pos of the exit based on whether there is a pool or not
-			var dist_to_floor = room_floor_y - rel_entry.y - 1
+			var dist_to_floor = room_floor_y - rel_entry.y - SIZE.y
 			var is_pool_possible = dist_to_floor > 2 && player.name == "MrCold"
-			var min_exit_height = 2 if is_pool_possible else 0
+			var min_exit_height = 3 if is_pool_possible else 0
 			var max_exit_height = 5 - min_exit_height if is_pool_possible else 3
 			
 			# Get a random offset value between min_exit_height & max_exit_height
@@ -183,18 +187,25 @@ func choose_move() -> Vector2:
 
 # Convert the theorical entry point in the concrete one
 # ie the lowest point from where the player pass
-func theorical_to_rel_access(access: Vector2, offset := Vector2.ZERO) -> Vector2:
-	var point = access + offset
-	var chunck_bin_map = chunck_bin.bin_map
+func theorical_to_rel_access(access: Vector2, room: ChunckRoom, entry := true) -> Vector2:
+	var room_rect = room.get_room_rect()
+	
+	var offset = Vector2.LEFT if entry else Vector2.ZERO
+	var clamped_access = Vector2(room_rect.position.x, access.y) if entry else access
+	
+	var point = clamped_access + offset
 	var chunck_size = ChunckBin.chunck_tile_size
 	var rel_access = Vector2.ZERO
 	
 	for i in range(chunck_size.y):
-		if point.y + i > chunck_size.y: break
-		if chunck_bin_map[point.y + i][point.x] == 1:
-			rel_access = access + Vector2(0, i - 2) * int(i != 0 && i != 1)
+		if point.y + i > chunck_size.y: 
+			break
+		if is_automata_pos_in_wall(point + Vector2(0, i)):
+			if i == 0: 
+				break
+			rel_access = clamped_access + Vector2(0, i - 1)
 			return rel_access
-	return access
+	return clamped_access
 
 
 # Compare the given move with the last move the automata has done.
@@ -252,6 +263,22 @@ func is_pos_inside_chunck(pos: Vector2):
 	return pos.x >= 0 && pos.y >= 0 \
 	&& pos.x < chunck_bin.chunck_tile_size.x && pos.y < chunck_bin.chunck_tile_size.y
 
+# Check if the entire automata is inside the given room 
+func is_inside_room(room : ChunckRoom) -> bool:
+	var room_rect = room.get_room_rect()
+	for i in range(SIZE.y):
+		for j in range(SIZE.x):
+			if !room_rect.has_point(bin_map_pos + Vector2(j, i)):
+				return false
+	return true
+
+func is_automata_pos_in_wall(pos: Vector2) -> bool:
+	var bin_map = chunck_bin.get_bin_map()
+	for i in range(SIZE.y):
+		for j in range(SIZE.x):
+			if bin_map[pos.y + i][pos.x + j] == 1:
+				return true
+	return false
 
 #### VIRTUALS ####
 

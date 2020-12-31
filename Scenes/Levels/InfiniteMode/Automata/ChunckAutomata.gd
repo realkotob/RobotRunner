@@ -50,7 +50,6 @@ func _init(chunck_binary: ChunckBin, pos: Vector2):
 
 func _ready():
 	var _err = connect("finished", chunck, "_on_automata_finished")
-	_err = connect("finished", chunck_bin, "_on_automata_finished")
 	_err = connect("moved", chunck, "_on_automata_moved")
 	_err = connect("forced_move_finished", chunck, "_on_automata_forced_move_finished")
 	_err = connect("block_placable", chunck, "_on_automata_block_placable")
@@ -107,7 +106,7 @@ func move() -> bool:
 		room_rect = room.get_room_rect()
 		var entry_point = Vector2(0, bin_map_pos.y)
 		var rel_entry = theorical_to_rel_access(bin_map_pos, Vector2.LEFT)
-		var room_floor_y = room_rect.position.y + room_rect.size.y
+		var room_floor_y = room_rect.position.y + room_rect.size.y - 1
 		
 		rel_entry = Vector2(rel_entry.x, clamp(rel_entry.y, entry_point.y, room_floor_y - 2))
 		
@@ -117,7 +116,7 @@ func move() -> bool:
 			var player = chunck.players_disposition[player_key].get_ref()
 			
 			# Compute the y pos of the exit based on whether there is a pool or not
-			var dist_to_floor = room_floor_y - 1 - rel_entry.y 
+			var dist_to_floor = room_floor_y - rel_entry.y - 1
 			var is_pool_possible = dist_to_floor > 2 && player.name == "MrCold"
 			var min_exit_height = 2 if is_pool_possible else 0
 			var max_exit_height = 5 - min_exit_height if is_pool_possible else 3

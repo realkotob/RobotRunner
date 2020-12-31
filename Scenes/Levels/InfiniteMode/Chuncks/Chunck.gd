@@ -48,7 +48,6 @@ func get_class() -> String: return "LevelChunck"
 func set_chunck_bin(value: ChunckBin):
 	if value != null:
 		chunck_bin = value
-		var _err = chunck_bin.connect("bin_map_changed", self, "on_bin_map_changed")
 
 func get_chunck_bin() -> ChunckBin: return chunck_bin
 
@@ -387,6 +386,7 @@ func _on_automata_finished(final_pos: Vector2):
 	nb_automata -= 1
 	
 	if nb_automata == 0:
+		chunck_bin.refine_chunck()
 		emit_signal("every_automata_finished")
 		generate_self()
 

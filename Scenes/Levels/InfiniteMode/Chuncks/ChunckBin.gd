@@ -7,8 +7,6 @@ var chunck = null
 var bin_map : Array setget set_bin_map, get_bin_map
 var entry_exit_couple_array : Array = []
 
-signal bin_map_changed
-
 #### ACCESSORS ####
 
 func is_class(value: String): return value == "" or .is_class(value)
@@ -60,7 +58,7 @@ func refine_chunck():
 	for i in range(chunck_tile_size.y):
 		for j in range(chunck_tile_size.x):
 			if i == 0 or j == 0 or i == chunck_tile_size.y - 1 or j == chunck_tile_size.x -1\
-					or is_cell_inside_room_walls(Vector2(j, i)):
+					or is_cell_inside_room_walls(Vector2(i, j)):
 				continue
 			var wall_neighbours : int = count_wall_neighbours(Vector2(j, i)) 
 			
@@ -111,7 +109,3 @@ func is_cell_outside_chunck(cell: Vector2) -> bool:
 
 
 #### SIGNAL RESPONSES ####
-
-func _on_automata_finished(_pos: Vector2):
-	refine_chunck()
-	emit_signal("bin_map_changed")

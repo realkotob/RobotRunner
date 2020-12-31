@@ -61,6 +61,8 @@ func damage():
 		if body.get_class() in owner.breakable_type_array:
 			var average_pos = (body.global_position + action_hitbox_node.global_position) / 2
 			damage_body(body, average_pos)
+	
+	has_touch = true
 
 
 func interact():

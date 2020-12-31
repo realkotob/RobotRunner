@@ -26,15 +26,14 @@ func _ready():
 
 #### LOGIC ####
 
-# Create an ice block on interaction, the position of the hit box has to be inside the water area to truly happen
+# Create an iceblock on interaction, the position of the hit box has to be inside the water area to truly happen
 func interact(global_pos : Vector2):
 	if collision_shape != null:
 		if is_position_in_area(global_pos, collision_shape):
-			M_IceBlocks_node = iceblock_scene.instance()
-			
-			add_child(M_IceBlocks_node)
-			M_IceBlocks_node.set_global_position(global_pos)
-			body_floating(M_IceBlocks_node, true)
+			var iceblock = iceblock_scene.instance()
+			add_child(iceblock)
+			iceblock.set_global_position(global_pos)
+			iceblock.set_floating_line(floating_line_node.global_position.y)
 
 
 # Return true if the given position is inside the given area, false if not
@@ -47,7 +46,10 @@ func is_position_in_area(pos: Vector2, collision_shape : CollisionShape2D) -> bo
 
 # Setup the floating on the given body
 func body_floating(body : PhysicsBody2D, float_or_not : bool):
-	body.is_floating = float_or_not
+	if !body.has_method("set_floating"):
+		return
+	
+	body.set_floating(float_or_not)
 	
 	if float_or_not == true:
 		body.floating_line_y = floating_line_node.global_position.y

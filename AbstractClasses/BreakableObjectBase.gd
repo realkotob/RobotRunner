@@ -86,6 +86,7 @@ func awake():
 	awake_nearby_bodies()
 	set_mode(RigidBody2D.MODE_RIGID)
 	set_sleeping(false)
+	set_physics_process(true)
 
 
 #### SIGNAL RESPONSES ####

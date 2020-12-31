@@ -58,7 +58,7 @@ func refine_chunck():
 	for i in range(chunck_tile_size.y):
 		for j in range(chunck_tile_size.x):
 			if i == 0 or j == 0 or i == chunck_tile_size.y - 1 or j == chunck_tile_size.x -1\
-					or is_cell_inside_room_walls(Vector2(i, j)):
+					or is_cell_inside_room_walls(Vector2(j, i)):
 				continue
 			var wall_neighbours : int = count_wall_neighbours(Vector2(j, i)) 
 			

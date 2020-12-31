@@ -13,6 +13,7 @@ var last_moves := PoolVector2Array()
 var stoped : bool = false setget set_stoped, is_stoped
 
 var forced_moves = []
+var thread : Thread
 
 onready var move_timer = Timer.new()
 
@@ -38,7 +39,7 @@ func get_bin_map_pos() -> Vector2: return bin_map_pos
 func set_stoped(value: bool): 
 	stoped = value
 	if stoped == false:
-		carving_movement_loop()
+		start_carving()
 
 func is_stoped() -> bool: return stoped
 
@@ -52,6 +53,7 @@ func _init(chunck_binary: ChunckBin, pos: Vector2):
 
 func _ready():
 	var _err = connect("finished", chunck, "_on_automata_finished")
+	_err = connect("finished", self, "_on_carving_finished")
 	_err = connect("moved", chunck, "_on_automata_moved")
 	_err = connect("forced_move_finished", chunck, "_on_automata_forced_move_finished")
 	_err = connect("block_placable", chunck, "_on_automata_block_placable")
@@ -64,13 +66,23 @@ func _ready():
 		move_timer.set_wait_time(0.1)
 		_err = move_timer.connect("timeout", self, "on_move_timer_timeout")
 	else:
-		carving_movement_loop()
+		start_carving()
 
 
 #### LOGIC ####
 
 
-func carving_movement_loop() -> void:
+func start_carving() -> void:
+	carving_movement_loop(null)
+#	if debug:
+#		carving_movement_loop(null)
+#	else:
+#		thread = Thread.new()
+#		var __ = thread.start(self, "carving_movement_loop")
+
+
+# Carve into the chunck until something tells it to stop or its arrived at the end of the chunck
+func carving_movement_loop(_thread_user_data):
 	var movement_finished : bool = false
 	
 	while(!stoped):
@@ -84,7 +96,7 @@ func carving_movement_loop() -> void:
 	
 	if movement_finished:
 		emit_signal("finished", bin_map_pos)
-		queue_free()
+		return
 
 
 # Choose a movement, the movement can either be expressed if relative value (chosen_move)
@@ -295,3 +307,9 @@ func _input(_event):
 
 func on_move_timer_timeout():
 	var __ = move()
+
+### NEED TO BE TAKING THREAD END IN ACCOUNT ###
+func _on_carving_finished(_pos: Vector2):
+#	if !debug:
+#		thread.wait_to_finish()
+	queue_free()

@@ -8,8 +8,8 @@ onready var border_anticip_label = $DebugLayer/Control/VBoxContainer/BordersAnti
 
 var borders_anticipated := Array() setget set_borders_anticipated, get_borders_anticipated
 
-#### FOLLOW CAMERA STATE ####
 
+#### FOLLOW CAMERA STATE ####
 
 #### ACCESSORS ####
 
@@ -72,6 +72,7 @@ func update(_host, _delta):
 			camera.start_zooming(dest_zoom)
 		
 		camera.update_camera_limits()
+
 
 #### LOGIC ####
 

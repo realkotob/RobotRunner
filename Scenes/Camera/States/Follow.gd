@@ -106,33 +106,30 @@ func get_border_approched(ply_average_pos: Vector2) -> Array:
 		var left_buffer_dist = BUFFER_DIST * int(Vector2.LEFT in borders_anticipated)
 		var right_buffer_dist = BUFFER_DIST * int(Vector2.RIGHT in borders_anticipated)
 		
-		# Check individual players position
-		# Check for right border beeing approched
+		### Check individual players position ###
 		if player_pos.x > pivot_pos.x + (screen_size.x / 2) - anticip_dist - right_buffer_dist && \
 							player.last_direction == 1:
 			if !(Vector2.RIGHT in border_array):
 				border_array.append(Vector2.RIGHT)
 				continue
 		
-		# Check for left border beeing approched
-		elif player_pos.x < pivot_pos.x - (screen_size.y / 2) + anticip_dist + left_buffer_dist && \
+		elif player_pos.x < pivot_pos.x - (screen_size.x / 2) + anticip_dist + left_buffer_dist && \
 							player.last_direction == -1:
 			if !(Vector2.LEFT in border_array):
 				border_array.append(Vector2.LEFT)
 				continue
 		
-		var cam_pos = camera.get_global_position()
 		var cam_zoom = camera.get_zoom()
 		var cam_size = screen_size * cam_zoom
 		var cam_anticip_dist = cam_size.x * ANTICIP_TRIGGER_RATIO
 		
 		# Check average players position being in one of the border buffer
-		if ply_average_pos.x > cam_pos.x + (cam_size.x / 2) - cam_anticip_dist - right_buffer_dist:
+		if ply_average_pos.x > pivot_pos.x + (cam_size.x / 2) - cam_anticip_dist - right_buffer_dist:
 			if !(Vector2.RIGHT in border_array) && player.last_direction == 1:
 				border_array.append(Vector2.RIGHT)
 				break
 		
-		if ply_average_pos.x < cam_pos.x - (cam_size.x / 2) + cam_anticip_dist + left_buffer_dist:
+		if ply_average_pos.x < pivot_pos.x - (cam_size.x / 2) + cam_anticip_dist + left_buffer_dist:
 			if !(Vector2.LEFT in border_array) && player.last_direction == -1:
 				border_array.append(Vector2.LEFT)
 				break

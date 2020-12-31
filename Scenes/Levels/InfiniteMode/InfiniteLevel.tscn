@@ -17,14 +17,14 @@ debug_dict = {
 }
 debug = true
 
-[node name="Camera" parent="." index="5"]
-limit_left = 0
-limit_top = 0
-limit_bottom = 540
-editor_draw_limits = true
-
 [node name="StartingPointP1" parent="." index="6" instance=ExtResource( 3 )]
 position = Vector2( 72, 132 )
 
 [node name="StartingPointP2" parent="." index="7" instance=ExtResource( 2 )]
 position = Vector2( 72, 420 )
+
+[node name="Camera" parent="." index="8"]
+limit_left = 0
+limit_top = 0
+limit_bottom = 540
+editor_draw_limits = true

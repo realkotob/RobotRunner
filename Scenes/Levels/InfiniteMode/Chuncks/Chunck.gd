@@ -14,7 +14,7 @@ const max_nb_room : int = 3
 onready var walls_tilemap = $Walls
 onready var new_chunck_area = $NewChunckGenArea
 
-export var debug : bool = true
+export var debug : bool = true setget set_debug, is_debug
 
 var chunck_bin : ChunckBin = null setget set_chunck_bin, get_chunck_bin
 
@@ -45,6 +45,12 @@ signal walls_updated
 func is_class(value: String): return value == "LevelChunck" or .is_class(value)
 func get_class() -> String: return "LevelChunck"
 
+func set_debug(value : bool):
+	debug = value
+	$Walls/DebugCursor.set_active(value)
+
+func is_debug() -> bool : return debug
+
 func set_chunck_bin(value: ChunckBin):
 	if value != null:
 		chunck_bin = value
@@ -61,6 +67,7 @@ func _ready():
 	
 	if debug:
 		GAME.set_screen_fade_visible(false)
+		$Walls/DebugCursor.set_active(true)
 	
 	var last_room = generate_rooms()
 	

@@ -1,18 +1,43 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Levels/InfiniteMode/Chuncks/Chunck.gd" type="Script" id=1]
 [ext_resource path="res://Global/Tileset/LevelBase.tres" type="TileSet" id=2]
+[ext_resource path="res://Scenes/Levels/Debug/TilemapDebugCursor.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 48, 276 )
 
 [node name="Chunck" type="Node2D"]
 script = ExtResource( 1 )
+debug = false
 
 [node name="Walls" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 24, 24 )
 format = 1
+
+[node name="DebugCursor" type="ColorRect" parent="Walls"]
+margin_right = 24.0
+margin_bottom = 24.0
+color = Color( 1, 0, 0, 0.32549 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Walls/DebugCursor"]
+anchor_top = -0.862
+anchor_right = 3.499
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell" type="Label" parent="Walls/DebugCursor/VBoxContainer"]
+margin_right = 83.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="NewChunckGenArea" type="Area2D" parent="."]
 position = Vector2( 492, 264 )

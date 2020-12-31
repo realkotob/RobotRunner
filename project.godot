@@ -409,6 +409,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/InteractiveObjects/Teleports/Scripts/TeleportArea.gd"
 }, {
+"base": "ColorRect",
+"class": "TilemapDebugCursor",
+"language": "GDScript",
+"path": "res://Scenes/Levels/Debug/TilemapDebugCursor.gd"
+}, {
 "base": "Area2D",
 "class": "TriggerArea",
 "language": "GDScript",
@@ -510,6 +515,7 @@ _global_script_class_icons={
 "StatesMachine": "",
 "SubMenuBase": "",
 "TeleportArea": "",
+"TilemapDebugCursor": "",
 "TriggerArea": "",
 "Water": "",
 "XionCloud": "",

@@ -12,6 +12,27 @@ var default_button_state : Array = []
 # Check the options when the scenes is ready, to get sure at least one of them is clickable
 # Change the color of the option accordingly to their state
 func _ready():
+	_setup()
+
+
+func _setup():
+	connect_wrapping_menu()
+	focus_first_option()
+
+
+#### LOGIC ####
+
+# Focus the first available option
+func focus_first_option():
+	for button in opt_container.get_children():
+		if !button.is_disabled():
+			button.set_focused(true)
+			break
+
+# Connect the options in the menu so it wraps around 
+# Going up on the first option put the focus on the last
+# And going down on the last put the focus on the first
+func connect_wrapping_menu():
 	if len(buttons_array) == 0:
 		return
 	
@@ -56,14 +77,8 @@ func _ready():
 		# Connect options signals
 		var _err = button.connect("option_chose", self, "_on_menu_option_chose")
 		_err = button.connect("focus_changed", self, "_on_menu_option_focus_changed")
-	
-	
-	# Focus the first available option
-	first_option_unabled.grab_focus()
 
 
-
-#### LOGIC ####
 
 # Stock the default state of every button
 func load_default_buttons_state():

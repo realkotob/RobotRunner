@@ -13,12 +13,13 @@ const max_nb_room : int = 3
 
 onready var walls_tilemap = $Walls
 onready var new_chunck_area = $NewChunckGenArea
+onready var debug_cursor = $Walls/TilemapDebugCursor
 
-signal chunck_gen_finished
-signal new_chunck_reached(invert_player_pos)
-signal every_automata_finished
+export var debug : bool = true setget set_debug, is_debug
 
 var chunck_bin : ChunckBin = null setget set_chunck_bin, get_chunck_bin
+
+var unplaced_rooms : Array = []
 
 var first_chunck : bool = false
 var is_ready : bool = false
@@ -35,19 +36,30 @@ var players_disposition : Dictionary = {
 	"bottom": null
 }
 
+signal chunck_gen_finished
+signal new_chunck_reached(invert_player_pos)
+signal every_automata_finished
+signal walls_updated
 
 #### ACCESSORS ####
 
 func is_class(value: String): return value == "LevelChunck" or .is_class(value)
 func get_class() -> String: return "LevelChunck"
 
+func set_debug(value : bool):
+	debug = value
+	if debug_cursor!= null:
+		debug_cursor.set_active(value)
+
+func is_debug() -> bool : return debug
+
 func set_chunck_bin(value: ChunckBin):
 	if value != null:
 		chunck_bin = value
-		var _err = chunck_bin.connect("bin_map_changed", self, "on_bin_map_changed")
 
 func get_chunck_bin() -> ChunckBin: return chunck_bin
 
+func get_rooms() -> Array : return $Rooms.get_children()
 
 #### BUILT-IN ####
 
@@ -55,10 +67,17 @@ func _ready():
 	var _err = new_chunck_area.connect("body_entered", self, "on_body_entered")
 	is_ready = true
 	
+	if debug:
+		GAME.set_screen_fade_visible(false)
+		debug_cursor.set_active(true)
+	
 	var last_room = generate_rooms()
 	
 	if last_room != null:
 		yield(last_room, "ready")
+	
+	set_chunck_bin(ChunckBin.new(self))
+	update_wall_tiles()
 	
 	initialize_player_placement()
 	create_automatas()
@@ -67,14 +86,25 @@ func _ready():
 #### LOGIC ####
 
 func generate_self():
-	place_rooms()
-	place_wall_tiles()
-	walls_tilemap.update_bitmask_region(Vector2.ZERO, ChunckBin.chunck_tile_size)
+	update_wall_tiles()
 	SlopePlacer.place_slopes(walls_tilemap)
-	
+	fetch_rooms_objects()
 	generate_objects()
-#	room_debug_visualizer()
+	
+	if debug:
+		room_debug_visualizer()
 	emit_signal("chunck_gen_finished")
+
+
+func update_wall_tiles(pos := Vector2.INF):
+	place_wall_tiles(pos)
+	if pos == Vector2.INF:
+		walls_tilemap.update_bitmask_region(Vector2.ZERO, ChunckBin.chunck_tile_size)
+	else:
+		walls_tilemap.update_bitmask_region(pos - Vector2.ONE, pos + Vector2(2, 2))
+	
+	walls_tilemap.update_dirty_quadrants()
+	emit_signal("walls_updated")
 
 
 func create_automatas() -> void:
@@ -105,37 +135,55 @@ func generate_rooms() -> Node:
 		room.name = "SmallRoom"
 		room.chunck = self
 		$Rooms.call_deferred("add_child", room)
+		unplaced_rooms.append(room)
 	return room
 
 
-# Place the rooms in the chunck by carving modifing the chunck bin accordingly to the room bin
-func place_rooms():
+func fetch_rooms_objects():
 	for room in $Rooms.get_children():
-		
-		# If no automata has entered this room, ignore it
-		if room.entry_exit_couple_array.empty():
-			continue
-		
-		var room_rect : Rect2 = room.get_room_rect()
-		for i in range(room_rect.size.y):
-			for j in range(room_rect.size.x):
-				var pos = Vector2(j, i) + room_rect.position
-				if room.bin_map.empty():
-					continue
-				else:
-					var room_cell = room.bin_map[i][j]
-					chunck_bin.bin_map[pos.y][pos.x] = room_cell
-		
+		var room_rect = room.get_room_rect()
 		for obj in room.interactive_objects:
 			obj.set_position(obj.get_position() + room_rect.position * GAME.TILE_SIZE)
-			object_to_add.append(obj)
+			object_to_add.append(obj) 
 
+
+# Place the rooms in the chunck by carving modifing the chunck bin accordingly to the room bin
+func place_room(room : ChunckRoom):
+	var room_rect : Rect2 = room.get_room_rect()
+	for i in range(room_rect.size.y):
+		for j in range(room_rect.size.x):
+			var pos = Vector2(j, i) + room_rect.position
+			if room.bin_map.empty():
+				continue
+			else:
+				var room_cell = room.bin_map[i][j]
+				chunck_bin.bin_map[pos.y][pos.x] = room_cell
+				walls_tilemap.set_cellv(pos, -1)
+	
+	var top_left_corner = room_rect.position - Vector2.ONE
+	var bottom_right_corner = room_rect.position + room_rect.size + Vector2.ONE
+	walls_tilemap.update_bitmask_region(top_left_corner, bottom_right_corner)
 
 # Place the tiles in the tilemap according the the bin_map value
-func place_wall_tiles():
+func place_wall_tiles(pos := Vector2.INF):
 	var wall_tile_id = walls_tilemap.get_tileset().find_tile_by_name("AutotileWall")
 	var chunck_tile_size = ChunckBin.chunck_tile_size
-	var bin_noise_map = chunck_bin.bin_map
+	var bin_noise_map = chunck_bin.get_bin_map()
+	
+	# Update a single given automata position (2*2 tiles)
+	if pos != Vector2.INF:
+		for i in range(2):
+			for j in range(2):
+				var current_pos = pos + Vector2(j, i)
+				if chunck_bin.is_cell_outside_chunck(current_pos):
+					continue
+				if bin_noise_map[current_pos.y][current_pos.x] == 1:
+					walls_tilemap.set_cellv(current_pos, wall_tile_id)
+				else:
+					walls_tilemap.set_cellv(current_pos, -1)
+		return
+	
+	# Update the whole tilemap
 	walls_tilemap.clear()
 	
 	for i in range(chunck_tile_size.y):
@@ -143,6 +191,8 @@ func place_wall_tiles():
 			var current_pos = Vector2(j, i)
 			if bin_noise_map[i][j] == 1:
 				walls_tilemap.set_cellv(current_pos, wall_tile_id)
+			else:
+				walls_tilemap.set_cellv(current_pos, -1)
 
 
 # Initialize the player disposition dictionary
@@ -160,13 +210,6 @@ func initialize_player_placement():
 		players_disposition[key] = weakref(player)
 
 
-
-# Verify if the given cell is outside the chunck or not
-func is_cell_outside_chunck(cell: Vector2) -> bool:
-	return cell.x < 0 or cell.y < 0 or\
-	cell.x >= chunck_bin.chunck_tile_size.x or cell.y >= chunck_bin.chunck_tile_size.y
-
-
 # Returns true if the given position is in the bottom half of the chunck
 # False if the pos is in the top half
 func is_pos_in_bottom_half(pos: Vector2) -> bool:
@@ -175,7 +218,7 @@ func is_pos_in_bottom_half(pos: Vector2) -> bool:
 
 # Returns the rect of the room the given is in
 # Returns an empty Rect2 if the given pos isn't in a room
-func find_room_form_cell(cell: Vector2) -> ChunckRoom:
+func find_room_from_cell(cell: Vector2) -> ChunckRoom:
 	for room in $Rooms.get_children():
 		var room_rect = room.get_room_rect()
 		if room_rect.has_point(cell): 
@@ -337,25 +380,32 @@ func on_bin_map_changed():
 	pass
 
 
-func on_automata_moved(_automata: ChunckAutomata, _to: Vector2):
+func _on_automata_moved(_automata: ChunckAutomata, to: Vector2):
+	chunck_bin.erase_automata_pos(to)
+	if debug:
+		update_wall_tiles(to)
+
+
+func _on_automata_forced_move_finished(_automata: ChunckAutomata, _pos: Vector2):
 	pass
 
 
-func on_automata_forced_move_finished(_automata: ChunckAutomata, _pos: Vector2):
-	pass
-
-
-func on_automata_finished(final_pos: Vector2):
+func _on_automata_finished(final_pos: Vector2):
 	next_start_pos_array.append(Vector2(0, final_pos.y))
 	nb_automata -= 1
 	
 	if nb_automata == 0:
+		chunck_bin.refine_chunck()
 		emit_signal("every_automata_finished")
 		generate_self()
 
 
-func on_automata_block_placable(cell: Vector2):
+func _on_automata_block_placable(cell: Vector2):
 	if !first_chunck:
 		var rng = randi() % 3
 		if rng == 0:
 			place_block(cell)
+
+func _on_automata_room_reached(_automata: ChunckAutomata, room: ChunckRoom):
+	if room in unplaced_rooms:
+		place_room(room)

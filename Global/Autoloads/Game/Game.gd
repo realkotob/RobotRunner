@@ -11,11 +11,15 @@ export var transition_time : float = 1.0
 const TILE_SIZE := Vector2(24, 24)
 const JUMP_MAX_DIST := Vector2(6, 2)
 
+var window_width = ProjectSettings.get_setting("display/window/size/width")
+var window_height = ProjectSettings.get_setting("display/window/size/height")
+var window_size = Vector2(window_width, window_height)
+
 var chapters_array = []
 var current_chapter : Resource = null
 
-var player1 = preload("res://Scenes/Actor/Players/RobotIce/RobotIce.tscn")
-var player2 = preload("res://Scenes/Actor/Players/RobotHammer/RobotHammer.tscn")
+var player1 = preload("res://Scenes/Actor/Players/MrCold/MrCold.tscn")
+var player2 = preload("res://Scenes/Actor/Players/MrStonks/MrStonks.tscn")
 
 var level_array : Array
 var last_level_name : String
@@ -41,7 +45,7 @@ func _ready():
 	_err = EVENTS.connect("level_finished", self, "on_level_finished")
 	_err = EVENTS.connect("seed_change_query", self, "on_seed_change_query")
 
-	LevelSaver.create_savedlevel_dirs(["json","tscn"])
+	LevelSaver.create_savedlevel_dirs(["json", "tscn"])
 	
 #### LOGIC ####
 
@@ -219,6 +223,10 @@ func fade_out():
 	MUSIC.fade_out()
 
 
+func set_screen_fade_visible(value: bool):
+	$CanvasLayer/ColorRect.set_visible(value)
+
+
 # Check if the current level index is the right one when a new level is ready
 # Usefull when testing a level standalone to keep track of the progression
 func update_current_level_index(level : Level):
@@ -226,7 +234,8 @@ func update_current_level_index(level : Level):
 	var level_index = current_chapter.find_level_id(level_name)
 	GAME.progression.set_level(level_index)
 
-func toggle_camera_debug_mode():
+
+func toggle_free_camera_mode():
 	var level = get_tree().get_current_scene()
 	if not level is Level:
 		return
@@ -252,8 +261,8 @@ func on_gameover_timer_timeout():
 #### INPUTS ####
 
 func _input(_event):
-	if Input.is_action_just_pressed("toggle_camera_debug_mode"):
-		toggle_camera_debug_mode()
+	if Input.is_action_just_pressed("toggle_free_camera_mode"):
+		toggle_free_camera_mode()
 
 #### SIGNAL RESPONSES ####
 

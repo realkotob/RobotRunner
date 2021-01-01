@@ -31,6 +31,7 @@ func set_direction(value : int):
 	value = int(sign(value))
 	if value != 0 and value != direction:
 		flip(value)
+		last_direction = value
 	direction = value
 
 func get_direction() -> int: return direction
@@ -79,7 +80,6 @@ func _physics_process(delta):
 			current_speed = base_speed
 		else:
 			current_speed += acceleration
-		last_direction = dir
 	else:
 		current_speed -= acceleration * 3.3
 	

@@ -39,7 +39,8 @@ static func create_savedlevel_dirs(directories_to_create : Array):
 			var created_directory_path = SAVEDLEVEL_DIR + "/" + directory_to_check
 			if debug:
 				print("Done ! Directory can in be found in : " + created_directory_path)
-		
+
+
 # Save the current state of the level: Call both the .tscn save and the serialized save in the given dict
 static func save_level(level: Node, dict_to_fill: Dictionary):
 	dict_to_fill.clear()

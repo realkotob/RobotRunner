@@ -9,8 +9,9 @@ var focused : bool = false setget set_focused, is_focused
 #### ACCESSSORS ####
 
 func set_focused(value: bool):
-	if value != focused:
+	if value != focused && !is_disabled():
 		focused = value
+		if focused: grab_focus()
 		emit_signal("focus_changed", self, focused)
 
 func is_focused() -> bool: return focused
@@ -37,7 +38,7 @@ func _on_pressed(): emit_signal("option_chose", self)
 
 func _on_mouse_entered():
 	if !is_disabled():
-		grab_focus()
+		set_focused(true)
 
 func _on_focus_entered():
 	set_focused(true)

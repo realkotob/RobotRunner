@@ -1,18 +1,21 @@
 extends Node
 class_name ChunckGenerator
 
-onready var chunck_container_node : Node2D = owner.find_node("ChunckContainer")
-
-var normal_chunck_scene = preload("res://Scenes/Levels/InfiniteMode/Chuncks/Chunck.tscn")
-var special_chunck_scene_array = [
-	preload("res://Scenes/Levels/InfiniteMode/Chuncks/CrossChunck.tscn"),
-	preload("res://Scenes/Levels/InfiniteMode/Chuncks/BigRoomChunck.tscn")
-]
+var chunck_scene_dict : Dictionary = {
+	"Normal" : preload("res://Scenes/Levels/InfiniteMode/Chuncks/Chunck.tscn"),
+	"Cross" : preload("res://Scenes/Levels/InfiniteMode/Chuncks/CrossChunck.tscn"),
+	"BigRoom" : preload("res://Scenes/Levels/InfiniteMode/Chuncks/BigRoomChunck.tscn")
+}
 
 var nb_chunck : int = 0
 var is_generating : bool = false
 
 var last_chunck_scene : PackedScene = null
+
+export var debug_dict : Dictionary = {
+	"only_normal_chunck" : false,
+	"forced_chunck_type" : ""
+}
 
 export var debug : bool = false
 
@@ -53,34 +56,24 @@ func stress_test(nb_test : int):
 	print("## CHUNCK GENERATION STRESS TEST FINISHED ##")
 
 
-# Generate a chunck of map, from a simplex noise, at the size of the playable area
-# Return the number of generations it took to generate the chunck 
-func generate_chunck_binary() -> ChunckBin:
-	var chunck_bin = ChunckBin.new()
-	
-	if debug:
-		chunck_bin.print_bin_map()
-	
-	return chunck_bin
-
-
 # Generate a chunck
 # Have a chance on 4 to create a special chunck
 func generate_chunck() -> LevelChunck:
-	var rng = randi() % 3
-	var chose_chunck_scene : PackedScene = null
 	
-	if last_chunck_scene in special_chunck_scene_array or last_chunck_scene == null:
-		rng = randi() % 2
+	# Forced chunck type for debug purpose
+	if debug:
+		if debug_dict["only_normal_chunck"]:
+			return chunck_scene_dict["Normal"].instance()
+		elif debug_dict["forced_chunck_type"] in chunck_scene_dict.keys():
+			return chunck_scene_dict[debug_dict["forced_chunck_type"]]
 	
-	if rng == 2:
-		# Pick a random special chunck, but different from the last one
-		var possible_chunck = special_chunck_scene_array.duplicate()
+	# Pick a random special chunck, but different from the last one if it wasn't a normal one
+	var possible_chunck = chunck_scene_dict.values()
+	if last_chunck_scene != chunck_scene_dict["Normal"]:
 		possible_chunck.erase(last_chunck_scene)
-		var rdm_id = randi() % possible_chunck.size()
-		chose_chunck_scene = possible_chunck[rdm_id]
-	else:
-		chose_chunck_scene = normal_chunck_scene
+	
+	var rdm_id = randi() % possible_chunck.size()
+	var chose_chunck_scene = possible_chunck[rdm_id]
 	
 	var chunck = chose_chunck_scene.instance()
 	last_chunck_scene = chose_chunck_scene
@@ -90,9 +83,9 @@ func generate_chunck() -> LevelChunck:
 
 # Retruns the last chunck created
 func get_last_chunck() -> Node:
-	var nb_chuncks = chunck_container_node.get_child_count()
+	var nb_chuncks = get_child_count()
 	if nb_chuncks == 0: return null
-	else: return chunck_container_node.get_child(nb_chuncks - 1)
+	else: return get_child(nb_chuncks - 1)
 
 
 # Find the starting points, convert their position as cells and returns it in a PoolVector2Array
@@ -113,16 +106,15 @@ func get_starting_points_cell_pos() -> PoolVector2Array:
 func place_level_chunck(invert_player_pos : bool = false) -> LevelChunck:
 	is_generating = true
 	var starting_points := PoolVector2Array()
-	var first_chunck : bool = chunck_container_node.get_child_count() == 0
+	var first_chunck : bool = get_child_count() == 0
 	
 	if first_chunck:
 		starting_points = get_starting_points_cell_pos()
 	else:
-		var last_child_id = chunck_container_node.get_child_count()
-		var last_chunck = chunck_container_node.get_child(last_child_id - 1)
+		var last_child_id = get_child_count()
+		var last_chunck = get_child(last_child_id - 1)
 		starting_points = last_chunck.next_start_pos_array
 	
-	var chunck_bin = generate_chunck_binary()
 	var chunck_tile_size = ChunckBin.chunck_tile_size
 	
 	var new_chunck = generate_chunck()
@@ -136,13 +128,12 @@ func place_level_chunck(invert_player_pos : bool = false) -> LevelChunck:
 	
 	nb_chunck += 1
 	
-	if chunck_container_node.get_child_count() > 2:
-		var chunck_to_delete = chunck_container_node.get_child(0)
+	if get_child_count() > 2:
+		var chunck_to_delete = get_child(0)
 		chunck_to_delete.queue_free()
 		yield(chunck_to_delete, "tree_exited")
 	
-	new_chunck.set_chunck_bin(chunck_bin)
-	chunck_container_node.call_deferred("add_child", new_chunck)
+	call_deferred("add_child", new_chunck)
 	
 	if !new_chunck.is_ready:
 		yield(new_chunck, "ready")

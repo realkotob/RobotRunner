@@ -3,10 +3,9 @@ class_name ChunckBin
 
 const chunck_tile_size := Vector2(40, 23)
 
+var chunck = null
 var bin_map : Array setget set_bin_map, get_bin_map
 var entry_exit_couple_array : Array = []
-
-signal bin_map_changed
 
 #### ACCESSORS ####
 
@@ -18,8 +17,9 @@ func get_bin_map() -> Array: return bin_map
 
 #### BUILT-IN ####
 
-func _init():
+func _init(chunck_ref):
 	generate_filled_bin_map()
+	chunck = chunck_ref
 
 #### LOGIC ####
 
@@ -42,34 +42,44 @@ func print_bin_map():
 		print(line)
 
 
+# Erase the 2*2 tiles at the given automata position
 func erase_automata_pos(pos: Vector2):
-	pos = Vector2(int(pos.x), int(pos.y))
-	bin_map[pos.y][pos.x] = 0
-	if pos.y - 1 >= 0:
-		bin_map[pos.y - 1][pos.x] = 0
-
-	if pos.x + 1 < chunck_tile_size.x:
-		bin_map[pos.y][pos.x + 1] = 0
-		if pos.y - 1 >= 0:
-			bin_map[pos.y - 1][pos.x + 1] = 0
+	for i in range(2):
+		for j in range(2):
+			var current_pos = pos + Vector2(j, i)
+			if is_cell_outside_chunck(current_pos): 
+				continue
+			bin_map[current_pos.y][current_pos.x] = 0
 
 
-
-#### BUG WITH LEVEL START SOMTIMES ####
-
+# Removes 1 tile large walls if its not on the border of the chunck or a room wall
 func refine_chunck():
 	for i in range(chunck_tile_size.y):
 		for j in range(chunck_tile_size.x):
-			if i == 0 or j == 0 or i == chunck_tile_size.y - 1 or j == chunck_tile_size.x -1:
+			var cell = Vector2(j, i)
+			
+			if is_cell_a_chunck_border(cell) or is_cell_inside_room_walls(cell):
 				continue
-			var wall_neighbours : int = count_wall_neighbours(Vector2(j, i)) 
+			
+			var wall_neighbours : int = count_wall_neighbours(cell) 
+			
 			if bin_map[i][j] == 1 && wall_neighbours <= 1:
 				bin_map[i][j] = 0
 				
 				# Suppress the tile right above this one if its also a single tile
 				if i - 1 > 0 && bin_map[i - 1][j] == 1 && \
-				count_wall_neighbours(Vector2(j, i - 1)) <= 1:
+				count_wall_neighbours(cell + Vector2.UP) <= 1:
 					bin_map[i - 1][j] = 0
+
+
+# Check if the given cell is inside the room, including its walls
+func is_cell_inside_room_walls(cell: Vector2) -> bool:
+	for room in chunck.get_rooms():
+		var top_left = room.get_top_left() - Vector2.ONE
+		var room_walls_rect := Rect2(top_left, room.get_room_rect().size + Vector2(2, 2))
+		if room_walls_rect.has_point(cell):
+			return true
+	return false
 
 
 func count_wall_neighbours(pos: Vector2) -> int:
@@ -85,6 +95,17 @@ func count_wall_neighbours(pos: Vector2) -> int:
 	return nb_wall_neighbour
 
 
+# Verify if the given cell is outside the chunck or not
+func is_cell_outside_chunck(cell: Vector2) -> bool:
+	return cell.x < 0 or cell.y < 0 or \
+	cell.x >= chunck_tile_size.x or cell.y >= chunck_tile_size.y
+
+
+func is_cell_a_chunck_border(cell: Vector2) -> bool :
+	return cell.x == 0 or cell.y == 0 or \
+	cell.x == chunck_tile_size.x - 1 or cell.y == chunck_tile_size.y - 1
+
+
 #### VIRTUALS ####
 
 
@@ -94,10 +115,3 @@ func count_wall_neighbours(pos: Vector2) -> int:
 
 
 #### SIGNAL RESPONSES ####
-
-func on_automata_moved(_automata: Object, to_pos: Vector2):
-	erase_automata_pos(to_pos)
-
-func on_automata_finished(_pos: Vector2):
-	refine_chunck()
-	emit_signal("bin_map_changed")

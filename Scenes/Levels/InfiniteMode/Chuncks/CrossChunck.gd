@@ -80,7 +80,7 @@ func on_body_entered(body: PhysicsBody2D):
 		new_chunck_area.queue_free()
 
 
-func on_automata_moved(automata: ChunckAutomata, to: Vector2):
+func _on_automata_moved(automata: ChunckAutomata, to: Vector2):
 	if automata in automata_arrived or already_teleported:
 		return
 	
@@ -89,7 +89,7 @@ func on_automata_moved(automata: ChunckAutomata, to: Vector2):
 		automata.forced_moves += [Vector2.RIGHT, Vector2.RIGHT, Vector2.RIGHT]
 
 
-func on_automata_forced_move_finished(automata: ChunckAutomata, _pos: Vector2):
+func _on_automata_forced_move_finished(automata: ChunckAutomata, _pos: Vector2):
 	automata.set_stoped(true)
 	automata_ready_to_teleport.append(automata)
 	
@@ -98,6 +98,6 @@ func on_automata_forced_move_finished(automata: ChunckAutomata, _pos: Vector2):
 
 
 # Function overide: we don't want a block in this kind of chuncks
-func on_automata_block_placable(_cell: Vector2):
+func _on_automata_block_placable(_cell: Vector2):
 	pass
 

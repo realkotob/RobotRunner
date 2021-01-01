@@ -2,13 +2,14 @@ extends CameraState
 
 const ANTICIP_DIST : float = 200.0
 const ANTICIP_TRIGGER_RATIO : float = 0.3
+const BUFFER_DIST = 40.0
 
 onready var border_anticip_label = $DebugLayer/Control/VBoxContainer/BordersAnticip
 
 var borders_anticipated := Array() setget set_borders_anticipated, get_borders_anticipated
 
-#### FOLLOW CAMERA STATE ####
 
+#### FOLLOW CAMERA STATE ####
 
 #### ACCESSORS ####
 
@@ -43,7 +44,8 @@ func update(_host, _delta):
 		
 		# Compute the dest of the camera
 		var average_pos : Vector2 = camera.get_average_player_pos()
-		set_borders_anticipated(get_border_approched(average_pos))
+		var new_borders_approched = get_border_approched(average_pos)
+		set_borders_anticipated(new_borders_approched)
 		var offset = Vector2.ZERO
 		
 		if borders_anticipated.size() == 1:
@@ -68,6 +70,8 @@ func update(_host, _delta):
 		
 		if camera.zoom != dest_zoom:
 			camera.start_zooming(dest_zoom)
+		
+		camera.update_camera_limits()
 
 
 #### LOGIC ####
@@ -99,38 +103,39 @@ func get_border_approched(ply_average_pos: Vector2) -> Array:
 		var pivot_pos = camera.get_pivot_position()
 		var anticip_dist = screen_size.x * ANTICIP_TRIGGER_RATIO
 		
-		# Check individual player position
-		if player_pos.x > pivot_pos.x + (screen_size.x / 2) - anticip_dist && \
+		# Buffer distance for anticipation (To fix border effect causing unwanted shaking)
+		var left_buffer_dist = BUFFER_DIST * int(Vector2.LEFT in borders_anticipated)
+		var right_buffer_dist = BUFFER_DIST * int(Vector2.RIGHT in borders_anticipated)
+		
+		### Check individual players position ###
+		if player_pos.x > pivot_pos.x + (screen_size.x / 2) - anticip_dist - right_buffer_dist && \
 							player.last_direction == 1:
 			if !(Vector2.RIGHT in border_array):
 				border_array.append(Vector2.RIGHT)
 				continue
 		
-		elif player_pos.x < pivot_pos.x - (screen_size.y / 2) + anticip_dist && \
+		elif player_pos.x < pivot_pos.x - (screen_size.x / 2) + anticip_dist + left_buffer_dist && \
 							player.last_direction == -1:
 			if !(Vector2.LEFT in border_array):
 				border_array.append(Vector2.LEFT)
 				continue
 		
-		var cam_pos = camera.get_global_position()
 		var cam_zoom = camera.get_zoom()
 		var cam_size = screen_size * cam_zoom
 		var cam_anticip_dist = cam_size.x * ANTICIP_TRIGGER_RATIO
 		
-		# Check average players position
-		if ply_average_pos.x > cam_pos.x + (cam_size.x / 2) - cam_anticip_dist:
-			if !(Vector2.RIGHT in border_array):
+		# Check average players position being in one of the border buffer
+		if ply_average_pos.x > pivot_pos.x + (cam_size.x / 2) - cam_anticip_dist - right_buffer_dist:
+			if !(Vector2.RIGHT in border_array) && player.last_direction == 1:
 				border_array.append(Vector2.RIGHT)
 				break
 		
-		if ply_average_pos.x < cam_pos.x - (cam_size.x / 2) + cam_anticip_dist:
-			if !(Vector2.LEFT in border_array):
+		if ply_average_pos.x < pivot_pos.x - (cam_size.x / 2) + cam_anticip_dist + left_buffer_dist:
+			if !(Vector2.LEFT in border_array) && player.last_direction == -1:
 				border_array.append(Vector2.LEFT)
 				break
 	
 	return border_array
-
-
 
 # Convert a global position to a relative position to the camera origin (center)
 func global_to_relative(global : Vector2) -> Vector2:

@@ -1,9 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/Menus/MenuOptionBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Menus/MenuBase.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Menus/SaveSelectionMenu/save1_button.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Menus/SaveSelectionMenu/SaveLoader.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/Menus/save2_button.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/Menus/save3_button.gd" type="Script" id=6]
 
-[node name="MenuBase" instance=ExtResource( 2 )]
+[node name="SaveSelectionMenu" instance=ExtResource( 2 )]
+script = ExtResource( 4 )
 
 [node name="V_OptContainer" parent="HBoxContainer" index="0"]
 margin_left = 45.0
@@ -12,18 +17,18 @@ margin_right = 129.0
 [node name="SAVE_1" parent="HBoxContainer/V_OptContainer" index="0" instance=ExtResource( 1 )]
 margin_right = 84.0
 text = "Save 1"
-script = null
+script = ExtResource( 3 )
 
 [node name="SAVE_2" parent="HBoxContainer/V_OptContainer" index="1" instance=ExtResource( 1 )]
 margin_top = 48.0
 margin_right = 84.0
 margin_bottom = 92.0
 text = "Save 2"
-script = null
+script = ExtResource( 5 )
 
 [node name="SAVE_3" parent="HBoxContainer/V_OptContainer" index="2" instance=ExtResource( 1 )]
 margin_top = 96.0
 margin_right = 84.0
 margin_bottom = 140.0
 text = "Save 3"
-script = null
+script = ExtResource( 6 )

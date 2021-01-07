@@ -364,10 +364,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/Actor/Players/PlayerBase/Scripts/SFX_group_base.gd"
 }, {
-"base": "Node",
+"base": "MenuBase",
 "class": "SaveLoader",
 "language": "GDScript",
 "path": "res://Scenes/Menus/SaveSelectionMenu/SaveLoader.gd"
+}, {
+"base": "MenuBase",
+"class": "SaveSelectionMenu",
+"language": "GDScript",
+"path": "res://Scenes/Menus/SaveSelectionMenu/SaveSelectionMenu.gd"
 }, {
 "base": "MenuBase",
 "class": "ScreenTitleMenu",
@@ -512,6 +517,7 @@ _global_script_class_icons={
 "SFX_Explosion": "",
 "SFX_group_base": "",
 "SaveLoader": "",
+"SaveSelectionMenu": "",
 "ScreenTitleMenu": "",
 "SeedField": "",
 "SlopePlacer": "",

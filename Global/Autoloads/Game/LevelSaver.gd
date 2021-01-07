@@ -5,13 +5,13 @@ class_name LevelSaver
 const debug : bool = false
 
 const SAVEDLEVEL_DIR : String = "res://Scenes/Levels/SavedLevel"
-const SAVEDLEVEL_JSON_DIR : String = "/json"
-const SAVEDLEVEL_TSCN_DIR : String = "/tscn"
+const SAVEDLEVEL_JSON_DIR : String = "/json/"
+const SAVEDLEVEL_TSCN_DIR : String = "/tscn/"
 
 const objects_datatype_storage = {
-	"Camera": ["zoom", "instruction_stack"]#,
-#	"ParallaxBackground": ["scroll_offset", "scroll_base_scale", "scale"],
-#	"ParallaxLayer": ["position", "scale"]
+	"GameCamera": ["zoom", "instruction_stack"],
+	"ParallaxBackground" : ["scroll_offset", "scroll_base_offset", "scroll_base_scale", "scale"],
+	"ParallaxLayer" : ["motion_scale", "motion_offset", "scale"],
 }
 
 #### ACCESSORS ####
@@ -39,7 +39,8 @@ static func create_savedlevel_dirs(directories_to_create : Array):
 			var created_directory_path = SAVEDLEVEL_DIR + "/" + directory_to_check
 			if debug:
 				print("Done ! Directory can in be found in : " + created_directory_path)
-		
+
+
 # Save the current state of the level: Call both the .tscn save and the serialized save in the given dict
 static func save_level(level: Node, dict_to_fill: Dictionary):
 	dict_to_fill.clear()
@@ -70,6 +71,7 @@ static func serialize_level_properties(current_node : Node, dict_to_fill : Dicti
 		
 		if child.get_child_count() != 0:
 			serialize_level_properties(child, dict_to_fill)
+
 
 static func deserialize_level_properties(file_path : String):
 	var level_properties  : String = ""
@@ -132,11 +134,12 @@ static func load_level_properties_from_json(level_name : String) -> Dictionary:
 			if keys == "name":
 				continue
 			var property_value
-			match get_string_value_type(loaded_objects[object_dict][keys]):
-				"Vector2" : property_value = get_vector_from_string(loaded_objects[object_dict][keys])
-				"int"  : property_value = int(loaded_objects[object_dict][keys])
-				"float" : property_value = float(loaded_objects[object_dict][keys])
-				"bool" : property_value = get_bool_from_string(loaded_objects[object_dict][keys])
+			var string_property_value = String(loaded_objects[object_dict][keys])
+			match get_string_value_type(string_property_value):
+				"Vector2" : property_value = get_vector_from_string(string_property_value)
+				"int"  : property_value = int(string_property_value)
+				"float" : property_value = float(string_property_value)
+				"bool" : property_value = get_bool_from_string(string_property_value)
 			property_dict[keys] = property_value
 		loaded_level_properties[object_dict] = property_dict
 	

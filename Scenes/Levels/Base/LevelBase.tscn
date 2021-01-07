@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/GroupBase.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Camera/Camera.tscn" type="PackedScene" id=2]
@@ -10,9 +10,8 @@
 [ext_resource path="res://Scenes/GameConsole/GameConsole.tscn" type="PackedScene" id=8]
 [ext_resource path="res://icon.png" type="Texture" id=9]
 [ext_resource path="res://Scenes/Levels/Base/Paralaxe.gd" type="Script" id=10]
+[ext_resource path="res://Scenes/Fog/CosmeticFog/FogMaterial.tres" type="Material" id=11]
 [ext_resource path="res://Scenes/GUI/HUD/HUD.tscn" type="PackedScene" id=19]
-[ext_resource path="res://Scenes/Fog/CosmeticFog/magenta_FG_fog_shadermaterial.tres" type="Material" id=20]
-[ext_resource path="res://Scenes/Fog/CosmeticFog/green_bg_fog_shadermaterial.tres" type="Material" id=21]
 [ext_resource path="res://Scenes/Levels/Base/LevelBase.gd" type="Script" id=24]
 
 [node name="LevelBase" type="Node2D"]
@@ -30,7 +29,7 @@ __meta__ = {
 }
 
 [node name="Fog" type="Sprite" parent="Foreground/Fog"]
-material = ExtResource( 20 )
+material = ExtResource( 11 )
 position = Vector2( 470.01, 277.517 )
 scale = Vector2( 2.09202, 1.27633 )
 texture = ExtResource( 9 )
@@ -41,7 +40,7 @@ __meta__ = {
 }
 
 [node name="GUI" type="CanvasLayer" parent="."]
-layer = 2
+layer = 3
 script = ExtResource( 3 )
 
 [node name="Popups" type="Control" parent="GUI"]
@@ -88,6 +87,7 @@ layer = -1
 script = ExtResource( 10 )
 
 [node name="Back" type="ParallaxLayer" parent="Map/Background/Paralaxe"]
+motion_scale = Vector2( 0.2, 0.2 )
 motion_mirroring = Vector2( 2048, 1152 )
 __meta__ = {
 "_edit_group_": true,
@@ -106,13 +106,15 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Lights" type="Node2D" parent="Map/Background/Paralaxe"]
+[node name="Lights" type="ParallaxLayer" parent="Map/Background/Paralaxe"]
+motion_scale = Vector2( 0.25, 0.25 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
 
 [node name="Gears" type="ParallaxLayer" parent="Map/Background/Paralaxe"]
+motion_scale = Vector2( 0.3, 0.3 )
 motion_mirroring = Vector2( 2048, 1152 )
 __meta__ = {
 "_edit_group_": true,
@@ -132,28 +134,11 @@ __meta__ = {
 
 [node name="ProdLine1" parent="Map/Background/Paralaxe" instance=ExtResource( 6 )]
 position = Vector2( 0, 370 )
-motion_scale = Vector2( 1, 1 )
+motion_scale = Vector2( 0.37, 0.37 )
 
 [node name="ProdLine2" parent="Map/Background/Paralaxe" instance=ExtResource( 6 )]
 position = Vector2( 0, 650 )
-motion_scale = Vector2( 1, 1 )
-
-[node name="Fog" type="ParallaxLayer" parent="Map/Background/Paralaxe"]
-motion_mirroring = Vector2( 2048, 2048 )
-__meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true
-}
-
-[node name="Fog" type="Sprite" parent="Map/Background/Paralaxe/Fog"]
-material = ExtResource( 21 )
-texture = ExtResource( 9 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 0, 0, 2048, 2048 )
-__meta__ = {
-"_edit_lock_": true
-}
+motion_scale = Vector2( 0.4, 0.4 )
 
 [node name="Walls" type="TileMap" parent="Map"]
 z_index = 1
@@ -354,3 +339,7 @@ __meta__ = {
 z_index = 999
 limit_smoothed = true
 smoothing_enabled = true
+
+[node name="MusicTimer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true

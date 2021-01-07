@@ -31,6 +31,8 @@ func exit_state(_host):
 # Else : execute the next instruction of the camera
 # If it was the last instruction: set back to the previous state
 func update(_host, _delta):
+	camera.update_camera_limits()
+	
 	if move_to_destination() == true or destination == Vector2.ZERO:
 		if wait_time != 0.0:
 			owner.stop_state_node.wait_time = wait_time

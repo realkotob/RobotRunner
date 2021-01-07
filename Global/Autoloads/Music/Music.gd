@@ -105,7 +105,6 @@ func index_volume_on_distance(dist_to : float) -> float:
 	return clamp(desired_volume, -80.0, .0)
 
 
-
 # Start playing every layers of music
 func play():
 	fading_out = false
@@ -140,6 +139,7 @@ func fade_out(duration : float = 1.0):
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	
 	tween_node.start()
+
 
 # Start fading in the given audio stream
 func fade_in_stream(stream: AudioStreamPlayer, duration : float = 1.0):

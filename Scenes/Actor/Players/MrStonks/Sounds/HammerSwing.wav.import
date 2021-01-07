@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/HammerSwing.wav-32b9b2736c3c4563f393e84344c5f6de.sample"
+
+[deps]
+
+source_file="res://Scenes/Actor/Players/MrStonks/Sounds/HammerSwing.wav"
+dest_files=[ "res://.import/HammerSwing.wav-32b9b2736c3c4563f393e84344c5f6de.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

@@ -11,14 +11,30 @@ export var transition_time : float = 1.0
 const TILE_SIZE := Vector2(24, 24)
 const JUMP_MAX_DIST := Vector2(6, 2)
 
+var window_width = ProjectSettings.get_setting("display/window/size/width")
+var window_height = ProjectSettings.get_setting("display/window/size/height")
+var window_size = Vector2(window_width, window_height)
+
 var chapters_array = []
 var current_chapter : Resource = null
 
-var player1 = preload("res://Scenes/Actor/Players/RobotIce/RobotIce.tscn")
-var player2 = preload("res://Scenes/Actor/Players/RobotHammer/RobotHammer.tscn")
+var player1 = preload("res://Scenes/Actor/Players/MrCold/MrCold.tscn")
+var player2 = preload("res://Scenes/Actor/Players/MrStonks/MrStonks.tscn")
 
 var level_array : Array
 var last_level_name : String
+
+var current_seed : int = 0 setget _set_current_seed, get_current_seed
+
+
+#### ACCESSORS ####
+
+func _set_current_seed(value: int): 
+	current_seed = value
+	seed(current_seed)
+
+func get_current_seed() -> int: return current_seed
+
 
 #### BUILT-IN ####
 
@@ -27,8 +43,9 @@ func _ready():
 	_err = transition_timer_node.connect("timeout",self, "on_transition_timer_timeout")
 	_err = EVENTS.connect("level_ready", self, "on_level_ready")
 	_err = EVENTS.connect("level_finished", self, "on_level_finished")
+	_err = EVENTS.connect("seed_change_query", self, "on_seed_change_query")
 
-	LevelSaver.create_savedlevel_dirs(["json","tscn"])
+	LevelSaver.create_savedlevel_dirs(["json", "tscn"])
 	
 #### LOGIC ####
 
@@ -45,7 +62,8 @@ func goto_last_level():
 
 	var loaded_from_save : bool = false
 	var level_scene : PackedScene
-	var level_to_load_path : String = find_saved_level_path(LevelSaver.SAVEDLEVEL_DIR + LevelSaver.SAVEDLEVEL_TSCN_DIR, last_level_name)
+	var dir = LevelSaver.SAVEDLEVEL_DIR + LevelSaver.SAVEDLEVEL_TSCN_DIR
+	var level_to_load_path : String = find_saved_level_path(dir, last_level_name)
 
 	# If no save of the current level exists, reload the same scene
 	if level_to_load_path != "":
@@ -59,9 +77,11 @@ func goto_last_level():
 	var __ = get_tree().change_scene_to(level_scene)
 
 	if loaded_from_save:
-		yield(EVENTS, "level_ready")
-		var level = get_tree().get_current_scene()
+		yield(EVENTS, "level_entered_tree")
+		var level : Level = get_tree().get_current_scene()
+		level.is_loaded_from_save = loaded_from_save
 		LevelSaver.build_level_from_loaded_properties(level)
+
 
 # Change scene to the next level scene
 # If the last level was not in the list, set the progression to -1
@@ -187,29 +207,6 @@ func discard_collectable_progression():
 	pass
 
 
-# Check if the current level index is the right one when a new level is ready
-# Usefull when testing a level standalone to keep track of the progression
-func update_current_level_index(level : Level):
-	var level_name = level.get_name()
-	var level_index = current_chapter.find_level_id(level_name)
-	GAME.progression.set_level(level_index)
-
-func toggle_camera_debug_mode():
-	var level = get_tree().get_current_scene()
-	if not level is Level:
-		return
-	
-	var camera_node = level.find_node("Camera")
-	var was_camera_debug_mode = camera_node.get_state_name() == "Debug"
-	if was_camera_debug_mode:
-		camera_node.set_to_previous_state()
-	else:
-		camera_node.set_state("Debug")
-	
-	for player in get_tree().get_nodes_in_group("Players"):
-		player.set_active(was_camera_debug_mode)
-
-
 func fade_in():
 	$Tween.interpolate_property($CanvasLayer/ColorRect, "modulate",
 		Color.black, Color.transparent, transition_time,
@@ -225,6 +222,35 @@ func fade_out():
 
 	MUSIC.fade_out()
 
+
+func set_screen_fade_visible(value: bool):
+	$CanvasLayer/ColorRect.set_visible(value)
+
+
+# Check if the current level index is the right one when a new level is ready
+# Usefull when testing a level standalone to keep track of the progression
+func update_current_level_index(level : Level):
+	var level_name = level.get_name()
+	var level_index = current_chapter.find_level_id(level_name)
+	GAME.progression.set_level(level_index)
+
+
+func toggle_free_camera_mode():
+	var level = get_tree().get_current_scene()
+	if not level is Level:
+		return
+	
+	var camera_node = level.find_node("Camera")
+	var was_camera_debug_mode = camera_node.get_state_name() == "Debug"
+	if was_camera_debug_mode:
+		camera_node.set_to_previous_state()
+	else:
+		camera_node.set_state("Debug")
+	
+	for player in get_tree().get_nodes_in_group("Players"):
+		player.set_active(was_camera_debug_mode)
+
+
 #### SIGNAL RESPONSES ####
 
 #  Change scene to go to the gameover scene after the timer has finished
@@ -235,8 +261,8 @@ func on_gameover_timer_timeout():
 #### INPUTS ####
 
 func _input(_event):
-	if Input.is_action_just_pressed("toggle_camera_debug_mode"):
-		toggle_camera_debug_mode()
+	if Input.is_action_just_pressed("toggle_free_camera_mode"):
+		toggle_free_camera_mode()
 
 #### SIGNAL RESPONSES ####
 
@@ -260,6 +286,7 @@ func on_level_ready(level : Level):
 	
 	if level is InfiniteLevel:
 		LevelSaver.save_level(level, progression.main_stored_objects)
+		LevelSaver.save_level_properties_as_json(level)
 
 
 # When a player reach a checkpoint
@@ -270,3 +297,7 @@ func on_checkpoint_reached(level: Level, checkpoint_id: int):
 	progression.set_main_xion(SCORE.xion)
 	progression.set_main_materials(SCORE.materials)
 	LevelSaver.save_level(level, progression.main_stored_objects)
+
+
+func on_seed_change_query(new_seed: int):
+	_set_current_seed(new_seed)

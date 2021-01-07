@@ -35,6 +35,8 @@ func get_class() -> String: return "ChunckRoom"
 func set_room_rect(value: Rect2): room_rect = value
 func get_room_rect() -> Rect2: return room_rect
 
+func get_top_left() -> Vector2: return room_rect.position
+func get_bottom_right() -> Vector2 : return room_rect.position + room_rect.size
 
 #### BUILT-IN ####
 
@@ -72,15 +74,14 @@ func generate_platforms():
 		var room_size = get_room_rect().size
 		
 		var nb_platform = int(round(room_size.x / (jump_max_dist.x + AVERAGE_PLTF_LEN) + 1))
-		var entry_point_cell = get_playable_access(entry)
 		var average_dist = clamp(int(room_size.x / nb_platform + 1), 3.0, GAME.JUMP_MAX_DIST.x - 1)
 		
-		var last_platform_end : Vector2 = entry_point_cell
-		var platform_avg_y = entry_point_cell.y
+		var last_platform_end : Vector2 = entry
+		var platform_avg_y = entry.y
 		
 		var half_chuck_y = int(ChunckBin.chunck_tile_size.y / 2) 
 		var first_half : bool = entry.y + room_rect.position.y <= half_chuck_y
-		var stair_needed : bool = entry_point_cell.y - exit.y > GAME.JUMP_MAX_DIST.y
+		var stair_needed : bool = entry.y - exit.y > GAME.JUMP_MAX_DIST.y
 		
 		# Platform generation, loop through every platfroms
 		for i in range(nb_platform):
@@ -179,20 +180,6 @@ func generate_breakable_platfrom(plt: ChunckPlatform):
 	interactive_objects.append(breakable_pltf)
 
 
-# Convert the theorical entry point in the concrete one
-# ie the point from where the player can jump
-func get_playable_access(access: Vector2, exit: bool = false) -> Vector2:
-	var rel_access = _cell_rel_to_abs(access)
-	var point = rel_access + Vector2.LEFT if !exit else rel_access + Vector2.RIGHT
-	var chunck_bin_map = chunck.get_chunck_bin().bin_map
-	var chunck_size = ChunckBin.chunck_tile_size
-	
-	for i in range(chunck_size.y):
-		if chunck_bin_map[point.y + i][point.x] == 1:
-			return access + Vector2(0, i - 1)
-	return access
-
-
 # Convert a relative cell (relative to the room) to an absolute cell (relative to the whole chunck) 
 func _cell_rel_to_abs(cell: Vector2) -> Vector2:
 	return cell + room_rect.position
@@ -233,7 +220,7 @@ func get_top_entry_exit_couple() -> Array:
 # Generate a liquid in the room if the conditions are met
 func generate_liquid(liquid_type: String):
 	var lowest_access = find_lowest_room_access()
-	var y_max_pool_size = room_rect.size.y - lowest_access.y - 2
+	var y_max_pool_size = room_rect.size.y - lowest_access.y - 3
 	
 	var lowest_platform = find_lowest_platfrom()
 	
@@ -255,9 +242,11 @@ func generate_liquid(liquid_type: String):
 	var liquid_node = liquid_scenes[liquid_type].instance()
 	interactive_objects.append(liquid_node)
 	
+	# Determine the pool size in pixels
 	var pool_size = Vector2(room_rect.size.x, y_max_pool_size) * GAME.TILE_SIZE
 	liquid_node.set_pool_size(pool_size)
 	
+	# Determine the position of the pool in the room
 	var pool_sprite_size = Vector2(pool_size.x, pool_size.y + liquid_node.empty_part)
 	var pos =  room_rect.size * GAME.TILE_SIZE - pool_sprite_size / 2
 	liquid_node.set_position(pos)
@@ -268,8 +257,7 @@ func find_lowest_room_access() -> Vector2:
 	var lowest_access := -Vector2.INF
 	for couple in entry_exit_couple_array:
 		for i in range(couple.size()):
-			var is_exit : bool = i == 1
-			var access = get_playable_access(couple[i], is_exit) 
+			var access = couple[i]
 			if access.y > lowest_access.y:
 				lowest_access = access
 	return lowest_access
@@ -286,6 +274,7 @@ func find_lowest_platfrom() -> ChunckPlatform:
 			lowest_platform = platform
 	return lowest_platform
 
+
 #### VIRTUALS ####
 
 
@@ -294,7 +283,7 @@ func find_lowest_platfrom() -> ChunckPlatform:
 
 #### SIGNAL RESPONSES ####
 
-func on_automata_entered(entry: Vector2, exit: Vector2):
+func _on_automata_crossed(entry: Vector2, exit: Vector2):
 	entry_exit_couple_array.append([_cell_abs_to_rel(entry, true), _cell_abs_to_rel(exit, true)])
 
 func on_every_automata_finished():

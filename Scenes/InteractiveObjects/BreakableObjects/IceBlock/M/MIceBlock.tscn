@@ -37,7 +37,6 @@ extents = Vector2( 22.3649, 2.77931 )
 
 [node name="M_IceBlock" instance=ExtResource( 1 )]
 nb_debris = 30
-block_size = Vector2( 48, 48 )
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )

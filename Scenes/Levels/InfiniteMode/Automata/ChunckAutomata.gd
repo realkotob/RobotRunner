@@ -1,6 +1,8 @@
 extends Node
 class_name ChunckAutomata
 
+const SIZE := Vector2(2, 2)
+
 export var debug : bool = false 
 
 var chunck_bin : ChunckBin = null 
@@ -11,35 +13,33 @@ var last_moves := PoolVector2Array()
 var stoped : bool = false setget set_stoped, is_stoped
 
 var forced_moves = []
+var thread : Thread
 
 onready var move_timer = Timer.new()
 
 signal moved(automata, to)
 signal finished(final_pos)
-signal entered_room(entry_point, exit_point)
+signal room_reached(automata, room)
+signal room_crossed(entry_point, exit_point)
 signal forced_move_finished(automata, pos)
 signal block_placable(cell)
 
 #### ACCESSORS ####
 
-func is_class(value: String):
-	return value == "ChunckAutomata" or .is_class(value)
-
-func get_class() -> String:
-	return "ChunckAutomata"
+func is_class(value: String): return value == "ChunckAutomata" or .is_class(value)
+func get_class() -> String: return "ChunckAutomata"
 
 func set_bin_map_pos(value: Vector2):
 	if value != Vector2.INF && value != bin_map_pos:
 		bin_map_pos = value
 		emit_signal("moved", self, bin_map_pos)
 
-func get_bin_map_pos() -> Vector2:
-	return bin_map_pos
+func get_bin_map_pos() -> Vector2: return bin_map_pos
 
 func set_stoped(value: bool): 
 	stoped = value
 	if stoped == false:
-		automata_carving_movement()
+		start_carving()
 
 func is_stoped() -> bool: return stoped
 
@@ -48,30 +48,41 @@ func is_stoped() -> bool: return stoped
 
 func _init(chunck_binary: ChunckBin, pos: Vector2):
 	chunck_bin = chunck_binary
-	var _err = connect("moved", chunck_bin, "on_automata_moved")
-	bin_map_pos = pos
+	set_bin_map_pos(pos)
 
 
 func _ready():
+	var _err = connect("finished", chunck, "_on_automata_finished")
+	_err = connect("finished", self, "_on_carving_finished")
+	_err = connect("moved", chunck, "_on_automata_moved")
+	_err = connect("forced_move_finished", chunck, "_on_automata_forced_move_finished")
+	_err = connect("block_placable", chunck, "_on_automata_block_placable")
+	_err = connect("room_reached", chunck, "_on_automata_room_reached")
+	
 	emit_signal("moved", self, bin_map_pos)
-	var _err = connect("finished", chunck, "on_automata_finished")
-	_err = connect("finished", chunck_bin, "on_automata_finished")
-	_err = connect("moved", chunck, "on_automata_moved")
-	_err = connect("forced_move_finished", chunck, "on_automata_forced_move_finished")
-	_err = connect("block_placable", chunck, "on_automata_block_placable")
 	
 	if debug:
 		add_child(move_timer)
 		move_timer.set_wait_time(0.1)
 		_err = move_timer.connect("timeout", self, "on_move_timer_timeout")
 	else:
-		automata_carving_movement()
+		start_carving()
 
 
 #### LOGIC ####
 
 
-func automata_carving_movement() -> void:
+func start_carving() -> void:
+	carving_movement_loop(null)
+#	if debug:
+#		carving_movement_loop(null)
+#	else:
+#		thread = Thread.new()
+#		var __ = thread.start(self, "carving_movement_loop")
+
+
+# Carve into the chunck until something tells it to stop or its arrived at the end of the chunck
+func carving_movement_loop(_thread_user_data):
 	var movement_finished : bool = false
 	
 	while(!stoped):
@@ -85,7 +96,7 @@ func automata_carving_movement() -> void:
 	
 	if movement_finished:
 		emit_signal("finished", bin_map_pos)
-		queue_free()
+		return
 
 
 # Choose a movement, the movement can either be expressed if relative value (chosen_move)
@@ -94,7 +105,9 @@ func automata_carving_movement() -> void:
 # if the final_pos have a value, the chosen_move should have the value of Vector2.INF
 # that way, we know this move was a teleportation
 func move() -> bool:
-	var room : ChunckRoom = chunck.find_room_form_cell(bin_map_pos)
+	var room : ChunckRoom = chunck.find_room_from_cell(bin_map_pos)
+	if room != null && !is_inside_room(room):
+		room = null
 	var chosen_move = Vector2.INF
 	var final_pos := Vector2.INF
 	var room_rect := Rect2()
@@ -103,22 +116,42 @@ func move() -> bool:
 	# If it's a big room, stay on the same y axis, if it's a small one
 	# set the y position to the bottom of the room so it is accesible from a jump
 	if room != null:
-		var _err = connect("entered_room", room, "on_automata_entered")
+		emit_signal("room_reached", self, room)
+		
+		var _err = connect("room_crossed", room, "_on_automata_crossed")
 		room_rect = room.get_room_rect()
 		var entry_point = Vector2(0, bin_map_pos.y)
+		var rel_entry = theorical_to_rel_access(bin_map_pos, room)
+		var room_floor_y = room_rect.position.y + room_rect.size.y
+		
+		rel_entry = Vector2(rel_entry.x, clamp(rel_entry.y, entry_point.y, room_floor_y - SIZE.y))
 		
 		if room is SmallChunckRoom:
-			var random_offset = (randi() % 3) * Vector2.UP
-			final_pos = room_rect.position + room_rect.size + random_offset + Vector2.UP
+			# Get the player in the same half of the chunck as the automata
+			var player_key = "bottom" if is_in_bottom_half() else "top"
+			var player = chunck.players_disposition[player_key].get_ref()
+			
+			# Compute the y pos of the exit based on whether there is a pool or not
+			var dist_to_floor = room_floor_y - rel_entry.y - SIZE.y
+			var is_pool_possible = dist_to_floor > 2 && player.name == "MrCold"
+			var min_exit_height = 3 if is_pool_possible else 0
+			var max_exit_height = 5 - min_exit_height if is_pool_possible else 3
+			
+			# Get a random offset value between min_exit_height & max_exit_height
+			var random_offset = (randi() % int(max_exit_height) + min_exit_height) * Vector2.UP
+			final_pos = room_rect.position + room_rect.size + random_offset + Vector2(0, -2)
+			
+			if is_pool_possible:
+				pass
 		else:
-			var x = room_rect.position.x + room_rect.size.x
 			# Clamp the exit position so its not too close from the ceiling
 			# And it can't exceed the floor of the room
-			var y = clamp(bin_map_pos.y, room_rect.position.y + 4, room_rect.position.y + room_rect.size.x)
+			var x = room_rect.position.x + room_rect.size.x
+			var y = clamp(bin_map_pos.y, room_rect.position.y + GAME.JUMP_MAX_DIST.y, room_floor_y)
 			final_pos = Vector2(x, y)
 		
-		emit_signal("entered_room", entry_point, final_pos)
-		disconnect("entered_room", room, "on_automata_entered")
+		emit_signal("room_crossed", rel_entry, final_pos)
+		disconnect("room_crossed", room, "_on_automata_crossed")
 		
 		forced_moves.append(Vector2.RIGHT)
 	else:
@@ -164,6 +197,29 @@ func choose_move() -> Vector2:
 	return possible_moves[random_id]
 
 
+# Convert the theorical entry point in the concrete one
+# ie the lowest point from where the player pass
+func theorical_to_rel_access(access: Vector2, room: ChunckRoom, entry := true) -> Vector2:
+	var room_rect = room.get_room_rect()
+	
+	var offset = Vector2.LEFT if entry else Vector2.ZERO
+	var clamped_access = Vector2(room_rect.position.x, access.y) if entry else access
+	
+	var point = clamped_access + offset
+	var chunck_size = ChunckBin.chunck_tile_size
+	var rel_access = Vector2.ZERO
+	
+	for i in range(chunck_size.y):
+		if point.y + i > chunck_size.y: 
+			break
+		if is_automata_pos_in_wall(point + Vector2(0, i)):
+			if i == 0: 
+				break
+			rel_access = clamped_access + Vector2(0, i - 1)
+			return rel_access
+	return clamped_access
+
+
 # Compare the given move with the last move the automata has done.
 # Returns true if it is the same
 func is_last_move(move: Vector2) -> bool:
@@ -200,9 +256,9 @@ func is_near_ceiling() -> bool:
 # Returns true if the automata is close from the floor of its half
 func is_near_floor() -> bool:
 	if !is_in_bottom_half():
-		return bin_map_pos.y >= chunck_bin.chunck_tile_size.y / 2 - 2
+		return bin_map_pos.y >= chunck_bin.chunck_tile_size.y / 2 - 3
 	else:
-		return bin_map_pos.y >= chunck_bin.chunck_tile_size.y - 2
+		return bin_map_pos.y >= chunck_bin.chunck_tile_size.y - 3
 
 
 # Returns true if the automata is close from the end of the floor
@@ -219,6 +275,22 @@ func is_pos_inside_chunck(pos: Vector2):
 	return pos.x >= 0 && pos.y >= 0 \
 	&& pos.x < chunck_bin.chunck_tile_size.x && pos.y < chunck_bin.chunck_tile_size.y
 
+# Check if the entire automata is inside the given room 
+func is_inside_room(room : ChunckRoom) -> bool:
+	var room_rect = room.get_room_rect()
+	for i in range(SIZE.y):
+		for j in range(SIZE.x):
+			if !room_rect.has_point(bin_map_pos + Vector2(j, i)):
+				return false
+	return true
+
+func is_automata_pos_in_wall(pos: Vector2) -> bool:
+	var bin_map = chunck_bin.get_bin_map()
+	for i in range(SIZE.y):
+		for j in range(SIZE.x):
+			if bin_map[pos.y + i][pos.x + j] == 1:
+				return true
+	return false
 
 #### VIRTUALS ####
 
@@ -235,3 +307,9 @@ func _input(_event):
 
 func on_move_timer_timeout():
 	var __ = move()
+
+### NEED TO BE TAKING THREAD END IN ACCOUNT ###
+func _on_carving_finished(_pos: Vector2):
+#	if !debug:
+#		thread.wait_to_finish()
+	queue_free()

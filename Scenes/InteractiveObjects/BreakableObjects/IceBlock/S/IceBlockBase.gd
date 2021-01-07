@@ -1,62 +1,42 @@
 extends BlockBase
-
 class_name IceBlock
 
-func is_class(value: String):
-	return value == "IceBlock" or .is_class(value)
+var floating_line : float = INF setget set_floating_line, get_floating_line
+var floating_force : float = 1000.0
 
-func get_class() -> String:
-	return "IceBlock"
-
-
-### ICEBLOCKS ###
-
-var floating_line_y : float = 0.0
-var floating_speed : int = 50
-var is_floating : bool = false setget set_is_floating
-
-var floating_force := Vector2(0, -150)
 onready var base_gravity_scale = get_gravity_scale()
+
+#### ACCESSORS ####
+
+func is_class(value: String): return value == "IceBlock" or .is_class(value)
+func get_class() -> String: return "IceBlock"
+
+func set_floating_line(value: float):
+	floating_line = value
+	if floating_line != INF:
+		awake()
+
+func get_floating_line() -> float: return floating_line
+
+### BUILT-IN ###
 
 func _ready():
 	set_physics_process(false)
 
 
-# When the block is destroyed, lauch the destroy animation
-func destroy(_actor_destroying: Node = null):
-	awake_nearby_bodies()
-	audio_node.play()
-	call_deferred("set_mode", RigidBody2D.MODE_STATIC)
-	collision_shape_node.call_deferred("set_disabled", true)
-	$Particles2D.set_emitting(true)
-	SFX.scatter_sprite(self, nb_debris, explosion_impulse)
-	SFX.scatter_sprite(self, int(nb_debris / 6), explosion_impulse * 0.7)
-	sprite_node.set_visible(false)
-
-
-
 func _physics_process(_delta):
-	if floating_line_y != 0.0:
-		if global_position.y >= floating_line_y:
-			apply_floating(true)
-		else:
-			apply_floating(false)
+	if is_sleeping():
+		return
+	
+	if floating_line != INF:
+		apply_floating(global_position.y > floating_line)
+
+#### LOGIC ####
 
 
 func apply_floating(value: bool):
-	var y_direction : int
-	if value == true:
-		y_direction = 1
-	else:
-		y_direction = -1
-
-	if(get_applied_force()) != floating_force * y_direction:
-		add_central_force(Vector2(0,0))
-		add_central_force(floating_force * y_direction)
-
-
-func set_is_floating(value: bool):
-	is_floating = value
-	apply_floating(true)
-	set_physics_process(true)
-	add_to_group("MovableBodies")
+	var force_dir := Vector2.UP if value else Vector2.DOWN
+	var force = get_applied_force()
+	
+	if force != floating_force * force_dir:
+		add_central_force(floating_force * force_dir)

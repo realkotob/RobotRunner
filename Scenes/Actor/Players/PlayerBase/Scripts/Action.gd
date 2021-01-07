@@ -13,7 +13,7 @@ export var interactables : PoolStringArray
 var action_hitbox_node : Area2D
 var hit_box_shape : Node
 
-var has_touch : bool = false
+var has_damaged : bool = false
 
 onready var audio_node = get_node("AudioStreamPlayer")
 
@@ -27,7 +27,7 @@ func _ready():
 
 
 func update(_host, _delta):
-	if !has_touch:
+	if !has_damaged:
 		damage()
 
 
@@ -48,7 +48,7 @@ func exit_state(_host):
 	interact()
 	
 	# Reset the was broke bool, for the next use of the action state
-	has_touch = false
+	has_damaged = false
 	
 	# Set the hitbox inactive
 	hit_box_shape.set_disabled(true)
@@ -61,16 +61,21 @@ func damage():
 		if body.get_class() in owner.breakable_type_array:
 			var average_pos = (body.global_position + action_hitbox_node.global_position) / 2
 			damage_body(body, average_pos)
+			has_damaged = true
 
 
 func interact():
+	# Check if the actor has already has damaged something 
+	# (meaning it can't interact this time)
+	if has_damaged: return
+	
 	# Get every area in the hitbox area
 	var interact_areas = action_hitbox_node.get_overlapping_areas()
 	
 	# Check if one on the areas in the hitbox area is an interative one, and interact with it if it is
 	# Also verify if no block were broke in this use of the action state
 	for area in interact_areas:
-		if area.get_class() in interactables && has_touch == false:
+		if area.get_class() in interactables:
 			area.interact(hit_box_shape.global_position)
 
 
@@ -79,7 +84,7 @@ func interact():
 func damage_body(body : PhysicsBody2D, impact_pos: Vector2):
 	body.damage(owner)
 	SFX.play_SFX(SFX.great_hit, impact_pos)
-	has_touch = true
+	has_damaged = true
 
 
 # When the animation is off, set the actor's state to Idle

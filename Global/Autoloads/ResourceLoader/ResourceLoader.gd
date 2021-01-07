@@ -23,9 +23,6 @@ func _ready():
 			print("Thread created sucesfully")
 
 
-func _exit_tree():
-	thread.wait_to_finish()
-
 
 
 #### LOGIC ####
@@ -38,7 +35,9 @@ func load_resources(_userdata):
 	if debug:
 		print("Resource loading finished")
 	
+	thread.wait_to_finish()
 	emit_signal("thread_finished")
+	thread = null
 
 
 #### VIRTUALS ####

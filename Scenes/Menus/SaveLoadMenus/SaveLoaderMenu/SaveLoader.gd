@@ -31,4 +31,5 @@ func _on_menu_option_chose(option: MenuOptionsBase):
 		load_save(option.get_index()+1)
 	else:
 		match(option.get_name()):
-			"BackToMenu": navigate_sub_menu(MENUS.title_screen_scene.instance())
+			"BackToMenu":
+				navigate_sub_menu(MENUS.title_screen_scene.instance())

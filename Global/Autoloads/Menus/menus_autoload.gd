@@ -6,6 +6,8 @@ onready var option_menu_scene = preload("res://Scenes/Menus/OptionsMenu/OptionsM
 onready var title_screen_scene = preload("res://Scenes/Menus/ScreenTitle/ScreenTitle.tscn")
 onready var sounds_menu_scene = preload("res://Scenes/Menus/OptionsMenu/SoundMenu/SoundMenu.tscn")
 onready var controls_menu_scene = preload("res://Scenes/Menus/OptionsMenu/Controls/InputMenu.tscn")
+onready var saveloader_menu_scene = preload("res://Scenes/Menus/SaveLoadMenus/SaveLoaderMenu/SaveLoaderMenu.tscn")
+onready var slotsaver_menu_scene = preload("res://Scenes/Menus/SaveLoadMenus/SlotSaverMenu/SlotSaverMenu.tscn")
 
 # Triggers the game over scene
 func gameover():

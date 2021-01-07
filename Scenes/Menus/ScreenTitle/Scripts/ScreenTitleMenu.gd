@@ -46,10 +46,14 @@ func _on_menu_option_chose(option: MenuOptionsBase):
 	var option_name = option.name
 	
 	match(option_name):
-		"NewGame": _err = GAME.goto_level(1)
-		"LoadGame":  _err = get_tree().change_scene_to(save_loader_scene)
-		"InfiniteMode": _err = get_tree().change_scene_to(infinite_level_scene)
-		"Quit": get_tree().quit()
+		"NewGame":
+			_err = GAME.goto_level(1)
+		"LoadGame": 
+			_err = navigate_sub_menu(MENUS.saveloader_menu_scene.instance())
+		"InfiniteMode":
+			_err = get_tree().change_scene_to(infinite_level_scene)
+		"Quit":
+			get_tree().quit()
 
 
 func _on_menu_option_focus_changed(button : Button, focus: bool):

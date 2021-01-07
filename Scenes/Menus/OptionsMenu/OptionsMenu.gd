@@ -6,7 +6,8 @@ func cancel():
 
 func _on_menu_option_chose(option):
 	match(option.name):
-		"Graphics": pass
+		"Graphics":
+			pass
 		"Sounds": 
 			var _err = navigate_sub_menu(MENUS.sounds_menu_scene.instance())
 		"Inputs": 

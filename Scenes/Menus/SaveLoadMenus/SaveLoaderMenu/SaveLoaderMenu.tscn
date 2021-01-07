@@ -8,7 +8,26 @@
 [node name="SaveLoaderMenu" instance=ExtResource( 2 )]
 script = ExtResource( 4 )
 
-[node name="HBoxContainer" parent="." index="0"]
+[node name="ColorRect" type="ColorRect" parent="." index="0"]
+modulate = Color( 0, 0, 0, 0.4 )
+margin_right = 960.0
+margin_bottom = 540.0
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect" index="0"]
+modulate = Color( 0, 0, 0, 0.6 )
+margin_left = 80.0
+margin_top = 70.0
+margin_right = 880.0
+margin_bottom = 470.0
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="HBoxContainer" parent="." index="1"]
 anchor_bottom = 0.629
 
 [node name="V_OptContainer" parent="HBoxContainer" index="0"]

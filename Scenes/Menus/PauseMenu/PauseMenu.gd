@@ -29,18 +29,22 @@ func cancel() -> void:
 #### SIGNAL RESPONSES ####
 
 func _on_menu_option_chose(option: MenuOptionsBase):
+	var _err = null
+	
 	match(option.name):
-		"Resume": 
-			get_tree().set_pause(false)
+		"Resume":
 			resume_game()
 		
 		"Retry": 
 			get_tree().set_pause(false)
-			var _err = GAME.goto_last_level()
+			_err = GAME.goto_last_level()
 		
-		"Options": 
-			var _err = navigate_sub_menu(MENUS.option_menu_scene.instance())
+		"Options":
+			_err = navigate_sub_menu(MENUS.option_menu_scene.instance())
+		
+		"SaveGame":
+			_err = navigate_sub_menu(MENUS.slotsaver_menu_scene.instance())
 		
 		"Quit": 
 			get_tree().set_pause(false)
-			var _err = get_tree().change_scene_to(MENUS.title_screen_scene)
+			_err = get_tree().change_scene_to(MENUS.title_screen_scene)

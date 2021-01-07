@@ -17,6 +17,10 @@ func get_class() -> String:
 func save_game_into_slot(slot_saved_id : int):
 	print("A game has been saved into Slot ID:",slot_saved_id)
 
+func resume_game():
+	get_tree().set_pause(false)
+	queue_free()
+
 #### VIRTUALS ####
 
 
@@ -31,4 +35,5 @@ func _on_menu_option_chose(option: MenuOptionsBase):
 		save_game_into_slot(option.get_index()+1)
 	else:
 		match(option.get_name()):
-			"Resume": queue_free()
+			"Resume":
+				resume_game()

@@ -17,7 +17,11 @@ func _ready():
 	
 	if RESOURCE_LOADER.thread != null && RESOURCE_LOADER.thread.is_active():
 		set_buttons_disabled(true)
+	else:
+		._setup()
 
+## FUNCTION OVERRIDE ##
+# This need to stay empty
 func _setup():
 	pass
 

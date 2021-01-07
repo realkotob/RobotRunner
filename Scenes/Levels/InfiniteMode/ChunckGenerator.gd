@@ -4,7 +4,8 @@ class_name ChunckGenerator
 var chunck_scene_dict : Dictionary = {
 	"Normal" : preload("res://Scenes/Levels/InfiniteMode/Chuncks/Chunck.tscn"),
 	"Cross" : preload("res://Scenes/Levels/InfiniteMode/Chuncks/CrossChunck.tscn"),
-	"BigRoom" : preload("res://Scenes/Levels/InfiniteMode/Chuncks/BigRoomChunck.tscn")
+	"BigRoom" : preload("res://Scenes/Levels/InfiniteMode/Chuncks/BigRoomChunck.tscn"),
+	"Composite" : preload("res://Scenes/Levels/InfiniteMode/Chuncks/CompositeChunck.tscn")
 }
 
 var nb_chunck : int = 0

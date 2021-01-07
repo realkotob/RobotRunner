@@ -159,6 +159,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/GameConsole/Commands.gd"
 }, {
+"base": "LevelChunck",
+"class": "CompositeChunck",
+"language": "GDScript",
+"path": "res://Scenes/Levels/InfiniteMode/Chuncks/CompositeChunck.gd"
+}, {
+"base": "ChunckRoom",
+"class": "CompositeRoom",
+"language": "GDScript",
+"path": "res://Scenes/Levels/InfiniteMode/ChunckRooms/CompositeRoom/CompositeRoom.gd"
+}, {
 "base": "SpecialChunck",
 "class": "CrossChunck",
 "language": "GDScript",
@@ -465,6 +475,8 @@ _global_script_class_icons={
 "ClassFinder": "",
 "CollactableBase": "",
 "Commands": "",
+"CompositeChunck": "",
+"CompositeRoom": "",
 "CrossChunck": "",
 "CustomParallaxLayer": "",
 "DialogueBox": "",
@@ -721,7 +733,7 @@ LevelChunckGen={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":59,"unicode":0,"echo":false,"script":null)
  ]
 }
-toggle_camera_debug_mode={
+toggle_free_camera_mode={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777249,"unicode":0,"echo":false,"script":null)
  ]

@@ -12,7 +12,7 @@ script = ExtResource( 5 )
 [node name="ChunckContainer" type="Node2D" parent="Map" index="5"]
 script = ExtResource( 1 )
 debug_dict = {
-"forced_chunck_type": "BigRoom",
+"forced_chunck_type": "Composite",
 "only_normal_chunck": false
 }
 debug = true

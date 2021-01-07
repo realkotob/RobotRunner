@@ -102,7 +102,6 @@ func navigate_sub_menu(menu: Control):
 	queue_free()
 
 
-
 #### VIRTUAL ####
 
 func cancel():

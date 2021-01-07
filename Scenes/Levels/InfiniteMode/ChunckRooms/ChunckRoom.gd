@@ -41,7 +41,8 @@ func get_bottom_right() -> Vector2 : return room_rect.position + room_rect.size
 #### BUILT-IN ####
 
 func _ready():
-	var _err = chunck.connect("every_automata_finished", self, "on_every_automata_finished")
+	if chunck != null:
+		var _err = chunck.connect("every_automata_finished", self, "on_every_automata_finished")
 	generate()
 
 
@@ -196,7 +197,7 @@ func _cell_abs_to_rel(cell: Vector2, clamp_pos: bool = false) -> Vector2:
 
 # Fill the bin map with 0, and set its size a the same size as the room
 func create_bin_map():
-	var room_size = get_room_rect().size
+	var room_size = room_rect.size
 	
 	for _i in range(room_size.y):
 		var line_array = Array()

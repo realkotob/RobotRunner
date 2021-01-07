@@ -17,19 +17,19 @@ func get_bin_map() -> Array: return bin_map
 
 #### BUILT-IN ####
 
-func _init(chunck_ref):
-	generate_filled_bin_map()
+func _init(chunck_ref, default_value: int = 1):
+	generate_bin_map(default_value)
 	chunck = chunck_ref
 
 #### LOGIC ####
 
 # Generate a bin_map filed with 1
-func generate_filled_bin_map() -> void:
+func generate_bin_map(default_value: int) -> void:
 	bin_map = []
 	for _i in range(chunck_tile_size.y):
 		var line_array := Array()
 		for _j in range(chunck_tile_size.x):
-			line_array.append(1)
+			line_array.append(default_value)
 		bin_map.append(line_array)
 
 

@@ -53,8 +53,8 @@ func teleport_automatas() -> void:
 		var entry_teleporter = interactive_object_dict[tel_type].instance()
 		var exit_teleporter = interactive_object_dict[tel_type].instance()
 		
-		entry_teleporter.set_position(automata_pos * GAME.TILE_SIZE + GAME.TILE_SIZE / 2)
-		exit_teleporter.set_position((dest_cell + Vector2.RIGHT) * GAME.TILE_SIZE + GAME.TILE_SIZE / 2)
+		entry_teleporter.set_position(automata_pos * GAME.TILE_SIZE + Vector2(GAME.TILE_SIZE.x * 0.5, GAME.TILE_SIZE.y * 1.5))
+		exit_teleporter.set_position((dest_cell + Vector2.RIGHT) * GAME.TILE_SIZE + Vector2(GAME.TILE_SIZE.x * 0.5, GAME.TILE_SIZE.y * 1.5))
 		
 		object_to_add.append([group, entry_teleporter, exit_teleporter])
 	

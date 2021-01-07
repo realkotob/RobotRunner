@@ -71,6 +71,12 @@ func _ready():
 		GAME.set_screen_fade_visible(false)
 		debug_cursor.set_active(true)
 	
+	initialize_chunck()
+
+
+#### LOGIC ####
+
+func initialize_chunck():
 	var last_room = generate_rooms()
 	
 	if last_room != null:
@@ -82,8 +88,6 @@ func _ready():
 	initialize_player_placement()
 	create_automatas()
 
-
-#### LOGIC ####
 
 func generate_self():
 	update_wall_tiles()
@@ -147,7 +151,7 @@ func fetch_rooms_objects():
 			object_to_add.append(obj) 
 
 
-# Place the rooms in the chunck by carving modifing the chunck bin accordingly to the room bin
+# Place the rooms in the chunck by modifing the chunck bin accordingly to the room bin
 func place_room(room : ChunckRoom):
 	var room_rect : Rect2 = room.get_room_rect()
 	for i in range(room_rect.size.y):
@@ -158,11 +162,6 @@ func place_room(room : ChunckRoom):
 			else:
 				var room_cell = room.bin_map[i][j]
 				chunck_bin.bin_map[pos.y][pos.x] = room_cell
-				walls_tilemap.set_cellv(pos, -1)
-	
-	var top_left_corner = room_rect.position - Vector2.ONE
-	var bottom_right_corner = room_rect.position + room_rect.size + Vector2.ONE
-	walls_tilemap.update_bitmask_region(top_left_corner, bottom_right_corner)
 
 
 # Place the tiles in the tilemap according the the bin_map value

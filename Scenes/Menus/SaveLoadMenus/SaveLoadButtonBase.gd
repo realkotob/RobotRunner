@@ -1,6 +1,6 @@
 extends MenuOptionsBase
 
-class_name SaveSlotButton
+class_name SaveLoadButtonBase
 
 #### ACCESSORS ####
 

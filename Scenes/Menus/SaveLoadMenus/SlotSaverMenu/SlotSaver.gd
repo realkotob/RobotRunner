@@ -1,5 +1,7 @@
 extends MenuBase
 
+class_name SlotSaver
+
 #### ACCESSORS ####
 
 func is_class(value: String):
@@ -10,12 +12,10 @@ func get_class() -> String:
 
 #### BUILT-IN ####
 
-
-
 #### LOGIC ####
 
 func save_game_into_slot(slot_saved_id : int):
-	print("A game has been saved into Slot ID:",slot_saved_id,"]")
+	print("A game has been saved into Slot ID:",slot_saved_id)
 
 #### VIRTUALS ####
 
@@ -27,4 +27,8 @@ func save_game_into_slot(slot_saved_id : int):
 
 #### SIGNAL RESPONSES ####
 func _on_menu_option_chose(option: MenuOptionsBase):
-	save_game_into_slot(option.get_index()+1)
+	if option is SaveLoadButtonBase:
+		save_game_into_slot(option.get_index()+1)
+	else:
+		match(option.get_name()):
+			"Resume": queue_free()

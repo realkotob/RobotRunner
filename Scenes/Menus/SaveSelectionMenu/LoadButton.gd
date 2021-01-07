@@ -1,6 +1,6 @@
 extends MenuOptionsBase
 
-const save_id : int = 2
+class_name LoadButtonBase
 
 #### ACCESSORS ####
 

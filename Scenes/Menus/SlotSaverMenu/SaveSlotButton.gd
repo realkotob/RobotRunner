@@ -1,5 +1,6 @@
-extends MenuBase
-class_name SaveSelectionMenu
+extends MenuOptionsBase
+
+class_name SaveSlotButton
 
 #### ACCESSORS ####
 
@@ -26,4 +27,3 @@ func get_class() -> String:
 
 
 #### SIGNAL RESPONSES ####
-

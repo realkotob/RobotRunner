@@ -7,8 +7,6 @@ class_name SaveLoader
 # It will get the signal of a loaded save and load all necessary resources
 # Signal which will be emetted by SAVE_1/2/3 buttons (MenuOptionsBase)
 
-signal save_loaded
-
 #### ACCESSORS ####
 
 func is_class(value: String):
@@ -24,7 +22,8 @@ func _ready():
 
 #### LOGIC ####
 
-
+func load_save(save_to_load_id : int):
+	print("A save has been loaded [ID:",save_to_load_id,"]")
 
 #### VIRTUALS ####
 
@@ -36,11 +35,4 @@ func _ready():
 
 #### SIGNAL RESPONSES ####
 func _on_menu_option_chose(option: MenuOptionsBase):
-	var _err = null
-	
-	if option.get("save_id"):
-		_err = emit_signal("save_loaded",option.save_id)
-	
-	
-func _on_save_loaded(save_id : int):
-	print("A save has been loaded [ID:",save_id,"]")
+	load_save(option.get_index()+1)

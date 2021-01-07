@@ -1,6 +1,4 @@
-extends MenuOptionsBase
-
-const save_id : int = 3
+extends MenuBase
 
 #### ACCESSORS ####
 
@@ -16,7 +14,8 @@ func get_class() -> String:
 
 #### LOGIC ####
 
-
+func save_game_into_slot(slot_saved_id : int):
+	print("A game has been saved into Slot ID:",slot_saved_id,"]")
 
 #### VIRTUALS ####
 
@@ -27,3 +26,5 @@ func get_class() -> String:
 
 
 #### SIGNAL RESPONSES ####
+func _on_menu_option_chose(option: MenuOptionsBase):
+	save_game_into_slot(option.get_index()+1)

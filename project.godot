@@ -289,6 +289,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/InteractiveObjects/Liquids/Liquid.gd"
 }, {
+"base": "MenuOptionsBase",
+"class": "LoadButtonBase",
+"language": "GDScript",
+"path": "res://Scenes/Menus/SaveSelectionMenu/LoadButton.gd"
+}, {
 "base": "CollactableBase",
 "class": "MaterialCollactable",
 "language": "GDScript",
@@ -369,10 +374,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/Menus/SaveSelectionMenu/SaveLoader.gd"
 }, {
-"base": "MenuBase",
-"class": "SaveSelectionMenu",
+"base": "MenuOptionsBase",
+"class": "SaveSlotButton",
 "language": "GDScript",
-"path": "res://Scenes/Menus/SaveSelectionMenu/SaveSelectionMenu.gd"
+"path": "res://Scenes/Menus/SlotSaverMenu/SaveSlotButton.gd"
 }, {
 "base": "MenuBase",
 "class": "ScreenTitleMenu",
@@ -501,6 +506,7 @@ _global_script_class_icons={
 "LevelEvent": "",
 "LevelSaver": "",
 "Liquid": "",
+"LoadButtonBase": "",
 "MaterialCollactable": "",
 "MenuBase": "",
 "MenuOptions": "",
@@ -517,7 +523,7 @@ _global_script_class_icons={
 "SFX_Explosion": "",
 "SFX_group_base": "",
 "SaveLoader": "",
-"SaveSelectionMenu": "",
+"SaveSlotButton": "",
 "ScreenTitleMenu": "",
 "SeedField": "",
 "SlopePlacer": "",

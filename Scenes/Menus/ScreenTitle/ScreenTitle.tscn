@@ -48,10 +48,6 @@ tracks/0/keys = {
 }
 
 [node name="ScreenTitle" instance=ExtResource( 1 )]
-margin_left = 0.89093
-margin_top = -1.3364
-margin_right = 0.89093
-margin_bottom = -1.33643
 mouse_filter = 2
 script = ExtResource( 5 )
 

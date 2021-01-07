@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 class_name ChunckGenerator
 
 var chunck_scene_dict : Dictionary = {
@@ -56,19 +56,21 @@ func stress_test(nb_test : int):
 	print("## CHUNCK GENERATION STRESS TEST FINISHED ##")
 
 
-# Generate a chunck
-# Have a chance on 4 to create a special chunck
-func generate_chunck() -> LevelChunck:
+# Generate a random chunck
+# You can't have the same chunck two times in a row, unless its a Normal chunck 
+func generate_chunck(first: bool = false) -> LevelChunck:
+	if first:
+		return chunck_scene_dict["Normal"].instance()
 	
 	# Forced chunck type for debug purpose
 	if debug:
 		if debug_dict["only_normal_chunck"]:
 			return chunck_scene_dict["Normal"].instance()
 		elif debug_dict["forced_chunck_type"] in chunck_scene_dict.keys():
-			return chunck_scene_dict[debug_dict["forced_chunck_type"]]
+			return chunck_scene_dict[debug_dict["forced_chunck_type"]].instance()
 	
 	# Pick a random special chunck, but different from the last one if it wasn't a normal one
-	var possible_chunck = chunck_scene_dict.values()
+	var possible_chunck = chunck_scene_dict.values().duplicate()
 	if last_chunck_scene != chunck_scene_dict["Normal"]:
 		possible_chunck.erase(last_chunck_scene)
 	
@@ -117,7 +119,7 @@ func place_level_chunck(invert_player_pos : bool = false) -> LevelChunck:
 	
 	var chunck_tile_size = ChunckBin.chunck_tile_size
 	
-	var new_chunck = generate_chunck()
+	var new_chunck = generate_chunck(nb_chunck == 0)
 	new_chunck.starting_points = starting_points
 	new_chunck.set_position(GAME.TILE_SIZE * Vector2(chunck_tile_size.x, 0) * nb_chunck)
 	new_chunck.set_name("LevelChunck" + String(nb_chunck))
@@ -159,3 +161,7 @@ func place_level_chunck(invert_player_pos : bool = false) -> LevelChunck:
 func on_new_chunck_reached(invert_player_pos: bool):
 	if !is_generating:
 		place_level_chunck(invert_player_pos)
+
+
+func _on_automata_crossed(_entry: Vector2, _exit: Vector2):
+	pass

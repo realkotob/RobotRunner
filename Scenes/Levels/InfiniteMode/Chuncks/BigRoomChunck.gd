@@ -22,6 +22,7 @@ func generate_rooms() -> Node:
 	room.name = "BigRoom"
 	room.chunck = self
 	$Rooms.call_deferred("add_child", room)
+	unplaced_rooms.append(room)
 	return room
 
 #### INPUTS ####

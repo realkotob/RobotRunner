@@ -154,7 +154,7 @@ func place_room(room : ChunckRoom):
 		for j in range(room_rect.size.x):
 			var pos = Vector2(j, i) + room_rect.position
 			if room.bin_map.empty():
-				continue
+				break
 			else:
 				var room_cell = room.bin_map[i][j]
 				chunck_bin.bin_map[pos.y][pos.x] = room_cell
@@ -163,6 +163,7 @@ func place_room(room : ChunckRoom):
 	var top_left_corner = room_rect.position - Vector2.ONE
 	var bottom_right_corner = room_rect.position + room_rect.size + Vector2.ONE
 	walls_tilemap.update_bitmask_region(top_left_corner, bottom_right_corner)
+
 
 # Place the tiles in the tilemap according the the bin_map value
 func place_wall_tiles(pos := Vector2.INF):
@@ -406,6 +407,7 @@ func _on_automata_block_placable(cell: Vector2):
 		if rng == 0:
 			place_block(cell)
 
-func _on_automata_room_reached(_automata: ChunckAutomata, room: ChunckRoom):
+
+func _on_automata_finished_crossing_room(_automata: ChunckAutomata, room: ChunckRoom):
 	if room in unplaced_rooms:
 		place_room(room)

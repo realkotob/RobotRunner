@@ -38,13 +38,14 @@ func enlarge_entry_exit(tile_wide: int = randi() % 2 + 3):
 
 #### SIGNAL RESPONSES ####
 
-func on_automata_entered(entry: Vector2, exit: Vector2):
-	.on_automata_entered(entry, exit)
+func _on_automata_crossed(entry: Vector2, exit: Vector2):
+	._on_automata_crossed(entry, exit)
 	
 	if entry_exit_couple_array.size() == 2:
 		generate_platforms()
 		place_platforms()
 		enlarge_entry_exit()
+
 
 func on_every_automata_finished():
 	generate_liquid("Lava")

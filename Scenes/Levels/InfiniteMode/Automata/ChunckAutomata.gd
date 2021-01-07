@@ -19,8 +19,8 @@ onready var move_timer = Timer.new()
 
 signal moved(automata, to)
 signal finished(final_pos)
-signal room_reached(automata, room)
 signal room_crossed(entry_point, exit_point)
+signal finished_crossing_room(automata, room)
 signal forced_move_finished(automata, pos)
 signal block_placable(cell)
 
@@ -57,7 +57,7 @@ func _ready():
 	_err = connect("moved", chunck, "_on_automata_moved")
 	_err = connect("forced_move_finished", chunck, "_on_automata_forced_move_finished")
 	_err = connect("block_placable", chunck, "_on_automata_block_placable")
-	_err = connect("room_reached", chunck, "_on_automata_room_reached")
+	_err = connect("finished_crossing_room", chunck, "_on_automata_finished_crossing_room")
 	
 	emit_signal("moved", self, bin_map_pos)
 	
@@ -116,8 +116,6 @@ func move() -> bool:
 	# If it's a big room, stay on the same y axis, if it's a small one
 	# set the y position to the bottom of the room so it is accesible from a jump
 	if room != null:
-		emit_signal("room_reached", self, room)
-		
 		var _err = connect("room_crossed", room, "_on_automata_crossed")
 		room_rect = room.get_room_rect()
 		var entry_point = Vector2(0, bin_map_pos.y)
@@ -151,6 +149,7 @@ func move() -> bool:
 			final_pos = Vector2(x, y)
 		
 		emit_signal("room_crossed", rel_entry, final_pos)
+		emit_signal("finished_crossing_room", self, room)
 		disconnect("room_crossed", room, "_on_automata_crossed")
 		
 		forced_moves.append(Vector2.RIGHT)

@@ -81,6 +81,8 @@ func on_body_entered(body: PhysicsBody2D):
 
 
 func _on_automata_moved(automata: ChunckAutomata, to: Vector2):
+	._on_automata_moved(automata, to)
+	
 	if automata in automata_arrived or already_teleported:
 		return
 	

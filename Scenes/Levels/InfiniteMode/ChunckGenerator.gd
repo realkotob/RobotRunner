@@ -4,7 +4,6 @@ class_name ChunckGenerator
 var chunck_scene_dict : Dictionary = {
 	"Normal" : preload("res://Scenes/Levels/InfiniteMode/Chuncks/Chunck.tscn"),
 	"Cross" : preload("res://Scenes/Levels/InfiniteMode/Chuncks/CrossChunck.tscn"),
-	"BigRoom" : preload("res://Scenes/Levels/InfiniteMode/Chuncks/BigRoomChunck.tscn"),
 	"Composite" : preload("res://Scenes/Levels/InfiniteMode/Chuncks/CompositeChunck.tscn")
 }
 
@@ -15,7 +14,8 @@ var last_chunck_scene : PackedScene = null
 
 export var debug_dict : Dictionary = {
 	"only_normal_chunck" : false,
-	"forced_chunck_type" : ""
+	"forced_chunck_type" : "",
+	"not_wanted_types": []
 }
 
 export var debug : bool = false
@@ -32,7 +32,6 @@ func get_class() -> String: return "ChunckGenerator"
 
 func _ready() -> void:
 	if GAME.get_current_seed() == 0:
-		randomize()
 		EVENTS.emit_signal("seed_change_query", randi())
 	
 	place_level_chunck()
@@ -69,6 +68,10 @@ func generate_chunck(first: bool = false) -> LevelChunck:
 			return chunck_scene_dict["Normal"].instance()
 		elif debug_dict["forced_chunck_type"] in chunck_scene_dict.keys():
 			return chunck_scene_dict[debug_dict["forced_chunck_type"]].instance()
+		else:
+			for type in debug_dict["not_wanted_types"]:
+				if type in chunck_scene_dict.keys():
+					var __ = chunck_scene_dict.erase(type)
 	
 	# Pick a random special chunck, but different from the last one if it wasn't a normal one
 	var possible_chunck = chunck_scene_dict.values().duplicate()

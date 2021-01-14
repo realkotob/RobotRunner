@@ -9,6 +9,11 @@ var interactive_object_dict : Dictionary = {
 	"EarthBlock": preload("res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/M/MEarthBlock.tscn")
 }
 
+var room_type_dict : Dictionary = {
+	"Small": SmallChunckRoom,
+	"Big": BigChunckRoom
+}
+
 const max_nb_room : int = 3
 
 onready var walls_tilemap = $Walls
@@ -126,17 +131,16 @@ func generate_rooms() -> Node:
 	var room : Node = null
 	var nb_room = randi() % max_nb_room
 	for i in range(nb_room):
-		var next_room_half = SmallChunckRoom.ROOM_HALF.TOP_HALF
+		var room_type_id = randi() % room_type_dict.size()
+		var room_type = room_type_dict.values()[room_type_id]
+		var next_room_half = ChunckRoom.ROOM_HALF.TOP_HALF
 		
-		if i == 0:
-			room = SmallChunckRoom.new()
-		else:
+		if i != 0:
 			var last_room_half = room.get_room_half()
 			if last_room_half == next_room_half:
-				next_room_half = SmallChunckRoom.ROOM_HALF.BOTTOM_HALF
+				next_room_half = ChunckRoom.ROOM_HALF.BOTTOM_HALF
 		
-		room = SmallChunckRoom.new(next_room_half)
-		room.name = "SmallRoom"
+		room = room_type.new(next_room_half)
 		room.chunck = self
 		$Rooms.call_deferred("add_child", room)
 		unplaced_rooms.append(room)

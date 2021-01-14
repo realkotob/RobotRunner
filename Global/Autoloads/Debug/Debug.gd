@@ -7,7 +7,7 @@ func _enter_tree() -> void:
 
 func _ready():
 	pause_mode = Node.PAUSE_MODE_PROCESS
-	LevelSaver.delete_all_level_temp_saves(false)
+	GameSaver.delete_all_level_temp_saves(false)
 
 
 func _input(event):
@@ -24,6 +24,6 @@ func _input(event):
 func on_scene_tree_node_added(node: Node):
 	if node is Level:
 		yield(node, "ready")
-		LevelSaver.save_level_properties_as_json(node)
+		GameSaver.save_level_properties_as_json(node)
 		
 		get_tree().disconnect("node_added", self, "on_scene_tree_node_added")

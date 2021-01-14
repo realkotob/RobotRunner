@@ -16,6 +16,8 @@ func get_class() -> String:
 
 func save_game_into_slot(slot_saved_id : int):
 	print("A game has been saved into Slot ID:",slot_saved_id)
+	GameSaver.create_dirs(GameSaver.SAVEGAME_DIR, ["save" + str(slot_saved_id)])
+	InputMapper.export_profile(3)
 
 func resume_game():
 	get_tree().set_pause(false)

@@ -83,6 +83,7 @@ func generate_chunck(first: bool = false) -> LevelChunck:
 	
 	var chunck = chose_chunck_scene.instance()
 	last_chunck_scene = chose_chunck_scene
+	chunck.first_chunck = first
 	
 	return chunck
 

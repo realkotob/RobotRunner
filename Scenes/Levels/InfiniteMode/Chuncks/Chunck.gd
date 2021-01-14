@@ -102,6 +102,7 @@ func generate_self():
 	
 	if debug:
 		room_debug_visualizer()
+	
 	emit_signal("chunck_gen_finished")
 
 
@@ -131,7 +132,7 @@ func generate_rooms() -> Node:
 	var room : Node = null
 	var nb_room = randi() % max_nb_room
 	for i in range(nb_room):
-		var room_type_id = randi() % room_type_dict.size()
+		var room_type_id = randi() % room_type_dict.size() if !first_chunck else 0
 		var room_type = room_type_dict.values()[room_type_id]
 		var next_room_half = ChunckRoom.ROOM_HALF.TOP_HALF
 		

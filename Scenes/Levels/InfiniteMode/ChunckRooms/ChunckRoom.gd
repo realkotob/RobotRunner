@@ -86,7 +86,7 @@ func generate_platforms():
 		var exit = couple[1]
 		
 		# If one exit is close enough from the ground, ignore it (Doesn't need platform)
-		if exit.y >= room_rect.size.y - 3: continue
+		if exit.y >= room_rect.size.y - 4: continue
 		 
 		var jump_max_dist : Vector2 = GAME.JUMP_MAX_DIST
 		var room_size = get_room_rect().size

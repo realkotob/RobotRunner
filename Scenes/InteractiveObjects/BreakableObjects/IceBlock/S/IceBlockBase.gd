@@ -15,6 +15,11 @@ func set_floating_line(value: float):
 	floating_line = value
 	if floating_line != INF:
 		awake()
+		if !is_in_group("MovableBodies"):
+			add_to_group("MovableBodies")
+	else:
+		if !is_in_group("MovableBodies"):
+			remove_from_group("MovableBodies")
 
 func get_floating_line() -> float: return floating_line
 
@@ -24,19 +29,19 @@ func _ready():
 	set_physics_process(false)
 
 
-func _physics_process(_delta):
+func _integrate_forces(_state: Physics2DDirectBodyState) -> void:
 	if is_sleeping():
 		return
 	
 	if floating_line != INF:
 		apply_floating(global_position.y > floating_line)
 
+
 #### LOGIC ####
 
 
 func apply_floating(value: bool):
 	var force_dir := Vector2.UP if value else Vector2.DOWN
-	var force = get_applied_force()
-	
-	if force != floating_force * force_dir:
+	var current_force = get_applied_force()
+	if current_force.length() < floating_force or sign(current_force.y) != force_dir.y:
 		add_central_force(floating_force * force_dir)

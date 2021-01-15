@@ -12,7 +12,7 @@ onready var action_hitbox_node = get_node_or_null("ActionHitBox")
 export var default_state : String = ""
 
 export var jump_force : int = -500 
-export (int, 0, 200) var push = 2
+export (int, 0, 1000) var push = 2
 
 const GRAVITY : int = 30
 

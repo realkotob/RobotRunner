@@ -210,7 +210,7 @@ func theorical_to_rel_access(access: Vector2, room: ChunckRoom, entry := true) -
 	for i in range(chunck_size.y):
 		if point.y + i > chunck_size.y: 
 			break
-		if is_automata_pos_in_wall(point + Vector2(0, i)):
+		if is_automata_pos_in_wall(point + Vector2(0, i), room):
 			if i == 0: 
 				break
 			rel_access = clamped_access + Vector2(0, i - 1)
@@ -284,13 +284,16 @@ func is_inside_room(room : ChunckRoom) -> bool:
 	return true
 
 
-func is_automata_pos_in_wall(pos: Vector2) -> bool:
+func is_automata_pos_in_wall(pos: Vector2, room : ChunckRoom = null) -> bool:
 	var bin_map = chunck_bin.get_bin_map()
 	for i in range(SIZE.y):
 		for j in range(SIZE.x):
-			if bin_map[pos.y + i][pos.x + j] == 1:
+			var cell = Vector2(pos.x + j , pos.y + i)
+			if bin_map[cell.y][cell.x] == 1 && !room.is_cell_inside_room(cell):
 				return true
 	return false
+
+
 
 #### VIRTUALS ####
 

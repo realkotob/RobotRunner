@@ -293,6 +293,9 @@ func find_lowest_platfrom() -> ChunckPlatform:
 	return lowest_platform
 
 
+func is_cell_inside_room(cell: Vector2) -> bool:
+	return room_rect.has_point(cell)
+
 #### VIRTUALS ####
 
 

@@ -44,8 +44,8 @@ func enlarge_entry_exit(tile_wide: int = randi() % 2 + 3):
 
 #### SIGNAL RESPONSES ####
 
-func _on_automata_crossed(entry: Vector2, exit: Vector2):
-	._on_automata_crossed(entry, exit)
+func _on_automata_crossed(automata, room: ChunckRoom, entry: Vector2, exit: Vector2):
+	._on_automata_crossed(automata, room, entry, exit)
 	generate_platforms()
 	place_platforms()
 	enlarge_entry_exit()

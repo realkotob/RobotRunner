@@ -60,6 +60,8 @@ func _init(half: int = ROOM_HALF.UNDEFINED):
 func _ready():
 	if chunck != null:
 		var _err = chunck.connect("every_automata_finished", self, "on_every_automata_finished")
+	
+	var _err = EVENTS.connect("automata_room_crossed", self, "_on_automata_crossed")
 	generate()
 
 
@@ -304,9 +306,13 @@ func is_cell_inside_room(cell: Vector2) -> bool:
 
 #### SIGNAL RESPONSES ####
 
-func _on_automata_crossed(entry: Vector2, exit: Vector2):
+func _on_automata_crossed(_automata, room: ChunckRoom, entry: Vector2, exit: Vector2):
+	if room != self:
+		return
+	
 	var couple = [_cell_abs_to_rel(entry, true), _cell_abs_to_rel(exit, true)]
 	entry_exit_couple_array.append(couple)
+
 
 func on_every_automata_finished():
 	pass

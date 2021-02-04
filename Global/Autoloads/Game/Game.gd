@@ -26,6 +26,34 @@ var last_level_name : String
 
 var current_seed : int = 0 setget _set_current_seed, get_current_seed
 
+var music_bus_id = AudioServer.get_bus_index("Music")
+var sound_bus_id = AudioServer.get_bus_index("Sounds")
+
+var _config_file = ConfigFile.new()
+
+var _settings = {
+		"audio":{
+			"music": AudioServer.get_bus_volume_db(music_bus_id),
+			"sounds": AudioServer.get_bus_volume_db(sound_bus_id)
+		},
+		"controls":{
+				"jump_player1": InputMap.get_action_list("jump_player1")[0].scancode,
+				"move_left_player1": InputMap.get_action_list("move_left_player1")[0].scancode,
+				"move_right_player1": InputMap.get_action_list("move_right_player1")[0].scancode,
+				"teleport_player1": InputMap.get_action_list("teleport_player1")[0].scancode,
+				"action_player1": InputMap.get_action_list("action_player1")[0].scancode,
+				
+				"jump_player2": InputMap.get_action_list("jump_player2")[0].scancode,
+				"move_left_player2": InputMap.get_action_list("move_left_player2")[0].scancode,
+				"move_right_player2": InputMap.get_action_list("move_right_player2")[0].scancode,
+				"teleport_player2": InputMap.get_action_list("teleport_player2")[0].scancode,
+				"action_player2": InputMap.get_action_list("action_player2")[0].scancode,
+				
+				"game_restart": InputMap.get_action_list("game_restart")[0].scancode,
+				"HUD_switch_state": InputMap.get_action_list("HUD_switch_state")[0].scancode,
+				"display_console": InputMap.get_action_list("display_console")[0].scancode
+		}
+	}
 
 #### ACCESSORS ####
 
@@ -45,10 +73,24 @@ func _ready():
 	_err = EVENTS.connect("level_finished", self, "on_level_finished")
 	_err = EVENTS.connect("seed_change_query", self, "on_seed_change_query")
 
-	GameSaver.create_dirs(GameSaver.SAVEGAME_DIR, [])
-	GameSaver.create_dirs(GameSaver.SAVEDLEVEL_DIR, ["json", "tscn"])
+	GameSaver.create_dirs(GameSaver.SAVEGAME_DIR, []) #Create saves directory at root
+	GameSaver.create_dirs(GameSaver.SAVEDLEVEL_DIR, ["json", "tscn"]) #Create json and tscn directory at SAVEDLEVEL_DIR : String = "res://Scenes/Levels/SavedLevel/"
 	
 #### LOGIC ####
+
+func settings_update_keys():
+	for section in _settings:
+			match(section):
+				"audio":
+					#print("AUDIO SECTION")
+					pass
+				"controls":
+					#print("CONTROL SECTION")
+					for keys in _settings[section]:
+						_settings[section][keys] = InputMap.get_action_list(keys)[0].scancode
+				_:
+					#print("DEFAULT MATCH SECTION STATE")
+					pass
 
 func new_chapter():
 	progression.add_to_chapter(1)

@@ -8,8 +8,6 @@ const SAVEGAME_DIR : String = "res://saves"
 const SAVEDLEVEL_DIR : String = "res://Scenes/Levels/SavedLevel"
 const SAVEDLEVEL_JSON_DIR : String = "/json/"
 const SAVEDLEVEL_TSCN_DIR : String = "/tscn/"
-const SAVESLOT_PATHS_ARRAY : Array = ["/slot1/","/slot2/","/slot3/"]
-
 
 const objects_datatype_storage = {
 	"GameCamera": ["zoom", "instruction_stack"],
@@ -19,11 +17,7 @@ const objects_datatype_storage = {
 
 #### ACCESSORS ####
 
-
-
 #### BUILT-IN ####
-
-
 
 #### LOGIC ####
 
@@ -69,6 +63,49 @@ static func save_level(level: Node, dict_to_fill: Dictionary):
 	if debug:
 		print_level_data(dict_to_fill)
 
+
+static func save_settings(path : String):
+#	var error = GAME._config_file.load(path)
+#	if error == OK:
+#	print("SUCCESSFULLY LOADED SETTINGS CFG FILE. SUCCESS CODE : " + str(error))
+	GAME.settings_update_keys()
+	for section in GAME._settings.keys():
+		for key in GAME._settings[section]:
+			GAME._config_file.set_value(section, key, GAME._settings[section][key])
+			
+#	else:
+#		print("FAILED TO LOAD SETTINGS CFG FILE. ERROR CODE : " + str(error))
+#		return
+	
+	GAME._config_file.save(path + "/settings.cfg")
+
+static func load_settings(path):
+	var error = GAME._config_file.load(path)
+	if error == OK:
+		
+		print("SUCCESSFULLY LOADED SETTINGS CFG FILE. SUCCESS CODE : " + str(error))
+		for section in GAME._config_file.get_sections():
+			match(section):
+				"audio":
+					for audio_keys in GAME._config_file.get_section_keys(section):
+						#print("%s %s" % [AudioServer.get_bus_index(audio_keys.capitalize()), GAME._config_file.get_value(section, audio_keys)])
+						AudioServer.set_bus_volume_db(AudioServer.get_bus_index(audio_keys.capitalize()), GAME._config_file.get_value(section, audio_keys))
+				"controls":
+					print("ITS CONTROL SECTION")
+				_:
+					print("DEFAULT MATCH SECTION STATE")
+	
+		print(str(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music"))))
+		print(str(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Sounds"))))
+	
+	else:
+		print("FAILED TO LOAD SETTINGS CFG FILE. ERROR CODE : " + str(error))
+		return
+	
+#	for section in GAME._config_file.get_sections():
+#		for key in GAME._config_file.get_section_keys(section):
+#			var val = GAME._settings[section][key]
+#			values.append(GAME._config_file.get_value(section, key, val))
 
 # Save the level in a .tscn file
 static func save_level_as_tscn(level: Node2D):

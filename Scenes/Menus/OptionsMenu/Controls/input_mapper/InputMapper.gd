@@ -50,7 +50,23 @@ var profile_qwerty = {
 	'display_console': KEY_F3
 }
 
-var profile_custom = profile_azerty
+var profile_custom = {
+	'jump_player1': InputMap.get_action_list("jump_player1")[0].scancode,
+	'move_left_player1': InputMap.get_action_list("move_left_player1")[0].scancode,
+	'move_right_player1': InputMap.get_action_list("move_right_player1")[0].scancode,
+	'teleport_player1': InputMap.get_action_list("teleport_player1")[0].scancode,
+	'action_player1': InputMap.get_action_list("action_player1")[0].scancode,
+	
+	'jump_player2': InputMap.get_action_list("jump_player2")[0].scancode,
+	'move_left_player2': InputMap.get_action_list("move_left_player2")[0].scancode,
+	'move_right_player2': InputMap.get_action_list("move_right_player2")[0].scancode,
+	'teleport_player2': InputMap.get_action_list("teleport_player2")[0].scancode,
+	'action_player2': InputMap.get_action_list("action_player2")[0].scancode,
+	
+	'game_restart': InputMap.get_action_list("game_restart")[0].scancode,
+	'HUD_switch_state': InputMap.get_action_list("HUD_switch_state")[0].scancode,
+	'display_console': InputMap.get_action_list("display_console")[0].scancode
+}
 
 #Get the selected profile id to change it. Ref to profile var for more information
 func change_profile(id):
@@ -59,13 +75,8 @@ func change_profile(id):
 	var is_customizable = true if id == 2 else false #Currently, the customizable profile is the 3rd one, so ID(2).
 	#Otherwise, if we chose to add one more profile, the customizable profile would be ID(3), ID(4), etc...
 	
-	#For loop to get all the profile's coresponding keys
-	for action_name in profile.keys(): #get the name, get the key
-		change_action_key(action_name, profile[action_name]) #change the key
 	emit_signal('profile_changed', profile, is_customizable) #Emit the signal 'profile changed'
-	
-	
-	
+
 	return profile #return the profile to display it / use it later.
 
 
@@ -86,25 +97,8 @@ func erase_action_events(action_name):
 	for event in input_events:
 		InputMap.action_erase_event(action_name, event)
 
-func export_profile(profile_id : int, save_slot : int = -1, path : String = GameSaver.SAVEGAME_DIR):
-	if(save_slot != -1):
-		path = path + "/save" + str(save_slot)
-		#if save_slot = 1 for example ==> path = res://saves/save1
-		#if save_slot = -1 for example ==> path = res://saves
-		#if save_slot = 1 and path = res://Scenes/Levels for exammple ==> path = res://Scenes/Levels/save1
-	
-	var controls_json_file = File.new()
-	var profile = get(profiles[profile_id])
-	var profile_to_export_as_dictionary : Dictionary = {}
-	
-	for action_name in profile.keys():
-		profile_to_export_as_dictionary[action_name] = action_name
-	
-	GameSaver.create_dirs(path, ["controls.json"])
-
 func get_selected_profile():
 	return get(profiles[current_profile_id])
-
 
 func _on_ProfilesMenu_item_selected(ID):
 	change_profile(ID)

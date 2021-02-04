@@ -115,7 +115,11 @@ pool_size = Vector2( 200, 48 )
 
 [node name="GrowingLava" parent="InteractivesObjects/LavaTiles" index="1" instance=ExtResource( 16 )]
 position = Vector2( 500.8, 480 )
+group_name = ""
+empty_part = 48.0
 pool_size = Vector2( 1500, 48 )
+speed = 20
+is_growing = false
 
 [node name="GreatDoor" parent="InteractivesObjects/GreatDoorGroup" index="0" instance=ExtResource( 11 )]
 position = Vector2( 516, -792 )

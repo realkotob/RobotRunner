@@ -283,13 +283,15 @@ func place_block(cell: Vector2):
 
 # Check if the block is on a correct possition to be placed
 func is_block_placable(block: BlockBase) -> bool:
-	if block == null : return false
-	var block_cell = walls_tilemap.world_to_map(block.get_position())
+	if block == null : 
+		return false
+	var block_global_pos = block.get_position() + walls_tilemap.get_position()
+	var block_cell = walls_tilemap.world_to_map(block_global_pos) + Vector2.ONE
 	var used_cells = walls_tilemap.get_used_cells()
 	
 	# for the block to be placable the two cells on its left must be empty cells,
 	# and it shall have a floor underneath
-	if !are_cells_empty(block_cell, 4, Vector2.LEFT) or \
+	if !are_cells_empty(block_cell, 2, Vector2.LEFT) or \
 	 !(block_cell + Vector2.DOWN in used_cells && block_cell + Vector2(-1, 1) in used_cells):
 		return false
 	

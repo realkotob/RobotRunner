@@ -65,33 +65,32 @@ static func save_level(level: Node, dict_to_fill: Dictionary):
 
 
 static func save_settings(path : String):
-#	var error = GAME._config_file.load(path)
-#	if error == OK:
-#	print("SUCCESSFULLY LOADED SETTINGS CFG FILE. SUCCESS CODE : " + str(error))
 	GAME.settings_update_keys()
 	for section in GAME._settings.keys():
 		for key in GAME._settings[section]:
 			GAME._config_file.set_value(section, key, GAME._settings[section][key])
-			
-#	else:
-#		print("FAILED TO LOAD SETTINGS CFG FILE. ERROR CODE : " + str(error))
-#		return
 	
 	GAME._config_file.save(path + "/settings.cfg")
 
 static func load_settings(path):
-	var error = GAME._config_file.load(path)
+	var error = GAME._config_file.load(path + "/settings.cfg")
+	var inputmapper = InputMapper.new()
 	if error == OK:
 		
 		print("SUCCESSFULLY LOADED SETTINGS CFG FILE. SUCCESS CODE : " + str(error))
 		for section in GAME._config_file.get_sections():
 			match(section):
 				"audio":
+					print("ITS AUDIO SECTION")
 					for audio_keys in GAME._config_file.get_section_keys(section):
-						#print("%s %s" % [AudioServer.get_bus_index(audio_keys.capitalize()), GAME._config_file.get_value(section, audio_keys)])
+						print("%s %s" % [AudioServer.get_bus_index(audio_keys.capitalize()), GAME._config_file.get_value(section, audio_keys)])
 						AudioServer.set_bus_volume_db(AudioServer.get_bus_index(audio_keys.capitalize()), GAME._config_file.get_value(section, audio_keys))
 				"controls":
-					print("ITS CONTROL SECTION")
+					for control_keys in GAME._config_file.get_section_keys(section):
+						#print("%s %s" % [InputMap.get_action_list(control_keys)[0].as_text(), GAME._config_file.get_value(section, control_keys)])
+						#print("%s %s" % [control_keys, GAME._config_file.get_value(section, control_keys)])
+						inputmapper.change_action_key(control_keys, GAME._config_file.get_value(section, control_keys))
+						print("%s %s" % [control_keys, InputMap.get_action_list(control_keys)[0].as_text()])
 				_:
 					print("DEFAULT MATCH SECTION STATE")
 	
@@ -101,11 +100,6 @@ static func load_settings(path):
 	else:
 		print("FAILED TO LOAD SETTINGS CFG FILE. ERROR CODE : " + str(error))
 		return
-	
-#	for section in GAME._config_file.get_sections():
-#		for key in GAME._config_file.get_section_keys(section):
-#			var val = GAME._settings[section][key]
-#			values.append(GAME._config_file.get_value(section, key, val))
 
 # Save the level in a .tscn file
 static func save_level_as_tscn(level: Node2D):

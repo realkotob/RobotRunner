@@ -82,8 +82,8 @@ func settings_update_keys():
 	for section in _settings:
 			match(section):
 				"audio":
-					#print("AUDIO SECTION")
-					pass
+					for keys in _settings[section]:
+						_settings[section][keys] = AudioServer.get_bus_volume_db(AudioServer.get_bus_index(keys.capitalize()))
 				"controls":
 					#print("CONTROL SECTION")
 					for keys in _settings[section]:

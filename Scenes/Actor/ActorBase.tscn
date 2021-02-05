@@ -8,7 +8,6 @@
 [node name="ActorBase" type="KinematicBody2D"]
 z_index = -1
 script = ExtResource( 1 )
-speed = 400.0
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 

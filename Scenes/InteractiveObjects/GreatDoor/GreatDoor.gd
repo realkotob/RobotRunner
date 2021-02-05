@@ -43,7 +43,6 @@ func open_door(instant : bool = false):
 			#print("Self : ", self, " Children  : ", self.get_children())
 			for child in self.get_children():
 				if child is AnimationPlayer:
-					print(child, " is an AnimationPlayer !")
 					child.set_speed_scale(64)
 			animation_node.play("Open")
 			

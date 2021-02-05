@@ -28,9 +28,6 @@
 [ext_resource path="res://Scenes/Events/Checkpoint/NewStartingPoint1.tscn" type="PackedScene" id=27]
 [ext_resource path="res://Scenes/Events/Checkpoint/NewStartingPoint2.tscn" type="PackedScene" id=28]
 
-
-
-
 [sub_resource type="RectangleShape2D" id=1]
 resource_local_to_scene = true
 extents = Vector2( 50, 10.2005 )
@@ -504,8 +501,6 @@ rotation = 4.71239
 
 [node name="GreenDoor" parent="InteractivesObjects/Buttons&Doors/BD_Group2" index="2" instance=ExtResource( 18 )]
 position = Vector2( 1288, 504 )
-triggers_on_level_start = false
-event_disabled = false
 
 [node name="BD_Group3" parent="InteractivesObjects/Buttons&Doors" index="2" instance=ExtResource( 10 )]
 
@@ -522,8 +517,6 @@ position = Vector2( 2136, 760 )
 
 [node name="GreenDoor" parent="InteractivesObjects/Buttons&Doors/BD_Group4" index="1" instance=ExtResource( 18 )]
 position = Vector2( 2424, 672 )
-triggers_on_level_start = false
-event_disabled = false
 
 [node name="BD_Group5" parent="InteractivesObjects/Buttons&Doors" index="4" instance=ExtResource( 10 )]
 
@@ -532,8 +525,6 @@ position = Vector2( 2016, 1048 )
 
 [node name="GreenDoor" parent="InteractivesObjects/Buttons&Doors/BD_Group5" index="1" instance=ExtResource( 18 )]
 position = Vector2( 2448, 1008 )
-triggers_on_level_start = false
-event_disabled = false
 
 [node name="BD_Group6" parent="InteractivesObjects/Buttons&Doors" index="5" instance=ExtResource( 10 )]
 
@@ -542,8 +533,6 @@ position = Vector2( 2128, 1216 )
 
 [node name="GreenDoor" parent="InteractivesObjects/Buttons&Doors/BD_Group6" index="1" instance=ExtResource( 18 )]
 position = Vector2( 2376, 1248 )
-triggers_on_level_start = false
-event_disabled = false
 
 [node name="BD_Group7" parent="InteractivesObjects/Buttons&Doors" index="6" instance=ExtResource( 10 )]
 
@@ -552,8 +541,6 @@ position = Vector2( 2048, 1456 )
 
 [node name="GreenDoor" parent="InteractivesObjects/Buttons&Doors/BD_Group7" index="1" instance=ExtResource( 18 )]
 position = Vector2( 2448, 1392 )
-triggers_on_level_start = false
-event_disabled = false
 
 [node name="BD_Group8" parent="InteractivesObjects/Buttons&Doors" index="7" instance=ExtResource( 10 )]
 
@@ -571,8 +558,6 @@ position = Vector2( 3144, 185 )
 
 [node name="GreenDoor" parent="InteractivesObjects/Buttons&Doors/BD_Group9" index="1" instance=ExtResource( 18 )]
 position = Vector2( 3096, 336 )
-triggers_on_level_start = false
-event_disabled = false
 
 [node name="RedButton1" parent="InteractivesObjects/GreatDoorGroup" index="0" instance=ExtResource( 21 )]
 position = Vector2( 3488, 240 )
@@ -662,6 +647,9 @@ position = Vector2( -48, -64 )
 [node name="CameraEvent" parent="Events/CameraEvents" index="0" instance=ExtResource( 26 )]
 position = Vector2( 728, 352 )
 scale = Vector2( 1, 8.84 )
+
+[node name="AnimatedSprite" parent="Events/CameraEvents/CameraEvent" index="0"]
+frame = 1
 
 [node name="CameraEvent2" parent="Events/CameraEvents" index="1" instance=ExtResource( 26 )]
 position = Vector2( 1920, 448 )

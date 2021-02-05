@@ -1,6 +1,7 @@
 extends MenuBase
 class_name ScreenTitleMenu
 
+onready var save_loader_scene = preload("res://Scenes/Menus/SaveLoadMenus/SaveLoaderMenu/SaveLoaderMenu.tscn")
 onready var infinite_level_scene = preload("res://Scenes/Levels/InfiniteMode/InfiniteLevel.tscn")
 onready var seed_field = $HBoxContainer/V_OptContainer/InfiniteMode/SeedField
 
@@ -41,12 +42,18 @@ func on_thread_finished():
 
 
 func _on_menu_option_chose(option: MenuOptionsBase):
+	var _err = null
 	var option_name = option.name
 	
 	match(option_name):
-		"NewGame": var _err = GAME.goto_level(1)
-		"InfiniteMode": var _err = get_tree().change_scene_to(infinite_level_scene)
-		"Quit": get_tree().quit()
+		"NewGame":
+			_err = GAME.goto_level(1)
+		"LoadGame": 
+			_err = navigate_sub_menu(MENUS.saveloader_menu_scene.instance())
+		"InfiniteMode":
+			_err = get_tree().change_scene_to(infinite_level_scene)
+		"Quit":
+			get_tree().quit()
 
 
 func _on_menu_option_focus_changed(button : Button, focus: bool):

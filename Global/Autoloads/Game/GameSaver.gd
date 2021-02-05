@@ -1,9 +1,10 @@
 extends Node
 
-class_name LevelSaver
+class_name GameSaver
 
 const debug : bool = false
 
+const SAVEGAME_DIR : String = "res://saves"
 const SAVEDLEVEL_DIR : String = "res://Scenes/Levels/SavedLevel"
 const SAVEDLEVEL_JSON_DIR : String = "/json/"
 const SAVEDLEVEL_TSCN_DIR : String = "/tscn/"
@@ -16,30 +17,43 @@ const objects_datatype_storage = {
 
 #### ACCESSORS ####
 
-
-
 #### BUILT-IN ####
-
-
 
 #### LOGIC ####
 
-static func create_savedlevel_dirs(directories_to_create : Array):
+# Directory_to_check in directories_to_create :
+## Directories to crate is an array given in parameter of the method
+## Directory to check is a single variable which will take each directory of
+## the array and check if it already exists or not
+# directoryExist : variable which will either be true or false, according to if a file already exist or not
+## Behavior : check if directory_to_check exist in MAIN_DIR/directory_to_check
+## If yes : return true and ignore <if !deirectoryExist:> condition since it's TRUE.
+## If no : return false and go into the <if !deirectoryExist:> condition since it's FALSE.
+### L.48 > open the MAIN_DIR
+### L.49 > Create the given directory directory_to_check
+static func create_dirs(MAIN_DIR : String, directories_to_create : Array):
 	var dir = Directory.new()
 	
+	if(!check_if_dir_exist(MAIN_DIR)):
+		dir.open("res://")
+		dir.make_dir(MAIN_DIR)
+	
 	for directory_to_check in directories_to_create:
-		var directoryExist = dir.dir_exists(SAVEDLEVEL_DIR + "/" + directory_to_check)
-		
-		if !directoryExist:
+		if !(check_if_dir_exist(MAIN_DIR + "/" + directory_to_check)):
 			if debug:
-				print("DIRECTORY DOES NOT EXIST. Creating one in " + SAVEDLEVEL_DIR + "...")
-			dir.open(SAVEDLEVEL_DIR)
+				print("DIRECTORY DOES NOT EXIST. Creating one in " + MAIN_DIR + "...")
+			dir.open(MAIN_DIR)
 			dir.make_dir(directory_to_check)
 			
-			var created_directory_path = SAVEDLEVEL_DIR + "/" + directory_to_check
+			var created_directory_path : String = MAIN_DIR + "/" + directory_to_check
 			if debug:
+				##### IF DEBUG THIS WILL DISPLAY IN THE CONSOLE THE NEWLY CREATED FILE
 				print("Done ! Directory can in be found in : " + created_directory_path)
 
+static func check_if_dir_exist(dir_path : String) -> bool:
+	var dir = Directory.new()
+	var dirExist : bool = dir.dir_exists(dir_path)
+	return dirExist
 
 # Save the current state of the level: Call both the .tscn save and the serialized save in the given dict
 static func save_level(level: Node, dict_to_fill: Dictionary):
@@ -49,6 +63,52 @@ static func save_level(level: Node, dict_to_fill: Dictionary):
 	if debug:
 		print_level_data(dict_to_fill)
 
+#Get audio and controls project settings and set them into a dictionary.
+# This dictionary _settings will be used later to save and load anytime a user wishes to
+static func settings_update_keys(settings_dictionary : Dictionary):
+	for section in settings_dictionary:
+			match(section):
+				"audio":
+					for keys in settings_dictionary[section]:
+						settings_dictionary[section][keys] = AudioServer.get_bus_volume_db(AudioServer.get_bus_index(keys.capitalize()))
+				"controls":
+					for keys in settings_dictionary[section]:
+						settings_dictionary[section][keys] = InputMap.get_action_list(keys)[0].scancode
+				_:
+					pass
+
+# Save settings into a config file : res://saves/save1/2/3
+static func save_settings(path : String):
+	settings_update_keys(GAME._settings)
+	for section in GAME._settings.keys():
+		for key in GAME._settings[section]:
+			GAME._config_file.set_value(section, key, GAME._settings[section][key])
+	
+	GAME._config_file.save(path + "/settings.cfg")
+
+# Load the settings found in the ConfigFile settings.cfg at given path (default res://saves/save1/2/3
+static func load_settings(path):
+	var error = GAME._config_file.load(path + "/settings.cfg")
+	var inputmapper = InputMapper.new()
+	if error == OK:
+		if debug:
+			print("SUCCESSFULLY LOADED SETTINGS CFG FILE. SUCCESS CODE : " + str(error))
+		for section in GAME._config_file.get_sections():
+			match(section):
+				"audio":
+					#set audio settings
+					for audio_keys in GAME._config_file.get_section_keys(section):
+						AudioServer.set_bus_volume_db(AudioServer.get_bus_index(audio_keys.capitalize()), GAME._config_file.get_value(section, audio_keys))
+				"controls":
+					#set controls settings
+					for control_keys in GAME._config_file.get_section_keys(section):
+						inputmapper.change_action_key(control_keys, GAME._config_file.get_value(section, control_keys))
+				_:
+					pass
+	else:
+		if debug:
+			print("FAILED TO LOAD SETTINGS CFG FILE. ERROR CODE : " + str(error))
+		return
 
 # Save the level in a .tscn file
 static func save_level_as_tscn(level: Node2D):

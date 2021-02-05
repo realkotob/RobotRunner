@@ -155,7 +155,7 @@ mouse_filter = 2
 [node name="V_OptContainer" parent="HBoxContainer" index="0"]
 margin_left = 93.0
 margin_right = 258.0
-margin_bottom = 153.0
+margin_bottom = 188.0
 mouse_filter = 2
 
 [node name="NewGame" parent="HBoxContainer/V_OptContainer" index="0" instance=ExtResource( 13 )]
@@ -165,10 +165,16 @@ custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
 custom_colors/font_color_pressed = Color( 0.623529, 0.215686, 0.160784, 1 )
 text = "New Game"
 
-[node name="InfiniteMode" parent="HBoxContainer/V_OptContainer" index="1" instance=ExtResource( 13 )]
+[node name="LoadGame" parent="HBoxContainer/V_OptContainer" index="1" instance=ExtResource( 13 )]
 margin_top = 48.0
 margin_right = 165.0
 margin_bottom = 92.0
+text = "Load Game"
+
+[node name="InfiniteMode" parent="HBoxContainer/V_OptContainer" index="2" instance=ExtResource( 13 )]
+margin_top = 96.0
+margin_right = 165.0
+margin_bottom = 140.0
 text = "Infinite Mode"
 script = ExtResource( 2 )
 
@@ -205,10 +211,10 @@ __meta__ = {
 }
 default_text = "RANDOM"
 
-[node name="Quit" parent="HBoxContainer/V_OptContainer" index="2" instance=ExtResource( 13 )]
-margin_top = 96.0
+[node name="Quit" parent="HBoxContainer/V_OptContainer" index="3" instance=ExtResource( 13 )]
+margin_top = 144.0
 margin_right = 165.0
-margin_bottom = 140.0
+margin_bottom = 188.0
 text = "Quit"
 
 [node name="OptionChoiceSound" parent="." index="4"]

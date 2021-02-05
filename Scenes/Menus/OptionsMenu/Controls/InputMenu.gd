@@ -10,7 +10,7 @@ func _ready():
 	
 	#Initialize all labels to display the controls and profile
 	$CanvasLayer/Column/ProfilesMenu.initialize($InputMapper)
-	$InputMapper.change_profile($CanvasLayer/Column/ProfilesMenu.selected)
+	#$InputMapper.change_profile($CanvasLayer/Column/ProfilesMenu.selected)
 
 #This function will be executed when the signal emited from $InputMapper.gd [Line 55] will be emited.
 func rebuild(input_profile, is_customizable = false):
@@ -48,5 +48,9 @@ func _input(event):
 
 #This function will queue free the Input Menu and back to the game
 func _on_PlayButton_pressed():
+	#For loop to get all the profile's coresponding keys
+	for action_name in $InputMapper.get_selected_profile().keys(): #get the name, get the key
+		$InputMapper.change_action_key(action_name, $InputMapper.get_selected_profile()[action_name]) #change the key
+		
 	queue_free()
 	get_tree().paused = false

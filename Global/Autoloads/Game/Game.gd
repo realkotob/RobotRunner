@@ -26,6 +26,34 @@ var last_level_name : String
 
 var current_seed : int = 0 setget _set_current_seed, get_current_seed
 
+var music_bus_id = AudioServer.get_bus_index("Music")
+var sound_bus_id = AudioServer.get_bus_index("Sounds")
+
+var _config_file = ConfigFile.new()
+
+var _settings ={
+		"audio":{
+			"music": AudioServer.get_bus_volume_db(music_bus_id),
+			"sounds": AudioServer.get_bus_volume_db(sound_bus_id)
+		},
+		"controls":{
+				"jump_player1": InputMap.get_action_list("jump_player1")[0].scancode,
+				"move_left_player1": InputMap.get_action_list("move_left_player1")[0].scancode,
+				"move_right_player1": InputMap.get_action_list("move_right_player1")[0].scancode,
+				"teleport_player1": InputMap.get_action_list("teleport_player1")[0].scancode,
+				"action_player1": InputMap.get_action_list("action_player1")[0].scancode,
+				
+				"jump_player2": InputMap.get_action_list("jump_player2")[0].scancode,
+				"move_left_player2": InputMap.get_action_list("move_left_player2")[0].scancode,
+				"move_right_player2": InputMap.get_action_list("move_right_player2")[0].scancode,
+				"teleport_player2": InputMap.get_action_list("teleport_player2")[0].scancode,
+				"action_player2": InputMap.get_action_list("action_player2")[0].scancode,
+				
+				"game_restart": InputMap.get_action_list("game_restart")[0].scancode,
+				"HUD_switch_state": InputMap.get_action_list("HUD_switch_state")[0].scancode,
+				"display_console": InputMap.get_action_list("display_console")[0].scancode
+		}
+	}
 
 #### ACCESSORS ####
 
@@ -45,7 +73,9 @@ func _ready():
 	_err = EVENTS.connect("level_finished", self, "on_level_finished")
 	_err = EVENTS.connect("seed_change_query", self, "on_seed_change_query")
 
-	LevelSaver.create_savedlevel_dirs(["json", "tscn"])
+	GameSaver.create_dirs(GameSaver.SAVEGAME_DIR, []) #Create saves directory at root
+	GameSaver.create_dirs(GameSaver.SAVEDLEVEL_DIR, ["json", "tscn"]) #Create json and tscn directory at SAVEDLEVEL_DIR : String = "res://Scenes/Levels/SavedLevel/"
+	GameSaver.settings_update_keys(_settings)
 	
 #### LOGIC ####
 
@@ -62,7 +92,7 @@ func goto_last_level():
 
 	var loaded_from_save : bool = false
 	var level_scene : PackedScene
-	var dir = LevelSaver.SAVEDLEVEL_DIR + LevelSaver.SAVEDLEVEL_TSCN_DIR
+	var dir = GameSaver.SAVEDLEVEL_DIR + GameSaver.SAVEDLEVEL_TSCN_DIR
 	var level_to_load_path : String = find_saved_level_path(dir, last_level_name)
 
 	# If no save of the current level exists, reload the same scene
@@ -80,7 +110,7 @@ func goto_last_level():
 		yield(EVENTS, "level_entered_tree")
 		var level : Level = get_tree().get_current_scene()
 		level.is_loaded_from_save = loaded_from_save
-		LevelSaver.build_level_from_loaded_properties(level)
+		GameSaver.build_level_from_loaded_properties(level)
 
 
 # Change scene to the next level scene
@@ -100,13 +130,13 @@ func goto_next_level():
 		next_level_id = current_chapter.find_level_id(last_level_name) + 1
 
 	var next_level_name = current_chapter.get_level_name(next_level_id)
-	LevelSaver.delete_level_temp_saves(next_level_name)
+	GameSaver.delete_level_temp_saves(next_level_name)
 
 	var _err = get_tree().change_scene_to(next_level)
 
 	yield(EVENTS, "level_ready")
 	var level = get_tree().get_current_scene()
-	LevelSaver.save_level_properties_as_json(level)
+	GameSaver.save_level_properties_as_json(level)
 
 
 func goto_level(level_index : int):
@@ -118,12 +148,12 @@ func goto_level(level_index : int):
 
 	level = current_chapter.load_level(level_index-1)
 	var level_name = current_chapter.get_level_name(level_id)
-	LevelSaver.delete_level_temp_saves(level_name)
+	GameSaver.delete_level_temp_saves(level_name)
 
 	var _err = get_tree().change_scene_to(level)
 	yield(EVENTS, "level_ready")
 	var current_level = get_tree().get_current_scene()
-	LevelSaver.save_level_properties_as_json(current_level)
+	GameSaver.save_level_properties_as_json(current_level)
 
 # Triggers the timer before the gameover is triggered
 # Called when a player die
@@ -285,8 +315,8 @@ func on_level_ready(level : Level):
 	fade_in()
 	
 	if level is InfiniteLevel:
-		LevelSaver.save_level(level, progression.main_stored_objects)
-		LevelSaver.save_level_properties_as_json(level)
+		GameSaver.save_level(level, progression.main_stored_objects)
+		GameSaver.save_level_properties_as_json(level)
 
 
 # When a player reach a checkpoint
@@ -296,7 +326,7 @@ func on_checkpoint_reached(level: Level, checkpoint_id: int):
 
 	progression.set_main_xion(SCORE.xion)
 	progression.set_main_materials(SCORE.materials)
-	LevelSaver.save_level(level, progression.main_stored_objects)
+	GameSaver.save_level(level, progression.main_stored_objects)
 
 
 func on_seed_change_query(new_seed: int):

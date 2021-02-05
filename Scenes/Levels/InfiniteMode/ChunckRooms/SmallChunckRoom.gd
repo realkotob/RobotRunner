@@ -1,29 +1,15 @@
 extends ChunckRoom
 class_name SmallChunckRoom
 
-enum ROOM_HALF{
-	UNDEFINED,
-	TOP_HALF,
-	BOTTOM_HALF
-}
-
-var room_half : int = ROOM_HALF.UNDEFINED setget set_room_half, get_room_half
-
 #### ACCESSORS ####
 
 func is_class(value: String): return value == "SmallChunckRoom" or .is_class(value)
 func get_class() -> String: return "SmallChunckRoom"
 
-func set_room_half(value: int): room_half = value
-func get_room_half() -> int: return room_half
-
 #### BUILT-IN ####
 
 func _init(half: int = ROOM_HALF.UNDEFINED):
-	if half != ROOM_HALF.UNDEFINED:
-		room_half = half
-	else:
-		room_half = randi() % 2 + 1
+	._init(half)
 
 #### LOGIC ####
 

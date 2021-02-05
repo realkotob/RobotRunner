@@ -3,6 +3,12 @@ class_name ChunckRoom
 
 const AVERAGE_PLTF_LEN : int = 3
 
+enum ROOM_HALF{
+	UNDEFINED,
+	TOP_HALF,
+	BOTTOM_HALF
+}
+
 var liquid_scenes : Dictionary = {
 	"Water" : preload("res://Scenes/InteractiveObjects/Liquids/Water/Water.tscn"),
 	"Lava" : preload("res://Scenes/InteractiveObjects/Liquids/Lava/Lava.tscn")
@@ -26,6 +32,7 @@ var entry_exit_couple_array := Array()
 var interactive_objects := Array()
 var platforms_array := Array()
 
+var room_half : int = ROOM_HALF.UNDEFINED setget set_room_half, get_room_half
 
 #### ACCESSORS ####
 
@@ -38,10 +45,23 @@ func get_room_rect() -> Rect2: return room_rect
 func get_top_left() -> Vector2: return room_rect.position
 func get_bottom_right() -> Vector2 : return room_rect.position + room_rect.size
 
+func set_room_half(value: int): room_half = value
+func get_room_half() -> int: return room_half
+
 #### BUILT-IN ####
 
+func _init(half: int = ROOM_HALF.UNDEFINED):
+	if half != ROOM_HALF.UNDEFINED:
+		room_half = half
+	else:
+		room_half = randi() % 2 + 1
+
+
 func _ready():
-	var _err = chunck.connect("every_automata_finished", self, "on_every_automata_finished")
+	if chunck != null:
+		var _err = chunck.connect("every_automata_finished", self, "on_every_automata_finished")
+	
+	var _err = EVENTS.connect("automata_room_crossed", self, "_on_automata_crossed")
 	generate()
 
 
@@ -68,7 +88,7 @@ func generate_platforms():
 		var exit = couple[1]
 		
 		# If one exit is close enough from the ground, ignore it (Doesn't need platform)
-		if exit.y >= room_rect.size.y - 3: continue
+		if exit.y >= room_rect.size.y - 4: continue
 		 
 		var jump_max_dist : Vector2 = GAME.JUMP_MAX_DIST
 		var room_size = get_room_rect().size
@@ -80,7 +100,7 @@ func generate_platforms():
 		var platform_avg_y = entry.y
 		
 		var half_chuck_y = int(ChunckBin.chunck_tile_size.y / 2) 
-		var first_half : bool = entry.y + room_rect.position.y <= half_chuck_y
+		var first_half : bool = entry.y <= half_chuck_y
 		var stair_needed : bool = entry.y - exit.y > GAME.JUMP_MAX_DIST.y
 		
 		# Platform generation, loop through every platfroms
@@ -92,7 +112,7 @@ func generate_platforms():
 			
 			# Assure the first platform is close enough from the starting point
 			# But far enough for it not to block the way
-			# it should also always be a the level of the starting point or lower
+			# it should also always be at the level of the starting point or lower
 			if i == 0: 
 				platform_x_dist /= 2
 				platform_x_dist = clamp(platform_x_dist, 2, INF)
@@ -196,7 +216,7 @@ func _cell_abs_to_rel(cell: Vector2, clamp_pos: bool = false) -> Vector2:
 
 # Fill the bin map with 0, and set its size a the same size as the room
 func create_bin_map():
-	var room_size = get_room_rect().size
+	var room_size = room_rect.size
 	
 	for _i in range(room_size.y):
 		var line_array = Array()
@@ -275,6 +295,9 @@ func find_lowest_platfrom() -> ChunckPlatform:
 	return lowest_platform
 
 
+func is_cell_inside_room(cell: Vector2) -> bool:
+	return room_rect.has_point(cell)
+
 #### VIRTUALS ####
 
 
@@ -283,8 +306,13 @@ func find_lowest_platfrom() -> ChunckPlatform:
 
 #### SIGNAL RESPONSES ####
 
-func _on_automata_crossed(entry: Vector2, exit: Vector2):
-	entry_exit_couple_array.append([_cell_abs_to_rel(entry, true), _cell_abs_to_rel(exit, true)])
+func _on_automata_crossed(_automata, room: ChunckRoom, entry: Vector2, exit: Vector2):
+	if room != self:
+		return
+	
+	var couple = [_cell_abs_to_rel(entry, true), _cell_abs_to_rel(exit, true)]
+	entry_exit_couple_array.append(couple)
+
 
 func on_every_automata_finished():
 	pass

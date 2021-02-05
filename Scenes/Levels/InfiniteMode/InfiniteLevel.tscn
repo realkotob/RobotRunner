@@ -13,7 +13,8 @@ script = ExtResource( 5 )
 script = ExtResource( 1 )
 debug_dict = {
 "forced_chunck_type": "",
-"only_normal_chunck": true
+"not_wanted_types": [ "Composite" ],
+"only_normal_chunck": false
 }
 debug = true
 
@@ -22,6 +23,7 @@ limit_left = 0
 limit_top = 0
 limit_bottom = 540
 editor_draw_limits = true
+debug = false
 
 [node name="StartingPointP1" parent="." index="6" instance=ExtResource( 3 )]
 position = Vector2( 72, 132 )

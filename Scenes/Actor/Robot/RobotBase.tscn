@@ -9,6 +9,7 @@
 extents = Vector2( 13, 13 )
 
 [node name="RobotBase" instance=ExtResource( 2 )]
+push = 44
 
 [node name="Inactive" type="Node" parent="StatesMachine" index="0"]
 script = ExtResource( 4 )

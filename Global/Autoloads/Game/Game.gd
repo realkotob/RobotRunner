@@ -271,11 +271,11 @@ func toggle_free_camera_mode():
 		return
 	
 	var camera_node = level.find_node("Camera")
-	var was_camera_debug_mode = camera_node.get_state_name() == "Debug"
+	var was_camera_debug_mode = camera_node.get_state_name() == "Free"
 	if was_camera_debug_mode:
 		camera_node.set_to_previous_state()
 	else:
-		camera_node.set_state("Debug")
+		camera_node.set_state("Free")
 	
 	for player in get_tree().get_nodes_in_group("Players"):
 		player.set_active(was_camera_debug_mode)

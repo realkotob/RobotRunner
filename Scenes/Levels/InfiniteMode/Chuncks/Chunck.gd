@@ -9,6 +9,11 @@ var interactive_object_dict : Dictionary = {
 	"EarthBlock": preload("res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/M/MEarthBlock.tscn")
 }
 
+var room_type_dict : Dictionary = {
+	"Small": SmallChunckRoom,
+	"Big": BigChunckRoom
+}
+
 const max_nb_room : int = 3
 
 onready var walls_tilemap = $Walls
@@ -71,6 +76,12 @@ func _ready():
 		GAME.set_screen_fade_visible(false)
 		debug_cursor.set_active(true)
 	
+	initialize_chunck()
+
+
+#### LOGIC ####
+
+func initialize_chunck():
 	var last_room = generate_rooms()
 	
 	if last_room != null:
@@ -83,8 +94,6 @@ func _ready():
 	create_automatas()
 
 
-#### LOGIC ####
-
 func generate_self():
 	update_wall_tiles()
 	SlopePlacer.place_slopes(walls_tilemap)
@@ -93,6 +102,7 @@ func generate_self():
 	
 	if debug:
 		room_debug_visualizer()
+	
 	emit_signal("chunck_gen_finished")
 
 
@@ -122,17 +132,16 @@ func generate_rooms() -> Node:
 	var room : Node = null
 	var nb_room = randi() % max_nb_room
 	for i in range(nb_room):
-		var next_room_half = SmallChunckRoom.ROOM_HALF.TOP_HALF
+		var room_type_id = randi() % room_type_dict.size() if !first_chunck else 0
+		var room_type = room_type_dict.values()[room_type_id]
+		var next_room_half = ChunckRoom.ROOM_HALF.TOP_HALF
 		
-		if i == 0:
-			room = SmallChunckRoom.new()
-		else:
+		if i != 0:
 			var last_room_half = room.get_room_half()
 			if last_room_half == next_room_half:
-				next_room_half = SmallChunckRoom.ROOM_HALF.BOTTOM_HALF
+				next_room_half = ChunckRoom.ROOM_HALF.BOTTOM_HALF
 		
-		room = SmallChunckRoom.new(next_room_half)
-		room.name = "SmallRoom"
+		room = room_type.new(next_room_half)
 		room.chunck = self
 		$Rooms.call_deferred("add_child", room)
 		unplaced_rooms.append(room)
@@ -147,22 +156,18 @@ func fetch_rooms_objects():
 			object_to_add.append(obj) 
 
 
-# Place the rooms in the chunck by carving modifing the chunck bin accordingly to the room bin
+# Place the rooms in the chunck by modifing the chunck bin accordingly to the room bin
 func place_room(room : ChunckRoom):
 	var room_rect : Rect2 = room.get_room_rect()
 	for i in range(room_rect.size.y):
 		for j in range(room_rect.size.x):
 			var pos = Vector2(j, i) + room_rect.position
 			if room.bin_map.empty():
-				continue
+				break
 			else:
 				var room_cell = room.bin_map[i][j]
 				chunck_bin.bin_map[pos.y][pos.x] = room_cell
-				walls_tilemap.set_cellv(pos, -1)
-	
-	var top_left_corner = room_rect.position - Vector2.ONE
-	var bottom_right_corner = room_rect.position + room_rect.size + Vector2.ONE
-	walls_tilemap.update_bitmask_region(top_left_corner, bottom_right_corner)
+
 
 # Place the tiles in the tilemap according the the bin_map value
 func place_wall_tiles(pos := Vector2.INF):
@@ -278,13 +283,15 @@ func place_block(cell: Vector2):
 
 # Check if the block is on a correct possition to be placed
 func is_block_placable(block: BlockBase) -> bool:
-	if block == null : return false
-	var block_cell = walls_tilemap.world_to_map(block.get_position())
+	if block == null : 
+		return false
+	var block_global_pos = block.get_position() + walls_tilemap.get_position()
+	var block_cell = walls_tilemap.world_to_map(block_global_pos) + Vector2.ONE
 	var used_cells = walls_tilemap.get_used_cells()
 	
 	# for the block to be placable the two cells on its left must be empty cells,
 	# and it shall have a floor underneath
-	if !are_cells_empty(block_cell, 4, Vector2.LEFT) or \
+	if !are_cells_empty(block_cell, 2, Vector2.LEFT) or \
 	 !(block_cell + Vector2.DOWN in used_cells && block_cell + Vector2(-1, 1) in used_cells):
 		return false
 	
@@ -406,6 +413,7 @@ func _on_automata_block_placable(cell: Vector2):
 		if rng == 0:
 			place_block(cell)
 
-func _on_automata_room_reached(_automata: ChunckAutomata, room: ChunckRoom):
+
+func _on_automata_finished_crossing_room(_automata: ChunckAutomata, room: ChunckRoom):
 	if room in unplaced_rooms:
 		place_room(room)

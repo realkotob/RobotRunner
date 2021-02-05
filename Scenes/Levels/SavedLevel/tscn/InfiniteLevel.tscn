@@ -1,0 +1,413 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://Scenes/StartingPoints/StartingPointP1.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Camera/Camera.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/GameConsole/GameConsole.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Global/Background/ProdLine.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/GUI/HUD/HUD.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/StartingPoints/StartingPointP2.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Levels/InfiniteMode/ChunckGenerator.gd" type="Script" id=7]
+[ext_resource path="res://Global/Tileset/LevelBase.tres" type="TileSet" id=8]
+[ext_resource path="res://Scenes/StartingPoints/StartingPoint.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/GroupBase.gd" type="Script" id=10]
+[ext_resource path="res://Scenes/GUI/GUI.gd" type="Script" id=11]
+[ext_resource path="res://Scenes/Camera/Camera.gd" type="Script" id=12]
+[ext_resource path="res://Scenes/GameConsole/GameConsole.gd" type="Script" id=13]
+[ext_resource path="res://Scenes/Levels/InfiniteMode/InfiniteLevel.gd" type="Script" id=14]
+[ext_resource path="res://Scenes/Levels/Base/Paralaxe.gd" type="Script" id=15]
+[ext_resource path="res://Scenes/GUI/HUD/HUD.gd" type="Script" id=16]
+[ext_resource path="res://Global/Background/Background.png" type="Texture" id=17]
+[ext_resource path="res://Global/Background/Gears.png" type="Texture" id=18]
+[ext_resource path="res://icon.png" type="Texture" id=19]
+[ext_resource path="res://Scenes/Fog/CosmeticFog/FogMaterial.tres" type="Material" id=20]
+
+[node name="InfiniteLevel" type="Node2D"]
+script = ExtResource( 14 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Foreground" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Fog" type="Node2D" parent="Foreground"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Fog" type="Sprite" parent="Foreground/Fog"]
+material = ExtResource( 20 )
+position = Vector2( 470.01, 277.517 )
+scale = Vector2( 2.09202, 1.27633 )
+texture = ExtResource( 19 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 480, 540 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="GUI" type="CanvasLayer" parent="."]
+layer = 3
+script = ExtResource( 11 )
+
+[node name="Popups" type="Control" parent="GUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="HUD" type="Control" parent="GUI" instance=ExtResource( 5 )]
+anchor_right = 1.0
+anchor_bottom = 0.143
+margin_top = -64.0
+margin_bottom = -64.22
+script = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+hidden = true
+speed = 400
+
+[node name="GameConsole" type="Control" parent="GUI" instance=ExtResource( 3 )]
+pause_mode = 2
+visible = false
+margin_top = -1.0
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DialogueContainer" type="Control" parent="GUI"]
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Map" type="Node2D" parent="."]
+z_index = 2
+z_as_relative = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Background" type="Node2D" parent="Map"]
+z_index = -1
+z_as_relative = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Paralaxe" type="ParallaxBackground" parent="Map/Background"]
+layer = -1
+script = ExtResource( 15 )
+
+[node name="Back" type="ParallaxLayer" parent="Map/Background/Paralaxe"]
+position = Vector2( -1664, -936 )
+motion_scale = Vector2( 0.2, 0.2 )
+motion_mirroring = Vector2( 2048, 1152 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="BGBase" type="Sprite" parent="Map/Background/Paralaxe/Back"]
+modulate = Color( 1, 0.96, 0.96, 1 )
+light_mask = 2
+texture = ExtResource( 17 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 2048, 1152 )
+region_filter_clip = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Lights" type="ParallaxLayer" parent="Map/Background/Paralaxe"]
+position = Vector2( 360, 202.5 )
+motion_scale = Vector2( 0.25, 0.25 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Gears" type="ParallaxLayer" parent="Map/Background/Paralaxe"]
+position = Vector2( -1712, -963 )
+motion_scale = Vector2( 0.3, 0.3 )
+motion_mirroring = Vector2( 2048, 1152 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Gears" type="Sprite" parent="Map/Background/Paralaxe/Gears"]
+modulate = Color( 1, 0.903333, 0.9, 1 )
+light_mask = 2
+texture = ExtResource( 18 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 2048, 1152 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ProdLine1" type="ParallaxLayer" parent="Map/Background/Paralaxe" instance=ExtResource( 4 )]
+position = Vector2( -1745.6, -1507.9 )
+motion_scale = Vector2( 0.37, 0.37 )
+motion_mirroring = Vector2( 2048, 2048 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="ProdLine2" type="ParallaxLayer" parent="Map/Background/Paralaxe" instance=ExtResource( 4 )]
+position = Vector2( -1760, -1236 )
+motion_scale = Vector2( 0.4, 0.4 )
+motion_mirroring = Vector2( 2048, 2048 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Walls" type="TileMap" parent="Map"]
+z_index = 1
+tile_set = ExtResource( 8 )
+cell_size = Vector2( 24, 24 )
+collision_layer = 5
+collision_mask = 5
+format = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="HiddenWalls" type="TileMap" parent="Map"]
+light_mask = 48
+z_index = 10
+z_as_relative = false
+tile_set = ExtResource( 8 )
+cell_size = Vector2( 24, 24 )
+collision_layer = 0
+collision_mask = 16
+occluder_light_mask = 48
+format = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Decoration" type="TileMap" parent="Map"]
+z_index = 2
+tile_set = ExtResource( 8 )
+cell_size = Vector2( 24, 24 )
+format = 1
+tile_data = PoolIntArray( 917566, 536870922, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Decoration2" type="TileMap" parent="Map"]
+z_index = 2
+tile_set = ExtResource( 8 )
+cell_size = Vector2( 24, 24 )
+format = 1
+tile_data = PoolIntArray( 917566, 536870922, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ChunckContainer" type="Node2D" parent="Map"]
+script = ExtResource( 7 )
+debug_dict = {
+"forced_chunck_type": "",
+"not_wanted_types": [ "Composite" ],
+"only_normal_chunck": false
+}
+debug = true
+
+[node name="InteractivesObjects" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="IceBlocks" type="Node2D" parent="InteractivesObjects"]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="S" type="Node2D" parent="InteractivesObjects/IceBlocks"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="M" type="Node2D" parent="InteractivesObjects/IceBlocks"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="EarthBlocks" type="Node2D" parent="InteractivesObjects"]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="S" type="Node2D" parent="InteractivesObjects/EarthBlocks"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="M" type="Node2D" parent="InteractivesObjects/EarthBlocks"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="WaterTiles" type="Node2D" parent="InteractivesObjects"]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="LavaTiles" type="Node2D" parent="InteractivesObjects"]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="XionLiquid" type="Node2D" parent="InteractivesObjects"]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="TeleportGroups" type="Node2D" parent="InteractivesObjects"]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Buttons&Doors" type="Node2D" parent="InteractivesObjects"]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="GreatDoorGroup" type="Node2D" parent="InteractivesObjects"]
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Collactables" type="Node2D" parent="InteractivesObjects"]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="XionCrates" type="Node2D" parent="InteractivesObjects/Collactables"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Gears" type="Node2D" parent="InteractivesObjects/Collactables"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="GoldenGears" type="Node2D" parent="InteractivesObjects/Collactables"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Platform" type="Node2D" parent="InteractivesObjects"]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="5 Tiles" type="Node2D" parent="InteractivesObjects/Platform"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="3 Tiles" type="Node2D" parent="InteractivesObjects/Platform"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="2 Tiles" type="Node2D" parent="InteractivesObjects/Platform"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Robot" type="Node2D" parent="InteractivesObjects"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Events" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Checkpoints" type="Node2D" parent="Events"]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CameraEvents" type="Node2D" parent="Events"]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="LevelEvent" type="Node2D" parent="Events"]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="DialogueEvents" type="Node2D" parent="Events"]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Camera" type="Camera2D" parent="." instance=ExtResource( 2 )]
+position = Vector2( 480, 270 )
+z_index = 999
+rotating = true
+current = true
+limit_left = 0
+limit_top = 0
+limit_bottom = 540
+limit_smoothed = true
+smoothing_enabled = true
+editor_draw_limits = true
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_lock_": true
+}
+camera_speed = 3.0
+debug = false
+
+[node name="StartingPointP1" type="Node2D" parent="." groups=[
+"StartingPoint",
+] instance=ExtResource( 1 )]
+position = Vector2( 72, 132 )
+script = ExtResource( 9 )
+
+[node name="StartingPointP2" type="Node2D" parent="." groups=[
+"StartingPoint",
+] instance=ExtResource( 6 )]
+position = Vector2( 72, 420 )
+script = ExtResource( 9 )
+
+[node name="MusicTimer" type="Timer" parent="."]
+wait_time = 0.05

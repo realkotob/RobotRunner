@@ -179,3 +179,10 @@ cmd_name = "CAMERA_DEBUG"
 args_number = 1
 target = "Camera"
 target_method = "set_debug"
+
+[node name="TOGGLE_FREE_CAMERA" type="Node" parent="CommandsList"]
+script = ExtResource( 5 )
+cmd_name = "TOGGLE_FREE_CAMERA"
+cmd_description = "Set the state of the camera to the given state"
+target = "GAME"
+target_method = "toggle_free_camera_mode"

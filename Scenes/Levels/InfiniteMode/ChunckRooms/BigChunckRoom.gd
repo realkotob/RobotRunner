@@ -8,13 +8,19 @@ func get_class() -> String: return "BigChunckRoom"
 
 #### BUILT-IN ####
 
+func _init(half: int = ROOM_HALF.UNDEFINED):
+	._init(half)
 
 
 #### LOGIC ####
 
-func _init():
-	min_room_size = Vector2(30, 20)
-	max_room_size = ChunckBin.chunck_tile_size - Vector2(2, 2)
+
+# FUNCTION OVERRIDE
+func generate():
+	var room_size = Vector2(ChunckBin.chunck_tile_size.x - 4, 9)
+	var room_pos = Vector2(2, 2) if room_half == ROOM_HALF.TOP_HALF else Vector2(2, ceil(ChunckBin.chunck_tile_size.y / 2) + 1)
+	set_room_rect(Rect2(room_pos, room_size))
+	create_bin_map()
 
 
 # Enlarge the entry and the exit of the room, so its easier to reach by jumping
@@ -38,13 +44,12 @@ func enlarge_entry_exit(tile_wide: int = randi() % 2 + 3):
 
 #### SIGNAL RESPONSES ####
 
-func on_automata_entered(entry: Vector2, exit: Vector2):
-	.on_automata_entered(entry, exit)
-	
-	if entry_exit_couple_array.size() == 2:
-		generate_platforms()
-		place_platforms()
-		enlarge_entry_exit()
+func _on_automata_crossed(automata, room: ChunckRoom, entry: Vector2, exit: Vector2):
+	._on_automata_crossed(automata, room, entry, exit)
+	generate_platforms()
+	place_platforms()
+	enlarge_entry_exit()
+
 
 func on_every_automata_finished():
 	generate_liquid("Lava")

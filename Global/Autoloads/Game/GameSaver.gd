@@ -63,42 +63,51 @@ static func save_level(level: Node, dict_to_fill: Dictionary):
 	if debug:
 		print_level_data(dict_to_fill)
 
+#Get audio and controls project settings and set them into a dictionary.
+# This dictionary _settings will be used later to save and load anytime a user wishes to
+static func settings_update_keys(settings_dictionary : Dictionary):
+	for section in settings_dictionary:
+			match(section):
+				"audio":
+					for keys in settings_dictionary[section]:
+						settings_dictionary[section][keys] = AudioServer.get_bus_volume_db(AudioServer.get_bus_index(keys.capitalize()))
+				"controls":
+					for keys in settings_dictionary[section]:
+						settings_dictionary[section][keys] = InputMap.get_action_list(keys)[0].scancode
+				_:
+					pass
 
+# Save settings into a config file : res://saves/save1/2/3
 static func save_settings(path : String):
-	GAME.settings_update_keys()
+	settings_update_keys(GAME._settings)
 	for section in GAME._settings.keys():
 		for key in GAME._settings[section]:
 			GAME._config_file.set_value(section, key, GAME._settings[section][key])
 	
 	GAME._config_file.save(path + "/settings.cfg")
 
+# Load the settings found in the ConfigFile settings.cfg at given path (default res://saves/save1/2/3
 static func load_settings(path):
 	var error = GAME._config_file.load(path + "/settings.cfg")
 	var inputmapper = InputMapper.new()
 	if error == OK:
-		
-		print("SUCCESSFULLY LOADED SETTINGS CFG FILE. SUCCESS CODE : " + str(error))
+		if debug:
+			print("SUCCESSFULLY LOADED SETTINGS CFG FILE. SUCCESS CODE : " + str(error))
 		for section in GAME._config_file.get_sections():
 			match(section):
 				"audio":
-					print("ITS AUDIO SECTION")
+					#set audio settings
 					for audio_keys in GAME._config_file.get_section_keys(section):
-						print("%s %s" % [AudioServer.get_bus_index(audio_keys.capitalize()), GAME._config_file.get_value(section, audio_keys)])
 						AudioServer.set_bus_volume_db(AudioServer.get_bus_index(audio_keys.capitalize()), GAME._config_file.get_value(section, audio_keys))
 				"controls":
+					#set controls settings
 					for control_keys in GAME._config_file.get_section_keys(section):
-						#print("%s %s" % [InputMap.get_action_list(control_keys)[0].as_text(), GAME._config_file.get_value(section, control_keys)])
-						#print("%s %s" % [control_keys, GAME._config_file.get_value(section, control_keys)])
 						inputmapper.change_action_key(control_keys, GAME._config_file.get_value(section, control_keys))
-						print("%s %s" % [control_keys, InputMap.get_action_list(control_keys)[0].as_text()])
 				_:
-					print("DEFAULT MATCH SECTION STATE")
-	
-		print(str(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music"))))
-		print(str(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Sounds"))))
-	
+					pass
 	else:
-		print("FAILED TO LOAD SETTINGS CFG FILE. ERROR CODE : " + str(error))
+		if debug:
+			print("FAILED TO LOAD SETTINGS CFG FILE. ERROR CODE : " + str(error))
 		return
 
 # Save the level in a .tscn file

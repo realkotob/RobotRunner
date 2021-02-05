@@ -31,7 +31,7 @@ var sound_bus_id = AudioServer.get_bus_index("Sounds")
 
 var _config_file = ConfigFile.new()
 
-var _settings = {
+var _settings ={
 		"audio":{
 			"music": AudioServer.get_bus_volume_db(music_bus_id),
 			"sounds": AudioServer.get_bus_volume_db(sound_bus_id)
@@ -75,22 +75,9 @@ func _ready():
 
 	GameSaver.create_dirs(GameSaver.SAVEGAME_DIR, []) #Create saves directory at root
 	GameSaver.create_dirs(GameSaver.SAVEDLEVEL_DIR, ["json", "tscn"]) #Create json and tscn directory at SAVEDLEVEL_DIR : String = "res://Scenes/Levels/SavedLevel/"
+	GameSaver.settings_update_keys(_settings)
 	
 #### LOGIC ####
-
-func settings_update_keys():
-	for section in _settings:
-			match(section):
-				"audio":
-					for keys in _settings[section]:
-						_settings[section][keys] = AudioServer.get_bus_volume_db(AudioServer.get_bus_index(keys.capitalize()))
-				"controls":
-					#print("CONTROL SECTION")
-					for keys in _settings[section]:
-						_settings[section][keys] = InputMap.get_action_list(keys)[0].scancode
-				_:
-					#print("DEFAULT MATCH SECTION STATE")
-					pass
 
 func new_chapter():
 	progression.add_to_chapter(1)

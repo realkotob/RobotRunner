@@ -99,6 +99,7 @@ func set_buttons_default_state():
 
 func navigate_sub_menu(menu: Control):
 	get_parent().add_child(menu)
+	get_tree().set_current_scene(menu)
 	queue_free()
 
 

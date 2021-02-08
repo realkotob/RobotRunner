@@ -1,11 +1,8 @@
 extends Node
 
-onready var normal_explosion = preload("res://Global/Autoloads/SFX/NormalExplosion/NormalExplosion.tscn")
-onready var small_explosion = preload("res://Global/Autoloads/SFX/SmallExplosion/SmallExplosion.tscn")
-onready var xion_explosion = preload("res://Global/Autoloads/SFX/XionExplosion/XionExplosion.tscn")
 
-onready var normal_hit = preload("res://Global/Autoloads/SFX/Feedbacks/NormalHit/NormalHit.tscn")
-onready var great_hit = preload("res://Global/Autoloads/SFX/Feedbacks/GreatHit/GreatHit.tscn")
+### ADD A ALGO THAT REPLACE THE PATH OF EACH SFX SCENE BY ITS CORRESPONDING LOADED PACKED SCENE ###
+export var sfx_dict : Dictionary = {}
 
 onready var debris = preload("res://Global/Autoloads/SFX/Debris/Debris.tscn")
 
@@ -60,7 +57,11 @@ func _on_scatter_object(body : Node, nb_debris : int, impulse_force: float = 100
 
 
 func _on_play_SFX(fx_name: String, pos: Vector2):
-	var fx = get(fx_name)
+	if not fx_name in sfx_dict.keys():
+		print("The fx named " + fx_name + " doesn't exist in the dictionnary")
+		return
+	
+	var fx = load(sfx_dict[fx_name])
 	var fx_node = fx.instance()
 	fx_node.set_global_position(pos)
 	add_child(fx_node)

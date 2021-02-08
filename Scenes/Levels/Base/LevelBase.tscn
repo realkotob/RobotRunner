@@ -71,6 +71,12 @@ __meta__ = {
 
 [node name="DebrisGenerator" type="Node2D" parent="."]
 script = ExtResource( 12 )
+sfx_dict = {
+"normal_explosion": "res://Global/Autoloads/SFX/NormalExplosion/NormalExplosion.tscn",
+"normal_hit": "res://Global/Autoloads/SFX/Feedbacks/NormalHit/NormalHit.tscn",
+"small_explosion": "res://Global/Autoloads/SFX/SmallExplosion/SmallExplosion.tscn",
+"xion_explosion": "res://Global/Autoloads/SFX/XionExplosion/XionExplosion.tscn"
+}
 
 [node name="Map" type="Node2D" parent="."]
 z_index = 2

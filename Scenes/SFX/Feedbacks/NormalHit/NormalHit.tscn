@@ -1,0 +1,18 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scenes/SFX/Feedbacks/NormalHit/NormalHit1.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/SFX/Feedbacks/NormalHit/NormalHit2.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/SFX/Feedbacks/NormalHit/NormalHit3.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/SFX/SFX.tscn" type="PackedScene" id=4]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 3 ), ExtResource( 2 ) ],
+"loop": false,
+"name": "default",
+"speed": 10.0
+} ]
+
+[node name="NormalHit" instance=ExtResource( 4 )]
+modulate = Color( 1, 1, 1, 0.588235 )
+frames = SubResource( 1 )

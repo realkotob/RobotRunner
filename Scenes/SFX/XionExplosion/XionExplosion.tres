@@ -1,0 +1,22 @@
+[gd_resource type="SpriteFrames" load_steps=13 format=2]
+
+[ext_resource path="res://Scenes/SFX/XionExplosion/Animation/CrateExplosion1.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/SFX/XionExplosion/Animation/CrateExplosion2.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/SFX/XionExplosion/Animation/CrateExplosion9.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/SFX/XionExplosion/Animation/CrateExplosion3.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/SFX/XionExplosion/Animation/CrateExplosion10.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/SFX/XionExplosion/Animation/CrateExplosion8.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/SFX/XionExplosion/Animation/CrateExplosion6.png" type="Texture" id=7]
+[ext_resource path="res://Scenes/SFX/XionExplosion/Animation/CrateExplosion4.png" type="Texture" id=8]
+[ext_resource path="res://Scenes/SFX/XionExplosion/Animation/CrateExplosion11.png" type="Texture" id=9]
+[ext_resource path="res://Scenes/SFX/XionExplosion/Animation/CrateExplosion7.png" type="Texture" id=10]
+[ext_resource path="res://Scenes/SFX/XionExplosion/Animation/CrateExplosion5.png" type="Texture" id=11]
+[ext_resource path="res://Scenes/SFX/XionExplosion/Animation/CrateExplosion12.png" type="Texture" id=12]
+
+[resource]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 4 ), ExtResource( 8 ), ExtResource( 11 ), ExtResource( 7 ), ExtResource( 10 ), ExtResource( 6 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 9 ), ExtResource( 12 ) ],
+"loop": false,
+"name": "default",
+"speed": 15.0
+} ]

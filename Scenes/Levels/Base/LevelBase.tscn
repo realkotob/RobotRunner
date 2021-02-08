@@ -11,7 +11,7 @@
 [ext_resource path="res://icon.png" type="Texture" id=9]
 [ext_resource path="res://Scenes/Levels/Base/Paralaxe.gd" type="Script" id=10]
 [ext_resource path="res://Scenes/Fog/CosmeticFog/FogMaterial.tres" type="Material" id=11]
-[ext_resource path="res://Global/Autoloads/SFX/DebrisGenerator.gd" type="Script" id=12]
+[ext_resource path="res://Scenes/SFX/DebrisGenerator.gd" type="Script" id=12]
 [ext_resource path="res://Scenes/GUI/HUD/HUD.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Scenes/Levels/Base/LevelBase.gd" type="Script" id=24]
 
@@ -72,10 +72,11 @@ __meta__ = {
 [node name="DebrisGenerator" type="Node2D" parent="."]
 script = ExtResource( 12 )
 sfx_dict = {
-"normal_explosion": "res://Global/Autoloads/SFX/NormalExplosion/NormalExplosion.tscn",
-"normal_hit": "res://Global/Autoloads/SFX/Feedbacks/NormalHit/NormalHit.tscn",
-"small_explosion": "res://Global/Autoloads/SFX/SmallExplosion/SmallExplosion.tscn",
-"xion_explosion": "res://Global/Autoloads/SFX/XionExplosion/XionExplosion.tscn"
+"great_hit": "res://Scenes/SFX/Feedbacks/GreatHit/GreatHit.tscn",
+"normal_explosion": "res://Scenes/SFX/NormalExplosion/NormalExplosion.tscn",
+"normal_hit": "res://Scenes/SFX/Feedbacks/NormalHit/NormalHit.tscn",
+"small_explosion": "res://Scenes/SFX/SmallExplosion/SmallExplosion.tscn",
+"xion_explosion": "res://Scenes/SFX/XionExplosion/XionExplosion.tscn"
 }
 
 [node name="Map" type="Node2D" parent="."]

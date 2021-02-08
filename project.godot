@@ -377,7 +377,7 @@ _global_script_classes=[ {
 "base": "SFX_AnimationBase",
 "class": "SFX_Explosion",
 "language": "GDScript",
-"path": "res://Global/Autoloads/SFX/NormalExplosion/Explosion.gd"
+"path": "res://Scenes/SFX/NormalExplosion/Explosion.gd"
 }, {
 "base": "Node2D",
 "class": "SFX_group_base",

@@ -83,7 +83,7 @@ func interact():
 # If the raycast found no obstacle in its way, damage the targeted body
 func damage_body(body : PhysicsBody2D, impact_pos: Vector2):
 	body.damage(owner)
-	SFX.play_SFX(SFX.great_hit, impact_pos)
+	EVENTS.emit_signal("play_SFX", "great_hit", impact_pos)
 	has_damaged = true
 
 

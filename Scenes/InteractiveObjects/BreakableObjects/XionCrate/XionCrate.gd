@@ -142,7 +142,7 @@ func on_destruction(actor: Node = null):
 	hide_crate()
 	
 	# Play the Xion explosion animation
-	SFX.play_SFX(SFX.xion_explosion, global_position)
+	EVENTS.emit_signal("play_SFX", "xion_explosion", global_position)
 	
 	# Play the crate explosion and triggers the fade out
 	base_anim_node.disconnect("animation_finished", self, "on_sprite_animation_finished")

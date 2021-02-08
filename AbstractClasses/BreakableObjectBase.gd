@@ -59,8 +59,8 @@ func destroy(actor_destroying : Node = null):
 		particule_node.set_emitting(true)
 	
 	call_deferred("set_mode", RigidBody2D.MODE_STATIC)
-	SFX.scatter_sprite(self, nb_debris, explosion_impulse)
-	SFX.scatter_sprite(self, int(nb_debris / 6), explosion_impulse * explosion_impulse_modifier)
+	EVENTS.emit_signal("scatter_object", self, nb_debris, explosion_impulse)
+	EVENTS.emit_signal("scatter_object", self, int(nb_debris / 6), explosion_impulse * explosion_impulse_modifier)
 	
 	awake_nearby_bodies()
 	

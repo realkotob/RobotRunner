@@ -1,0 +1,3 @@
+[submodule "BabaGodotLib"]
+	path = BabaGodotLib
+	url = https://github.com/MrBSmith/BabaGodotLib

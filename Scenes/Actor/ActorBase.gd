@@ -134,7 +134,7 @@ func overheat():
 
 
 func destroy():
-	SFX.play_SFX(SFX.small_explosion, global_position)
+	EVENTS.emit_signal("play_SFX", "small_explosion", global_position)
 	queue_free()
 
 

@@ -10,15 +10,17 @@ onready var great_hit = preload("res://Global/Autoloads/SFX/Feedbacks/GreatHit/G
 onready var debris = preload("res://Global/Autoloads/SFX/Debris/Debris.tscn")
 
 
-func play_SFX(fx: PackedScene, pos: Vector2):
-	var fx_node = fx.instance()
-	fx_node.set_global_position(pos)
-	add_child(fx_node)
-	fx_node.play_animation()
+#### BUILT-IN ####
+
+func _ready() -> void:
+	var _err = EVENTS.connect("play_SFX", self, "_on_play_SFX")
+	_err = EVENTS.connect("scatter_object", self, "_on_scatter_object")
 
 
 
-func scatter_sprite(body : Node, nb_debris : int, impulse_force: float = 100.0):
+#### SIGNAL_RESPONSES ####
+
+func _on_scatter_object(body : Node, nb_debris : int, impulse_force: float = 100.0):
 	var texture = body.get_node("Sprite").get_texture()
 	
 	var sprite_width : float = texture.get_width()
@@ -55,3 +57,11 @@ func scatter_sprite(body : Node, nb_debris : int, impulse_force: float = 100.0):
 			debris_node.apply_central_impulse(-(epicenter_dir * impulse_force * rand_range(0.7, 1.3)))
 			
 			call_deferred("add_child", debris_node)
+
+
+func _on_play_SFX(fx_name: String, pos: Vector2):
+	var fx = get(fx_name)
+	var fx_node = fx.instance()
+	fx_node.set_global_position(pos)
+	add_child(fx_node)
+	fx_node.play_animation()

@@ -1,4 +1,4 @@
-extends Node
+extends EventsBase
 
 # warnings-disable
 

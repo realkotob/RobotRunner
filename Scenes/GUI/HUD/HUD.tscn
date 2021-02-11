@@ -1,15 +1,15 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Global/Fonts/BoldCapsPixel64.tres" type="DynamicFont" id=1]
+[ext_resource path="res://BabaGodotLib/Fonts/BoldCapsPixel64.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Scenes/GUI/HUD/HUD.gd" type="Script" id=2]
+[ext_resource path="res://BabaGodotLib/Scenes/HUD/Collectable_HUD_Label.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/GUI/HUD/Xion.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/GUI/HUD/Materials.png" type="Texture" id=5]
 [ext_resource path="res://Scenes/GUI/Dialogue/Assets/Boxes/DialogueBoxHUD.png" type="Texture" id=6]
 
 [node name="HUD" type="Control"]
 anchor_right = 1.0
-anchor_bottom = 0.143
-margin_bottom = -0.220001
+anchor_bottom = 1.0
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -40,18 +40,16 @@ margin_left = -130.0
 margin_top = 6.0
 margin_right = 4.0
 margin_bottom = 57.0
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+collectable_type = "Xion"
 
-[node name="Sprite" type="TextureRect" parent="Background/Xion"]
+[node name="Texture" type="Sprite" parent="Background/Xion"]
 light_mask = 16384
-margin_right = 44.0
-margin_bottom = 51.0
+position = Vector2( 29.0109, 21.0224 )
 texture = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="Background/Xion"]
 margin_left = 64.0
@@ -61,11 +59,14 @@ margin_bottom = 41.0
 custom_fonts/font = ExtResource( 1 )
 text = "0"
 align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Materials" type="Control" parent="Background"]
+[node name="Tween" type="Tween" parent="Background/Xion"]
+
+[node name="Gear" type="Control" parent="Background"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -74,27 +75,35 @@ margin_left = -256.0
 margin_top = -22.0
 margin_right = -142.0
 margin_bottom = 9.00002
-
-[node name="Sprite" type="TextureRect" parent="Background/Materials"]
-light_mask = 16384
-margin_right = 44.0
-margin_bottom = 51.0
-texture = ExtResource( 5 )
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+collectable_type = "Gear"
 
-[node name="Label" type="Label" parent="Background/Materials"]
-margin_left = 64.0
-margin_top = -10.0
-margin_right = 120.0
-margin_bottom = 41.0
+[node name="Texture" type="Sprite" parent="Background/Gear"]
+light_mask = 16384
+position = Vector2( 24.386, 21.4429 )
+texture = ExtResource( 5 )
+
+[node name="Label" type="Label" parent="Background/Gear"]
+anchor_left = 0.561
+anchor_top = -0.323
+anchor_right = 0.561
+anchor_bottom = -0.323
+margin_left = 0.0459938
+margin_top = 0.0130062
+margin_right = 56.046
+margin_bottom = 51.013
 custom_fonts/font = ExtResource( 1 )
 text = "0"
 align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Tween" type="Tween" parent="Background/Gear"]
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0

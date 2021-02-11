@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Global/Fonts/BoldCapsPixel64.tres" type="DynamicFont" id=1]
+[ext_resource path="res://BabaGodotLib/Fonts/BoldCapsPixel64.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Global/GUI_theme/transparant_UI_theme.tres" type="Theme" id=2]
 [ext_resource path="res://Scenes/Menus/OptionsMenu/Controls/input_line/InputLine.gd" type="Script" id=3]
 

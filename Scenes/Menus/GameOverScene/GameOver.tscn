@@ -1,51 +1,18 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/Menus/GameOverScene/GameOver.gd" type="Script" id=1]
-[ext_resource path="res://Global/Fonts/BoldCapsPixel.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://BabaGodotLib/Fonts/BoldCapsPixel.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://BabaGodotLib/Fonts/BoldCapsPixel.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="DynamicFont" id=1]
-size = 32
-font_data = ExtResource( 2 )
+size = 200
+font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 32
-font_data = ExtResource( 2 )
+size = 80
+font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=3]
-size = 32
-font_data = ExtResource( 2 )
-
-[sub_resource type="DynamicFont" id=4]
-size = 32
-font_data = ExtResource( 2 )
-
-[sub_resource type="DynamicFont" id=5]
-size = 200
-font_data = ExtResource( 2 )
-
-[sub_resource type="DynamicFontData" id=6]
-font_path = "res://Global/Fonts/BoldCapsPixel.ttf"
-
-[sub_resource type="DynamicFont" id=7]
-font_data = SubResource( 6 )
-
-[sub_resource type="DynamicFont" id=8]
-font_data = SubResource( 6 )
-
-[sub_resource type="DynamicFont" id=9]
-font_data = ExtResource( 2 )
-
-[sub_resource type="DynamicFont" id=10]
-font_data = ExtResource( 2 )
-
-[sub_resource type="DynamicFont" id=11]
-size = 80
-font_data = ExtResource( 2 )
-
-[sub_resource type="DynamicFont" id=12]
-font_data = ExtResource( 2 )
-
-[sub_resource type="DynamicFont" id=13]
 size = 60
 outline_size = 2
 font_data = ExtResource( 2 )
@@ -77,11 +44,7 @@ margin_right = 877.5
 margin_bottom = 194.212
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/mono_font = SubResource( 1 )
-custom_fonts/bold_italics_font = SubResource( 2 )
-custom_fonts/italics_font = SubResource( 3 )
-custom_fonts/bold_font = SubResource( 4 )
-custom_fonts/normal_font = SubResource( 5 )
+custom_fonts/normal_font = SubResource( 1 )
 custom_colors/default_color = Color( 0.815686, 0, 0, 1 )
 bbcode_enabled = true
 bbcode_text = "GAME OVER"
@@ -97,12 +60,8 @@ margin_left = 5.0
 margin_top = 201.0
 margin_right = 959.0
 margin_bottom = 338.0
-custom_fonts/mono_font = SubResource( 7 )
-custom_fonts/bold_italics_font = SubResource( 8 )
-custom_fonts/italics_font = SubResource( 9 )
-custom_fonts/bold_font = SubResource( 10 )
-custom_fonts/normal_font = SubResource( 11 )
-custom_colors/default_color = Color( 0.2, 0.7, 0.7, 0.8 )
+custom_fonts/normal_font = SubResource( 2 )
+custom_colors/default_color = Color( 0.140411, 0.803335, 0.835938, 1 )
 bbcode_enabled = true
 scroll_active = false
 __meta__ = {
@@ -114,11 +73,7 @@ margin_left = 428.0
 margin_top = 338.0
 margin_right = 532.0
 margin_bottom = 384.0
-custom_fonts/mono_font = SubResource( 7 )
-custom_fonts/bold_italics_font = SubResource( 8 )
-custom_fonts/italics_font = SubResource( 9 )
-custom_fonts/bold_font = SubResource( 12 )
-custom_fonts/normal_font = SubResource( 13 )
+custom_fonts/normal_font = SubResource( 3 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
 bbcode_enabled = true
 bbcode_text = "[center][shake rate=10 level=20]OR[/shake][/center]"
@@ -133,11 +88,7 @@ margin_left = 4.0
 margin_top = 394.0
 margin_right = 955.0
 margin_bottom = 520.0
-custom_fonts/mono_font = SubResource( 7 )
-custom_fonts/bold_italics_font = SubResource( 8 )
-custom_fonts/italics_font = SubResource( 9 )
-custom_fonts/bold_font = SubResource( 10 )
-custom_fonts/normal_font = SubResource( 11 )
+custom_fonts/normal_font = SubResource( 2 )
 custom_colors/default_color = Color( 0.859375, 0.275865, 0.275269, 0.784314 )
 bbcode_enabled = true
 scroll_active = false

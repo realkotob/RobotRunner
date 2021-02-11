@@ -149,11 +149,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://AbstractClasses/ClassFinder.gd"
 }, {
-"base": "Area2D",
-"class": "CollactableBase",
-"language": "GDScript",
-"path": "res://Scenes/InteractiveObjects/Collactables/CollactableBase.gd"
-}, {
 "base": "InteractiveObject",
 "class": "Collectable",
 "language": "GDScript",
@@ -237,7 +232,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "EventsBase",
 "language": "GDScript",
-"path": "res://Global/Autoloads/EventBase.gd"
+"path": "res://BabaGodotLib/Autoload/EventBase.gd"
 }, {
 "base": "Camera2D",
 "class": "GameCamera",
@@ -338,11 +333,6 @@ _global_script_classes=[ {
 "class": "Liquid",
 "language": "GDScript",
 "path": "res://Scenes/InteractiveObjects/Liquids/Liquid.gd"
-}, {
-"base": "CollactableBase",
-"class": "MaterialCollactable",
-"language": "GDScript",
-"path": "res://Scenes/InteractiveObjects/Collactables/Materials/Gear/Gear.gd"
 }, {
 "base": "Control",
 "class": "MenuBase",
@@ -494,6 +484,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/XionCloud/XionCloud.gd"
 }, {
+"base": "Collectable",
+"class": "XionCollectable",
+"language": "GDScript",
+"path": "res://Scenes/InteractiveObjects/Collactables/XionCollactable/Xion.gd"
+}, {
 "base": "BreakableObjectBase",
 "class": "XionCrate",
 "language": "GDScript",
@@ -528,7 +523,6 @@ _global_script_class_icons={
 "ChunckPlatform": "",
 "ChunckRoom": "",
 "ClassFinder": "",
-"CollactableBase": "",
 "Collectable": "",
 "Collectable_CollectState": "",
 "Collectable_FollowState": "",
@@ -548,7 +542,11 @@ _global_script_class_icons={
 "EventsBase": "",
 "GameCamera": "",
 "GameConsoleScript": "",
+<<<<<<< HEAD
 "GameSaver": "",
+=======
+"Gear": "",
+>>>>>>> Implement BabaGodotLib collectables
 "GreatDoor": "",
 "GrowingLava": "",
 "HUD_label": "",
@@ -566,7 +564,6 @@ _global_script_class_icons={
 "LevelChunck": "",
 "LevelEvent": "",
 "Liquid": "",
-"MaterialCollactable": "",
 "MenuBase": "",
 "MenuOptions": "",
 "MenuOptionsBase": "",
@@ -597,6 +594,7 @@ _global_script_class_icons={
 "TriggerArea": "",
 "Water": "",
 "XionCloud": "",
+"XionCollectable": "",
 "XionCrate": ""
 }
 

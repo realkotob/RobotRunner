@@ -1,12 +1,17 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Scenes/InteractiveObjects/Collactables/CollactableBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://BabaGodotLib/Scenes/InteractiveObject/Collectable/Collectable.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/InteractiveObjects/Collactables/Materials/Gear/GearFrames.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://AbstractClasses/RayCastBase.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/InteractiveObjects/Collactables/Materials/Gear/Gear.gd" type="Script" id=9]
 
-[sub_resource type="Animation" id=1]
-resource_name = "Floating"
+[sub_resource type="CircleShape2D" id=4]
+radius = 13.0136
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 57.4735
+
+[sub_resource type="Animation" id=3]
 length = 4.0
 loop = true
 tracks/0/type = "value"
@@ -22,33 +27,35 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 4.015 ), Vector2( 0, -4 ) ]
 }
 
-[sub_resource type="CircleShape2D" id=2]
-radius = 57.5
-
 [node name="Gear" instance=ExtResource( 1 )]
 script = ExtResource( 9 )
-initial_impulse = false
+collectable_name = "Gear"
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="0"]
-position = Vector2( 0, 0.00750041 )
+[node name="CollisionShape2D" parent="InteractArea" index="0"]
+shape = SubResource( 4 )
+
+[node name="CollisionShape2D" parent="FollowArea" index="0"]
+shape = SubResource( 5 )
+
+[node name="Collect" parent="StatesMachine" index="2"]
+speed = 500.0
+acceleration = 20.0
+initial_speed = 1000.0
+initial_speed_damping = 200.0
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="6"]
+position = Vector2( 0, 0.00749969 )
 frames = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="TravellingSound" parent="." index="3"]
-stream = null
+[node name="TravellingSound" type="AudioStreamPlayer2D" parent="." index="7"]
+attenuation = 0.31864
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 autoplay = "Floating"
-anims/Floating = SubResource( 1 )
+anims/Floating = SubResource( 3 )
 
-[node name="Timer" type="Timer" parent="." index="5"]
-wait_time = 2.5
-one_shot = true
-autostart = true
-
-[node name="TriggerArea" type="Area2D" parent="." index="6"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea" index="0"]
-shape = SubResource( 2 )
-
-[node name="RayCast" type="RayCast2D" parent="." index="7"]
+[node name="RayCast" type="RayCast2D" parent="." index="9"]
 script = ExtResource( 3 )

@@ -87,8 +87,8 @@ func generate_xion_collectable():
 		for _i in range(5):
 			var xion_collactable_node = COLLACTABLES.xion.instance()
 			xion_collactable_node.position = global_position
-			xion_collactable_node.aimed_character_weakref = weakref(actor_destroying)
 			owner.add_child(xion_collactable_node)
+			xion_collactable_node.follow(actor_destroying)
 
 
 

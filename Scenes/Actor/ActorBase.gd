@@ -62,9 +62,6 @@ func get_face_direction() -> int:
 
 #### BUILT-IN ####
 
-func _ready():
-	$StatesMachine.default_state = default_state
-
 
 #### PHYSIC BEHAVIOUR ####
 

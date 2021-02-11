@@ -20,7 +20,7 @@ func _ready():
 	_err = jump_buffer_timer_node.connect("timeout", self, "on_jump_buffer_timeout")
 
 
-func update(_host, _delta):
+func update(_delta):
 	if owner.is_on_floor():
 		if jump_buffered:
 			return "Jump"
@@ -29,7 +29,7 @@ func update(_host, _delta):
 
 
 # Start the cool down at the entery of the state
-func enter_state(_host):
+func enter_state():
 	owner.current_snap = Vector2.ZERO
 	var previous_state : String = state_node.previous_state.name
 	
@@ -58,7 +58,7 @@ func _input(event):
 		return
 	
 	if event is InputEventKey:
-		if state_node.get_current_state() == self:
+		if state_node.get_state() == self:
 			if event.is_action_pressed(inputs_node.get_input("Action")):
 				state_node.set_state("Action")
 				
@@ -76,7 +76,7 @@ func _input(event):
 
 # Triggers the fall animation when the start falling is over
 func on_animation_finished():
-	if state_node.get_current_state() == self:
+	if state_node.get_state() == self:
 		if animation_node.get_animation() == "StartFalling":
 				animation_node.play(self.name)
 

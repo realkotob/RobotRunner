@@ -11,14 +11,14 @@ func _ready():
 	var _err = animation_node.connect("animation_finished", self, "on_animation_finished")
 
 
-func update(_host, _delta):
+func update(_delta):
 	if owner.is_on_floor():
 		return "Idle"
 	if owner.velocity.y > 0:
 		return "Fall"
 
 
-func enter_state(_host):
+func enter_state():
 	animation_node.play(self.name)
 	
 	owner.current_snap = Vector2.ZERO
@@ -28,7 +28,7 @@ func enter_state(_host):
 
 
 func on_animation_finished():
-	if state_node.get_current_state() == self:
+	if state_node.get_state() == self:
 		if animation_node.get_animation() == "Jump":
 			if "MidAir" in animation_node.get_sprite_frames().get_animation_names():
 				animation_node.play("MidAir")

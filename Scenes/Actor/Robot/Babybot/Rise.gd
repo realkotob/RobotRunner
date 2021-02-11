@@ -8,5 +8,5 @@ func _ready():
 
 
 func on_animation_finished():
-	if states_node.current_state == self:
-		states_node.set_state("Move")
+	if states_machine.current_state == self:
+		states_machine.set_state("Move")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Actor/ActorBase.gd" type="Script" id=1]
-[ext_resource path="res://AbstractClasses/StateMachine.gd" type="Script" id=2]
+[ext_resource path="res://BabaGodotLib/Absract/StateMachine/StateMachine.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Actor/Animations/FadeOut.tres" type="Animation" id=3]
 [ext_resource path="res://Scenes/Actor/Animations/Overheat.tres" type="Animation" id=4]
 

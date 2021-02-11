@@ -15,7 +15,7 @@ func _ready():
 
 
 # Check if the character is falling, before it triggers fall state
-func update(_host, _delta):
+func update(_delta):
 	if !owner.is_on_floor():
 		return "Fall"
 
@@ -27,14 +27,15 @@ func update(_host, _delta):
 
 # Triggers the Idle aniamtion when entering the state,
 # If the character was falling before, triggers the landing animation before
-func enter_state(host):
+func enter_state():
 	if !owner.is_on_floor():
-		host.set_state("Fall")
+		states_machine.set_state("Fall")
 	
 	var animations_array = animation_node.get_sprite_frames().get_animation_names()
 	owner.current_snap = owner.snap_vector
 	
-	if host.previous_state != null && host.previous_state.name == "Fall" && "StartFalling" in animations_array:
+	if states_machine.previous_state != null && states_machine.previous_state.name == "Fall"\
+	 	&& "StartFalling" in animations_array:
 		animation_node.play("Land")
 	else:
 		animation_node.play(self.name)
@@ -45,7 +46,7 @@ func _input(event):
 	if !owner.active:
 		return
 	
-	if state_node.get_current_state() == self:
+	if state_node.get_state() == self:
 		if event.is_action_pressed(inputs_node.get_input("Jump")):
 			state_node.set_state("Jump")
 		
@@ -58,6 +59,6 @@ func _input(event):
 
 # Triggers the idle animation when the slanding is over
 func on_animation_finished():
-	if state_node.get_current_state() == self:
+	if state_node.get_state() == self:
 		if animation_node.get_animation() == "Land":
 				animation_node.play(self.name)

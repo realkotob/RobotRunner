@@ -11,6 +11,6 @@ func _ready():
 	state_node = get_parent()
 
 # Play the animation with a name corresponding to the current state
-func enter_state(_host):
+func enter_state():
 	if animation_node != null:
 		animation_node.play(self.name)

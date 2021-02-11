@@ -24,10 +24,10 @@ func _physics_process(delta):
 
 #### LOGIC ####
 
-func enter_state(_host : Node):
+func enter_state():
 	set_physics_process(true)
 
-func exit_state(_host : Node):
+func exit_state():
 	set_physics_process(false)
 
 #### VIRTUALS ####
@@ -37,7 +37,7 @@ func exit_state(_host : Node):
 #### INPUTS ####
 
 func _input(_event):
-	if states_node.get_current_state() != self:
+	if states_machine.get_state() != self:
 		return
 	
 	if Input.is_action_just_pressed("camera_speed_increase"):

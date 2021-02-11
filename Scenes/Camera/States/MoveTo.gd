@@ -13,14 +13,14 @@ var wait_time : float = 0.0
 
 # If average_w_player is true, the camera compute the average position
 # Between itself and the players
-func enter_state(_host):
+func enter_state():
 	if average_w_players == true:
 		destination += owner.compute_average_pos()
 		destination /= 2
 
 
 # Reset the bool value when leaving the state
-func exit_state(_host):
+func exit_state():
 	average_w_players = false
 	current_speed = move_speed
 	wait_time = 0.0
@@ -30,18 +30,18 @@ func exit_state(_host):
 # Set to stop state if a wait time is specified
 # Else : execute the next instruction of the camera
 # If it was the last instruction: set back to the previous state
-func update(_host, _delta):
+func update(_delta):
 	camera.update_camera_limits()
 	
 	if move_to_destination() == true or destination == Vector2.ZERO:
 		if wait_time != 0.0:
 			owner.stop_state_node.wait_time = wait_time
-			states_node.set_state("Stop")
+			states_machine.set_state("Stop")
 		
 		elif len(owner.instruction_stack) != 0:
 			owner.execute_next_instruction()
 		else:
-			states_node.set_state(states_node.previous_state)
+			states_machine.set_state(states_machine.previous_state)
 
 
 # Move to the current destination, return true when it's arrived, false otherwise

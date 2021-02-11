@@ -12,7 +12,7 @@ func _ready():
 	var _err = animated_sprite_node.connect("animation_finished", self, "on_animation_finished")
 
 
-func enter_state(_host):
+func enter_state():
 	owner.set_direction(0)
 	
 	if animated_sprite_node.get_sprite_frames().has_animation(name):
@@ -24,5 +24,5 @@ func enter_state(_host):
 
 
 func on_animation_finished():
-	if states_node.current_state == self:
-		states_node.set_state(states_node.previous_state)
+	if states_machine.current_state == self:
+		states_machine.set_state(states_machine.previous_state)

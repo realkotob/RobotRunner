@@ -21,8 +21,8 @@ onready var default_limit_left = get_limit(MARGIN_LEFT)
 onready var default_limit_right = get_limit(MARGIN_RIGHT)
 
 export var camera_speed : float = 3.0
-
 export var debug : bool = false setget set_debug, is_debug
+export var default_state : String = "Follow"
 
 var players_weakref_array : Array = [] setget set_players_weakref_array
 var instruction_stack : Array = []
@@ -37,7 +37,7 @@ func is_class(value: String) -> bool: return value == "GameCamera" or .is_class(
 func get_class() -> String: return "GameCamera"
 
 func set_state(state_name: String): state_machine_node.set_state(state_name)
-func get_state() -> StateBase: return state_machine_node.get_current_state()
+func get_state() -> StateBase: return state_machine_node.get_state()
 func get_state_name() -> String: return get_state().get_name()
 
 func set_debug(value: bool):
@@ -224,6 +224,6 @@ func shake(magnitude: float, duration: float):
 
 #### SIGNAL RESPONSES ####
 
-func on_state_changed(new_state: StateBase):
-	var string = "State: " + new_state.name
+func on_state_changed(state_name: String):
+	var string = "State: " + state_name
 	state_label.set_text(string)

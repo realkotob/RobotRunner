@@ -13,14 +13,14 @@ func _ready():
 	inputs_node = owner.get_node("Inputs")
 
 
-func update(_host, _delta):
+func update( _delta):
 	if !owner.is_on_floor():
 		return "Fall"
 	elif owner.velocity.x == 0:
 		return "Idle"
 
 
-func enter_state(_host):
+func enter_state():
 	if !owner.is_on_floor():
 		state_node.set_state("Jump")
 	
@@ -29,7 +29,7 @@ func enter_state(_host):
 	SFX_node.play_SFX("MoveDust", true)
 
 
-func exit_state(_host):
+func exit_state():
 	SFX_node.play_SFX("MoveDust", false)
 
 
@@ -38,7 +38,7 @@ func _input(event):
 	if !owner.active:
 		return
 	
-	if state_node.get_current_state() == self:
+	if state_node.get_state() == self:
 		if event.is_action_pressed(inputs_node.get_input("Jump")):
 			state_node.set_state("Jump")
 		

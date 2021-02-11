@@ -35,7 +35,7 @@ func get_borders_anticipated() -> Array: return borders_anticipated
 # This state is used to follow the players
 # It computes the average position of all the players, and move the camera towards it
 # Progressivly, so the camera feels smooth
-func update(_host, _delta):
+func update(_delta):
 	var players_array = camera.get_players_array()
 	
 	# Move the camera speed towards the average postion

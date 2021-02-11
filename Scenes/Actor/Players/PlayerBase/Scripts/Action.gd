@@ -26,13 +26,13 @@ func _ready():
 	hit_box_shape = action_hitbox_node.get_node("CollisionShape2D")
 
 
-func update(_host, _delta):
+func update(_delta):
 	if !has_damaged:
 		damage()
 
 
 # When the actor enters action state: set active the hit box, and play the right animation
-func enter_state(_host):
+func enter_state():
 	# Play the animation
 	animation_node.play(self.name)
 	
@@ -44,7 +44,7 @@ func enter_state(_host):
 
 
 # When the actor exits action state: set unactive the hit box and triggers the interaction if necesary
-func exit_state(_host):
+func exit_state():
 	interact()
 	
 	# Reset the was broke bool, for the next use of the action state
@@ -103,7 +103,7 @@ func _input(event):
 		return
 	
 	if event is InputEventKey:
-		if state_node.get_current_state() == self:
+		if state_node.get_state() == self:
 			
 			if event.is_action_pressed(inputs_node.get_input("MoveLeft")) \
 			or event.is_action_pressed(inputs_node.get_input("MoveRight")):

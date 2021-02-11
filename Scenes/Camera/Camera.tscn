@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Camera/Camera.gd" type="Script" id=1]
-[ext_resource path="res://AbstractClasses/StateMachine.gd" type="Script" id=2]
+[ext_resource path="res://BabaGodotLib/Absract/StateMachine/StateMachine.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Camera/States/Follow.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Camera/States/MoveTo.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/Camera/States/Stop.gd" type="Script" id=5]
@@ -21,7 +21,6 @@ debug = true
 
 [node name="StateMachine" type="Node2D" parent="."]
 script = ExtResource( 2 )
-default_state = "Follow"
 
 [node name="Stop" type="Node" parent="StateMachine"]
 script = ExtResource( 5 )

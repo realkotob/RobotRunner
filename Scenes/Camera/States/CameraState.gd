@@ -22,12 +22,12 @@ func _ready():
 #### VIRTUALS ####
 
 
-func enter_state(_host : Node):
+func enter_state():
 	if camera.is_debug():
 		set_debug_panel_visible(true)
 
 
-func exit_state(_host : Node):
+func exit_state():
 	if camera.is_debug():
 		set_debug_panel_visible(false)
 

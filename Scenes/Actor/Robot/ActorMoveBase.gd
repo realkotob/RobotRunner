@@ -4,7 +4,7 @@ extends ActorStateBase
 
 onready var original_pos = owner.get_global_position()
 
-func update(_host : Node, _delta : float):
+func update(_delta : float):
 	if owner.is_path_empty():
 		return "Idle"
 	
@@ -27,7 +27,7 @@ func update(_host : Node, _delta : float):
 			move_to_next_point()
 
 
-func enter_state(_host : Node):
+func enter_state():
 	if owner.animated_sprite_node.get_sprite_frames().has_animation(name):
 		owner.animated_sprite_node.play(name)
 	

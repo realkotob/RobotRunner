@@ -14,14 +14,14 @@ func _ready():
 	var _err = animation_node.connect("animation_finished", self, "on_animation_finished")
 
 
-func update(_host, _delta):
+func update(_delta):
 	if owner.is_on_floor():
 		return "Idle"
 	elif owner.velocity.y > 0:
 		return "Fall"
 
 
-func enter_state(_host):
+func enter_state():
 	animation_node.play(self.name)
 	
 	# Genreate the jump dust
@@ -34,13 +34,13 @@ func enter_state(_host):
 	owner.velocity.y = owner.jump_force
 
 
-func exit_state(_host):
+func exit_state():
 	SFX_node.play_SFX("JumpDust", false)
 	SFX_node.reset_SFX("JumpDust")
 
 
 func on_animation_finished():
-	if state_node.get_current_state() == self:
+	if state_node.get_state() == self:
 		if animation_node.get_animation() == "Jump":
 			if "MidAir" in animation_node.get_sprite_frames().get_animation_names():
 				animation_node.play("MidAir")
@@ -51,7 +51,7 @@ func _input(event):
 	if !owner.active:
 		return
 	
-	if state_node.get_current_state() == self:
+	if state_node.get_state() == self:
 		if event.is_action_pressed(inputs_node.get_input("Action")):
 			state_node.set_state("Action")
 			

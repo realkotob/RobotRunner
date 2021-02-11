@@ -17,14 +17,14 @@ func _ready():
 	var _err = timer_node.connect("timeout", self, "on_timer_timeout")
 
 
-func enter_state(_host):
+func enter_state():
 	origin_position = owner.get_global_position()
 	random_position = origin_position
 	timer_node.set_wait_time(duration)
 	timer_node.start()
 
 
-func exit_state(_host):
+func exit_state():
 	timer_node.stop()
 	move_to(origin_position)
 	origin_position = Vector2.ZERO
@@ -33,9 +33,9 @@ func exit_state(_host):
 
 
 # Give a new random destination position each time a new one is given
-func update(host, _delta):
+func update(_delta):
 	if magnitude == 0.0 or duration == 0.0:
-		return host.previous_state
+		return states_machine.previous_state
 	
 	if random_position == Vector2.ZERO or move_to(random_position):
 		random_position = origin_position + Vector2(rand_range(-3.0, 3.0), rand_range(-3.0, 3.0)) * magnitude
@@ -57,7 +57,7 @@ func rotate_to(dest_rot : float):
 
 
 func on_timer_timeout():
-	states_node.set_state(states_node.previous_state)
+	states_machine.set_state(states_machine.previous_state)
 
 
 func get_limits():

@@ -36,6 +36,7 @@ func _ready():
 	
 	MUSIC.play()
 	
+	EVENTS.emit_signal("update_HUD")
 	EVENTS.emit_signal("level_ready", self)
 
 

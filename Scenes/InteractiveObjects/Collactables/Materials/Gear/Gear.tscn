@@ -5,10 +5,10 @@
 [ext_resource path="res://AbstractClasses/RayCastBase.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/InteractiveObjects/Collactables/Materials/Gear/Gear.gd" type="Script" id=9]
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="CircleShape2D" id=1]
 radius = 13.0136
 
-[sub_resource type="CircleShape2D" id=5]
+[sub_resource type="CircleShape2D" id=2]
 radius = 57.4735
 
 [sub_resource type="Animation" id=3]
@@ -32,30 +32,27 @@ script = ExtResource( 9 )
 collectable_name = "Gear"
 
 [node name="CollisionShape2D" parent="InteractArea" index="0"]
-shape = SubResource( 4 )
+shape = SubResource( 1 )
 
 [node name="CollisionShape2D" parent="FollowArea" index="0"]
-shape = SubResource( 5 )
+shape = SubResource( 2 )
 
 [node name="Collect" parent="StatesMachine" index="2"]
 speed = 500.0
 acceleration = 20.0
-initial_speed = 1000.0
-initial_speed_damping = 200.0
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="6"]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="4"]
 position = Vector2( 0, 0.00749969 )
 frames = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="TravellingSound" type="AudioStreamPlayer2D" parent="." index="7"]
+[node name="TravellingSound" type="AudioStreamPlayer2D" parent="." index="5"]
 attenuation = 0.31864
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
-autoplay = "Floating"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
 anims/Floating = SubResource( 3 )
 
-[node name="RayCast" type="RayCast2D" parent="." index="9"]
+[node name="RayCast" type="RayCast2D" parent="." index="7"]
 script = ExtResource( 3 )

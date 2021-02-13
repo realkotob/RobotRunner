@@ -34,8 +34,8 @@ func get_materials() -> int : return materials
 
 func _ready():
 	var _err = timer_node.connect("timeout", self, "on_timer_timeout")
-	_err = SCORE.connect("score_changed", self, "on_score_changed")
 	_err = EVENTS.connect("collect", self, "_on_collect")
+	_err = EVENTS.connect("approch_collactable", self, "_on_approch_collectable")
 	rect_position = Vector2(0, -HUD_width)
 	set_visible(true)
 
@@ -86,11 +86,8 @@ func move_to(dest: Vector2, spd : float):
 func on_score_changed():
 	set_hidden(false)
 	
-	var total_xion = SCORE.get_xion()
-	var total_materials = SCORE.get_materials()
-	
-	interpolate_score_display("xion", total_xion)
-	interpolate_score_display("materials", total_materials)
+#	interpolate_score_display("xion", total_xion)
+#	interpolate_score_display("materials", total_materials)
 
 
 func interpolate_score_display(score_type: String, score_final_value: int):
@@ -98,6 +95,7 @@ func interpolate_score_display(score_type: String, score_final_value: int):
 			get(score_type), score_final_value, 0.5,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween_node.start()
+
 
 func _on_collect(_obj):
 	set_hidden(false)
@@ -112,3 +110,6 @@ func on_materials_changed(new_value: int):
 func on_timer_timeout():
 	set_hidden(true)
 	timer_node.stop()
+
+func _on_approch_collectable(_obj: Collectable):
+	set_hidden(false)

@@ -68,7 +68,6 @@ func get_face_direction() -> int:
 func _physics_process(delta):
 	var dir = get_direction()
 	
-	
 	# Handle actor's acceleration/decceleration
 	var base_speed = max_speed / 2
 	
@@ -165,6 +164,9 @@ func flip(dir: int):
 # by setting vertical to false
 func corner_correct(amount : int, delta: float, collision2D : KinematicCollision2D = null, 
 					vertical: bool = true) -> bool:
+	
+	var level = get_tree().get_current_scene()
+	
 	if !collision2D:
 		return false
 	
@@ -175,11 +177,11 @@ func corner_correct(amount : int, delta: float, collision2D : KinematicCollision
 			var movement = Vector2(i * j, velocity.y * delta) if vertical\
 								   else Vector2(velocity.x * delta, i * j)
 			
-			var collision = COLLISION_CHECKER.test_collision(self, movement, 
+			var collision = CollisionChecker.test_collision(self, movement, 
 													collision2D, vertical)
 			
 			if !collision:
-				if vertical && COLLISION_CHECKER.test_wall_collision(self, movement):
+				if vertical && CollisionChecker.test_wall_collision(self, level, movement):
 					return false
 				else:
 					global_position += movement

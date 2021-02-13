@@ -1,4 +1,6 @@
 extends Node
+class_name CollisionChecker
+
 
 #### ACCESSORS ####
 
@@ -11,7 +13,7 @@ extends Node
 #### LOGIC ####
 
 # Test if a collision occur between the caller, and the given entity
-func test_collision(caller : PhysicsBody2D, movement: Vector2, 
+static func test_collision(caller : PhysicsBody2D, movement: Vector2, 
 	collision2D: KinematicCollision2D, vertical: bool) -> bool:
 	
 	var collider = collision2D.get_collider()
@@ -32,7 +34,7 @@ func test_collision(caller : PhysicsBody2D, movement: Vector2,
 
 
 # Check for a wall collision behind the character
-func test_wall_collision(body: PhysicsBody2D, movement: Vector2) -> bool:
+static func test_wall_collision(body: PhysicsBody2D, level: Level, movement: Vector2) -> bool:
 	if movement.x == 0 or !body:
 		return false
 	
@@ -41,11 +43,10 @@ func test_wall_collision(body: PhysicsBody2D, movement: Vector2) -> bool:
 	var top_left_corner = body_rect.position
 	var top_right_corner = body_rect.position + Vector2(body_rect.size.x, 0)
 	
-	var level_node = get_tree().get_current_scene()
-	var wall_tilemap = level_node.find_node("Walls")
+	var wall_tilemap = level.find_node("Walls")
 	
 	if !wall_tilemap:
-		print("Walls Tilemap can't be found in the scene: " + level_node.name)
+		print("Walls Tilemap can't be found in the scene: " + level.name)
 		return false
 	
 	var top_left_tilemap_pos = wall_tilemap.world_to_map(top_left_corner)
@@ -55,8 +56,8 @@ func test_wall_collision(body: PhysicsBody2D, movement: Vector2) -> bool:
 	return top_left_tilemap_pos in used_wall_cells or top_right_tilemap_pos in used_wall_cells
 
 
-# Return the rect representing the hitbox of the given body
-func get_body_rect(body: PhysicsBody2D, movement := Vector2.ZERO) -> Rect2:
+# Return the rect representing the hitbox of the given bodys
+static func get_body_rect(body: PhysicsBody2D, movement := Vector2.ZERO) -> Rect2:
 	var shape = body.get_node("CollisionShape2D").get_shape()
 	if !shape is RectangleShape2D:
 		return Rect2(Vector2.ZERO, Vector2.ZERO)

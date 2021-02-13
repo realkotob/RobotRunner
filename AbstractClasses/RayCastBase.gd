@@ -6,7 +6,7 @@ class_name RayCastBase
 # the signal target_found usually connected by it's parent is emitted whenever
 # the first body found by the raycast is the target
 
-signal target_found
+signal target_found(target)
 
 var cast_target : Node = null 
 

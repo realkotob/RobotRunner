@@ -39,6 +39,15 @@ position = Vector2( -4284, 460 )
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="DebrisGenerator" parent="." index="4"]
+sfx_dict = {
+"great_hit": "res://Scenes/SFX/Feedbacks/GreatHit/GreatHit.tscn",
+"normal_explosion": "res://Scenes/SFX/NormalExplosion/NormalExplosion.tscn",
+"normal_hit": "res://Scenes/SFX/Feedbacks/NormalHit/NormalHit.tscn",
+"small_explosion": "res://Scenes/SFX/SmallExplosion/SmallExplosion.tscn",
+"xion_explosion": "res://Scenes/SFX/XionExplosion/XionExplosion.tscn"
+}
+
 [node name="Light" parent="Map/Background/Paralaxe/Lights" index="0" instance=ExtResource( 9 )]
 position = Vector2( -3360, 922 )
 
@@ -256,22 +265,18 @@ position = Vector2( -1056, 168 )
 
 [node name="Water" parent="InteractivesObjects/WaterTiles" index="0" instance=ExtResource( 10 )]
 position = Vector2( 585.101, 477.957 )
-group_name = ""
 pool_size = Vector2( 200.364, 79.405 )
 
 [node name="Water2" parent="InteractivesObjects/WaterTiles" index="1" instance=ExtResource( 10 )]
 position = Vector2( 2688, 375.073 )
-group_name = ""
 pool_size = Vector2( 200, 68.898 )
 
 [node name="Water3" parent="InteractivesObjects/WaterTiles" index="2" instance=ExtResource( 10 )]
 position = Vector2( -3234.95, 220 )
-group_name = ""
 pool_size = Vector2( 253.449, 60.504 )
 
 [node name="Water4" parent="InteractivesObjects/WaterTiles" index="3" instance=ExtResource( 10 )]
 position = Vector2( -2461.68, 499.246 )
-group_name = ""
 pool_size = Vector2( 748.09, 83.953 )
 
 [node name="Lava" parent="InteractivesObjects/LavaTiles" index="0" instance=ExtResource( 1 )]
@@ -395,6 +400,14 @@ method_name = "overheat"
 position = Vector2( 300, 0 )
 method_name = "overheat"
 
+[node name="XionCloud" parent="." index="7" instance=ExtResource( 2 )]
+visible = false
+position = Vector2( -2016, 204 )
+cloud_active = false
+
+[node name="CloudPath" parent="XionCloud" index="3" instance=ExtResource( 7 )]
+position = Vector2( 480, -272.975 )
+
 [node name="Checkpoint" parent="Events/Checkpoints" index="0" instance=ExtResource( 16 )]
 position = Vector2( 1416, 280 )
 
@@ -449,15 +462,7 @@ position = Vector2( 2820, 228 )
 scale = Vector2( 2.368, 13.065 )
 dialogue_index = 6
 
-[node name="XionCloud" parent="." index="7" instance=ExtResource( 2 )]
-visible = false
-position = Vector2( -2016, 204 )
-cloud_active = false
-
-[node name="CloudPath" parent="XionCloud" index="3" instance=ExtResource( 7 )]
-position = Vector2( 480, -272.975 )
-
-[node name="Camera" parent="." index="8"]
+[node name="Camera" parent="." index="9"]
 position = Vector2( -4000, 272 )
 limit_left = -4500
 limit_top = 0

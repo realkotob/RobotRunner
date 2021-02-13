@@ -99,6 +99,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://AbstractClasses/ChapterBase.gd"
 }, {
+"base": "Node",
+"class": "ChapterGenerator",
+"language": "GDScript",
+"path": "res://Global/Autoloads/ChapterGeneration/ChapterGen.gd"
+}, {
 "base": "Event",
 "class": "Checkpoint",
 "language": "GDScript",
@@ -175,6 +180,11 @@ _global_script_classes=[ {
 "path": "res://BabaGodotLib/Scenes/InteractiveObject/Collectable/States/Idle.gd"
 }, {
 "base": "Node",
+"class": "CollisionChecker",
+"language": "GDScript",
+"path": "res://Global/Autoloads/Collision.gd"
+}, {
+"base": "Node",
 "class": "Commands",
 "language": "GDScript",
 "path": "res://Scenes/GameConsole/Commands.gd"
@@ -198,6 +208,11 @@ _global_script_classes=[ {
 "class": "CustomParallaxLayer",
 "language": "GDScript",
 "path": "res://AbstractClasses/CustomParalaxLayer.gd"
+}, {
+"base": "Node",
+"class": "Dialogue",
+"language": "GDScript",
+"path": "res://Global/Autoloads/Dialogue/DialogueContainter.gd"
 }, {
 "base": "NinePatchRect",
 "class": "DialogueBox",
@@ -513,6 +528,7 @@ _global_script_class_icons={
 "CameraEventBase": "",
 "CameraState": "",
 "ChapterBase": "",
+"ChapterGenerator": "",
 "Checkpoint": "",
 "ChunckAutomata": "",
 "ChunckBin": "",
@@ -528,11 +544,13 @@ _global_script_class_icons={
 "Collectable_FollowState": "",
 "Collectable_HUD_Label": "",
 "Collectable_IdleState": "",
+"CollisionChecker": "",
 "Commands": "",
 "CompositeChunck": "",
 "CompositeRoom": "",
 "CrossChunck": "",
 "CustomParallaxLayer": "",
+"Dialogue": "",
 "DialogueBox": "",
 "DialogueEvent": "",
 "Door": "",
@@ -611,17 +629,10 @@ default_bus_layout="res://Global/AudioBus/default_bus_layout.tres"
 
 [autoload]
 
-SCORE="*res://Global/Score/Score.gd"
 MENUS="*res://Global/Autoloads/Menus/menus_autoload.gd"
 GAME="*res://Global/Autoloads/Game/Game.tscn"
-COLLACTABLES="*res://Global/Autoloads/Collactables/Collactables.gd"
-CHAPTER_GEN="*res://Global/Autoloads/ChapterGeneration/ChapterGen.gd"
-DIALOGUE="*res://Global/Autoloads/Dialogue/DialogueContainter.gd"
 DEBUG="*res://Global/Autoloads/Debug/Debug.gd"
-SOLO_CONTROL="*res://Global/Autoloads/SoloControl/SoloControl.gd"
 MUSIC="*res://Global/Autoloads/Music/Music.tscn"
-RESOURCE_LOADER="*res://Global/Autoloads/ResourceLoader/ResourceLoader.tscn"
-COLLISION_CHECKER="*res://Global/Autoloads/Collision.gd"
 EVENTS="*res://Global/Autoloads/Events.gd"
 
 [debug]

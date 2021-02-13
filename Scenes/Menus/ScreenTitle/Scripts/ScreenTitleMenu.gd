@@ -12,19 +12,7 @@ func get_class() -> String: return "ScreenTitleMenu"
 
 #### BUILT-IN ####
 
-func _ready():
-	var _err = RESOURCE_LOADER.connect("thread_finished", self, "on_thread_finished")
-	load_default_buttons_state()
-	
-	if RESOURCE_LOADER.thread != null && RESOURCE_LOADER.thread.is_active():
-		set_buttons_disabled(true)
-	else:
-		._setup()
 
-## FUNCTION OVERRIDE ##
-# This need to stay empty
-func _setup():
-	pass
 
 #### LOGIC ####
 
@@ -39,11 +27,6 @@ func _setup():
 
 
 #### SIGNAL RESPONSES ####
-
-func on_thread_finished():
-	set_buttons_default_state()
-	._setup()
-
 
 func _on_menu_option_chose(option: MenuOptionsBase):
 	var _err = null

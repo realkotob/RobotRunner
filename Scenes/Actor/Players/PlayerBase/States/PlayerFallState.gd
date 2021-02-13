@@ -1,7 +1,5 @@
-extends ActorStateBase
+extends ActorFallState
 class_name PlayerFallState
-
-### FALL STATE ###
 
 onready var tolerance_timer_node = $ToleranceTimer
 onready var jump_buffer_timer_node = $JumpBufferTimer
@@ -11,25 +9,20 @@ var inputs_node : Node
 var jump_tolerance : bool = false
 var jump_buffered : bool = false
 
-func _ready():
+#### BUILT-IN ####
+
+func _ready() -> void:
 	yield(owner, "ready")
 	
 	inputs_node = owner.get_node("Inputs")
 	
-	var _err = animated_sprite.connect("animation_finished", self, "on_animation_finished")
-	_err = tolerance_timer_node.connect("timeout", self, "on_tolerence_timeout")
+	var _err = tolerance_timer_node.connect("timeout", self, "on_tolerence_timeout")
 	_err = jump_buffer_timer_node.connect("timeout", self, "on_jump_buffer_timeout")
 
 
-func update(_delta):
-	if owner.is_on_floor():
-		if jump_buffered:
-			return "Jump"
-		else:
-			return "Idle"
+#### VIRTUALS ####
 
-
-# Start the cool down at the entery of the state
+# Start the cool down at the entry of the state
 func enter_state():
 	owner.current_snap = Vector2.ZERO
 	var previous_state : String = states_machine.previous_state.name
@@ -51,6 +44,16 @@ func _exit_state():
 	jump_tolerance = false
 	jump_buffered = false
 
+
+func update(_delta):
+	if owner.is_on_floor():
+		if jump_buffered:
+			return "Jump"
+		else:
+			return "Idle"
+
+
+#### INPUTS ####
 
 # Define the actions the player can do in this state
 func _input(event):
@@ -75,11 +78,7 @@ func _input(event):
 					jump_buffered = true
 
 
-# Triggers the fall animation when the start falling is over
-func on_animation_finished():
-	if states_machine.get_state() == self:
-		if animated_sprite.get_animation() == "StartFalling":
-				animated_sprite.play(self.name)
+#### SIGNAL RESPONSES ####
 
 
 # When the tolerence time is finished, reset the jump_tolerance to false

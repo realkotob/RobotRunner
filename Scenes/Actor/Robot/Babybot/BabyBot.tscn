@@ -1,12 +1,12 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Actor/Robot/RobotBase.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/Actor/Robot/Babybot/Attack.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Actor/States/ActorActionState.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Actor/Robot/Babybot/Rise.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Actor/Robot/Babybot/Hidden.gd" type="Script" id=4]
-[ext_resource path="res://Scenes/Actor/Robot/Babybot/BabyJump.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/Actor/States/ActorJumpState.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Actor/Robot/Babybot/BabyBot.gd" type="Script" id=6]
-[ext_resource path="res://Scenes/Actor/Robot/Babybot/Fall.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/Actor/States/ActorFallState.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/Actor/Players/Inputs.gd" type="Script" id=8]
 
 [node name="BabyBot" instance=ExtResource( 1 )]

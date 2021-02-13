@@ -8,7 +8,6 @@ export var arguments_array : Array = []
 export var queue_free_after_trigger : bool = true
 
 
-
 func event():
 	method_call()
 

@@ -16,14 +16,12 @@ func update(_delta):
 
 
 func enter_state():
-	if owner.animated_sprite_node.get_sprite_frames().has_animation(name):
-		owner.animated_sprite_node.play(name)
-	
+	.enter_state()
 	owner.current_snap = Vector2.ZERO
 
 
 # Triggers the fall animation when the start falling is over
 func on_animation_finished():
-	if state_node.get_state() == self:
-		if animation_node.get_animation() == "StartFalling":
-				animation_node.play(self.name)
+	if states_machine.get_state() == self:
+		if animated_sprite.get_animation() == "StartFalling":
+				animated_sprite.play(self.name)

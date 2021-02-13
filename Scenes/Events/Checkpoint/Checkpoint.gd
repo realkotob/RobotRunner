@@ -1,5 +1,4 @@
 extends Event
-
 class_name Checkpoint
 
 export var active : bool = false

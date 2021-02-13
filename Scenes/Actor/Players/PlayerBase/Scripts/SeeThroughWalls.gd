@@ -1,6 +1,5 @@
 extends Light2D
 
-
 onready var tween_node = $Tween
 onready var area_node = $Area2D
 

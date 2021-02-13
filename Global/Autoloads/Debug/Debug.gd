@@ -1,6 +1,5 @@
 extends Node
 
-
 func _enter_tree() -> void:
 	if OS.is_debug_build():
 		var _err = get_tree().connect("node_added", self, "on_scene_tree_node_added")

@@ -1,5 +1,4 @@
 extends Event
-
 class_name LevelEvent
 
 export var target_name : String = ""

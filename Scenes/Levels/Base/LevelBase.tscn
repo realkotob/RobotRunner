@@ -11,10 +11,11 @@
 [ext_resource path="res://icon.png" type="Texture" id=9]
 [ext_resource path="res://Scenes/Levels/Base/Paralaxe.gd" type="Script" id=10]
 [ext_resource path="res://Scenes/Fog/CosmeticFog/FogMaterial.tres" type="Material" id=11]
-[ext_resource path="res://Scenes/SFX/DebrisGenerator.gd" type="Script" id=12]
+[ext_resource path="res://BabaGodotLib/SFX/Debris/DebrisGenerator.gd" type="Script" id=12]
 [ext_resource path="res://Global/Autoloads/Dialogue/DialogueContainter.gd" type="Script" id=13]
 [ext_resource path="res://Scenes/GUI/HUD/HUD.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Scenes/Levels/Base/LevelBase.gd" type="Script" id=24]
+
 
 [node name="LevelBase" type="Node2D"]
 script = ExtResource( 24 )

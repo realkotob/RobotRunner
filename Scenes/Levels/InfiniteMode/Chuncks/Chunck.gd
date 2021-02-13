@@ -5,8 +5,8 @@ var interactive_object_dict : Dictionary = {
 	"RedTeleporter": preload("res://Scenes/InteractiveObjects/Teleports/Types/RedTeleporter.tscn"),
 	"BlueTeleporter": preload("res://Scenes/InteractiveObjects/Teleports/Types/BlueTeleporter.tscn"),
 	"GreenTeleporter": preload("res://Scenes/InteractiveObjects/Teleports/Types/GreenTeleporter.tscn"),
-	"IceBlock": preload("res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/M/MIceBlock.tscn"),
-	"EarthBlock": preload("res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/M/MEarthBlock.tscn")
+	"IceBlock": preload("res://Scenes/InteractiveObjects/BreakableObjects/Blocks/IceBlock/M/MIceBlock.tscn"),
+	"EarthBlock": preload("res://Scenes/InteractiveObjects/BreakableObjects/Blocks/EarthBlock/S/EarthBlockBase.tscn")
 }
 
 var room_type_dict : Dictionary = {

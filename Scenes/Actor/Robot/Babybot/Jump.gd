@@ -3,12 +3,9 @@ class_name JumpBase
 
 #### JUMP STATE ####
 
-var animation_node : AnimatedSprite
-
 func _ready():
 	yield(owner, "ready")
-	animation_node = owner.animated_sprite_node
-	var _err = animation_node.connect("animation_finished", self, "on_animation_finished")
+	var _err = animated_sprite.connect("animation_finished", self, "on_animation_finished")
 
 
 func update(_delta):
@@ -19,7 +16,7 @@ func update(_delta):
 
 
 func enter_state():
-	animation_node.play(self.name)
+	animated_sprite.play(self.name)
 	
 	owner.current_snap = Vector2.ZERO
 	
@@ -28,7 +25,7 @@ func enter_state():
 
 
 func on_animation_finished():
-	if state_node.get_state() == self:
-		if animation_node.get_animation() == "Jump":
-			if "MidAir" in animation_node.get_sprite_frames().get_animation_names():
-				animation_node.play("MidAir")
+	if states_machine.get_state() == self:
+		if animated_sprite.get_animation() == "Jump":
+			if "MidAir" in animated_sprite.get_sprite_frames().get_animation_names():
+				animated_sprite.play("MidAir")

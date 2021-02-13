@@ -1,5 +1,4 @@
 extends Event
-
 class_name CameraEventBase
 
 export var camera_new_zoom := Vector2.ONE

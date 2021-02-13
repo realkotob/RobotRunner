@@ -32,8 +32,9 @@
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateNO/LargeCrateAnimNO5.png" type="Texture" id=30]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/CrateSO/LargeCrateAnimSO5.png" type="Texture" id=31]
 [ext_resource path="res://Global/Lights/Light300.png" type="Texture" id=32]
-[ext_resource path="res://AbstractClasses/RayCastBase.gd" type="Script" id=36]
+[ext_resource path="res://BabaGodotLib/Absract/Raycast/RayCastBase.gd" type="Script" id=36]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/Sprites/LargeCrate.png" type="Texture" id=37]
+
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {

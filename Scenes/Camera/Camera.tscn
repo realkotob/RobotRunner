@@ -2,12 +2,18 @@
 
 [ext_resource path="res://Scenes/Camera/Camera.gd" type="Script" id=1]
 [ext_resource path="res://BabaGodotLib/Absract/StateMachine/StateMachine.gd" type="Script" id=2]
-[ext_resource path="res://Scenes/Camera/States/Follow.gd" type="Script" id=3]
-[ext_resource path="res://Scenes/Camera/States/MoveTo.gd" type="Script" id=4]
-[ext_resource path="res://Scenes/Camera/States/Stop.gd" type="Script" id=5]
-[ext_resource path="res://Scenes/Camera/States/Shake.gd" type="Script" id=6]
-[ext_resource path="res://Scenes/Camera/DebugState.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/Camera/States/CameraFollowState.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Camera/States/CameraMoveToState.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/Camera/States/CameraStopState.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/Camera/States/CameraShakeState.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/Camera/States/CameraDebugState.gd" type="Script" id=7]
 [ext_resource path="res://icon.png" type="Texture" id=8]
+
+
+
+
+
+
 
 [node name="Camera" type="Camera2D"]
 position = Vector2( 480, 270 )

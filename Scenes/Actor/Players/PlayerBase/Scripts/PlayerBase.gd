@@ -22,7 +22,7 @@ var active : bool = true
 
 #### ACCESSORS ####
 
-func is_class(value: String): return value == "Player"
+func is_class(value: String): return value == "Player" or .is_class(value)
 func get_class() -> String: return "Player"
 
 func set_jump_force(value : int): jump_force = value

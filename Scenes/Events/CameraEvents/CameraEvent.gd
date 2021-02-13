@@ -8,13 +8,12 @@ export var zoom_duration : float = 3.0
 export var follow_state : bool = false
 
 func event():
-	if !event_disabled: #Check if the camera event is disabled, if yes, the camera won't move.
-						#[DEBUG/TEST FEATURE]
-		GAME.zoom_camera_to(camera_new_zoom, zoom_duration)
+	if !event_disabled: # Check if the camera event is disabled, if yes, the camera won't move.
+		EVENTS.emit_signal("zoom_camera_to_query", camera_new_zoom, zoom_duration)
 		if follow_state:
-			GAME.set_camera_on_follow()
+			EVENTS.emit_signal("camera_state_change_query", "Follow")
 		else:
-			GAME.move_camera_to($Position2D.get_global_position(), false, camera_new_speed, INF)
+			EVENTS.emit_signal("move_camera_to_query", $Position2D.get_global_position(), false, camera_new_speed, INF)
 		queue_free()
 	else:
 		print("An Event has been triggered but is disabled")

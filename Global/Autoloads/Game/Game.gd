@@ -167,6 +167,7 @@ func goto_level(level_index : int):
 	var current_level = get_tree().get_current_scene()
 	GameSaver.save_level_properties_as_json(current_level)
 
+
 # Triggers the timer before the gameover is triggered
 # Called when a player die
 func gameover():
@@ -179,40 +180,8 @@ func gameover():
 	current_scene.set_process(false)
 
 
-# Move the camera to the given position
-func move_camera_to(dest: Vector2, average_w_players: bool = false, speed : float = -1.0, duration : float = 0.0):
-	var camera_node = get_tree().get_current_scene().find_node("Camera")
-	if camera_node != null:
-		var func_call_array : Array = ["move_to", dest, average_w_players, speed, duration]
-		camera_node.stack_instruction(func_call_array)
+### TRY TO RELOCATE THIS FUNCTION IN GAME_SAVER ###
 
-
-# Give zoom the camera to the destination wanted zoom
-func zoom_camera_to(dest_zoom: Vector2, zoom_speed : float = 1.0):
-	var camera_node = get_tree().get_current_scene().find_node("Camera")
-	if camera_node != null:
-		camera_node.start_zooming(dest_zoom, zoom_speed)
-
-
-# Set the camera in the follow state
-func set_camera_on_follow():
-	var camera_node = get_tree().get_current_scene().find_node("Camera")
-	camera_node.set_state("Follow")
-
-
-# Return the index of a given string in a given array
-# Return -1 if the string wasn't found
-func find_string(string_array: PoolStringArray, target_string : String):
-	var index = 0
-	for string in string_array:
-		if target_string.is_subsequence_of(string) or target_string == string:
-			return index
-		else:
-			index += 1
-	return -1
-
-# XION AND MATERIALS METHODS HANDLERS
-# Save the players' <level>progression into the main game progression
 # Find the saved level with the corresponding name, and returns its path
 # Returns "" if nothing was found
 func find_saved_level_path(dir_path: String, level_name: String) -> String:
@@ -230,11 +199,6 @@ func find_saved_level_path(dir_path: String, level_name: String) -> String:
 				else:
 					current_file_name = dir.get_next()
 	return ""
-
-
-# Discard progression and get the lastest data
-func discard_collectable_progression():
-	pass
 
 
 func fade_in():
@@ -263,22 +227,6 @@ func update_current_level_index(level : Level):
 	var level_name = level.get_name()
 	var level_index = current_chapter.find_level_id(level_name)
 	GAME.progression.set_level(level_index)
-
-
-func toggle_free_camera_mode():
-	var level = get_tree().get_current_scene()
-	if not level is Level:
-		return
-
-	var camera_node = level.find_node("Camera")
-	var was_camera_debug_mode = camera_node.get_state_name() == "Free"
-	if was_camera_debug_mode:
-		camera_node.set_to_previous_state()
-	else:
-		camera_node.set_state("Free")
-
-	for player in get_tree().get_nodes_in_group("Players"):
-		player.set_active(was_camera_debug_mode)
 
 
 #### INPUTS ####
@@ -310,6 +258,7 @@ func _input(_event):
 		# set it to active and every other one to inactive
 		var id = player.get_player_id()
 		player.set_active(id == target)
+
 
 #### SIGNAL RESPONSES ####
 

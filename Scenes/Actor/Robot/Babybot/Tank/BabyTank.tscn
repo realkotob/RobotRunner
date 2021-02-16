@@ -18,19 +18,19 @@
 [ext_resource path="res://Scenes/Actor/Robot/Babybot/Tank/Sprite/TankMinionFall.png" type="Texture" id=16]
 
 [sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 13 )
+atlas = ExtResource( 16 )
 region = Rect2( 0, 0, 52, 32 )
 
 [sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 13 )
+atlas = ExtResource( 16 )
 region = Rect2( 52, 0, 52, 32 )
 
 [sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 16 )
+atlas = ExtResource( 13 )
 region = Rect2( 0, 0, 52, 32 )
 
 [sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 16 )
+atlas = ExtResource( 13 )
 region = Rect2( 52, 0, 52, 32 )
 
 [sub_resource type="AtlasTexture" id=5]
@@ -113,14 +113,19 @@ animations = [ {
 "name": "Idle",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"frames": [ ExtResource( 5 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 11 ), ExtResource( 10 ) ],
 "loop": false,
-"name": "Jump",
+"name": "Action",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"loop": true,
+"name": "Fall",
 "speed": 13.0
 }, {
 "frames": [ SubResource( 3 ), SubResource( 4 ) ],
-"loop": true,
-"name": "Fall",
+"loop": false,
+"name": "Jump",
 "speed": 13.0
 }, {
 "frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
@@ -137,11 +142,6 @@ animations = [ {
 "loop": false,
 "name": "Rise",
 "speed": 13.0
-}, {
-"frames": [ ExtResource( 5 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 11 ), ExtResource( 10 ) ],
-"loop": false,
-"name": "Attack",
-"speed": 8.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=23]
@@ -150,13 +150,13 @@ extents = Vector2( 6, 10 )
 [node name="BabyTank" instance=ExtResource( 1 )]
 z_index = 1
 z_as_relative = false
+interactables = PoolStringArray( "InteractiveObject", "IceBlock" )
 action_name_bubble = "action_player1"
-breakable_type_array = PoolStringArray( "IceBlock" )
 player_id = 1
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = SubResource( 22 )
-animation = "Idle"
+animation = "Action"
 offset = Vector2( 10, -4 )
 
 [node name="CollisionShape2D" parent="." index="1"]

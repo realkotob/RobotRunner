@@ -1,9 +1,9 @@
-extends ActorStateBase
-class_name ActorMoveState
-
-#### MOVE STATE ####
+extends RT_ActorMoveState
+class_name RobotMoveState
 
 onready var original_pos = owner.get_global_position()
+
+#### MOVE STATE ####
 
 func update(_delta : float):
 	if owner.is_path_empty():

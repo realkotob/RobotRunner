@@ -1,4 +1,4 @@
-extends ActorActionState
+extends RobotActionState
 class_name PlayerActionState
 
 var inputs_node : Node

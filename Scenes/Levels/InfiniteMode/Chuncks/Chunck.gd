@@ -275,7 +275,7 @@ func place_block(cell: Vector2):
 	
 	var player = player_weakref.get_ref()
 	
-	var breakable_objs = player.breakable_type_array
+	var breakable_objs = player.interactables
 	var block_type = "IceBlock" if "IceBlock" in breakable_objs else "EarthBlock"
 	
 	stack_object_at_cell(block_type, cell)

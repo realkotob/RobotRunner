@@ -1,4 +1,4 @@
-extends ActorStateBase
+extends RobotMoveState
 class_name PlayerMoveState
 
 var SFX_node : Node

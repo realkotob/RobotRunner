@@ -1,13 +1,16 @@
-extends ActorJumpState
+extends RobotJumpState
 class_name PlayerJumpState
 
 var inputs_node : Node
+
+#### BUILT-IN ####
 
 func _ready() -> void:
 	yield(owner, "ready")
 	inputs_node = owner.get_node_or_null("Inputs")
 
 
+#### INPUTS ####
 
 # Define the actions the player can do in this state
 func _input(event):

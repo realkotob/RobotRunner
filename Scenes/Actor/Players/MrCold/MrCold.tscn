@@ -1,15 +1,15 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/Actor/Players/MrCold/Sounds/Tank3.wav" type="AudioStream" id=1]
-[ext_resource path="res://Scenes/Actor/Players/Inputs.gd" type="Script" id=2]
-[ext_resource path="res://Scenes/Actor/Players/PlayerBase/PlayerBase.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Actor/Players/PlayerBase/PlayerBase.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Actor/Players/Inputs.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Actor/Players/MrCold/AnimationRobotIce.tres" type="SpriteFrames" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 15.5305, 20 )
 
-[node name="MrCold" instance=ExtResource( 3 )]
-breakable_type_array = PoolStringArray( "XionCrate", "IceBlock" )
+[node name="MrCold" instance=ExtResource( 2 )]
+interactables = PoolStringArray( "InteractiveObject", "IceBlock", "XionCrate" )
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = ExtResource( 4 )
@@ -19,14 +19,11 @@ offset = Vector2( 25, -4 )
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource( 1 )
 
-[node name="Action" parent="StatesMachine" index="4"]
-interactables = PoolStringArray( "Water" )
-
 [node name="AudioStreamPlayer" parent="StatesMachine/Action" index="0"]
 stream = ExtResource( 1 )
 
 [node name="Inputs" parent="." index="3"]
-script = ExtResource( 2 )
+script = ExtResource( 3 )
 
 [node name="CollisionShape2D" parent="HeadHitBox" index="0"]
 position = Vector2( 0, -16 )

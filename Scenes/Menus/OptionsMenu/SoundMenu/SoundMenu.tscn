@@ -1,9 +1,8 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/Menus/OptionsMenu/SoundMenu/SoundMenu.gd" type="Script" id=1]
-[ext_resource path="res://BabaGodotLib/Menu/MenuBase.tscn" type="PackedScene" id=2]
+[ext_resource path="res://BabaGodotLib/UI/Menu/MenuBase.tscn" type="PackedScene" id=2]
 [ext_resource path="res://BabaGodotLib/Fonts/BoldCapsPixel48.tres" type="DynamicFont" id=3]
-
 
 [node name="SoundMenu" instance=ExtResource( 2 )]
 margin_left = -1.0
@@ -29,6 +28,11 @@ __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
+
+[node name="V_OptContainer" parent="HBoxContainer" index="0"]
+margin_left = 87.0
+margin_right = 87.0
+margin_bottom = 215.0
 
 [node name="MusicSlider" type="HSlider" parent="." index="3"]
 anchor_left = 0.5

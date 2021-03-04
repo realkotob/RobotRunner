@@ -40,7 +40,6 @@ light_mask = 0
 shape = SubResource( 1 )
 
 [node name="Follow" parent="StatesMachine" index="1"]
-speed = 10.0
 acceleration = 20.0
 
 [node name="Collect" parent="StatesMachine" index="2"]

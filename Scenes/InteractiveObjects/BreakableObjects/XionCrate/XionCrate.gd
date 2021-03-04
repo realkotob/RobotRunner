@@ -2,6 +2,8 @@ extends BreakableObjectBase
 
 class_name XionCrate
 
+const xion_collectable = preload("res://Scenes/InteractiveObjects/Collactables/XionCollactable/XionCollectable.tscn")
+
 onready var sprites_group_node = $Sprites
 onready var animation_player_node = $AnimationPlayer
 onready var timer_node = $Timer
@@ -14,8 +16,6 @@ var animated_sprite_node_array : Array
 
 var actor_destroying : Node
 var tracked_player : Player = null
-
-signal approch_collactable
 
 export var hitpoint : int = 3
 
@@ -37,7 +37,6 @@ func _ready():
 	_err = area_node.connect("body_entered", self, "on_area_body_entered")
 	_err = area_node.connect("body_exited", self, "on_area_body_exited")
 	_err = raycast_node.connect("target_found", self, "on_raycast_target_found")
-	_err = connect("approch_collactable", SCORE, "on_approch_collactable")
 	
 	for child in sprites_group_node.get_children():
 		if child.is_class("AnimatedSprite"):
@@ -85,10 +84,10 @@ func start_vibrate_anim():
 func generate_xion_collectable():
 	if actor_destroying != null:
 		for _i in range(5):
-			var xion_collactable_node = COLLACTABLES.xion.instance()
+			var xion_collactable_node = xion_collectable.instance()
 			xion_collactable_node.position = global_position
-			xion_collactable_node.aimed_character_weakref = weakref(actor_destroying)
 			owner.add_child(xion_collactable_node)
+			xion_collactable_node.follow(actor_destroying)
 
 
 
@@ -115,7 +114,7 @@ func on_area_body_exited(body : Node):
 
 func on_raycast_target_found(target: Node):
 	if target is Player:
-		emit_signal("approch_collactable")
+		EVENTS.emit_signal("approch_collactable", self)
 
 
 # Called when the object has finished its breaking animation
@@ -142,7 +141,7 @@ func on_destruction(actor: Node = null):
 	hide_crate()
 	
 	# Play the Xion explosion animation
-	SFX.play_SFX(SFX.xion_explosion, global_position)
+	EVENTS.emit_signal("play_SFX", "xion_explosion", global_position)
 	
 	# Play the crate explosion and triggers the fade out
 	base_anim_node.disconnect("animation_finished", self, "on_sprite_animation_finished")

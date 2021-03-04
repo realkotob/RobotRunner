@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/SFX/XionExplosion/XionExplosion.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Scenes/SFX/SFX.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/SFX/NormalExplosion/Explosion.gd" type="Script" id=13]
+[ext_resource path="res://Scenes/SFX/NormalExplosion/Sound/ExplosionV1.wav" type="AudioStream" id=14]
+
+[node name="XionExplosion" instance=ExtResource( 2 )]
+frames = ExtResource( 1 )
+offset = Vector2( 0, -24 )
+script = ExtResource( 13 )
+
+[node name="AudioStreamPlayer2D" parent="." index="0"]
+stream = ExtResource( 14 )
+attenuation = 0.378929

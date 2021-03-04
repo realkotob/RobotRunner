@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/BreakIce.wav-668e56994fc0ed8a724dd7b2ec261596.sample"
+
+[deps]
+
+source_file="res://Scenes/InteractiveObjects/BreakableObjects/Blocks/IceBlock/Sound/BreakIce.wav"
+dest_files=[ "res://.import/BreakIce.wav-668e56994fc0ed8a724dd7b2ec261596.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

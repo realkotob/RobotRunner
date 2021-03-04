@@ -1,6 +1,6 @@
 extends Area2D
-
 class_name TriggerArea
+
 const CLASS = "TriggerArea"
 
 export var all_players : bool = false

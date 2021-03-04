@@ -7,7 +7,7 @@ tool
 ## USE: CHANGE THE SIZE OF THE POOL BY CHANGING THE SCALE OF THIS NODE ##
 ## PLEASE DO NOT CHANGE CHILDREN SIZE OR SCALE TO CHANGE THE SIZE ##
 
-onready var iceblock_scene = load("res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/M/MIceBlock.tscn")
+onready var iceblock_scene = load("res://Scenes/InteractiveObjects/BreakableObjects/Blocks/IceBlock/M/MIceBlock.tscn")
 onready var floating_line_node = get_node_or_null("FloatingLine")
 
 var M_IceBlocks_node : Node2D

@@ -1,4 +1,4 @@
-extends SubMenuBase
+extends MenuBase
 class_name MenuOptions
 
 func cancel():

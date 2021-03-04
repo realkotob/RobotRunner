@@ -5,8 +5,8 @@ var interactive_object_dict : Dictionary = {
 	"RedTeleporter": preload("res://Scenes/InteractiveObjects/Teleports/Types/RedTeleporter.tscn"),
 	"BlueTeleporter": preload("res://Scenes/InteractiveObjects/Teleports/Types/BlueTeleporter.tscn"),
 	"GreenTeleporter": preload("res://Scenes/InteractiveObjects/Teleports/Types/GreenTeleporter.tscn"),
-	"IceBlock": preload("res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/M/MIceBlock.tscn"),
-	"EarthBlock": preload("res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/M/MEarthBlock.tscn")
+	"IceBlock": preload("res://Scenes/InteractiveObjects/BreakableObjects/Blocks/IceBlock/M/MIceBlock.tscn"),
+	"EarthBlock": preload("res://Scenes/InteractiveObjects/BreakableObjects/Blocks/EarthBlock/S/EarthBlockBase.tscn")
 }
 
 var room_type_dict : Dictionary = {
@@ -275,7 +275,7 @@ func place_block(cell: Vector2):
 	
 	var player = player_weakref.get_ref()
 	
-	var breakable_objs = player.breakable_type_array
+	var breakable_objs = player.interactables
 	var block_type = "IceBlock" if "IceBlock" in breakable_objs else "EarthBlock"
 	
 	stack_object_at_cell(block_type, cell)
@@ -325,6 +325,14 @@ func are_cells_empty(o_cell: Vector2, nb_cells: int, dir: Vector2) -> bool:
 		if cell_to_check in used_cells:
 			return false
 	return true
+
+
+func is_pos_inside_chunck(pos: Vector2) -> bool:
+	var chunck_pos = get_global_position()
+	var chunck_bottom_right = chunck_pos + ChunckBin.chunck_tile_size * GAME.TILE_SIZE
+	
+	return pos.x > chunck_pos.x && pos.y > chunck_pos.y && \
+	pos.x < chunck_bottom_right.x && pos.y < chunck_bottom_right.y
 
 
 #### VIRTUALS ####

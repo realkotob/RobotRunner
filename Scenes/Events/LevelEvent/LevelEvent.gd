@@ -1,5 +1,4 @@
 extends Event
-
 class_name LevelEvent
 
 export var target_name : String = ""
@@ -7,7 +6,6 @@ export var target_as_group : bool = false
 export var method_name : String = ""
 export var arguments_array : Array = []
 export var queue_free_after_trigger : bool = true
-
 
 
 func event():

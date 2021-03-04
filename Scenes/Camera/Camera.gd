@@ -21,8 +21,8 @@ onready var default_limit_left = get_limit(MARGIN_LEFT)
 onready var default_limit_right = get_limit(MARGIN_RIGHT)
 
 export var camera_speed : float = 3.0
-
 export var debug : bool = false setget set_debug, is_debug
+export var default_state : String = "Follow"
 
 var players_weakref_array : Array = [] setget set_players_weakref_array
 var instruction_stack : Array = []
@@ -37,7 +37,7 @@ func is_class(value: String) -> bool: return value == "GameCamera" or .is_class(
 func get_class() -> String: return "GameCamera"
 
 func set_state(state_name: String): state_machine_node.set_state(state_name)
-func get_state() -> StateBase: return state_machine_node.get_current_state()
+func get_state() -> StateBase: return state_machine_node.get_state()
 func get_state_name() -> String: return get_state().get_name()
 
 func set_debug(value: bool):
@@ -69,7 +69,6 @@ func get_average_player_pos() -> Vector2: return average_player_pos
 func set_pivot_position(value: Vector2): pivot.set_global_position(value)
 func get_pivot_position() -> Vector2: return pivot.get_global_position()
 
-
 # Feed the array of players with weakrefs
 func set_players_weakref_array(weakref_array: Array):
 	for element in weakref_array:
@@ -98,6 +97,11 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	var _err = state_machine_node.connect("state_changed", self, "on_state_changed")
+	_err = EVENTS.connect("move_camera_to_query", self, "_on_move_camera_to_query")
+	_err = EVENTS.connect("zoom_camera_to_query", self, "_on_zoom_camera_to_query")
+	_err = EVENTS.connect("camera_state_change_query", self, "_on_camera_state_change_query")
+	_err = EVENTS.connect("camera_toggle_free_mode_query", self, "_on_camera_toggle_free_mode_query")
+	
 	
 	pivot.set_as_toplevel(true)
 	avg_pos_visualizer.set_as_toplevel(true)
@@ -188,6 +192,14 @@ func compute_average_pos() -> Vector2:
 	
 	return average_pos
 
+# Toggle the free camera mode
+func toggle_free_mode():
+	if get_state_name() == "Free":
+		set_to_previous_state()
+	else:
+		set_state("Free")
+
+
 # Dynamicly push the camera limits if it tresspasses it by dezooming
 func update_camera_limits() -> void:
 	var screen_extents = GAME.window_size / 2
@@ -224,6 +236,23 @@ func shake(magnitude: float, duration: float):
 
 #### SIGNAL RESPONSES ####
 
-func on_state_changed(new_state: StateBase):
-	var string = "State: " + new_state.name
+func on_state_changed(state_name: String):
+	var string = "State: " + state_name
 	state_label.set_text(string)
+
+
+func _on_move_camera_to_query(dest: Vector2, average_w_players: bool, speed: float, duration: float):
+	var func_call_array : Array = ["move_to", dest, average_w_players, speed, duration]
+	stack_instruction(func_call_array)
+
+
+func _on_zoom_camera_to_query(dest_zoom: Vector2, zoom_speed: float):
+	start_zooming(dest_zoom, zoom_speed)
+
+
+## MAY HAVE TO BE CHANGED IN A STACK INSTRUCTION CALL ##
+func _on_camera_state_change_query(state_name: String):
+	set_state(state_name)
+
+func _on_toggle_free_camera_mode_query():
+	toggle_free_mode()

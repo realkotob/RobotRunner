@@ -1,5 +1,4 @@
 extends MenuBase
-
 class_name SaveLoader
 
 #### ACCESSORS ####

@@ -49,7 +49,6 @@ func stop_typing():
 # Load the dialogue at its current index, store it in entire_text, 
 # And then increment the dialogue counter
 func load_text():
-	entire_text = DIALOGUE.get_current_translation().get_message(dialogue_key)
 	split_in_paragraphs(entire_text)
 
 

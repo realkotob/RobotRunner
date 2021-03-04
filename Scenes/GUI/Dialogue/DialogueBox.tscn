@@ -1,11 +1,10 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://Global/Fonts/BoldCapsPixel32.tres" type="DynamicFont" id=1]
+[ext_resource path="res://BabaGodotLib/Fonts/BoldCapsPixel32.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Scenes/GUI/Dialogue/Assets/Boxes/DialogueBox.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/GUI/Dialogue/Assets/Portrait/Overseer.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/GUI/Dialogue/DialogueBox.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/GUI/Dialogue/Assets/Portrait/PortraitFrame.png" type="Texture" id=5]
-[ext_resource path="res://Global/Fonts/BoldCapsPixel48.tres" type="DynamicFont" id=6]
 [ext_resource path="res://Scenes/GUI/Dialogue/PortraitFrame.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/GUI/Dialogue/RichTextLabel.gd" type="Script" id=8]
 [ext_resource path="res://Global/Shaders/Glitch/Glitch.shader" type="Shader" id=9]
@@ -166,6 +165,7 @@ sound_volume = -12.0
 self_modulate = Color( 1, 1, 1, 0.0392157 )
 show_behind_parent = true
 frames = SubResource( 2 )
+frame = 1
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -180,7 +180,7 @@ margin_top = -0.449917
 margin_right = 341.0
 margin_bottom = 86.5499
 rect_clip_content = false
-custom_fonts/mono_font = ExtResource( 6 )
+custom_fonts/mono_font = ExtResource( 1 )
 custom_fonts/normal_font = ExtResource( 1 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
 scroll_active = false

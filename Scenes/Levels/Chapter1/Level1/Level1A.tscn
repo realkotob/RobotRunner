@@ -6,15 +6,15 @@
 [ext_resource path="res://Scenes/StartingPoints/StartingPointP2.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Levels/Base/LevelBase.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/XionCrate.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/XionCloud/CloudPath.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/XionCloud/Path/CloudPath.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/ChildrenScenes/RedButton.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Global/Background/BackgroundLight.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/InteractiveObjects/Liquids/Water/Water.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/S (base)/EarthBlockBase.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/M/MEarthBlock.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/Blocks/EarthBlock/S/EarthBlockBase.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/Blocks/EarthBlock/M/MEarthBlock.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/InteractiveObjects/GreatDoor/GreatDoor.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/M/MIceBlock.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/S/IceBlockBase.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/Blocks/IceBlock/M/MIceBlock.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/Blocks/IceBlock/S/IceBlockBase.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Events/Checkpoint/Checkpoint.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/Events/DialogueEvent/LeakEvent.gd" type="Script" id=17]
 [ext_resource path="res://Scenes/Actor/Robot/Babybot/Tank/BabyTank.tscn" type="PackedScene" id=18]
@@ -23,8 +23,8 @@
 [ext_resource path="res://Scenes/Events/DialogueEvent/DialogueEvent.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Scenes/Events/LevelEvent/LevelEvent.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Scenes/Actor/Robot/Babybot/Hammer/BabyHammer.tscn" type="PackedScene" id=23]
-[ext_resource path="res://Scenes/Actor/Path.gd" type="Script" id=24]
-[ext_resource path="res://Scenes/Actor/Robot/PathPoint.tscn" type="PackedScene" id=25]
+[ext_resource path="res://BabaGodotLib/Actor/AI/ActorPath/ActorPath.gd" type="Script" id=24]
+[ext_resource path="res://BabaGodotLib/Actor/AI/ActorPath/PathPoint.tscn" type="PackedScene" id=25]
 [ext_resource path="res://Scenes/Events/Checkpoint/NewStartingPoint1.tscn" type="PackedScene" id=26]
 
 [node name="Level1A" instance=ExtResource( 5 )]
@@ -38,6 +38,15 @@ position = Vector2( -4284, 460 )
 [node name="Popups" parent="GUI" index="0"]
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="DebrisGenerator" parent="." index="4"]
+sfx_dict = {
+"great_hit": "res://Scenes/SFX/Feedbacks/GreatHit/GreatHit.tscn",
+"normal_explosion": "res://Scenes/SFX/NormalExplosion/NormalExplosion.tscn",
+"normal_hit": "res://Scenes/SFX/Feedbacks/NormalHit/NormalHit.tscn",
+"small_explosion": "res://Scenes/SFX/SmallExplosion/SmallExplosion.tscn",
+"xion_explosion": "res://Scenes/SFX/XionExplosion/XionExplosion.tscn"
+}
 
 [node name="Light" parent="Map/Background/Paralaxe/Lights" index="0" instance=ExtResource( 9 )]
 position = Vector2( -3360, 922 )
@@ -276,6 +285,8 @@ pool_size = Vector2( 748.09, 83.953 )
 
 [node name="Lava" parent="InteractivesObjects/LavaTiles" index="0" instance=ExtResource( 1 )]
 position = Vector2( 1812, 441.406 )
+group_name = ""
+empty_part = 48.0
 pool_size = Vector2( 512, 150 )
 
 [node name="GreatDoor" parent="InteractivesObjects/GreatDoorGroup" index="0" instance=ExtResource( 13 )]
@@ -360,7 +371,7 @@ argument_array = [ "Action" ]
 [node name="PathPoint1" parent="InteractivesObjects/Robot/BabyTank2/Path" index="1" instance=ExtResource( 25 )]
 position = Vector2( 202.107, 0 )
 method_name = "set_state"
-argument_array = [ "Attack" ]
+argument_array = [ "Action" ]
 
 [node name="PathPoint2" parent="InteractivesObjects/Robot/BabyTank2/Path" index="2" instance=ExtResource( 25 )]
 position = Vector2( 240, 0 )
@@ -385,7 +396,7 @@ argument_array = [ "Action" ]
 [node name="PathPoint1" parent="InteractivesObjects/Robot/BabyHammer2/Path" index="1" instance=ExtResource( 25 )]
 position = Vector2( 156, 0 )
 method_name = "set_state"
-argument_array = [ "Attack" ]
+argument_array = [ "Action" ]
 
 [node name="PathPoint2" parent="InteractivesObjects/Robot/BabyHammer2/Path" index="2" instance=ExtResource( 25 )]
 position = Vector2( 168, 0 )
@@ -394,6 +405,14 @@ method_name = "overheat"
 [node name="PathPoint3" parent="InteractivesObjects/Robot/BabyHammer2/Path" index="3" instance=ExtResource( 25 )]
 position = Vector2( 300, 0 )
 method_name = "overheat"
+
+[node name="XionCloud" parent="." index="7" instance=ExtResource( 2 )]
+visible = false
+position = Vector2( -2016, 204 )
+cloud_active = false
+
+[node name="CloudPath" parent="XionCloud" index="3" instance=ExtResource( 7 )]
+position = Vector2( 480, -272.975 )
 
 [node name="Checkpoint" parent="Events/Checkpoints" index="0" instance=ExtResource( 16 )]
 position = Vector2( 1416, 280 )
@@ -449,15 +468,7 @@ position = Vector2( 2820, 228 )
 scale = Vector2( 2.368, 13.065 )
 dialogue_index = 6
 
-[node name="XionCloud" parent="." index="7" instance=ExtResource( 2 )]
-visible = false
-position = Vector2( -2016, 204 )
-cloud_active = false
-
-[node name="CloudPath" parent="XionCloud" index="3" instance=ExtResource( 7 )]
-position = Vector2( 480, -272.975 )
-
-[node name="Camera" parent="." index="8"]
+[node name="Camera" parent="." index="9"]
 position = Vector2( -4000, 272 )
 limit_left = -4500
 limit_top = 0

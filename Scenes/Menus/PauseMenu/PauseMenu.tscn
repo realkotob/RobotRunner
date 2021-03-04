@@ -1,10 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Scenes/Menus/MenuBase.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Global/Fonts/BoldCapsPixel64.tres" type="DynamicFont" id=2]
+[ext_resource path="res://BabaGodotLib/UI/Menu/MenuBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://BabaGodotLib/UI/Menu/MenuOptionBase.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Menus/PauseMenu/PauseMenu.gd" type="Script" id=3]
-[ext_resource path="res://AbstractClasses/MenuOptionsBase.gd" type="Script" id=4]
-[ext_resource path="res://Scenes/Menus/SaveLoadMenus/SaveLoadButtonBase.gd" type="Script" id=5]
 
 [node name="PauseMenu" instance=ExtResource( 1 )]
 grow_horizontal = 2
@@ -30,11 +28,12 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -256.05
-margin_top = -164.0
-margin_right = 304.95
-margin_bottom = 165.0
-rect_scale = Vector2( 0.919925, 1 )
+margin_left = -280.5
+margin_top = -164.5
+margin_right = 280.5
+margin_bottom = 164.5
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 __meta__ = {
 "_edit_lock_": true,
@@ -46,52 +45,42 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -90.0
-margin_top = -120.0
-margin_right = 90.0
-margin_bottom = 120.0
+margin_left = -79.5
+margin_top = -118.0
+margin_right = 79.5
+margin_bottom = 118.0
 mouse_filter = 2
 
 [node name="V_OptContainer" parent="HBoxContainer" index="0"]
 margin_left = 0.0
-margin_right = 180.0
-margin_bottom = 301.0
+margin_right = 159.0
+margin_bottom = 236.0
 mouse_filter = 2
 
-[node name="Resume" type="Button" parent="HBoxContainer/V_OptContainer" index="0"]
-margin_right = 180.0
-margin_bottom = 57.0
-custom_fonts/font = ExtResource( 2 )
+[node name="Resume" parent="HBoxContainer/V_OptContainer" index="0" instance=ExtResource( 2 )]
+margin_right = 159.0
 text = "Resume"
-script = ExtResource( 4 )
 
-[node name="Retry" type="Button" parent="HBoxContainer/V_OptContainer" index="1"]
-margin_top = 61.0
-margin_right = 180.0
-margin_bottom = 118.0
-custom_fonts/font = ExtResource( 2 )
-text = "Retry level"
-script = ExtResource( 4 )
+[node name="Retry" parent="HBoxContainer/V_OptContainer" index="1" instance=ExtResource( 2 )]
+margin_top = 48.0
+margin_right = 159.0
+margin_bottom = 92.0
+text = "Retry Level"
 
-[node name="Options" type="Button" parent="HBoxContainer/V_OptContainer" index="2"]
-margin_top = 122.0
-margin_right = 180.0
-margin_bottom = 179.0
-custom_fonts/font = ExtResource( 2 )
+[node name="Options" parent="HBoxContainer/V_OptContainer" index="2" instance=ExtResource( 2 )]
+margin_top = 96.0
+margin_right = 159.0
+margin_bottom = 140.0
 text = "Options"
-script = ExtResource( 4 )
 
-[node name="SaveGame" type="Button" parent="HBoxContainer/V_OptContainer" index="3"]
-margin_top = 183.0
-margin_right = 180.0
-margin_bottom = 240.0
+[node name="SaveGame" parent="HBoxContainer/V_OptContainer" index="3" instance=ExtResource( 2 )]
+margin_top = 144.0
+margin_right = 159.0
+margin_bottom = 188.0
 text = "Save Game"
-script = ExtResource( 5 )
 
-[node name="Quit" type="Button" parent="HBoxContainer/V_OptContainer" index="4"]
-margin_top = 244.0
-margin_right = 180.0
-margin_bottom = 301.0
-custom_fonts/font = ExtResource( 2 )
+[node name="Quit" parent="HBoxContainer/V_OptContainer" index="4" instance=ExtResource( 2 )]
+margin_top = 192.0
+margin_right = 159.0
+margin_bottom = 236.0
 text = "Quit"
-script = ExtResource( 4 )

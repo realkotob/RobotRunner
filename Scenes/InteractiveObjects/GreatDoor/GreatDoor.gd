@@ -38,7 +38,7 @@ func open_door(instant : bool = false):
 				audio_node.play()
 				
 			# Triggers the camera movement
-			GAME.move_camera_to(position, !focus_on_door, -1.0, 0.0)
+			EVENTS.emit_signal("move_camera_to_query", position, !focus_on_door, -1.0, 0.0)
 		else:
 			#print("Self : ", self, " Children  : ", self.get_children())
 			for child in self.get_children():

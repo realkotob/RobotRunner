@@ -4,13 +4,13 @@
 [ext_resource path="res://Scenes/InteractiveObjects/Liquids/Lava/Lava.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/StartingPoints/StartingPointP1.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/StartingPoints/StartingPointP2.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/M/MEarthBlock.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/M/MIceBlock.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/Blocks/EarthBlock/M/MEarthBlock.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/Blocks/IceBlock/M/MIceBlock.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/XionCrate.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/InteractiveObjects/Platform/BreakablePlatform/5Tiles(Base)/BreakablePlateform.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/ChildrenScenes/RedButton.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/InteractiveObjects/GreatDoor/GreatDoor.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Scenes/XionCloud/CloudPath.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/XionCloud/Path/CloudPath.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/XionCloud/XionCloud.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Global/Background/BackgroundLight.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/Events/Checkpoint/Checkpoint.tscn" type="PackedScene" id=14]
@@ -20,6 +20,8 @@
 [ext_resource path="res://Scenes/Events/Checkpoint/NewStartingPoint2.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Scenes/Events/Checkpoint/NewStartingPoint1.tscn" type="PackedScene" id=19]
 
+
+
 [node name="Level1B" instance=ExtResource( 1 )]
 
 [node name="StartingPointP1" parent="." index="0" instance=ExtResource( 3 )]
@@ -27,6 +29,15 @@ position = Vector2( 48, 264 )
 
 [node name="StartingPointP2" parent="." index="1" instance=ExtResource( 4 )]
 position = Vector2( 48, 360 )
+
+[node name="DebrisGenerator" parent="." index="4"]
+sfx_dict = {
+"great_hit": "res://Scenes/SFX/Feedbacks/GreatHit/GreatHit.tscn",
+"normal_explosion": "res://Scenes/SFX/NormalExplosion/NormalExplosion.tscn",
+"normal_hit": "res://Scenes/SFX/Feedbacks/NormalHit/NormalHit.tscn",
+"small_explosion": "res://Scenes/SFX/SmallExplosion/SmallExplosion.tscn",
+"xion_explosion": "res://Scenes/SFX/XionExplosion/XionExplosion.tscn"
+}
 
 [node name="Light" parent="Map/Background/Paralaxe/Lights" index="0" instance=ExtResource( 13 )]
 position = Vector2( 240, 36 )
@@ -314,19 +325,19 @@ scale = Vector2( 2.83, 3.222 )
 [node name="Position2D" parent="Events/CameraEvents/CameraEvent3" index="1"]
 position = Vector2( 601.819, -16 )
 
-[node name="Camera" parent="." index="7"]
-limit_left = 0
-limit_top = -70
-limit_right = 4500
-limit_bottom = 750
-editor_draw_limits = true
-
 [node name="XionCloud" parent="." index="8" instance=ExtResource( 12 )]
 position = Vector2( -1032, 300 )
 speed = 45.0
 
 [node name="CloudPath" parent="XionCloud" index="4" instance=ExtResource( 11 )]
 visible = false
+
+[node name="Camera" parent="." index="9"]
+limit_left = 0
+limit_top = -70
+limit_right = 4500
+limit_bottom = 750
+editor_draw_limits = true
 
 [editable path="Events/CameraEvents/CameraEvent"]
 

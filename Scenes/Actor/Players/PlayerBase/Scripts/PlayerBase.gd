@@ -9,7 +9,6 @@ onready var inputs_node = get_node("Inputs")
 onready var SFX_node = get_node("SFX")
 onready var anim_player_node = get_node("AnimationPlayer")
 
-export var breakable_type_array : PoolStringArray = []
 export var player_id : int = 1 setget , get_player_id
 
 var dirLeft : int = 0 
@@ -22,7 +21,7 @@ var active : bool = true
 
 #### ACCESSORS ####
 
-func is_class(value: String): return value == "Player"
+func is_class(value: String): return value == "Player" or .is_class(value)
 func get_class() -> String: return "Player"
 
 func set_jump_force(value : int): jump_force = value
@@ -77,7 +76,7 @@ func stop_overheat():
 # Called when the robot is destroyed, triggers the death animation, the gameover,
 # and destroy this instance
 func destroy():
-	SFX.play_SFX(SFX.normal_explosion, global_position)
+	EVENTS.emit_signal("play_SFX", "normal_explosion", global_position)
 	GAME.gameover()
 	queue_free()
 

@@ -1,13 +1,14 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/Actor/Robot/RobotBase.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/Actor/Robot/Babybot/Attack.gd" type="Script" id=2]
-[ext_resource path="res://Scenes/Actor/Robot/Babybot/Rise.gd" type="Script" id=3]
-[ext_resource path="res://Scenes/Actor/Robot/Babybot/Hidden.gd" type="Script" id=4]
-[ext_resource path="res://Scenes/Actor/Robot/Babybot/BabyJump.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/Actor/Robot/Babybot/States/BabyBotActionState.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Actor/Robot/Babybot/States/BabyBotRiseState.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Actor/Robot/Babybot/States/BabyBotHiddenState.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/Actor/Robot/Babybot/States/BabyBotJumpState.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Actor/Robot/Babybot/BabyBot.gd" type="Script" id=6]
-[ext_resource path="res://Scenes/Actor/Robot/Babybot/Fall.gd" type="Script" id=7]
+[ext_resource path="res://BabaGodotLib/Actor/States/BaseStates/ActorFallState.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/Actor/Players/Inputs.gd" type="Script" id=8]
+[ext_resource path="res://Scenes/Actor/Robot/Babybot/States/BabyBotIdleState.gd" type="Script" id=9]
 
 [node name="BabyBot" instance=ExtResource( 1 )]
 z_index = 0
@@ -20,7 +21,10 @@ script = ExtResource( 4 )
 [node name="Rise" type="Node" parent="StatesMachine" index="1"]
 script = ExtResource( 3 )
 
-[node name="Attack" type="Node" parent="StatesMachine" index="4"]
+[node name="Idle" parent="StatesMachine" index="3"]
+script = ExtResource( 9 )
+
+[node name="Action" type="Node" parent="StatesMachine" index="4"]
 script = ExtResource( 2 )
 
 [node name="Jump" type="Node" parent="StatesMachine" index="5"]

@@ -9,6 +9,15 @@
 [node name="InfiniteLevel" instance=ExtResource( 4 )]
 script = ExtResource( 5 )
 
+[node name="DebrisGenerator" parent="." index="2"]
+sfx_dict = {
+"great_hit": "res://Scenes/SFX/Feedbacks/GreatHit/GreatHit.tscn",
+"normal_explosion": "res://Scenes/SFX/NormalExplosion/NormalExplosion.tscn",
+"normal_hit": "res://Scenes/SFX/Feedbacks/NormalHit/NormalHit.tscn",
+"small_explosion": "res://Scenes/SFX/SmallExplosion/SmallExplosion.tscn",
+"xion_explosion": "res://Scenes/SFX/XionExplosion/XionExplosion.tscn"
+}
+
 [node name="ChunckContainer" type="Node2D" parent="Map" index="5"]
 script = ExtResource( 1 )
 debug_dict = {
@@ -18,15 +27,15 @@ debug_dict = {
 }
 debug = true
 
-[node name="Camera" parent="." index="5"]
-limit_left = 0
-limit_top = 0
-limit_bottom = 540
-editor_draw_limits = true
-debug = false
-
 [node name="StartingPointP1" parent="." index="6" instance=ExtResource( 3 )]
 position = Vector2( 72, 132 )
 
 [node name="StartingPointP2" parent="." index="7" instance=ExtResource( 2 )]
 position = Vector2( 72, 420 )
+
+[node name="Camera" parent="." index="8"]
+limit_left = 0
+limit_top = 0
+limit_bottom = 540
+editor_draw_limits = true
+debug = false

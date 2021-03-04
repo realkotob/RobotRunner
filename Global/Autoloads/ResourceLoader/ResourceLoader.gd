@@ -1,4 +1,4 @@
-extends ClassFinder
+extends SceneFinder
 class_name Resource_Loader
 
 var thread : Thread = null

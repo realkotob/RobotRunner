@@ -9,6 +9,8 @@ onready var animated_sprite_node = $AnimatedSprite
 onready var path_node = get_node_or_null("Path")
 onready var action_hitbox_node = get_node_or_null("ActionHitBox")
 
+export var interactables := PoolStringArray(["InteractiveObject"])
+
 export var default_state : String = ""
 
 export var jump_force : int = -500 
@@ -62,15 +64,11 @@ func get_face_direction() -> int:
 
 #### BUILT-IN ####
 
-func _ready():
-	$StatesMachine.default_state = default_state
-
 
 #### PHYSIC BEHAVIOUR ####
 
 func _physics_process(delta):
 	var dir = get_direction()
-	
 	
 	# Handle actor's acceleration/decceleration
 	var base_speed = max_speed / 2
@@ -134,7 +132,7 @@ func overheat():
 
 
 func destroy():
-	SFX.play_SFX(SFX.small_explosion, global_position)
+	EVENTS.emit_signal("play_SFX", "small_explosion", global_position)
 	queue_free()
 
 
@@ -168,6 +166,9 @@ func flip(dir: int):
 # by setting vertical to false
 func corner_correct(amount : int, delta: float, collision2D : KinematicCollision2D = null, 
 					vertical: bool = true) -> bool:
+	
+	var level = get_tree().get_current_scene()
+	
 	if !collision2D:
 		return false
 	
@@ -178,11 +179,11 @@ func corner_correct(amount : int, delta: float, collision2D : KinematicCollision
 			var movement = Vector2(i * j, velocity.y * delta) if vertical\
 								   else Vector2(velocity.x * delta, i * j)
 			
-			var collision = COLLISION_CHECKER.test_collision(self, movement, 
+			var collision = CollisionChecker.test_collision(self, movement, 
 													collision2D, vertical)
 			
 			if !collision:
-				if vertical && COLLISION_CHECKER.test_wall_collision(self, movement):
+				if vertical && CollisionChecker.test_wall_collision(self, level, movement):
 					return false
 				else:
 					global_position += movement

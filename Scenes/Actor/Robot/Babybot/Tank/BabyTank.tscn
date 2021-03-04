@@ -113,6 +113,11 @@ animations = [ {
 "name": "Idle",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 5 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 11 ), ExtResource( 10 ) ],
+"loop": false,
+"name": "Action",
+"speed": 8.0
+}, {
 "frames": [ SubResource( 1 ), SubResource( 2 ) ],
 "loop": true,
 "name": "Fall",
@@ -133,11 +138,6 @@ animations = [ {
 "name": "Land",
 "speed": 13.0
 }, {
-"frames": [ ExtResource( 5 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 11 ), ExtResource( 10 ) ],
-"loop": false,
-"name": "Attack",
-"speed": 8.0
-}, {
 "frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
 "loop": false,
 "name": "Rise",
@@ -150,13 +150,13 @@ extents = Vector2( 6, 10 )
 [node name="BabyTank" instance=ExtResource( 1 )]
 z_index = 1
 z_as_relative = false
+interactables = PoolStringArray( "InteractiveObject", "IceBlock" )
 action_name_bubble = "action_player1"
-breakable_type_array = PoolStringArray( "IceBlock" )
 player_id = 1
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = SubResource( 22 )
-animation = "Idle"
+animation = "Action"
 offset = Vector2( 10, -4 )
 
 [node name="CollisionShape2D" parent="." index="1"]

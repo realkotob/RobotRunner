@@ -2,9 +2,9 @@ extends Node2D
 
 onready var gameover_timer_node = $GameoverTimer
 onready var transition_timer_node = $TransitionTimer
+onready var progression = $Progression
 
 export var debug : bool = false
-export var progression : Resource
 
 export var transition_time : float = 1.0
 
@@ -25,6 +25,7 @@ var level_array : Array
 var last_level_name : String
 
 var current_seed : int = 0 setget _set_current_seed, get_current_seed
+var solo_mode : bool = false setget set_solo_mode, get_solo_mode
 
 var music_bus_id = AudioServer.get_bus_index("Music")
 var sound_bus_id = AudioServer.get_bus_index("Sounds")
@@ -42,27 +43,35 @@ var _settings ={
 				"move_right_player1": InputMap.get_action_list("move_right_player1")[0].scancode,
 				"teleport_player1": InputMap.get_action_list("teleport_player1")[0].scancode,
 				"action_player1": InputMap.get_action_list("action_player1")[0].scancode,
-				
+
 				"jump_player2": InputMap.get_action_list("jump_player2")[0].scancode,
 				"move_left_player2": InputMap.get_action_list("move_left_player2")[0].scancode,
 				"move_right_player2": InputMap.get_action_list("move_right_player2")[0].scancode,
 				"teleport_player2": InputMap.get_action_list("teleport_player2")[0].scancode,
 				"action_player2": InputMap.get_action_list("action_player2")[0].scancode,
-				
+
 				"game_restart": InputMap.get_action_list("game_restart")[0].scancode,
 				"HUD_switch_state": InputMap.get_action_list("HUD_switch_state")[0].scancode,
 				"display_console": InputMap.get_action_list("display_console")[0].scancode
 		}
 	}
 
+
 #### ACCESSORS ####
 
-func _set_current_seed(value: int): 
+func _set_current_seed(value: int):
 	current_seed = value
 	seed(current_seed)
 
 func get_current_seed() -> int: return current_seed
 
+func set_solo_mode(value: bool):
+	solo_mode = value
+	if !solo_mode:
+		for player in get_tree().get_nodes_in_group("Players"):
+			player.set_active(true)
+
+func get_solo_mode() -> bool: return solo_mode
 
 #### BUILT-IN ####
 
@@ -76,7 +85,12 @@ func _ready():
 	GameSaver.create_dirs(GameSaver.SAVEGAME_DIR, []) #Create saves directory at root
 	GameSaver.create_dirs(GameSaver.SAVEDLEVEL_DIR, ["json", "tscn"]) #Create json and tscn directory at SAVEDLEVEL_DIR : String = "res://Scenes/Levels/SavedLevel/"
 	GameSaver.settings_update_keys(_settings)
-	
+
+	# Generate the chapters
+	ChapterGenerator.create_chapters(ChapterGenerator.chapter_dir_path, chapters_array)
+	new_chapter() # Set the current chapter to be the first one
+
+
 #### LOGIC ####
 
 func new_chapter():
@@ -103,7 +117,7 @@ func goto_last_level():
 	# If a save exists, load it
 	else:
 		level_scene = load(current_chapter.find_level_path(last_level_name))
-	
+
 	var __ = get_tree().change_scene_to(level_scene)
 
 	if loaded_from_save:
@@ -121,7 +135,6 @@ func goto_next_level():
 	var next_level_id : int = 0
 
 	progression.set_checkpoint(-1)
-	update_collectable_progression()
 
 	if last_level_name == "":
 		next_level = current_chapter.load_level(0)
@@ -144,7 +157,6 @@ func goto_level(level_index : int):
 	var level_id : int = 0
 
 	progression.set_checkpoint(-1)
-	update_collectable_progression()
 
 	level = current_chapter.load_level(level_index-1)
 	var level_name = current_chapter.get_level_name(level_id)
@@ -154,6 +166,7 @@ func goto_level(level_index : int):
 	yield(EVENTS, "level_ready")
 	var current_level = get_tree().get_current_scene()
 	GameSaver.save_level_properties_as_json(current_level)
+
 
 # Triggers the timer before the gameover is triggered
 # Called when a player die
@@ -167,40 +180,8 @@ func gameover():
 	current_scene.set_process(false)
 
 
-# Move the camera to the given position
-func move_camera_to(dest: Vector2, average_w_players: bool = false, speed : float = -1.0, duration : float = 0.0):
-	var camera_node = get_tree().get_current_scene().find_node("Camera")
-	if camera_node != null:
-		var func_call_array : Array = ["move_to", dest, average_w_players, speed, duration]
-		camera_node.stack_instruction(func_call_array)
+### TRY TO RELOCATE THIS FUNCTION IN GAME_SAVER ###
 
-
-# Give zoom the camera to the destination wanted zoom
-func zoom_camera_to(dest_zoom: Vector2, zoom_speed : float = 1.0):
-	var camera_node = get_tree().get_current_scene().find_node("Camera")
-	if camera_node != null:
-		camera_node.start_zooming(dest_zoom, zoom_speed)
-
-
-# Set the camera in the follow state
-func set_camera_on_follow():
-	var camera_node = get_tree().get_current_scene().find_node("Camera")
-	camera_node.set_state("Follow")
-
-
-# Return the index of a given string in a given array
-# Return -1 if the string wasn't found
-func find_string(string_array: PoolStringArray, target_string : String):
-	var index = 0
-	for string in string_array:
-		if target_string.is_subsequence_of(string) or target_string == string:
-			return index
-		else:
-			index += 1
-	return -1
-
-# XION AND MATERIALS METHODS HANDLERS
-# Save the players' <level>progression into the main game progression
 # Find the saved level with the corresponding name, and returns its path
 # Returns "" if nothing was found
 func find_saved_level_path(dir_path: String, level_name: String) -> String:
@@ -218,23 +199,6 @@ func find_saved_level_path(dir_path: String, level_name: String) -> String:
 				else:
 					current_file_name = dir.get_next()
 	return ""
-
-# Save the players' level progression into the main game progression
-
-func update_collectable_progression():
-	progression.set_main_xion(SCORE.get_xion())
-	progression.set_main_materials(SCORE.get_materials())
-
-
-# Update the HUD when a player retry or go to the next level
-func update_hud_collectable_progression():
-	SCORE.set_xion(progression.get_main_xion())
-	SCORE.set_materials(progression.get_main_materials())
-
-
-# Discard progression and get the lastest data
-func discard_collectable_progression():
-	pass
 
 
 func fade_in():
@@ -265,20 +229,35 @@ func update_current_level_index(level : Level):
 	GAME.progression.set_level(level_index)
 
 
-func toggle_free_camera_mode():
-	var level = get_tree().get_current_scene()
-	if not level is Level:
+#### INPUTS ####
+
+# Manage the robot switching in solo mode
+func _input(_event):
+	if !solo_mode:
 		return
-	
-	var camera_node = level.find_node("Camera")
-	var was_camera_debug_mode = camera_node.get_state_name() == "Free"
-	if was_camera_debug_mode:
-		camera_node.set_to_previous_state()
+
+	var players_array = get_tree().get_nodes_in_group("Players")
+	var target : int = -1
+
+	if Input.is_action_just_pressed("both_chara"):
+		target = 0
+	elif Input.is_action_just_pressed("chara1"):
+		target = 1
+	elif Input.is_action_just_pressed("chara2"):
+		target = 2
 	else:
-		camera_node.set_state("Free")
-	
-	for player in get_tree().get_nodes_in_group("Players"):
-		player.set_active(was_camera_debug_mode)
+		return
+
+	for player in players_array:
+		# In case the player wants every robots active
+		if target == 0:
+			player.set_active(true)
+			continue
+
+		# In case the player wants one robot active only,
+		# set it to active and every other one to inactive
+		var id = player.get_player_id()
+		player.set_active(id == target)
 
 
 #### SIGNAL RESPONSES ####
@@ -288,13 +267,6 @@ func on_gameover_timer_timeout():
 	gameover_timer_node.stop()
 	var _err = get_tree().change_scene_to(MENUS.game_over_scene)
 
-#### INPUTS ####
-
-func _input(_event):
-	if Input.is_action_just_pressed("toggle_free_camera_mode"):
-		toggle_free_camera_mode()
-
-#### SIGNAL RESPONSES ####
 
 # Called when a level is finished: wait for the transition to be finished
 func on_level_finished(_level : Level):
@@ -313,7 +285,7 @@ func on_level_ready(level : Level):
 	if progression.level == 0:
 		update_current_level_index(level)
 	fade_in()
-	
+
 	if level is InfiniteLevel:
 		GameSaver.save_level(level, progression.main_stored_objects)
 		GameSaver.save_level_properties_as_json(level)
@@ -324,8 +296,6 @@ func on_checkpoint_reached(level: Level, checkpoint_id: int):
 	if checkpoint_id + 1 > GAME.progression.checkpoint:
 		progression.checkpoint = checkpoint_id + 1
 
-	progression.set_main_xion(SCORE.xion)
-	progression.set_main_materials(SCORE.materials)
 	GameSaver.save_level(level, progression.main_stored_objects)
 
 

@@ -1,32 +1,18 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Scenes/InteractiveObjects/Collactables/CollactableBase.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/InteractiveObjects/Collactables/XionCollactable/XionCollectable.gd" type="Script" id=2]
-[ext_resource path="res://Global/Lights/Light300.png" type="Texture" id=3]
-[ext_resource path="res://Scenes/InteractiveObjects/Collactables/XionCollactable/XionGradiant.tres" type="Texture" id=4]
+[ext_resource path="res://BabaGodotLib/Scenes/InteractiveObject/Collectable/Collectable.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Global/Lights/Light300.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/InteractiveObjects/Collactables/XionCollactable/XionGradiant.tres" type="Texture" id=3]
+[ext_resource path="res://Scenes/InteractiveObjects/Collactables/Audio/XionTraveling.ogg" type="AudioStream" id=4]
+[ext_resource path="res://Scenes/InteractiveObjects/Collactables/XionCollactable/Xion.gd" type="Script" id=5]
 
-[sub_resource type="ParticlesMaterial" id=1]
-render_priority = 1
-emission_shape = 1
-emission_sphere_radius = 10.36
-flag_disable_z = true
-direction = Vector3( 0, 0, 0 )
-spread = 103.78
-flatness = 0.42
-gravity = Vector3( 0, -100, 0 )
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-damping = 63.24
-angle_random = 0.13
-scale_random = 0.54
-color_ramp = ExtResource( 4 )
-hue_variation = 0.07
-hue_variation_random = 0.76
+[sub_resource type="CircleShape2D" id=1]
+radius = 4.96792
 
 [sub_resource type="ParticlesMaterial" id=2]
 render_priority = 1
 emission_shape = 1
-emission_sphere_radius = 7.34
+emission_sphere_radius = 7.13
 flag_disable_z = true
 direction = Vector3( 0, 0, 0 )
 spread = 103.78
@@ -36,70 +22,47 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 damping = 63.24
 angle_random = 0.13
-scale = 3.0
 scale_random = 0.54
-color_ramp = ExtResource( 4 )
-hue_variation_random = 0.2
+color_ramp = ExtResource( 3 )
+hue_variation = 0.07
+hue_variation_random = 0.76
 
-[sub_resource type="ParticlesMaterial" id=3]
-render_priority = 1
-emission_shape = 1
-emission_sphere_radius = 5.0
-flag_disable_z = true
-direction = Vector3( 0, 0, 0 )
-spread = 103.78
-flatness = 0.42
-gravity = Vector3( 0, -100, 0 )
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-damping = 63.24
-angle_random = 0.13
-scale = 4.0
-scale_random = 0.54
-color_ramp = ExtResource( 4 )
-hue_variation_random = 0.2
+[node name="XionCollectable" instance=ExtResource( 1 )]
+light_mask = -2147483648
+script = ExtResource( 5 )
+average_amount = 5
+collectable_name = "Xion"
 
-[node name="XionCollactable" instance=ExtResource( 1 )]
-script = ExtResource( 2 )
+[node name="Sprite" type="Sprite" parent="." index="0"]
+light_mask = 0
 
-[node name="CollectSound" parent="." index="1"]
+[node name="CollisionShape2D" parent="InteractArea" index="0"]
+shape = SubResource( 1 )
+
+[node name="Follow" parent="StatesMachine" index="1"]
+acceleration = 20.0
+
+[node name="Collect" parent="StatesMachine" index="2"]
+speed = 500.0
+acceleration = 20.0
+initial_speed = 1400.0
+initial_speed_damping = 100.0
+
+[node name="TravellingSound" type="AudioStreamPlayer2D" parent="." index="5"]
+stream = ExtResource( 4 )
+attenuation = 0.31864
 bus = "Sounds"
 
-[node name="TravellingSound" parent="." index="2"]
-bus = "Sounds"
+[node name="Light2D" type="Light2D" parent="." index="6"]
+texture = ExtResource( 2 )
+texture_scale = 0.3
+color = Color( 1, 0, 0.984314, 1 )
+energy = 0.69
 
-[node name="Light2D" type="Light2D" parent="." index="3"]
-texture = ExtResource( 3 )
-texture_scale = 0.29
-color = Color( 1, 0.784314, 0.980392, 1 )
-energy = 0.8
-shadow_enabled = true
-shadow_color = Color( 0, 0, 0, 0.447059 )
-shadow_item_cull_mask = 17
-
-[node name="Particles" type="Particles2D" parent="." index="4"]
+[node name="Particles" type="Particles2D" parent="." index="7"]
 z_index = -1
-amount = 1000
+amount = 235
 lifetime = 2.0
 randomness = 1.0
 local_coords = false
-process_material = SubResource( 1 )
-
-[node name="Particles2" type="Particles2D" parent="." index="5"]
-z_index = -1
-amount = 100
-randomness = 1.0
-local_coords = false
 process_material = SubResource( 2 )
-
-[node name="Particles3" type="Particles2D" parent="." index="6"]
-z_index = -1
-amount = 10
-randomness = 1.0
-local_coords = false
-process_material = SubResource( 3 )
-
-[node name="Timer" type="Timer" parent="." index="7"]
-wait_time = 0.2
-one_shot = true
-autostart = true

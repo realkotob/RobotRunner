@@ -1,55 +1,40 @@
-extends CollactableBase
-class_name MaterialCollactable
+extends Collectable
+class_name Gear
 
-onready var timer_node = $Timer
-onready var animated_sprite_node = $AnimatedSprite
-onready var trigger_area_node = $TriggerArea
+#### ACCESSORS ####
 
-onready var raycast_node = $RayCast
-
-var targeted_player : Player = null
-
-func _physics_process(_delta):
-	if targeted_player != null:
-		raycast_node.search_for_target(targeted_player)
+func is_class(value: String): return value == "Gear" or .is_class(value)
+func get_class() -> String: return "Gear"
 
 
-func _ready():
-	var _err = timer_node.connect("timeout", self, "on_timer_timeout")
-	_err = animated_sprite_node.connect("animation_finished", self, "on_animation_finished")
-	_err = trigger_area_node.connect("body_entered", self, "on_trigger_area_body_entered")
-	_err = trigger_area_node.connect("body_exited", self, "on_trigger_area_body_exited")
-	_err = raycast_node.connect("target_found", self, "on_raycast_target_found")
+#### BUILT-IN ####
 
-	if is_collected:
-		queue_free()
+func _ready() -> void:
+	var _err = $RayCast.connect("target_found", self, "_on_raycast_target_found")
+	
+	
+	if get_state_name() == "Collect" or default_state == "Collect":
+		$AnimationPlayer.stop()
+	else:
+		$AnimationPlayer.play("Floating")
 
-func on_timer_timeout():
-	animated_sprite_node.play()
-	timer_node.start()
-
-
-func on_animation_finished():
-	animated_sprite_node.set_frame(0)
-	animated_sprite_node.stop()
+#### VIRTUALS ####
 
 
-func on_trigger_area_body_entered(body: PhysicsBody2D):
-	if body is Player:
-		raycast_node.search_for_target(body)
+
+#### LOGIC ####
 
 
-func on_trigger_area_body_exited(body: PhysicsBody2D):
-	if body is Player:
-		targeted_player = null
+
+#### INPUTS ####
 
 
-func on_raycast_target_found(target: Node):
-	aimed_character_weakref = weakref(target)
-	SCORE.on_approch_collactable()
 
+#### SIGNAL RESPONSES ####
 
-func collect():
-	.collect()
-	animated_sprite_node.set_visible(false)
-	SCORE.set_materials(SCORE.get_materials() + 1)
+func _on_follow_area_body_entered(body: PhysicsBody2D):
+	if body is Player && get_state_name() != "Follow":
+		$RayCast.search_for_target(body)
+
+func _on_raycast_target_found(target: Node2D):
+	follow(target)

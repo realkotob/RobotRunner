@@ -5,9 +5,9 @@
 [ext_resource path="res://Scenes/StartingPoints/StartingPointP1.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/StartingPoints/StartingPointP2.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/InteractiveObjects/Platform/BreakablePlatform/5Tiles(Base)/BreakablePlateform.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/M/MIceBlock.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/EarthBlock/M/MEarthBlock.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/IceBlock/S/IceBlockBase.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/Blocks/IceBlock/M/MIceBlock.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/Blocks/EarthBlock/M/MEarthBlock.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/Blocks/IceBlock/S/IceBlockBase.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/XionCrate/XionCrate.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Global/Background/BackgroundLight.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/InteractiveObjects/GreatDoor/GreatDoor.tscn" type="PackedScene" id=11]
@@ -21,6 +21,7 @@
 [ext_resource path="res://Scenes/Events/Checkpoint/NewStartingPoint1.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Scenes/Events/Checkpoint/NewStartingPoint2.tscn" type="PackedScene" id=20]
 
+
 [node name="Level1C" instance=ExtResource( 1 )]
 
 [node name="StartingPointP1" parent="." index="0" instance=ExtResource( 3 )]
@@ -28,6 +29,15 @@ position = Vector2( 60, 408 )
 
 [node name="StartingPointP2" parent="." index="1" instance=ExtResource( 4 )]
 position = Vector2( 924, 408 )
+
+[node name="DebrisGenerator" parent="." index="4"]
+sfx_dict = {
+"great_hit": "res://Scenes/SFX/Feedbacks/GreatHit/GreatHit.tscn",
+"normal_explosion": "res://Scenes/SFX/NormalExplosion/NormalExplosion.tscn",
+"normal_hit": "res://Scenes/SFX/Feedbacks/NormalHit/NormalHit.tscn",
+"small_explosion": "res://Scenes/SFX/SmallExplosion/SmallExplosion.tscn",
+"xion_explosion": "res://Scenes/SFX/XionExplosion/XionExplosion.tscn"
+}
 
 [node name="Light" parent="Map/Background/Paralaxe/Lights" index="0" instance=ExtResource( 10 )]
 position = Vector2( -74, 340 )

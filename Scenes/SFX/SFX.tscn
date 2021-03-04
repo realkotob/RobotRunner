@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://BabaGodotLib/SFX/SFX_Animation/SFX_AnimationBase.gd" type="Script" id=1]
+
+
+
+[node name="SFX_Base" type="AnimatedSprite"]
+z_index = 20
+z_as_relative = false
+script = ExtResource( 1 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+bus = "Sounds"

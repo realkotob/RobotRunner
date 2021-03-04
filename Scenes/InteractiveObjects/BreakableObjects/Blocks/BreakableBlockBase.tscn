@@ -1,0 +1,71 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/Blocks/EarthBlock/Sound/Break Earth Bloc.wav" type="AudioStream" id=1]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/Blocks/EarthBlock/S/SmallRock.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/InteractiveObjects/BreakableObjects/Blocks/BlockBase.gd" type="Script" id=3]
+
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 12, 12.1 )
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.938462 )
+colors = PoolColorArray( 0.717647, 0.572549, 0.368627, 0.796078, 0.705882, 0.454902, 0.0980392, 0.368627 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+width = 1
+
+[sub_resource type="ParticlesMaterial" id=4]
+emission_shape = 2
+emission_box_extents = Vector3( 10, 10, 1 )
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 60.0
+gravity = Vector3( 0, 150, 0 )
+initial_velocity = 96.15
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 1.88
+scale_random = 1.0
+color_ramp = SubResource( 3 )
+hue_variation_random = 1.0
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 11.4111, 2.38694 )
+
+[node name="BreakableBlockBase" type="RigidBody2D"]
+z_as_relative = false
+mode = 1
+gravity_scale = 10.0
+contacts_reported = 1
+contact_monitor = true
+sleeping = true
+linear_damp = 1.0
+angular_damp = 0.0
+script = ExtResource( 3 )
+nb_debris = 20
+explosion_impulse = 150.0
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 1 )
+bus = "Sounds"
+
+[node name="Particles2D" type="Particles2D" parent="."]
+emitting = false
+amount = 30
+one_shot = true
+explosiveness = 0.78
+process_material = SubResource( 4 )
+
+[node name="AwakeArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AwakeArea"]
+position = Vector2( -0.113628, -15.6608 )
+shape = SubResource( 5 )

@@ -13,8 +13,8 @@ func get_class() -> String:
 
 #### LOGIC ####
 
-func load_save(path : String):
-	GameSaver.load_settings(path)
+func load_save(slot_id : int):
+	GameSaver.load_settings(slot_id)
 
 #### VIRTUALS ####
 
@@ -26,9 +26,9 @@ func load_save(path : String):
 
 #### SIGNAL RESPONSES ####
 func _on_menu_option_chose(option: MenuOptionsBase):
-	if option is SaveLoadButtonBase:
-		load_save(GameSaver.SAVEGAME_DIR + "/save" + str(option.get_index()+1))
-	else:
-		match(option.get_name()):
-			"BackToMenu":
-				navigate_sub_menu(MENUS.title_screen_scene.instance())
+	match(option.get_name()):
+		"BackToMenu":
+			navigate_sub_menu(MENUS.title_screen_scene.instance())
+		_:
+			load_save(option.get_index()+1)
+

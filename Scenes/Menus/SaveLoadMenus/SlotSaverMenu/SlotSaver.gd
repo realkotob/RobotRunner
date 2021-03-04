@@ -18,6 +18,7 @@ func get_class() -> String:
 
 func save_game_into_slot(slot_saved_id : int, path : String):
 	GameSaver.create_dirs(GameSaver.SAVEGAME_DIR, ["save" + str(slot_saved_id)])
+	GAME._settings["system"]["slot_id"] = slot_saved_id
 	GameSaver.save_settings(path)
 
 func resume_game():
@@ -34,9 +35,8 @@ func resume_game():
 
 #### SIGNAL RESPONSES ####
 func _on_menu_option_chose(option: MenuOptionsBase):
-	if option is SaveLoadButtonBase:
-		save_game_into_slot(option.get_index()+1, GameSaver.SAVEGAME_DIR + "/save" + str(option.get_index()+1))
-	else:
-		match(option.get_name()):
-			"Resume":
-				resume_game()
+	match(option.get_name()):
+		"Resume":
+			resume_game()
+		_:
+			save_game_into_slot(option.get_index()+1, GameSaver.SAVEGAME_DIR + "/save" + str(option.get_index()+1))

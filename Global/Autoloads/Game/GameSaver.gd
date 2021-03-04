@@ -8,6 +8,7 @@ const SAVEGAME_DIR : String = "res://saves"
 const SAVEDLEVEL_DIR : String = "res://Scenes/Levels/SavedLevel"
 const SAVEDLEVEL_JSON_DIR : String = "/json/"
 const SAVEDLEVEL_TSCN_DIR : String = "/tscn/"
+const SAVEDFILE_DEFAULT_NAME : String = "save"
 
 const objects_datatype_storage = {
 	"GameCamera": ["zoom", "instruction_stack"],
@@ -87,9 +88,15 @@ static func save_settings(path : String):
 	GAME._config_file.save(path + "/settings.cfg")
 
 # Load the settings found in the ConfigFile settings.cfg at given path (default res://saves/save1/2/3
-static func load_settings(path):
-	var error = GAME._config_file.load(path + "/settings.cfg")
+static func load_settings(slot_id : int):
 	var inputmapper = InputMapper.new()
+
+	var save_files : Array = find_all_saves_directories()
+	var save_name : String = find_corresponding_save_file(save_files, slot_id)
+
+	var savecfg_path : String = SAVEGAME_DIR + "/" + save_name + "/settings.cfg"
+	var error = GAME._config_file.load(savecfg_path)
+
 	if error == OK:
 		if debug:
 			print("SUCCESSFULLY LOADED SETTINGS CFG FILE. SUCCESS CODE : " + str(error))
@@ -109,6 +116,50 @@ static func load_settings(path):
 		if debug:
 			print("FAILED TO LOAD SETTINGS CFG FILE. ERROR CODE : " + str(error))
 		return
+
+static func find_all_saves_directories() -> Array:
+	var saves_directory = Directory.new()
+	var error = saves_directory.open(SAVEGAME_DIR)
+	var files = []
+
+	if error == OK:
+		if debug:
+			print("SUCCESSFULLY LOADED SETTINGS CFG FILE. SUCCESS CODE : " + str(error))
+
+		saves_directory.list_dir_begin(true, true)
+		while true:
+			var file = saves_directory.get_next()
+			if file == "":
+				break
+			else:
+				files.append(file)
+		saves_directory.list_dir_end()
+
+		return files
+
+	else:
+		if debug:
+			print("FAILED TO LOAD SETTINGS CFG FILE. ERROR CODE : " + str(error))
+		return []
+
+static func find_corresponding_save_file(files : Array, save_id : int) -> String:
+	var save_file = Directory.new()
+	var error
+
+	for file in files:
+
+		error = GAME._config_file.load(SAVEGAME_DIR + "/" + file + "/settings.cfg")
+
+		if error == OK:
+			var file_save_id : int = GAME._config_file.get_value("system","slot_id")
+			if(save_id == file_save_id):
+				return str(file)
+		else:
+			if debug:
+				print("FAILED TO LOAD SETTINGS CFG FILE. ERROR CODE : " + str(error))
+			return ""
+
+	return ""
 
 # Save the level in a .tscn file
 static func save_level_as_tscn(level: Node2D):

@@ -33,6 +33,9 @@ var sound_bus_id = AudioServer.get_bus_index("Sounds")
 var _config_file = ConfigFile.new()
 
 var _settings ={
+		"system":{
+			"slot_id": 1
+		},
 		"audio":{
 			"music": AudioServer.get_bus_volume_db(music_bus_id),
 			"sounds": AudioServer.get_bus_volume_db(sound_bus_id)
@@ -43,13 +46,13 @@ var _settings ={
 				"move_right_player1": InputMap.get_action_list("move_right_player1")[0].scancode,
 				"teleport_player1": InputMap.get_action_list("teleport_player1")[0].scancode,
 				"action_player1": InputMap.get_action_list("action_player1")[0].scancode,
-
+				
 				"jump_player2": InputMap.get_action_list("jump_player2")[0].scancode,
 				"move_left_player2": InputMap.get_action_list("move_left_player2")[0].scancode,
 				"move_right_player2": InputMap.get_action_list("move_right_player2")[0].scancode,
 				"teleport_player2": InputMap.get_action_list("teleport_player2")[0].scancode,
 				"action_player2": InputMap.get_action_list("action_player2")[0].scancode,
-
+				
 				"game_restart": InputMap.get_action_list("game_restart")[0].scancode,
 				"HUD_switch_state": InputMap.get_action_list("HUD_switch_state")[0].scancode,
 				"display_console": InputMap.get_action_list("display_console")[0].scancode

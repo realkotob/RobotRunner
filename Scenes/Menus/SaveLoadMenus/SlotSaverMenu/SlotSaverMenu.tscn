@@ -1,16 +1,16 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://BabaGodotLib/UI/Menu/MenuBase.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/Menus/SaveLoadMenus/SaveLoadButtonBase.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Menus/SaveLoadMenus/SlotSaverMenu/SlotSaver.gd" type="Script" id=3]
-[ext_resource path="res://BabaGodotLib/UI/Menu/MenuOptionsBase.gd" type="Script" id=4]
+[ext_resource path="res://BabaGodotLib/UI/Menu/MenuOptionBase.tscn" type="PackedScene" id=5]
 
 [node name="SlotSaverMenu" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 
 [node name="ColorRect" type="ColorRect" parent="." index="0"]
 modulate = Color( 0, 0, 0, 0.4 )
-margin_right = 960.0
+margin_left = -3.3674
+margin_right = 956.633
 margin_bottom = 540.0
 __meta__ = {
 "_edit_use_anchors_": false,
@@ -19,9 +19,11 @@ __meta__ = {
 
 [node name="ColorRect" type="ColorRect" parent="ColorRect" index="0"]
 modulate = Color( 0, 0, 0, 0.6 )
-margin_left = 80.0
+anchor_left = 0.0011692
+anchor_right = 0.0011692
+margin_left = 82.2449
 margin_top = 70.0
-margin_right = 880.0
+margin_right = 882.245
 margin_bottom = 470.0
 __meta__ = {
 "_edit_use_anchors_": false,
@@ -29,47 +31,31 @@ __meta__ = {
 }
 
 [node name="V_OptContainer" parent="HBoxContainer" index="0"]
-margin_left = 32.0
-margin_right = 142.0
-margin_bottom = 215.0
+margin_left = 0.0
+margin_right = 216.0
+margin_bottom = 284.0
 alignment = 1
 
-[node name="SAVE_SLOT_1" type="Button" parent="HBoxContainer/V_OptContainer" index="0"]
-margin_top = 61.0
-margin_right = 110.0
-margin_bottom = 81.0
+[node name="SAVE_SLOT_1" parent="HBoxContainer/V_OptContainer" index="0" instance=ExtResource( 5 )]
+margin_top = 48.0
+margin_right = 216.0
+margin_bottom = 92.0
 text = "Save into Slot 1"
-script = ExtResource( 2 )
-__meta__ = {
-"_edit_lock_": true
-}
 
-[node name="SAVE_SLOT_2" type="Button" parent="HBoxContainer/V_OptContainer" index="1"]
-margin_top = 85.0
-margin_right = 110.0
-margin_bottom = 105.0
-text = "Save into Slot 2"
-script = ExtResource( 2 )
-__meta__ = {
-"_edit_lock_": true
-}
+[node name="SAVE_SLOT_2" parent="HBoxContainer/V_OptContainer" index="1" instance=ExtResource( 5 )]
+margin_top = 96.0
+margin_right = 216.0
+margin_bottom = 140.0
+text = "Save into Slot 1"
 
-[node name="SAVE_SLOT_3" type="Button" parent="HBoxContainer/V_OptContainer" index="2"]
-margin_top = 109.0
-margin_right = 110.0
-margin_bottom = 129.0
-text = "Save into Slot 3"
-script = ExtResource( 2 )
-__meta__ = {
-"_edit_lock_": true
-}
+[node name="SAVE_SLOT_3" parent="HBoxContainer/V_OptContainer" index="2" instance=ExtResource( 5 )]
+margin_top = 144.0
+margin_right = 216.0
+margin_bottom = 188.0
+text = "Save into Slot 1"
 
-[node name="Resume" type="Button" parent="HBoxContainer/V_OptContainer" index="3"]
-margin_top = 133.0
-margin_right = 110.0
-margin_bottom = 153.0
-text = "Resume Game"
-script = ExtResource( 4 )
-__meta__ = {
-"_edit_lock_": true
-}
+[node name="Resume" parent="HBoxContainer/V_OptContainer" index="3" instance=ExtResource( 5 )]
+margin_top = 192.0
+margin_right = 216.0
+margin_bottom = 236.0
+text = "Resume"

@@ -153,15 +153,9 @@ margin_bottom = 200.0
 mouse_filter = 2
 
 [node name="V_OptContainer" parent="HBoxContainer" index="0"]
-<<<<<<< HEAD
-margin_left = 93.0
-margin_right = 258.0
-margin_bottom = 188.0
-=======
 margin_left = 87.0
 margin_right = 264.0
-margin_bottom = 153.0
->>>>>>> Add BabaGodotLib statemachines & menus implementation
+margin_bottom = 188.0
 mouse_filter = 2
 
 [node name="NewGame" parent="HBoxContainer/V_OptContainer" index="0" instance=ExtResource( 13 )]
@@ -178,7 +172,7 @@ text = "Load Game"
 
 [node name="InfiniteMode" parent="HBoxContainer/V_OptContainer" index="2" instance=ExtResource( 13 )]
 margin_top = 96.0
-margin_right = 165.0
+margin_right = 177.0
 margin_bottom = 140.0
 text = "Infinite Mode"
 script = ExtResource( 2 )
@@ -216,17 +210,10 @@ __meta__ = {
 }
 default_text = "RANDOM"
 
-<<<<<<< HEAD
 [node name="Quit" parent="HBoxContainer/V_OptContainer" index="3" instance=ExtResource( 13 )]
 margin_top = 144.0
-margin_right = 165.0
-margin_bottom = 188.0
-=======
-[node name="Quit" parent="HBoxContainer/V_OptContainer" index="2" instance=ExtResource( 13 )]
-margin_top = 96.0
 margin_right = 177.0
-margin_bottom = 140.0
->>>>>>> Add BabaGodotLib statemachines & menus implementation
+margin_bottom = 188.0
 text = "Quit"
 
 [node name="OptionChoiceSound" parent="." index="4"]

@@ -34,7 +34,8 @@ var _config_file = ConfigFile.new()
 
 var _settings ={
 		"system":{
-			"slot_id": 1
+			"slot_id": 1,
+			"time": "unknown"
 		},
 		"audio":{
 			"music": AudioServer.get_bus_volume_db(music_bus_id),

@@ -8,6 +8,7 @@ onready var sounds_menu_scene = preload("res://Scenes/Menus/OptionsMenu/SoundMen
 onready var controls_menu_scene = preload("res://Scenes/Menus/OptionsMenu/Controls/InputMenu.tscn")
 onready var saveloader_menu_scene = preload("res://Scenes/Menus/SaveLoadMenus/SaveLoaderMenu/SaveLoaderMenu.tscn")
 onready var slotsaver_menu_scene = preload("res://Scenes/Menus/SaveLoadMenus/SlotSaverMenu/SlotSaverMenu.tscn")
+onready var saveconfirm_menu_scene = preload("res://Scenes/Menus/SaveLoadMenus/SaveConfirmMenu/SaveConfirm.tscn")
 
 # Triggers the game over scene
 func gameover():

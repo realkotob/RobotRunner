@@ -2,8 +2,6 @@ extends MenuBase
 
 class_name SlotSaver
 
-var myInputMapper = InputMapper.new()
-
 #### ACCESSORS ####
 
 func is_class(value: String):
@@ -16,10 +14,10 @@ func get_class() -> String:
 
 #### LOGIC ####
 
-func save_game_into_slot(slot_saved_id : int, path : String):
-	GameSaver.create_dirs(GameSaver.SAVEGAME_DIR, ["save" + str(slot_saved_id)])
+func save_game_into_slot(slot_saved_id : int):
 	GAME._settings["system"]["slot_id"] = slot_saved_id
-	GameSaver.save_settings(path)
+	navigate_sub_menu(MENUS.saveconfirm_menu_scene.instance())
+
 
 func resume_game():
 	get_tree().set_pause(false)
@@ -39,4 +37,4 @@ func _on_menu_option_chose(option: MenuOptionsBase):
 		"Resume":
 			resume_game()
 		_:
-			save_game_into_slot(option.get_index()+1, GameSaver.SAVEGAME_DIR + "/save" + str(option.get_index()+1))
+			save_game_into_slot(option.get_index()+1)

@@ -5,7 +5,6 @@
 [ext_resource path="res://BabaGodotLib/Absract/Raycast/RayCastBase.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/InteractiveObjects/Collactables/Materials/Gear/Gear.gd" type="Script" id=9]
 
-
 [sub_resource type="CircleShape2D" id=1]
 radius = 13.0136
 

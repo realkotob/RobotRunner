@@ -1,6 +1,6 @@
 tool
 extends Path2D
-class_name LevelNodeBound
+class_name LevelNodeBind
 
 onready var line : Line2D = $Line2D
 

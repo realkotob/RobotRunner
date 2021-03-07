@@ -5,9 +5,10 @@ class_name WorldMapEditor
 var last_lvl_node_selected : LevelNode = null
 var current_lvl_node_selected : LevelNode = null
 
-var bound_button : Button = null
+var bind_button : Button = null
 var confirm_bind_button : Button = null
 var abort_bind_button : Button = null
+var delete_binds_button : Button = null
 
 var bind_origin = LevelNode
 var bind_dest_array : Array = []
@@ -24,10 +25,14 @@ func set_bind_mode(value: bool):
 		bind_mode = value
 		
 		if bind_mode == false:
-			bind_mode = false
 			_unselect_all_level_nodes()
 			bind_origin = null
 			bind_dest_array = []
+			destroy_button(confirm_bind_button)
+			destroy_button(abort_bind_button)
+		else:
+			destroy_button(bind_button)
+			generate_button("abort_bind_button", "Abort bind")
 
 #### BUILT-IN ####
 
@@ -41,7 +46,12 @@ func _exit_tree() -> void:
 
 func handles(obj: Object) -> bool:
 	if obj is LevelNode:
-		generate_button("bound_button", "Create Bound")
+		if bind_mode == false:
+			generate_button("bind_button", "Create Bind")
+		if obj.get_binds_count() > 0:
+			generate_button("delete_binds_button", "Delete Binds")
+		else:
+			destroy_button(delete_binds_button)
 	else:
 		destroy_every_buttons()
 	
@@ -53,21 +63,23 @@ func edit(object: Object) -> void:
 	current_lvl_node_selected = object
 	
 	if bind_mode:
-		current_lvl_node_selected.set_editor_select_state(LevelNode.EDITOR_SELECTED.BIND_DESTINATION)
 		add_destination(current_lvl_node_selected)
 
 
 func add_destination(level_node: LevelNode):
 	if not level_node in bind_dest_array && level_node != bind_origin:
+		if level_node.owner.are_level_nodes_bounded(bind_origin, level_node):
+			return
 		bind_dest_array.append(level_node)
+		current_lvl_node_selected.set_editor_select_state(LevelNode.EDITOR_SELECTED.BIND_DESTINATION)
 		generate_button("confirm_bind_button", "Confirm bind")
-		generate_button("abort_bind_button", "Abort bind")
 
 
 func destroy_every_buttons():
-	destroy_button(bound_button)
+	destroy_button(bind_button)
 	destroy_button(confirm_bind_button)
 	destroy_button(abort_bind_button)
+	destroy_button(delete_binds_button)
 
 
 #### VIRTUALS ####
@@ -103,27 +115,23 @@ func _unselect_all_level_nodes():
 
 #### SIGNAL RESPONSES ####
 
-func _on_bound_button_pressed():
+func _on_bind_button_pressed():
 	if !bind_mode:
-		bind_mode = true
-		print("Bind mode on")
+		set_bind_mode(true)
 		bind_origin = current_lvl_node_selected
 		current_lvl_node_selected.set_editor_select_state(LevelNode.EDITOR_SELECTED.BIND_ORIGIN)
 
 
 func _on_confirm_bind_button_pressed():
-	print("Confirm bind")
-	
-	var output = "create bound from " + bind_origin.name + " to "
 	for bind_dest in bind_dest_array:
-		output += bind_dest.name + " "
 		bind_origin.emit_signal("add_bind_query", bind_origin, bind_dest)
-	
-	print(output)
 	
 	set_bind_mode(false)
 
 
 func _on_abort_bind_button_pressed():
-	print("Abort bind")
 	set_bind_mode(false)
+
+
+func _on_delete_binds_button_pressed():
+	current_lvl_node_selected.emit_signal("remove_all_binds_query", current_lvl_node_selected)

@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Scenes/Menus/LevelSelectionMenu/LevelNodeBound.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Menus/LevelSelectionMenu/LevelNodeBind.gd" type="Script" id=1]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
 "points": PoolVector2Array(  )
 }
 
-[node name="LevelNodeBound" type="Path2D"]
+[node name="LevelNodeBind" type="Path2D"]
 curve = SubResource( 1 )
 script = ExtResource( 1 )
 __meta__ = {

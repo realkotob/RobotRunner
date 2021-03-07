@@ -2,7 +2,9 @@ tool
 extends CanvasLayer
 class_name LevelSelectionMenu
 
-const bound_scene = preload("res://Scenes/Menus/LevelSelectionMenu/LevelNodeBound.tscn")
+const bind_scene = preload("res://Scenes/Menus/LevelSelectionMenu/LevelNodeBind.tscn")
+
+onready var binds_container = $Binds
 
 #### ACCESSORS ####
 
@@ -12,8 +14,6 @@ func get_class() -> String: return "LevelSelectionMenu"
 
 #### BUILT-IN ####
 
-func _ready() -> void:
-	$Levels/LevelNode.add_bind($Levels/LevelNode2)
 
 
 #### VIRTUALS ####
@@ -22,6 +22,11 @@ func _ready() -> void:
 
 #### LOGIC ####
 
+func are_level_nodes_bounded(origin: LevelNode, dest: LevelNode) -> bool:
+	for bind in binds_container.get_children():
+		if bind.get_origin() == origin && bind.get_destination() == dest:
+			return true
+	return false
 
 
 #### INPUTS ####
@@ -31,9 +36,18 @@ func _ready() -> void:
 #### SIGNAL RESPONSES ####
 
 func _on_add_bind_query(origin: LevelNode, dest: LevelNode):
-	var bound = bound_scene.instance()
-	$Bounds.add_child(bound)
-	bound.owner = self
+	var bind = bind_scene.instance()
+	binds_container.add_child(bind)
+	bind.owner = self
 	
-	bound.set_origin(origin)
-	bound.set_destination(dest)
+	origin.add_bind(bind)
+	
+	bind.set_origin(origin)
+	bind.set_destination(dest)
+
+
+func _on_remove_all_binds_query(origin: LevelNode):
+	for bind in binds_container.get_children():
+		if bind.get_origin() == origin:
+			origin.remove_bind(bind)
+			bind.queue_free()

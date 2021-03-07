@@ -490,9 +490,9 @@ _global_script_classes=[ {
 "path": "res://Scenes/Menus/LevelSelectionMenu/LevelNode.gd"
 }, {
 "base": "Path2D",
-"class": "LevelNodeBound",
+"class": "LevelNodeBind",
 "language": "GDScript",
-"path": "res://Scenes/Menus/LevelSelectionMenu/LevelNodeBound.gd"
+"path": "res://Scenes/Menus/LevelSelectionMenu/LevelNodeBind.gd"
 }, {
 "base": "CanvasLayer",
 "class": "LevelSelectionMenu",
@@ -921,7 +921,7 @@ _global_script_class_icons={
 "LevelChunck": "",
 "LevelEvent": "",
 "LevelNode": "",
-"LevelNodeBound": "",
+"LevelNodeBind": "",
 "LevelSelectionMenu": "",
 "LineContainer": "",
 "LineData": "",

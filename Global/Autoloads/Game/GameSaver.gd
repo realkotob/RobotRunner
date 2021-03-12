@@ -69,8 +69,12 @@ static func save_level(level: Node, dict_to_fill: Dictionary):
 static func settings_update_keys(settings_dictionary : Dictionary):
 	for section in settings_dictionary:
 			match(section):
+				"system":
+					settings_dictionary[section]["time"] = OS.get_datetime()
 				"audio":
 					for keys in settings_dictionary[section]:
+						if str(AudioServer.get_bus_volume_db(AudioServer.get_bus_index(keys.capitalize()))) == "-1.#INF":
+							AudioServer.set_bus_volume_db(AudioServer.get_bus_index(keys.capitalize()), -100)
 						settings_dictionary[section][keys] = AudioServer.get_bus_volume_db(AudioServer.get_bus_index(keys.capitalize()))
 				"controls":
 					for keys in settings_dictionary[section]:
@@ -84,7 +88,7 @@ static func save_settings(path : String):
 	for section in GAME._settings.keys():
 		for key in GAME._settings[section]:
 			GAME._config_file.set_value(section, key, GAME._settings[section][key])
-	
+			
 	GAME._config_file.save(path + "/settings.cfg")
 
 # Load the settings found in the ConfigFile settings.cfg at given path (default res://saves/save1/2/3
@@ -117,6 +121,12 @@ static func load_settings(slot_id : int):
 			print("FAILED TO LOAD SETTINGS CFG FILE. ERROR CODE : " + str(error))
 		return
 
+# METHOD EXPLAINATION
+### This method will return an array of every file considered as a SAVE FILE
+#INPUT
+### No input are required
+#OUTPUT
+### Return an array of files
 static func find_all_saves_directories() -> Array:
 	var saves_directory = Directory.new()
 	var error = saves_directory.open(SAVEGAME_DIR)
@@ -142,8 +152,14 @@ static func find_all_saves_directories() -> Array:
 			print("FAILED TO LOAD SETTINGS CFG FILE. ERROR CODE : " + str(error))
 		return []
 
+# METHOD EXPLAINATION
+### This method will return the path of the save file that has been found according to the specified save_id
+#INPUT
+### Files Array
+### Save ID  to get the save we want
+#OUTPUT
+### Return the path of the found save as a string
 static func find_corresponding_save_file(files : Array, save_id : int) -> String:
-	var save_file = Directory.new()
 	var error
 
 	for file in files:
@@ -152,13 +168,40 @@ static func find_corresponding_save_file(files : Array, save_id : int) -> String
 
 		if error == OK:
 			var file_save_id : int = GAME._config_file.get_value("system","slot_id")
-			if(save_id == file_save_id):
+			if save_id == file_save_id:
 				return str(file)
 		else:
 			if debug:
 				print("FAILED TO LOAD SETTINGS CFG FILE. ERROR CODE : " + str(error))
 			return ""
 
+	return ""
+
+static func get_save_cfg_property_value_by_name_and_cfgid(cfgproperty_name : String, save_id : int):
+	var file_array : Array
+	var save_path : String
+	
+	file_array = find_all_saves_directories()
+	save_path = find_corresponding_save_file(file_array, save_id)
+	
+	var savecfg_path : String = SAVEGAME_DIR + "/" + save_path + "/settings.cfg"
+	var error = GAME._config_file.load(savecfg_path)
+	
+	if error == OK:
+		if debug:
+			print("SUCCESSFULLY LOADED SETTINGS CFG FILE. SUCCESS CODE : " + str(error))
+		for section in GAME._config_file.get_sections():
+			for keys in GAME._config_file.get_section_keys(section):
+				if keys == cfgproperty_name:
+					print("FOUND PROPERTY BY NAME : ", str(keys))
+					var property_value = GAME._config_file.get_value(section, keys)
+					print("PROPERTY VALUE : ", str(property_value))
+					return property_value
+	else:
+		if debug:
+			print("FAILED TO LOAD SETTINGS CFG FILE. ERROR CODE : " + str(error))
+		return ""
+	
 	return ""
 
 # Save the level in a .tscn file

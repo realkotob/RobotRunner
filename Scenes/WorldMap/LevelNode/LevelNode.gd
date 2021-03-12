@@ -8,12 +8,16 @@ enum EDITOR_SELECTED{
 	BIND_DESTINATION
 }
 
-export var binds_path_array := Array()
+export var level_scene : PackedScene = null
 
-var binds_array := Array()
+export var accessible : bool = true
+export var visited : bool = false
+
 var editor_select_state : int = EDITOR_SELECTED.UNSELECTED setget set_editor_select_state, get_editor_select_state
 
+# warning-ignore:unused_signal
 signal add_bind_query(origin, dest)
+# warning-ignore:unused_signal
 signal remove_all_binds_query(origin)
 
 #### ACCESSORS ####
@@ -37,18 +41,14 @@ func get_editor_select_state() -> int: return editor_select_state
 
 func _ready() -> void:
 	yield(owner, "ready")
+	owner.get_binds(self)
 	
-	binds_array = []
-	for bind_path in binds_path_array:
-		binds_array.append(owner.get_node(bind_path))
-	
-	debug_print_bind_path_array()
 	
 	if !Engine.editor_hint:
 		$ColorRect.queue_free()
 	else:
-		connect("add_bind_query", owner, "_on_add_bind_query")
-		connect("remove_all_binds_query", owner, "_on_remove_all_binds_query")
+		var __ = connect("add_bind_query", owner, "_on_add_bind_query")
+		__ = connect("remove_all_binds_query", owner, "_on_remove_all_binds_query")
 
 
 #### VIRTUALS ####
@@ -57,32 +57,16 @@ func _ready() -> void:
 
 #### LOGIC ####
 
-func add_bind(bind: Node) -> void:
-	var bind_path = owner.get_path_to(bind)
-	if not bind in binds_array && not bind_path in binds_path_array:
-		binds_array.append(bind)
-		binds_path_array.append(bind_path)
-	
-	debug_print_bind_path_array()
 
-
-func remove_bind(bind: Node) -> void:
-	var bind_path = owner.get_path_to(bind)
-	if bind in binds_array:
-		binds_array.erase(bind)
-		binds_path_array.erase(bind_path)
-	
-	debug_print_bind_path_array()
+func get_binds() -> Array:
+	return owner.get_binds(self)
 
 
 func get_binds_count() -> int:
-	return binds_array.size()
+	return get_binds().size()
 
 
 
-func debug_print_bind_path_array():
-	for bind_path in binds_path_array:
-		print(bind_path)
 
 #### INPUTS ####
 

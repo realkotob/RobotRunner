@@ -32,7 +32,7 @@ func get_dialogue_key(index: int) -> String:
 #### BUILT-IN ####
 
 func _ready():
-	EVENTS.connect("dialogue_query", self, "_on_dialogue_query")
+	var __ = EVENTS.connect("dialogue_query", self, "_on_dialogue_query")
 	
 	TranslationServer.set_locale(default_locale)
 	set_current_translation_by_locale(default_locale)

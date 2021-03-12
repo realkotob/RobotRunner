@@ -1,0 +1,155 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Scenes/WorldMap/LevelNode/LevelNode.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/WorldMap/Character/WorldMapCharacter.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Levels/Chapter1/Level1/Level1B.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Levels/Chapter1/Level1/Level1A.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/WorldMap/WorldMap.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/WorldMap/Character/WorldMapCharacter.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/WorldMap/Bind/LevelNodeBind.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/WorldMap/Cursor/WorldMapCursor.tscn" type="PackedScene" id=8]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 42.6909, 237.756, 0, 0, 0, 0, 388.237, 94.8019 )
+}
+
+[sub_resource type="GDScript" id=2]
+script/source = "tool
+extends Path2D
+class_name LevelNodeBind
+
+onready var line : Line2D = $Line2D
+
+export var origin_node_path : String = \"\"
+export var destination_node_path : String = \"\"
+
+var origin : Node2D setget set_origin, get_origin
+var destination : Node2D setget set_destination, get_destination
+
+var is_ready : bool = false
+
+#### ACCESSORS ####
+
+func is_class(value: String): return value == \"LevelNodeBound\" or .is_class(value)
+func get_class() -> String: return \"LevelNodeBound\"
+
+func set_origin(value: Node2D):
+	if origin == value: 
+		return
+	origin = value
+	if origin_node_path == \"\" && owner != null:
+		origin_node_path = owner.get_path_to(origin)
+
+func get_origin() -> Node2D: return origin
+
+func set_destination(value: Node2D): 
+	if destination == value: 
+		return
+	destination = value
+	if destination_node_path == \"\" && owner != null:
+		destination_node_path = owner.get_path_to(destination)
+
+func get_destination() -> Node2D: return destination
+
+
+#### BUILT-IN ####
+
+func _ready() -> void:
+	set_curve(Curve2D.new())
+	
+	if owner != null && origin_node_path != \"\" && destination_node_path != \"\":
+		set_origin(owner.get_node(origin_node_path))
+		set_destination(owner.get_node(destination_node_path))
+	
+	is_ready = true
+
+
+func _process(_delta: float) -> void:
+	_update_line()
+
+#### VIRTUALS ####
+
+
+
+#### LOGIC ####
+
+
+func _update_line():
+	if origin == null or destination == null:
+		return
+	
+	curve.clear_points()
+	
+	curve.add_point(origin.get_global_position())
+	curve.add_point(destination.get_global_position())
+	
+	var points = curve.get_baked_points()
+	line.set_points(points)
+
+
+#### INPUTS ####
+
+
+
+#### SIGNAL RESPONSES ####
+"
+
+[sub_resource type="Curve2D" id=3]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 42.6909, 237.756, 0, 0, 0, 0, 369.726, 407.902 )
+}
+
+[node name="WorldMap" type="CanvasLayer"]
+script = ExtResource( 5 )
+
+[node name="Levels" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LevelNode" parent="Levels" instance=ExtResource( 1 )]
+position = Vector2( 42.6909, 237.756 )
+level_scene = ExtResource( 4 )
+
+[node name="WorldMapCharacter" parent="Levels/LevelNode" instance=ExtResource( 2 )]
+position = Vector2( -0.661263, -40.6787 )
+script = ExtResource( 6 )
+
+[node name="WorldMapCursor" parent="Levels/LevelNode" instance=ExtResource( 8 )]
+position = Vector2( 1.5874, -1.54285 )
+
+[node name="LevelNode2" parent="Levels" instance=ExtResource( 1 )]
+position = Vector2( 388.237, 94.8019 )
+
+[node name="LevelNode3" parent="Levels" instance=ExtResource( 1 )]
+position = Vector2( 369.726, 407.902 )
+level_scene = ExtResource( 3 )
+
+[node name="LevelNode4" parent="Levels" instance=ExtResource( 1 )]
+position = Vector2( 767.276, 251.388 )
+
+[node name="Binds" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LevelNodeBind" type="Path2D" parent="Binds" instance=ExtResource( 7 )]
+curve = SubResource( 1 )
+script = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+origin_node_path = "Levels/LevelNode"
+destination_node_path = "Levels/LevelNode2"
+
+[node name="LevelNodeBind2" type="Path2D" parent="Binds" instance=ExtResource( 7 )]
+curve = SubResource( 3 )
+script = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+origin_node_path = "Levels/LevelNode"
+destination_node_path = "Levels/LevelNode3"
+
+[node name="Tween" type="Tween" parent="."]

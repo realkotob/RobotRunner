@@ -7,17 +7,17 @@
 
 [sub_resource type="Curve2D" id=1]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 96.0764, 222.091, 0, 0, 0, 0, 339.269, 108.192 )
+"points": PoolVector2Array( 0, 0, 0, 0, 389.167, 389.658, 0, 0, 0, 0, 775.294, 350.278 )
 }
 
 [sub_resource type="Curve2D" id=2]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 96.0764, 222.091, 0, 0, 0, 0, 389.167, 390.918 )
+"points": PoolVector2Array( 0, 0, 0, 0, 72.2732, 220.969, 0, 0, 0, 0, 469.139, 96.3276 )
 }
 
 [sub_resource type="Curve2D" id=3]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 389.167, 390.918, 0, 0, 0, 0, 761.824, 386.428 )
+"points": PoolVector2Array( 0, 0, 0, 0, 72.2732, 220.969, 0, 0, 0, 0, 389.167, 389.658 )
 }
 
 [node name="LevelSelectionMenu" type="CanvasLayer"]
@@ -29,37 +29,45 @@ __meta__ = {
 }
 
 [node name="LevelNode" parent="Levels" instance=ExtResource( 1 )]
-position = Vector2( 96.0764, 222.091 )
+position = Vector2( 72.2732, 220.969 )
+binds_path_array = [ NodePath("Binds/LevelNodeBind3"), NodePath("Binds/LevelNodeBind"), NodePath("Binds/LevelNodeBind2") ]
 
 [node name="LevelNode2" parent="Levels" instance=ExtResource( 1 )]
-position = Vector2( 339.269, 108.192 )
+position = Vector2( 469.139, 96.3276 )
+binds_path_array = [ NodePath("Binds/LevelNodeBind"), NodePath("Binds/LevelNodeBind2"), NodePath("Binds/LevelNodeBind3") ]
 
 [node name="LevelNode3" parent="Levels" instance=ExtResource( 1 )]
-position = Vector2( 389.167, 390.918 )
+position = Vector2( 389.167, 389.658 )
+binds_path_array = [ NodePath("Binds/LevelNodeBind"), NodePath("Binds/LevelNodeBind2"), NodePath("Binds/LevelNodeBind3") ]
 
 [node name="LevelNode4" parent="Levels" instance=ExtResource( 1 )]
-position = Vector2( 761.824, 386.428 )
+position = Vector2( 775.294, 350.278 )
+binds_path_array = [ NodePath("Binds/LevelNodeBind"), NodePath("Binds/LevelNodeBind2"), NodePath("Binds/LevelNodeBind3") ]
 
 [node name="Binds" type="Node2D" parent="."]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="LevelNodeBind" parent="Binds" instance=ExtResource( 4 )]
+[node name="LevelNodeBind3" parent="Binds" instance=ExtResource( 4 )]
 curve = SubResource( 1 )
+origin_node_path = "Levels/LevelNode3"
+destination_node_path = "Levels/LevelNode4"
+
+[node name="LevelNodeBind" type="Path2D" parent="Binds" instance=ExtResource( 4 )]
+curve = SubResource( 2 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
 origin_node_path = "Levels/LevelNode"
 destination_node_path = "Levels/LevelNode2"
 
-[node name="LevelNodeBind2" parent="Binds" instance=ExtResource( 4 )]
-curve = SubResource( 2 )
-origin_node_path = "Levels/LevelNode"
-destination_node_path = "Levels/LevelNode3"
-
-[node name="LevelNodeBind3" type="Path2D" parent="Binds" instance=ExtResource( 4 )]
+[node name="LevelNodeBind2" type="Path2D" parent="Binds" instance=ExtResource( 4 )]
 curve = SubResource( 3 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
-origin_node_path = "Levels/LevelNode3"
-destination_node_path = "Levels/LevelNode4"
+origin_node_path = "Levels/LevelNode"
+destination_node_path = "Levels/LevelNode3"

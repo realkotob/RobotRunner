@@ -8,6 +8,8 @@ enum EDITOR_SELECTED{
 	BIND_DESTINATION
 }
 
+export var binds_path_array := Array()
+
 var binds_array := Array()
 var editor_select_state : int = EDITOR_SELECTED.UNSELECTED setget set_editor_select_state, get_editor_select_state
 
@@ -34,6 +36,14 @@ func get_editor_select_state() -> int: return editor_select_state
 #### BUILT-IN ####
 
 func _ready() -> void:
+	yield(owner, "ready")
+	
+	binds_array = []
+	for bind_path in binds_path_array:
+		binds_array.append(owner.get_node(bind_path))
+	
+	debug_print_bind_path_array()
+	
 	if !Engine.editor_hint:
 		$ColorRect.queue_free()
 	else:
@@ -48,19 +58,31 @@ func _ready() -> void:
 #### LOGIC ####
 
 func add_bind(bind: Node) -> void:
-	if not bind in binds_array:
+	var bind_path = owner.get_path_to(bind)
+	if not bind in binds_array && not bind_path in binds_path_array:
 		binds_array.append(bind)
+		binds_path_array.append(bind_path)
+	
+	debug_print_bind_path_array()
 
 
 func remove_bind(bind: Node) -> void:
+	var bind_path = owner.get_path_to(bind)
 	if bind in binds_array:
 		binds_array.erase(bind)
+		binds_path_array.erase(bind_path)
+	
+	debug_print_bind_path_array()
 
 
 func get_binds_count() -> int:
 	return binds_array.size()
 
 
+
+func debug_print_bind_path_array():
+	for bind_path in binds_path_array:
+		print(bind_path)
 
 #### INPUTS ####
 

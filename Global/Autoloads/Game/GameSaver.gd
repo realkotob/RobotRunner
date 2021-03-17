@@ -56,14 +56,6 @@ static func check_if_dir_exist(dir_path : String) -> bool:
 	var dirExist : bool = dir.dir_exists(dir_path)
 	return dirExist
 
-# Save the current state of the level: Call both the .tscn save and the serialized save in the given dict
-static func save_level(level: Node, dict_to_fill: Dictionary):
-	dict_to_fill.clear()
-	save_level_as_tscn(level)
-	
-	if debug:
-		print_level_data(dict_to_fill)
-
 #Get audio and controls project settings and set them into a dictionary.
 # This dictionary _settings will be used later to save and load anytime a user wishes to
 static func settings_update_keys(settings_dictionary : Dictionary):
@@ -79,6 +71,15 @@ static func settings_update_keys(settings_dictionary : Dictionary):
 				"controls":
 					for keys in settings_dictionary[section]:
 						settings_dictionary[section][keys] = InputMap.get_action_list(keys)[0].scancode
+				"gameplay":
+					for keys in settings_dictionary[section]:
+						match(keys):
+							"level_id":
+								settings_dictionary[section][keys] = GAME.progression.get_level() + 1
+							"xion":
+								settings_dictionary[section][keys] = GAME.progression.get_xion()
+							"gear":
+								settings_dictionary[section][keys] = GAME.progression.get_gear()
 				_:
 					pass
 
@@ -98,12 +99,17 @@ static func load_settings(slot_id : int):
 	var save_files : Array = find_all_saves_directories()
 	var save_name : String = find_corresponding_save_file(save_files, slot_id)
 
+	if save_name == "":
+		return
+
 	var savecfg_path : String = SAVEGAME_DIR + "/" + save_name + "/settings.cfg"
+	
 	var error = GAME._config_file.load(savecfg_path)
 
 	if error == OK:
 		if debug:
 			print("SUCCESSFULLY LOADED SETTINGS CFG FILE. SUCCESS CODE : " + str(error))
+			print("From GameSaver.gd : Method Line 87 - Print Line 102+103")
 		for section in GAME._config_file.get_sections():
 			match(section):
 				"audio":
@@ -114,12 +120,24 @@ static func load_settings(slot_id : int):
 					#set controls settings
 					for control_keys in GAME._config_file.get_section_keys(section):
 						inputmapper.change_action_key(control_keys, GAME._config_file.get_value(section, control_keys))
+				"gameplay":
+					for keys in GAME._config_file.get_section_keys(section):
+						print(keys, int(keys))
+						match(keys):
+							"level_id":
+								GAME.progression.set_level(GAME._config_file.get_value(section, keys))
+							"xion":
+								GAME.progression.set_xion(GAME._config_file.get_value(section, keys))
+							"gear":
+								GAME.progression.set_gear(GAME._config_file.get_value(section, keys))
 				_:
 					pass
 	else:
 		if debug:
 			print("FAILED TO LOAD SETTINGS CFG FILE. ERROR CODE : " + str(error))
 		return
+	
+	GAME.goto_level(GAME.progression.get_level())
 
 # METHOD EXPLAINATION
 ### This method will return an array of every file considered as a SAVE FILE
@@ -135,6 +153,7 @@ static func find_all_saves_directories() -> Array:
 	if error == OK:
 		if debug:
 			print("SUCCESSFULLY LOADED SETTINGS CFG FILE. SUCCESS CODE : " + str(error))
+			print("From GameSaver.gd : Method Line 130 - Print Line 137+138")
 
 		saves_directory.list_dir_begin(true, true)
 		while true:
@@ -190,6 +209,7 @@ static func get_save_cfg_property_value_by_name_and_cfgid(cfgproperty_name : Str
 	if error == OK:
 		if debug:
 			print("SUCCESSFULLY LOADED SETTINGS CFG FILE. SUCCESS CODE : " + str(error))
+			print("From GameSaver.gd : Method Line 180 - Print Line 192+193")
 		for section in GAME._config_file.get_sections():
 			for keys in GAME._config_file.get_section_keys(section):
 				if keys == cfgproperty_name:

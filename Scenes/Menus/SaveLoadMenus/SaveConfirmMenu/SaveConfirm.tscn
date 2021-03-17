@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://BabaGodotLib/Fonts/BoldCapsPixel.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://BabaGodotLib/UI/Menu/MenuOptionBase.tscn" type="PackedScene" id=2]
@@ -10,11 +10,11 @@
 size = 24
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=2]
 size = 24
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 24
 font_data = ExtResource( 1 )
 
@@ -23,6 +23,14 @@ size = 24
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=5]
+size = 24
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 24
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=7]
 size = 24
 font_data = ExtResource( 1 )
 
@@ -99,30 +107,30 @@ __meta__ = {
 }
 
 [node name="CurrentSave" type="VBoxContainer" parent="SaveInformations" index="0"]
-margin_right = 457.0
-margin_bottom = 64.0
+margin_right = 405.0
+margin_bottom = 75.0
 size_flags_horizontal = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="SaveInformations/CurrentSave" index="0"]
-margin_right = 457.0
+margin_right = 405.0
 margin_bottom = 29.0
 size_flags_horizontal = 3
 
 [node name="c_savename" type="Label" parent="SaveInformations/CurrentSave/HBoxContainer" index="0"]
 margin_top = 5.0
-margin_right = 203.0
+margin_right = 151.0
 margin_bottom = 24.0
 custom_fonts/font = SubResource( 1 )
-text = "Current Save name : "
+text = "Current name : "
 valign = 1
 uppercase = true
 
 [node name="SaveNameField" type="LineEdit" parent="SaveInformations/CurrentSave/HBoxContainer" index="1"]
-margin_left = 207.0
-margin_right = 457.0
+margin_left = 155.0
+margin_right = 405.0
 margin_bottom = 29.0
 rect_min_size = Vector2( 250, 0 )
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 2 )
 align = 1
 max_length = 32
 expand_to_text_length = true
@@ -138,38 +146,58 @@ __meta__ = {
 
 [node name="c_savetime" type="Label" parent="SaveInformations/CurrentSave" index="1"]
 margin_top = 33.0
-margin_right = 457.0
+margin_right = 405.0
 margin_bottom = 52.0
-custom_fonts/font = SubResource( 2 )
-text = "Current Save Time : "
+custom_fonts/font = SubResource( 3 )
+text = "Current Time : "
+valign = 1
+uppercase = true
+
+[node name="c_savelevel" type="Label" parent="SaveInformations/CurrentSave" index="2"]
+margin_top = 56.0
+margin_right = 405.0
+margin_bottom = 75.0
+custom_fonts/font = SubResource( 4 )
+text = "Current Level : "
 valign = 1
 uppercase = true
 
 [node name="TargetSave" type="VBoxContainer" parent="SaveInformations" index="1"]
-margin_left = 608.0
-margin_top = 11.0
+margin_left = 565.0
+margin_top = 5.0
 margin_right = 800.0
-margin_bottom = 53.0
+margin_bottom = 70.0
 size_flags_vertical = 4
 alignment = 2
 
 [node name="t_savename" type="Label" parent="SaveInformations/TargetSave" index="0"]
-margin_right = 192.0
+margin_right = 225.0
 margin_bottom = 19.0
 size_flags_horizontal = 0
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 4 )
-text = "Target Save name : "
+custom_fonts/font = SubResource( 5 )
+text = "Targetted Save name : "
 valign = 1
 uppercase = true
 
 [node name="t_savetime" type="Label" parent="SaveInformations/TargetSave" index="1"]
 margin_top = 23.0
-margin_right = 192.0
+margin_right = 225.0
 margin_bottom = 42.0
 size_flags_horizontal = 0
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 5 )
-text = "Target Save Time : "
+custom_fonts/font = SubResource( 6 )
+text = "Targetted Save Time : "
+valign = 1
+uppercase = true
+
+[node name="t_savelevel" type="Label" parent="SaveInformations/TargetSave" index="2"]
+margin_top = 46.0
+margin_right = 235.0
+margin_bottom = 65.0
+size_flags_horizontal = 0
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 7 )
+text = "Targetted Save Level : "
 valign = 1
 uppercase = true

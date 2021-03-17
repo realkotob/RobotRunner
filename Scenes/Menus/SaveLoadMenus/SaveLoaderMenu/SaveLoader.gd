@@ -15,6 +15,8 @@ func get_class() -> String:
 
 func load_save(slot_id : int):
 	GameSaver.load_settings(slot_id)
+	GameSaver.load_level_from_saveslot()
+	queue_free()
 
 #### VIRTUALS ####
 

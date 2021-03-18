@@ -158,18 +158,37 @@ func goto_next_level():
 
 func goto_level(level_index : int):
 	var level : PackedScene = null
-	var level_id : int = 0
 
 	progression.set_checkpoint(-1)
 
-	level = current_chapter.load_level(level_index-1)
-	var level_name = current_chapter.get_level_name(level_id)
+	level = current_chapter.load_level(level_index)
+	var level_name = current_chapter.get_level_name(level_index)
 	GameSaver.delete_level_temp_saves(level_name)
 
 	var _err = get_tree().change_scene_to(level)
 	yield(EVENTS, "level_ready")
 	var current_level = get_tree().get_current_scene()
 	GameSaver.save_level_properties_as_json(current_level)
+
+
+
+func goto_level_by_path(level_scene_path: String):
+	var level_chapter_id : int = -1
+	var level_id : int = -1
+	
+	for i in range(chapters_array.size()):
+		var chapter = chapters_array[i]
+		level_id = chapter.get_level_id_by_path(level_scene_path)
+		if level_id != -1:
+			level_chapter_id = i
+			break
+	
+	if level_chapter_id != -1:
+		current_chapter = chapters_array[level_chapter_id]
+	else:
+		print_debug("The given path: " + level_scene_path + " can't be found in any chapter")
+	
+	goto_level(level_id)
 
 
 # Triggers the timer before the gameover is triggered

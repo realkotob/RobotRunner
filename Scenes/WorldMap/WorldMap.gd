@@ -102,9 +102,12 @@ func get_binds(level_node: LevelNode) -> Array:
 func enter_level():
 	var current_level_node = cursor.get_current_level()
 	if current_level_node != null && !current_level_node.is_visited():
-		var level_scene = current_level_node.get_level_scene()
-		if level_scene != null:
-			var _err = get_tree().change_scene_to(level_scene)
+		var current_level_path = current_level_node.get_level_scene_path()
+		
+		if current_level_path == "":
+			print("The LevelNode " + current_level_node.name + " doesn't have any scene path")
+		
+		GAME.goto_level_by_path(current_level_path)
 
 
 

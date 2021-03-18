@@ -14,6 +14,9 @@ func load_all_levels():
 	return levels_array
 
 
+func get_level_id_by_path(level_path: String):
+	return levels_scenes_array.find(level_path)
+
 func find_level_path(level_name: String) -> String:
 	var level_id = find_level_id(level_name)
 	return levels_scenes_array[level_id]

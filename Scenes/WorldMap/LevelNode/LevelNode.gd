@@ -8,7 +8,7 @@ enum EDITOR_SELECTED{
 	BIND_DESTINATION
 }
 
-export var level_scene : PackedScene = null setget , get_level_scene
+export var level_scene_path : String = "" setget , get_level_scene_path
 
 export var accessible : bool = true
 export var visited : bool = false setget set_visited, is_visited
@@ -43,7 +43,7 @@ func set_visited(value: bool):
 
 func is_visited() -> bool: return visited
 
-func get_level_scene() -> PackedScene: return level_scene
+func get_level_scene_path() -> String: return level_scene_path
 
 #### BUILT-IN ####
 
@@ -72,7 +72,6 @@ func get_binds() -> Array:
 
 func get_binds_count() -> int:
 	return get_binds().size()
-
 
 
 

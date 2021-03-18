@@ -7,7 +7,11 @@ const bind_scene = preload("res://Scenes/WorldMap/Bind/LevelNodeBind.tscn")
 onready var binds_container = $Binds
 onready var tween_node = $Tween
 
-var cursor : Node2D = null
+onready var characters_container = $Characters
+
+export var cursor_start_level_path : String = "" 
+
+onready var cursor : Node2D = $WorldMapCursor
 var cursor_moving : bool = false
 
 #### ACCESSORS ####
@@ -20,8 +24,7 @@ func get_class() -> String: return "LevelSelectionMenu"
 
 func _ready() -> void:
 	if !Engine.editor_hint:
-		cursor = find_node("WorldMapCursor")
-
+		cursor.set_current_level(get_node(cursor_start_level_path))
 
 #### VIRTUALS ####
 
@@ -38,44 +41,32 @@ func are_level_nodes_bounded(origin: LevelNode, dest: LevelNode) -> bool:
 
 func move_cursor(dir: Vector2):
 	var adequate_node = find_adequate_level(dir)
-	
-	if adequate_node == null:
-		return
-	
-	tween_node.interpolate_property(cursor, "global_position",
-		cursor.get_global_position(), adequate_node.get_global_position(),
-		1.0, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-	
-	tween_node.start()
-	cursor_moving = true
-	
-	yield(tween_node, "tween_all_completed")
-	var new_cursor = cursor.duplicate()
-	var cursor_global_pos = cursor.get_global_position()
-	cursor.queue_free()
-	
-	adequate_node.add_child(new_cursor)
-	new_cursor.call_deferred("set_global_position", cursor_global_pos)
-	cursor = new_cursor
-	
-	cursor_moving = false
+	cursor.move_to_level_node(adequate_node)
 
 
-func find_adequate_level(dir: Vector2) -> LevelNode:
-	var current_level_node = cursor.get_parent()
+func find_adequate_level(dir: Vector2, discard_opposite: bool = true) -> LevelNode:
+	var current_level_node = cursor.get_current_level()
 	var bounded_nodes_array = get_bounded_level_nodes(current_level_node)
 	var smallest_dist : float = INF
 	var closest_node : LevelNode = null
 	
+	# Find the level_node whose direction is the closest from the input direction
 	for level_node in bounded_nodes_array:
-		var relative_pos = level_node.get_global_position() - current_level_node.get_global_position()
-		
 		var node_dir = current_level_node.get_global_position().direction_to(level_node.get_global_position())
 		var dir_dist = dir.distance_to(node_dir)
 		
 		if dir_dist < smallest_dist:
 			smallest_dist = dir_dist
 			closest_node = level_node
+	
+	# Discard the closest node if its position is in this opposite direction
+	if discard_opposite:
+		if closest_node == null: return null
+		var relative_pos = closest_node.get_global_position() - current_level_node.get_global_position()
+		
+		if (dir in [Vector2.LEFT, Vector2.RIGHT] && sign(relative_pos.x) != dir.x) or \
+			(dir in [Vector2.UP, Vector2.DOWN] && sign(relative_pos.y) != dir.y) :
+			closest_node = null
 	
 	return closest_node
 
@@ -98,6 +89,7 @@ func get_bounded_level_nodes(node: LevelNode) -> Array:
 	
 	return bounded_nodes_array
 
+
 func get_binds(level_node: LevelNode) -> Array:
 	var bind_array := Array()
 	for bind in binds_container.get_children():
@@ -105,6 +97,16 @@ func get_binds(level_node: LevelNode) -> Array:
 			bind_array.append(level_node)
 	
 	return bind_array
+
+
+func enter_level():
+	var current_level_node = cursor.get_current_level()
+	if current_level_node != null && !current_level_node.is_visited():
+		var level_scene = current_level_node.get_level_scene()
+		if level_scene != null:
+			var _err = get_tree().change_scene_to(level_scene)
+
+
 
 #### INPUTS ####
 
@@ -123,7 +125,14 @@ func _input(_event: InputEvent) -> void:
 	
 	if Input.is_action_just_pressed("ui_left"):
 		move_cursor(Vector2.LEFT)
-
+	
+	if Input.is_action_just_pressed("ui_accept"):
+		var current_level_node = cursor.get_current_level()
+		if !characters_container.is_moving():
+			characters_container.enter_level(current_level_node)
+			
+			yield(characters_container, "enter_level_animation_finished")
+			enter_level()
 
 #### SIGNAL RESPONSES ####
 

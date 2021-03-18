@@ -3,9 +3,6 @@
 [ext_resource path="res://Scenes/InteractiveObjects/Collactables/Materials/Gear/Gear1.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/WorldMap/LevelNode/LevelNode.gd" type="Script" id=2]
 
-
-
-
 [node name="LevelNode" type="Sprite"]
 texture = ExtResource( 1 )
 script = ExtResource( 2 )

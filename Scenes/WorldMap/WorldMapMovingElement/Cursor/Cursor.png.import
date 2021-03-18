@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Cursor.png-e3846f54a5df54f7376ed4ba3b7d9218.stex"
+path="res://.import/Cursor.png-f56cd1e2822789ecefa2efec200aaf4e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/WorldMap/Cursor/Cursor.png"
-dest_files=[ "res://.import/Cursor.png-e3846f54a5df54f7376ed4ba3b7d9218.stex" ]
+source_file="res://Scenes/WorldMap/WorldMapMovingElement/Cursor/Cursor.png"
+dest_files=[ "res://.import/Cursor.png-f56cd1e2822789ecefa2efec200aaf4e.stex" ]
 
 [params]
 

@@ -1,9 +1,6 @@
-extends Node2D
+extends Sprite
 class_name WorldMapCharacter
 
-onready var sprite := $Sprite
-
-var texture : Texture = null setget set_texture
 
 #### ACCESSORS ####
 
@@ -13,8 +10,6 @@ func get_class() -> String: return "WorldMapCharacter"
 
 #### BUILT-IN ####
 
-func set_texture(value: Texture):
-	sprite.set_texture(value)
 
 
 #### VIRTUALS ####

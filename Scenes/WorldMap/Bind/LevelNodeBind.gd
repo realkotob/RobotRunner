@@ -13,6 +13,8 @@ var destination : Node2D setget set_destination, get_destination
 var origin_pos := Vector2.INF setget set_origin_pos
 var dest_pos := Vector2.INF setget set_dest_pos
 
+var point_path := PoolVector2Array() setget , get_point_path
+
 var is_ready : bool = false
 
 #### ACCESSORS ####
@@ -28,7 +30,7 @@ func set_origin(value: Node2D):
 		origin_node_path = owner.get_path_to(origin)
 	
 	if origin == null:
-		origin_pos == Vector2.INF
+		origin_pos = Vector2.INF
 
 func get_origin() -> Node2D: return origin
 
@@ -40,7 +42,7 @@ func set_destination(value: Node2D):
 		destination_node_path = owner.get_path_to(destination)
 	
 	if destination == null:
-		dest_pos == Vector2.INF
+		dest_pos = Vector2.INF
 
 func get_destination() -> Node2D: return destination
 
@@ -54,6 +56,8 @@ func set_dest_pos(value: Vector2):
 		dest_pos = value
 		_update_line()
 
+func get_point_path() -> PoolVector2Array: return point_path
+
 #### BUILT-IN ####
 
 func _ready() -> void:
@@ -66,11 +70,10 @@ func _ready() -> void:
 	is_ready = true
 
 
-func _process(delta: float) -> void:
-	if Engine.editor_hint:
-		if origin != null && destination != null:
-			set_origin_pos(origin.get_global_position())
-			set_dest_pos(destination.get_global_position())
+func _process(_delta: float) -> void:
+	if origin != null && destination != null:
+		set_origin_pos(origin.get_global_position())
+		set_dest_pos(destination.get_global_position())
 
 #### VIRTUALS ####
 
@@ -83,20 +86,23 @@ func _update_line():
 	if Vector2.INF in [origin_pos, dest_pos]:
 		return
 	
-	curve.clear_points()
-	
-	curve.add_point(origin_pos)
+	point_path = PoolVector2Array()
+	point_path.append(origin_pos)
 	
 	var x_dist = abs(origin_pos.x - dest_pos.x)
 	var y_dist = abs(origin_pos.y - dest_pos.y)
 	
 	if x_dist != 0.0 && y_dist != 0.0:
 		if x_dist > y_dist:
-			curve.add_point(Vector2(origin_pos.x, dest_pos.y))
+			point_path.append(Vector2(origin_pos.x, dest_pos.y))
 		else:
-			curve.add_point(Vector2(dest_pos.x, origin_pos.y))
+			point_path.append(Vector2(dest_pos.x, origin_pos.y))
 	
-	curve.add_point(dest_pos)
+	point_path.append(dest_pos)
+	
+	curve.clear_points()
+	for point in point_path:
+		curve.add_point(point)
 	
 	var points = curve.get_baked_points()
 	line.set_points(points)

@@ -24,7 +24,10 @@ func get_class() -> String: return "LevelSelectionMenu"
 
 func _ready() -> void:
 	if !Engine.editor_hint:
-		cursor.set_current_level(get_node(cursor_start_level_path))
+		var current_level = get_node(cursor_start_level_path)
+		
+		cursor.set_current_level(current_level)
+		characters_container.set_current_level(current_level)
 
 #### VIRTUALS ####
 
@@ -41,7 +44,7 @@ func are_level_nodes_bounded(origin: LevelNode, dest: LevelNode) -> bool:
 
 func move_cursor(dir: Vector2):
 	var adequate_node = find_adequate_level(dir)
-	cursor.move_to_level_node(adequate_node)
+	cursor.move_to_level(adequate_node)
 
 
 func find_adequate_level(dir: Vector2, discard_opposite: bool = true) -> LevelNode:
@@ -99,6 +102,14 @@ func get_binds(level_node: LevelNode) -> Array:
 	return bind_array
 
 
+func get_bind(origin: LevelNode, dest: LevelNode) -> LevelNodeBind:
+	for child in binds_container.get_children():
+		var bind_nodes = [child.get_origin(), child.get_destination()]
+		if origin in bind_nodes && dest in bind_nodes:
+			return child
+	return null
+
+
 func enter_level():
 	var current_level_node = cursor.get_current_level()
 	if current_level_node != null && !current_level_node.is_visited():
@@ -132,7 +143,7 @@ func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("ui_accept"):
 		var current_level_node = cursor.get_current_level()
 		if !characters_container.is_moving():
-			characters_container.enter_level(current_level_node)
+			characters_container.move_to_level(current_level_node)
 			
 			yield(characters_container, "enter_level_animation_finished")
 			enter_level()

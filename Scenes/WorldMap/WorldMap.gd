@@ -47,31 +47,20 @@ func move_cursor(dir: Vector2):
 	cursor.move_to_level(adequate_node)
 
 
-func find_adequate_level(dir: Vector2, discard_opposite: bool = true) -> LevelNode:
-	var current_level_node = cursor.get_current_level()
-	var bounded_nodes_array = get_bounded_level_nodes(current_level_node)
-	var smallest_dist : float = INF
-	var closest_node : LevelNode = null
+
+func find_adequate_level(dir: Vector2) -> LevelNode:
+	var current_level = cursor.get_current_level()
+	var level_node_binds = get_binds(current_level)
 	
-	# Find the level_node whose direction is the closest from the input direction
-	for level_node in bounded_nodes_array:
-		var node_dir = current_level_node.get_global_position().direction_to(level_node.get_global_position())
-		var dir_dist = dir.distance_to(node_dir)
-		
-		if dir_dist < smallest_dist:
-			smallest_dist = dir_dist
-			closest_node = level_node
+	for bind in level_node_binds:
+		if bind.get_path_direction_form_node(current_level) == dir:
+			if current_level == bind.get_origin():
+				return bind.get_destination()
+			else:
+				return bind.get_origin()
 	
-	# Discard the closest node if its position is in this opposite direction
-	if discard_opposite:
-		if closest_node == null: return null
-		var relative_pos = closest_node.get_global_position() - current_level_node.get_global_position()
-		
-		if (dir in [Vector2.LEFT, Vector2.RIGHT] && sign(relative_pos.x) != dir.x) or \
-			(dir in [Vector2.UP, Vector2.DOWN] && sign(relative_pos.y) != dir.y) :
-			closest_node = null
-	
-	return closest_node
+	return null
+
 
 
 func get_bounded_level_nodes(node: LevelNode) -> Array:
@@ -97,7 +86,7 @@ func get_binds(level_node: LevelNode) -> Array:
 	var bind_array := Array()
 	for bind in binds_container.get_children():
 		if bind.get_origin() == level_node or bind.get_destination() == level_node:
-			bind_array.append(level_node)
+			bind_array.append(bind)
 	
 	return bind_array
 

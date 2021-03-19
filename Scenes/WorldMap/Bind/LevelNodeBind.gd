@@ -108,6 +108,20 @@ func _update_line():
 	line.set_points(points)
 
 
+# Return the direction the path of the bind is aiming to, based on the given level_node 
+func get_path_direction_form_node(level_node: LevelNode) -> Vector2:
+	var path = get_point_path()
+	if level_node == destination:
+		path.invert()
+	
+	if path.size() <= 1:
+		return Vector2.ZERO
+	
+	var point_dir = path[0].direction_to(path[1])
+	return point_dir
+
+
+
 #### INPUTS ####
 
 

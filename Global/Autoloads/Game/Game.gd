@@ -60,6 +60,7 @@ var _settings ={
 		},
 		"gameplay":{
 			"level_id": -1,
+			"checkpoint_reached": -1,
 			"xion": 0,
 			"gear": 0
 		}
@@ -291,8 +292,8 @@ func on_transition_timer_timeout():
 # Called when the level is ready, correct
 func on_level_ready(level : Level):
 	last_level_name = level.get_name()
-	if progression.level == 0:
-		update_current_level_index(level)
+	#if progression.level == 0: <- Why ?
+	update_current_level_index(level)
 	fade_in()
 
 	if level is InfiniteLevel:

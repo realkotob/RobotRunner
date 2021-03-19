@@ -75,7 +75,9 @@ static func settings_update_keys(settings_dictionary : Dictionary):
 					for keys in settings_dictionary[section]:
 						match(keys):
 							"level_id":
-								settings_dictionary[section][keys] = GAME.progression.get_level() + 1
+								settings_dictionary[section][keys] = GAME.progression.get_level()
+							"checkpoint_reached":
+								settings_dictionary[section][keys] = GAME.progression.get_checkpoint()
 							"xion":
 								settings_dictionary[section][keys] = GAME.progression.get_xion()
 							"gear":
@@ -101,7 +103,8 @@ static func load_settings(slot_id : int):
 
 	if save_name == "":
 		return
-
+	
+	var save_path : String = SAVEGAME_DIR + "/" + save_name + "/"
 	var savecfg_path : String = SAVEGAME_DIR + "/" + save_name + "/settings.cfg"
 	
 	var error = GAME._config_file.load(savecfg_path)
@@ -122,10 +125,12 @@ static func load_settings(slot_id : int):
 						inputmapper.change_action_key(control_keys, GAME._config_file.get_value(section, control_keys))
 				"gameplay":
 					for keys in GAME._config_file.get_section_keys(section):
-						print(keys, int(keys))
+						print(keys + " : " + str(GAME._config_file.get_value(section, keys)))
 						match(keys):
 							"level_id":
 								GAME.progression.set_level(GAME._config_file.get_value(section, keys))
+							"checkpoint_reached":
+								GAME.progression.set_checkpoint(GAME._config_file.get_value(section, keys))
 							"xion":
 								GAME.progression.set_xion(GAME._config_file.get_value(section, keys))
 							"gear":
@@ -137,7 +142,7 @@ static func load_settings(slot_id : int):
 			print("FAILED TO LOAD SETTINGS CFG FILE. ERROR CODE : " + str(error))
 		return
 	
-	GAME.goto_level(GAME.progression.get_level())
+	return save_path
 
 # METHOD EXPLAINATION
 ### This method will return an array of every file considered as a SAVE FILE
@@ -213,9 +218,7 @@ static func get_save_cfg_property_value_by_name_and_cfgid(cfgproperty_name : Str
 		for section in GAME._config_file.get_sections():
 			for keys in GAME._config_file.get_section_keys(section):
 				if keys == cfgproperty_name:
-					print("FOUND PROPERTY BY NAME : ", str(keys))
 					var property_value = GAME._config_file.get_value(section, keys)
-					print("PROPERTY VALUE : ", str(property_value))
 					return property_value
 	else:
 		if debug:
@@ -231,7 +234,6 @@ static func save_level_as_tscn(level: Node2D):
 	saved_level.pack(level)
 	var _err = ResourceSaver.save(SAVEDLEVEL_DIR + "/tscn/" + level_name + ".tscn", saved_level)
 
-
 # Find recursivly every wanted nodes, and extract their wanted properties
 static func serialize_level_properties(current_node : Node, dict_to_fill : Dictionary):
 	var classes_to_scan_array = objects_datatype_storage.keys()
@@ -245,7 +247,6 @@ static func serialize_level_properties(current_node : Node, dict_to_fill : Dicti
 		
 		if child.get_child_count() != 0:
 			serialize_level_properties(child, dict_to_fill)
-
 
 static func deserialize_level_properties(file_path : String):
 	var level_properties  : String = ""

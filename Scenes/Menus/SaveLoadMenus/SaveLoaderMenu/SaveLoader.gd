@@ -14,9 +14,20 @@ func get_class() -> String:
 #### LOGIC ####
 
 func load_save(slot_id : int):
-	GameSaver.load_settings(slot_id)
-	GameSaver.load_level_from_saveslot()
-	queue_free()
+	var save_path : String = str(GameSaver.load_settings(slot_id))
+	var tscn_path : String = save_path + "SavedLevel.tscn"
+	
+	if save_path != "Null" or save_path != "":
+		var file = File.new()
+		var _err = file.open(tscn_path, File.READ)
+		
+		if _err != OK:
+			print(str(_err))
+			return
+		
+		print("line 27 method load_save line 16 of SaveLoader.gd")
+		get_tree().change_scene(tscn_path)
+		queue_free()
 
 #### VIRTUALS ####
 

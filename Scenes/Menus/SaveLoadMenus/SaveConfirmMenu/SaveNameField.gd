@@ -1,5 +1,9 @@
 extends LineEdit
 
+var namestaken_info_node
+var submitsave_button
+var save_files : Array = []
+
 #### ACCESSORS ####
 
 func is_class(value: String):
@@ -8,15 +12,28 @@ func is_class(value: String):
 func get_class() -> String:
 	return ""
 
+
+
 #### BUILT-IN ####
 
 func _ready():
 	var _err
 	_err = connect("text_changed", self, "_on_text_changed")
-
+	
+	save_files = GameSaver.find_all_saves_directories()
+	
 #### LOGIC ####
 
-
+func check_if_name_is_already_taken(name : String) -> bool:
+	var is_taken : bool = false
+	for savefile in save_files:
+		if savefile.to_upper().capitalize() == name.to_upper().capitalize():
+			is_taken = true
+			return is_taken
+		else:
+			is_taken = false
+			continue
+	return is_taken
 
 #### VIRTUALS ####
 
@@ -38,3 +55,10 @@ func _on_text_changed(new_text):
 		word += textchar.get_string()
 	self.set_text(word)
 	caret_position = old_caret_position
+	
+	if check_if_name_is_already_taken(word):
+		namestaken_info_node.visible = true
+		submitsave_button.disabled = true
+	else:
+		namestaken_info_node.visible = false
+		submitsave_button.disabled = false

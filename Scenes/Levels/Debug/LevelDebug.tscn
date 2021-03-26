@@ -17,7 +17,6 @@
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Buttons/ChildrenScenes/BlueButton.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/InteractiveObjects/Buttons&Doors/Door/ChildrenScenes/BlueDoor.tscn" type="PackedScene" id=16]
 
-
 [node name="LevelDebug" instance=ExtResource( 4 )]
 
 [node name="DebrisGenerator" parent="." index="2"]

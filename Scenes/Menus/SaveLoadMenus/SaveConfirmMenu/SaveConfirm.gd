@@ -5,10 +5,12 @@ class_name SaveConfirmMenu
 onready var currentsave_container_node = $SaveInformations/CurrentSave
 onready var lineedit_csavename_node = $SaveInformations/CurrentSave/HBoxContainer/SaveNameField
 onready var label_csavetime_node = $SaveInformations/CurrentSave/c_savetime
+onready var label_csavelevel_node = $SaveInformations/CurrentSave/c_savelevel
 
 onready var targetsave_container_node = $SaveInformations/TargetSave
 onready var label_tsavename_node = $SaveInformations/TargetSave/t_savename
 onready var label_tsavetime_node = $SaveInformations/TargetSave/t_savetime
+onready var label_tsavelevel_node = $SaveInformations/TargetSave/t_savelevel
 
 var save_id : int
 var savefile_array : Array
@@ -29,6 +31,11 @@ func _ready():
 	savefile_array = GameSaver.find_all_saves_directories()
 	savefile_path = GameSaver.find_corresponding_save_file(savefile_array, save_id)
 	update_menu_labels()
+	
+	if "namestaken_info_node" in lineedit_csavename_node:
+		lineedit_csavename_node.namestaken_info_node = $SaveInformations/CurrentSave/c_savenamestaken
+	if "submitsave_button" in lineedit_csavename_node:
+		lineedit_csavename_node.submitsave_button = $"HBoxContainer/V_OptContainer/Confirm Save"
 
 #### LOGIC ####
 
@@ -42,12 +49,14 @@ func update_menu_labels():
 
 func update_currentsave_informations():
 	label_csavetime_node.text = label_csavetime_node.text + str(OS.get_datetime().get("day")) + "/" + str(OS.get_datetime().get("month"))  +  "/" + str(OS.get_datetime().get("year")) + " " + str(OS.get_datetime().get("hour")) + "h" + str(OS.get_datetime().get("minute")) + ":" + str(OS.get_datetime().get("second"))
+	label_csavelevel_node.text = label_csavelevel_node.text + "Level " + str(GAME.progression.get_level() + 1)
 	
 func update_targetsave_informations():
 	var target_cfg_save_time : Dictionary = {}
 	target_cfg_save_time = GameSaver.get_save_cfg_property_value_by_name_and_cfgid("time",save_id)
 	label_tsavename_node.text = label_tsavename_node.text  + savefile_path
 	label_tsavetime_node.text = label_tsavetime_node.text + str(target_cfg_save_time.get("day")) + "/" + str(target_cfg_save_time.get("month"))  +  "/" + str(target_cfg_save_time.get("year")) + " " + str(target_cfg_save_time.get("hour")) + "h" + str(target_cfg_save_time.get("minute")) + ":" + str(target_cfg_save_time.get("second"))
+	label_tsavelevel_node.text = label_tsavelevel_node.text + "Level " + str(GameSaver.get_save_cfg_property_value_by_name_and_cfgid("level_id",save_id) + 1)
 
 func submit_and_save_game():
 	var save_name : String = lineedit_csavename_node.text
@@ -67,10 +76,46 @@ func submit_and_save_game():
 				if save_id == existing_save_id:
 					if dir.open("res://saves/" + folder) == OK:
 						dir.remove("res://saves/" + folder + "/settings.cfg")
+						dir.remove("res://saves/" + folder + "/SavedLevel.tscn")
 						dir.remove("res://saves/" + folder)
 	
 	GameSaver.create_dirs(GameSaver.SAVEGAME_DIR, [save_name])
 	GameSaver.save_settings(GameSaver.SAVEGAME_DIR + "/" + save_name)
+	copy_saved_level_tscn(save_name)
+
+# IMPORTANT WARNING # IMPORTANT WARNING # IMPORTANT WARNING # IMPORTANT WARNING # IMPORTANT WARNING #
+#############################################################################################################
+### ISSUE WITH THIS METHOD WHICH WILL BE IGNORED LATER :                                                  ###
+### SAVING A LEVEL AFTER REACHING A CHECKPOINT                                                            ###
+### (SO AFTER THAT THE SAVED LEVEL GOT GENERATED IN Scenes/Levels/SavedLevels/tscn/LevelXX.tscn)          ###
+### REBOOTING THE GAME, LOADING SAVE (= LOAD SAVEDLEVEL IN SAVEDIRECTORY/SavedLevel.tscn)                 ###
+### AND SAVING AGAIN WILL BREAK THE GAME BECAUSE EVERY FOLDERS IN Scenes/Levels/SavedLevels/json + /tscn  ###
+### WILL BE REMOVED AT GAME LAUNCH, SO THE SAVE FOLDER WILL ONLY CONTAIN A SINGLE CFG FILE                ###
+#############################################################################################################
+
+# Solution :
+## It will be solved thanks to the future saving system :
+## We will automatically save the game after a level is finished by players
+## This feature can be disabled by players in option menu
+
+# IMPORTANT WARNING # IMPORTANT WARNING # IMPORTANT WARNING # IMPORTANT WARNING # IMPORTANT WARNING # 
+func copy_saved_level_tscn(save_name : String):
+	var levels_save_dir = GameSaver.SAVEDLEVEL_DIR + GameSaver.SAVEDLEVEL_TSCN_DIR
+	var copy_destination : String = GameSaver.SAVEGAME_DIR+ "/" + save_name + "/"
+	var tscn_level_to_copy : String = GAME.find_saved_level_path(levels_save_dir, GAME.current_chapter.get_level_name(int(GameSaver.get_save_cfg_property_value_by_name_and_cfgid("level_id",save_id))))
+
+	# If no save of the current level exists, reload the same scene
+	if tscn_level_to_copy != "":
+		var dir = Directory.new()
+		var _err = dir.open(copy_destination)
+		if _err == OK:
+			var _cpyerr = dir.copy(tscn_level_to_copy, copy_destination + "SavedLevel.tscn")
+			if _cpyerr != OK:
+				print("Cannot copy destination. Error Code : " + str(_cpyerr))
+				print("Error returned by SaveConfirm.gd Method Line 80 - Print Line 92+93")
+		else:
+			print("Cannot open copy destination. Error Code : " + str(_err))
+			print("Error returned by SaveConfirm.gd Method Line 80 - Print Line 95+96")
 
 #### VIRTUALS ####
 

@@ -4,7 +4,6 @@
 [ext_resource path="res://Scenes/Menus/SaveLoadMenus/SlotSaverMenu/SlotSaver.gd" type="Script" id=3]
 [ext_resource path="res://BabaGodotLib/UI/Menu/OptionButtons/MenuOptionBase.tscn" type="PackedScene" id=5]
 
-
 [node name="SlotSaverMenu" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 

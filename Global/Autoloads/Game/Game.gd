@@ -42,21 +42,27 @@ var _settings ={
 			"sounds": AudioServer.get_bus_volume_db(sound_bus_id)
 		},
 		"controls":{
-				"jump_player1": InputMap.get_action_list("jump_player1")[0].scancode,
-				"move_left_player1": InputMap.get_action_list("move_left_player1")[0].scancode,
-				"move_right_player1": InputMap.get_action_list("move_right_player1")[0].scancode,
-				"teleport_player1": InputMap.get_action_list("teleport_player1")[0].scancode,
-				"action_player1": InputMap.get_action_list("action_player1")[0].scancode,
+			"jump_player1": InputMap.get_action_list("jump_player1")[0].scancode,
+			"move_left_player1": InputMap.get_action_list("move_left_player1")[0].scancode,
+			"move_right_player1": InputMap.get_action_list("move_right_player1")[0].scancode,
+			"teleport_player1": InputMap.get_action_list("teleport_player1")[0].scancode,
+			"action_player1": InputMap.get_action_list("action_player1")[0].scancode,
 				
-				"jump_player2": InputMap.get_action_list("jump_player2")[0].scancode,
-				"move_left_player2": InputMap.get_action_list("move_left_player2")[0].scancode,
-				"move_right_player2": InputMap.get_action_list("move_right_player2")[0].scancode,
-				"teleport_player2": InputMap.get_action_list("teleport_player2")[0].scancode,
-				"action_player2": InputMap.get_action_list("action_player2")[0].scancode,
+			"jump_player2": InputMap.get_action_list("jump_player2")[0].scancode,
+			"move_left_player2": InputMap.get_action_list("move_left_player2")[0].scancode,
+			"move_right_player2": InputMap.get_action_list("move_right_player2")[0].scancode,
+			"teleport_player2": InputMap.get_action_list("teleport_player2")[0].scancode,
+			"action_player2": InputMap.get_action_list("action_player2")[0].scancode,
 				
-				"game_restart": InputMap.get_action_list("game_restart")[0].scancode,
-				"HUD_switch_state": InputMap.get_action_list("HUD_switch_state")[0].scancode,
-				"display_console": InputMap.get_action_list("display_console")[0].scancode
+			"game_restart": InputMap.get_action_list("game_restart")[0].scancode,
+			"HUD_switch_state": InputMap.get_action_list("HUD_switch_state")[0].scancode,
+			"display_console": InputMap.get_action_list("display_console")[0].scancode
+		},
+		"gameplay":{
+			"level_id": -1,
+			"checkpoint_reached": -1,
+			"xion": 0,
+			"gear": 0
 		}
 	}
 
@@ -305,12 +311,12 @@ func on_transition_timer_timeout():
 # Called when the level is ready, correct
 func on_level_ready(level : Level):
 	last_level_name = level.get_name()
-	if progression.level == 0:
-		update_current_level_index(level)
+	#if progression.level == 0: <- Why ?
+	update_current_level_index(level)
 	fade_in()
 
 	if level is InfiniteLevel:
-		GameSaver.save_level(level, progression.main_stored_objects)
+		GameSaver.save_level_as_tscn(level)
 		GameSaver.save_level_properties_as_json(level)
 
 
@@ -319,7 +325,7 @@ func on_checkpoint_reached(level: Level, checkpoint_id: int):
 	if checkpoint_id + 1 > GAME.progression.checkpoint:
 		progression.checkpoint = checkpoint_id + 1
 
-	GameSaver.save_level(level, progression.main_stored_objects)
+	GameSaver.save_level_as_tscn(level)
 
 
 func on_seed_change_query(new_seed: int):

@@ -31,7 +31,7 @@ func get_class() -> String:
 func _ready():
 	scene_ready = true
 	load_slot_button_nodes_array = [load_slot1_node, load_slot2_node, load_slot3_node]
-	
+
 	for i in range(0,3):
 		var save_name : String = GameSaver.get_save_cfg_property_value_by_name_and_cfgid("save_name",i+1)
 		if save_name == "":
@@ -62,11 +62,11 @@ func update_save_information(slot_id : int):
 func load_save(slot_id : int):
 	var save_path : String = str(GameSaver.load_settings(slot_id))
 	var tscn_path : String = save_path + "SavedLevel.tscn"
-	
+
 	if save_path != "Null" or save_path != "":
 		var file = File.new()
 		var _err = file.open(tscn_path, File.READ)
-		
+
 		if _err != OK:
 			return
 
@@ -88,7 +88,7 @@ func _on_menu_option_focus_changed(_button : Button, focus: bool) -> void:
 	any_button_focused = true
 	if focus && choice_sound_node != null:
 		choice_sound_node.play()
-	
+
 	var buttonindex = _button.get_index()+1
 	var target_save_time = GameSaver.get_save_cfg_property_value_by_name_and_cfgid("time", buttonindex)
 	if typeof(target_save_time) == TYPE_STRING:
@@ -101,4 +101,3 @@ func _on_menu_option_chose(option: MenuOptionsBase):
 			navigate_sub_menu(MENUS.title_screen_scene.instance())
 		_:
 			load_save(option.get_index()+1)
-

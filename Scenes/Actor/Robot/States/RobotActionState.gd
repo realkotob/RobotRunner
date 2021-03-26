@@ -3,7 +3,6 @@ class_name RobotActionState
 
 var has_damaged : bool = false
 
-onready var audio_node = get_node_or_null("AudioStreamPlayer")
 
 #### ACCESSORS ####
 
@@ -34,12 +33,7 @@ func enter_state():
 	if not owner is Player:
 		owner.set_direction(0)
 	
-	# Play the animation
-	animated_sprite.play(self.name)
-	
-	# Play the audio
-	if audio_node != null:
-		audio_node.play()
+	.enter_state()
 	
 	# Set the hitbox active
 	hit_box_shape.set_disabled(false)

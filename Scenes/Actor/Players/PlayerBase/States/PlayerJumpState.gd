@@ -10,6 +10,7 @@ func _ready() -> void:
 	inputs_node = owner.get_node_or_null("Inputs")
 
 
+
 #### INPUTS ####
 
 # Define the actions the player can do in this state

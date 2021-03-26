@@ -1,4 +1,4 @@
 .import
 *.translation
 */SavedLevel/*
-*.cfg
+*/saves/*

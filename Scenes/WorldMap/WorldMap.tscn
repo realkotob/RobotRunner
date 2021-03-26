@@ -52,24 +52,43 @@ __meta__ = {
 self_modulate = Color( 0.66, 0.66, 0.66, 1 )
 position = Vector2( 57.9876, 243.463 )
 level_scene_path = "res://Scenes/Levels/Chapter1/Level1/Level1A.tscn"
+accessible = true
 visited = true
 
 [node name="LevelNode2" parent="Levels" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 1, 1, 1 )
 position = Vector2( 334.553, 452.107 )
 level_scene_path = "res://Scenes/Levels/Chapter1/Level1/Level1B.tscn"
+accessible = true
+visited = false
 
 [node name="LevelNode3" parent="Levels" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 1, 1, 1 )
 position = Vector2( 244.081, 122.334 )
 level_scene_path = "res://Scenes/Levels/Chapter1/Level1/Level1C.tscn"
+accessible = true
+visited = false
 
 [node name="LevelNode4" parent="Levels" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 1, 1, 1 )
 position = Vector2( 669.808, 250.821 )
+level_scene_path = ""
+accessible = true
+visited = false
 
 [node name="LevelNode5" parent="Levels" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 1, 1, 1 )
 position = Vector2( 433.348, 252.043 )
+level_scene_path = ""
+accessible = true
+visited = false
 
 [node name="LevelNode6" parent="Levels" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 1, 1, 1 )
 position = Vector2( 730.908, 114.845 )
+level_scene_path = ""
+accessible = true
+visited = false
 
 [node name="Binds" type="Node2D" parent="."]
 __meta__ = {

@@ -12,7 +12,7 @@
 [ext_resource path="res://Scenes/Fog/CosmeticFog/Fog.shader" type="Shader" id=10]
 [ext_resource path="res://Scenes/Menus/ScreenTitle/Sprites/RobotHead.png" type="Texture" id=11]
 [ext_resource path="res://Global/Lights/Light500.png" type="Texture" id=12]
-[ext_resource path="res://BabaGodotLib/UI/Menu/MenuOptionBase.tscn" type="PackedScene" id=13]
+[ext_resource path="res://BabaGodotLib/UI/Menu/OptionButtons/MenuOptionBase.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/Fog/CosmeticFog/FogNoise1.tres" type="Texture" id=14]
 [ext_resource path="res://Scenes/Fog/CosmeticFog/FogNoise2.tres" type="Texture" id=15]
 

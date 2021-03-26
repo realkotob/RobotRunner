@@ -71,7 +71,7 @@ func load_save(slot_id : int):
 			return
 		
 		print("line 27 method load_save line 16 of SaveLoader.gd")
-		get_tree().change_scene(tscn_path)
+		var __ = get_tree().change_scene(tscn_path)
 		queue_free()
 
 #### VIRTUALS ####

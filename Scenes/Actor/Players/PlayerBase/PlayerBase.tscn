@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Scenes/Actor/Players/PlayerBase/Scripts/PlayerBase.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Actor/Players/PlayerBase/States/PlayerJumpState.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Scenes/Actor/SeeThroughWalls.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Actor/Players/PlayerBase/States/PlayerActionState.gd" type="Script" id=6]
 [ext_resource path="res://Scenes/Actor/Players/PlayerBase/States/PlayerIdleState.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/Actor/Sounds/JumpSound.ogg" type="AudioStream" id=8]
 [ext_resource path="res://Scenes/Actor/ActorBase.tscn" type="PackedScene" id=10]
 [ext_resource path="res://BabaGodotLib/Fonts/BoldCapsPixel64.tres" type="DynamicFont" id=12]
 [ext_resource path="res://Scenes/Actor/Players/PlayerBase/States/PlayerMoveState.gd" type="Script" id=13]
@@ -169,8 +170,14 @@ script = ExtResource( 7 )
 [node name="Move" type="Node" parent="StatesMachine" index="1"]
 script = ExtResource( 13 )
 
-[node name="Jump" type="Node" parent="StatesMachine" index="2"]
+[node name="Jump" type="Node2D" parent="StatesMachine" index="2"]
 script = ExtResource( 2 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="StatesMachine/Jump" index="0"]
+stream = ExtResource( 8 )
+volume_db = -17.0
+pitch_scale = 1.37
+bus = "Sounds"
 
 [node name="Fall" type="Node" parent="StatesMachine" index="3"]
 script = ExtResource( 4 )
@@ -190,7 +197,6 @@ script = ExtResource( 6 )
 bus = "Sounds"
 
 [node name="StateLabel" type="Label" parent="StatesMachine" index="5"]
-visible = false
 margin_left = -56.8554
 margin_top = -81.0958
 margin_right = 60.1446

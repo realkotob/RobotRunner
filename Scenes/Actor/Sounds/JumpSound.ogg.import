@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/JumpSound.ogg-dee0979d080b36a12bc816efdb5efde5.oggstr"
+
+[deps]
+
+source_file="res://Scenes/Actor/Sounds/JumpSound.ogg"
+dest_files=[ "res://.import/JumpSound.ogg-dee0979d080b36a12bc816efdb5efde5.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

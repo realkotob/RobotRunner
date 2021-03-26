@@ -44,6 +44,9 @@ func are_level_nodes_bounded(origin: LevelNode, dest: LevelNode) -> bool:
 
 func move_cursor(dir: Vector2):
 	var adequate_node = find_adequate_level(dir)
+	if adequate_node == null:
+		return
+	
 	cursor.move_to_level(adequate_node)
 
 

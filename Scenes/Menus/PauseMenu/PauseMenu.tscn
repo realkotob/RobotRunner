@@ -4,6 +4,7 @@
 [ext_resource path="res://BabaGodotLib/UI/Menu/OptionButtons/MenuOptionBase.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Menus/PauseMenu/PauseMenu.gd" type="Script" id=3]
 
+
 [node name="PauseMenu" instance=ExtResource( 1 )]
 grow_horizontal = 2
 grow_vertical = 2

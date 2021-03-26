@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/WorldMapEditor/ConfirmBoundCreation.gd" type="Script" id=1]
+[ext_resource path="res://BabaGodotLib/Fonts/BoldCapsPixel48.tres" type="DynamicFont" id=2]
+[ext_resource path="res://BabaGodotLib/UI/Menu/MenuOptionBase.tscn" type="PackedScene" id=3]
+
+[node name="ConfirmBoundCreation" type="Control"]
+margin_left = -99.0
+margin_top = -109.0
+margin_right = 101.0
+margin_bottom = -39.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 201.0
+margin_bottom = 86.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_right = 201.0
+margin_bottom = 38.0
+custom_fonts/font = ExtResource( 2 )
+text = "Create a Bound?"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 42.0
+margin_right = 201.0
+margin_bottom = 86.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuOptionBase" parent="VBoxContainer/HBoxContainer" instance=ExtResource( 3 )]
+margin_right = 57.0
+text = "Yes"
+
+[node name="MenuOptionBase2" parent="VBoxContainer/HBoxContainer" instance=ExtResource( 3 )]
+margin_left = 61.0
+margin_right = 106.0
+text = "No"

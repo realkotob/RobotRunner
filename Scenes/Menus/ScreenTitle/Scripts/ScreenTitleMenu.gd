@@ -10,6 +10,7 @@ onready var seed_field = $HBoxContainer/V_OptContainer/InfiniteMode/SeedField
 func is_class(value: String): return value == "ScreenTitleMenu" or .is_class(value)
 func get_class() -> String: return "ScreenTitleMenu"
 
+
 #### BUILT-IN ####
 
 

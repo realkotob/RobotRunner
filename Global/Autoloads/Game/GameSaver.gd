@@ -58,11 +58,12 @@ static func check_if_dir_exist(dir_path : String) -> bool:
 
 #Get audio and controls project settings and set them into a dictionary.
 # This dictionary _settings will be used later to save and load anytime a user wishes to
-static func settings_update_keys(settings_dictionary : Dictionary):
+static func settings_update_keys(settings_dictionary : Dictionary, save_name : String = ""):
 	for section in settings_dictionary:
 			match(section):
 				"system":
 					settings_dictionary[section]["time"] = OS.get_datetime()
+					settings_dictionary[section]["save_name"] = save_name
 				"audio":
 					for keys in settings_dictionary[section]:
 						if str(AudioServer.get_bus_volume_db(AudioServer.get_bus_index(keys.capitalize()))) == "-1.#INF":
@@ -85,9 +86,12 @@ static func settings_update_keys(settings_dictionary : Dictionary):
 				_:
 					pass
 
+static func settings_update_save_name(settings_dictionary  : Dictionary, save_name : String):
+	settings_dictionary["system"]["save_name"] = save_name
+
 # Save settings into a config file : res://saves/save1/2/3
-static func save_settings(path : String):
-	settings_update_keys(GAME._settings)
+static func save_settings(path : String, save_name : String):
+	settings_update_keys(GAME._settings, save_name)
 	for section in GAME._settings.keys():
 		for key in GAME._settings[section]:
 			GAME._config_file.set_value(section, key, GAME._settings[section][key])
@@ -125,7 +129,6 @@ static func load_settings(slot_id : int):
 						inputmapper.change_action_key(control_keys, GAME._config_file.get_value(section, control_keys))
 				"gameplay":
 					for keys in GAME._config_file.get_section_keys(section):
-						print(keys + " : " + str(GAME._config_file.get_value(section, keys)))
 						match(keys):
 							"level_id":
 								GAME.progression.set_level(GAME._config_file.get_value(section, keys))

@@ -56,7 +56,7 @@ func update_targetsave_informations():
 	target_cfg_save_time = GameSaver.get_save_cfg_property_value_by_name_and_cfgid("time",save_id)
 	label_tsavename_node.text = label_tsavename_node.text  + savefile_path
 	label_tsavetime_node.text = label_tsavetime_node.text + str(target_cfg_save_time.get("day")) + "/" + str(target_cfg_save_time.get("month"))  +  "/" + str(target_cfg_save_time.get("year")) + " " + str(target_cfg_save_time.get("hour")) + "h" + str(target_cfg_save_time.get("minute")) + ":" + str(target_cfg_save_time.get("second"))
-	label_tsavelevel_node.text = label_tsavelevel_node.text + "Level " + str(GameSaver.get_save_cfg_property_value_by_name_and_cfgid("level_id",save_id) + 1)
+	label_tsavelevel_node.text = label_tsavelevel_node.text + "Level " + str(GameSaver.get_save_cfg_property_value_by_name_and_cfgid("level_id",save_id))
 
 func submit_and_save_game():
 	var save_name : String = lineedit_csavename_node.text
@@ -80,7 +80,7 @@ func submit_and_save_game():
 						dir.remove("res://saves/" + folder)
 	
 	GameSaver.create_dirs(GameSaver.SAVEGAME_DIR, [save_name])
-	GameSaver.save_settings(GameSaver.SAVEGAME_DIR + "/" + save_name)
+	GameSaver.save_settings(GameSaver.SAVEGAME_DIR + "/" + save_name, save_name)
 	copy_saved_level_tscn(save_name)
 
 # IMPORTANT WARNING # IMPORTANT WARNING # IMPORTANT WARNING # IMPORTANT WARNING # IMPORTANT WARNING #

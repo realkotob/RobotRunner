@@ -35,6 +35,7 @@ var _config_file = ConfigFile.new()
 var _settings ={
 		"system":{
 			"slot_id": 1,
+			"save_name": "none",
 			"time": "unknown"
 		},
 		"audio":{

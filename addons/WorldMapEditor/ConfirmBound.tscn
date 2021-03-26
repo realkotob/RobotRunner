@@ -2,7 +2,7 @@
 
 [ext_resource path="res://addons/WorldMapEditor/ConfirmBoundCreation.gd" type="Script" id=1]
 [ext_resource path="res://BabaGodotLib/Fonts/BoldCapsPixel48.tres" type="DynamicFont" id=2]
-[ext_resource path="res://BabaGodotLib/UI/Menu/MenuOptionBase.tscn" type="PackedScene" id=3]
+[ext_resource path="res://BabaGodotLib/UI/Menu/OptionButtons/MenuOptionBase.tscn" type="PackedScene" id=3]
 
 [node name="ConfirmBoundCreation" type="Control"]
 margin_left = -99.0

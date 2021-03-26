@@ -36,7 +36,7 @@ func _on_menu_option_chose(option: MenuOptionsBase):
 	match(option_name):
 		"NewGame":
 			queue_free()
-			_err = GAME.goto_level(1)
+			_err = GAME.goto_level(0)
 		"LoadGame": 
 			_err = navigate_sub_menu(MENUS.saveloader_menu_scene.instance())
 		"InfiniteMode":

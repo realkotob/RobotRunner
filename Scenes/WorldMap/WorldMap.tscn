@@ -10,32 +10,32 @@
 
 [sub_resource type="Curve2D" id=1]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 57.9876, 243.463, 0, 0, 0, 0, 57.9876, 122.334, 0, 0, 0, 0, 244.081, 122.334 )
+"points": PoolVector2Array( 0, 0, 0, 0, 54.5021, 253.45, 0, 0, 0, 0, 54.5021, 154.342, 0, 0, 0, 0, 280.005, 154.342 )
 }
 
 [sub_resource type="Curve2D" id=2]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 57.9876, 243.463, 0, 0, 0, 0, 57.9876, 452.107, 0, 0, 0, 0, 334.553, 452.107 )
+"points": PoolVector2Array( 0, 0, 0, 0, 54.5021, 291.45, 0, 0, 0, 0, 54.5021, 475.212, 0, 0, 0, 0, 319.305, 475.212 )
 }
 
 [sub_resource type="Curve2D" id=3]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 244.081, 122.334, 0, 0, 0, 0, 244.081, 252.043, 0, 0, 0, 0, 433.348, 252.043 )
+"points": PoolVector2Array( 0, 0, 0, 0, 299.005, 173.342, 0, 0, 0, 0, 299.005, 231.156, 0, 0, 0, 0, 520.802, 231.156 )
 }
 
 [sub_resource type="Curve2D" id=4]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 334.553, 452.107, 0, 0, 0, 0, 433.348, 452.107, 0, 0, 0, 0, 433.348, 252.043 )
+"points": PoolVector2Array( 0, 0, 0, 0, 357.305, 475.212, 0, 0, 0, 0, 539.802, 475.212, 0, 0, 0, 0, 539.802, 250.156 )
 }
 
 [sub_resource type="Curve2D" id=5]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 433.348, 252.043, 0, 0, 0, 0, 433.348, 250.821, 0, 0, 0, 0, 669.808, 250.821 )
+"points": PoolVector2Array( 0, 0, 0, 0, 558.802, 231.156, 0, 0, 0, 0, 645.227, 231.156, 0, 0, 0, 0, 645.227, 420.518 )
 }
 
 [sub_resource type="Curve2D" id=6]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 669.808, 250.821, 0, 0, 0, 0, 730.908, 250.821, 0, 0, 0, 0, 730.908, 114.845 )
+"points": PoolVector2Array( 0, 0, 0, 0, 664.227, 439.518, 0, 0, 0, 0, 767.749, 439.518, 0, 0, 0, 0, 767.749, 232.298 )
 }
 
 [node name="WorldMap" type="CanvasLayer"]
@@ -50,45 +50,26 @@ __meta__ = {
 
 [node name="LevelNode" parent="Levels" instance=ExtResource( 1 )]
 self_modulate = Color( 0.66, 0.66, 0.66, 1 )
-position = Vector2( 57.9876, 243.463 )
+position = Vector2( 54.5021, 272.45 )
 level_scene_path = "res://Scenes/Levels/Chapter1/Level1/Level1A.tscn"
-accessible = true
 visited = true
 
 [node name="LevelNode2" parent="Levels" instance=ExtResource( 1 )]
-self_modulate = Color( 1, 1, 1, 1 )
-position = Vector2( 334.553, 452.107 )
+position = Vector2( 338.305, 475.212 )
 level_scene_path = "res://Scenes/Levels/Chapter1/Level1/Level1B.tscn"
-accessible = true
-visited = false
 
 [node name="LevelNode3" parent="Levels" instance=ExtResource( 1 )]
-self_modulate = Color( 1, 1, 1, 1 )
-position = Vector2( 244.081, 122.334 )
+position = Vector2( 299.005, 154.342 )
 level_scene_path = "res://Scenes/Levels/Chapter1/Level1/Level1C.tscn"
-accessible = true
-visited = false
 
 [node name="LevelNode4" parent="Levels" instance=ExtResource( 1 )]
-self_modulate = Color( 1, 1, 1, 1 )
-position = Vector2( 669.808, 250.821 )
-level_scene_path = ""
-accessible = true
-visited = false
+position = Vector2( 645.227, 439.518 )
 
 [node name="LevelNode5" parent="Levels" instance=ExtResource( 1 )]
-self_modulate = Color( 1, 1, 1, 1 )
-position = Vector2( 433.348, 252.043 )
-level_scene_path = ""
-accessible = true
-visited = false
+position = Vector2( 539.802, 231.156 )
 
 [node name="LevelNode6" parent="Levels" instance=ExtResource( 1 )]
-self_modulate = Color( 1, 1, 1, 1 )
-position = Vector2( 730.908, 114.845 )
-level_scene_path = ""
-accessible = true
-visited = false
+position = Vector2( 767.749, 213.298 )
 
 [node name="Binds" type="Node2D" parent="."]
 __meta__ = {
@@ -128,7 +109,7 @@ destination_node_path = "Levels/LevelNode6"
 [node name="Tween" type="Tween" parent="."]
 
 [node name="Characters" type="Node2D" parent="."]
-position = Vector2( 57.8978, 244.478 )
+position = Vector2( 54.5021, 272.45 )
 script = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
@@ -146,4 +127,4 @@ region_rect = Rect2( 0, 0, 64, 64 )
 [node name="Tween" type="Tween" parent="Characters"]
 
 [node name="WorldMapCursor" parent="." instance=ExtResource( 8 )]
-position = Vector2( 57.9876, 244.304 )
+position = Vector2( 54.5021, 272.45 )

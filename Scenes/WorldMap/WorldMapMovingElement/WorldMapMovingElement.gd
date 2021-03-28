@@ -1,3 +1,4 @@
+tool
 extends Node2D
 class_name WorldMapMovingElement
 
@@ -24,6 +25,11 @@ func get_current_level() -> LevelNode: return current_level
 
 func _ready() -> void:
 	var __ = connect("movement_finished", self, "_on_movement_finished")
+
+
+func _process(delta: float) -> void:
+	if Engine.editor_hint && current_level != null:
+		set_position(current_level.get_position())
 
 #### VIRTUALS ####
 
@@ -81,3 +87,4 @@ func move(dest: Vector2, ease_type: int = Tween.EASE_IN_OUT):
 
 func _on_movement_finished():
 	moving = false
+

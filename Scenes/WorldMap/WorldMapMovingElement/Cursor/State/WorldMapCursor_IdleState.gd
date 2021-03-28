@@ -38,7 +38,7 @@ func trigger_idle_animation():
 	lerp_arrow_offset(Vector2(-13, 0), lerp_duration)
 	yield(self, "lerp_finished")
 
-	lerp_arrow_offset(Vector2(-16, 0), lerp_duration)
+	lerp_arrow_offset(Vector2(-20, 0), lerp_duration)
 	yield(self, "lerp_finished")
 	
 	owner.emit_signal("idle_animation_finished")

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/CoinLiaison.png-a1452c244c543bf817ca09d024604776.stex"
+path="res://.import/BindEnd.png-ea638a428d559a2d3c10ff6444c2e907.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/WorldMap/Bind/CoinLiaison.png"
-dest_files=[ "res://.import/CoinLiaison.png-a1452c244c543bf817ca09d024604776.stex" ]
+source_file="res://Scenes/WorldMap/Bind/BindEnd.png"
+dest_files=[ "res://.import/BindEnd.png-ea638a428d559a2d3c10ff6444c2e907.stex" ]
 
 [params]
 

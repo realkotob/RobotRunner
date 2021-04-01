@@ -19,7 +19,7 @@ func _input(event):
 		return
 	
 	if event is InputEventKey:
-		if states_machine.get_state() == self:
+		if is_current_state():
 			
 			if event.is_action_pressed(inputs_node.get_input("MoveLeft")) \
 			or event.is_action_pressed(inputs_node.get_input("MoveRight")):

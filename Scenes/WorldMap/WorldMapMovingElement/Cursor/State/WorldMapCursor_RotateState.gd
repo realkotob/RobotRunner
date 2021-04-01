@@ -47,5 +47,5 @@ func trigger_quarter_turn_rotation():
 #### SIGNAL RESPONSES ####
 
 func _on_rotation_animation_finished():
-	if states_machine.get_state() == self:
+	if is_current_state():
 		states_machine.set_state(states_machine.previous_state)

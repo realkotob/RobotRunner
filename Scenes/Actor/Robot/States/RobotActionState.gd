@@ -23,7 +23,7 @@ func _ready():
 
 #### VIRTUALS ####
 
-func update(_delta):
+func update_state(_delta):
 	if !has_damaged:
 		damage()
 

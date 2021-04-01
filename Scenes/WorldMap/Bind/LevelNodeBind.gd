@@ -2,10 +2,12 @@ tool
 extends Path2D
 class_name LevelNodeBind
 
-onready var line : Line2D = $Line2D
+onready var line : BindLine = $BindLine
 
 export var origin_node_path : String = ""
 export var destination_node_path : String = ""
+
+export var cap_offset : float = 18.0
 
 var origin : Node2D setget set_origin, get_origin
 var destination : Node2D setget set_destination, get_destination
@@ -87,6 +89,7 @@ func _update_line():
 		return
 	
 	point_path = PoolVector2Array()
+	var line_points_array = PoolVector2Array()
 	point_path.append(origin_pos)
 	
 	var x_dist = abs(origin_pos.x - dest_pos.x)
@@ -101,11 +104,20 @@ func _update_line():
 	point_path.append(dest_pos)
 	
 	curve.clear_points()
-	for point in point_path:
-		curve.add_point(point)
+	for i in range(point_path.size()):
+		var point = point_path[i]
+		var dir = Vector2.ZERO
+		
+		if i == 0:
+			dir = point_path[0].direction_to(point_path[1])
+		if i == point_path.size() - 1:
+			dir = point_path[i].direction_to(point_path[i - 1])
+		
+		var point_pos = point + cap_offset * dir
+		line_points_array.append(point_pos)
+		curve.add_point(point_pos)
 	
-	var points = curve.get_baked_points()
-	line.set_points(points)
+	line.set_points(line_points_array)
 
 
 # Return the direction the path of the bind is aiming to, based on the given level_node 
@@ -119,7 +131,6 @@ func get_path_direction_form_node(level_node: LevelNode) -> Vector2:
 	
 	var point_dir = path[0].direction_to(path[1])
 	return point_dir
-
 
 
 #### INPUTS ####

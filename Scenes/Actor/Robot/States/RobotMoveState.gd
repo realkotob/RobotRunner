@@ -5,7 +5,7 @@ onready var original_pos = owner.get_global_position()
 
 #### MOVE STATE ####
 
-func update(_delta : float):
+func update_state(_delta : float):
 	if owner.is_path_empty():
 		return "Idle"
 	

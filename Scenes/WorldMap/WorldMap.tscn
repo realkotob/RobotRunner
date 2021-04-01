@@ -10,32 +10,32 @@
 
 [sub_resource type="Curve2D" id=1]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 57.9876, 243.463, 0, 0, 0, 0, 57.9876, 122.334, 0, 0, 0, 0, 244.081, 122.334 )
+"points": PoolVector2Array( 0, 0, 0, 0, 70.2383, 275.469, 0, 0, 0, 0, 70.2383, 103.047, 0, 0, 0, 0, 261.505, 103.047 )
 }
 
 [sub_resource type="Curve2D" id=2]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 57.9876, 243.463, 0, 0, 0, 0, 57.9876, 452.107, 0, 0, 0, 0, 334.553, 452.107 )
+"points": PoolVector2Array( 0, 0, 0, 0, 299.505, 103.047, 0, 0, 0, 0, 416.822, 103.047, 0, 0, 0, 0, 416.822, 251 )
 }
 
 [sub_resource type="Curve2D" id=3]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 244.081, 122.334, 0, 0, 0, 0, 244.081, 252.043, 0, 0, 0, 0, 433.348, 252.043 )
+"points": PoolVector2Array( 0, 0, 0, 0, 70.2383, 313.469, 0, 0, 0, 0, 70.2383, 454.957, 0, 0, 0, 0, 224.717, 454.957 )
 }
 
 [sub_resource type="Curve2D" id=4]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 334.553, 452.107, 0, 0, 0, 0, 433.348, 452.107, 0, 0, 0, 0, 433.348, 252.043 )
+"points": PoolVector2Array( 0, 0, 0, 0, 435.822, 270, 0, 0, 0, 0, 620.658, 270 )
 }
 
 [sub_resource type="Curve2D" id=5]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 433.348, 252.043, 0, 0, 0, 0, 433.348, 250.821, 0, 0, 0, 0, 669.808, 250.821 )
+"points": PoolVector2Array( 0, 0, 0, 0, 639.658, 251, 0, 0, 0, 0, 639.658, 201.024, 0, 0, 0, 0, 741.524, 201.024 )
 }
 
 [sub_resource type="Curve2D" id=6]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 669.808, 250.821, 0, 0, 0, 0, 730.908, 250.821, 0, 0, 0, 0, 730.908, 114.845 )
+"points": PoolVector2Array( 0, 0, 0, 0, 262.717, 454.957, 0, 0, 0, 0, 416.822, 454.957, 0, 0, 0, 0, 416.822, 289 )
 }
 
 [node name="WorldMap" type="CanvasLayer"]
@@ -44,91 +44,68 @@ cursor_start_level_path = "Levels/LevelNode"
 
 [node name="Levels" type="Node2D" parent="."]
 z_index = 1
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="LevelNode" parent="Levels" instance=ExtResource( 1 )]
 self_modulate = Color( 0.66, 0.66, 0.66, 1 )
-position = Vector2( 57.9876, 243.463 )
+position = Vector2( 70.2383, 294.469 )
 level_scene_path = "res://Scenes/Levels/Chapter1/Level1/Level1A.tscn"
-accessible = true
 visited = true
 
 [node name="LevelNode2" parent="Levels" instance=ExtResource( 1 )]
-self_modulate = Color( 1, 1, 1, 1 )
-position = Vector2( 334.553, 452.107 )
-level_scene_path = "res://Scenes/Levels/Chapter1/Level1/Level1B.tscn"
-accessible = true
-visited = false
+position = Vector2( 243.717, 454.957 )
 
 [node name="LevelNode3" parent="Levels" instance=ExtResource( 1 )]
-self_modulate = Color( 1, 1, 1, 1 )
-position = Vector2( 244.081, 122.334 )
+position = Vector2( 280.505, 103.047 )
 level_scene_path = "res://Scenes/Levels/Chapter1/Level1/Level1C.tscn"
-accessible = true
-visited = false
 
 [node name="LevelNode4" parent="Levels" instance=ExtResource( 1 )]
-self_modulate = Color( 1, 1, 1, 1 )
-position = Vector2( 669.808, 250.821 )
-level_scene_path = ""
-accessible = true
-visited = false
+position = Vector2( 639.658, 270 )
 
 [node name="LevelNode5" parent="Levels" instance=ExtResource( 1 )]
-self_modulate = Color( 1, 1, 1, 1 )
-position = Vector2( 433.348, 252.043 )
-level_scene_path = ""
-accessible = true
-visited = false
+position = Vector2( 416.822, 270 )
 
 [node name="LevelNode6" parent="Levels" instance=ExtResource( 1 )]
-self_modulate = Color( 1, 1, 1, 1 )
-position = Vector2( 730.908, 114.845 )
-level_scene_path = ""
-accessible = true
-visited = false
+position = Vector2( 760.524, 201.024 )
 
 [node name="Binds" type="Node2D" parent="."]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="LevelNodeBind" parent="Binds" instance=ExtResource( 4 )]
+[node name="LevelNodeBind2" parent="Binds" instance=ExtResource( 4 )]
 curve = SubResource( 1 )
 origin_node_path = "Levels/LevelNode"
 destination_node_path = "Levels/LevelNode3"
 
-[node name="LevelNodeBind2" parent="Binds" instance=ExtResource( 4 )]
-curve = SubResource( 2 )
-origin_node_path = "Levels/LevelNode"
-destination_node_path = "Levels/LevelNode2"
-
 [node name="LevelNodeBind3" parent="Binds" instance=ExtResource( 4 )]
-curve = SubResource( 3 )
+curve = SubResource( 2 )
 origin_node_path = "Levels/LevelNode3"
 destination_node_path = "Levels/LevelNode5"
 
+[node name="LevelNodeBind" parent="Binds" instance=ExtResource( 4 )]
+curve = SubResource( 3 )
+origin_node_path = "Levels/LevelNode"
+destination_node_path = "Levels/LevelNode2"
+
 [node name="LevelNodeBind4" parent="Binds" instance=ExtResource( 4 )]
 curve = SubResource( 4 )
-origin_node_path = "Levels/LevelNode2"
-destination_node_path = "Levels/LevelNode5"
-
-[node name="LevelNodeBind5" parent="Binds" instance=ExtResource( 4 )]
-curve = SubResource( 5 )
 origin_node_path = "Levels/LevelNode5"
 destination_node_path = "Levels/LevelNode4"
 
-[node name="LevelNodeBind6" parent="Binds" instance=ExtResource( 4 )]
-curve = SubResource( 6 )
+[node name="LevelNodeBind5" parent="Binds" instance=ExtResource( 4 )]
+curve = SubResource( 5 )
 origin_node_path = "Levels/LevelNode4"
 destination_node_path = "Levels/LevelNode6"
+
+[node name="LevelNodeBind6" parent="Binds" instance=ExtResource( 4 )]
+curve = SubResource( 6 )
+origin_node_path = "Levels/LevelNode2"
+destination_node_path = "Levels/LevelNode5"
 
 [node name="Tween" type="Tween" parent="."]
 
 [node name="Characters" type="Node2D" parent="."]
-position = Vector2( 57.8978, 244.478 )
+position = Vector2( 70.2383, 294.469 )
 script = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
@@ -146,4 +123,4 @@ region_rect = Rect2( 0, 0, 64, 64 )
 [node name="Tween" type="Tween" parent="Characters"]
 
 [node name="WorldMapCursor" parent="." instance=ExtResource( 8 )]
-position = Vector2( 57.9876, 244.304 )
+position = Vector2( 70.2383, 294.469 )

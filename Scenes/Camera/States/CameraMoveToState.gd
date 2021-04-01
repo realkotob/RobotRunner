@@ -32,7 +32,7 @@ func exit_state():
 # Set to stop state if a wait time is specified
 # Else : execute the next instruction of the camera
 # If it was the last instruction: set back to the previous state
-func update(_delta):
+func update_state(_delta):
 	camera.update_camera_limits()
 	
 	if move_to_destination() == true or destination == Vector2.ZERO:

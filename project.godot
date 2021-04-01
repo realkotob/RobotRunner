@@ -119,6 +119,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/WorldMap/Bind/BindLine.gd"
 }, {
+"base": "Sprite",
+"class": "BindVariation",
+"language": "GDScript",
+"path": "res://Scenes/WorldMap/Bind/BindVariation.gd"
+}, {
 "base": "BreakableObjectBase",
 "class": "BlockBase",
 "language": "GDScript",
@@ -544,6 +549,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/Levels/InfiniteMode/GenData/MetaChunckGenData.gd"
 }, {
+"base": "PushdownAutomata",
+"class": "NestedPushdownAutomata",
+"language": "GDScript",
+"path": "res://BabaGodotLib/Absract/StateMachine/PushdownAutomata/NestedPushdownAutomata.gd"
+}, {
+"base": "StatesMachine",
+"class": "NestedStatesMachine",
+"language": "GDScript",
+"path": "res://BabaGodotLib/Absract/StateMachine/NestedStatesMachine.gd"
+}, {
 "base": "LineData",
 "class": "NormalLineData",
 "language": "GDScript",
@@ -603,6 +618,11 @@ _global_script_classes=[ {
 "class": "PlayerMoveState",
 "language": "GDScript",
 "path": "res://Scenes/Actor/Players/PlayerBase/States/PlayerMoveState.gd"
+}, {
+"base": "StatesMachine",
+"class": "PushdownAutomata",
+"language": "GDScript",
+"path": "res://BabaGodotLib/Absract/StateMachine/PushdownAutomata/PushdownAutomata.gd"
 }, {
 "base": "ActorActionState",
 "class": "RT_ActorActionState",
@@ -887,6 +907,7 @@ _global_script_class_icons={
 "BigChunckRoom": "",
 "BigRoomChunck": "",
 "BindLine": "",
+"BindVariation": "",
 "BlockBase": "",
 "BreakableObjectBase": "",
 "BreakablePlatfrom": "",
@@ -972,6 +993,8 @@ _global_script_class_icons={
 "MenuOptions": "",
 "MenuOptionsBase": "",
 "MetaChunckGenData": "",
+"NestedPushdownAutomata": "",
+"NestedStatesMachine": "",
 "NormalLineData": "",
 "OptionDataContainer": "",
 "OptionLineContainer": "",
@@ -984,6 +1007,7 @@ _global_script_class_icons={
 "PlayerIdleState": "",
 "PlayerJumpState": "",
 "PlayerMoveState": "",
+"PushdownAutomata": "",
 "RT_ActorActionState": "",
 "RT_ActorFallState": "",
 "RT_ActorIdleState": "",

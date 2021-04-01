@@ -3,6 +3,7 @@ extends Line2D
 class_name BindLine
 
 const bind_line_scene_path = "res://Scenes/WorldMap/Bind/BindLine.tscn"
+onready var bind_variation_scene = preload("res://Scenes/WorldMap/Bind/BindVariation.tscn")
 
 onready var start_cap = $StartCap
 onready var end_cap = $EndCap
@@ -81,18 +82,21 @@ func _ready() -> void:
 
 func _update_children_binds():
 	clear_children_binds()
-	start_cap.set_visible(start_cap_visible)
-	end_cap.set_visible(end_cap_visible)
-
-	# Generate the corner lines
-	if depth == 0 && points.size() > 2 && corner_line == false:
-		generate_corner_lines()
 	
 	# Generate the dead ends of the corner line
 	if corner_line == true:
 		generate_dead_end_lines()
 	else:
 		generate_node_sublines()
+
+	# Generate the corner lines & variations
+	if depth == 0 && corner_line == false:
+		if points.size() > 2:
+			generate_corner_lines()
+		
+		yield(get_tree(), "idle_frame")
+		generate_variations()
+	
 
 
 func generate_node_sublines():
@@ -214,11 +218,52 @@ func generate_dead_end_lines():
 			line.call_deferred("set_points", PoolVector2Array([start_point, end_point]))
 
 
+func generate_variations():
+	for i in range(points.size() - 1):
+		if randi() % 3 != 0: continue
+		var dir = points[i].direction_to(points[i + 1])
+		var dist = points[i].distance_to(points[i + 1])
+		var point = points[i] + dist / rand_range(1.3, 3.0) * dir
+		
+		if !is_point_available(point):
+			continue
+		
+		for j in range(randi() % 2 + 3):
+			var dir_sign = (j % 2) * 2 - 1 if j != 0 else 0
+			
+			var nb_offset = int(float(j + 1) / 2)
+			
+			var variation = bind_variation_scene.instance()
+			variation.set_position(point + (dir_sign * dir * 3 * nb_offset))
+			variation.set_rotation(dir.angle())
+			add_child(variation)
+
 
 func clear_children_binds():
 	for child in get_children():
-		if child.is_class("BindLine"):
+		if not child in [start_cap, end_cap]:
 			child.queue_free()
+
+
+func get_points_recursive(array_to_fill: Array):
+	for point in points:
+		array_to_fill.append(point)
+	
+	for child in get_children():
+		if child.is_class("BindLine"):
+			child.get_points_recursive(array_to_fill)
+
+
+func is_point_available(point_to_test: Vector2) -> bool:
+	var points_array : Array = []
+	
+	get_points_recursive(points_array)
+	
+	for point in points_array:
+		if point.distance_to(point_to_test) < sub_line_minimum_dist:
+			return false
+	
+	return true
 
 
 #### INPUTS ####

@@ -65,9 +65,9 @@ func lerp_arrow_offset(to: Vector2, duration: float):
 #### SIGNAL RESPONSES ####
 
 func _on_idle_animation_finished():
-	if states_machine.get_state() == self:
+	if is_current_state():
 		trigger_idle_animation()
 
 func _on_variation_timer_timeout():
-	if states_machine.get_state() == self:
+	if is_current_state():
 		states_machine.set_state("Rotate")

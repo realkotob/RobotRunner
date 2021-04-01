@@ -16,7 +16,7 @@ func _ready():
 
 
 # Check if the character is falling, before it triggers fall state
-func update(_delta):
+func update_state(_delta):
 	if !owner.is_on_floor():
 		return "Fall"
 
@@ -47,7 +47,7 @@ func _input(event):
 	if !owner.active:
 		return
 	
-	if states_machine.get_state() == self:
+	if is_current_state():
 		if event.is_action_pressed(inputs_node.get_input("Jump")):
 			states_machine.set_state("Jump")
 		
@@ -60,6 +60,6 @@ func _input(event):
 
 # Triggers the idle animation when the slanding is over
 func on_animation_finished():
-	if states_machine.get_state() == self:
+	if is_current_state():
 		if animated_sprite.get_animation() == "Land":
 				animated_sprite.play(self.name)

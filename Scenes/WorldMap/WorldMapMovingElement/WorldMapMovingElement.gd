@@ -27,7 +27,7 @@ func _ready() -> void:
 	var __ = connect("movement_finished", self, "_on_movement_finished")
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Engine.editor_hint && current_level != null:
 		set_position(current_level.get_position())
 

@@ -34,7 +34,7 @@ func exit_state():
 
 
 # Give a new random destination position each time a new one is given
-func update(_delta):
+func update_state(_delta):
 	if magnitude == 0.0 or duration == 0.0:
 		return states_machine.previous_state
 	

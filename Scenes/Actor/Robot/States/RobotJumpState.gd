@@ -4,7 +4,7 @@ class_name RobotJumpState
 ### JUMP STATE ###
 
 
-func update(_delta):
+func update_state(_delta):
 	if owner.is_on_floor():
 		return "Idle"
 	elif owner.velocity.y > 0:
@@ -23,7 +23,7 @@ func enter_state():
 
 
 func _on_animation_finished():
-	if states_machine.get_state() == self:
+	if is_current_state():
 		if animated_sprite.get_animation() == "Jump":
 			if "MidAir" in animated_sprite.get_sprite_frames().get_animation_names():
 				animated_sprite.play("MidAir")

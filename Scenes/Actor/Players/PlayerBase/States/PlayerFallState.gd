@@ -45,7 +45,7 @@ func _exit_state():
 	jump_buffered = false
 
 
-func update(_delta):
+func update_state(_delta):
 	if owner.is_on_floor():
 		if jump_buffered:
 			return "Jump"
@@ -62,7 +62,7 @@ func _input(event):
 		return
 	
 	if event is InputEventKey:
-		if states_machine.get_state() == self:
+		if is_current_state():
 			if event.is_action_pressed(inputs_node.get_input("Action")):
 				states_machine.set_state("Action")
 				

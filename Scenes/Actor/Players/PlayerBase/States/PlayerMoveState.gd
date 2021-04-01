@@ -10,7 +10,7 @@ func _ready():
 	inputs_node = owner.get_node("Inputs")
 
 
-func update( _delta):
+func update_state( _delta):
 	if !owner.is_on_floor():
 		return "Fall"
 	elif owner.velocity.x == 0:
@@ -35,7 +35,7 @@ func _input(event):
 	if !owner.active:
 		return
 	
-	if states_machine.get_state() == self:
+	if is_current_state():
 		if event.is_action_pressed(inputs_node.get_input("Jump")):
 			states_machine.set_state("Jump")
 		

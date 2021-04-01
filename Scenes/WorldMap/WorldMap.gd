@@ -14,6 +14,8 @@ export var cursor_start_level_path : String = ""
 onready var cursor : Node2D = $WorldMapCursor
 var cursor_moving : bool = false
 
+var is_ready : bool = false 
+
 #### ACCESSORS ####
 
 func is_class(value: String): return value == "LevelSelectionMenu" or .is_class(value)
@@ -23,11 +25,11 @@ func get_class() -> String: return "LevelSelectionMenu"
 #### BUILT-IN ####
 
 func _ready() -> void:
-	if !Engine.editor_hint:
-		var current_level = get_node(cursor_start_level_path)
-		
-		cursor.set_current_level(current_level)
-		characters_container.set_current_level(current_level)
+	var current_level = get_node(cursor_start_level_path)
+	
+	cursor.set_current_level(current_level)
+	characters_container.set_current_level(current_level)
+
 
 #### VIRTUALS ####
 

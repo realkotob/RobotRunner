@@ -1,3 +1,4 @@
+tool
 extends WorldMapMovingElement
 class_name WorldMapCharacterContainer
 
@@ -13,11 +14,13 @@ func get_class() -> String: return "WorldMapCharacterContainer"
 
 
 
+
 #### VIRTUALS ####
 
 
 
 #### LOGIC ####
+
 
 func move_to_level(level_node: LevelNode):
 	.move_to_level(level_node)

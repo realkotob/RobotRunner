@@ -18,7 +18,7 @@ func _input(event):
 	if !owner.active:
 		return
 	
-	if states_machine.get_state() == self:
+	if is_current_state():
 		if event.is_action_pressed(inputs_node.get_input("Action")):
 			states_machine.set_state("Action")
 			

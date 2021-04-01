@@ -114,6 +114,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/Levels/InfiniteMode/Chuncks/BigRoomChunck.gd"
 }, {
+"base": "Line2D",
+"class": "BindLine",
+"language": "GDScript",
+"path": "res://Scenes/WorldMap/Bind/BindLine.gd"
+}, {
+"base": "Sprite",
+"class": "BindVariation",
+"language": "GDScript",
+"path": "res://Scenes/WorldMap/Bind/BindVariation.gd"
+}, {
 "base": "BreakableObjectBase",
 "class": "BlockBase",
 "language": "GDScript",
@@ -896,6 +906,8 @@ _global_script_class_icons={
 "BabyBotRiseState": "",
 "BigChunckRoom": "",
 "BigRoomChunck": "",
+"BindLine": "",
+"BindVariation": "",
 "BlockBase": "",
 "BreakableObjectBase": "",
 "BreakablePlatfrom": "",

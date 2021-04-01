@@ -1,3 +1,4 @@
+tool
 extends WorldMapMovingElement
 class_name WorldMapCursor
 

@@ -86,7 +86,7 @@ func get_solo_mode() -> bool: return solo_mode
 
 #### BUILT-IN ####
 
-func _ready():
+func _ready():	
 	var _err = gameover_timer_node.connect("timeout",self, "on_gameover_timer_timeout")
 	_err = transition_timer_node.connect("timeout",self, "on_transition_timer_timeout")
 	_err = EVENTS.connect("level_ready", self, "on_level_ready")
@@ -325,7 +325,7 @@ func on_level_ready(level : Level):
 func on_checkpoint_reached(level: Level, checkpoint_id: int):
 	if checkpoint_id + 1 > GAME.progression.checkpoint:
 		progression.checkpoint = checkpoint_id + 1
-
+	
 	GameSaver.save_level_as_tscn(level)
 
 

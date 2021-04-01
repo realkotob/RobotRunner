@@ -22,11 +22,6 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 20 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 10 ), ExtResource( 8 ), ExtResource( 12 ), ExtResource( 14 ), ExtResource( 18 ), ExtResource( 11 ), ExtResource( 13 ) ],
-"loop": false,
-"name": "Trigger",
-"speed": 17.0
-}, {
 "frames": [ ExtResource( 6 ) ],
 "loop": true,
 "name": "Idle",
@@ -36,6 +31,11 @@ animations = [ {
 "loop": true,
 "name": "Active",
 "speed": 13.0
+}, {
+"frames": [ ExtResource( 20 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 10 ), ExtResource( 8 ), ExtResource( 12 ), ExtResource( 14 ), ExtResource( 18 ), ExtResource( 11 ), ExtResource( 13 ) ],
+"loop": false,
+"name": "Trigger",
+"speed": 17.0
 } ]
 
 [sub_resource type="Animation" id=2]

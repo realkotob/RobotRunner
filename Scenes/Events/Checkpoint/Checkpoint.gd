@@ -27,9 +27,9 @@ func event():
 
 
 func trigger_animation():
-	animated_sprite_node.play("Trigger")
-	$AnimationPlayer.play("LightUp")
-
+#	animated_sprite_node.play("Trigger")
+#	$AnimationPlayer.play("LightUp")
+	pass
 
 func activate_checkpoint():
 	trigger_animation()

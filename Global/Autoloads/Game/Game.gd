@@ -32,6 +32,8 @@ var sound_bus_id = AudioServer.get_bus_index("Sounds")
 
 var _config_file = ConfigFile.new()
 
+#var save_thread : Thread = null
+
 var _settings ={
 		"system":{
 			"slot_id": 1,
@@ -86,7 +88,7 @@ func get_solo_mode() -> bool: return solo_mode
 
 #### BUILT-IN ####
 
-func _ready():
+func _ready():	
 	var _err = gameover_timer_node.connect("timeout",self, "on_gameover_timer_timeout")
 	_err = transition_timer_node.connect("timeout",self, "on_transition_timer_timeout")
 	_err = EVENTS.connect("level_ready", self, "on_level_ready")
@@ -317,17 +319,34 @@ func on_level_ready(level : Level):
 	fade_in()
 
 	if level is InfiniteLevel:
+#		start_thread_savelevel([level, true])
 		GameSaver.save_level_as_tscn(level)
 		GameSaver.save_level_properties_as_json(level)
-
 
 # When a player reach a checkpoint
 func on_checkpoint_reached(level: Level, checkpoint_id: int):
 	if checkpoint_id + 1 > GAME.progression.checkpoint:
 		progression.checkpoint = checkpoint_id + 1
-
+	
 	GameSaver.save_level_as_tscn(level)
+#	start_thread_savelevel([level, false])
 
+#func start_thread_savelevel(args : Array):
+#	save_thread = Thread.new()
+#	save_thread.start(self, "save_level", args)
+#
+#
+#func save_level(args : Array):
+#	GameSaver.save_level_as_tscn(args[0])
+#	if args[1]: #bool to check if we save json or not
+#		GameSaver.save_level_properties_as_json(args[0])
+#
+#	call_deferred("finish_thread_savelevel")
+#
+#func finish_thread_savelevel():
+#	var result = save_thread.wait_to_finish()
+#	if debug:
+#		print("save_thread Thread finished successfully. Level has been saved !")
 
 func on_seed_change_query(new_seed: int):
 	_set_current_seed(new_seed)

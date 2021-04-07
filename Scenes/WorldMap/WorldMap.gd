@@ -136,7 +136,7 @@ func _input(_event: InputEvent) -> void:
 	
 	if Input.is_action_just_pressed("ui_accept"):
 		var current_level_node = cursor.get_current_level()
-		if !characters_container.is_moving():
+		if !characters_container.is_moving() && !current_level_node.visited:
 			characters_container.move_to_level(current_level_node)
 			
 			yield(characters_container, "enter_level_animation_finished")

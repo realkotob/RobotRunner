@@ -20,6 +20,7 @@ offset = Vector2( 25, -4 )
 shape = SubResource( 1 )
 
 [node name="AudioStreamPlayer" parent="StatesMachine/Jump" index="0"]
+volume_db = 0.0
 pitch_scale = 1.71
 
 [node name="AudioStreamPlayer" parent="StatesMachine/Action" index="0"]

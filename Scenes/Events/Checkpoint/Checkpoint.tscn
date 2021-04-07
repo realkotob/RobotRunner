@@ -22,11 +22,6 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 6 ) ],
-"loop": true,
-"name": "Idle",
-"speed": 13.0
-}, {
 "frames": [ ExtResource( 16 ), ExtResource( 15 ), ExtResource( 17 ), ExtResource( 19 ) ],
 "loop": true,
 "name": "Active",
@@ -36,6 +31,11 @@ animations = [ {
 "loop": false,
 "name": "Trigger",
 "speed": 17.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 13.0
 } ]
 
 [sub_resource type="Animation" id=2]

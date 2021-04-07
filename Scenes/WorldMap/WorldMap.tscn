@@ -8,7 +8,7 @@
 [ext_resource path="res://Scenes/Actor/Players/MrStonks/Sprites/RoboHammer.png" type="Texture" id=6]
 [ext_resource path="res://Scenes/WorldMap/Backgound/BackgroundElement.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/WorldMap/WorldMapMovingElement/Cursor/WorldMapCursor.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/WorldMap/Backgound/Variation6.png" type="Texture" id=9]
+[ext_resource path="res://Scenes/WorldMap/Backgound/Variation4.png" type="Texture" id=9]
 [ext_resource path="res://Scenes/WorldMap/WorldMapCharacterContainer.gd" type="Script" id=10]
 [ext_resource path="res://Scenes/WorldMap/Backgound/Variation3.png" type="Texture" id=11]
 [ext_resource path="res://Scenes/WorldMap/Backgound/Variation5.png" type="Texture" id=12]
@@ -49,7 +49,7 @@ _data = {
 
 [sub_resource type="Curve2D" id=7]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 452, 282.699, 0, 0, 0, 0, 471.333, 282.699, 0, 0, 0, 0, 471.333, 109.5 )
+"points": PoolVector2Array( 0, 0, 0, 0, 472, 262.699, 0, 0, 0, 0, 472, 104.828 )
 }
 
 [node name="WorldMap" type="CanvasLayer"]
@@ -72,8 +72,7 @@ __meta__ = {
 }
 
 [node name="BackgroundElement" parent="BackgroundElements" instance=ExtResource( 7 )]
-position = Vector2( 530.696, 233.654 )
-rotation = 1.5708
+position = Vector2( 353.267, 249.631 )
 texture = ExtResource( 9 )
 
 [node name="BackgroundElement5" parent="BackgroundElements" instance=ExtResource( 7 )]
@@ -127,7 +126,7 @@ position = Vector2( 472, 282.699 )
 position = Vector2( 829.612, 156.038 )
 
 [node name="BossLevelNode" parent="Levels" instance=ExtResource( 3 )]
-position = Vector2( 471.333, 71 )
+position = Vector2( 472, 66.328 )
 
 [node name="Binds" type="Node2D" parent="."]
 __meta__ = {

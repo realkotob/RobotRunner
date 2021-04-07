@@ -12,6 +12,8 @@ var bind_dest_array : Array = []
 
 var bind_mode : bool = false setget set_bind_mode
 
+var handeled_objects = ["LevelNode", "WorldMapBackgroundElement", "LevelNodeBind"]
+
 #### ACCESSORS ####
 
 func is_class(value: String): return value == "WorldMapEditor" or .is_class(value)
@@ -61,10 +63,13 @@ func handles(obj: Object) -> bool:
 	elif obj is LevelNodeBind:
 		generate_button("Reroll Bind Gen")
 	
-	return obj.get_class() in ["LevelNode", "WorldMapBackgroundElement"]
+	return obj.get_class() in handeled_objects
 
 
 func edit(object: Object) -> void:
+	if not object.get_class() in handeled_objects:
+		return
+	
 	last_node_selected = current_node_selected
 	current_node_selected = object
 	

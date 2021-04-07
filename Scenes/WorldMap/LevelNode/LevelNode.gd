@@ -10,6 +10,7 @@ enum EDITOR_SELECTED{
 
 export var level_scene_path : String = "" setget , get_level_scene_path
 
+export var hidden : bool = false setget set_hidden, is_hidden
 export var accessible : bool = true
 export var visited : bool = false setget set_visited, is_visited
 
@@ -19,6 +20,8 @@ var editor_select_state : int = EDITOR_SELECTED.UNSELECTED setget set_editor_sel
 signal add_bind_query(origin, dest)
 # warning-ignore:unused_signal
 signal remove_all_binds_query(origin)
+signal hidden_changed(level_node, hidden_value)
+
 
 #### ACCESSORS ####
 
@@ -43,6 +46,14 @@ func set_visited(value: bool):
 
 func is_visited() -> bool: return visited
 
+func set_hidden(value: bool): 
+	if value != hidden:
+		hidden = value
+		set_visible(!hidden)
+		emit_signal("hidden_changed", self, hidden)
+
+func is_hidden() -> bool : return hidden
+
 func get_level_scene_path() -> String: return level_scene_path
 
 #### BUILT-IN ####
@@ -51,11 +62,12 @@ func _ready() -> void:
 	yield(owner, "ready")
 	owner.get_binds(self)
 	
+	var __ = connect("hidden_changed", owner, "_on_level_node_hidden_changed")
 	
 	if !Engine.editor_hint:
 		$ColorRect.queue_free()
 	else:
-		var __ = connect("add_bind_query", owner, "_on_add_bind_query")
+		__ = connect("add_bind_query", owner, "_on_add_bind_query")
 		__ = connect("remove_all_binds_query", owner, "_on_remove_all_binds_query")
 
 

@@ -157,3 +157,11 @@ func _on_remove_all_binds_query(origin: LevelNode):
 	for bind in binds_container.get_children():
 		if bind.get_origin() == origin:
 			bind.queue_free()
+
+
+func _on_level_node_hidden_changed(level_node: LevelNode, hidden: bool):
+	var level_binds = get_binds(level_node)
+	for bind in level_binds:
+		var reveal = !hidden && !bind.origin.is_hidden() && !bind.destination.is_hidden()
+		bind.set_visible(reveal)
+

@@ -7,6 +7,8 @@ onready var line : BindLine = $BindLine
 export var origin_node_path : String = ""
 export var destination_node_path : String = ""
 
+export var hidden : bool = false setget set_hidden, is_hidden
+
 var origin : Node2D setget set_origin, get_origin
 var destination : Node2D setget set_destination, get_destination
 
@@ -57,6 +59,19 @@ func set_dest_pos(value: Vector2):
 		_update_line()
 
 func get_point_path() -> PoolVector2Array: return point_path
+
+func set_hidden(value: bool): 
+	if value != hidden:
+		hidden = value
+		if Engine.editor_hint:
+			if hidden:
+				set_modulate(Color(1, 1, 1, 0.2))
+			else:
+				set_modulate(Color.white)
+		else:
+			set_visible(!hidden)
+
+func is_hidden() -> bool : return hidden
 
 #### BUILT-IN ####
 

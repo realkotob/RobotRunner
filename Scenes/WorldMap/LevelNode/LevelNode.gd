@@ -49,7 +49,13 @@ func is_visited() -> bool: return visited
 func set_hidden(value: bool): 
 	if value != hidden:
 		hidden = value
-		set_visible(!hidden)
+		if Engine.editor_hint:
+			if hidden:
+				set_modulate(Color(1, 1, 1, 0.2))
+			else:
+				set_modulate(Color.white)
+		else:
+			set_visible(!hidden)
 		emit_signal("hidden_changed", self, hidden)
 
 func is_hidden() -> bool : return hidden

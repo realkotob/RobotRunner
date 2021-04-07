@@ -35,12 +35,12 @@ _data = {
 
 [sub_resource type="Curve2D" id=4]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 492, 282.699, 0, 0, 0, 0, 677.693, 282.699 )
+"points": PoolVector2Array( 0, 0, 0, 0, 472, 262.699, 0, 0, 0, 0, 472, 280.317, 0, 0, 0, 0, 679.28, 280.317 )
 }
 
 [sub_resource type="Curve2D" id=5]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 697.693, 262.699, 0, 0, 0, 0, 697.693, 156.832, 0, 0, 0, 0, 809.612, 156.832 )
+"points": PoolVector2Array( 0, 0, 0, 0, 699.28, 260.317, 0, 0, 0, 0, 699.28, 156.832, 0, 0, 0, 0, 809.612, 156.832 )
 }
 
 [sub_resource type="Curve2D" id=6]
@@ -118,7 +118,7 @@ position = Vector2( 283.668, 167.438 )
 level_scene_path = "res://Scenes/Levels/Chapter1/Level1/Level1C.tscn"
 
 [node name="LevelNode4" parent="Levels" instance=ExtResource( 1 )]
-position = Vector2( 697.693, 282.699 )
+position = Vector2( 699.28, 280.317 )
 
 [node name="LevelNode5" parent="Levels" instance=ExtResource( 1 )]
 position = Vector2( 472, 282.699 )

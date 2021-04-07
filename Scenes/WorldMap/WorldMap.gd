@@ -162,6 +162,6 @@ func _on_remove_all_binds_query(origin: LevelNode):
 func _on_level_node_hidden_changed(level_node: LevelNode, hidden: bool):
 	var level_binds = get_binds(level_node)
 	for bind in level_binds:
-		var reveal = !hidden && !bind.origin.is_hidden() && !bind.destination.is_hidden()
-		bind.set_visible(reveal)
+		var hidden_bind = true if hidden else bind.origin.is_hidden() or bind.destination.is_hidden()
+		bind.set_hidden(hidden_bind)
 

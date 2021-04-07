@@ -175,6 +175,7 @@ script = ExtResource( 9 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="StatesMachine/Jump" index="0"]
 stream = ExtResource( 8 )
+volume_db = -12.0
 pitch_scale = 1.37
 bus = "Sounds"
 

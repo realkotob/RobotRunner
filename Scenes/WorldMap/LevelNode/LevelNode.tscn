@@ -1,11 +1,18 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/WorldMap/LevelNode/Node.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/WorldMap/LevelNode/LevelNode.gd" type="Script" id=2]
 [ext_resource path="res://BabaGodotLib/Fonts/BoldCapsPixel24.tres" type="DynamicFont" id=3]
+[ext_resource path="res://BabaGodotLib/Absract/StateMachine/StateMachine.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/WorldMap/LevelNode/State/Visible.gd" type="Script" id=5]
+[ext_resource path="res://BabaGodotLib/Absract/StateMachine/AbstractStates/Appear.gd" type="Script" id=6]
+[ext_resource path="res://BabaGodotLib/Absract/StateMachine/AbstractStates/Disappear.gd" type="Script" id=7]
+[ext_resource path="res://BabaGodotLib/Shaders/Disolve/Disolve_shadermaterial.tres" type="Material" id=8]
+[ext_resource path="res://Scenes/WorldMap/LevelNode/State/Hidden.gd" type="Script" id=10]
 
 [node name="LevelNode" type="Sprite"]
 self_modulate = Color( 0.270588, 0.611765, 0.156863, 1 )
+material = ExtResource( 8 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
 
@@ -30,3 +37,20 @@ custom_fonts/font = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="StatesMachine" type="Node2D" parent="."]
+script = ExtResource( 4 )
+
+[node name="Visible" type="Node" parent="StatesMachine"]
+script = ExtResource( 5 )
+
+[node name="Disappear" type="Node" parent="StatesMachine"]
+script = ExtResource( 7 )
+
+[node name="Hidden" type="Node" parent="StatesMachine"]
+script = ExtResource( 10 )
+
+[node name="Appear" type="Node" parent="StatesMachine"]
+script = ExtResource( 6 )
+
+[node name="Tween" type="Tween" parent="."]

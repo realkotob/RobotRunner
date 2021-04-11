@@ -37,13 +37,17 @@ func _ready() -> void:
 
 #### LOGIC ####
 
-func are_level_nodes_bounded(origin: LevelNode, dest: LevelNode) -> bool:
+
+# Returns true if the two given nodes are connected by a bind
+func are_level_nodes_bounded(level1: LevelNode, level2: LevelNode) -> bool:
 	for bind in binds_container.get_children():
-		if bind.get_origin() == origin && bind.get_destination() == dest:
+		var bind_nodes = [bind.get_origin(), bind.get_destination()]
+		if level1 in bind_nodes && level2 in bind_nodes:
 			return true
 	return false
 
 
+# Move the cursor based on the user input
 func move_cursor(dir: Vector2):
 	var adequate_node = find_adequate_level(dir)
 	if adequate_node == null:
@@ -52,7 +56,7 @@ func move_cursor(dir: Vector2):
 	cursor.move_to_level(adequate_node)
 
 
-
+# Find the node targeted by the user, based on the direction of his input and returns it
 func find_adequate_level(dir: Vector2) -> LevelNode:
 	var current_level = cursor.get_current_level()
 	var level_node_binds = get_binds(current_level)
@@ -67,7 +71,7 @@ func find_adequate_level(dir: Vector2) -> LevelNode:
 	return null
 
 
-
+# Get every nodes connected to the given one by a bind
 func get_bounded_level_nodes(node: LevelNode) -> Array:
 	var binds_array = binds_container.get_children()
 	var bounded_nodes_array := Array()
@@ -87,6 +91,7 @@ func get_bounded_level_nodes(node: LevelNode) -> Array:
 	return bounded_nodes_array
 
 
+# Returns an arrayu containing all the binds of the given node
 func get_binds(level_node: LevelNode) -> Array:
 	var bind_array := Array()
 	for bind in binds_container.get_children():
@@ -95,7 +100,7 @@ func get_binds(level_node: LevelNode) -> Array:
 	
 	return bind_array
 
-
+# Return the bind conencting the two given nodes
 func get_bind(origin: LevelNode, dest: LevelNode) -> LevelNodeBind:
 	for child in binds_container.get_children():
 		var bind_nodes = [child.get_origin(), child.get_destination()]
@@ -104,7 +109,7 @@ func get_bind(origin: LevelNode, dest: LevelNode) -> LevelNodeBind:
 	return null
 
 
-func enter_level():
+func enter_current_level():
 	var current_level_node = cursor.get_current_level()
 	if current_level_node != null && !current_level_node.is_visited():
 		var current_level_path = current_level_node.get_level_scene_path()
@@ -136,11 +141,12 @@ func _input(_event: InputEvent) -> void:
 	
 	if Input.is_action_just_pressed("ui_accept"):
 		var current_level_node = cursor.get_current_level()
-		if !characters_container.is_moving() && !current_level_node.visited:
-			characters_container.move_to_level(current_level_node)
-			
-			yield(characters_container, "enter_level_animation_finished")
-			enter_level()
+		current_level_node.set_visited(true)
+#		if !characters_container.is_moving() && !current_level_node.visited:
+#			characters_container.move_to_level(current_level_node)
+#
+#			yield(characters_container, "enter_level_animation_finished")
+#			enter_current_level()
 
 #### SIGNAL RESPONSES ####
 
@@ -165,3 +171,9 @@ func _on_level_node_hidden_changed(level_node: LevelNode, hidden: bool):
 		var hidden_bind = true if hidden else bind.origin.is_hidden() or bind.destination.is_hidden()
 		bind.set_hidden(hidden_bind)
 
+
+func _on_level_visited(level_node : LevelNode):
+	var bounded_nodes = get_bounded_level_nodes(level_node)
+	for node in bounded_nodes:
+		if node.is_hidden():
+			node.set_hidden(false)

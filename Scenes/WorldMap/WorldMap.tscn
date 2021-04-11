@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Scenes/WorldMap/LevelNode/LevelNode.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/WorldMap/WorldMapMovingElement/Character/WorldMapCharacter.tscn" type="PackedScene" id=2]
@@ -15,42 +15,139 @@
 [ext_resource path="res://Scenes/WorldMap/Backgound/Variation2.png" type="Texture" id=13]
 [ext_resource path="res://Scenes/WorldMap/Backgound/Variation8.png" type="Texture" id=14]
 [ext_resource path="res://Scenes/WorldMap/Binds.gd" type="Script" id=15]
+[ext_resource path="res://BabaGodotLib/Shaders/Disolve/DisolveVisualShader.tres" type="Shader" id=16]
+[ext_resource path="res://BabaGodotLib/Shaders/Disolve/DisolveNoiseTexture.tres" type="Texture" id=17]
+[ext_resource path="res://BabaGodotLib/Shaders/Disolve/Disolve.shader" type="Shader" id=18]
 
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+render_priority = 1
+shader = ExtResource( 18 )
+shader_param/amount = 0.0
+shader_param/noise = ExtResource( 17 )
 
+[sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
+render_priority = 1
+shader = ExtResource( 18 )
+shader_param/amount = 0.0
+shader_param/noise = ExtResource( 17 )
 
-[sub_resource type="Curve2D" id=1]
+[sub_resource type="ShaderMaterial" id=3]
+resource_local_to_scene = true
+render_priority = 1
+shader = ExtResource( 18 )
+shader_param/amount = 0.0
+shader_param/noise = ExtResource( 17 )
+
+[sub_resource type="ShaderMaterial" id=4]
+resource_local_to_scene = true
+render_priority = 1
+shader = ExtResource( 18 )
+shader_param/amount = 0.0
+shader_param/noise = ExtResource( 17 )
+
+[sub_resource type="ShaderMaterial" id=5]
+resource_local_to_scene = true
+render_priority = 1
+shader = ExtResource( 18 )
+shader_param/amount = 0.0
+shader_param/noise = ExtResource( 17 )
+
+[sub_resource type="ShaderMaterial" id=6]
+resource_local_to_scene = true
+render_priority = 1
+shader = ExtResource( 18 )
+shader_param/amount = 0.0
+shader_param/noise = ExtResource( 17 )
+
+[sub_resource type="ShaderMaterial" id=7]
+resource_local_to_scene = true
+render_priority = 1
+shader = ExtResource( 18 )
+shader_param/amount = 0.0
+shader_param/noise = ExtResource( 17 )
+
+[sub_resource type="ShaderMaterial" id=8]
+resource_local_to_scene = true
+shader = ExtResource( 16 )
+shader_param/amount = 0.0
+
+[sub_resource type="Curve2D" id=21]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 126.591, 287.168, 0, 0, 0, 0, 126.591, 167.438, 0, 0, 0, 0, 263.668, 167.438 )
 }
 
-[sub_resource type="Curve2D" id=2]
+[sub_resource type="ShaderMaterial" id=10]
+resource_local_to_scene = true
+render_priority = 1
+shader = ExtResource( 18 )
+shader_param/amount = 0.0
+shader_param/noise = ExtResource( 17 )
+
+[sub_resource type="Curve2D" id=22]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 283.668, 187.438, 0, 0, 0, 0, 283.668, 282.699, 0, 0, 0, 0, 452, 282.699 )
+"points": PoolVector2Array( 0, 0, 0, 0, 283.668, 187.438, 0, 0, 0, 0, 283.668, 282, 0, 0, 0, 0, 452, 282 )
 }
 
-[sub_resource type="Curve2D" id=3]
+[sub_resource type="ShaderMaterial" id=12]
+resource_local_to_scene = true
+render_priority = 1
+shader = ExtResource( 18 )
+shader_param/amount = 0.0
+shader_param/noise = ExtResource( 17 )
+
+[sub_resource type="Curve2D" id=23]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 126.591, 327.168, 0, 0, 0, 0, 126.591, 471.402, 0, 0, 0, 0, 347.494, 471.402 )
+"points": PoolVector2Array( 0, 0, 0, 0, 126.591, 327.168, 0, 0, 0, 0, 126.591, 471.402, 0, 0, 0, 0, 346.08, 471.402 )
 }
 
-[sub_resource type="Curve2D" id=4]
+[sub_resource type="ShaderMaterial" id=14]
+resource_local_to_scene = true
+render_priority = 1
+shader = ExtResource( 18 )
+shader_param/amount = 0.0
+shader_param/noise = ExtResource( 17 )
+
+[sub_resource type="Curve2D" id=24]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 472, 262.699, 0, 0, 0, 0, 472, 280.317, 0, 0, 0, 0, 679.28, 280.317 )
+"points": PoolVector2Array( 0, 0, 0, 0, 492, 282, 0, 0, 0, 0, 679.28, 282 )
 }
 
-[sub_resource type="Curve2D" id=5]
+[sub_resource type="ShaderMaterial" id=16]
+resource_local_to_scene = true
+render_priority = 1
+shader = ExtResource( 18 )
+shader_param/amount = 0.0
+shader_param/noise = ExtResource( 17 )
+
+[sub_resource type="Curve2D" id=25]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 699.28, 260.317, 0, 0, 0, 0, 699.28, 156.832, 0, 0, 0, 0, 809.612, 156.832 )
+"points": PoolVector2Array( 0, 0, 0, 0, 699.28, 262, 0, 0, 0, 0, 699.28, 157.776, 0, 0, 0, 0, 810.556, 157.776 )
 }
 
-[sub_resource type="Curve2D" id=6]
+[sub_resource type="ShaderMaterial" id=18]
+resource_local_to_scene = true
+render_priority = 1
+shader = ExtResource( 18 )
+shader_param/amount = 0.0
+shader_param/noise = ExtResource( 17 )
+
+[sub_resource type="Curve2D" id=26]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 387.494, 471.402, 0, 0, 0, 0, 472, 471.402, 0, 0, 0, 0, 472, 302.699 )
+"points": PoolVector2Array( 0, 0, 0, 0, 386.08, 471.402, 0, 0, 0, 0, 472, 471.402, 0, 0, 0, 0, 472, 302 )
 }
 
-[sub_resource type="Curve2D" id=7]
+[sub_resource type="ShaderMaterial" id=20]
+resource_local_to_scene = true
+render_priority = 1
+shader = ExtResource( 18 )
+shader_param/amount = 0.0
+shader_param/noise = ExtResource( 17 )
+
+[sub_resource type="Curve2D" id=27]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 472, 262.699, 0, 0, 0, 0, 472, 104.828 )
+"points": PoolVector2Array( 0, 0, 0, 0, 472, 262, 0, 0, 0, 0, 472, 98.5 )
 }
 
 [node name="WorldMap" type="CanvasLayer"]
@@ -73,7 +170,7 @@ __meta__ = {
 }
 
 [node name="BackgroundElement" parent="BackgroundElements" instance=ExtResource( 7 )]
-position = Vector2( 353.267, 249.631 )
+position = Vector2( 354.267, 239.631 )
 texture = ExtResource( 9 )
 
 [node name="BackgroundElement5" parent="BackgroundElements" instance=ExtResource( 7 )]
@@ -106,28 +203,39 @@ __meta__ = {
 
 [node name="LevelNode" parent="Levels" instance=ExtResource( 1 )]
 modulate = Color( 0.66, 0.66, 0.66, 1 )
+material = SubResource( 1 )
 position = Vector2( 126.591, 307.168 )
 level_scene_path = "res://Scenes/Levels/Chapter1/Level1/Level1A.tscn"
 visited = true
 
 [node name="LevelNode2" parent="Levels" instance=ExtResource( 1 )]
-position = Vector2( 367.494, 471.402 )
+material = SubResource( 2 )
+position = Vector2( 366.08, 471.402 )
 
 [node name="LevelNode3" parent="Levels" instance=ExtResource( 1 )]
+material = SubResource( 3 )
 position = Vector2( 283.668, 167.438 )
 level_scene_path = "res://Scenes/Levels/Chapter1/Level1/Level1C.tscn"
 
 [node name="LevelNode4" parent="Levels" instance=ExtResource( 1 )]
-position = Vector2( 699.28, 280.317 )
+modulate = Color( 1, 1, 1, 0.2 )
+material = SubResource( 4 )
+position = Vector2( 699.28, 282 )
+hidden = true
 
 [node name="LevelNode5" parent="Levels" instance=ExtResource( 1 )]
-position = Vector2( 472, 282.699 )
+material = SubResource( 5 )
+position = Vector2( 472, 282 )
 
 [node name="LevelNode6" parent="Levels" instance=ExtResource( 1 )]
-position = Vector2( 829.612, 156.832 )
+modulate = Color( 1, 1, 1, 0.2 )
+material = SubResource( 6 )
+position = Vector2( 830.556, 157.776 )
+hidden = true
 
 [node name="BossLevelNode" parent="Levels" instance=ExtResource( 3 )]
-position = Vector2( 472, 66.328 )
+material = SubResource( 7 )
+position = Vector2( 472, 60 )
 
 [node name="Binds" type="Node2D" parent="."]
 script = ExtResource( 15 )
@@ -136,37 +244,48 @@ __meta__ = {
 }
 
 [node name="LevelNodeBind2" parent="Binds" instance=ExtResource( 4 )]
-curve = SubResource( 1 )
+material = SubResource( 8 )
+curve = SubResource( 21 )
 origin_node_path = "Levels/LevelNode"
 destination_node_path = "Levels/LevelNode3"
 
 [node name="LevelNodeBind3" parent="Binds" instance=ExtResource( 4 )]
-curve = SubResource( 2 )
+material = SubResource( 10 )
+curve = SubResource( 22 )
 origin_node_path = "Levels/LevelNode3"
 destination_node_path = "Levels/LevelNode5"
 
 [node name="LevelNodeBind" parent="Binds" instance=ExtResource( 4 )]
-curve = SubResource( 3 )
+material = SubResource( 12 )
+curve = SubResource( 23 )
 origin_node_path = "Levels/LevelNode"
 destination_node_path = "Levels/LevelNode2"
 
 [node name="LevelNodeBind4" parent="Binds" instance=ExtResource( 4 )]
-curve = SubResource( 4 )
+modulate = Color( 1, 1, 1, 0.2 )
+material = SubResource( 14 )
+curve = SubResource( 24 )
 origin_node_path = "Levels/LevelNode5"
 destination_node_path = "Levels/LevelNode4"
+hidden = true
 
 [node name="LevelNodeBind5" parent="Binds" instance=ExtResource( 4 )]
-curve = SubResource( 5 )
+modulate = Color( 1, 1, 1, 0.2 )
+material = SubResource( 16 )
+curve = SubResource( 25 )
 origin_node_path = "Levels/LevelNode4"
 destination_node_path = "Levels/LevelNode6"
+hidden = true
 
 [node name="LevelNodeBind6" parent="Binds" instance=ExtResource( 4 )]
-curve = SubResource( 6 )
+material = SubResource( 18 )
+curve = SubResource( 26 )
 origin_node_path = "Levels/LevelNode2"
 destination_node_path = "Levels/LevelNode5"
 
 [node name="LevelNodeBind7" parent="Binds" instance=ExtResource( 4 )]
-curve = SubResource( 7 )
+material = SubResource( 20 )
+curve = SubResource( 27 )
 origin_node_path = "Levels/LevelNode5"
 destination_node_path = "Levels/BossLevelNode"
 

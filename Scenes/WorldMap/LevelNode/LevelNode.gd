@@ -2,6 +2,9 @@ tool
 extends Sprite
 class_name LevelNode
 
+onready var tween_node = $Tween
+onready var default_state : String = "Hidden" if hidden else "Visible" 
+
 enum EDITOR_SELECTED{
 	UNSELECTED,
 	BIND_ORIGIN,
@@ -16,12 +19,14 @@ export var visited : bool = false setget set_visited, is_visited
 
 var editor_select_state : int = EDITOR_SELECTED.UNSELECTED setget set_editor_select_state, get_editor_select_state
 
+var is_ready := false
+
 # warning-ignore:unused_signal
 signal add_bind_query(origin, dest)
 # warning-ignore:unused_signal
 signal remove_all_binds_query(origin)
 signal hidden_changed(level_node, hidden_value)
-
+signal level_visited(level_node)
 
 #### ACCESSORS ####
 
@@ -41,12 +46,18 @@ func get_editor_select_state() -> int: return editor_select_state
 
 func set_visited(value: bool):
 	visited = value
-	if visited: set_modulate(Color.darkgray)
+	if visited: 
+		set_modulate(Color.darkgray)
+		emit_signal("level_visited", self)
 	else: set_modulate(Color.white)
 
 func is_visited() -> bool: return visited
 
 func set_hidden(value: bool): 
+	if !is_ready:
+		hidden = value
+		return
+	
 	if value != hidden:
 		hidden = value
 		if Engine.editor_hint:
@@ -55,26 +66,37 @@ func set_hidden(value: bool):
 			else:
 				set_modulate(Color.white)
 		else:
-			set_visible(!hidden)
+			if value:
+				set_state("Disappear")
+			else:
+				set_state("Appear")
 		emit_signal("hidden_changed", self, hidden)
 
 func is_hidden() -> bool : return hidden
 
 func get_level_scene_path() -> String: return level_scene_path
 
+func set_state(value): $StatesMachine.set_state(value)
+func get_state() -> StateBase: return $StatesMachine.get_state()
+func get_state_name() -> String: return $StatesMachine.get_state_name()
+
 #### BUILT-IN ####
 
 func _ready() -> void:
+	if owner == null: return
 	yield(owner, "ready")
-	owner.get_binds(self)
 	
 	var __ = connect("hidden_changed", owner, "_on_level_node_hidden_changed")
+	__ = connect("level_visited", owner, "_on_level_visited")
 	
 	if !Engine.editor_hint:
 		$ColorRect.queue_free()
+		get_material().set_local_to_scene(true)
 	else:
 		__ = connect("add_bind_query", owner, "_on_add_bind_query")
 		__ = connect("remove_all_binds_query", owner, "_on_remove_all_binds_query")
+	
+	is_ready = true
 
 
 #### VIRTUALS ####

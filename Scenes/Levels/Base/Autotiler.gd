@@ -11,11 +11,8 @@ onready var grid_node = get_parent()
 
 #### ACCESSORS ####
 
-func is_class(value: String):
-	return value == "" or .is_class(value)
-
-func get_class() -> String:
-	return ""
+func is_class(value: String): return value == "Autotiler" or .is_class(value)
+func get_class() -> String: return "Autotiler"
 
 #### BUILT-IN ####
 
@@ -29,11 +26,11 @@ func update_grid_autotiling():
 	for tile in tiles_array:
 		var tile_type = tile.get_tile_type()
 		if tile_type.get_tileset() != null:
-			update_tile_sprite(tile, tile_type)
+			tile.update_sprite(tile_type)
 
 
 # Update the sprite of a single tile
-func get_tile_texture_pos(tile: Tile, new_type: TileType):
+func get_tile_texture_pos(tile, new_type):
 	var tileset = new_type.get_tileset()
 	
 	if tileset == null: 
@@ -57,7 +54,7 @@ func get_tile_texture_pos(tile: Tile, new_type: TileType):
 
 # Take a tile and its new type, and return the bitmask value it should have, 
 # based on the adjacent tiles 
-func get_tile_bitmask(tile: Tile, new_type: TileType) -> int:
+func get_tile_bitmask(tile, new_type) -> int:
 	var next_type_class = new_type.get_class()
 	var adjacent_tiles = grid_node.get_adjacent_tiles(tile)
 	var final_bitmask_value : int = 0

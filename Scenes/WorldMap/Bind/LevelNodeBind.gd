@@ -2,7 +2,9 @@ tool
 extends Path2D
 class_name LevelNodeBind
 
+onready var tween_node : Tween = $Tween 
 onready var line : BindLine = $BindLine
+onready var default_state : String = "Hidden" if hidden else "Visible" 
 
 export var origin_node_path : String = ""
 export var destination_node_path : String = ""
@@ -61,6 +63,10 @@ func set_dest_pos(value: Vector2):
 func get_point_path() -> PoolVector2Array: return point_path
 
 func set_hidden(value: bool): 
+	if !is_ready:
+		hidden = value
+		return
+	
 	if value != hidden:
 		hidden = value
 		if Engine.editor_hint:
@@ -69,9 +75,16 @@ func set_hidden(value: bool):
 			else:
 				set_modulate(Color.white)
 		else:
-			set_visible(!hidden)
+			if value:
+				set_state("Disappear")
+			else:
+				set_state("Appear")
 
 func is_hidden() -> bool : return hidden
+
+func set_state(value): $StatesMachine.set_state(value)
+func get_state() -> StateBase: return $StatesMachine.get_state()
+func get_state_name() -> String: return $StatesMachine.get_state_name()
 
 #### BUILT-IN ####
 
@@ -81,6 +94,9 @@ func _ready() -> void:
 	if owner != null && origin_node_path != "" && destination_node_path != "":
 		set_origin(owner.get_node(origin_node_path))
 		set_destination(owner.get_node(destination_node_path))
+	
+	if !Engine.editor_hint:
+		get_material().set_local_to_scene(true)
 	
 	is_ready = true
 

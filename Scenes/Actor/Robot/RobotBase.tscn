@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://BabaGodotLib/Actor/States/ActorState/BaseStates/ActorIdleState.gd" type="Script" id=1]
+[ext_resource path="res://BabaGodotLib/Actor/States/ActorState/RealTimeStates/RT_ActorIdleState.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Actor/ActorBase.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Actor/Robot/States/RobotMoveState.gd" type="Script" id=3]
 [ext_resource path="res://BabaGodotLib/Actor/Inactive.gd" type="Script" id=4]

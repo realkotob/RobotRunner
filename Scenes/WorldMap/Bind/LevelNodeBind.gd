@@ -95,9 +95,6 @@ func _ready() -> void:
 		set_origin(owner.get_node(origin_node_path))
 		set_destination(owner.get_node(destination_node_path))
 	
-	if !Engine.editor_hint:
-		get_material().set_local_to_scene(true)
-	
 	is_ready = true
 
 

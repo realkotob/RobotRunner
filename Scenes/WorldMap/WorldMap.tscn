@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Scenes/WorldMap/LevelNode/LevelNode.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/WorldMap/WorldMapMovingElement/Character/WorldMapCharacter.tscn" type="PackedScene" id=2]
@@ -15,7 +15,6 @@
 [ext_resource path="res://Scenes/WorldMap/Backgound/Variation2.png" type="Texture" id=13]
 [ext_resource path="res://Scenes/WorldMap/Backgound/Variation8.png" type="Texture" id=14]
 [ext_resource path="res://Scenes/WorldMap/Binds.gd" type="Script" id=15]
-[ext_resource path="res://BabaGodotLib/Shaders/Disolve/DisolveVisualShader.tres" type="Shader" id=16]
 [ext_resource path="res://BabaGodotLib/Shaders/Disolve/DisolveNoiseTexture.tres" type="Texture" id=17]
 [ext_resource path="res://BabaGodotLib/Shaders/Disolve/Disolve.shader" type="Shader" id=18]
 
@@ -68,84 +67,37 @@ shader = ExtResource( 18 )
 shader_param/amount = 0.0
 shader_param/noise = ExtResource( 17 )
 
-[sub_resource type="ShaderMaterial" id=8]
-resource_local_to_scene = true
-shader = ExtResource( 16 )
-shader_param/amount = 0.0
-
-[sub_resource type="Curve2D" id=21]
+[sub_resource type="Curve2D" id=8]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 126.591, 287.168, 0, 0, 0, 0, 126.591, 167.438, 0, 0, 0, 0, 263.668, 167.438 )
 }
 
-[sub_resource type="ShaderMaterial" id=10]
-resource_local_to_scene = true
-render_priority = 1
-shader = ExtResource( 18 )
-shader_param/amount = 0.0
-shader_param/noise = ExtResource( 17 )
-
-[sub_resource type="Curve2D" id=22]
+[sub_resource type="Curve2D" id=9]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 283.668, 187.438, 0, 0, 0, 0, 283.668, 282, 0, 0, 0, 0, 452, 282 )
 }
 
-[sub_resource type="ShaderMaterial" id=12]
-resource_local_to_scene = true
-render_priority = 1
-shader = ExtResource( 18 )
-shader_param/amount = 0.0
-shader_param/noise = ExtResource( 17 )
-
-[sub_resource type="Curve2D" id=23]
+[sub_resource type="Curve2D" id=10]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 126.591, 327.168, 0, 0, 0, 0, 126.591, 471.402, 0, 0, 0, 0, 346.08, 471.402 )
 }
 
-[sub_resource type="ShaderMaterial" id=14]
-resource_local_to_scene = true
-render_priority = 1
-shader = ExtResource( 18 )
-shader_param/amount = 0.0
-shader_param/noise = ExtResource( 17 )
-
-[sub_resource type="Curve2D" id=24]
+[sub_resource type="Curve2D" id=11]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 492, 282, 0, 0, 0, 0, 679.28, 282 )
 }
 
-[sub_resource type="ShaderMaterial" id=16]
-resource_local_to_scene = true
-render_priority = 1
-shader = ExtResource( 18 )
-shader_param/amount = 0.0
-shader_param/noise = ExtResource( 17 )
-
-[sub_resource type="Curve2D" id=25]
+[sub_resource type="Curve2D" id=12]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 699.28, 262, 0, 0, 0, 0, 699.28, 157.776, 0, 0, 0, 0, 810.556, 157.776 )
 }
 
-[sub_resource type="ShaderMaterial" id=18]
-resource_local_to_scene = true
-render_priority = 1
-shader = ExtResource( 18 )
-shader_param/amount = 0.0
-shader_param/noise = ExtResource( 17 )
-
-[sub_resource type="Curve2D" id=26]
+[sub_resource type="Curve2D" id=13]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 386.08, 471.402, 0, 0, 0, 0, 472, 471.402, 0, 0, 0, 0, 472, 302 )
 }
 
-[sub_resource type="ShaderMaterial" id=20]
-resource_local_to_scene = true
-render_priority = 1
-shader = ExtResource( 18 )
-shader_param/amount = 0.0
-shader_param/noise = ExtResource( 17 )
-
-[sub_resource type="Curve2D" id=27]
+[sub_resource type="Curve2D" id=14]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 472, 262, 0, 0, 0, 0, 472, 98.5 )
 }
@@ -244,48 +196,41 @@ __meta__ = {
 }
 
 [node name="LevelNodeBind2" parent="Binds" instance=ExtResource( 4 )]
-material = SubResource( 8 )
-curve = SubResource( 21 )
+curve = SubResource( 8 )
 origin_node_path = "Levels/LevelNode"
 destination_node_path = "Levels/LevelNode3"
 
 [node name="LevelNodeBind3" parent="Binds" instance=ExtResource( 4 )]
-material = SubResource( 10 )
-curve = SubResource( 22 )
+curve = SubResource( 9 )
 origin_node_path = "Levels/LevelNode3"
 destination_node_path = "Levels/LevelNode5"
 
 [node name="LevelNodeBind" parent="Binds" instance=ExtResource( 4 )]
-material = SubResource( 12 )
-curve = SubResource( 23 )
+curve = SubResource( 10 )
 origin_node_path = "Levels/LevelNode"
 destination_node_path = "Levels/LevelNode2"
 
 [node name="LevelNodeBind4" parent="Binds" instance=ExtResource( 4 )]
 modulate = Color( 1, 1, 1, 0.2 )
-material = SubResource( 14 )
-curve = SubResource( 24 )
+curve = SubResource( 11 )
 origin_node_path = "Levels/LevelNode5"
 destination_node_path = "Levels/LevelNode4"
 hidden = true
 
 [node name="LevelNodeBind5" parent="Binds" instance=ExtResource( 4 )]
 modulate = Color( 1, 1, 1, 0.2 )
-material = SubResource( 16 )
-curve = SubResource( 25 )
+curve = SubResource( 12 )
 origin_node_path = "Levels/LevelNode4"
 destination_node_path = "Levels/LevelNode6"
 hidden = true
 
 [node name="LevelNodeBind6" parent="Binds" instance=ExtResource( 4 )]
-material = SubResource( 18 )
-curve = SubResource( 26 )
+curve = SubResource( 13 )
 origin_node_path = "Levels/LevelNode2"
 destination_node_path = "Levels/LevelNode5"
 
 [node name="LevelNodeBind7" parent="Binds" instance=ExtResource( 4 )]
-material = SubResource( 20 )
-curve = SubResource( 27 )
+curve = SubResource( 14 )
 origin_node_path = "Levels/LevelNode5"
 destination_node_path = "Levels/BossLevelNode"
 

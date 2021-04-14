@@ -69,7 +69,7 @@ func move_along_path(path: PoolVector2Array):
 func move(dest: Vector2, ease_type: int = Tween.EASE_IN_OUT):
 	tween_node.interpolate_property(self, "global_position",
 		get_global_position(), dest,
-		1.0, Tween.TRANS_CUBIC, ease_type)
+		0.7, Tween.TRANS_CUBIC, ease_type)
 	
 	tween_node.start()
 	

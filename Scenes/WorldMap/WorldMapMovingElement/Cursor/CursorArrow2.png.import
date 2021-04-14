@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Glitch.png-a0c1f6d9a95ce62bfb60f3d3eb3a4335.stex"
+path="res://.import/CursorArrow2.png-9882ae9096016b7f4d2f4531818577b0.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Global/Shaders/Glitch/texture/Glitch.png"
-dest_files=[ "res://.import/Glitch.png-a0c1f6d9a95ce62bfb60f3d3eb3a4335.stex" ]
+source_file="res://Scenes/WorldMap/WorldMapMovingElement/Cursor/CursorArrow2.png"
+dest_files=[ "res://.import/CursorArrow2.png-9882ae9096016b7f4d2f4531818577b0.stex" ]
 
 [params]
 

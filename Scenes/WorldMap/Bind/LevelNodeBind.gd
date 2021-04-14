@@ -18,6 +18,7 @@ var origin_pos := Vector2.INF setget set_origin_pos
 var dest_pos := Vector2.INF setget set_dest_pos
 
 var point_path := PoolVector2Array() setget , get_point_path
+var line_points_array = PoolVector2Array()
 
 var is_ready : bool = false
 
@@ -115,7 +116,7 @@ func _update_line():
 		return
 	
 	point_path = PoolVector2Array()
-	var line_points_array = PoolVector2Array()
+	line_points_array = PoolVector2Array()
 	point_path.append(origin_pos)
 	
 	var x_dist = abs(origin_pos.x - dest_pos.x)
@@ -171,6 +172,8 @@ func get_path_direction_form_node(level_node: LevelNode) -> Vector2:
 	
 	var point_dir = path[0].direction_to(path[1])
 	return point_dir
+
+
 
 
 #### INPUTS ####

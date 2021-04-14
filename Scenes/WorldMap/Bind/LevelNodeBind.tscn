@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/WorldMap/Bind/LevelNodeBind.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/WorldMap/Bind/BindLine.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Scenes/WorldMap/LevelNode/State/Visible.gd" type="Script" id=5]
 [ext_resource path="res://BabaGodotLib/Absract/StateMachine/StateMachine.gd" type="Script" id=6]
 [ext_resource path="res://BabaGodotLib/Absract/StateMachine/AbstractStates/Appear.gd" type="Script" id=7]
+[ext_resource path="res://Global/Lights/Light300.png" type="Texture" id=8]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -45,3 +46,8 @@ script = ExtResource( 4 )
 script = ExtResource( 3 )
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 8 )
+texture_scale = 0.2
+color = Color( 0, 0.952941, 1, 1 )

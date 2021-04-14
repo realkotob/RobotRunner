@@ -7,13 +7,15 @@
 [ext_resource path="res://Scenes/GUI/Dialogue/Assets/Portrait/PortraitFrame.png" type="Texture" id=5]
 [ext_resource path="res://Scenes/GUI/Dialogue/PortraitFrame.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/GUI/Dialogue/RichTextLabel.gd" type="Script" id=8]
-[ext_resource path="res://Global/Shaders/Glitch/Glitch.shader" type="Shader" id=9]
-[ext_resource path="res://Global/Shaders/GlitchEffect.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Global/Shaders/Glitch/texture/Glitch.png" type="Texture" id=11]
+[ext_resource path="res://BabaGodotLib/Shaders/Glitch/Glitch.shader" type="Shader" id=9]
+[ext_resource path="res://BabaGodotLib/Shaders/Glitch/GlitchEffect.tscn" type="PackedScene" id=10]
+[ext_resource path="res://BabaGodotLib/Shaders/Glitch/texture/Glitch.png" type="Texture" id=11]
 [ext_resource path="res://Scenes/GUI/Dialogue/Assets/Portrait/ScreenEffect/ScreenEffect2.png" type="Texture" id=12]
 [ext_resource path="res://Scenes/GUI/Dialogue/Assets/Portrait/ScreenEffect/ScreenEffect3.png" type="Texture" id=13]
 [ext_resource path="res://Scenes/GUI/Dialogue/Assets/Portrait/ScreenEffect/ScreenEffect4.png" type="Texture" id=14]
 [ext_resource path="res://Scenes/GUI/Dialogue/Assets/Portrait/ScreenEffect/ScreenEffect1.png" type="Texture" id=15]
+
+
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 9 )

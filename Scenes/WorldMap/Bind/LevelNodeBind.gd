@@ -174,7 +174,8 @@ func get_path_direction_form_node(level_node: LevelNode) -> Vector2:
 	return point_dir
 
 
-
+func get_every_branching_line(tip_level: LevelNode):
+	var lines_array = [line]
 
 #### INPUTS ####
 

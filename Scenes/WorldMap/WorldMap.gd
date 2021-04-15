@@ -3,10 +3,10 @@ extends CanvasLayer
 class_name LevelSelectionMenu
 
 const bind_scene = preload("res://Scenes/WorldMap/Bind/LevelNodeBind.tscn")
+const signal_light_scence = preload("res://Scenes/WorldMap/SignalLight.tscn")
 
 onready var binds_container = $Binds
 onready var tween_node = $Tween
-onready var signal_light = $SignalLight
 
 onready var characters_container = $Characters
 
@@ -122,15 +122,16 @@ func enter_current_level():
 
 
 func light_moving_through(start: LevelNode, dest: LevelNode):
-	var bind = get_bind(start, dest)
-	if bind == null:
-		print_debug("The given start and/or dest LevelNode are neither the origin nor the destination")
-		return
-	
-	var line_points_array = bind.line_points_array if start == bind.origin else bind.line_points_array.invert()
-	var light_pos = line_points_array[0]
-	signal_light.set_global_position(light_pos)
-	signal_light.move_along_path(line_points_array)
+#	var bind = get_bind(start, dest)
+#	if bind == null:
+#		print_debug("The given start and/or dest LevelNode are neither the origin nor the destination")
+#		return
+#
+#	var line_points_array = bind.line_points_array if start == bind.origin else bind.line_points_array.invert()
+#	var light_pos = line_points_array[0]
+#	signal_light.set_global_position(light_pos)
+#	signal_light.move_along_path(line_points_array)
+	pass
 
 
 #### INPUTS ####
@@ -155,9 +156,9 @@ func _input(_event: InputEvent) -> void:
 		var cursor_level_node = cursor.get_current_level()
 		
 		if !characters_container.is_moving() && !cursor_level_node.visited:
-#			characters_container.move_to_level(cursor_level_node)
 			light_moving_through(characters_container.current_level, cursor_level_node)
-			
+			yield(signal_light, "path_finished")
+			characters_container.move_to_level(cursor_level_node)
 			yield(characters_container, "enter_level_animation_finished")
 			enter_current_level()
 

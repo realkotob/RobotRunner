@@ -24,11 +24,6 @@ __meta__ = {
 
 [node name="BindLine" parent="." instance=ExtResource( 2 )]
 start_cap_visible = true
-end_cap_visible = true
-subline_offset = 8.0
-sub_line_minimum_dist = 17.0
-depth = 0
-max_depth = 2
 
 [node name="StatesMachine" type="Node2D" parent="."]
 script = ExtResource( 6 )

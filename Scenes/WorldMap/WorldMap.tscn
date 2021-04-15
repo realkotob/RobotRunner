@@ -69,37 +69,37 @@ shader = ExtResource( 18 )
 shader_param/amount = 0.0
 shader_param/noise = ExtResource( 17 )
 
-[sub_resource type="Curve2D" id=8]
+[sub_resource type="Curve2D" id=16]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 129.709, 286.277, 0, 0, 0, 0, 129.709, 167.438, 0, 0, 0, 0, 263.668, 167.438 )
 }
 
-[sub_resource type="Curve2D" id=9]
+[sub_resource type="Curve2D" id=17]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 283.668, 187.438, 0, 0, 0, 0, 283.668, 282, 0, 0, 0, 0, 452, 282 )
 }
 
-[sub_resource type="Curve2D" id=10]
+[sub_resource type="Curve2D" id=18]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 129.709, 326.277, 0, 0, 0, 0, 129.709, 471.402, 0, 0, 0, 0, 346.08, 471.402 )
 }
 
-[sub_resource type="Curve2D" id=11]
+[sub_resource type="Curve2D" id=19]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 492, 282, 0, 0, 0, 0, 679.28, 282 )
 }
 
-[sub_resource type="Curve2D" id=12]
+[sub_resource type="Curve2D" id=20]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 699.28, 262, 0, 0, 0, 0, 699.28, 157.776, 0, 0, 0, 0, 810.556, 157.776 )
 }
 
-[sub_resource type="Curve2D" id=13]
+[sub_resource type="Curve2D" id=21]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 386.08, 471.402, 0, 0, 0, 0, 472, 471.402, 0, 0, 0, 0, 472, 302 )
 }
 
-[sub_resource type="Curve2D" id=14]
+[sub_resource type="Curve2D" id=22]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 472, 262, 0, 0, 0, 0, 472, 98.5 )
 }
@@ -162,11 +162,9 @@ __meta__ = {
 }
 
 [node name="LevelNode" parent="Levels" instance=ExtResource( 1 )]
-modulate = Color( 0.66, 0.66, 0.66, 1 )
 material = SubResource( 1 )
 position = Vector2( 129.709, 306.277 )
 level_scene_path = "res://Scenes/Levels/Chapter1/Level1/Level1A.tscn"
-visited = true
 
 [node name="LevelNode2" parent="Levels" instance=ExtResource( 1 )]
 material = SubResource( 2 )
@@ -204,41 +202,41 @@ __meta__ = {
 }
 
 [node name="LevelNodeBind2" parent="Binds" instance=ExtResource( 4 )]
-curve = SubResource( 8 )
+curve = SubResource( 16 )
 origin_node_path = "Levels/LevelNode"
 destination_node_path = "Levels/LevelNode3"
 
 [node name="LevelNodeBind3" parent="Binds" instance=ExtResource( 4 )]
-curve = SubResource( 9 )
+curve = SubResource( 17 )
 origin_node_path = "Levels/LevelNode3"
 destination_node_path = "Levels/LevelNode5"
 
 [node name="LevelNodeBind" parent="Binds" instance=ExtResource( 4 )]
-curve = SubResource( 10 )
+curve = SubResource( 18 )
 origin_node_path = "Levels/LevelNode"
 destination_node_path = "Levels/LevelNode2"
 
 [node name="LevelNodeBind4" parent="Binds" instance=ExtResource( 4 )]
 modulate = Color( 1, 1, 1, 0.2 )
-curve = SubResource( 11 )
+curve = SubResource( 19 )
 origin_node_path = "Levels/LevelNode5"
 destination_node_path = "Levels/LevelNode4"
 hidden = true
 
 [node name="LevelNodeBind5" parent="Binds" instance=ExtResource( 4 )]
 modulate = Color( 1, 1, 1, 0.2 )
-curve = SubResource( 12 )
+curve = SubResource( 20 )
 origin_node_path = "Levels/LevelNode4"
 destination_node_path = "Levels/LevelNode6"
 hidden = true
 
 [node name="LevelNodeBind6" parent="Binds" instance=ExtResource( 4 )]
-curve = SubResource( 13 )
+curve = SubResource( 21 )
 origin_node_path = "Levels/LevelNode2"
 destination_node_path = "Levels/LevelNode5"
 
 [node name="LevelNodeBind7" parent="Binds" instance=ExtResource( 4 )]
-curve = SubResource( 14 )
+curve = SubResource( 22 )
 origin_node_path = "Levels/LevelNode5"
 destination_node_path = "Levels/BossLevelNode"
 

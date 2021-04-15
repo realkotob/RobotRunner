@@ -29,8 +29,9 @@ func _ready() -> void:
 	var current_level = get_node(cursor_start_level_path)
 	
 	cursor.set_current_level(current_level)
+	cursor.set_global_position(current_level.get_global_position())
 	characters_container.set_current_level(current_level)
-
+	characters_container.set_global_position(current_level.get_global_position())
 
 #### VIRTUALS ####
 
@@ -122,16 +123,32 @@ func enter_current_level():
 
 
 func light_moving_through(start: LevelNode, dest: LevelNode):
-#	var bind = get_bind(start, dest)
-#	if bind == null:
-#		print_debug("The given start and/or dest LevelNode are neither the origin nor the destination")
-#		return
-#
-#	var line_points_array = bind.line_points_array if start == bind.origin else bind.line_points_array.invert()
-#	var light_pos = line_points_array[0]
-#	signal_light.set_global_position(light_pos)
-#	signal_light.move_along_path(line_points_array)
-	pass
+	var bind = get_bind(start, dest)
+	if bind == null:
+		print_debug("The given start and/or dest LevelNode are neither the origin nor the destination")
+		return
+	
+	var line_array := Array()
+	bind.get_every_branching_line(start, line_array)
+	
+	for line in line_array:
+		var points = line.get_points()
+		
+		if line.depth != 0 or start != line.get_start_cap_node():
+			points.invert()
+			if line.depth != 0:
+				var main_line_points = line_array[0].get_points()
+				if start != line_array[0].get_start_cap_node():
+					main_line_points.invert()
+				main_line_points.remove(0)
+				points += main_line_points
+		
+		var signal_light = signal_light_scence.instance()
+		var light_pos = points[0]
+		add_child(signal_light)
+		
+		signal_light.set_global_position(light_pos)
+		signal_light.move_along_path(points, false)
 
 
 #### INPUTS ####
@@ -157,10 +174,9 @@ func _input(_event: InputEvent) -> void:
 		
 		if !characters_container.is_moving() && !cursor_level_node.visited:
 			light_moving_through(characters_container.current_level, cursor_level_node)
-			yield(signal_light, "path_finished")
 			characters_container.move_to_level(cursor_level_node)
-			yield(characters_container, "enter_level_animation_finished")
-			enter_current_level()
+#			yield(characters_container, "enter_level_animation_finished")
+#			enter_current_level()
 
 #### SIGNAL RESPONSES ####
 

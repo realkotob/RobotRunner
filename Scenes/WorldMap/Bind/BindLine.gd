@@ -24,6 +24,8 @@ var dead_end : bool = false
 var is_ready : bool = false
 var offset_sign : int = 0
 
+var end_cap_node : LevelNode = null setget set_end_cap_node, get_end_cap_node
+var start_cap_node : LevelNode = null setget set_start_cap_node, get_start_cap_node
 
 #### ACCESSORS ####
 
@@ -61,6 +63,13 @@ func set_points(points_array: PoolVector2Array):
 
 func set_depth(value: int): depth = value
 func set_max_depth(value: int): max_depth = value
+
+func set_start_cap_node(value: LevelNode): start_cap_node = value
+func get_start_cap_node() -> LevelNode: return start_cap_node
+
+func set_end_cap_node(value: LevelNode): end_cap_node = value
+func get_end_cap_node() -> LevelNode: return end_cap_node
+
 
 #### BUILT-IN ####
 
@@ -173,6 +182,12 @@ func generate_node_sublines():
 			else:
 				line.set_max_depth(max_depth)
 			add_child(line)
+			
+			if i == 0:
+				line.set_start_cap_node(start_cap_node)
+			else:
+				line.set_end_cap_node(end_cap_node)
+			
 			line.set_owner(self)
 			line.call_deferred("set_points", PoolVector2Array(line_points_array))
 

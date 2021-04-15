@@ -22,7 +22,7 @@ func get_class() -> String: return "WorldMapCharacterContainer"
 #### LOGIC ####
 
 
-func move_to_level(level_node: LevelNode):
+func move_to_level(level_node: LevelNode, _interpol: bool= true):
 	set_global_position(level_node.get_global_position())
 	
 	for child in get_children():

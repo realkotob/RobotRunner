@@ -15,6 +15,8 @@
 [ext_resource path="res://Scenes/WorldMap/Backgound/Variation2.png" type="Texture" id=13]
 [ext_resource path="res://Scenes/WorldMap/Backgound/Variation8.png" type="Texture" id=14]
 
+
+
 [sub_resource type="Curve2D" id=1]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 126.591, 287.168, 0, 0, 0, 0, 126.591, 167.438, 0, 0, 0, 0, 263.668, 167.438 )

@@ -1,8 +1,8 @@
 tool
 extends Line2D
-class_name BindLine
+class_name XL_BindLine
 
-const bind_line_scene_path = "res://Scenes/WorldMap/Bind/BindLine.tscn"
+const bind_line_scene_path = "res://Scenes/WorldMap/Bind/XL_BindLine.tscn"
 onready var bind_variation_scene = preload("res://Scenes/WorldMap/Bind/BindVariation.tscn")
 
 onready var start_cap = $StartCap
@@ -29,8 +29,8 @@ var start_cap_node : LevelNode = null setget set_start_cap_node, get_start_cap_n
 
 #### ACCESSORS ####
 
-func is_class(value: String): return value == "BindLine" or .is_class(value)
-func get_class() -> String: return "BindLine"
+func is_class(value: String): return value == "XL_BindLine" or .is_class(value)
+func get_class() -> String: return "XL_BindLine"
 
 func set_start_cap_visible(value: bool):
 	start_cap_visible = value
@@ -274,7 +274,7 @@ func get_points_recursive(array_to_fill: Array):
 		array_to_fill.append(point)
 	
 	for child in get_children():
-		if child.is_class("BindLine"):
+		if child.is_class("XL_BindLine"):
 			child.get_points_recursive(array_to_fill)
 
 

@@ -1,4 +1,4 @@
-extends BindLine
+extends XL_BindLine
 
 #### ACCESSORS ####
 

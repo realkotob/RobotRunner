@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://BabaGodotLib/WorldMap/LevelNodeBind/LevelNodeBind.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/WorldMap/Bind/XL_BindLine.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/WorldMap/Bind/XL_LevelNodeBind.gd" type="Script" id=3]
+
+[sub_resource type="Curve2D" id=9]
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[node name="XL_LevelNodeBind" instance=ExtResource( 1 )]
+curve = SubResource( 9 )
+script = ExtResource( 3 )
+
+[node name="BindLine" parent="." index="2" instance=ExtResource( 2 )]

@@ -38,7 +38,7 @@ func move_to_level(level_node: LevelNode, interpol: bool = true):
 		"Idle": yield(self, "idle_animation_finished")
 		"Rotate": yield(self, "rotation_animation_finished")
 	
-	.move_to_level(level_node, interpol)
+	.move_to_level(level_node, true)
 
 
 #### INPUTS ####

@@ -192,8 +192,11 @@ position = Vector2( 830.556, 157.776 )
 hidden = true
 
 [node name="BossLevelNode" parent="Levels" instance=ExtResource( 3 )]
+light_mask = 1
 material = SubResource( 7 )
 position = Vector2( 472, 60 )
+z_index = 0
+z_as_relative = true
 
 [node name="Binds" type="Node2D" parent="."]
 script = ExtResource( 15 )
@@ -245,11 +248,12 @@ destination_node_path = "Levels/BossLevelNode"
 [node name="Characters" type="Node2D" parent="."]
 modulate = Color( 0.270588, 0.611765, 0.156863, 1 )
 material = SubResource( 15 )
-position = Vector2( 129.709, 306.277 )
+position = Vector2( 472, 282 )
 script = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
 }
+speed = 300.0
 
 [node name="WorldMapCharacter" parent="Characters" instance=ExtResource( 2 )]
 use_parent_material = true
@@ -267,4 +271,7 @@ region_rect = Rect2( 0, 0, 64, 64 )
 [node name="GlitchEffect" parent="Characters" instance=ExtResource( 19 )]
 
 [node name="WorldMapCursor" parent="." instance=ExtResource( 8 )]
-position = Vector2( 129.709, 306.277 )
+position = Vector2( 472, 282 )
+speed = 300.0
+
+[node name="MovingLightContainer" type="Node2D" parent="."]

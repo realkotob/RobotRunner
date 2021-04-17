@@ -179,13 +179,14 @@ func get_path_direction_form_node(level_node: LevelNode) -> Vector2:
 
 func get_every_branching_line(tip_level: LevelNode, array_to_fill: Array, bind_line: BindLine = line):
 	if not bind_line in array_to_fill:
-		array_to_fill.append(line)
+		array_to_fill.append(bind_line)
 	
 	var tip_to_fetch = "start_cap_node" if tip_level == origin else "end_cap_node"
 	for child in bind_line.get_children():
-		if child is BindLine && child.get(tip_to_fetch) == tip_level:
-			array_to_fill.append(child)
-			
+		if not child is BindLine or (child.start_cap_node == null && child.end_cap_node == null):
+			continue
+		
+		if child.get(tip_to_fetch) == tip_level:
 			get_every_branching_line(tip_level, array_to_fill, child)
 
 

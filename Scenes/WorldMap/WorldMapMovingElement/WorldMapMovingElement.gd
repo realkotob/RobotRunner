@@ -2,7 +2,7 @@ tool
 extends Node2D
 class_name WorldMapMovingElement
 
-export var speed : float = 300.0
+export var speed : float = 100.0
 
 onready var tween_node = $Tween
 
@@ -66,7 +66,7 @@ func move_to_level(level_node: LevelNode, interpol: bool = true):
 	
 	# If we need move along the bind in backwards order
 	if bind.origin == level_node:
-		path.invert()
+		move_path.invert()
 	
 	set_current_level(level_node)
 	

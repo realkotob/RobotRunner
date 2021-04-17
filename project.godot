@@ -529,11 +529,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/WorldMap/LevelNode/State/Visible.gd"
 }, {
-"base": "CanvasLayer",
-"class": "LevelSelectionMenu",
-"language": "GDScript",
-"path": "res://Scenes/WorldMap/WorldMap.gd"
-}, {
 "base": "HBoxContainer",
 "class": "LineContainer",
 "language": "GDScript",
@@ -658,6 +653,11 @@ _global_script_classes=[ {
 "class": "PlayerMoveState",
 "language": "GDScript",
 "path": "res://Scenes/Actor/Players/PlayerBase/States/PlayerMoveState.gd"
+}, {
+"base": "Node2D",
+"class": "PulsingLight",
+"language": "GDScript",
+"path": "res://BabaGodotLib/Feedback/PulsingLight.gd"
 }, {
 "base": "StatesMachine",
 "class": "PushdownAutomata",
@@ -909,6 +909,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/InteractiveObjects/Liquids/Water/Scripts/Water.gd"
 }, {
+"base": "CanvasLayer",
+"class": "WorldMap",
+"language": "GDScript",
+"path": "res://Scenes/WorldMap/WorldMap.gd"
+}, {
 "base": "Sprite",
 "class": "WorldMapBackgroundElement",
 "language": "GDScript",
@@ -1079,7 +1084,6 @@ _global_script_class_icons={
 "LevelNodeBind": "",
 "LevelNode_HiddenState": "",
 "LevelNode_VisibleState": "",
-"LevelSelectionMenu": "",
 "LineContainer": "",
 "LineData": "",
 "Liquid": "",
@@ -1105,6 +1109,7 @@ _global_script_class_icons={
 "PlayerIdleState": "",
 "PlayerJumpState": "",
 "PlayerMoveState": "",
+"PulsingLight": "",
 "PushdownAutomata": "",
 "RT_ActorActionState": "",
 "RT_ActorFallState": "",
@@ -1155,6 +1160,7 @@ _global_script_class_icons={
 "TilemapDebugCursor": "",
 "TriggerArea": "",
 "Water": "",
+"WorldMap": "",
 "WorldMapBackgroundElement": "",
 "WorldMapCharacter": "",
 "WorldMapCharacterContainer": "",

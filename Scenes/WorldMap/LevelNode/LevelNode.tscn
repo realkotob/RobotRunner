@@ -12,7 +12,10 @@
 
 [node name="LevelNode" type="Sprite"]
 self_modulate = Color( 0.270588, 0.611765, 0.156863, 1 )
+light_mask = 0
 material = ExtResource( 8 )
+z_index = 1
+z_as_relative = false
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
 

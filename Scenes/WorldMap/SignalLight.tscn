@@ -12,6 +12,7 @@ color = Color( 0, 0.976471, 1, 1 )
 range_layer_min = -512
 range_layer_max = 512
 script = ExtResource( 2 )
+speed = 250.0
 
 [node name="Tween" type="Tween" parent="."]
 

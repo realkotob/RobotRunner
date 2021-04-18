@@ -39,7 +39,7 @@ signal velocity_changed
 func set_direction(value : Vector2):
 	value = value.normalized()
 	if value.x != 0 and value != direction:
-		flip(sign(value.x))
+		flip(int(sign(value.x)))
 		last_direction = value
 	direction = value
 

@@ -14,6 +14,7 @@ onready var animated_sprite_node = $AnimatedSprite
 onready var path_node = get_node_or_null("Path")
 onready var action_hitbox_node = get_node_or_null("ActionHitBox")
 
+export var default_state : String = ""
 export var interactables := PoolStringArray(["InteractiveObject"])
 
 export var jump_force : int = -500 

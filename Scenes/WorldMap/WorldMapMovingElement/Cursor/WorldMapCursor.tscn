@@ -2,7 +2,7 @@
 
 [ext_resource path="res://BabaGodotLib/Absract/StateMachine/StateMachine.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/WorldMap/WorldMapMovingElement/Cursor/WorldMapCursor.gd" type="Script" id=2]
-[ext_resource path="res://Scenes/WorldMap/WorldMapMovingElement/Cursor/CursorArrow.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/WorldMap/WorldMapMovingElement/Cursor/CursorArrow2.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/WorldMap/WorldMapMovingElement/Cursor/State/WorldMapCursor_IdleState.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/WorldMap/WorldMapMovingElement/Cursor/State/WorldMapCursor_RotateState.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/WorldMap/WorldMapMovingElement/Cursor/State/WorldMapCursor_MoveState.gd" type="Script" id=6]
@@ -37,18 +37,18 @@ modulate = Color( 0.545098, 0.721569, 0.258824, 1 )
 [node name="Sprite" type="Sprite" parent="SpriteContainer"]
 rotation = 1.5708
 texture = ExtResource( 3 )
-offset = Vector2( -20, 0 )
+offset = Vector2( -20, -20 )
 
 [node name="Sprite2" type="Sprite" parent="SpriteContainer"]
 texture = ExtResource( 3 )
-offset = Vector2( -20, 0 )
+offset = Vector2( -20, -20 )
 
 [node name="Sprite3" type="Sprite" parent="SpriteContainer"]
 rotation = 3.14159
 texture = ExtResource( 3 )
-offset = Vector2( -20, 0 )
+offset = Vector2( -20, -20 )
 
 [node name="Sprite4" type="Sprite" parent="SpriteContainer"]
 rotation = 4.71239
 texture = ExtResource( 3 )
-offset = Vector2( -20, 0 )
+offset = Vector2( -20, -20 )

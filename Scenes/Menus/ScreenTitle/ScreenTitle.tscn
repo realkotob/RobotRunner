@@ -6,8 +6,8 @@
 [ext_resource path="res://Scenes/GUI/TextField.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/Menus/ScreenTitle/Scripts/ScreenTitleMenu.gd" type="Script" id=5]
 [ext_resource path="res://BabaGodotLib/Fonts/BoldCapsPixel32.tres" type="DynamicFont" id=6]
-[ext_resource path="res://Global/Shaders/Glitch/Glitch.shader" type="Shader" id=7]
-[ext_resource path="res://Global/Shaders/GlitchEffect.tscn" type="PackedScene" id=8]
+[ext_resource path="res://BabaGodotLib/Shaders/Glitch/Glitch.shader" type="Shader" id=7]
+[ext_resource path="res://BabaGodotLib/Shaders/Glitch/GlitchEffect.tscn" type="PackedScene" id=8]
 [ext_resource path="res://icon.png" type="Texture" id=9]
 [ext_resource path="res://Scenes/Fog/CosmeticFog/Fog.shader" type="Shader" id=10]
 [ext_resource path="res://Scenes/Menus/ScreenTitle/Sprites/RobotHead.png" type="Texture" id=11]
@@ -153,7 +153,6 @@ margin_bottom = 200.0
 mouse_filter = 2
 
 [node name="V_OptContainer" parent="HBoxContainer" index="0"]
-margin_left = 87.0
 margin_right = 264.0
 margin_bottom = 188.0
 mouse_filter = 2
@@ -215,6 +214,3 @@ margin_top = 144.0
 margin_right = 177.0
 margin_bottom = 188.0
 text = "Quit"
-
-[node name="OptionChoiceSound" parent="." index="4"]
-bus = "Sounds"

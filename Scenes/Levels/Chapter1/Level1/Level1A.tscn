@@ -311,6 +311,7 @@ position = Vector2( 2316, 120 )
 
 [node name="BabyTank1" parent="InteractivesObjects/Robot" index="0" instance=ExtResource( 18 )]
 position = Vector2( -4092, 228 )
+default_state = "Rise"
 action_name_bubble = "jump_player1"
 
 [node name="Path" type="Node2D" parent="InteractivesObjects/Robot/BabyTank1" index="5"]
@@ -334,6 +335,7 @@ position = Vector2( 372, -48 )
 
 [node name="BabyHammer1" parent="InteractivesObjects/Robot" index="1" instance=ExtResource( 23 )]
 position = Vector2( -4092, 468 )
+default_state = "Rise"
 
 [node name="Path" type="Node2D" parent="InteractivesObjects/Robot/BabyHammer1" index="5"]
 script = ExtResource( 24 )
@@ -378,6 +380,7 @@ position = Vector2( 350, 0 )
 
 [node name="BabyHammer2" parent="InteractivesObjects/Robot" index="3" instance=ExtResource( 23 )]
 position = Vector2( -2028, 420 )
+default_state = ""
 action_name_bubble = "action_player2"
 
 [node name="Path" type="Node2D" parent="InteractivesObjects/Robot/BabyHammer2" index="5"]
@@ -429,8 +432,8 @@ scale = Vector2( 3.05, 5.014 )
 [node name="Intro" parent="Events/DialogueEvents" index="0" instance=ExtResource( 21 )]
 position = Vector2( 25.3403, 277 )
 scale = Vector2( 4.755, 4.275 )
+triggers_on_level_start = true
 dialogue_index = 1
-cut_scene = true
 
 [node name="Minions" parent="Events/DialogueEvents" index="1" instance=ExtResource( 21 )]
 position = Vector2( -2916, 204 )

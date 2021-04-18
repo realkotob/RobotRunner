@@ -12,6 +12,10 @@ var bind_dest_array : Array = []
 
 var bind_mode : bool = false setget set_bind_mode
 
+var handeled_objects = ["LevelNode", "WorldMapBackgroundElement", "LevelNodeBind"]
+
+var debug_mode : bool = false
+
 #### ACCESSORS ####
 
 func is_class(value: String): return value == "WorldMapEditor" or .is_class(value)
@@ -42,7 +46,8 @@ func _exit_tree() -> void:
 	destroy_every_buttons()
 
 func handles(obj: Object) -> bool:
-	destroy_every_buttons()
+	if !is_object_handled(obj):
+		destroy_every_buttons()
 	
 	yield(get_tree(), "idle_frame")
 	
@@ -61,10 +66,13 @@ func handles(obj: Object) -> bool:
 	elif obj is LevelNodeBind:
 		generate_button("Reroll Bind Gen")
 	
-	return obj.get_class() in ["LevelNode", "WorldMapBackgroundElement"]
+	return obj.get_class() in handeled_objects
 
 
 func edit(object: Object) -> void:
+	if !is_object_handled(object):
+		return
+	
 	last_node_selected = current_node_selected
 	current_node_selected = object
 	
@@ -83,8 +91,14 @@ func add_destination(level_node: LevelNode):
 
 func destroy_every_buttons():
 	for key in button_dict.keys():
-		button_dict[key].queue_free()
-		button_dict.erase(key)
+		destroy_button(key)
+
+
+func is_object_handled(obj: Object) -> bool:
+	for obj_class in handeled_objects:
+		if obj.is_class(obj_class):
+			return true
+	return false
 
 
 #### VIRTUALS ####
@@ -95,18 +109,23 @@ func destroy_every_buttons():
 
 func generate_button(button_name: String):
 	var snake_cased_button_name = button_name.to_lower().replace(" ", "_")
-
+	
 	if !button_dict.has(button_name) or button_dict[button_name] == null:
 		button_dict[button_name] = Button.new()
 		button_dict[button_name].set_text(button_name)
 		add_control_to_container(EditorPlugin.CONTAINER_CANVAS_EDITOR_MENU, button_dict[button_name])
 		var _err = button_dict[button_name].connect("pressed", self, "_on_" + snake_cased_button_name + "_button_pressed")
-
+		
+		if debug_mode:
+			print(button_name + " button added")
 
 func destroy_button(button_name: String):
 	var button = button_dict[button_name] if button_dict.has(button_name) else null
 	if button != null:
 		button.queue_free()
+		button_dict.erase(button_name)
+		if debug_mode:
+			print(button_name + " button destroyed")
 
 
 func _unselect_all_level_nodes():
@@ -117,7 +136,6 @@ func _unselect_all_level_nodes():
 		node.set_editor_select_state(LevelNode.EDITOR_SELECTED.UNSELECTED)
 
 #### INPUTS ####
-
 
 
 #### SIGNAL RESPONSES ####

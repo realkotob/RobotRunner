@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://BabaGodotLib/Actor/States/ActorState/BaseStates/ActorIdleState.gd" type="Script" id=1]
+[ext_resource path="res://BabaGodotLib/Actor/States/ActorState/RealTimeStates/RT_ActorIdleState.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Actor/ActorBase.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Actor/Robot/States/RobotMoveState.gd" type="Script" id=3]
 [ext_resource path="res://BabaGodotLib/Actor/Inactive.gd" type="Script" id=4]
+[ext_resource path="res://BabaGodotLib/Absract/StateMachine/StateLabel.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 13, 13 )
@@ -19,6 +20,16 @@ script = ExtResource( 1 )
 
 [node name="Move" type="Node" parent="StatesMachine" index="2"]
 script = ExtResource( 3 )
+
+[node name="StateLabel" type="Label" parent="StatesMachine" index="3"]
+visible = false
+margin_top = -60.0
+margin_right = 40.0
+margin_bottom = -46.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ActionHitBox" type="Area2D" parent="." index="3"]
 

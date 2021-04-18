@@ -22,10 +22,8 @@ func get_class() -> String: return "WorldMapCharacterContainer"
 #### LOGIC ####
 
 
-func move_to_level(level_node: LevelNode):
-	.move_to_level(level_node)
-	
-	yield(self, "path_finished")
+func move_to_level(level_node: LevelNode, _interpol: bool= true):
+	set_global_position(level_node.get_global_position())
 	
 	for child in get_children():
 		if child is WorldMapCharacter:

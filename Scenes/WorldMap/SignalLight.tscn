@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Global/Lights/Light300.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/WorldMap/SignalLight.gd" type="Script" id=2]
+
+[node name="SignalLight" type="Light2D"]
+visible = false
+position = Vector2( 0.594543, 0.594574 )
+texture = ExtResource( 1 )
+texture_scale = 0.1
+color = Color( 0, 0.976471, 1, 1 )
+range_layer_min = -512
+range_layer_max = 512
+script = ExtResource( 2 )
+speed = 250.0
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 1 )
+texture_scale = 0.05
+range_layer_min = -100
+range_layer_max = 512

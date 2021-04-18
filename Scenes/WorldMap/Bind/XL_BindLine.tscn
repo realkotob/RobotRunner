@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scenes/WorldMap/Bind/BindEnd.png" type="Texture" id=1]
-[ext_resource path="res://Scenes/WorldMap/Bind/BindLine.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/WorldMap/Bind/XL_BindLine.gd" type="Script" id=2]
 
-[node name="BindLine" type="Line2D"]
+[node name="XL_BindLine" type="Line2D"]
 points = PoolVector2Array( 815.604, 181.286 )
 width = 2.0
 default_color = Color( 0.270588, 0.611765, 0.156863, 1 )

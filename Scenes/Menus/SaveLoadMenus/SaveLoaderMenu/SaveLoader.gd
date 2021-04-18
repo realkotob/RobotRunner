@@ -70,7 +70,7 @@ func load_save(slot_id : int):
 		if _err != OK:
 			return
 
-		_err = get_tree().change_scene(tscn_path)
+		var __ = get_tree().change_scene(tscn_path)
 		queue_free()
 
 #### VIRTUALS ####

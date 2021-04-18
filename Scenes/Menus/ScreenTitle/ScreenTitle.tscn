@@ -153,7 +153,6 @@ margin_bottom = 200.0
 mouse_filter = 2
 
 [node name="V_OptContainer" parent="HBoxContainer" index="0"]
-margin_left = 87.0
 margin_right = 264.0
 margin_bottom = 188.0
 mouse_filter = 2
@@ -215,6 +214,3 @@ margin_top = 144.0
 margin_right = 177.0
 margin_bottom = 188.0
 text = "Quit"
-
-[node name="OptionChoiceSound" parent="." index="4"]
-bus = "Sounds"

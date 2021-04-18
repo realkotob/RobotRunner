@@ -289,11 +289,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/Levels/InfiniteMode/ChunckRooms/CompositeRoom/CompositeRoom.gd"
 }, {
-"base": "ConfirmationDialog",
-"class": "ConfirmBoundCreation",
-"language": "GDScript",
-"path": "res://addons/WorldMapEditor/ConfirmBoundCreation.gd"
-}, {
 "base": "SpecialChunck",
 "class": "CrossChunck",
 "language": "GDScript",
@@ -1046,7 +1041,6 @@ _global_script_class_icons={
 "Commands": "",
 "CompositeChunck": "",
 "CompositeRoom": "",
-"ConfirmBoundCreation": "",
 "CrossChunck": "",
 "DescriptionWindow": "",
 "Dialogue": "",

@@ -1,15 +1,51 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://addons/WorldMapEditor/ConfirmBoundCreation.gd" type="Script" id=1]
 [ext_resource path="res://BabaGodotLib/Fonts/BoldCapsPixel48.tres" type="DynamicFont" id=2]
 [ext_resource path="res://BabaGodotLib/UI/Menu/OptionButtons/MenuOptionBase.tscn" type="PackedScene" id=3]
+
+[sub_resource type="GDScript" id=1]
+script/source = "tool
+extends ConfirmationDialog
+class_name ConfirmBoundCreation
+
+#### ACCESSORS ####
+
+func is_class(value: String): return value == \"ConfirmBoundCreation\" or .is_class(value)
+func get_class() -> String: return \"ConfirmBoundCreation\"
+
+
+#### BUILT-IN ####
+
+func _ready() -> void:
+	for option in $VBoxContainer/HBoxContainer.get_children():
+		var __ = option.connect(\"option_chose\", self, \"_on_option_chose\")
+
+#### VIRTUALS ####
+
+
+
+#### LOGIC ####
+
+
+
+#### INPUTS ####
+
+
+
+#### SIGNAL RESPONSES ####
+
+func _on_option_chose(option: MenuOptionsBase):
+	match(option.name):
+		\"Yes\": print(\"yes\")
+		\"No\": print(\"no\")
+"
 
 [node name="ConfirmBoundCreation" type="Control"]
 margin_left = -99.0
 margin_top = -109.0
 margin_right = 101.0
 margin_bottom = -39.0
-script = ExtResource( 1 )
+script = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

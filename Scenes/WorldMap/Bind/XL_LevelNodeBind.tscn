@@ -4,13 +4,14 @@
 [ext_resource path="res://Scenes/WorldMap/Bind/XL_BindLine.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/WorldMap/Bind/XL_LevelNodeBind.gd" type="Script" id=3]
 
-[sub_resource type="Curve2D" id=9]
+[sub_resource type="Curve2D" id=1]
 _data = {
 "points": PoolVector2Array(  )
 }
 
 [node name="XL_LevelNodeBind" instance=ExtResource( 1 )]
-curve = SubResource( 9 )
+light_mask = 0
+curve = SubResource( 1 )
 script = ExtResource( 3 )
 
 [node name="BindLine" parent="." index="2" instance=ExtResource( 2 )]

@@ -17,3 +17,13 @@ self_modulate = Color( 0.270588, 0.611765, 0.156863, 1 )
 light_mask = -2147483648
 material = SubResource( 1 )
 texture = ExtResource( 2 )
+
+[node name="Label" parent="." index="1"]
+modulate = Color( 0.14902, 0.219608, 0.278431, 1 )
+light_mask = 0
+margin_left = -14.0
+margin_top = -12.0
+margin_right = 14.0
+margin_bottom = 12.0
+align = 1
+valign = 1

@@ -100,11 +100,11 @@ position = Vector2( 407.798, 362.771 )
 texture = ExtResource( 4 )
 
 [node name="BackgroundElement3" parent="BackgroundElements" instance=ExtResource( 13 )]
-position = Vector2( 158.183, 203.925 )
+position = Vector2( 158.183, 227.925 )
 texture = ExtResource( 7 )
 
 [node name="BackgroundElement4" parent="BackgroundElements" instance=ExtResource( 13 )]
-position = Vector2( 169.529, 229.954 )
+position = Vector2( 209.529, 173.954 )
 texture = ExtResource( 6 )
 
 [node name="Levels" type="Node2D" parent="."]
